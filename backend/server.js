@@ -15,9 +15,11 @@ import sqlExe from "#db/dbFunctions.js";
 
 const app = express();
 
+app.use(express.static(`./public`));
+
 app.use(express.json());
 
-app.set("trust proxy", 1);
+//app.set("trust proxy", 1);
 
 let corsOrigins = [
   "https://accounts.google.com/o/oauth2",
@@ -34,30 +36,31 @@ const corsOrigin = {
   optionSuccessStatus: 200,
 };
 
+console.log(NODE_ENV);
+
 if (NODE_ENV === "prod") {
-  console.log("prod");
+  console.log("Connecting to redis...");
+  const redisClient = redis.createClient(REDIS_CONFIG);
+
+  try {
+    await redisClient.connect();
+    console.log("Connected to redis");
+  } catch (error) {
+    console.log("Failed to connect to redis\n", error);
+  }
+
+  redisClient.on("error", (err) => {
+    console.error("Redis connection error:", err);
+  });
+  app.use(
+    session({
+      store: new RedisStore({ client: redisClient }),
+      ...SESSION_CONFIG,
+    })
+  );
 } else {
-  console.log("local or dev");
+  app.use(session(SESSION_CONFIG));
 }
-console.log("Connecting to redis...");
-const redisClient = redis.createClient(REDIS_CONFIG);
-
-try {
-  await redisClient.connect();
-  console.log("Connected to redis");
-} catch (error) {
-  console.log("Failed to connect to redis\n", error);
-}
-
-redisClient.on("error", (err) => {
-  console.error("Redis connection error:", err);
-});
-app.use(
-  session({
-    store: new RedisStore({ client: redisClient }),
-    ...SESSION_CONFIG,
-  })
-);
 
 app.use(
   rateLimit({

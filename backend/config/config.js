@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 global.NODE_ENV = process.env.NODE_ENV;
 if (NODE_ENV === undefined) {
   dotenv.config({
-    path: "../secrets.env",
+    path: "../../secrets.env",
   });
 }
 global.NODE_ENV = process.env.NODE_ENV;
@@ -11,13 +11,13 @@ global.NODE_ENV = process.env.NODE_ENV;
 console.log(NODE_ENV);
 
 export const MYSQL_CONFIG = {
-  host: process.env.MYSQL_SERVER,
-  user: process.env.MYSQL_USERNAME,
-  password: process.env.MYSQL_PASSWORD,
-  database: process.env.MYSQL_DB,
+  host: NODE_ENV == "prod" ? process.env.MYSQL_URL : process.env.MYSQL_SERVER,
+  user: NODE_ENV == "prod" ? null : process.env.MYSQL_USERNAME,
+  password: NODE_ENV == "prod" ? null : process.env.MYSQL_PASSWORD,
+  database: NODE_ENV == "prod" ? null : process.env.MYSQL_DB,
+  port: NODE_ENV == "prod" ? null : process.env.MYSQL_PORT,
   waitForConnections: true,
   connectionLimit: 10,
-  port: process.env.MYSQL_PORT,
   queueLimit: 0,
   namedPlaceholders: true,
 };
@@ -35,9 +35,8 @@ export const SESSION_CONFIG = {
 };
 
 export const REDIS_CONFIG = {
-  url: "redis://redis:6379", // why does this work?
+  url: process.env.REDIS_URL, // why does this work?
 };
-console.log(REDIS_CONFIG);
 
 export const GOOGLE_OAUTH_CONFIG = {
   clientID: process.env.GOOGLE_CLIENT_ID,

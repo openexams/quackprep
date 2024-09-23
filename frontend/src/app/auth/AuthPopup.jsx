@@ -47,7 +47,8 @@ export default function Auth() {
             </Header>
           </Modal.Header>
           <Modal.Content style={{ textAlign: 'center' }}>
-            <Form onSubmit={() => window.open(`${BACKEND_URL}/api/auth/google`)}>
+            <Form onSubmit={() => window.open(`/api/auth/google`)}>
+              {/** may be why google no work */}
               <Button
                 style={{
                   backgroundColor: 'white',

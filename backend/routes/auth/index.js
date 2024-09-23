@@ -94,7 +94,7 @@ router.get(
   "/google/callback",
   passport.authenticate("google"),
   async function (req, res) {
-    res.redirect(`${process.env.FRONTEND_URL}/`);
+    res.redirect(`/`);
   }
 );
 /**   *    *    * */

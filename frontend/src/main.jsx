@@ -7,14 +7,13 @@ import store from '@src/app/store/store.js';
 import FlashMessage from '@components/flashmessage/FlashMessage.jsx';
 import AppRouter from './app/AppRouter';
 import HistoryNav from '@components/Breadcrumb';
-// pl
+
 export default function Main() {
   return (
     <Provider store={store}>
       <div className='ui pusher' style={{ marginTop: '5.6em' }}>
         <FlashMessage />
         <HistoryNav />
-
         <AppRouter />
       </div>
     </Provider>

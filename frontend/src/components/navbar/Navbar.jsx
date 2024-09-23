@@ -14,16 +14,15 @@ import {
 } from './navbarSlice';
 import { getCurUser } from '@src/app/auth/authSlice';
 import ProfileDropdown from './components/Profile/ProfileDropdown';
-import { useLocation, useNavigate, Link } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import BrandLogo from './components/BrandLogo';
 import { getHasStreak, selectHasStreak } from '@src/app/streak/streakSlice.js';
 import { selectClassState } from '@src/app/class/classSlice';
 import { getClasses } from '@src/app/class/classSlice';
-import { getQuestionsByTopic } from '@src/app/class/question/questionSlice';
 import { getTopicsByClassId } from '@src/app/class/topic/topicSlice';
 import { findNeedleInArrayOfObjectsLINEAR, findNeedlesInArrayOfObjectsLINEAR } from '@utils/functions';
 import { selectTopicState } from '@src/app/class/topic/topicSlice';
-import { selectQuestionState } from '@src/app/class/question/questionSlice';
+import { selectQuestionState, getQuestionsByTopic } from '@src/app/class/topic/question/questionSlice';
 
 export default function Navbar() {
   const location = useLocation();
