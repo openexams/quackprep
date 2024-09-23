@@ -26,6 +26,8 @@ export const MYSQL_CONFIG = {
   namedPlaceholders: true,
 };
 
+console.log(MYSQL_CONFIG);
+
 export const SESSION_CONFIG = {
   secret: process.env.SESSION_SECRET,
   resave: false,
@@ -41,6 +43,8 @@ export const SESSION_CONFIG = {
 export const REDIS_CONFIG = {
   url: process.env.REDIS_URL, // why does this work?
 };
+
+console.log(REDIS_CONFIG);
 
 export const GOOGLE_OAUTH_CONFIG = {
   clientID: process.env.GOOGLE_CLIENT_ID,
