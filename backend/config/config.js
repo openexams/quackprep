@@ -18,7 +18,7 @@ export const MYSQL_CONFIG = {
   host: NODE_ENV == "prod" ? process.env.MYSQL_URL : process.env.MYSQL_SERVER,
   user: NODE_ENV == "prod" ? null : process.env.MYSQL_USERNAME,
   password: NODE_ENV == "prod" ? null : process.env.MYSQL_PASSWORD,
-  database: NODE_ENV == "prod" ? null : process.env.MYSQL_DB,
+  database: process.env.MYSQL_DB, //NODE_ENV == "prod" ? null : process.env.MYSQL_DB,
   port: NODE_ENV == "prod" ? null : process.env.MYSQL_PORT,
   waitForConnections: true,
   connectionLimit: 10,
@@ -26,7 +26,7 @@ export const MYSQL_CONFIG = {
   namedPlaceholders: true,
 };
 
-console.log(MYSQL_CONFIG);
+console.log(MYSQL_CONFIG); // tmp
 
 export const SESSION_CONFIG = {
   secret: process.env.SESSION_SECRET,
@@ -44,7 +44,7 @@ export const REDIS_CONFIG = {
   url: process.env.REDIS_URL, // why does this work?
 };
 
-console.log(REDIS_CONFIG);
+console.log(REDIS_CONFIG); // tmp
 
 export const GOOGLE_OAUTH_CONFIG = {
   clientID: process.env.GOOGLE_CLIENT_ID,
