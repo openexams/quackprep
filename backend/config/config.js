@@ -9,7 +9,6 @@ if (NODE_ENV === undefined) {
 }
 global.NODE_ENV = process.env.NODE_ENV;
 
-console.log(NODE_ENV);
 if (NODE_ENV == undefined) {
   throw Error("fatal error ENV VARS NOT LOADED");
 }
@@ -18,15 +17,13 @@ export const MYSQL_CONFIG = {
   host: process.env.MADDOX_MYSQL_SERVER,
   user: process.env.MADDOX_MYSQL_USERNAME,
   password: process.env.MADDOX_MYSQL_PASSWORD,
-  database: process.env.MADDOX_MYSQL_DB, //NODE_ENV MADDOX_== "prod" ? null : process.env.MADDOX_MYSQL_DB,
+  database: process.env.MADDOX_MYSQL_DB,
   port: process.env.MADDOX_MYSQL_PORT,
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0,
   namedPlaceholders: true,
 };
-
-console.log(MYSQL_CONFIG); // tmp
 
 export const SESSION_CONFIG = {
   secret: process.env.SESSION_SECRET,
@@ -43,8 +40,6 @@ export const SESSION_CONFIG = {
 export const REDIS_CONFIG = {
   url: process.env.REDIS_URL, // why does this work?
 };
-
-console.log(REDIS_CONFIG); // tmp
 
 export const GOOGLE_OAUTH_CONFIG = {
   clientID: process.env.GOOGLE_CLIENT_ID,
