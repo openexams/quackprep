@@ -15,11 +15,11 @@ if (NODE_ENV == undefined) {
 }
 
 export const MYSQL_CONFIG = {
-  host: NODE_ENV == "prod" ? process.env.MYSQL_URL : process.env.MYSQL_SERVER,
-  user: NODE_ENV == "prod" ? null : process.env.MYSQL_USERNAME,
-  password: NODE_ENV == "prod" ? null : process.env.MYSQL_PASSWORD,
+  host: process.env.MYSQL_SERVER,
+  user: process.env.MYSQL_USERNAME,
+  password: process.env.MYSQL_PASSWORD,
   database: process.env.MYSQL_DB, //NODE_ENV == "prod" ? null : process.env.MYSQL_DB,
-  port: NODE_ENV == "prod" ? null : process.env.MYSQL_PORT,
+  port: process.env.MYSQL_PORT,
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0,
