@@ -4,11 +4,15 @@ global.NODE_ENV = process.env.NODE_ENV;
 if (NODE_ENV === undefined) {
   dotenv.config({
     path: "../../secrets.env",
+    debug: true,
   });
 }
 global.NODE_ENV = process.env.NODE_ENV;
 
 console.log(NODE_ENV);
+if (NODE_ENV == undefined) {
+  throw Error("fatal error ENV VARS NOT LOADED");
+}
 
 export const MYSQL_CONFIG = {
   host: NODE_ENV == "prod" ? process.env.MYSQL_URL : process.env.MYSQL_SERVER,

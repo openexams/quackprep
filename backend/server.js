@@ -62,6 +62,8 @@ if (NODE_ENV === "prod") {
   app.use(session(SESSION_CONFIG));
 }
 
+sqlExe.test();
+
 app.use(
   rateLimit({
     windowMs: 15 * 60 * 1000, // 15 minutes
@@ -88,5 +90,3 @@ app.listen(3000, () => {
   console.log("Listening on port 3000");
 });
 //test db connections
-
-sqlExe.test();
