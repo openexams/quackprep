@@ -1,6 +1,6 @@
 {
-  "name": "fullstack-app",
-  "version": "1.0.0",
+  "name": "quackprep",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
     "start": "npm run build:frontend && npm run start:backend",
