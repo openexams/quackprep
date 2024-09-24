@@ -1,4 +1,7 @@
 export function isAuthenticated(req, res, next) {
+  // if (NODE_ENV == "local") {
+  //   return next(); // change to auto login for dev
+  // }
   if (req.isAuthenticated()) {
     return next();
   }
