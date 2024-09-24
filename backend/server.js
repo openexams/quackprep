@@ -12,10 +12,15 @@ import redis from "redis";
 import bodyParser from "body-parser";
 import { REDIS_CONFIG, SESSION_CONFIG } from "./config/config.js";
 import sqlExe from "#db/dbFunctions.js";
+import path, { dirname } from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 
-app.use(express.static(`./public`));
+console.log(path.join(__dirname, "./public/"));
 
 app.use(express.json());
 
@@ -84,7 +89,13 @@ app.use(passport.initialize());
 app.use(passport.session());
 /** *        *          *     */
 
+app.use(express.static(path.join(__dirname, "./public/")));
+
 app.use("/api", router);
+
+app.get("/*", (req, res) => {
+  res.sendFile(path.join(__dirname, "./public/index.html"));
+});
 
 app.listen(3000, () => {
   console.log("Listening on port 3000");
