@@ -3,6 +3,7 @@ import {
   getStreakData,
   hasStreak,
   getTopStreaks,
+  claimStreak,
 } from "#models/streak/index.js";
 import express from "express";
 
@@ -43,6 +44,16 @@ router.get("/", async function (req, res) {
     res.status(200).json(data);
   } catch (error) {
     res.status(500).json({ message: "failed to get all streak data" });
+  }
+});
+
+// lets user claim a streak
+router.post("/", async function (req, res) {
+  try {
+    const data = await claimStreak(req.user);
+    res.status(200).json(data);
+  } catch (error) {
+    res.status(500).json({ message: "failed to claim streak" });
   }
 });
 

@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { Card, Progress, Icon, Statistic, Grid, Label, Button } from 'semantic-ui-react';
-import { getStreak, getHasStreak, selectStreakData } from './streakSlice';
+import { getStreak, getHasStreak, selectStreakData, claimStreak } from './streakSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
-function hasBeenADay(oldDate) {
+function canClaimStreak(oldDate) {
   // timezones are fucked prob  // they are fucked look into this
   if (oldDate == null) {
     return true;
   }
-  const timeSince = (new Date() - new Date(oldDate)) / 1000 / 60 / 60 / 24;
-  if (timeSince >= 1) {
+  const timeSince = (new Date().getTime() - new Date(oldDate)) / 1000 / 60 / 60 / 24;
+  console.log(timeSince);
+  if (timeSince > 1) {
+    // logic for if user can claim a streak
     return true;
   }
   return false;
@@ -22,11 +24,11 @@ export default function StreakPage() {
 
   useEffect(() => {
     // if user doesnt have a row in the streak table make them a row
-    if (!streak.currentStreak) dispatch(getStreak());
-  }, []);
+    if (!streak.currentStreak && streak.hasStreak !== null) dispatch(getStreak());
+  }, [streak.hasStreak]);
 
   function handleCheckIn() {
-    // dispatch a upsert which updates the streak data and returns the new streak data
+    dispatch(claimStreak());
   }
 
   function giveLabels() {
@@ -138,8 +140,15 @@ export default function StreakPage() {
         </Grid.Row>
       </Grid>
       <div style={{ textAlign: 'center', marginTop: '2rem' }}>
-        <button className='ui primary button' onClick={handleCheckIn}>
-          {hasBeenADay(streak.lastClaim) ? 'Check In for Today' : 'Already Claimed Today'}
+        <button
+          className='ui primary button'
+          onClick={() => {
+            if (canClaimStreak(streak.lastClaim)) {
+              handleCheckIn();
+            }
+          }}
+        >
+          {canClaimStreak(streak.lastClaim) ? 'Check In for Today' : 'Already Claimed Today'}
         </button>
       </div>
     </div>

@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "npm run build:frontend && npm run start:backend",
-    "dev": "concurrently --kill-others-on-fail --success=first \"npm run start:backend\" \"sleep 3 && npm run dev:frontend\"",
+    "dev": "concurrently --kill-others-on-fail --success=first \"npm run start:backend\" \"npm run dev:frontend\"",
     "build:frontend": "cd frontend && npm i && npm run build",
     "start:backend": "cd backend && npm i && npm start",
     "dev:frontend": "cd frontend && npm i && npm run dev"

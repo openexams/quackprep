@@ -23,6 +23,7 @@ export const MYSQL_CONFIG = {
   connectionLimit: 10,
   queueLimit: 0,
   namedPlaceholders: true,
+  timezone: "Z", // This sets the timezone to UTC
 };
 
 export const SESSION_CONFIG = {
