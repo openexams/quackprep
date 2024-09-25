@@ -28,7 +28,7 @@ async function checkAndChangeCurStreak(userId, last_claim) {
 /**
  * @param {Int} userId
  * @param {Int} value (positive pls)
- * @returns {Boolean}
+ * @returns {void}
  */
 export async function setCurrentStreak(userId, value) {
   // testable
@@ -88,9 +88,9 @@ export async function getTopStreaks(amt) {
 
 export async function claimStreak(userId) {
   // will need to be a upsert
-  const streak_data = await getStreakData(userId); // has side effects
+  await hasStreak(userId); // has side effects that will set cur streak to 0 if user dont have a streak
   const params = { userId };
-  const result = await sqlExe.executeCommand(
+  await sqlExe.executeCommand(
     `INSERT INTO streak (user_id, current_streak, longest_streak, last_claim) VALUES (:userId, 1,1,CURRENT_TIMESTAMP) 
 ON DUPLICATE KEY UPDATE 
 		current_streak = current_streak +1 ,  
