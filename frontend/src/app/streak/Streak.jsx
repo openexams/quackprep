@@ -22,7 +22,7 @@ export default function StreakPage() {
 
   useEffect(() => {
     // if user doesnt have a row in the streak table make them a row
-    dispatch(getStreak());
+    if (!streak.currentStreak) dispatch(getStreak());
   }, []);
 
   function handleCheckIn() {
@@ -137,7 +137,6 @@ export default function StreakPage() {
           </Grid.Column>
         </Grid.Row>
       </Grid>
-
       <div style={{ textAlign: 'center', marginTop: '2rem' }}>
         <button className='ui primary button' onClick={handleCheckIn}>
           {hasBeenADay(streak.lastClaim) ? 'Check In for Today' : 'Already Claimed Today'}

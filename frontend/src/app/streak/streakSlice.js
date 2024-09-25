@@ -22,7 +22,7 @@ const DEFAULT_STATE = {
 export default function streakReducer(state = DEFAULT_STATE, action) {
   switch (action.type) {
     case GET_HAS_STREAK:
-      return { ...state, hasStreak: action.payload.has_streak };
+      return { ...state, hasStreak: action.payload };
 
     case GET_STREAK:
       return {

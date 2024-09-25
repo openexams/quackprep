@@ -15,13 +15,7 @@ router.use(isAuthenticated);
 router.get("/has_streak", async function (req, res) {
   try {
     const bool = await hasStreak(req.user);
-    let response;
-    if (bool) {
-      response = { has_streak: true };
-    } else {
-      response = { has_streak: false };
-    }
-    res.status(200).json(response);
+    res.status(200).json(bool);
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "server errored getting users streak" });

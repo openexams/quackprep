@@ -6,11 +6,13 @@ import { useState } from 'react';
 import ConfirmSignoutModal from './ConfirmSignoutModal';
 import fireGif from '/img/fire_flame.gif';
 import { changeNavbarPage } from '@components/navbar/navbarSlice';
+import { useNavigate } from 'react-router-dom';
 
 export default function ProfileDropdown({ activePage, handlePageChange, hasStreak }) {
   const dispatch = useDispatch();
   const { user } = useSelector(selectUser);
   const [confimOpen, setConfirmOpen] = useState(false);
+  const navigate = useNavigate();
   return (
     <Dropdown
       item
@@ -37,6 +39,7 @@ export default function ProfileDropdown({ activePage, handlePageChange, hasStrea
               dispatch(signOut());
               setConfirmOpen(false);
               dispatch(changeNavbarPage('/home'));
+              navigate(0); // reloads page so store is reset should null it all out to be more performant
             }}
           />
         ) : null}

@@ -14,6 +14,7 @@ import { REDIS_CONFIG, SESSION_CONFIG } from "./config/config.js";
 import sqlExe from "#db/dbFunctions.js";
 import path, { dirname } from "path";
 import { fileURLToPath } from "url";
+import { hasStreak } from "#models/streak/index.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -33,7 +34,7 @@ let corsOrigins = [
   "https://www.quackprep.com",
   "https://quackprep.onrender.com",
 ];
-if (NODE_ENV === "local") corsOrigins.push("http://localhost:5173"); // maybe bad pratice
+if (NODE_ENV === "local") corsOrigins.push("http://localhost:3001"); // maybe bad pratice
 
 const corsOrigin = {
   origin: corsOrigins,
@@ -67,7 +68,7 @@ if (NODE_ENV === "prod") {
   app.use(session(SESSION_CONFIG));
 }
 
-sqlExe.test();
+await sqlExe.test();
 
 app.use(
   rateLimit({
@@ -100,4 +101,5 @@ app.get("/*", (req, res) => {
 app.listen(3000, () => {
   console.log("Listening on port 3000");
 });
+
 //test db connections
