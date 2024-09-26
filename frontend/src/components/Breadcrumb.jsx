@@ -55,7 +55,7 @@ export default function HistoryNav() {
 
   return (
     <>
-      {sections ? (
+      {sections.length !== 1 ? (
         <Segment basic style={breadcrumbStyle}>
           <Breadcrumb
             icon='right angle'
