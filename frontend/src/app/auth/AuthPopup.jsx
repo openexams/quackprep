@@ -36,8 +36,8 @@ export default function Auth() {
         style={{ backgroundColor: '#f7f7ff', zIndex: 2 }}
       >
         <Segment style={{ minHeight: 650 }} basic loading={loading}>
-          <Modal.Header style={{ textAlign: 'center', backgroundColor: '#6A0DAD', color: '#fff', padding: '20px' }}>
-            <Header as='h2' inverted>
+          <Modal.Header style={{ textAlign: 'center', backgroundColor: 'black', padding: '20px', marginBottom: '1em' }}>
+            <Header as='h2' inverted style={{ marginBottom: '.5em' }}>
               <Icon name='user' />
 
               <Header.Content>
@@ -66,12 +66,17 @@ export default function Auth() {
             </Form>
             <br></br>
             <Button.Group>
-              <Button active={loggingIn} onClick={() => setLoggingIn(true)} color={loggingIn ? 'purple' : 'grey'} size='large'>
+              <Button
+                active={loggingIn}
+                onClick={() => setLoggingIn(true)}
+                color={loggingIn ? ' !important' : 'grey'}
+                size='large'
+              >
                 Login
               </Button>
               <Button.Or />
               <Button active={!loggingIn} onClick={() => setLoggingIn(false)} color={!loggingIn ? 'purple' : 'grey'} size='large'>
-                Sign Up
+                Sign Up{/* change button class name depending on if active or not, since semantic ui / me ovverides the color. */}
               </Button>
             </Button.Group>
             <Segment style={{ marginTop: '20px', padding: '20px' }}>{loggingIn ? <Login /> : <Register />}</Segment>

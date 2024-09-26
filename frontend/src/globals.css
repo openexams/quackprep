@@ -33,50 +33,39 @@ h6 {
   font-family: 'Roboto', sans-serif !important;
 }
 :root {
-  --primary-color: #393e46; /* Dark Charcoal for primary elements */
-  --secondary-color: #eeeeee; /* Light Gray for secondary elements */
-  --menu-background: rgb(49, 43, 43); /* Very Light Gray for menu background */
-  --body-background: #f7f7f7; /* Very Light Gray for body background */
-  --header-color: #393e46; /* Dark Charcoal for headers */
-  --segment-background: #eeeeee; /* Light Gray for segments or cards */
-  --input-background: #f7f7f7; /* Very Light Gray for input fields */
-  --input-border: #929aab; /* Muted Blue-Gray for input borders */
-  /*--dropdown-background: gray; /* Light Gray for dropdown background */
+  --primary-color: #1e3a8a; /* Deep Blue for primary elements */
+  --secondary-color: #f1f5f9; /* Soft White for secondary elements */
+  --accent-color: #2761a3; /* Vibrant Green for accents and buttons */
+  --menu-background: #1e293b; /* Muted Navy for the menu background */
+  --body-background: #f8fafc; /* Very Light Gray for the body background */
+  --segment-background: #ffffff; /* Off-White for card/segment backgrounds */
+  --input-background: #e2e8f0; /* Soft Gray for input fields */
+  --input-border: #94a3b8; /* Light Blue Gray for input borders */
+  --dropdown-background: #60a5fa; /* Sky Blue for dropdowns */
 }
 
-/* Button styles */
 .ui.button {
-  background-color: var(--primary-color) !important;
-  color: white !important;
+  background-color: var(--primary-color) !important; /* Deep Blue for the button background */
+  color: white !important; /* White text for contrast */
+  border-color: var(--accent-color) !important;
+  border: 1px solid var(--primary-color) !important; /* Keep the button border consistent */
+  transition: background-color 0.3s ease !important; /* Smooth hover effect */
 }
 
-/* Menu styles */
-.ui.menu {
-  background-color: var(--menu-background) !important;
-  color: white !important;
+.ui.button:hover {
+  background-color: var(--accent-color) !important; /* Vibrant Green on hover */
+  border-color: var(--accent-color) !important; /* Change border to match hover background */
+  color: #ffffff !important; /* Ensure the text color stays white on hover */
 }
 
-/* Body styles */
-body {
-  background-color: var(--body-background) !important;
+.ui.button:active {
+  background-color: #e9e9e9 !important; /* Darker shade of blue when pressed */
 }
 
-/* Header styles */
-.ui.header {
-  color: var(--header-color) !important;
-}
-
-/* Segment styles */
-.ui.segment {
-  background-color: var(--segment-background) !important;
-  color: var(--header-color) !important;
-}
-
-/* Input styles */
-.ui.input input {
-  background-color: var(--input-background) !important;
-  border-color: var(--input-border) !important;
-  color: var(--header-color) !important; /* Text color in inputs */
+.ui.button.disabled {
+  background-color: #d1d5db !important; /* Light gray when disabled */
+  color: #6b7280 !important; /* Muted text color for disabled state */
+  border-color: #d1d5db !important; /* Matching border for disabled state */
 }
 
 /* Dropdown styles */
@@ -98,19 +87,6 @@ body {
 .ui.table thead th {
   background-color: var(--primary-color) !important;
   color: white !important; /* Header text color */
-}
-
-/* Popup styles */
-.ui.popup {
-  background-color: var(--dropdown-background) !important;
-  border-color: var(--input-border) !important;
-  color: var(--header-color) !important; /* Popup text color */
-}
-
-/* Modal styles */
-.ui.modal {
-  background-color: var(--segment-background) !important;
-  color: var(--header-color) !important;
 }
 
 .ui.menu {
@@ -142,78 +118,4 @@ body {
 .ui.icon.header .icon {
   margin-right: 0.5em;
   color: var(--input-background) !important; /* Ensure the icon color matches the text */
-}
-
-.hero-section {
-  background-color: var(--menu-background);
-  padding: 10em 0;
-  color: var(--input-background);
-  text-align: center;
-  background-image: url('https://via.placeholder.com/1200x600');
-  background-size: cover;
-  background-position: center;
-  width: 100%; /* Ensure full width */
-}
-
-.features-section {
-  padding: 5em 0;
-  background-color: var(--secondary-color);
-  width: 100%; /* Ensure full width */
-}
-
-.testimonial-section {
-  padding: 4em 0;
-  background-color: var(--dropdown-background);
-  width: 100%; /* Ensure full width */
-}
-
-.hero-header {
-  font-size: 4em;
-  margin-bottom: 0.5em;
-  color: #fff;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-}
-
-.hero-subheader {
-  font-size: 1.5em;
-  margin-bottom: 2em;
-  color: var(--input-background);
-}
-
-.feature-card {
-  background-color: var(--menu-background) !important;
-  color: var(--input-background) !important;
-}
-
-.feature-card .header {
-  color: var(--secondary-color) !important;
-}
-
-.testimonial-section p {
-  color: var(--input-background);
-  font-style: italic;
-  margin: 1em 0;
-}
-
-.ui.button.purple {
-  background-color: var(--secondary-color) !important;
-  color: #fff !important;
-}
-
-.ui.button.purple:hover {
-  background-color: var(--dropdown-background) !important;
-}
-
-.ui.segment.inverted {
-  background-color: var(--menu-background) !important;
-}
-
-.features-section .ui.grid {
-  width: 100%;
-  margin: 0; /* Remove any default margins */
-}
-
-.testimonial-section .ui.grid {
-  width: 100%;
-  margin: 0; /* Remove any default margins */
 }
