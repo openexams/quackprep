@@ -65,7 +65,7 @@ export default function StatsPage() {
   return (
     //add loading
     <Container>
-      <Header as='h2' textAlign='center'>
+      <Header as={'h1'} textAlign='center'>
         User Statistics <Icon name='line graph' />
       </Header>
       <Segment basic loading={loading}>

@@ -44,6 +44,9 @@ h6 {
   --dropdown-background: #60a5fa; /* Sky Blue for dropdowns */
 }
 
+h1.ui.header {
+  margin-top: 3.5em !important;
+}
 .ui.button {
   background-color: var(--primary-color) !important; /* Deep Blue for the button background */
   color: white !important; /* White text for contrast */
