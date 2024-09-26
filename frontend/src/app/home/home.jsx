@@ -44,7 +44,15 @@ export default function Home() {
           <Header as='h1' inverted style={{ fontSize: '4em', fontWeight: 'normal', marginBottom: 0 }}>
             Master Your Exams
           </Header>
-          <Header as='h2' inverted style={{ fontSize: '1.7em', fontWeight: 'normal', marginTop: '1.5em' }}>
+          <Header
+            as='h2'
+            inverted
+            style={{
+              fontSize: '1.7em',
+              fontWeight: 'normal',
+              marginTop: '1.5em',
+            }}
+          >
             Practice questions, detailed explanations, and personalized learning just for you.
           </Header>
           <Button primary size='huge' onClick={() => dispatch(changeNavbarPage('/class'))}>
