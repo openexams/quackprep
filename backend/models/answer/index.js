@@ -10,7 +10,7 @@ export async function postAnswer(user_id, choice_id) {
 
 export async function getWhichUsersAnsweredMostQuestions() {
   return await sqlExe.executeCommand(
-    `SELECT a.user_id, u.username, COUNT(*) as questions_answered FROM answers_transactional
+    `SELECT a.user_id, u.username, COUNT(*) as questions_answered, u.icon FROM answers_transactional
      a JOIN users u ON u.id = a.user_id GROUP BY a.user_id ORDER BY questions_answered DESC LIMIT 5; 
     `
   ); //pull in top 5

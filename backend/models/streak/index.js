@@ -11,6 +11,14 @@ function calculateIfHasStreak(last_claim) {
   }
 }
 
+function canClaimStreak(last_claim) {
+  if (last_claim == null) {
+    return true;
+  }
+  if (curTimeUTCMinusGiven(last_claim) > 1) return true;
+  return false;
+}
+
 /**
  *
  * @param {int} userId
@@ -78,7 +86,7 @@ export async function getStreakData(userId) {
 // filters out users who dont have streaks
 export async function getTopStreaks(amt) {
   return await sqlExe.executeCommand(
-    `SELECT s.user_id, s.current_streak, u.username FROM streak s INNER JOIN users u ON s.user_id = u.id 
+    `SELECT s.user_id, s.current_streak, u.username, u.icon FROM streak s INNER JOIN users u ON s.user_id = u.id 
     WHERE datediff(CURRENT_TIMESTAMP,s.last_claim)  <= 2
     ORDER BY s.current_streak DESC
     LIMIT 5`,
@@ -88,7 +96,10 @@ export async function getTopStreaks(amt) {
 
 export async function claimStreak(userId) {
   // will need to be a upsert
-  await hasStreak(userId); // has side effects that will set cur streak to 0 if user dont have a streak
+  const old_streak_data = await getStreakData(userId);
+  if (!canClaimStreak(old_streak_data.last_claim)) {
+    return {};
+  }
   const params = { userId };
   await sqlExe.executeCommand(
     `INSERT INTO streak (user_id, current_streak, longest_streak, last_claim) VALUES (:userId, 1,1,CURRENT_TIMESTAMP) 
@@ -99,5 +110,5 @@ ON DUPLICATE KEY UPDATE
 			`,
     params
   );
-  return await getStreakData(userId);
+  return await getStreakData(userId); // dont await for call and send back old data revised w new values;
 }

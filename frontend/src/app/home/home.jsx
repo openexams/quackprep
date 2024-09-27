@@ -111,9 +111,30 @@ export default function Home() {
               </Grid.Column>
               <Grid.Column width={8}>
                 <Header inverted as='h4' content='Connect With Us' />
-                <Button circular color='facebook' icon='facebook' />
-                <Button circular color='twitter' icon='twitter' />
-                <Button circular color='linkedin' icon='linkedin' />
+                <Button
+                  as={'a'}
+                  circular
+                  color='facebook'
+                  icon='facebook'
+                  href='https://www.youtube.com/watch?v=dQw4w9WgXcQ'
+                  target='_blank'
+                />
+                <Button
+                  as={'a'}
+                  circular
+                  color='twitter'
+                  icon='twitter'
+                  href='https://www.youtube.com/watch?v=dQw4w9WgXcQ'
+                  target='_blank'
+                />
+                <Button
+                  as={'a'}
+                  circular
+                  color='linkedin'
+                  icon='linkedin'
+                  href='https://www.youtube.com/watch?v=dQw4w9WgXcQ'
+                  target='_blank'
+                />
               </Grid.Column>
             </Grid.Row>
           </Grid>

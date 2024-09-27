@@ -26,3 +26,20 @@
 .cool-hover:active {
   animation: coolAnimation 0.8s ease-in-out;
 }
+
+.ui.header .icon {
+  margin-bottom: 0.5rem;
+}
+
+.ui.card {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+}
+
+.ui.card:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.ui.list > .item > .image + .content {
+  padding-left: 1rem;
+}

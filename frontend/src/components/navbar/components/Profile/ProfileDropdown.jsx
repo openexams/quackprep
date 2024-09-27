@@ -4,7 +4,6 @@ import { Dropdown, Image, Icon, Modal } from 'semantic-ui-react';
 import { signOut } from '@src/app/auth/login/loginSlice';
 import { useState } from 'react';
 import ConfirmSignoutModal from './ConfirmSignoutModal';
-import noUser from '/img/no_user.webp';
 import fireGif from '/img/fire_flame.gif';
 
 import { changeNavbarPage } from '@components/navbar/navbarSlice';
@@ -21,7 +20,8 @@ export default function ProfileDropdown({ activePage, handlePageChange, hasStrea
       direction='left'
       trigger={
         <span>
-          <Image avatar src={user.icon || noUser} /> {user.username} {hasStreak && <Image avatar src={fireGif} />}
+          <Image avatar src={user.icon || `https://api.dicebear.com/6.x/initials/svg?seed=${user.username}`} /> {user.username}{' '}
+          {hasStreak && <Image avatar src={fireGif} />}
         </span>
       }
     >

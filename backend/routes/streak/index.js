@@ -51,6 +51,10 @@ router.get("/", async function (req, res) {
 router.post("/", async function (req, res) {
   try {
     const data = await claimStreak(req.user);
+    if (!data?.current_streak) {
+      res.status(400).json({ message: "u alr have a streak" });
+      return;
+    }
     res.status(200).json(data);
   } catch (error) {
     res.status(500).json({ message: "failed to claim streak" });

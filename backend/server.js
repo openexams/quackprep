@@ -28,7 +28,7 @@ app.use(express.json());
 //app.set("trust proxy", 1);
 
 let corsOrigins = [
-  "https://accounts.google.com/o/oauth2",
+  "https://accounts.google.com/o/oauth2", // CALLING WRONG DOMAIN FATAL ERROR!
   "https://api.quackprep.com",
   "https://quackprep.com",
   "https://www.quackprep.com",
