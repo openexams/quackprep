@@ -1,46 +1,31 @@
-import { Segment, Grid, Header } from 'semantic-ui-react';
-import ClassCard from './ClassCard';
+import './class.css';
+import React from 'react';
+import { Container, Grid, Header, Card, Icon } from 'semantic-ui-react';
 import { useSelector } from 'react-redux';
-import { useEffect } from 'react';
 import { selectClassState } from './classSlice';
+import ClassCard from './ClassCard';
 
-function mapClassesToClassCard(classes) {
-  if (!classes) return null;
-  return classes.map((cl) => (
-    <Grid.Column style={{ maxWidth: 300 }} key={cl.id}>
-      <ClassCard name={cl.name} desc={cl.description} category={cl.category} id={cl.id} />
-    </Grid.Column>
-  ));
-}
-
-export default function ClassList() {
+const ClassList = () => {
   const { classes } = useSelector(selectClassState);
 
   return (
-    <Segment
-      basic
-      style={{
-        padding: '20px',
-      }}
-    >
-      <Header>Choose One To Study</Header>
-      <Grid
-        columns={3}
-        stackable
-        style={{
-          marginTop: '5px',
-          marginBottom: '0px',
-        }}
-      >
-        <Grid.Row
-          style={{
-            gap: '5px',
-            padding: '0px',
-          }}
-        >
-          {classes ? mapClassesToClassCard(classes) : null}
-        </Grid.Row>
+    <Container>
+      <Header as='h1' textAlign='center' icon>
+        <Icon name='graduation cap' />
+        Available Classes
+        <Header.Subheader>Choose one to begin your learning journey</Header.Subheader>
+      </Header>
+
+      <Grid columns={3} stackable doubling centered style={{ marginTop: '2rem' }}>
+        {classes &&
+          classes.map((cl) => (
+            <Grid.Column key={cl.id}>
+              <ClassCard name={cl.name} desc={cl.description} category={cl.category} id={cl.id} />
+            </Grid.Column>
+          ))}
       </Grid>
-    </Segment>
+    </Container>
   );
-}
+};
+
+export default ClassList;

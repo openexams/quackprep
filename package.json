@@ -2,6 +2,7 @@
   "name": "quackprep",
   "version": "0.0.1",
   "private": true,
+  "type": "module",
   "scripts": {
     "start": "npm run build:frontend && npm run start:backend",
     "dev": "concurrently --kill-others-on-fail --success=first \"npm run start:backend\" \"npm run dev:frontend\"",

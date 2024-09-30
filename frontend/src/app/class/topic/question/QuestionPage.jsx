@@ -57,7 +57,7 @@ export default function QuestionPage() {
     );
   return (
     <Segment basic>
-      <Header as={'h1'} textAlign='center'>
+      <Header style={{ fontSize: '2.5rem' }} textAlign='center'>
         {topicName}
       </Header>
       <Grid divided>

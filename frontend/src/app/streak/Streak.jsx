@@ -3,18 +3,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Container, Grid, Segment, Header, Icon, Statistic, Progress, Button } from 'semantic-ui-react';
 import { getStreak, selectStreakData, claimStreak } from './streakSlice';
-
-const canClaimStreak = (oldDate, hasStreak) => {
-  if (oldDate == null) return true;
-  const timeSince = (new Date().getTime() - new Date(oldDate).getTime()) / (1000 * 60 * 60 * 24);
-  if (hasStreak && timeSince > 1 && timeSince < 2) {
-    return true;
-  } else if (!hasStreak) {
-    return true;
-  } else {
-    return false;
-  }
-};
+import { Streak } from '../../../../shared/globalFuncs.js';
 
 const MilestoneLabel = ({ days, color }) => (
   <Segment color={color} size='tiny' className='milestone-label'>
@@ -25,15 +14,15 @@ const MilestoneLabel = ({ days, color }) => (
 export default function StreakPage() {
   const { streak } = useSelector(selectStreakData);
   const dispatch = useDispatch();
+  const streakClass = new Streak(streak.lastClaim);
 
   useEffect(() => {
     if (!streak.currentStreak && streak.hasStreak !== null) {
       dispatch(getStreak());
     }
-  }, [streak.hasStreak, dispatch]);
+  }, [streak.hasStreak]);
 
   const handleCheckIn = () => {
-    console.log('clikced');
     dispatch(claimStreak());
   };
 
@@ -55,8 +44,9 @@ export default function StreakPage() {
    */
   function calculateRelativeGoal() {
     for (let i = 1; i < milestones.length; i++) {
-      if (streak.currentStreak > milestones[i - 1].days && streak.currentStreak < milestones[i].days) {
-        return (100 * (streak.currentStreak - milestones[i - 1].days)) / (milestones[i].days - milestones[i - 1].days);
+      if (streak.currentStreak >= milestones[i - 1].days && streak.currentStreak < milestones[i].days) {
+        const percent = (100 * (streak.currentStreak - milestones[i - 1].days)) / (milestones[i].days - milestones[i - 1].days);
+        return percent;
       }
     }
     return 0;
@@ -80,7 +70,7 @@ export default function StreakPage() {
                 <Statistic.Label>Days</Statistic.Label>
               </Statistic>
               <Progress percent={calculateRelativeGoal(streak.currentStreak)} indicating size='small' className='mt-4'>
-                Progress To Next Badge
+                Progress To Next Badge {/**does not check if u alr have the badge */}
               </Progress>
               <Button
                 primary
@@ -88,9 +78,9 @@ export default function StreakPage() {
                 size='large'
                 className='mt-4'
                 onClick={() => handleCheckIn()}
-                disabled={!canClaimStreak(streak.lastClaim)}
+                disabled={!streakClass.canClaimStreak()}
               >
-                {canClaimStreak(streak.lastClaim) ? 'Check In for Today' : 'Already Claimed Today'}
+                {streakClass.canClaimStreak() ? 'Check In for Today' : 'Already Claimed Today'}
               </Button>
             </Segment>
           </Grid.Column>

@@ -1,23 +1,6 @@
 import sqlExe from "#db/dbFunctions.js";
-import { curTimeUTCMinusGiven } from "#utils/dateFunctions.js";
-
+import { Streak } from "../../../shared/globalFuncs.js";
 // entire page is testable
-
-function calculateIfHasStreak(last_claim) {
-  if (curTimeUTCMinusGiven(last_claim) > 2) {
-    return false;
-  } else {
-    return true;
-  }
-}
-
-function canClaimStreak(last_claim) {
-  if (last_claim == null) {
-    return true;
-  }
-  if (curTimeUTCMinusGiven(last_claim) > 1) return true;
-  return false;
-}
 
 /**
  *
@@ -26,7 +9,7 @@ function canClaimStreak(last_claim) {
  * @returns {Boolean} returns if user has_streak
  */
 async function checkAndChangeCurStreak(userId, last_claim) {
-  const has_streak = calculateIfHasStreak(last_claim);
+  const has_streak = new Streak(last_claim).hasStreak();
   if (has_streak == false) {
     await setCurrentStreak(userId, 0);
   }
@@ -96,8 +79,10 @@ export async function getTopStreaks(amt) {
 
 export async function claimStreak(userId) {
   // will need to be a upsert
+
   const old_streak_data = await getStreakData(userId);
-  if (!canClaimStreak(old_streak_data.last_claim)) {
+
+  if (!new Streak(old_streak_data.last_claim).canClaimStreak()) {
     return {};
   }
   const params = { userId };
