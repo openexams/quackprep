@@ -5,7 +5,18 @@ export async function postAnswer(user_id, choice_id) {
   return await sqlExe.executeCommand(
     `INSERT INTO answers_transactional (choice_id, user_id) VALUES(:choice_id,:user_id)`,
     params
-  ); // maybe get last inserted id so i can see it worked?
+  ); // maybe get last inserted id so i can see it worked? Naaaa....
+}
+
+export async function upsertCurrentAnswer(user_id, choice_id, question_id) {
+  const params = { choice_id, user_id, question_id };
+  // if user already has row with this question update it, if not create a new one.
+  return await sqlExe.executeCommand(
+    `INSERT INTO answers_current (choice_id, user_id, question_id) VALUES(:choice_id,:user_id, :question_id)
+    ON DUPLICATE KEY
+    UPDATE choice_id = :choice_id`,
+    params
+  );
 }
 
 export async function getWhichUsersAnsweredMostQuestions() {

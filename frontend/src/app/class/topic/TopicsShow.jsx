@@ -40,7 +40,7 @@ export default function TopicsShow() {
                       dispatch(changeNavbarPage(`${topic.name}/question`));
                     }}
                   >
-                    <Icon name='study' />
+                    <Icon name='fork' />
                     Study Topic
                   </Button>
                 </Card.Content>

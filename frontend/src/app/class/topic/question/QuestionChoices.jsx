@@ -3,7 +3,7 @@ import { selectArrayOfStateById } from '@utils/functions';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Segment, Header, List, Button, Divider } from 'semantic-ui-react';
-import { getChoicesByQuestion, postChoice } from './choices/choicesSlice';
+import { getChoicesByQuestion, postAnswer, upsertCurrentAnswer } from './choices/choicesSlice';
 import { selectLoadingState } from '@src/app/store/loadingSlice';
 import MarkdownRenderer from '@components/MarkdownRenderer';
 
@@ -46,7 +46,8 @@ export default function QuestionChoices({ selectedQuestion }) {
                       if (!showAnswers) {
                         // if alr answered dont do this
                         setShowAnswers(true);
-                        dispatch(postChoice(choice.id));
+                        dispatch(postAnswer(choice.id));
+                        dispatch(upsertCurrentAnswer(choice.id, selectedQuestion.id));
                         if (choice.is_correct) {
                           console.log('correct! yay!');
                         }

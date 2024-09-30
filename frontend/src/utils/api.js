@@ -36,7 +36,7 @@ export function standardApiCall(
         dispatch(showFlashMessage('axios function not found', 'err'));
         return;
       }
-      dispatch({ type: resultAction, payload: result.data });
+      if (resultAction) dispatch({ type: resultAction, payload: result.data });
       dispatch(hideFlashMessage());
       dispatch(stopLoading(componentName));
     } catch (error) {

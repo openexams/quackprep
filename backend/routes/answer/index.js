@@ -3,6 +3,7 @@ import {
   getQuestionsAnsweredByMonthAndYear,
   getWhichUsersAnsweredMostQuestions,
   postAnswer,
+  upsertCurrentAnswer,
 } from "#models/answer/index.js";
 import express from "express";
 const router = express.Router();
@@ -15,6 +16,21 @@ router.post("/:choice_id", async function (req, res) {
     res.status(200).json(result);
   } catch (error) {
     res.status(500).json({ message: "server error, could not upload answer" });
+  }
+});
+
+router.post("/:choice_id/:question_id", async function (req, res) {
+  try {
+    const result = await upsertCurrentAnswer(
+      req.user,
+      req.params.choice_id,
+      req.params.question_id
+    );
+    res.status(200).json(result);
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "server error, could not upsert current answer" });
   }
 });
 
