@@ -1,8 +1,10 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Card, Image, Icon, Button } from 'semantic-ui-react';
 import { selectUser } from '../auth/authSlice';
+import { changeNavbarPage } from '@components/navbar/navbarSlice';
 
 export default function Profile() {
+  const dispatch = useDispatch();
   const { user } = useSelector(selectUser);
 
   return (
@@ -10,7 +12,7 @@ export default function Profile() {
       style={{
         display: 'flex',
         justifyContent: 'center',
-        marginTop: '20px',
+        marginTop: '7rem',
       }}
     >
       <Card
@@ -23,7 +25,7 @@ export default function Profile() {
         }}
       >
         <Image
-          src={user.icon}
+          src={user.icon || `https://api.dicebear.com/6.x/initials/svg?seed=${user.username}`}
           ui={false}
           style={{
             maxHeight: '250px',
@@ -62,6 +64,7 @@ export default function Profile() {
               color: '#fff',
               fontWeight: '500',
             }}
+            onClick={() => dispatch(changeNavbarPage('/settings'))}
           >
             Edit Profile
           </Button>

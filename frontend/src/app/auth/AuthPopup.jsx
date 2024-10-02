@@ -66,12 +66,7 @@ export default function Auth() {
             </Form>
             <br></br>
             <Button.Group>
-              <Button
-                active={loggingIn}
-                onClick={() => setLoggingIn(true)}
-                color={loggingIn ? ' !important' : 'grey'}
-                size='large'
-              >
+              <Button active={loggingIn} onClick={() => setLoggingIn(true)} color={loggingIn ? 'grey' : 'grey'} size='large'>
                 Login
               </Button>
               <Button.Or />

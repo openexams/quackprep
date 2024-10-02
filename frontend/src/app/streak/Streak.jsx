@@ -46,6 +46,7 @@ export default function StreakPage() {
     for (let i = 1; i < milestones.length; i++) {
       if (streak.currentStreak >= milestones[i - 1].days && streak.currentStreak < milestones[i].days) {
         const percent = (100 * (streak.currentStreak - milestones[i - 1].days)) / (milestones[i].days - milestones[i - 1].days);
+        console.log(percent);
         return percent;
       }
     }

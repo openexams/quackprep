@@ -20,22 +20,27 @@ export default function ProfileDropdown({ activePage, handlePageChange, hasStrea
       direction='left'
       trigger={
         <span>
-          <Image avatar src={user.icon || `https://api.dicebear.com/6.x/initials/svg?seed=${user.username}`} /> {user.username}{' '}
+          <Image as={'img'} avatar src={user.icon || `https://api.dicebear.com/6.x/initials/svg?seed=${user.username}`} />{' '}
+          {user.username}
           {hasStreak && <Image avatar src={fireGif} />}
         </span>
       }
     >
       <Dropdown.Menu>
-        <Dropdown.Item name='/profile' active={activePage === '/profile'} onClick={handlePageChange}>
-          Profile
-        </Dropdown.Item>
         <Dropdown.Item onClick={handlePageChange} active={activePage === '/streak'} name='/streak'>
           Streak
           <Icon name='fire' color='orange' />
         </Dropdown.Item>
+        <Dropdown.Item name='/profile' active={activePage === '/profile'} onClick={handlePageChange}>
+          Profile
+        </Dropdown.Item>
+        <Dropdown.Item name='/settings' active={activePage === '/settings'} onClick={handlePageChange}>
+          Settings
+        </Dropdown.Item>
         <Dropdown.Item onClick={() => setConfirmOpen(true)}>Sign Out</Dropdown.Item>
         {confimOpen ? (
           <ConfirmSignoutModal
+            onClose={setConfirmOpen}
             open={confimOpen}
             onSubmit={() => {
               dispatch(signOut());

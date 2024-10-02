@@ -11,6 +11,7 @@ import ClassShow from './class/ClassShow.jsx';
 import QuestionPage from './class/topic/question/QuestionPage.jsx';
 import TopicsShow from './class/topic/TopicsShow.jsx';
 import NotFoundPage from '@components/NotFound.jsx';
+import Settings from '@components/Settings.jsx';
 
 {
   /* topic could be a actual topic or a group of question such as a exam */
@@ -26,6 +27,7 @@ export default function AppRouter() {
         <Route path='/auth' element={<AuthPopup />} />
         <Route path='/profile' element={<Profile />} />
         <Route path='/streak' element={<Streak />} />
+        <Route path='/settings' element={<Settings />} />
         <Route path='/class' element={<ClassList />} />
         <Route path='/class/:class_name/' element={<ClassShow />} />
         <Route path='/class/:class_name/topic/' element={<TopicsShow />} />
