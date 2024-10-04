@@ -34,3 +34,42 @@ export async function getQuestionsAnsweredByMonthAndYear() {
      MONTH(created_at) ORDER BY YEAR ASC, MONTH ASC`
   );
 }
+
+//CRUD
+
+export async function getChoicesByQuestion(question_id) {
+  const params = { question_id };
+  return await sqlExe.executeCommand(
+    `SELECT * FROM choices WHERE question_id = :question_id ORDER BY id ASC`,
+    params
+  );
+}
+
+export async function addAnswerToQuestion(
+  user_id,
+  question_id,
+  isCorrect,
+  text
+) {
+  const params = { user_id, question_id, isCorrect, text };
+  return await sqlExe.executeCommand(
+    `INSERT INTO choices (answer,is_correct,question_id,user_id) values (:text,:isCorrect,question_id,user_id)`,
+    { params }
+  );
+}
+
+export async function updateAnswer(user_id, choice_id, newIsCorrect, newText) {
+  const params = { user_id, choice_id, newText, newIsCorrect };
+  return await sqlExe.executeCommand(
+    `UPDATE choices SET answer = :newText, is_correct=:newIsCorrect, WHERE id = :choice_id `,
+    { params }
+  );
+}
+
+export async function deleteAnswer(user_id, choice_id) {
+  const params = { user_id, choice_id };
+  return await sqlExe.executeCommand(
+    `UPDATE choices SET deleted = 1, WHERE id = :choice_id `,
+    { params }
+  );
+}

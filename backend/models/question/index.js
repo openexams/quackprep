@@ -6,11 +6,3 @@ export async function getQuestionsByTopic(topic_id) {
     params
   );
 }
-
-export async function getChoicesByQuestion(question_id) {
-  const params = { question_id };
-  return await sqlExe.executeCommand(
-    `SELECT * FROM choices WHERE question_id = :question_id ORDER BY id ASC`,
-    params
-  );
-}
