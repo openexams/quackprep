@@ -67,9 +67,10 @@ export async function updateAnswer(user_id, choice_id, newIsCorrect, newText) {
 }
 
 export async function deleteAnswer(user_id, choice_id) {
-  const params = { user_id, choice_id };
+  //console.log(user_id, choice_id);
+  const params = { choice_id }; // can use user_id for updated by.
   return await sqlExe.executeCommand(
-    `UPDATE choices SET deleted = 1, WHERE id = :choice_id `,
-    { params }
+    `UPDATE choices c SET c.deleted = 1 WHERE c.id = :choice_id `,
+    params
   );
 }

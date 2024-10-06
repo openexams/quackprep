@@ -9,6 +9,7 @@ import {
   updateAnswer,
   upsertCurrentAnswer,
 } from "#models/answer/index.js";
+import { checkApiKey } from "#models/auth/index.js";
 import express, { Router } from "express";
 const router = Router();
 
@@ -58,7 +59,7 @@ router.get("/qsansweredbymandy", async function (req, res) {
   }
 });
 
-/// CRUD CHOICES
+/// CRUD CHOICES & API KEY POSSIBLE TO USE
 
 //// R
 router.get("/:question_id", async function (req, res) {
@@ -80,12 +81,22 @@ router.post("/:question_id", async function (req, res) {
     if ((!data?.isCorrect, data?.text)) {
       throw Error("pls send all json body");
     }
-    const result = await addAnswerToQuestion(
-      req.user,
-      req.params.question_id,
-      data.isCorrect,
-      data.text
-    );
+    let result;
+    if (req.headers?.token) {
+      result = await addAnswerToQuestion(
+        await checkApiKey(req.headers.token),
+        req.params.question_id,
+        data.isCorrect,
+        data.text
+      );
+    } else {
+      result = await addAnswerToQuestion(
+        req.user,
+        req.params.question_id,
+        data.isCorrect,
+        data.text
+      );
+    }
     res.status(200).json(result);
   } catch (error) {
     res.status(500).json({
@@ -94,18 +105,30 @@ router.post("/:question_id", async function (req, res) {
   }
 });
 
+// U
 router.patch("/:choice_id", async function (req, res) {
   const data = req.body;
   try {
     if ((!data?.isCorrect, data?.text)) {
       throw Error("pls send all json body");
     }
-    const result = await updateAnswer(
-      req.user,
-      req.params.choice_id,
-      data.isCorrect,
-      data.text
-    );
+    let result;
+    if (req.headers?.token) {
+      // can i abstract this?
+      result = await updateAnswer(
+        await checkApiKey(req.headers.token),
+        req.params.choice_id,
+        data.isCorrect,
+        data.text
+      );
+    } else {
+      result = await updateAnswer(
+        req.user,
+        req.params.choice_id,
+        data.isCorrect,
+        data.text
+      );
+    }
     res.status(200).json(result);
   } catch (error) {
     res.status(500).json({
@@ -114,17 +137,24 @@ router.patch("/:choice_id", async function (req, res) {
   }
 });
 
+//D
 router.delete("/:choice_id", async function (req, res) {
-  const data = req.body;
+  console.log(req.headers.token);
   try {
-    if ((!data?.isCorrect, data?.text)) {
-      throw Error("pls send all json body");
+    let result;
+    if (req.headers?.token) {
+      result = await deleteAnswer(
+        await checkApiKey(req.headers.token),
+        req.params.choice_id
+      );
+    } else {
+      result = await deleteAnswer(req.user, req.params.choice_id);
     }
-    const result = await deleteAnswer(req.user, req.params.choice_id);
+
     res.status(200).json(result);
   } catch (error) {
     res.status(500).json({
-      message: `failed to update choice by choice id: ${req.params.choice_id}`,
+      message: `failed to delete choice by choice id: ${req.params.choice_id}`,
     });
   }
 });

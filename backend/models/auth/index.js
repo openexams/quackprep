@@ -103,3 +103,19 @@ export async function findUserById(id) {
     return exists[0];
   }
 }
+
+// returns the api key users user_id
+export async function checkApiKey(key) {
+  if (!key) {
+    return null;
+  }
+  const result = await sqlExe.executeCommand(
+    `SELECT * FROM api_keys WHERE api_key = :key`,
+    { key }
+  );
+
+  if (result[0]) {
+    return result[0].user_id;
+  }
+  return null;
+}

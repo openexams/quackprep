@@ -1,4 +1,5 @@
 import {
+  checkApiKey,
   checkIfProviderIdExistsInUsers,
   findLocalUserByEmailPassword,
   findUserById,
@@ -8,6 +9,8 @@ import { GOOGLE_OAUTH_CONFIG } from "./config.js";
 import passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
+import { Strategy as BearerStrategy } from "passport-http-bearer";
+
 passport.use(
   new GoogleStrategy(GOOGLE_OAUTH_CONFIG, async function (
     accessToken,
@@ -76,6 +79,23 @@ passport.use(
       return done(null, user);
     }
   )
+);
+
+passport.use(
+  new BearerStrategy(async function (token, done) {
+    try {
+      const result = await checkApiKey(token);
+
+      if (!result) {
+        return done(null, false, { message: "Invalid API key" });
+      }
+
+      const user = { id: result.id };
+      return done(null, user);
+    } catch (err) {
+      return done(err);
+    }
+  })
 );
 
 passport.serializeUser(function (user, done) {
