@@ -52,10 +52,12 @@ export async function addAnswerToQuestion(
   text
 ) {
   const params = { user_id, question_id, isCorrect, text };
-  return await sqlExe.executeCommand(
-    `INSERT INTO choices (answer,is_correct,question_id,user_id) values (:text,:isCorrect,question_id,user_id)`,
-    { params }
-  );
+  return (
+    await sqlExe.executeCommand(
+      `INSERT INTO choices (answer,is_correct,question_id,user_id) values (:text,:isCorrect,question_id,user_id)`,
+      { params }
+    )
+  ).insertId;
 }
 
 export async function updateAnswer(user_id, choice_id, newIsCorrect, newText) {

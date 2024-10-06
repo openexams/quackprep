@@ -30,7 +30,7 @@ export function postAnswer(choice_id) {
 }
 
 export function getChoicesByQuestion(question_id) {
-  return standardApiCall('get', `/api/question/choices/${question_id}`, null, GET_CHOICES_BY_Q, 'QuestionChoices');
+  return standardApiCall('get', `/api/answer/${question_id}`, null, GET_CHOICES_BY_Q, 'QuestionChoices');
 }
 
 const DEFAULT_STATE = {

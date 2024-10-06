@@ -13,9 +13,7 @@ import { checkApiKey } from "#models/auth/index.js";
 import express, { Router } from "express";
 const router = Router();
 
-router.use(isAuthenticated);
-
-router.post("/:choice_id", async function (req, res) {
+router.post("/:choice_id", isAuthenticated, async function (req, res) {
   try {
     const result = await postAnswer(req.user, req.params.choice_id);
     res.status(200).json(result);
@@ -24,20 +22,24 @@ router.post("/:choice_id", async function (req, res) {
   }
 });
 
-router.post("/:choice_id/:question_id", async function (req, res) {
-  try {
-    const result = await upsertCurrentAnswer(
-      req.user,
-      req.params.choice_id,
-      req.params.question_id
-    );
-    res.status(200).json(result);
-  } catch (error) {
-    res
-      .status(500)
-      .json({ message: "server error, could not upsert current answer" });
+router.post(
+  "/:choice_id/:question_id",
+  isAuthenticated,
+  async function (req, res) {
+    try {
+      const result = await upsertCurrentAnswer(
+        req.user,
+        req.params.choice_id,
+        req.params.question_id
+      );
+      res.status(200).json(result);
+    } catch (error) {
+      res
+        .status(500)
+        .json({ message: "server error, could not upsert current answer" });
+    }
   }
-});
+);
 
 router.get("/top", async function (req, res) {
   try {
@@ -62,7 +64,7 @@ router.get("/qsansweredbymandy", async function (req, res) {
 /// CRUD CHOICES & API KEY POSSIBLE TO USE
 
 //// R
-router.get("/:question_id", async function (req, res) {
+router.get("/:question_id", isAuthenticated, async function (req, res) {
   try {
     const result = await getChoicesByQuestion(req.params.question_id);
     res.status(200).json(result);
@@ -75,7 +77,7 @@ router.get("/:question_id", async function (req, res) {
 
 // C
 
-router.post("/:question_id", async function (req, res) {
+router.post("/:question_id", isAuthenticated, async function (req, res) {
   const data = req.body;
   try {
     if ((!data?.isCorrect, data?.text)) {
@@ -106,7 +108,7 @@ router.post("/:question_id", async function (req, res) {
 });
 
 // U
-router.patch("/:choice_id", async function (req, res) {
+router.patch("/:choice_id", isAuthenticated, async function (req, res) {
   const data = req.body;
   try {
     if ((!data?.isCorrect, data?.text)) {
@@ -138,7 +140,7 @@ router.patch("/:choice_id", async function (req, res) {
 });
 
 //D
-router.delete("/:choice_id", async function (req, res) {
+router.delete("/:choice_id", isAuthenticated, async function (req, res) {
   console.log(req.headers.token);
   try {
     let result;

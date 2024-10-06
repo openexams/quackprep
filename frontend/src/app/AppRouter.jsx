@@ -12,6 +12,7 @@ import QuestionPage from './class/topic/question/QuestionPage.jsx';
 import TopicsShow from './class/topic/TopicsShow.jsx';
 import NotFoundPage from '@components/NotFound.jsx';
 import Settings from '@components/Settings.jsx';
+import ApiDocs from './docs/api/ApiDocs.jsx';
 
 {
   /* topic could be a actual topic or a group of question such as a exam */
@@ -35,6 +36,8 @@ export default function AppRouter() {
         <Route path='/class/:class_name/topic/:topic_name/question/:question_id' element={<QuestionPage />} />
         <Route path='/leaderboard' element={<Leaderboard />} />
         <Route path='/stats' element={<Stats />} />
+        <Route path='/docs/api' element={<ApiDocs />} />
+
         <Route path='*' element={<NotFoundPage />} />
       </Routes>
     </Router>

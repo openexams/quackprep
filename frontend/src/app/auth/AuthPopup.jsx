@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Modal, Button, Segment, Header, Icon, Image, Form } from 'semantic-ui-react';
 import Login from './login/Login';
-import { changeNavbarPage, selectCurrentPage } from '@components/navbar/navbarSlice';
+import { changeNavbarPage, selectCurrentPage, selectNavbarState } from '@components/navbar/navbarSlice';
 import Register from './register/register';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectUser } from './authSlice';
@@ -9,6 +9,7 @@ import google_icon from '/img/google_icon.webp';
 import { useSearchParams } from 'react-router-dom';
 
 export default function Auth() {
+  const linkAfterAuthNext = useSelector(selectNavbarState).navbar.page?.split('/auth?next=')?.[1];
   const loading = useSelector((state) => state.loading.loadingComps.AuthPopup);
   const dispatch = useDispatch();
   const { user } = useSelector(selectUser);
@@ -43,6 +44,11 @@ export default function Auth() {
               <Header.Content>
                 {log_or_sin_txt} to Your Account
                 <Header.Subheader style={{ color: '#ddd' }}>Welcome to quackprep</Header.Subheader>
+                {linkAfterAuthNext && (
+                  <Header.Subheader style={{ color: '#ddd' }}>
+                    You must be logged in to use **{linkAfterAuthNext}**
+                  </Header.Subheader>
+                )}
               </Header.Content>
             </Header>
           </Modal.Header>
