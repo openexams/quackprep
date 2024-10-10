@@ -1,0 +1,15 @@
+.milestone-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.milestone-label {
+  display: inline-block;
+  margin: 0.25rem;
+}
+
+.mt-4 {
+  margin-top: 1rem !important;
+}

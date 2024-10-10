@@ -12,6 +12,10 @@ export function getStreak() {
   return standardApiCall('get', '/api/streak/', null, GET_STREAK);
 }
 
+export function claimStreak() {
+  return standardApiCall('post', '/api/streak/', {}, GET_STREAK); // uses same dispatching const ik ik
+}
+
 const DEFAULT_STATE = {
   currentStreak: null,
   longestStreak: null,
@@ -22,9 +26,12 @@ const DEFAULT_STATE = {
 export default function streakReducer(state = DEFAULT_STATE, action) {
   switch (action.type) {
     case GET_HAS_STREAK:
-      return { ...state, hasStreak: action.payload.has_streak };
+      return { ...state, hasStreak: action.payload };
 
     case GET_STREAK:
+      if (!action.payload?.last_claim) {
+        return state;
+      }
       return {
         ...state,
         hasStreak: action.payload.has_streak,

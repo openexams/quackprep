@@ -91,7 +91,7 @@ export default function ClassCard({ id, name, category, desc }) {
         </Card.Content>
       </Card>
 
-      {hovered && (
+      {/* {hovered && (
         <div
           style={{
             position: 'absolute',
@@ -111,7 +111,7 @@ export default function ClassCard({ id, name, category, desc }) {
         >
           Study Now!
         </div>
-      )}
+      )} */}
     </div>
   );
 }

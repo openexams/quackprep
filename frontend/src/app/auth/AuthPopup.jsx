@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Modal, Button, Segment, Header, Icon, Image, Form } from 'semantic-ui-react';
 import Login from './login/Login';
-import { changeNavbarPage, selectCurrentPage } from '@components/navbar/navbarSlice';
+import { changeNavbarPage, selectCurrentPage, selectNavbarState } from '@components/navbar/navbarSlice';
 import Register from './register/register';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectUser } from './authSlice';
@@ -9,6 +9,7 @@ import google_icon from '/img/google_icon.webp';
 import { useSearchParams } from 'react-router-dom';
 
 export default function Auth() {
+  const linkAfterAuthNext = useSelector(selectNavbarState).navbar.page?.split('/auth?next=')?.[1];
   const loading = useSelector((state) => state.loading.loadingComps.AuthPopup);
   const dispatch = useDispatch();
   const { user } = useSelector(selectUser);
@@ -36,13 +37,18 @@ export default function Auth() {
         style={{ backgroundColor: '#f7f7ff', zIndex: 2 }}
       >
         <Segment style={{ minHeight: 650 }} basic loading={loading}>
-          <Modal.Header style={{ textAlign: 'center', backgroundColor: '#6A0DAD', color: '#fff', padding: '20px' }}>
-            <Header as='h2' inverted>
+          <Modal.Header style={{ textAlign: 'center', backgroundColor: 'black', padding: '20px', marginBottom: '1em' }}>
+            <Header as='h2' inverted style={{ marginBottom: '.5em' }}>
               <Icon name='user' />
 
               <Header.Content>
                 {log_or_sin_txt} to Your Account
                 <Header.Subheader style={{ color: '#ddd' }}>Welcome to quackprep</Header.Subheader>
+                {linkAfterAuthNext && (
+                  <Header.Subheader style={{ color: '#ddd' }}>
+                    You must be logged in to use **{linkAfterAuthNext}**
+                  </Header.Subheader>
+                )}
               </Header.Content>
             </Header>
           </Modal.Header>
@@ -66,12 +72,12 @@ export default function Auth() {
             </Form>
             <br></br>
             <Button.Group>
-              <Button active={loggingIn} onClick={() => setLoggingIn(true)} color={loggingIn ? 'purple' : 'grey'} size='large'>
+              <Button active={loggingIn} onClick={() => setLoggingIn(true)} color={loggingIn ? 'grey' : 'grey'} size='large'>
                 Login
               </Button>
               <Button.Or />
               <Button active={!loggingIn} onClick={() => setLoggingIn(false)} color={!loggingIn ? 'purple' : 'grey'} size='large'>
-                Sign Up
+                Sign Up{/* change button class name depending on if active or not, since semantic ui / me ovverides the color. */}
               </Button>
             </Button.Group>
             <Segment style={{ marginTop: '20px', padding: '20px' }}>{loggingIn ? <Login /> : <Register />}</Segment>

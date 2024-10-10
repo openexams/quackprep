@@ -10,15 +10,15 @@ export default defineConfig(({ command, mode }) => {
     // },
     plugins: [react()],
     server: {
-      hmr: false,
-      port: 5173,
+      hmr: true,
+      port: 3001,
       host: true,
-      // proxy: {
-      //   '/api': {
-      //     target: 'http://localhost:3000',
-      //     changeOrigin: true,
-      //   },
-      // },
+      proxy: {
+        '/api': {
+          target: 'http://localhost:3000',
+          changeOrigin: true,
+        },
+      },
     },
     resolve: {
       alias: {

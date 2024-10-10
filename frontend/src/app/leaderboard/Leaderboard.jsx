@@ -1,72 +1,68 @@
+import './leaderboard.css';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Table, Container, Header, Icon, Image, Grid } from 'semantic-ui-react';
+import { Container, Header, Icon, Grid, Card, List, Image } from 'semantic-ui-react';
 import { getTopStreaks, getWhichUsersAnsweredMostQuestions, selectLeaderboardState } from './leaderboardSlice';
-import './leaderboard.css';
 
 const TOP_X_AMT = 5;
 
-function createTableForLeaderboard(array, specializeItemName, headerElement) {
-  // Improved styling
-  const cellStyle = { width: '33%', textAlign: 'center' };
-
-  return (
-    <Grid.Column>
-      {headerElement}
-      <Table celled striped textAlign='center' size='large'>
-        <Table.Header>
-          <Table.Row>
-            <Table.HeaderCell style={cellStyle}>Rank</Table.HeaderCell>
-            <Table.HeaderCell style={cellStyle}>Username</Table.HeaderCell>
-            <Table.HeaderCell style={cellStyle}>{specializeItemName}</Table.HeaderCell>
-          </Table.Row>
-        </Table.Header>
-        <Table.Body>
-          {array &&
-            array.map((data, index) => (
-              <Table.Row key={data.user_id}>
-                <Table.Cell style={cellStyle}>{index + 1}</Table.Cell>
-                <Table.Cell style={cellStyle}>{data.username}</Table.Cell>
-                <Table.Cell style={cellStyle}>{data[specializeItemName]}</Table.Cell>
-              </Table.Row>
-            ))}
-        </Table.Body>
-      </Table>
-    </Grid.Column>
-  );
-}
+const LeaderboardCard = ({ title, icon, iconColor, data, dataKey }) => (
+  <Card fluid>
+    <Card.Content>
+      <Card.Header>
+        <Icon name={icon} color={iconColor} /> {title}
+      </Card.Header>
+    </Card.Content>
+    <Card.Content>
+      <List size='large' divided relaxed>
+        {data &&
+          data.map((item, index) => (
+            <List.Item key={item.user_id}>
+              <List.Content floated='right'>
+                <strong>{item[dataKey]}</strong>
+              </List.Content>
+              <Image avatar src={item.icon || `https://api.dicebear.com/6.x/initials/svg?seed=${item.username}`} />
+              <List.Content>
+                <List.Header>{item.username}</List.Header>
+                <List.Description>Rank: {index + 1}</List.Description>
+              </List.Content>
+            </List.Item>
+          ))}
+      </List>
+    </Card.Content>
+  </Card>
+);
 
 export default function Leaderboard() {
   const dispatch = useDispatch();
-  const { streaks } = useSelector(selectLeaderboardState).leaderboard;
-  const { questionsAnswered } = useSelector(selectLeaderboardState).leaderboard;
+  const { streaks, questionsAnswered } = useSelector(selectLeaderboardState).leaderboard;
 
   useEffect(() => {
     if (!streaks) dispatch(getTopStreaks(TOP_X_AMT));
     if (!questionsAnswered) dispatch(getWhichUsersAnsweredMostQuestions());
-  }, []);
+  }, [dispatch, streaks, questionsAnswered]);
+
   return (
     <Container>
-      <Header as={'h1'} textAlign='center'>
+      <Header as='h1' textAlign='center' icon>
+        <Icon name='trophy' color='yellow' className='cool-hover cool-click' />
         Leaderboard
-        <Icon size='mini' name='trophy' color='yellow' className='cool-hover cool-click' />{' '}
+        <Header.Subheader>Top performers in streaks and questions answered</Header.Subheader>
       </Header>
-      <Grid columns={2} stackable>
-        {createTableForLeaderboard(
-          streaks,
-          'current_streak',
-          <Header style={{ textAlign: 'center' }}>
-            Highest Streak Holders <Icon name='fire' color='red' />
-          </Header>,
-        )}
 
-        {createTableForLeaderboard(
-          questionsAnswered,
-          'questions_answered',
-          <Header style={{ textAlign: 'center' }}>
-            Most Questions Answered <Icon name='question' color='blue' />
-          </Header>,
-        )}
+      <Grid columns={2} stackable centered style={{ marginTop: '2rem' }}>
+        <Grid.Column>
+          <LeaderboardCard title='Highest Streak Holders' icon='fire' iconColor='red' data={streaks} dataKey='current_streak' />
+        </Grid.Column>
+        <Grid.Column>
+          <LeaderboardCard
+            title='Most Questions Answered'
+            icon='question'
+            iconColor='blue'
+            data={questionsAnswered}
+            dataKey='questions_answered'
+          />
+        </Grid.Column>
       </Grid>
     </Container>
   );

@@ -53,6 +53,15 @@ export default function Navbar() {
   const handleSidebarToggle = () => {
     setSidebarOpened(!sidebarOpened);
   };
+  const [counter, setCounter] = useState(0);
+
+  useEffect(() => {
+    setTimeout(() => {
+      //console.log('1 min later');
+      // will be used to track users time on site
+      setCounter(counter + 1);
+    }, 60000); // runs every min
+  }, [counter]);
 
   // get user at start of app
   useEffect(() => {

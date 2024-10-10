@@ -12,23 +12,29 @@ import redis from "redis";
 import bodyParser from "body-parser";
 import { REDIS_CONFIG, SESSION_CONFIG } from "./config/config.js";
 import sqlExe from "#db/dbFunctions.js";
+import path, { dirname } from "path";
+import { fileURLToPath } from "url";
+import { hasStreak } from "#models/streak/index.js";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 
-app.use(express.static(`./public`));
+console.log(path.join(__dirname, "./public/"));
 
 app.use(express.json());
 
 //app.set("trust proxy", 1);
 
 let corsOrigins = [
-  "https://accounts.google.com/o/oauth2",
+  "https://accounts.google.com/o/oauth2", // CALLING WRONG DOMAIN FATAL ERROR!
   "https://api.quackprep.com",
   "https://quackprep.com",
   "https://www.quackprep.com",
   "https://quackprep.onrender.com",
 ];
-if (NODE_ENV === "local") corsOrigins.push("http://localhost:5173"); // maybe bad pratice
+if (NODE_ENV === "local") corsOrigins.push("http://localhost:3001"); // maybe bad pratice
 
 const corsOrigin = {
   origin: corsOrigins,
@@ -62,12 +68,12 @@ if (NODE_ENV === "prod") {
   app.use(session(SESSION_CONFIG));
 }
 
-sqlExe.test();
+await sqlExe.test();
 
 app.use(
   rateLimit({
     windowMs: 15 * 60 * 1000, // 15 minutes
-    limit: 100000, // Limit each IP to 100 requests per `window` (here, per 15 minutes).
+    limit: 1000, // Limit each IP to 100 requests per `window` (here, per 15 minutes).
   })
 );
 app.use(cors(corsOrigin));
@@ -84,9 +90,16 @@ app.use(passport.initialize());
 app.use(passport.session());
 /** *        *          *     */
 
+app.use(express.static(path.join(__dirname, "./public/")));
+
 app.use("/api", router);
+
+app.get("/*", (req, res) => {
+  res.sendFile(path.join(__dirname, "./public/index.html"));
+});
 
 app.listen(3000, () => {
   console.log("Listening on port 3000");
 });
+
 //test db connections

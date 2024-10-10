@@ -3,25 +3,16 @@ import {
   getStreakData,
   hasStreak,
   getTopStreaks,
+  claimStreak,
 } from "#models/streak/index.js";
 import express from "express";
 
 const router = express.Router();
 
-router.use(isAuthenticated);
-
-// does user have streak
-
-router.get("/has_streak", async function (req, res) {
+router.get("/has_streak", isAuthenticated, async function (req, res) {
   try {
     const bool = await hasStreak(req.user);
-    let response;
-    if (bool) {
-      response = { has_streak: true };
-    } else {
-      response = { has_streak: false };
-    }
-    res.status(200).json(response);
+    res.status(200).json(bool);
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "server errored getting users streak" });
@@ -43,12 +34,26 @@ router.get("/top/:amt", async function (req, res) {
 });
 
 // gets all of the users current streak data
-router.get("/", async function (req, res) {
+router.get("/", isAuthenticated, async function (req, res) {
   try {
     const data = await getStreakData(req.user);
     res.status(200).json(data);
   } catch (error) {
     res.status(500).json({ message: "failed to get all streak data" });
+  }
+});
+
+// lets user claim a streak
+router.post("/", isAuthenticated, async function (req, res) {
+  try {
+    const data = await claimStreak(req.user);
+    if (!data?.current_streak) {
+      res.status(400).json({ message: "u alr have a streak" });
+      return;
+    }
+    res.status(200).json(data);
+  } catch (error) {
+    res.status(500).json({ message: "failed to claim streak" });
   }
 });
 

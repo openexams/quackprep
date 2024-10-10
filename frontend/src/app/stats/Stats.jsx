@@ -1,25 +1,60 @@
-import { useEffect, useMemo } from 'react';
-import { Container, Header, Grid, Segment, Icon } from 'semantic-ui-react';
-import { Line, Pie } from 'react-chartjs-2';
-import 'chart.js/auto';
+import './stats.css';
+import React, { useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Container, Header, Grid, Segment, Icon, Card } from 'semantic-ui-react';
+import { Line } from 'react-chartjs-2';
+import 'chart.js/auto';
 import { selectLoadingState } from '../store/loadingSlice';
 import { getQuestionsAnsweredByMonthAndYear, selectStatsState } from './statsSlice';
 
 const numberToNameMonthMapping = {
-  1: 'January',
-  2: 'February',
-  3: 'March',
-  4: 'April',
+  1: 'Jan',
+  2: 'Feb',
+  3: 'Mar',
+  4: 'Apr',
   5: 'May',
-  6: 'June',
-  7: 'July',
-  8: 'August',
-  9: 'September',
-  10: 'October',
-  11: 'November',
-  12: 'December',
+  6: 'Jun',
+  7: 'Jul',
+  8: 'Aug',
+  9: 'Sep',
+  10: 'Oct',
+  11: 'Nov',
+  12: 'Dec',
 };
+
+const mapQuestionsByMAndY = (data) => {
+  if (!data) return null;
+  const questionOverTimeCombineMandY = data.map(({ questions_answered, month, year }) => ({
+    questions_answered,
+    mY: `${numberToNameMonthMapping[month]} ${year}`,
+  }));
+
+  return {
+    labels: questionOverTimeCombineMandY.map((x) => x.mY),
+    datasets: [
+      {
+        label: 'Questions Answered',
+        data: questionOverTimeCombineMandY.map((x) => x.questions_answered),
+        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+        borderColor: 'rgba(75, 192, 192, 1)',
+        borderWidth: 2,
+        fill: true,
+        tension: 0.4,
+      },
+    ],
+  };
+};
+
+const ChartCard = ({ title, children }) => (
+  <Card fluid>
+    <Card.Content>
+      <Card.Header as='h3' textAlign='center'>
+        {title}
+      </Card.Header>
+    </Card.Content>
+    <Card.Content>{children}</Card.Content>
+  </Card>
+);
 
 export default function StatsPage() {
   const loading = useSelector(selectLoadingState).loadingComps.Stats;
@@ -28,58 +63,54 @@ export default function StatsPage() {
 
   useEffect(() => {
     if (!questionsAnsweredByMonthAndYear) dispatch(getQuestionsAnsweredByMonthAndYear());
-  }, []);
+  }, [dispatch, questionsAnsweredByMonthAndYear]);
 
-  // use memo
+  const mappedQuestions = useMemo(() => mapQuestionsByMAndY(questionsAnsweredByMonthAndYear), [questionsAnsweredByMonthAndYear]);
 
-  function mapQuestionsByMAndY(questionsAnsweredByMonthAndYear) {
-    if (!questionsAnsweredByMonthAndYear) return null;
-    const questionOverTimeCombineMandY = questionsAnsweredByMonthAndYear.map((mandy) => {
-      return { questions_answered: mandy.questions_answered, mY: `${numberToNameMonthMapping[mandy.month]} ${mandy.year} ` };
-    });
-
-    const questionsAnsweredOverTimeData = {
-      labels: questionOverTimeCombineMandY.map((x) => {
-        return x.mY;
-      }),
-      datasets: [
-        {
-          label: 'Total Questions Answered By Month',
-          data: questionOverTimeCombineMandY.map((x) => {
-            return x.questions_answered;
-          }),
-          backgroundColor: 'rgba(75, 192, 192, 0.2)',
-          borderColor: 'rgba(75, 192, 192, 1)',
-          borderWidth: 2,
-          fill: true,
+  const chartOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        position: 'top',
+      },
+      title: {
+        display: true,
+        text: 'Questions Answered Over Time',
+      },
+    },
+    scales: {
+      y: {
+        beginAtZero: true,
+        title: {
+          display: true,
+          text: 'Number of Questions',
         },
-      ],
-    };
-    return questionsAnsweredOverTimeData;
-  }
-
-  const mappedQuestions = useMemo(() => {
-    return mapQuestionsByMAndY(questionsAnsweredByMonthAndYear);
-  }, [questionsAnsweredByMonthAndYear]);
+      },
+      x: {
+        title: {
+          display: true,
+          text: 'Month and Year',
+        },
+      },
+    },
+  };
 
   return (
-    //add loading
     <Container>
-      <Header as='h2' textAlign='center'>
-        User Statistics <Icon name='line graph' />
+      <Header as='h1' textAlign='center' icon>
+        <Icon name='chart line' />
+        User Statistics
+        <Header.Subheader>Track our progress over time</Header.Subheader>
       </Header>
+
       <Segment basic loading={loading}>
         <Grid columns={1} stackable>
           <Grid.Row>
             <Grid.Column>
-              <Header as='h3' textAlign='center'>
-                Total Questions Answered Over Time
-              </Header>
-              <div style={{ width: '100%', height: '400px' }}>
-                {questionsAnsweredByMonthAndYear && (
-                  <Line data={mappedQuestions} options={{ responsive: true, maintainAspectRatio: false }} />
-                )}
-              </div>
+              <ChartCard title='Questions Answered Over Time'>
+                <div style={{ height: '400px' }}>{mappedQuestions && <Line data={mappedQuestions} options={chartOptions} />}</div>
+              </ChartCard>
             </Grid.Column>
           </Grid.Row>
         </Grid>
