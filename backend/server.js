@@ -32,7 +32,7 @@ let corsOrigins = [
   "https://api.quackprep.com",
   "https://quackprep.com",
   "https://www.quackprep.com",
-  "https://quackprep.onrender.com",
+  "https://quackprep-production.up.railway.app",
 ];
 if (NODE_ENV === "local") corsOrigins.push("http://localhost:3001"); // maybe bad pratice
 
