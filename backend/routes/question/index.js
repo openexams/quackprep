@@ -52,7 +52,7 @@ router.post("/", async function (req, res) {
     res.status(200).json(result);
   } catch (error) {
     res.status(500).json({
-      message: `failed to get question by topic id ${req.params.question_id}`,
+      message: `failed to add question by topic id ${req.body?.topic_id}`,
     });
   }
 });

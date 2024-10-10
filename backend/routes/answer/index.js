@@ -83,22 +83,14 @@ router.post("/:question_id", isAuthenticated, async function (req, res) {
     if ((!data?.isCorrect, data?.text)) {
       throw Error("pls send all json body");
     }
-    let result;
-    if (req.headers?.token) {
-      result = await addAnswerToQuestion(
-        await checkApiKey(req.headers.token),
-        req.params.question_id,
-        data.isCorrect,
-        data.text
-      );
-    } else {
-      result = await addAnswerToQuestion(
-        req.user,
-        req.params.question_id,
-        data.isCorrect,
-        data.text
-      );
-    }
+
+    const result = await addAnswerToQuestion(
+      req.user,
+      req.params.question_id,
+      data.isCorrect,
+      data.text
+    );
+
     res.status(200).json(result);
   } catch (error) {
     res.status(500).json({
@@ -114,23 +106,14 @@ router.patch("/:choice_id", isAuthenticated, async function (req, res) {
     if ((!data?.isCorrect, data?.text)) {
       throw Error("pls send all json body");
     }
-    let result;
-    if (req.headers?.token) {
-      // can i abstract this?
-      result = await updateAnswer(
-        await checkApiKey(req.headers.token),
-        req.params.choice_id,
-        data.isCorrect,
-        data.text
-      );
-    } else {
-      result = await updateAnswer(
-        req.user,
-        req.params.choice_id,
-        data.isCorrect,
-        data.text
-      );
-    }
+
+    const result = await updateAnswer(
+      req.user,
+      req.params.choice_id,
+      data.isCorrect,
+      data.text
+    );
+
     res.status(200).json(result);
   } catch (error) {
     res.status(500).json({
@@ -143,15 +126,7 @@ router.patch("/:choice_id", isAuthenticated, async function (req, res) {
 router.delete("/:choice_id", isAuthenticated, async function (req, res) {
   console.log(req.headers.token);
   try {
-    let result;
-    if (req.headers?.token) {
-      result = await deleteAnswer(
-        await checkApiKey(req.headers.token),
-        req.params.choice_id
-      );
-    } else {
-      result = await deleteAnswer(req.user, req.params.choice_id);
-    }
+    const result = await deleteAnswer(req.user, req.params.choice_id);
 
     res.status(200).json(result);
   } catch (error) {
