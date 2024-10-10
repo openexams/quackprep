@@ -7,11 +7,11 @@ export async function isAuthenticated(req, res, next) {
   // }
   if (req.user && req.isAuthenticated()) {
     dlog("user is logged in");
-    return next();
+    next();
   } else if (req.headers?.token && (await checkApiKey(req.headers.token))) {
     dlog("api token detected");
-    passport.authenticate("bearer", { session: false }); // tmp auth user TODO FIXd
-    return next();
+    req.user = await checkApiKey(req.headers.token); // inject into req.user temporaryily
+    next();
   } else {
     dlog("User not authed");
     res.status(401).json({

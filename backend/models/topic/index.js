@@ -14,3 +14,11 @@ export async function getTopicIdByClassNameAndTopicName(topicName, className) {
     params
   );
 }
+
+export async function addTopicToClass(name, class_id, description, user_id) {
+  const params = { name, class_id, description, user_id };
+  return await sqlExe.executeCommand(
+    `INSERT INTO topics (name,class_id,description,created_by) VALUES (:name,:class_id,:description,:user_id);`,
+    params
+  );
+}

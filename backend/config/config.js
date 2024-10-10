@@ -31,7 +31,7 @@ export const SESSION_CONFIG = {
   resave: false,
   saveUninitialized: false,
   cookie: {
-    domain: process.env.NODE_ENV === "prod" ? ".quackprep.com" : "",
+    domain: process.env.NODE_ENV === "prod" ? "quackprep.com" : "",
     httpOnly: process.env.NODE_ENV === "prod" ? true : false,
     secure: process.env.NODE_ENV !== "local",
     sameSite: true,

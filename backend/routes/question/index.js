@@ -39,29 +39,16 @@ router.post("/", async function (req, res) {
       throw Error("need body");
     }
     const data = req.body;
-    let result;
-    if (req.headers?.token) {
-      // ABSRTRAC
-      result = await createQuestionInTopic(
-        await checkApiKey(req.headers.token),
-        data.topic_id,
-        data.question,
-        data.year,
-        data.semester,
-        data.exam_num,
-        data.question_num_on_exam
-      );
-    } else {
-      result = await createQuestionInTopic(
-        req.user,
-        data.topic_id,
-        data.question,
-        data.year,
-        data.semester,
-        data.exam_num,
-        data.question_num_on_exam
-      );
-    }
+    const result = await createQuestionInTopic(
+      req.user,
+      data.topic_id,
+      data.question,
+      data.year,
+      data.semester,
+      data.exam_num,
+      data.question_num_on_exam
+    );
+
     res.status(200).json(result);
   } catch (error) {
     res.status(500).json({
