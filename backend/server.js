@@ -25,7 +25,7 @@ console.log(path.join(__dirname, "./public/"));
 
 app.use(express.json());
 
-//app.set("trust proxy", 1);
+app.set("trust proxy", 1);
 
 let corsOrigins = [
   "https://accounts.google.com/o/oauth2", // CALLING WRONG DOMAIN FATAL ERROR!
