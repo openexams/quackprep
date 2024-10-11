@@ -9,7 +9,7 @@ export function getTopStreaks(x) {
 }
 
 export function getWhichUsersAnsweredMostQuestions() {
-  return standardApiCall('get', `/api/answer/top`, null, GET_TOP_QS_ANSWERED, 'Leaderboard');
+  return standardApiCall('get', `/api/choice/top`, null, GET_TOP_QS_ANSWERED, 'Leaderboard');
 }
 
 const DEFAULT_STATE = {

@@ -1,21 +1,22 @@
 import { isAuthenticated } from "#middleware/authMiddleware.js";
 import {
-  addAnswerToQuestion,
-  deleteAnswer,
+  addChoiceToQuestion,
+  deleteChoice,
   getChoicesByQuestion,
   getQuestionsAnsweredByMonthAndYear,
   getWhichUsersAnsweredMostQuestions,
-  postAnswer,
-  updateAnswer,
-  upsertCurrentAnswer,
-} from "#models/answer/index.js";
+  postChoice,
+  updateChoice,
+  upsertCurrentChoice,
+} from "#models/choice/index.js";
 import { checkApiKey } from "#models/auth/index.js";
 import express, { Router } from "express";
 const router = Router();
 
+// answers transactional
 router.post("/:choice_id", isAuthenticated, async function (req, res) {
   try {
-    const result = await postAnswer(req.user, req.params.choice_id);
+    const result = await postChoice(req.user, req.params.choice_id);
     res.status(200).json(result);
   } catch (error) {
     res.status(500).json({ message: "server error, could not upload answer" });
@@ -27,7 +28,7 @@ router.post(
   isAuthenticated,
   async function (req, res) {
     try {
-      const result = await upsertCurrentAnswer(
+      const result = await upsertCurrentChoice(
         req.user,
         req.params.choice_id,
         req.params.question_id
@@ -61,7 +62,7 @@ router.get("/qsansweredbymandy", async function (req, res) {
   }
 });
 
-/// CRUD CHOICES & API KEY POSSIBLE TO USE
+/// CRUD CHOICES
 
 //// R
 router.get("/:question_id", isAuthenticated, async function (req, res) {
@@ -84,7 +85,7 @@ router.post("/:question_id", isAuthenticated, async function (req, res) {
       throw Error("pls send all json body");
     }
 
-    const result = await addAnswerToQuestion(
+    const result = await addChoiceToQuestion(
       req.user,
       req.params.question_id,
       data.isCorrect,
@@ -107,7 +108,7 @@ router.patch("/:choice_id", isAuthenticated, async function (req, res) {
       throw Error("pls send all json body");
     }
 
-    const result = await updateAnswer(
+    const result = await updateChoice(
       req.user,
       req.params.choice_id,
       data.isCorrect,
@@ -126,7 +127,7 @@ router.patch("/:choice_id", isAuthenticated, async function (req, res) {
 router.delete("/:choice_id", isAuthenticated, async function (req, res) {
   console.log(req.headers.token);
   try {
-    const result = await deleteAnswer(req.user, req.params.choice_id);
+    const result = await deleteChoice(req.user, req.params.choice_id);
 
     res.status(200).json(result);
   } catch (error) {

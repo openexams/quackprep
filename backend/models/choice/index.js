@@ -1,6 +1,6 @@
 import sqlExe from "#db/dbFunctions.js";
 
-export async function postAnswer(user_id, choice_id) {
+export async function postChoice(user_id, choice_id) {
   const params = { choice_id, user_id };
   return await sqlExe.executeCommand(
     `INSERT INTO answers_transactional (choice_id, user_id) VALUES(:choice_id,:user_id)`,
@@ -8,7 +8,7 @@ export async function postAnswer(user_id, choice_id) {
   ); // maybe get last inserted id so i can see it worked? Naaaa....
 }
 
-export async function upsertCurrentAnswer(user_id, choice_id, question_id) {
+export async function upsertCurrentChoice(user_id, choice_id, question_id) {
   const params = { choice_id, user_id, question_id };
   // if user already has row with this question update it, if not create a new one.
   return await sqlExe.executeCommand(
@@ -45,7 +45,7 @@ export async function getChoicesByQuestion(question_id) {
   );
 }
 
-export async function addAnswerToQuestion(
+export async function addChoiceToQuestion(
   user_id,
   question_id,
   isCorrect,
@@ -60,7 +60,7 @@ export async function addAnswerToQuestion(
   ).insertId;
 }
 
-export async function updateAnswer(user_id, choice_id, newIsCorrect, newText) {
+export async function updateChoice(user_id, choice_id, newIsCorrect, newText) {
   const params = { user_id, choice_id, newText, newIsCorrect };
   return await sqlExe.executeCommand(
     `UPDATE choices SET answer = :newText, is_correct=:newIsCorrect, WHERE id = :choice_id `,
@@ -68,7 +68,7 @@ export async function updateAnswer(user_id, choice_id, newIsCorrect, newText) {
   );
 }
 
-export async function deleteAnswer(user_id, choice_id) {
+export async function deleteChoice(user_id, choice_id) {
   //console.log(user_id, choice_id);
   const params = { choice_id }; // can use user_id for updated by.
   return await sqlExe.executeCommand(
