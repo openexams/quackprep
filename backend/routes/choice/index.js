@@ -81,7 +81,11 @@ router.get("/:question_id", isAuthenticated, async function (req, res) {
 router.post("/:question_id", isAuthenticated, async function (req, res) {
   const data = req.body;
   try {
-    if ((!data?.isCorrect, data?.text)) {
+    if (
+      data?.isCorrect === undefined ||
+      data?.isCorrect === null ||
+      !data?.text
+    ) {
       throw Error("pls send all json body");
     }
 
