@@ -14,7 +14,7 @@ import express, { Router } from "express";
 const router = Router();
 
 // answers transactional
-router.post("/:choice_id", isAuthenticated, async function (req, res) {
+router.post("/answer/:choice_id", isAuthenticated, async function (req, res) {
   try {
     const result = await postChoice(req.user, req.params.choice_id);
     res.status(200).json(result);

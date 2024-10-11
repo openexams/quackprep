@@ -16,17 +16,18 @@ export function getCurrentChoices(user_id) {
   return standardApiCall('get', '/api/choice/current', null, GET_CURRENT_CHOICES, 'QuestionChoices');
 }
 
-// not used right now needs to be used and setup.
+// not used right now needs to be used and setup. TODO
 export function postFavoriteAnswer(choice_id) {
   return standardApiCall('post', `/api/choice/favorite/${choice_id}`, {}, POST_FAVORITE_ANSWER);
 }
 
+//TODO
 export function upsertCurrentAnswer(choice_id, question_id) {
   return standardApiCall('post', `/api/choice/${choice_id}/${question_id}`, {}, null);
 }
 
 export function postAnswer(choice_id) {
-  return standardApiCall('post', `/api/choice/${choice_id}`, {}, null);
+  return standardApiCall('post', `/api/choice/answer/${choice_id}`, {}, null);
 }
 
 export function getChoicesByQuestion(question_id) {
