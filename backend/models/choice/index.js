@@ -52,10 +52,9 @@ export async function addChoiceToQuestion(
   text
 ) {
   const params = { user_id, question_id, isCorrect, text };
-  console.log(params);
   return (
     await sqlExe.executeCommand(
-      `INSERT INTO choices (answer,is_correct,question_id,user_id) values (:text,:isCorrect,question_id,user_id)`,
+      `INSERT INTO choices (answer,is_correct,question_id,created_by) values (:text,:isCorrect,:question_id,:user_id)`,
       params
     )
   ).insertId;
