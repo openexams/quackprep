@@ -52,10 +52,11 @@ export async function addChoiceToQuestion(
   text
 ) {
   const params = { user_id, question_id, isCorrect, text };
+  console.log(params);
   return (
     await sqlExe.executeCommand(
       `INSERT INTO choices (answer,is_correct,question_id,user_id) values (:text,:isCorrect,question_id,user_id)`,
-      { params }
+      params
     )
   ).insertId;
 }
@@ -64,7 +65,7 @@ export async function updateChoice(user_id, choice_id, newIsCorrect, newText) {
   const params = { user_id, choice_id, newText, newIsCorrect };
   return await sqlExe.executeCommand(
     `UPDATE choices SET answer = :newText, is_correct=:newIsCorrect, WHERE id = :choice_id `,
-    { params }
+    params
   );
 }
 

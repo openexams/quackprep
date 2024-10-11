@@ -108,7 +108,11 @@ router.post("/:question_id", isAuthenticated, async function (req, res) {
 router.patch("/:choice_id", isAuthenticated, async function (req, res) {
   const data = req.body;
   try {
-    if ((!data?.isCorrect, data?.text)) {
+    if (
+      data?.isCorrect === undefined ||
+      data?.isCorrect === null ||
+      !data?.text
+    ) {
       throw Error("pls send all json body");
     }
 
@@ -129,7 +133,7 @@ router.patch("/:choice_id", isAuthenticated, async function (req, res) {
 
 //D
 router.delete("/:choice_id", isAuthenticated, async function (req, res) {
-  console.log(req.headers.token);
+  //console.log(req.headers.token);
   try {
     const result = await deleteChoice(req.user, req.params.choice_id);
 
