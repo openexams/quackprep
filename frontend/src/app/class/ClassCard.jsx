@@ -1,7 +1,6 @@
 import { changeNavbarPage, updateCurrentClassData } from '@components/navbar/navbarSlice';
 import { useMemo, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import { Card, Icon } from 'semantic-ui-react';
 
 /**
@@ -48,6 +47,7 @@ function getIconByCategory(category) {
 }
 
 export default function ClassCard({ id, name, category, desc }) {
+  console.log(id, name, category, desc);
   const [hovered, setHovered] = useState(false);
   const dispatch = useDispatch();
 

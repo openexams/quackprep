@@ -55,12 +55,6 @@ h1.ui.header {
   transition: background-color 0.3s ease !important; /* Smooth hover effect */
 }
 
-.ui.button:hover {
-  background-color: var(--accent-color) !important; /* Vibrant Green on hover */
-  border-color: var(--accent-color) !important; /* Change border to match hover background */
-  color: #ffffff !important; /* Ensure the text color stays white on hover */
-}
-
 .ui.button:active {
   background-color: #e9e9e9 !important; /* Darker shade of blue when pressed */
 }

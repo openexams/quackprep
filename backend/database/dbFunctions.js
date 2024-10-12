@@ -21,14 +21,14 @@ export default class sqlExe {
       const response = await sqlExe.pool.execute(sqlCommand, params);
       return response[0];
     } catch (error) {
-      console.log("Failed at executeCommand\n", error);
+      console.log("Failed @executeCommand\n", error);
       throw error;
     }
   }
 
   static async test() {
     try {
-      const response = await sqlExe.pool.query("SELECT * FROM users");
+      await sqlExe.pool.query("SELECT * FROM answers_current LIMIT 1");
       console.log("Connected to quackprep");
     } catch (error) {
       console.error("Failed connection to quackprep");

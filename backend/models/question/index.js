@@ -2,7 +2,8 @@ import sqlExe from "#db/dbFunctions.js";
 export async function getQuestionsByTopic(topic_id) {
   const params = { topic_id };
   return await sqlExe.executeCommand(
-    `SELECT * FROM questions WHERE topic_id = :topic_id ORDER BY id ASC`,
+    // PULL IN MORE!
+    `SELECT q.id, q.question, tp.topic_id FROM questions q JOIN topic_question tp WHERE tp.topic_id = :topic_id ORDER BY q.id ASC`,
     params
   );
 }

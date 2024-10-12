@@ -82,7 +82,10 @@ export async function claimStreak(userId) {
 
   const old_streak_data = await getStreakData(userId);
 
-  if (!new Streak(old_streak_data.last_claim).canClaimStreak()) {
+  if (
+    old_streak_data?.last_claim &&
+    !new Streak(old_streak_data.last_claim).canClaimStreak()
+  ) {
     return {};
   }
   const params = { userId };

@@ -2,7 +2,7 @@ import sqlExe from "#db/dbFunctions.js";
 export async function getTopicsByClassId(class_id) {
   const params = { class_id };
   return await sqlExe.executeCommand(
-    `SELECT * FROM topics WHERE class_id = :class_id ORDER BY id ASC`,
+    `SELECT t.name,t.id,t.description,t.created_by, ct.class_id FROM topics t join class_topic ct WHERE t.deleted =0 AND ct.class_id = :class_id ORDER BY id ASC`,
     params
   );
 }
@@ -10,7 +10,8 @@ export async function getTopicsByClassId(class_id) {
 export async function getTopicIdByClassNameAndTopicName(topicName, className) {
   const params = { topicName, className };
   return await sqlExe.executeCommand(
-    `SELECT t.id,t.name FROM topics t JOIN classes c on t.class_id = c.id WHERE t.name = :topicName AND c.name = :className`,
+    // todo may be cooked chat
+    `SELECT t.id,t.name FROM topics t JOIN class_topic ct ON t.id = ct.topic_id AND (SELECT c.name FROM classes c WHERE c.id = ct.class_id) = :className AND t.name = :topicName`,
     params
   );
 }

@@ -17,8 +17,11 @@ export default function HistoryNav() {
     let sections = [];
     for (let i = 0; i < urlArr.length; i++) {
       if (urlArr[i] == '' || urlArr[i] == ' ') {
-      } else {
+        // do nothing
+      } else if (i !== 4) {
+        // 4 is the topics name and is not useable
         let curItemUrl = urlArr.slice(0, i + 1).join('/');
+
         sections.push({
           key: urlArr[i],
           content: urlArr[i][0].toUpperCase() + urlArr[i].slice(1),

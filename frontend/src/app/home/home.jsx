@@ -40,24 +40,44 @@ export default function Home() {
         textAlign='center'
         style={{ minHeight: 700, padding: '1em 0em', backgroundImage: `url(${horse})`, backgroundSize: 'cover' }}
       >
-        <Container text style={{ marginTop: '7em' }}>
-          <Header as='h1' inverted style={{ fontSize: '4em', fontWeight: 'normal', marginBottom: 0 }}>
+        <Container text textAlign='center'>
+          <Header
+            as='h1'
+            inverted
+            style={{
+              fontSize: '4em',
+              fontWeight: 'bold',
+              marginBottom: '0.5em',
+              textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)',
+            }}
+          >
             Master Your Exams
           </Header>
           <Header
             as='h2'
-            inverted
             style={{
               fontSize: '1.7em',
               fontWeight: 'normal',
               marginTop: '1.5em',
+              marginBottom: '1em',
+              color: 'white',
+              textShadow: '-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000, 0 0 8px rgba(0,0,0,0.5)',
             }}
           >
-            Practice questions, detailed explanations, and personalized learning just for you.
+            Unlock your potential with our adaptive learning platform. Personalized practice, expert explanations, and real-time
+            feedback.
           </Header>
-          <Button primary size='huge' onClick={() => dispatch(changeNavbarPage('/class'))}>
+          <Button
+            primary
+            size='huge'
+            onClick={() => dispatch(changeNavbarPage('/class'))}
+            style={{
+              backgroundColor: '#fbbd08',
+              color: 'rgba(0, 0, 0, 0.8)',
+            }}
+          >
             Start Practicing
-            <Icon name='right arrow' />
+            <Icon name='right arrow' style={{ marginLeft: '0.5em' }} />
           </Button>
         </Container>
       </Segment>
