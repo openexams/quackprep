@@ -40,7 +40,7 @@ export async function getQuestionsAnsweredByMonthAndYear() {
 export async function getChoicesByQuestion(question_id) {
   const params = { question_id };
   return await sqlExe.executeCommand(
-    `SELECT c.id,c.answer,c.is_correct,c.created_by,qc.question_id FROM choices c JOIN question_choice qc WHERE c.deleted = 0 AND qc.question_id = :question_id ORDER BY id ASC`,
+    `SELECT c.id,c.answer,c.is_correct,c.created_by,qc.question_id FROM choices c JOIN question_choice qc ON qc.question_id = :question_id AND c.id = qc.choice_id ORDER BY id ASC`,
     params
   );
 }
