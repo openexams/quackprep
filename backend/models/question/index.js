@@ -19,7 +19,7 @@ export async function getQuestionsByTopic(topic_id) {
  * @param {Int} question_num_on_exam our question numbers have id, the exam question have numbers ie question 1 etc
  * @returns {Int} question id u just insterted.
  */
-export async function createQuestionInTopic(
+export async function createQuestionInTopic( // NOT TESTED TODO
   user_id,
   topic_id,
   question,
@@ -37,10 +37,18 @@ export async function createQuestionInTopic(
     exam_num,
     question_num_on_exam,
   };
-  return (
+  const result = (
     await sqlExe.executeCommand(
-      `INSERT INTO questions (created_by,question,topic_id,year,semester,exam_num,question_num_on_exam) VALUES(:user_id, :question, :topic_id,:year,:semester,:exam_num,:question_num_on_exam)`,
+      `INSERT INTO questions (created_by,question,,year,semester,exam_num,question_num_on_exam) VALUES(:user_id, :question,:year,:semester,:exam_num,:question_num_on_exam)`,
       params
     )
   ).insertId;
+  params["result"] = result;
+  const bridge_tbl_res = (
+    await sqlExe.executeCommand(
+      `INSERT INTO topic_question (topic_id,question_id) VALUES(:topic_id, :result)`,
+      params
+    )
+  ).insertId;
+  return result;
 }

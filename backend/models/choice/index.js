@@ -45,19 +45,25 @@ export async function getChoicesByQuestion(question_id) {
   );
 }
 
-export async function addChoiceToQuestion(
+export async function addChoiceToQuestion( // NOT TESTED TODO
   user_id,
   question_id,
   isCorrect,
   text
 ) {
   const params = { user_id, question_id, isCorrect, text };
-  return (
+  const result = (
     await sqlExe.executeCommand(
-      `INSERT INTO choices (answer,is_correct,question_id,created_by) values (:text,:isCorrect,:question_id,:user_id)`,
+      `INSERT INTO choices (answer,is_correct,created_by) values (:text,:isCorrect,:user_id)`,
       params
     )
   ).insertId;
+  params["result"] = result;
+  const bridge_tbl_res = await sqlExe.executeCommand(
+    `INSERT INTO question_choice (question_id,choice_id) values (:question_id, :result)`,
+    params
+  );
+  return result;
 }
 
 export async function updateChoice(user_id, choice_id, newIsCorrect, newText) {

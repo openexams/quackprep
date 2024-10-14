@@ -4,7 +4,6 @@ import {
   createQuestionInTopic,
   getQuestionsByTopic,
 } from "#models/question/index.js";
-import { getChoicesByQuestion } from "#models/choice/index.js";
 
 const router = express.Router();
 router.use(isAuthenticated);
