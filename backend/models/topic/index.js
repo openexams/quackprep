@@ -18,14 +18,16 @@ export async function getTopicIdByClassNameAndTopicName(topicName, className) {
 
 export async function addTopicToClass(name, class_id, description, user_id) {
   const params = { name, class_id, description, user_id };
-  const result = await sqlExe.executeCommand(
-    `INSERT INTO topics (name,description,created_by) VALUES (:name,:description,:user_id);`,
-    params
+  const result = (
+    await sqlExe.executeCommand(
+      `INSERT INTO topics (name,description,created_by) VALUES (:name,:description,:user_id);`,
+      params
+    )
   ).insertId;
   params["result"] = result;
   const bridge_tbl_res = await sqlExe.executeCommand(
     `INSERT INTO class_topic (class_id,topic_id) VALUES (:class_id,:result);`,
     params
-  ).insertId;
+  );
   return result;
 }
