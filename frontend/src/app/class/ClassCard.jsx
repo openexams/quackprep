@@ -47,7 +47,6 @@ function getIconByCategory(category) {
 }
 
 export default function ClassCard({ id, name, category, desc }) {
-  console.log(id, name, category, desc);
   const [hovered, setHovered] = useState(false);
   const dispatch = useDispatch();
 

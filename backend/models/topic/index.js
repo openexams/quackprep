@@ -2,7 +2,7 @@ import sqlExe from "#db/dbFunctions.js";
 export async function getTopicsByClassId(class_id) {
   const params = { class_id };
   return await sqlExe.executeCommand(
-    `SELECT t.name,t.id,t.description,t.created_by, ct.class_id FROM topics t join class_topic ct WHERE t.deleted =0 AND ct.class_id = :class_id ORDER BY id ASC`,
+    `SELECT t.name,t.id,t.description,t.created_by, ct.class_id FROM topics t JOIN class_topic ct ON ct.class_id = :class_id AND ct.topic_id = t.id ORDER BY id ASC`,
     params
   );
 }
