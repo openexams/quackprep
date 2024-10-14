@@ -39,7 +39,7 @@ export async function createQuestionInTopic( // NOT TESTED TODO
   };
   const result = (
     await sqlExe.executeCommand(
-      `INSERT INTO questions (created_by,question,,year,semester,exam_num,question_num_on_exam) VALUES(:user_id, :question,:year,:semester,:exam_num,:question_num_on_exam)`,
+      `INSERT INTO questions (created_by,question,year,semester,exam_num,question_num_on_exam) VALUES(:user_id, :question,:year,:semester,:exam_num,:question_num_on_exam)`,
       params
     )
   ).insertId;
