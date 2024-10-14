@@ -38,6 +38,7 @@ export async function getQuestionsAnsweredByMonthAndYear() {
 //CRUD
 
 export async function getChoicesByQuestion(question_id) {
+  // TODO TEST
   const params = { question_id };
   return await sqlExe.executeCommand(
     `SELECT c.id,c.answer,c.is_correct,c.created_by,qc.question_id FROM choices c JOIN question_choice qc ON qc.question_id = :question_id AND c.id = qc.choice_id ORDER BY id ASC`,
