@@ -17,7 +17,9 @@ router.get("/users/count", isAuthenticated, async function (req, res) {
 });
 
 router.post("/register", async function (req, res) {
-  // make sure to check if that emails not alr taken lol TODO
+  res.status(500).json({ message: "signing up currently disabled srry chat" });
+  return;
+  // make sure to check if that emails not alr taken lol TODO FIX AND ITS TURNED OFF RN
   const { firstName, lastName, username, email, password } = req.body;
   if (!firstName || !lastName || !username || !email || !password) {
     res.status(400).json({
