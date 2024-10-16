@@ -1,6 +1,6 @@
 import { selectUser } from '@src/app/auth/authSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { Dropdown, Image, Icon, Modal } from 'semantic-ui-react';
+import { Dropdown, Image, Icon } from 'semantic-ui-react';
 import { signOut } from '@src/app/auth/login/loginSlice';
 import { useState } from 'react';
 import ConfirmSignoutModal from './ConfirmSignoutModal';
@@ -31,8 +31,8 @@ export default function ProfileDropdown({ activePage, handlePageChange, hasStrea
           Streak
           <Icon name='fire' color='orange' />
         </Dropdown.Item>
-        <Dropdown.Item name='/profile' active={activePage === '/profile'} onClick={handlePageChange}>
-          Profile
+        <Dropdown.Item name='/account' active={activePage === '/account'} onClick={handlePageChange}>
+          Account
         </Dropdown.Item>
         <Dropdown.Item name='/settings' active={activePage === '/settings'} onClick={handlePageChange}>
           Settings

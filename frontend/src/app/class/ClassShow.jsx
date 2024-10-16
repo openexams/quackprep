@@ -51,6 +51,13 @@ export default function ClassShow() {
               Study by Difficulty <span style={{ fontSize: '.7rem' }}>coming soon...</span>
             </Button>
           </Grid.Column>
+          <Grid.Column textAlign='center'>
+            <Button size='large' color='teal' onClick={() => dispatch(changeNavbarPage('exam'))}>
+              {/* TODO list exams*/}
+              <Icon name='list' />
+              Study by Exam
+            </Button>
+          </Grid.Column>
         </Grid>
       </Segment>
     </Container>

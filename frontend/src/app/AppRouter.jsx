@@ -26,7 +26,7 @@ export default function AppRouter() {
         <Route path='/' element={<Home />} />
         <Route path='/home' element={<Home />} />
         <Route path='/auth' element={<AuthPopup />} />
-        <Route path='/profile' element={<Profile />} />
+        <Route path='/account' element={<Profile />} />
         <Route path='/streak' element={<Streak />} />
         <Route path='/settings' element={<Settings />} />
         <Route path='/class' element={<ClassList />} />
