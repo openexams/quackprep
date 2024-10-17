@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Header, Segment, Card, Button, Container, Icon } from 'semantic-ui-react';
 import { selectArrayOfStateById, turnUnderscoreIntoSpace } from '@utils/functions';
-import { changeNavbarPage, selectNavbarState, updateCurrentTopicData } from '@components/navbar/navbarSlice';
+import { changeNavbarPage, selectNavbarState, updateCurrentGroupData } from '@components/navbar/navbarSlice';
 import { selectLoadingState } from '@src/app/store/loadingSlice';
 
 export default function TopicsShow() {
@@ -36,7 +36,7 @@ export default function TopicsShow() {
                     fluid
                     color='blue'
                     onClick={() => {
-                      dispatch(updateCurrentTopicData(topic.id, topic.name));
+                      dispatch(updateCurrentGroupData(topic.id, topic.name));
                       dispatch(changeNavbarPage(`${topic.name}/question`));
                     }}
                   >

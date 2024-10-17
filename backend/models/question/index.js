@@ -1,9 +1,10 @@
 import sqlExe from "#db/dbFunctions.js";
-export async function getQuestionsByTopic(topic_id) {
-  const params = { topic_id };
+
+export async function getQuestionsByGroupId(group_id) {
+  const params = { group_id };
   return await sqlExe.executeCommand(
     // PULL IN MORE!
-    `SELECT q.id, q.question, tp.topic_id FROM questions q JOIN topic_question tp ON tp.topic_id = :topic_id AND tp.question_id = q.id ORDER BY q.id ASC`,
+    `SELECT q.id, q.question, tp.topic_id as group_id FROM questions q JOIN topic_question tp ON tp.topic_id = :group_id AND tp.question_id = q.id ORDER BY q.id ASC`,
     params
   );
 }

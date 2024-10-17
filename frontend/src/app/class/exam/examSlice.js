@@ -4,7 +4,7 @@ import { createSelector } from 'reselect';
 const GET_EXAMS_BY_CLASS_ID = 'app/class/exam/GET_EXAMS_BY_CLASS_ID';
 
 export function getExamsByClassId(classId) {
-  return standardApiCall('get', `/api/exam/${classId}`, null, GET_EXAMS_BY_CLASS_ID, 'ExamList');
+  return standardApiCall('get', `/api/group/exam/${classId}`, null, GET_EXAMS_BY_CLASS_ID, 'ExamList');
 }
 const DEFAULT_STATE = {
   exams: null,

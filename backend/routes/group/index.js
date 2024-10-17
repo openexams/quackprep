@@ -19,7 +19,7 @@ router.get("/topic/:classId", async function (req, res) {
   }
 });
 
-router.get("topic/:topicName/:className", async function (req, res) {
+router.get("/topic/:topicName/:className", async function (req, res) {
   try {
     const result = await getTopicIdByClassNameAndTopicName(
       req.params.topicName,
