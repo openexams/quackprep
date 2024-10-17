@@ -31,3 +31,12 @@ export async function addTopicToClass(name, class_id, description, user_id) {
   );
   return result;
 }
+
+export async function getExamsByClassId(class_id) {
+  // TODO TEST SQL COMMAND
+  return await sqlExe.executeCommand(
+    `SELECT DISTINCT q.year, q.semester, q.exam_num, ct.class_id FROM questions q 
+INNER JOIN topic_question tq INNER JOIN class_topic ct ON q.id = tq.question_id AND tq.topic_id = ct.topic_id AND ct.class_id = :class_id`,
+    { class_id }
+  );
+}

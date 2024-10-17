@@ -2,23 +2,24 @@ import express from "express";
 import { isAuthenticated } from "#middleware/authMiddleware.js";
 import {
   addTopicToClass,
+  getExamsByClassId,
   getTopicIdByClassNameAndTopicName,
   getTopicsByClassId,
-} from "#models/topic/index.js";
+} from "#models/group/index.js";
 
 const router = express.Router();
 router.use(isAuthenticated);
 
-router.get("/:classId", async function (req, res) {
+router.get("/topic/:classId", async function (req, res) {
   try {
     const result = await getTopicsByClassId(req.params.classId);
     res.status(200).json(result);
   } catch (error) {
-    res.status(500).json({ message: "server error" });
+    res.status(500).json({ message: "topic fail" });
   }
 });
 
-router.get("/:topicName/:className", async function (req, res) {
+router.get("topic/:topicName/:className", async function (req, res) {
   try {
     const result = await getTopicIdByClassNameAndTopicName(
       req.params.topicName,
@@ -26,11 +27,11 @@ router.get("/:topicName/:className", async function (req, res) {
     );
     res.status(200).json({ id: result[0].id, name: result[0].name });
   } catch (error) {
-    res.status(500).json({ message: "server error" });
+    res.status(500).json({ message: "topic fail" });
   }
 });
 
-router.post("/", async function (req, res) {
+router.post("/topic/", async function (req, res) {
   try {
     const data = req.body;
     if (!data.name || !data.class_id) {
@@ -44,7 +45,20 @@ router.post("/", async function (req, res) {
     );
     res.status(200).json(result);
   } catch (error) {
-    res.status(500).json({ message: "server error" });
+    res.status(500).json({ message: "topic fail" });
+  }
+});
+
+// EXAM group pull in
+
+router.get("/exam/:class_id", async function (req, res) {
+  try {
+    const result = await getExamsByClassId(req.params.class_id);
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(500).json({
+      message: `failed to pull in exams by class id ${req.params.class_id}`,
+    });
   }
 });
 

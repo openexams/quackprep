@@ -153,7 +153,7 @@ export function findNeedleInArrayOfObjectsLINEAR(array, keyName, needle, keyWant
  * @param {Array} array haystack
  * @param {Array} keyNamesToCheck ex ["name", "class_id"]
  * @param {Array} needles ex ["Test_Topic", "1"]
- * @param {Array} keyWanted ex class_id
+ * @param {Array} keyWanted key you want returned at location where it found the needle
  */
 export function findNeedlesInArrayOfObjectsLINEAR(array, keyNamesToCheck, needles, returnKeyWanted) {
   if (!array || !needles || !keyNamesToCheck || !returnKeyWanted) return null;

@@ -13,7 +13,7 @@ export function getClassIdByClassName(className) {
 }
 
 export function getTopicIdbyClassNameAndTopicName(topicName, className) {
-  return standardApiCall('get', `/api/topic/${topicName}/${className}`, null, GET_TOPICS_BY_CN_TN, 'TopicsShow');
+  return standardApiCall('get', `/api/group/topic/${topicName}/${className}`, null, GET_TOPICS_BY_CN_TN, 'TopicsShow');
 }
 
 /**
@@ -50,8 +50,8 @@ const DEFAULT_STATE = {
   page: null,
   classId: null,
   className: null,
-  topicId: null,
-  topicName: null,
+  groupId: null, // this identifies the group, wether that means its a string or a id
+  groupName: null,
   questionId: null,
 };
 
@@ -71,13 +71,13 @@ export default function navbarReducer(state = DEFAULT_STATE, action) {
       // when I change the navbar set everything back to null so navbar has to dispatch to get id values;
       const urlArr = curUrl.split('/');
       const newClassName = urlArr[2] || null;
-      const newTopicName = urlArr[4] || null;
+      const newGroupName = urlArr[4] || null;
       const newQuestionId = parseInt(urlArr[6]) || null;
 
       return {
         ...state,
         page: curUrl,
-        topicName: newTopicName,
+        topicName: newGroupName,
         className: newClassName,
         questionId: parseInt(newQuestionId),
         classId: null, // these 2 null should be brought in again.
@@ -85,7 +85,7 @@ export default function navbarReducer(state = DEFAULT_STATE, action) {
       };
     case UPDATE_CUR_CLASS:
       return { ...state, classId: action.payload.id || state.classId, className: action.payload.name || state.className };
-    case UPDATE_CUR_TOPIC:
+    case UPDATE_CUR_TOPIC: // TODO FIX
       return { ...state, topicId: action.payload.id || state.topicId, topicName: action.payload.name || state.topicName };
     case UPDATE_CUR_QUESTION: // wrong fix later
       return {
@@ -96,7 +96,7 @@ export default function navbarReducer(state = DEFAULT_STATE, action) {
     case GET_CLASS_ID_BY_NAME:
       if (!action.payload) return state;
       return { ...state, classId: action.payload.id, className: action.payload.name };
-    case GET_TOPICS_BY_CN_TN:
+    case GET_TOPICS_BY_CN_TN: // TODO FIX
       if (!action.payload) return state;
       return { ...state, topicId: action.payload.id, topicName: action.payload.name };
     default:

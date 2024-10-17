@@ -11,7 +11,7 @@ router.use(isAuthenticated);
 router.get("/:topic_id", async function (req, res) {
   try {
     const result = await getQuestionsByTopic(req.params.topic_id);
-    console.log(result);
+    //console.log(result);
     res.status(200).json(result);
   } catch (error) {
     res.status(500).json({

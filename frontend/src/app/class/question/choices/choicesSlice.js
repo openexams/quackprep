@@ -1,12 +1,12 @@
 import { standardApiCall } from '@utils/api';
 import { updateArrWithNewVals } from '@utils/functions';
 
-const GET_CHOICES_BY_Q = 'app/class/topic/question/choices/GET_CHOICES_BY_Q';
+const GET_CHOICES_BY_Q = 'app/class/question/choices/GET_CHOICES_BY_Q';
 
-const POST_ANSWER = 'app/class/topic/question/choices/POST_ANSWER';
-const POST_FAVORITE_ANSWER = 'app/class/topic/question/choices/POST_ANSWER_CURRENT';
+const POST_ANSWER = 'app/class/question/choices/POST_ANSWER';
+const POST_FAVORITE_ANSWER = 'app/class/question/choices/POST_ANSWER_CURRENT';
 
-const GET_CURRENT_CHOICES = 'app/class/topic/question/choices/POST_ANSWER_CURRENT';
+const GET_CURRENT_CHOICES = 'app/class/question/choices/POST_ANSWER_CURRENT';
 
 //TODO
 export function getCurrentChoices(user_id) {

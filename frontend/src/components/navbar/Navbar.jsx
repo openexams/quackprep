@@ -22,12 +22,14 @@ import { getClasses } from '@src/app/class/classSlice';
 import { getTopicsByClassId } from '@src/app/class/topic/topicSlice';
 import { findNeedleInArrayOfObjectsLINEAR, findNeedlesInArrayOfObjectsLINEAR } from '@utils/functions';
 import { selectTopicState } from '@src/app/class/topic/topicSlice';
-import { selectQuestionState, getQuestionsByTopic } from '@src/app/class/topic/question/questionSlice';
+import { selectQuestionState, getQuestionsByTopic } from '@src/app/class/question/questionSlice';
+import { getExamsByClassId, selectExamsState } from '@src/app/class/exam/examSlice.js';
 
 export default function Navbar() {
   const location = useLocation();
   const { questions } = useSelector(selectQuestionState);
   const { topics } = useSelector(selectTopicState);
+  const { exams } = useSelector(selectExamsState);
   const { classes } = useSelector(selectClassState);
   const dispatch = useDispatch();
   const { user } = useSelector(selectUser);
@@ -76,7 +78,7 @@ export default function Navbar() {
 
   useEffect(() => {
     console.count('topics');
-
+    //TODO HOLY FUCK THIS SHIT IS AIDS COMMENT IT OR FIX IT
     // TOPICS DISPATCH
     const do_I_alr_have_a_topic_pulled_in_with_the_current_class_id = findNeedleInArrayOfObjectsLINEAR(
       topics,
@@ -95,9 +97,18 @@ export default function Navbar() {
     } else if (urlArr[4]) {
       dispatch(getTopicIdbyClassNameAndTopicName(urlArr[4], className)); // already have this value in state dont dispatch retard
     }
-  }, [activePage, classId, className, topics]);
+  }, [activePage, classId, className]); // why does topics watch itself [topic] may cause issue i remove it
 
   useEffect(() => {
+    console.count('exam');
+
+    const exams_pulled_in = findNeedleInArrayOfObjectsLINEAR(exams, 'class_id', classId, 'class_id');
+
+    if (activePage?.includes('exam') && !exams_pulled_in && classId && className) dispatch(getExamsByClassId(classId));
+  }, [activePage, classId, className]);
+
+  useEffect(() => {
+    // what if exam switches
     console.count('question');
     // QUESION DISPATCH
     const do_I_alr_have_a_question_pulled_in_with_the_current_topic_id = findNeedleInArrayOfObjectsLINEAR(
@@ -137,7 +148,7 @@ export default function Navbar() {
   useEffect(() => {
     navigate(activePage);
     const handlePopState = (event) => {
-      console.log('Back or forward button clicked');
+      //console.log('Back or forward button clicked');
       dispatch(changeNavbarPage(location.pathname + location.search + location.hash));
     };
 
