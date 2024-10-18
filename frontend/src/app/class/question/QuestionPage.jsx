@@ -28,7 +28,7 @@ export default function QuestionPage() {
   const dispatch = useDispatch();
   const { groupId, groupName, questionId } = useSelector(selectNavbarState).navbar;
 
-  const questions = useSelector(selectArrayOfStateById('app.question.questions', 'group_id', groupId)); // TODO Fix to pull in by a groupiD
+  const questions = useSelector(selectArrayOfStateById('app.question.questions', 'group_id', groupId));
 
   const loadingComps = useSelector(selectLoadingState).loadingComps;
 

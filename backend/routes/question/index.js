@@ -2,26 +2,40 @@ import express from "express";
 import { isAuthenticated } from "#middleware/authMiddleware.js";
 import {
   createQuestionInTopic,
-  getQuestionsByGroupId,
+  getQuestionsByExamId,
+  getQuestionsByTopicId,
 } from "#models/question/index.js";
 
 const router = express.Router();
 router.use(isAuthenticated);
 
-router.get("/:topic_id", async function (req, res) {
+router.get("/topic/:group_id", async function (req, res) {
   try {
-    const result = await getQuestionsByGroupId(req.params.topic_id);
+    const result = await getQuestionsByTopicId(req.params.group_id);
     //console.log(result);
     res.status(200).json(result);
   } catch (error) {
     res.status(500).json({
-      message: `failed to get question by topic id ${req.params.topic_id}`,
+      message: `failed to get question by topic id ${req.params.group_id}`,
+    });
+  }
+});
+
+router.get("/exam/:group_id", async function (req, res) {
+  try {
+    const result = await getQuestionsByExamId(req.params.group_id);
+    //console.log(result);
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(500).json({
+      message: `failed to get question by exam id ${req.params.topic_id}`,
     });
   }
 });
 
 // C
 router.post("/", async function (req, res) {
+  // ALLA THIS SHIT NEEDS FIXED TODO
   try {
     if (!req.body) {
       throw Error("need body");

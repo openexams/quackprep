@@ -6,7 +6,7 @@ const UPDATE_CUR_CLASS = 'components/navbar/UPDATE_CUR_CLASS';
 const UPDATE_CUR_GROUP = 'components/navbar/UPDATE_CUR_GROUP';
 const UPDATE_CUR_QUESTION = 'components/navbar/UPDATE_CUR_QUESTION';
 const GET_CLASS_ID_BY_NAME = 'components/navbar/GET_CLASS_ID_BY_NAME';
-const GET_TOPICS_BY_CN_TN = 'components/navbar/GET_TOPICS_BY_CN_TN';
+const UPDATE_GROUP_ID_NAME = 'components/navbar/UPDATE_GROUP_ID_NAME';
 
 const UPDATE_GROUP_TYPE = 'components/navbar/UPDATE_GROUP_TYPE';
 
@@ -15,7 +15,7 @@ export function getClassIdByClassName(className) {
 }
 
 export function getTopicIdbyClassNameAndTopicName(topicName, className) {
-  return standardApiCall('get', `/api/group/topic/${topicName}/${className}`, null, GET_TOPICS_BY_CN_TN, 'TopicsShow');
+  return standardApiCall('get', `/api/group/topic/${topicName}/${className}`, null, UPDATE_GROUP_ID_NAME, 'TopicsShow');
 }
 
 /**
@@ -45,7 +45,7 @@ export function updateCurrentClassData(params) {
 
 export function updateCurrentGroupData(params) {
   const { id, name } = params;
-  return { type: UPDATE_CUR_GROUP, payload: { id, name } };
+  return { type: UPDATE_GROUP_ID_NAME, payload: { id, name } };
 }
 
 export function updateGroupType(type) {
@@ -103,7 +103,8 @@ export default function navbarReducer(state = DEFAULT_STATE, action) {
     case GET_CLASS_ID_BY_NAME:
       if (!action.payload) return state;
       return { ...state, classId: action.payload.id, className: action.payload.name };
-    case GET_TOPICS_BY_CN_TN: // TODO FIX
+    case UPDATE_GROUP_ID_NAME: // TODO FIX
+      console.log('got');
       if (!action.payload) return state;
       return { ...state, groupId: action.payload.id, groupName: action.payload.name };
     case UPDATE_GROUP_TYPE:
