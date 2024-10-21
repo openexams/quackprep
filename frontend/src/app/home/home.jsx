@@ -14,8 +14,8 @@ export default function Home() {
     },
     {
       icon: horse,
-      title: 'Video Tutorials',
-      description: 'Learn from expert explanations and step-by-step video guides.',
+      title: 'AI Generated Questions',
+      description: 'Study all the Exam questions, then get more questions tailored to your needs',
     },
     {
       icon: horse,

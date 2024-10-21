@@ -34,9 +34,6 @@ export default function ProfileDropdown({ activePage, handlePageChange, hasStrea
         <Dropdown.Item name='/account' active={activePage === '/account'} onClick={handlePageChange}>
           Account
         </Dropdown.Item>
-        <Dropdown.Item name='/settings' active={activePage === '/settings'} onClick={handlePageChange}>
-          Settings
-        </Dropdown.Item>
         <Dropdown.Item onClick={() => setConfirmOpen(true)}>Sign Out</Dropdown.Item>
         {confimOpen ? (
           <ConfirmSignoutModal

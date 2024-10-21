@@ -64,7 +64,7 @@ export default function Profile() {
               color: '#fff',
               fontWeight: '500',
             }}
-            onClick={() => dispatch(changeNavbarPage('/settings'))}
+            onClick={() => dispatch(changeNavbarPage('/account'))}
           >
             Edit Profile
           </Button>

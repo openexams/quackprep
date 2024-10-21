@@ -21,7 +21,7 @@ export default function Auth() {
 
   useEffect(() => {
     if (user?.id && searchParams.has('next')) dispatch(changeNavbarPage(searchParams.get('next')));
-    else if (user?.id) dispatch(changeNavbarPage('/profile'));
+    else if (user?.id) dispatch(changeNavbarPage('/home'));
   }, [user]);
 
   if (!user.id) {

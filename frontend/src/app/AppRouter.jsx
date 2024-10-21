@@ -11,7 +11,6 @@ import ClassShow from './class/ClassShow.jsx';
 import QuestionPage from './class/question/QuestionPage.jsx';
 import TopicsShow from './class/topic/TopicsShow.jsx';
 import NotFoundPage from '@components/NotFound.jsx';
-import Settings from '@components/Settings.jsx';
 import ApiDocs from './docs/api/ApiDocs.jsx';
 import ExamList from './class/exam/ExamList.jsx';
 
@@ -29,7 +28,6 @@ export default function AppRouter() {
         <Route path='/auth' element={<AuthPopup />} />
         <Route path='/account' element={<Profile />} />
         <Route path='/streak' element={<Streak />} />
-        <Route path='/settings' element={<Settings />} />
         <Route path='/class' element={<ClassList />} />
         <Route path='/class/:class_name/' element={<ClassShow />} />
 

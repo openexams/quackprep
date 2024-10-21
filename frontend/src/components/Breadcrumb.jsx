@@ -37,7 +37,7 @@ export default function HistoryNav() {
     return mapCurrentNavbarStateToSectionsOfBreadcrumb(urlArr);
   }, [urlArr]);
   const breadcrumbStyle = {
-    marginTop: '0',
+    marginTop: '5rem', // todo fix pushes everything down
     marginBottom: '0',
   };
 
