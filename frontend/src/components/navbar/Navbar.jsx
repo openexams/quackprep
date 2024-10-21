@@ -115,12 +115,12 @@ export default function Navbar() {
     console.count('exam');
     if (activePage?.includes('exam')) {
       const exams_pulled_in = findNeedleInArrayOfObjectsLINEAR(exams, 'class_id', classId, 'id');
-      console.log(exams_pulled_in);
+      //console.log(exams_pulled_in);
 
       if (!exams_pulled_in && activePage?.includes('exam') && classId && className) {
         dispatch(getExamsByClassId(classId));
       } else if (exams_pulled_in !== null) {
-        console.log('updating current exam id', exams_pulled_in);
+        //console.log('updating current exam id', exams_pulled_in);
         dispatch(updateCurrentGroupData({ id: exams_pulled_in, name: urlArr[4] }));
       }
     }

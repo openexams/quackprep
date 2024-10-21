@@ -63,3 +63,16 @@ export async function createQuestionInTopic( // NOT TESTED TODO
   ).insertId;
   return result;
 }
+
+export async function linkQuestionToExam(exam_id, question_id) {
+  // NOT TESTED TODO
+  const params = {
+    question_id,
+    exam_id,
+  };
+  const bridge_tbl_res = await sqlExe.executeCommand(
+    `INSERT INTO exam_question (exam_id,question_id) VALUES(:exam_id, :question_id)`,
+    params
+  );
+  return bridge_tbl_res;
+}

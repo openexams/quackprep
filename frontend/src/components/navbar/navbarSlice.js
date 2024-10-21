@@ -79,6 +79,7 @@ export default function navbarReducer(state = DEFAULT_STATE, action) {
       const urlArr = curUrl.split('/');
       const newClassName = urlArr[2] || null;
       const newGroupName = urlArr[4] || null;
+
       const newQuestionId = parseInt(urlArr[6]) || null;
 
       return {
@@ -89,6 +90,7 @@ export default function navbarReducer(state = DEFAULT_STATE, action) {
         questionId: parseInt(newQuestionId),
         classId: null, // these 2 null should be brought in again.
         groupId: null,
+        groupType: null,
       };
     case UPDATE_CUR_CLASS:
       return { ...state, classId: action.payload.id || state.classId, className: action.payload.name || state.className };

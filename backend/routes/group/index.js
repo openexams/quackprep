@@ -1,6 +1,7 @@
 import express from "express";
 import { isAuthenticated } from "#middleware/authMiddleware.js";
 import {
+  addExamToClass,
   addTopicToClass,
   getExamsByClassId,
   getTopicIdByClassNameAndTopicName,
@@ -46,6 +47,19 @@ router.post("/topic/", async function (req, res) {
     res.status(200).json(result);
   } catch (error) {
     res.status(500).json({ message: "topic fail" });
+  }
+});
+
+router.post("/exam/", async function (req, res) {
+  try {
+    const data = req.body;
+    if (!data.year || !data.class_id || !data.semester || !data.exam_num) {
+      throw new Error("bruh");
+    }
+    const result = await addExamToClass(data.class_id, data.year,data.semester,data.exam_num, req.user);
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(500).json({ message: `fail to add exam to class id ${req.params.class_id}` });
   }
 });
 

@@ -23,7 +23,7 @@ export default function AppRouter() {
   return (
     <Router>
       <Navbar />
-      <Routes>
+      <Routes style={{ flex: 1 }}>
         <Route path='/' element={<Home />} />
         <Route path='/home' element={<Home />} />
         <Route path='/auth' element={<AuthPopup />} />

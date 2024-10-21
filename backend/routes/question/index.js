@@ -4,6 +4,7 @@ import {
   createQuestionInTopic,
   getQuestionsByExamId,
   getQuestionsByTopicId,
+  linkQuestionToExam,
 } from "#models/question/index.js";
 
 const router = express.Router();
@@ -33,7 +34,7 @@ router.get("/exam/:group_id", async function (req, res) {
   }
 });
 
-// C
+// Creates Question AND links it to a topic
 router.post("/", async function (req, res) {
   // ALLA THIS SHIT NEEDS FIXED TODO
   try {
@@ -55,6 +56,24 @@ router.post("/", async function (req, res) {
   } catch (error) {
     res.status(500).json({
       message: `failed to add question by topic id ${req.body?.topic_id}`,
+    });
+  }
+});
+
+// C
+router.post("/exam_link", async function (req, res) {
+  // ALLA THIS SHIT NEEDS FIXED TODO
+  try {
+    if (!req.body.exam_id || !req.body.question_id) {
+      throw Error("bruh");
+    }
+    const data = req.body;
+    const result = await linkQuestionToExam(data.exam_id, data.question_id);
+
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(500).json({
+      message: `failed to link question to exam id ${req.body?.exam_id}`,
     });
   }
 });
