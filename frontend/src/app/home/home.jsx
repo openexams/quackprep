@@ -15,7 +15,7 @@ export default function Home() {
     {
       icon: horse,
       title: 'AI Generated Questions',
-      description: 'Study all the Exam questions, then get more questions tailored to your needs',
+      description: 'Leverage AI to explore all exam questions and receive personalized, AI-generated questions.',
     },
     {
       icon: horse,
@@ -26,10 +26,13 @@ export default function Home() {
 
   const testimonials = [
     {
-      text: 'This platform has transformed the way I prepare for exams. The practice questions are top-notch!',
-      author: 'Sarah J.',
+      text: 'This platform significantly improved my exam preparation. The practice questions were highly effective.',
+      author: '- ChatGPT',
     },
-    { text: 'The video tutorials helped me understand complex topics with ease. Highly recommended!', author: 'Michael L.' },
+    {
+      text: 'The video tutorials explained complex topics so well, even my pet rock aced the test! Highly recommended for humans and rocks alike!',
+      author: '- Claude AI',
+    },
   ];
 
   return (
