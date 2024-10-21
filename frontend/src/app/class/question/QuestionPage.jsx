@@ -26,9 +26,9 @@ function findQuestionById(questions, id) {
 
 export default function QuestionPage() {
   const dispatch = useDispatch();
-  const { topicId, topicName, questionId } = useSelector(selectNavbarState).navbar;
+  const { groupId, groupName, questionId } = useSelector(selectNavbarState).navbar;
 
-  const questions = useSelector(selectArrayOfStateById('app.question.questions', 'topic_id', topicId));
+  const questions = useSelector(selectArrayOfStateById('app.question.questions', 'group_id', groupId));
 
   const loadingComps = useSelector(selectLoadingState).loadingComps;
 
@@ -58,7 +58,7 @@ export default function QuestionPage() {
   return (
     <Segment basic>
       <Header style={{ fontSize: '2.5rem' }} textAlign='center'>
-        {topicName}
+        {groupName}
       </Header>
       <Grid divided>
         <Grid.Row>

@@ -31,3 +31,33 @@ export async function addTopicToClass(name, class_id, description, user_id) {
   );
   return result;
 }
+
+export async function addExamToClass(
+  class_id,
+  year,
+  semester,
+  exam_num,
+  user_id
+) {
+  const params = { year, semester, exam_num, user_id, class_id };
+  const result = (
+    await sqlExe.executeCommand(
+      `INSERT INTO exams (year, semester, exam_num, user_id) VALUES (:year, :semester, :exam_num, :user_id);`,
+      params
+    )
+  ).insertId;
+  params["result"] = result;
+  const bridge_tbl_res = await sqlExe.executeCommand(
+    `INSERT INTO class_exam (class_id,exam_id) VALUES (:class_id,:result);`,
+    params
+  );
+  return result;
+}
+
+export async function getExamsByClassId(class_id) {
+  // TODO TEST SQL COMMAND
+  return await sqlExe.executeCommand(
+    `SELECT e.id, e.year, e.semester, e.exam_num, e.created_by, ce.class_id  FROM exams e JOIN class_exam ce ON ce.class_id = :class_id AND ce.exam_id = e.id `,
+    { class_id }
+  );
+}

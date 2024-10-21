@@ -8,9 +8,10 @@ import {
   selectCurrentPage,
   selectNavbarState,
   updateCurrentClassData,
-  updateCurrentTopicData,
+  updateCurrentGroupData,
   updateQuestionId,
   getTopicIdbyClassNameAndTopicName,
+  updateGroupType,
 } from './navbarSlice';
 import { getCurUser } from '@src/app/auth/authSlice';
 import ProfileDropdown from './components/Profile/ProfileDropdown';
@@ -22,12 +23,14 @@ import { getClasses } from '@src/app/class/classSlice';
 import { getTopicsByClassId } from '@src/app/class/topic/topicSlice';
 import { findNeedleInArrayOfObjectsLINEAR, findNeedlesInArrayOfObjectsLINEAR } from '@utils/functions';
 import { selectTopicState } from '@src/app/class/topic/topicSlice';
-import { selectQuestionState, getQuestionsByTopic } from '@src/app/class/topic/question/questionSlice';
+import { selectQuestionState, getQuestionsByGroupId } from '@src/app/class/question/questionSlice';
+import { getExamsByClassId, selectExamsState } from '@src/app/class/exam/examSlice.js';
 
 export default function Navbar() {
   const location = useLocation();
   const { questions } = useSelector(selectQuestionState);
   const { topics } = useSelector(selectTopicState);
+  const { exams } = useSelector(selectExamsState);
   const { classes } = useSelector(selectClassState);
   const dispatch = useDispatch();
   const { user } = useSelector(selectUser);
@@ -37,7 +40,7 @@ export default function Navbar() {
   const [sidebarOpened, setSidebarOpened] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
-  const { className, classId, topicName, topicId, questionId } = useSelector(selectNavbarState).navbar;
+  const { className, classId, groupName, groupId, questionId } = useSelector(selectNavbarState).navbar;
 
   const urlArr = useMemo(() => {
     return activePage ? activePage.split('/') : '/';
@@ -75,45 +78,74 @@ export default function Navbar() {
   ///  USE EFFECTS FOR KEEPING STORE SAME AS URL ///
 
   useEffect(() => {
-    console.count('topics');
-
-    // TOPICS DISPATCH
-    const do_I_alr_have_a_topic_pulled_in_with_the_current_class_id = findNeedleInArrayOfObjectsLINEAR(
-      topics,
-      'class_id',
-      classId,
-      'id',
-    );
-    let tmp_topic_id = null;
-    if (activePage?.includes('topic') && classId && !do_I_alr_have_a_topic_pulled_in_with_the_current_class_id) {
-      dispatch(getTopicsByClassId(classId));
-    } else if (
-      urlArr[4] &&
-      (tmp_topic_id = findNeedlesInArrayOfObjectsLINEAR(topics, ['name', 'class_id'], [urlArr[4], classId], 'id'))
-    ) {
-      dispatch(updateCurrentTopicData({ name: urlArr[4], id: tmp_topic_id }));
-    } else if (urlArr[4]) {
-      dispatch(getTopicIdbyClassNameAndTopicName(urlArr[4], className)); // already have this value in state dont dispatch retard
+    if (activePage?.includes('exam')) {
+      dispatch(updateGroupType('exam'));
+    } else if (activePage?.includes('topic')) {
+      dispatch(updateGroupType('topic'));
     }
-  }, [activePage, classId, className, topics]);
+  }, [activePage]);
 
   useEffect(() => {
-    console.count('question');
-    // QUESION DISPATCH
-    const do_I_alr_have_a_question_pulled_in_with_the_current_topic_id = findNeedleInArrayOfObjectsLINEAR(
-      questions,
-      'topic_id',
-      topicId,
-      'id',
-    );
-    if (activePage?.includes('question') && topicId && !do_I_alr_have_a_question_pulled_in_with_the_current_topic_id) {
-      dispatch(getQuestionsByTopic(topicId));
-      console.log('get questions by topic id');
-    } else if (urlArr[6]) {
-      dispatch(updateQuestionId(parseInt(urlArr[6])));
+    console.count('topics');
+    if (activePage?.includes('topic')) {
+      //TODO HOLY FUCK THIS SHIT IS AIDS COMMENT IT OR FIX IT
+      // TOPICS DISPATCH
+      const do_I_alr_have_a_topic_pulled_in_with_the_current_class_id = findNeedleInArrayOfObjectsLINEAR(
+        topics,
+        'class_id',
+        classId,
+        'id',
+      );
+      let tmp_topic_id = null;
+      if (activePage?.includes('topic') && classId && !do_I_alr_have_a_topic_pulled_in_with_the_current_class_id) {
+        dispatch(getTopicsByClassId(classId));
+      } else if (
+        urlArr[4] &&
+        (tmp_topic_id = findNeedlesInArrayOfObjectsLINEAR(topics, ['name', 'class_id'], [urlArr[4], classId], 'id'))
+      ) {
+        dispatch(updateCurrentGroupData({ name: urlArr[4], id: tmp_topic_id }));
+      } else if (urlArr[4]) {
+        dispatch(getTopicIdbyClassNameAndTopicName(urlArr[4], className)); // already have this value in state dont dispatch retard
+      }
     }
+  }, [activePage, classId, className, topics]); // why does topics watch itself [topic] may cause issue i remove it
+
+  //EXAM
+  useEffect(() => {
+    console.count('exam');
+    if (activePage?.includes('exam')) {
+      const exams_pulled_in = findNeedleInArrayOfObjectsLINEAR(exams, 'class_id', classId, 'id');
+      //console.log(exams_pulled_in);
+
+      if (!exams_pulled_in && activePage?.includes('exam') && classId && className) {
+        dispatch(getExamsByClassId(classId));
+      } else if (exams_pulled_in !== null) {
+        //console.log('updating current exam id', exams_pulled_in);
+        dispatch(updateCurrentGroupData({ id: exams_pulled_in, name: urlArr[4] }));
+      }
+    }
+  }, [activePage, classId, className, exams]);
+
+  useEffect(() => {
+    // what if exam?? TODO
+    if (urlArr[4]) {
+      console.count('question');
+      // QUESION DISPATCH
+      const do_I_alr_have_a_question_pulled_in_with_the_current_group_id = findNeedleInArrayOfObjectsLINEAR(
+        questions,
+        ['group_id', 'type'],
+        [groupId, urlArr[4]],
+        'id',
+      ); // same question may get pulled in twice once for exam once for topic
+      if (activePage?.includes('question') && groupId && !do_I_alr_have_a_question_pulled_in_with_the_current_group_id) {
+        dispatch(getQuestionsByGroupId(groupId, urlArr[3])); // url[3] is type
+      } else if (urlArr[6]) {
+        dispatch(updateQuestionId(parseInt(urlArr[6])));
+      }
+    }
+
     //DISPATCHES EVEN IF I ALR HAVE TOPICS WITH THIS TOPIC ID LOADED IN.
-  }, [activePage, topicId]);
+  }, [activePage, groupId]);
 
   useEffect(() => {
     console.count('classes');
@@ -137,7 +169,7 @@ export default function Navbar() {
   useEffect(() => {
     navigate(activePage);
     const handlePopState = (event) => {
-      console.log('Back or forward button clicked');
+      //console.log('Back or forward button clicked');
       dispatch(changeNavbarPage(location.pathname + location.search + location.hash));
     };
 

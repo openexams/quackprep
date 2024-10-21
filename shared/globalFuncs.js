@@ -37,3 +37,16 @@ export class Streak {
     return false;
   }
 }
+
+/**
+ * ${exam.semester}_${exam.year}_${exam.exam_num}
+ * @param {String} examNameString
+ */
+export function parseExamNameId(examNameString) {
+  examNameString = examNameString.split("_");
+  return {
+    semester: examNameString[0],
+    year: examNameString[1],
+    exam_num: examNameString[2],
+  };
+}

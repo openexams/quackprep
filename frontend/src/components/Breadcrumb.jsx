@@ -19,7 +19,7 @@ export default function HistoryNav() {
       if (urlArr[i] == '' || urlArr[i] == ' ') {
         // do nothing
       } else if (i !== 4) {
-        // 4 is the topics name and is not useable
+        // gets rid of topic / exam name from breadcrumb
         let curItemUrl = urlArr.slice(0, i + 1).join('/');
 
         sections.push({

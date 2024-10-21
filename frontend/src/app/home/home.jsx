@@ -120,46 +120,6 @@ export default function Home() {
           </Grid>
         </Container>
       </Segment>
-
-      <Segment inverted vertical style={{ padding: '5em 0em' }}>
-        <Container>
-          <Grid divided inverted stackable>
-            <Grid.Row>
-              <Grid.Column width={8}>
-                <Header inverted as='h4' content='About Us' />
-                <p>We are dedicated to helping students achieve their academic goals through innovative learning solutions.</p>
-              </Grid.Column>
-              <Grid.Column width={8}>
-                <Header inverted as='h4' content='Connect With Us' />
-                <Button
-                  as={'a'}
-                  circular
-                  color='facebook'
-                  icon='facebook'
-                  href='https://www.youtube.com/watch?v=dQw4w9WgXcQ'
-                  target='_blank'
-                />
-                <Button
-                  as={'a'}
-                  circular
-                  color='twitter'
-                  icon='twitter'
-                  href='https://www.youtube.com/watch?v=dQw4w9WgXcQ'
-                  target='_blank'
-                />
-                <Button
-                  as={'a'}
-                  circular
-                  color='linkedin'
-                  icon='linkedin'
-                  href='https://www.youtube.com/watch?v=dQw4w9WgXcQ'
-                  target='_blank'
-                />
-              </Grid.Column>
-            </Grid.Row>
-          </Grid>
-        </Container>
-      </Segment>
     </div>
   );
 }

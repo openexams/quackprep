@@ -9,10 +9,11 @@ import navbarReducer from '@components/navbar/navbarSlice.js';
 import streakReducer from '../streak/streakSlice.js';
 import classReducer from '../class/classSlice.js';
 import topicReducer from '../class/topic/topicSlice.js';
-import questionsReducer from '../class/topic/question/questionSlice.js';
+import questionsReducer from '../class/question/questionSlice.js';
 import leadboardReducer from '../leaderboard/leaderboardSlice.js';
-import choicesReducer from '../class/topic/question/choices/choicesSlice.js';
+import choicesReducer from '../class/question/choices/choicesSlice.js';
 import statsReducer from '../stats/statsSlice.js';
+import examSliceReducer from '../class/exam/examSlice.js';
 
 const app = combineReducers({
   home: homeReducer,
@@ -24,6 +25,7 @@ const app = combineReducers({
   leaderboard: leadboardReducer,
   choices: choicesReducer,
   stats: statsReducer,
+  exam: examSliceReducer,
 });
 const auth = combineReducers({ user: loginReducer });
 

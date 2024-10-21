@@ -1,9 +1,20 @@
 import sqlExe from "#db/dbFunctions.js";
-export async function getQuestionsByTopic(topic_id) {
-  const params = { topic_id };
+
+export async function getQuestionsByTopicId(group_id) {
+  const params = { group_id };
   return await sqlExe.executeCommand(
     // PULL IN MORE!
-    `SELECT q.id, q.question, tp.topic_id FROM questions q JOIN topic_question tp ON tp.topic_id = :topic_id AND tp.question_id = q.id ORDER BY q.id ASC`,
+    `SELECT q.id, q.question, tp.topic_id as group_id, 'topic' AS type FROM questions q JOIN topic_question tp ON tp.topic_id = :group_id AND tp.question_id = q.id ORDER BY q.id ASC`,
+    params
+  );
+}
+
+export async function getQuestionsByExamId(group_id) {
+  const params = { group_id };
+
+  return await sqlExe.executeCommand(
+    // PULL IN MORE!
+    `SELECT q.id, q.question, eq.exam_id as group_id, 'exam' AS type FROM questions q JOIN exam_question eq ON eq.exam_id = :group_id AND eq.question_id = q.id ORDER BY q.id ASC`,
     params
   );
 }
@@ -51,4 +62,17 @@ export async function createQuestionInTopic( // NOT TESTED TODO
     )
   ).insertId;
   return result;
+}
+
+export async function linkQuestionToExam(exam_id, question_id) {
+  // NOT TESTED TODO
+  const params = {
+    question_id,
+    exam_id,
+  };
+  const bridge_tbl_res = await sqlExe.executeCommand(
+    `INSERT INTO exam_question (exam_id,question_id) VALUES(:exam_id, :question_id)`,
+    params
+  );
+  return bridge_tbl_res;
 }

@@ -5,7 +5,7 @@ const GET_TOPICS_BY_C_ID = 'app/class/topic/GET_TOPICS_BY_C_ID';
 
 export function getTopicsByClassId(classId) {
   //console.log('getting topics by clas id', classId);
-  return standardApiCall('get', `/api/topic/${classId}`, null, GET_TOPICS_BY_C_ID, 'TopicsShow');
+  return standardApiCall('get', `/api/group/topic/${classId}`, null, GET_TOPICS_BY_C_ID, 'TopicsShow');
 }
 
 const DEFAULT_STATE = {

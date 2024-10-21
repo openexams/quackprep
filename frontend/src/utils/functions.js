@@ -106,8 +106,20 @@ export function selectArrayOfStateById(path, idName, id) {
   );
 }
 
+// pls pass in two objs with same keys TODO TEST
+export function checkEquivalenceOfObjects(obj1, obj2) {
+  let o1keys = Object.keys(obj1);
+  for (let i = 0; i < o1keys.length; i++) {
+    if (obj1[o1keys[i]] == obj2[o1keys[i]]) {
+    } else {
+      return false;
+    }
+  }
+  return true;
+}
+
 /**
- *
+ * if what you are trying to add (a arr of obj) id is the same as it was before then dont add it.
  * @param {Array} old
  * @param {Array} newA
  * @returns {Array}
@@ -116,14 +128,14 @@ export function updateArrWithNewVals(old, newA) {
   const map = {};
   if (old) {
     for (let i = 0; i < old.length; i++) {
-      map[old[i].id] = old[i].id;
+      map[old[i].id] = old[i];
     }
   } else {
     old = [];
   }
   let ret = [...old];
   for (let i = 0; i < newA.length; i++) {
-    if (map && newA[i].id in map) {
+    if (map && newA[i].id in map && checkEquivalenceOfObjects(map[newA[i].id], newA[i])) {
     } else {
       ret.push(newA[i]);
     }
@@ -153,7 +165,7 @@ export function findNeedleInArrayOfObjectsLINEAR(array, keyName, needle, keyWant
  * @param {Array} array haystack
  * @param {Array} keyNamesToCheck ex ["name", "class_id"]
  * @param {Array} needles ex ["Test_Topic", "1"]
- * @param {Array} keyWanted ex class_id
+ * @param {Array} keyWanted key you want returned at location where it found the needle
  */
 export function findNeedlesInArrayOfObjectsLINEAR(array, keyNamesToCheck, needles, returnKeyWanted) {
   if (!array || !needles || !keyNamesToCheck || !returnKeyWanted) return null;

@@ -8,11 +8,12 @@ import ClassList from './class/ClassList.jsx';
 import Leaderboard from './leaderboard/Leaderboard.jsx';
 import Stats from './stats/Stats.jsx';
 import ClassShow from './class/ClassShow.jsx';
-import QuestionPage from './class/topic/question/QuestionPage.jsx';
+import QuestionPage from './class/question/QuestionPage.jsx';
 import TopicsShow from './class/topic/TopicsShow.jsx';
 import NotFoundPage from '@components/NotFound.jsx';
 import Settings from '@components/Settings.jsx';
 import ApiDocs from './docs/api/ApiDocs.jsx';
+import ExamList from './class/exam/ExamList.jsx';
 
 {
   /* topic could be a actual topic or a group of question such as a exam */
@@ -22,7 +23,7 @@ export default function AppRouter() {
   return (
     <Router>
       <Navbar />
-      <Routes>
+      <Routes style={{ flex: 1 }}>
         <Route path='/' element={<Home />} />
         <Route path='/home' element={<Home />} />
         <Route path='/auth' element={<AuthPopup />} />
@@ -31,9 +32,15 @@ export default function AppRouter() {
         <Route path='/settings' element={<Settings />} />
         <Route path='/class' element={<ClassList />} />
         <Route path='/class/:class_name/' element={<ClassShow />} />
-        <Route path='/class/:class_name/topic/' element={<TopicsShow />} />
-        <Route path='/class/:class_name/topic/:topic_name/question' element={<QuestionPage />} />
-        <Route path='/class/:class_name/topic/:topic_name/question/:question_id' element={<QuestionPage />} />
+
+        <Route path='/class/:class_name/topic' element={<TopicsShow />} />
+        <Route path='/class/:class_name/topic/:group_name/question' element={<QuestionPage />} />
+        <Route path='/class/:class_name/topic/:group_name/question/:question_id' element={<QuestionPage />} />
+
+        <Route path='/class/:class_name/exam' element={<ExamList />} />
+        <Route path='/class/:class_name/exam/:group_name/question' element={<QuestionPage />} />
+        <Route path='/class/:class_name/exam/:group_name/question/:question_id' element={<QuestionPage />} />
+
         <Route path='/leaderboard' element={<Leaderboard />} />
         <Route path='/stats' element={<Stats />} />
         <Route path='/docs/api' element={<ApiDocs />} />

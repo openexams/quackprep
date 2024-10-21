@@ -4,6 +4,8 @@ import { isAuthenticated } from "#middleware/authMiddleware.js";
 
 const router = Router();
 
+router.use(isAuthenticated);
+
 // router.patch change username
 
 // change password
