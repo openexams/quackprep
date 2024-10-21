@@ -79,7 +79,9 @@ export default function Footer() {
                   quackprep@gmail.com
                 </List.Item>
               </List>
-              <p style={{ marginTop: '1em' }}>© {currentYear} Maddox Schmidlkofer. All rights reserved.</p>
+              <p style={{ marginTop: '1em' }}>
+                © {currentYear} <a href='https://github.com/maddox05'>Maddox Schmidlkofer.</a> All rights reserved.
+              </p>
             </Container>
           </Segment>
         </Container>
