@@ -42,7 +42,7 @@ export async function addExamToClass(
   const params = { year, semester, exam_num, user_id, class_id };
   const result = (
     await sqlExe.executeCommand(
-      `INSERT INTO exams (year, semester, exam_num, user_id) VALUES (:year, :semester, :exam_num, :user_id);`,
+      `INSERT INTO exams (year, semester, exam_num, created_by) VALUES (:year, :semester, :exam_num, :user_id);`,
       params
     )
   ).insertId;
