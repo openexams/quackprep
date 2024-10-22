@@ -168,7 +168,9 @@ export function findNeedleInArrayOfObjectsLINEAR(array, keyName, needle, keyWant
  * @param {Array} keyWanted key you want returned at location where it found the needle
  */
 export function findNeedlesInArrayOfObjectsLINEAR(array, keyNamesToCheck, needles, returnKeyWanted) {
-  if (!array || !needles || !keyNamesToCheck || !returnKeyWanted) return null;
+  if (!array || !needles || !keyNamesToCheck || !returnKeyWanted) {
+    return null;
+  }
   let both_equal = false;
   for (let i = 0; i < array.length; i++) {
     both_equal = false;

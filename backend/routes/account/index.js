@@ -1,10 +1,22 @@
 import { Router } from "express";
+import { upsertTimeSpent } from "#models/account/index.js";
 
 import { isAuthenticated } from "#middleware/authMiddleware.js";
 
 const router = Router();
 
 router.use(isAuthenticated);
+
+router.post("/time_spent", async function (req, res) {
+  try {
+    const result = await upsertTimeSpent(req.user); // always 5 min
+    res.status(200).json(result);
+  } catch (error) {
+    res
+      .status(500)
+      .json("server error, could not update your time spent on the site.");
+  }
+});
 
 // router.patch change username
 

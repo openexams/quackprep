@@ -10,7 +10,7 @@ export default function QuestionList({ questions, selectedQuestion }) {
     <Segment>
       <Header as='h3'>Choose a Question</Header>
       <List selection>
-        {questions.map((question) => (
+        {questions.map((question, index) => (
           <List.Item
             key={question.id}
             onClick={() => {
@@ -18,7 +18,8 @@ export default function QuestionList({ questions, selectedQuestion }) {
             }}
             active={selectedQuestion && selectedQuestion.id === question.id}
           >
-            <MarkdownRenderer render={question.question} components={{ h1: 'h3' }} />
+            {`Question ${index + 1}`}
+            {/* <MarkdownRenderer render={question.question} components={{ h1: 'h3' }} /> */}
           </List.Item>
         ))}
       </List>

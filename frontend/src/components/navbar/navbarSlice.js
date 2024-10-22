@@ -1,5 +1,6 @@
 import { createSelector } from 'reselect';
 import { standardApiCall } from '@utils/api';
+import { replaceP20WithSpace } from '../../../../shared/globalFuncs';
 
 const CHANGE_NAVBAR_PAGE = 'components/navbar/CHANGE_NAVBAR_PAGE';
 const UPDATE_CUR_CLASS = 'components/navbar/UPDATE_CUR_CLASS';
@@ -10,11 +11,18 @@ const UPDATE_GROUP_ID_NAME = 'components/navbar/UPDATE_GROUP_ID_NAME';
 
 const UPDATE_GROUP_TYPE = 'components/navbar/UPDATE_GROUP_TYPE';
 
+const UPSERT_TIME_SPENT = 'components/navbar/UPSERT_TIME_SPENT';
+
+export function upsertTimeSpent() {
+  return standardApiCall('post', '/api/account/time_spent', {});
+}
+
 export function getClassIdByClassName(className) {
   return standardApiCall('get', `/api/class/${className}`, null, GET_CLASS_ID_BY_NAME, 'ClassList');
 }
 
 export function getTopicIdbyClassNameAndTopicName(topicName, className) {
+  topicName = replaceP20WithSpace(topicName);
   return standardApiCall('get', `/api/group/topic/${topicName}/${className}`, null, UPDATE_GROUP_ID_NAME, 'TopicsShow');
 }
 
@@ -88,8 +96,8 @@ export default function navbarReducer(state = DEFAULT_STATE, action) {
         groupName: newGroupName,
         className: newClassName,
         questionId: parseInt(newQuestionId),
-        classId: null, // these 2 null should be brought in again.
-        groupId: null,
+        classId: urlArr[1] ? state.classId : null, // these 2 null should be brought in again, only if we changed topic or class, may cause issues when inputting new link directly into window.location TODO TEST
+        groupId: urlArr[3] ? state.groupId : null,
         groupType: null,
       };
     case UPDATE_CUR_CLASS:
@@ -106,7 +114,6 @@ export default function navbarReducer(state = DEFAULT_STATE, action) {
       if (!action.payload) return state;
       return { ...state, classId: action.payload.id, className: action.payload.name };
     case UPDATE_GROUP_ID_NAME: // TODO FIX
-      console.log('got');
       if (!action.payload) return state;
       return { ...state, groupId: action.payload.id, groupName: action.payload.name };
     case UPDATE_GROUP_TYPE:

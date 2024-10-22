@@ -50,3 +50,11 @@ export function parseExamNameId(examNameString) {
     exam_num: examNameString[2],
   };
 }
+
+/**
+ *
+ * @param {String} string
+ */
+export function replaceP20WithSpace(string) {
+  return string.replace(/%20/g, " ");
+}

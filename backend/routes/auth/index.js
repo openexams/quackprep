@@ -4,6 +4,17 @@ import { findUserById, getUserCount, register } from "#models/auth/index.js";
 import passport from "#config/passportConfig.js";
 import { isAuthenticated } from "#middleware/authMiddleware.js";
 
+import validator from "validator";
+import {
+  RegExpMatcher,
+  englishDataset,
+  englishRecommendedTransformers,
+} from "obscenity";
+const matcher = new RegExpMatcher({
+  ...englishDataset.build(),
+  ...englishRecommendedTransformers,
+});
+
 const router = Router();
 
 router.get("/users/count", isAuthenticated, async function (req, res) {
@@ -17,10 +28,9 @@ router.get("/users/count", isAuthenticated, async function (req, res) {
 });
 
 router.post("/register", async function (req, res) {
-  res.status(500).json({ message: "signing up currently disabled srry chat" });
-  return;
   // make sure to check if that emails not alr taken lol TODO FIX AND ITS TURNED OFF RN
   const { firstName, lastName, username, email, password } = req.body;
+
   if (!firstName || !lastName || !username || !email || !password) {
     res.status(400).json({
       message:
@@ -28,7 +38,25 @@ router.post("/register", async function (req, res) {
     });
     return;
   }
-  // check if email alr exists
+  if (!validator.isEmail(email)) {
+    res.status(400).json({
+      message: "please input a valid email addr",
+    });
+    return;
+  }
+  if (
+    matcher.getAllMatches(firstName).length !== 0 ||
+    matcher.getAllMatches(lastName) !== 0 ||
+    matcher.getAllMatches(email) !== 0 ||
+    matcher.getAllMatches(username) !== 0
+  ) {
+    res.status(400).json({
+      message: "bad word detected, pls dont use bad word",
+    });
+    return;
+  }
+
+  // check if email alr exists TODO will currently just not work
   const hashedPass = await bcrypt.hash(password, 10);
   const result = await register(
     firstName,
@@ -41,7 +69,10 @@ router.post("/register", async function (req, res) {
   if (result) {
     res.status(200).json({ message: "successfully created a account" });
   } else {
-    res.status(500).json({ message: "failed to create account" });
+    res.status(500).json({
+      message:
+        "failed to create account, server error. contact support for help.",
+    });
   }
 });
 

@@ -12,6 +12,7 @@ import {
   updateQuestionId,
   getTopicIdbyClassNameAndTopicName,
   updateGroupType,
+  upsertTimeSpent,
 } from './navbarSlice';
 import { getCurUser } from '@src/app/auth/authSlice';
 import ProfileDropdown from './components/Profile/ProfileDropdown';
@@ -25,6 +26,7 @@ import { findNeedleInArrayOfObjectsLINEAR, findNeedlesInArrayOfObjectsLINEAR } f
 import { selectTopicState } from '@src/app/class/topic/topicSlice';
 import { selectQuestionState, getQuestionsByGroupId } from '@src/app/class/question/questionSlice';
 import { getExamsByClassId, selectExamsState } from '@src/app/class/exam/examSlice.js';
+import { replaceP20WithSpace } from '../../../../shared/globalFuncs';
 
 export default function Navbar() {
   const location = useLocation();
@@ -56,15 +58,16 @@ export default function Navbar() {
   const handleSidebarToggle = () => {
     setSidebarOpened(!sidebarOpened);
   };
-  const [counter, setCounter] = useState(0);
 
   useEffect(() => {
-    setTimeout(() => {
-      //console.log('1 min later');
-      // will be used to track users time on site
-      setCounter(counter + 1);
-    }, 60000); // runs every min
-  }, [counter]);
+    const interval = setInterval(() => {
+      if (user.id) {
+        dispatch(upsertTimeSpent()); // TODO TEST
+      }
+    }, 300000); // runs every 5 minute
+
+    return () => clearInterval(interval);
+  }, []);
 
   // get user at start of app
   useEffect(() => {
@@ -86,8 +89,8 @@ export default function Navbar() {
   }, [activePage]);
 
   useEffect(() => {
-    console.count('topics');
     if (activePage?.includes('topic')) {
+      console.count('topics');
       //TODO HOLY FUCK THIS SHIT IS AIDS COMMENT IT OR FIX IT
       // TOPICS DISPATCH
       const do_I_alr_have_a_topic_pulled_in_with_the_current_class_id = findNeedleInArrayOfObjectsLINEAR(
@@ -96,6 +99,9 @@ export default function Navbar() {
         classId,
         'id',
       );
+      if (urlArr[4]) {
+        urlArr[4] = replaceP20WithSpace(urlArr[4]);
+      }
       let tmp_topic_id = null;
       if (activePage?.includes('topic') && classId && !do_I_alr_have_a_topic_pulled_in_with_the_current_class_id) {
         dispatch(getTopicsByClassId(classId));
@@ -104,16 +110,16 @@ export default function Navbar() {
         (tmp_topic_id = findNeedlesInArrayOfObjectsLINEAR(topics, ['name', 'class_id'], [urlArr[4], classId], 'id'))
       ) {
         dispatch(updateCurrentGroupData({ name: urlArr[4], id: tmp_topic_id }));
-      } else if (urlArr[4]) {
+      } else if (urlArr[4] && !groupId) {
         dispatch(getTopicIdbyClassNameAndTopicName(urlArr[4], className)); // already have this value in state dont dispatch retard
       }
     }
-  }, [activePage, classId, className, topics]); // why does topics watch itself [topic] may cause issue i remove it
+  }, [activePage, classId, className, topics, groupId]); // why does topics watch itself [topic] may cause issue i remove it
 
   //EXAM
   useEffect(() => {
-    console.count('exam');
     if (activePage?.includes('exam')) {
+      console.count('exam');
       const exams_pulled_in = findNeedleInArrayOfObjectsLINEAR(exams, 'class_id', classId, 'id');
       //console.log(exams_pulled_in);
 
@@ -128,16 +134,19 @@ export default function Navbar() {
 
   useEffect(() => {
     // what if exam?? TODO
-    if (urlArr[4]) {
+    if (activePage?.includes('question')) {
       console.count('question');
       // QUESION DISPATCH
-      const do_I_alr_have_a_question_pulled_in_with_the_current_group_id = findNeedleInArrayOfObjectsLINEAR(
+      if (urlArr[4]) {
+        urlArr[4] = replaceP20WithSpace(urlArr[4]);
+      }
+      const do_I_alr_have_a_question_pulled_in_with_the_current_group_id = findNeedlesInArrayOfObjectsLINEAR(
         questions,
         ['group_id', 'type'],
-        [groupId, urlArr[4]],
+        [groupId, urlArr[3]],
         'id',
       ); // same question may get pulled in twice once for exam once for topic
-      if (activePage?.includes('question') && groupId && !do_I_alr_have_a_question_pulled_in_with_the_current_group_id) {
+      if (groupId && !do_I_alr_have_a_question_pulled_in_with_the_current_group_id) {
         dispatch(getQuestionsByGroupId(groupId, urlArr[3])); // url[3] is type
       } else if (urlArr[6]) {
         dispatch(updateQuestionId(parseInt(urlArr[6])));
@@ -148,19 +157,21 @@ export default function Navbar() {
   }, [activePage, groupId]);
 
   useEffect(() => {
-    console.count('classes');
+    if (activePage?.includes('class')) {
+      console.count('classes');
 
-    // CLASSES DISPATCH MAIN THAT SETS OFF CHAIN OF REACTIONS
-    let tmp_c_id = null;
-    if (!classes && activePage?.includes('class')) {
-      dispatch(getClasses());
-    } else if (
-      activePage?.includes('class') &&
-      (tmp_c_id = findNeedleInArrayOfObjectsLINEAR(classes, 'name', urlArr[2], 'id')) !== null
-    ) {
-      dispatch(updateCurrentClassData({ name: urlArr[2], id: tmp_c_id }));
-    } else if (activePage?.includes('class') && urlArr[2]) {
-      dispatch(getClassIdByClassName(urlArr[2])); // updates id
+      // CLASSES DISPATCH MAIN THAT SETS OFF CHAIN OF REACTIONS
+      let tmp_c_id = null;
+      if (!classes && activePage?.includes('class')) {
+        dispatch(getClasses());
+      } else if (
+        activePage?.includes('class') &&
+        (tmp_c_id = findNeedleInArrayOfObjectsLINEAR(classes, 'name', urlArr[2], 'id')) !== null
+      ) {
+        dispatch(updateCurrentClassData({ name: urlArr[2], id: tmp_c_id }));
+      } else if (activePage?.includes('class') && urlArr[2]) {
+        dispatch(getClassIdByClassName(urlArr[2])); // updates id
+      }
     }
   }, [activePage, classId, classes]); // if classId gets nulled then i need to get shit again
 
