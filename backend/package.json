@@ -12,12 +12,14 @@
     "morgan": "^1.10.0",
     "mysql2": "^3.11.0",
     "nodemon": "^3.1.4",
+    "obscenity": "^0.4.0",
     "passport": "^0.7.0",
     "passport-google-oauth20": "^2.0.0",
     "passport-http-bearer": "^1.0.1",
     "passport-local": "^1.0.0",
     "path": "^0.12.7",
-    "redis": "^4.7.0"
+    "redis": "^4.7.0",
+    "validator": "^13.12.0"
   },
   "imports": {
     "#models/*": "./models/*",

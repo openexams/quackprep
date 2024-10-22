@@ -1,3 +1,5 @@
+import Rand, { PRNG } from "rand-seed";
+
 /**
  *
  * @param {String} given will be used with new Date(given)
@@ -64,15 +66,17 @@ export function replaceP20WithSpace(string) {
  * @param {Array} array array to be randomized
  * @returns {Array} randomized array
  */
-export function randomizeArray(array) {
+export function randomizeArray(array, seed) {
   if (!array) {
     return null;
   }
+  const rand = new Rand(seed); // TODO TEST SHOULD GENERATE SAME RANDOM NUMBER EVERY TIME
+
   const length = array.length;
   let newArr = [];
   for (let i = 0; i < length; i++) {
     const curLength = array.length;
-    const randomIndex = Math.floor(Math.random() * curLength);
+    const randomIndex = Math.floor(rand.next() * curLength);
     newArr.push(array[randomIndex]);
     array = [
       ...array.slice(0, randomIndex),
