@@ -58,3 +58,26 @@ export function parseExamNameId(examNameString) {
 export function replaceP20WithSpace(string) {
   return string.replace(/%20/g, " ");
 }
+
+/**
+ * randomizes a arrays values TODO TEST
+ * @param {Array} array array to be randomized
+ * @returns {Array} randomized array
+ */
+export function randomizeArray(array) {
+  if (!array) {
+    return null;
+  }
+  const length = array.length;
+  let newArr = [];
+  for (let i = 0; i < length; i++) {
+    const curLength = array.length;
+    const randomIndex = Math.floor(Math.random() * curLength);
+    newArr.push(array[randomIndex]);
+    array = [
+      ...array.slice(0, randomIndex),
+      ...array.slice(randomIndex + 1, length),
+    ];
+  }
+  return newArr;
+}

@@ -6,13 +6,17 @@ import { Segment, Header, List, Button, Divider } from 'semantic-ui-react';
 import { getChoicesByQuestion, postAnswer, upsertCurrentAnswer } from './choices/choicesSlice';
 import { selectLoadingState } from '@src/app/store/loadingSlice';
 import MarkdownRenderer from '@components/MarkdownRenderer';
+import { randomizeArray } from '../../../../../shared/globalFuncs';
 
 export default function QuestionChoices({ selectedQuestion }) {
   const dispatch = useDispatch();
   const loading = useSelector(selectLoadingState).loadingComps?.QuestionChoices;
 
-  const choices = useSelector(selectArrayOfStateById('app.choices.choices', 'question_id', selectedQuestion?.id));
+  let choices = useSelector(selectArrayOfStateById('app.choices.choices', 'question_id', selectedQuestion?.id));
   const [showAnswers, setShowAnswers] = useState(false);
+
+  // give choices a random order TODO LET THE USER DO THIS.
+  choices = randomizeArray(choices);
 
   // navbar does not do this
   useEffect(() => {
