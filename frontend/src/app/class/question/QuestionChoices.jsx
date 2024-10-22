@@ -16,7 +16,7 @@ export default function QuestionChoices({ selectedQuestion }) {
   const [showAnswers, setShowAnswers] = useState(false);
 
   // give choices a random order TODO LET THE USER DO THIS.
-  choices = randomizeArray(choices, 'choices');
+      choices = randomizeArray(choices, 1234);
 
   // navbar does not do this
   useEffect(() => {
