@@ -9,11 +9,6 @@ export default function FlashMessage() {
   const { page } = useSelector(selectNavbarState).navbar;
   const { show, error, msg } = useSelector(selectFlashMessageState);
 
-  useEffect(() => {
-    // TODO could result in errors maybe
-    if (error?.includes('401') && !page?.includes('auth')) dispatch(changeNavbarPage(`/auth?next=${page}`));
-  }, [show]);
-
   return (
     <>
       {show && (

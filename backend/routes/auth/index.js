@@ -55,6 +55,16 @@ router.post("/register", async function (req, res) {
     });
     return;
   }
+  if (
+    firstName.includes(" ") ||
+    lastName.includes(" ") ||
+    username.includes(" ")
+  ) {
+    res.status(400).json({
+      message: "no spaces allowed in first last or user name",
+    });
+    return;
+  }
 
   // check if email alr exists TODO will currently just not work
   const hashedPass = await bcrypt.hash(password, 10);

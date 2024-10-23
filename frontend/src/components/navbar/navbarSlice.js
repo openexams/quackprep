@@ -72,6 +72,7 @@ const DEFAULT_STATE = {
 
 export default function navbarReducer(state = DEFAULT_STATE, action) {
   if (state.page?.includes('/auth') && (action.type?.includes('UPDATE') || action.type?.includes('GET'))) {
+    // BIG ISSUE BUT OK
     return state; // was trying to do stuff with page that had auth?next= in it, since I parse the page using a array split("/") that did not go well
   }
   switch (action.type) {

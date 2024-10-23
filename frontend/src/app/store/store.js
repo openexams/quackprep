@@ -14,6 +14,7 @@ import leadboardReducer from '../leaderboard/leaderboardSlice.js';
 import choicesReducer from '../class/question/choices/choicesSlice.js';
 import statsReducer from '../stats/statsSlice.js';
 import examSliceReducer from '../class/exam/examSlice.js';
+import reducer401 from '@components/401/401Slice.js';
 
 const app = combineReducers({
   home: homeReducer,
@@ -30,5 +31,5 @@ const app = combineReducers({
 const auth = combineReducers({ user: loginReducer });
 
 export default configureStore({
-  reducer: { flashMessage: flashReducer, loading: loadingReducer, app, auth },
+  reducer: { flashMessage: flashReducer, show401: reducer401, loading: loadingReducer, app, auth },
 });

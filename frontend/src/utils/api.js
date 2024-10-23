@@ -1,3 +1,4 @@
+import { show401Msg } from '@components/401/401Slice.js';
 import axios from './axios.js';
 import { hideFlashMessage, showFlashMessage } from '@components/flashmessage/flashMessageSlice.js';
 import { startLoading, stopLoading } from '@src/app/store/loadingSlice.js';
@@ -43,7 +44,13 @@ export function standardApiCall(
       console.error(error);
       dispatch(stopLoading(componentName));
       console.error('Failed req to ', error.request.responseURL);
-      dispatch(showFlashMessage('Error', error?.response?.data?.message || errorMsg || error.message));
+      if (error?.response?.data?.message?.includes('401')) {
+        console.log('includes 401');
+        dispatch(show401Msg());
+        dispatch(hideFlashMessage());
+      } else {
+        dispatch(showFlashMessage('Error', error?.response?.data?.message || errorMsg || error.message));
+      }
     }
   };
 }

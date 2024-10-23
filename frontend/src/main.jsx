@@ -8,6 +8,7 @@ import FlashMessage from '@components/flashmessage/FlashMessage.jsx';
 import AppRouter from './app/AppRouter';
 import HistoryNav from '@components/Breadcrumb';
 import Footer from '@components/Footer';
+import Comp401 from '@components/401/Comp401';
 
 export default function Main() {
   return (
@@ -20,6 +21,7 @@ export default function Main() {
           flexDirection: 'column',
         }}
       >
+        <Comp401 />
         <FlashMessage />
         <HistoryNav />
         <div style={{ flex: 1, paddingTop: '5.6em' }}>

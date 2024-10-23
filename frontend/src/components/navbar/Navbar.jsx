@@ -81,15 +81,15 @@ export default function Navbar() {
   ///  USE EFFECTS FOR KEEPING STORE SAME AS URL ///
 
   useEffect(() => {
-    if (activePage?.includes('exam')) {
+    if (activePage?.includes('exam') && !activePage?.includes('/auth?next')) {
       dispatch(updateGroupType('exam'));
-    } else if (activePage?.includes('topic')) {
+    } else if (activePage?.includes('topic') && !activePage?.includes('/auth?next')) {
       dispatch(updateGroupType('topic'));
     }
   }, [activePage]);
 
   useEffect(() => {
-    if (activePage?.includes('topic')) {
+    if (activePage?.includes('topic') && !activePage?.includes('/auth?next')) {
       console.count('topics');
       //TODO HOLY FUCK THIS SHIT IS AIDS COMMENT IT OR FIX IT
       // TOPICS DISPATCH
@@ -118,7 +118,7 @@ export default function Navbar() {
 
   //EXAM
   useEffect(() => {
-    if (activePage?.includes('exam')) {
+    if (activePage?.includes('exam') && !activePage?.includes('/auth?next')) {
       console.count('exam');
       const exams_pulled_in = findNeedleInArrayOfObjectsLINEAR(exams, 'class_id', classId, 'id');
       //console.log(exams_pulled_in);
@@ -134,7 +134,7 @@ export default function Navbar() {
 
   useEffect(() => {
     // what if exam?? TODO
-    if (activePage?.includes('question')) {
+    if (activePage?.includes('question') && !activePage?.includes('/auth?next')) {
       console.count('question');
       // QUESION DISPATCH
       if (urlArr[4]) {
@@ -157,7 +157,7 @@ export default function Navbar() {
   }, [activePage, groupId]);
 
   useEffect(() => {
-    if (activePage?.includes('class')) {
+    if (activePage?.includes('class') && !activePage?.includes('/auth?next')) {
       console.count('classes');
 
       // CLASSES DISPATCH MAIN THAT SETS OFF CHAIN OF REACTIONS
