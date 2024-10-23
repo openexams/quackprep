@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { Container, Segment, Header, Button, Icon, Grid, Divider } from 'semantic-ui-react';
+import { Container, Segment, Header, Button, Icon, Grid, Divider, Popup } from 'semantic-ui-react';
 import { selectClassStateByName } from './classSlice';
 import { changeNavbarPage } from '@components/navbar/navbarSlice';
 
@@ -40,23 +40,29 @@ export default function ClassShow() {
 
         <Grid centered stackable columns={2}>
           <Grid.Column textAlign='center'>
-            <Button size='large' color='teal' onClick={() => dispatch(changeNavbarPage('topic'))}>
+            <Button size='large' onClick={() => dispatch(changeNavbarPage('exam'))}>
+              <Icon name='list' />
+              Study by Exam
+            </Button>
+          </Grid.Column>
+          <Grid.Column textAlign='center'>
+            <Button size='large' onClick={() => dispatch(changeNavbarPage('topic'))}>
               <Icon name='list' />
               Study by Topic
             </Button>
           </Grid.Column>
           <Grid.Column textAlign='center'>
-            <Button size='large' color='green' disabled>
-              <Icon name='tasks' />
-              Study by Difficulty <span style={{ fontSize: '.7rem' }}>coming soon...</span>
-            </Button>
-          </Grid.Column>
-          <Grid.Column textAlign='center'>
-            <Button size='large' color='teal' onClick={() => dispatch(changeNavbarPage('exam'))}>
-              {/* TODO list exams*/}
-              <Icon name='list' />
-              Study by Exam
-            </Button>
+            <Popup // does not work while button disabled
+              position='top center'
+              content='help'
+              on='hover'
+              trigger={
+                <Button size='large' color='green' disabled>
+                  <Icon name='tasks' />
+                  AI Generated Questions <span style={{ fontSize: '.7rem' }}>coming soon...</span>
+                </Button>
+              }
+            ></Popup>
           </Grid.Column>
         </Grid>
       </Segment>
