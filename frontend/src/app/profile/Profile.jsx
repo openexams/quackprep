@@ -57,6 +57,7 @@ export default function Profile() {
         </Card.Content>
         <Card.Content extra textAlign='center'>
           <Button
+            disabled
             primary
             fluid
             style={{
@@ -66,7 +67,7 @@ export default function Profile() {
             }}
             onClick={() => dispatch(changeNavbarPage('/account'))}
           >
-            Edit Profile
+            Edit Profile (Coming Soon, contact support for changes)
           </Button>
         </Card.Content>
       </Card>

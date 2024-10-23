@@ -1,6 +1,10 @@
 import { useDispatch } from 'react-redux';
 import { Container, Header, Button, Icon, Grid, Segment, Card, Image } from 'semantic-ui-react';
-import horse from '/img/horse.webp';
+import duckBlissImage from '/img/home/duck_bliss.webp';
+import libraryComputerDucks from '/img/home/library_computer_ducks.webp';
+import extensiveDucks from '/img/home/extensive_ducks.webp';
+import kiteDuck from '/img/home/duck_kite.webp';
+
 import { changeNavbarPage } from '@components/navbar/navbarSlice';
 
 export default function Home() {
@@ -8,17 +12,17 @@ export default function Home() {
 
   const features = [
     {
-      icon: horse,
+      icon: extensiveDucks,
       title: 'Extensive Question Bank',
       description: 'Access a wide range of questions across multiple subjects.',
     },
     {
-      icon: horse,
+      icon: kiteDuck,
       title: 'AI Generated Questions',
       description: 'Leverage AI to explore all exam questions and receive personalized, AI-generated questions.',
     },
     {
-      icon: horse,
+      icon: libraryComputerDucks,
       title: 'Track Your Progress',
       description: 'Monitor your learning journey and identify areas for improvement.',
     },
@@ -41,7 +45,7 @@ export default function Home() {
         inverted
         vertical
         textAlign='center'
-        style={{ minHeight: 700, padding: '1em 0em', backgroundImage: `url(${horse})`, backgroundSize: 'cover' }}
+        style={{ minHeight: 700, padding: '1em 0em', backgroundImage: `url(${duckBlissImage})`, backgroundSize: 'cover' }}
       >
         <Container text textAlign='center'>
           <Header

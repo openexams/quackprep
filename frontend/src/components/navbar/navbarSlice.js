@@ -71,6 +71,9 @@ const DEFAULT_STATE = {
 };
 
 export default function navbarReducer(state = DEFAULT_STATE, action) {
+  if (state.page?.includes('/auth') && (action.type?.includes('UPDATE') || action.type?.includes('GET'))) {
+    return state; // was trying to do stuff with page that had auth?next= in it, since I parse the page using a array split("/") that did not go well
+  }
   switch (action.type) {
     case CHANGE_NAVBAR_PAGE:
       let curUrl = state.page;
@@ -82,6 +85,19 @@ export default function navbarReducer(state = DEFAULT_STATE, action) {
       if (state.page === curUrl) {
         // if it didnt change dont do anything.
         return state;
+      }
+      if (action.payload?.includes('/auth?next=')) {
+        // this in the navbar fucks the ordering of urlArr[]
+        return {
+          ...state,
+          page: curUrl,
+          groupName: null,
+          className: null,
+          questionId: null,
+          classId: null,
+          groupId: null,
+          groupType: null,
+        };
       }
       // when I change the navbar set everything back to null so navbar has to dispatch to get id values;
       const urlArr = curUrl.split('/');
@@ -96,7 +112,7 @@ export default function navbarReducer(state = DEFAULT_STATE, action) {
         groupName: newGroupName,
         className: newClassName,
         questionId: parseInt(newQuestionId),
-        classId: urlArr[1] ? state.classId : null, // these 2 null should be brought in again, only if we changed topic or class, may cause issues when inputting new link directly into window.location TODO TEST
+        classId: urlArr[2] ? state.classId : null, // these 2 null should be brought in again, only if we changed topic or class, may cause issues when inputting new link directly into window.location TODO TEST
         groupId: urlArr[3] ? state.groupId : null,
         groupType: null,
       };

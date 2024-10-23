@@ -62,7 +62,7 @@ export default function StatsPage() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (!questionsAnsweredByMonthAndYear) dispatch(getQuestionsAnsweredByMonthAndYear());
+    if (!questionsAnsweredByMonthAndYear && !loading) dispatch(getQuestionsAnsweredByMonthAndYear());
   }, [dispatch, questionsAnsweredByMonthAndYear]);
 
   const mappedQuestions = useMemo(() => mapQuestionsByMAndY(questionsAnsweredByMonthAndYear), [questionsAnsweredByMonthAndYear]);
