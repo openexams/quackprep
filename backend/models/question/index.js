@@ -30,27 +30,17 @@ export async function getQuestionsByExamId(group_id) {
  * @param {Int} question_num_on_exam our question numbers have id, the exam question have numbers ie question 1 etc
  * @returns {Int} question id u just insterted.
  */
-export async function createQuestionInTopic( // NOT TESTED TODO
-  user_id,
-  topic_id,
-  question,
-  year,
-  semester,
-  exam_num,
-  question_num_on_exam
-) {
+export async function createQuestionInTopic(user_id, topic_id, question) {
+  // NOT TESTED TODO
   const params = {
     user_id,
     topic_id,
     question,
-    year,
-    semester,
-    exam_num,
     question_num_on_exam,
   };
   const result = (
     await sqlExe.executeCommand(
-      `INSERT INTO questions (created_by,question,year,semester,exam_num,question_num_on_exam) VALUES(:user_id, :question,:year,:semester,:exam_num,:question_num_on_exam)`,
+      `INSERT INTO questions (created_by,question, question_num_on_exam) VALUES(:user_id, :question, :question_num_on_exam)`,
       params
     )
   ).insertId;
@@ -75,4 +65,41 @@ export async function linkQuestionToExam(exam_id, question_id) {
     params
   );
   return bridge_tbl_res;
+}
+
+export async function createQuestionInExamAndTopic( // NOT TESTED TODO
+  user_id,
+  topic_id,
+  exam_id,
+  question,
+  question_num_on_exam
+) {
+  const params = {
+    user_id,
+    topic_id,
+    exam_id,
+    question,
+    question_num_on_exam,
+  };
+  const result = // insert question
+  (
+    await sqlExe.executeCommand(
+      `INSERT INTO questions (created_by,question, question_num_on_exam) VALUES(:user_id, :question, :question_num_on_exam)`,
+      params
+    )
+  ).insertId;
+  params["result"] = result;
+  const bridge_tbl_t_res = // link topic
+  (
+    await sqlExe.executeCommand(
+      `INSERT INTO topic_question (topic_id,question_id) VALUES(:topic_id, :result)`,
+      params
+    )
+  ).insertId;
+  const bridge_tbl_e_res = await sqlExe.executeCommand(
+    `INSERT INTO exam_question (exam_id,question_id) VALUES(:exam_id, :result)`,
+    params
+  );
+
+  return result; // useless for now;
 }
