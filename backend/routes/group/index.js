@@ -67,7 +67,7 @@ router.post("/exam/", async function (req, res) {
   } catch (error) {
     res
       .status(500)
-      .json({ message: `fail to add exam to class id ${data.class_id}` });
+      .json({ message: `fail to add exam to class id ${req.body?.class_id}` });
   }
 });
 
