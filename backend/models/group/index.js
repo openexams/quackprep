@@ -8,6 +8,7 @@ export async function getGroupsByClassId(class_id, type) {
   );
 }
 
+// not used
 export async function getGroupIdByClassNameAndGroupName(groupName, className) {
   const params = { groupName, className };
   return await sqlExe.executeCommand(
@@ -15,6 +16,16 @@ export async function getGroupIdByClassNameAndGroupName(groupName, className) {
     `SELECT g.id,g.name, g.class_id FROM cgroups g JOIN classes c ON g.class_id = c.id AND c.name = :className WHERE g.name =:groupName`,
     params
   );
+}
+
+export async function createGroupInClass(user_id, class_id, type, name, desc) {
+  const params = { user_id, class_id, type, name, desc };
+  return (
+    await sqlExe.executeCommand(
+      `INSERT INTO cgroups(name,type,\`desc\`,created_by,class_id) VALUES(:name,:type,:desc:user_id,:class_id);`, // back ticks may not work
+      params
+    )
+  ).insertId;
 }
 
 // TODO CREATE GROUP & ADD GROUP TO CLASS
