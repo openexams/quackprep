@@ -107,7 +107,7 @@ export default function Navbar() {
       } else if (
         // i alr have topics for this class pulled in, as such find that topic id  and update cur group data
         urlArr[4] &&
-        (tmp_topic_id = findNeedlesInArrayOfObjectsLINEAR(topics, ['name', 'class_id'], [urlArr[4], classId], 'id'))
+        (tmp_topic_id = findNeedlesInArrayOfObjectsLINEAR(topics, ['name', 'class_id'], [urlArr[4], classId], 'id')) // can do this cuz class & name in groups make a unique field;
       ) {
         dispatch(updateCurrentGroupData({ name: urlArr[4], id: tmp_topic_id }));
       }
@@ -118,7 +118,7 @@ export default function Navbar() {
   useEffect(() => {
     if (activePage?.includes('exam') && !activePage?.includes('/auth?next')) {
       console.count('exam');
-      const exams_pulled_in = findNeedleInArrayOfObjectsLINEAR(exams, 'class_id', classId, 'id');
+      const exams_pulled_in = findNeedlesInArrayOfObjectsLINEAR(exams, ['class_id', 'name'], [classId, urlArr[4]], 'id'); // can do this cuz class & name in groups make a unique field;
       //console.log(exams_pulled_in);
 
       if (!exams_pulled_in && activePage?.includes('exam') && classId && className) {
