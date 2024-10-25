@@ -106,13 +106,15 @@ export default function Navbar() {
       if (activePage?.includes('topic') && classId && !do_I_alr_have_a_topic_pulled_in_with_the_current_class_id) {
         dispatch(getTopicsByClassId(classId));
       } else if (
+        // i alr have topics for this class pulled in, as such find that topic id  and update cur group data
         urlArr[4] &&
         (tmp_topic_id = findNeedlesInArrayOfObjectsLINEAR(topics, ['name', 'class_id'], [urlArr[4], classId], 'id'))
       ) {
         dispatch(updateCurrentGroupData({ name: urlArr[4], id: tmp_topic_id }));
-      } else if (urlArr[4] && !groupId) {
-        dispatch(getTopicIdbyClassNameAndTopicName(urlArr[4], className)); // already have this value in state dont dispatch retard
-      }
+      } // } else if (urlArr[4] && !groupId) {
+      //   console.log('FATAL ERROR');
+      //   dispatch(getTopicIdbyClassNameAndTopicName(urlArr[4], className)); // already have this value in state dont dispatch retard
+      // }
     }
   }, [activePage, classId, className, topics, groupId]); // why does topics watch itself [topic] may cause issue i remove it
 
