@@ -9,10 +9,10 @@ import Leaderboard from './leaderboard/Leaderboard.jsx';
 import Stats from './stats/Stats.jsx';
 import ClassShow from './class/ClassShow.jsx';
 import QuestionPage from './class/question/QuestionPage.jsx';
-import TopicsShow from './class/topic/TopicsShow.jsx';
+import TopicsShow from './class/group/topic/TopicsShow.jsx';
 import NotFoundPage from '@components/NotFound.jsx';
 import ApiDocs from './docs/api/ApiDocs.jsx';
-import ExamList from './class/exam/ExamList.jsx';
+import ExamList from './class/group/exam/ExamList.jsx';
 
 {
   /* topic could be a actual topic or a group of question such as a exam */

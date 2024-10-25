@@ -6,6 +6,7 @@ export async function getClasses() {
   );
 }
 
+// since class names must be distinct
 export async function getClassIdByClassName(className) {
   const params = { className };
   return await sqlExe.executeCommand(

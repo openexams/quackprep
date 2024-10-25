@@ -8,12 +8,12 @@ import loginReducer from '../auth/login/loginSlice.js';
 import navbarReducer from '@components/navbar/navbarSlice.js';
 import streakReducer from '../streak/streakSlice.js';
 import classReducer from '../class/classSlice.js';
-import topicReducer from '../class/topic/topicSlice.js';
+import topicReducer from '../class/group/topic/topicSlice.js';
 import questionsReducer from '../class/question/questionSlice.js';
 import leadboardReducer from '../leaderboard/leaderboardSlice.js';
 import choicesReducer from '../class/question/choices/choicesSlice.js';
 import statsReducer from '../stats/statsSlice.js';
-import examSliceReducer from '../class/exam/examSlice.js';
+import examSliceReducer from '../class/group/exam/examSlice.js';
 import reducer401 from '@components/401/401Slice.js';
 
 const app = combineReducers({

@@ -1,63 +1,20 @@
 import sqlExe from "#db/dbFunctions.js";
-export async function getTopicsByClassId(class_id) {
-  const params = { class_id };
+
+export async function getGroupsByClassId(class_id, type) {
+  const params = { class_id, type };
   return await sqlExe.executeCommand(
-    `SELECT t.name,t.id,t.description,t.created_by, ct.class_id FROM topics t JOIN class_topic ct ON ct.class_id = :class_id AND ct.topic_id = t.id ORDER BY id ASC`,
+    `SELECT g.name,g.id,g.desc,g.created_by, g.class_id, gt.type_name as type FROM cgroups g JOIN group_types gt on g.type = gt.id WHERE gt.type_name = :type ORDER BY g.id ASC`,
     params
   );
 }
 
-export async function getTopicIdByClassNameAndTopicName(topicName, className) {
-  const params = { topicName, className };
+export async function getGroupIdByClassNameAndGroupName(groupName, className) {
+  const params = { groupName, className };
   return await sqlExe.executeCommand(
     // todo may be cooked chat
-    `SELECT t.id,t.name FROM topics t JOIN class_topic ct ON t.id = ct.topic_id AND (SELECT c.name FROM classes c WHERE c.id = ct.class_id) = :className AND t.name = :topicName`,
+    `SELECT g.id,g.name, g.class_id FROM cgroups g JOIN classes c ON g.class_id = c.id AND c.name = :className WHERE g.name =:groupName`,
     params
   );
 }
 
-export async function addTopicToClass(name, class_id, description, user_id) {
-  const params = { name, class_id, description, user_id };
-  const result = (
-    await sqlExe.executeCommand(
-      `INSERT INTO topics (name,description,created_by) VALUES (:name,:description,:user_id);`,
-      params
-    )
-  ).insertId;
-  params["result"] = result;
-  const bridge_tbl_res = await sqlExe.executeCommand(
-    `INSERT INTO class_topic (class_id,topic_id) VALUES (:class_id,:result);`,
-    params
-  );
-  return result;
-}
-
-export async function addExamToClass(
-  class_id,
-  year,
-  semester,
-  exam_num,
-  user_id
-) {
-  const params = { year, semester, exam_num, user_id, class_id };
-  const result = (
-    await sqlExe.executeCommand(
-      `INSERT INTO exams (year, semester, exam_num, created_by) VALUES (:year, :semester, :exam_num, :user_id);`,
-      params
-    )
-  ).insertId;
-  params["result"] = result;
-  const bridge_tbl_res = await sqlExe.executeCommand(
-    `INSERT INTO class_exam (class_id,exam_id) VALUES (:class_id,:result);`,
-    params
-  );
-  return result;
-}
-
-export async function getExamsByClassId(class_id) {
-  // TODO TEST SQL COMMAND
-  return await sqlExe.executeCommand(
-    `SELECT e.id, e.year, e.semester, e.exam_num, e.created_by, ce.class_id  FROM exams e JOIN class_exam ce ON ce.class_id = :class_id AND ce.exam_id = e.id `,
-    { class_id }
-  );
-}
+// TODO CREATE GROUP & ADD GROUP TO CLASS

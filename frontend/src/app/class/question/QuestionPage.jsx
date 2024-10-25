@@ -26,7 +26,7 @@ function findQuestionById(questions, id) {
 
 export default function QuestionPage() {
   const dispatch = useDispatch();
-  const { groupId, groupName, questionId } = useSelector(selectNavbarState).navbar;
+  const { groupId, groupName, questionId, groupType } = useSelector(selectNavbarState).navbar;
 
   const questions = useSelector(selectArrayOfStateById('app.question.questions', 'group_id', groupId));
 

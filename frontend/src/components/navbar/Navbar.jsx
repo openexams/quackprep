@@ -10,7 +10,6 @@ import {
   updateCurrentClassData,
   updateCurrentGroupData,
   updateQuestionId,
-  getTopicIdbyClassNameAndTopicName,
   updateGroupType,
   upsertTimeSpent,
 } from './navbarSlice';
@@ -21,11 +20,11 @@ import BrandLogo from './components/BrandLogo';
 import { getHasStreak, selectHasStreak } from '@src/app/streak/streakSlice.js';
 import { selectClassState } from '@src/app/class/classSlice';
 import { getClasses } from '@src/app/class/classSlice';
-import { getTopicsByClassId } from '@src/app/class/topic/topicSlice';
+import { getTopicsByClassId } from '@src/app/class//group/topic/topicSlice';
 import { findNeedleInArrayOfObjectsLINEAR, findNeedlesInArrayOfObjectsLINEAR } from '@utils/functions';
-import { selectTopicState } from '@src/app/class/topic/topicSlice';
+import { selectTopicState } from '@src/app/class/group/topic/topicSlice';
 import { selectQuestionState, getQuestionsByGroupId } from '@src/app/class/question/questionSlice';
-import { getExamsByClassId, selectExamsState } from '@src/app/class/exam/examSlice.js';
+import { getExamsByClassId, selectExamsState } from '@src/app/class/group/exam/examSlice.js';
 import { replaceP20WithSpace } from '../../../../shared/globalFuncs';
 
 export default function Navbar() {
@@ -111,10 +110,7 @@ export default function Navbar() {
         (tmp_topic_id = findNeedlesInArrayOfObjectsLINEAR(topics, ['name', 'class_id'], [urlArr[4], classId], 'id'))
       ) {
         dispatch(updateCurrentGroupData({ name: urlArr[4], id: tmp_topic_id }));
-      } // } else if (urlArr[4] && !groupId) {
-      //   console.log('FATAL ERROR');
-      //   dispatch(getTopicIdbyClassNameAndTopicName(urlArr[4], className)); // already have this value in state dont dispatch retard
-      // }
+      }
     }
   }, [activePage, classId, className, topics, groupId]); // why does topics watch itself [topic] may cause issue i remove it
 
@@ -135,7 +131,6 @@ export default function Navbar() {
   }, [activePage, classId, className, exams]);
 
   useEffect(() => {
-    // what if exam?? TODO
     if (activePage?.includes('question') && !activePage?.includes('/auth?next')) {
       console.count('question');
       // QUESION DISPATCH
@@ -144,8 +139,8 @@ export default function Navbar() {
       }
       const do_I_alr_have_a_question_pulled_in_with_the_current_group_id = findNeedlesInArrayOfObjectsLINEAR(
         questions,
-        ['group_id', 'type'],
-        [groupId, urlArr[3]],
+        ['group_id', 'type'], // >
+        [groupId, urlArr[3]], //I pass the type as well as when question are pulled in for one type, and the other type is loaded by the user, it may detect a question alr pulled in so then we will only have that single question when in reality the type had a lot more questions.
         'id',
       ); // same question may get pulled in twice once for exam once for topic
       if (groupId && !do_I_alr_have_a_question_pulled_in_with_the_current_group_id) {

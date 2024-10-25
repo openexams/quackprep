@@ -3,7 +3,6 @@ import { changeNavbarPage, selectNavbarState, updateQuestionId } from '@componen
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { List, Segment, Header } from 'semantic-ui-react';
-import { selectUser } from '@src/app/auth/authSlice';
 
 export default function QuestionList({ questions, selectedQuestion }) {
   const dispatch = useDispatch();

@@ -1,105 +1,17 @@
 import sqlExe from "#db/dbFunctions.js";
 
-export async function getQuestionsByTopicId(group_id) {
-  const params = { group_id };
+export async function getQuestionsByGroupId(group_id, type) {
+  const params = { group_id, type };
   return await sqlExe.executeCommand(
     // PULL IN MORE!
-    `SELECT q.id, q.question, tp.topic_id as group_id, 'topic' AS type FROM questions q JOIN topic_question tp ON tp.topic_id = :group_id AND tp.question_id = q.id ORDER BY q.id ASC`,
+    `SELECT q.id, q.question, gq.id as group_id, gt.type_name as type FROM questions q 
+    JOIN group_question gq ON gq.id = :group_id AND gq.question_id = q.id 
+    JOIN cgroups g ON gq.id = g.id 
+    JOIN group_types gt ON gt.id = g.type
+    ORDER BY q.id ASC
+`,
     params
   );
 }
 
-export async function getQuestionsByExamId(group_id) {
-  const params = { group_id };
-
-  return await sqlExe.executeCommand(
-    // PULL IN MORE!
-    `SELECT q.id, q.question, eq.exam_id as group_id, 'exam' AS type FROM questions q JOIN exam_question eq ON eq.exam_id = :group_id AND eq.question_id = q.id ORDER BY q.id ASC`,
-    params
-  );
-}
-
-/**
- *
- * @param {Int} user_id user id foreign key
- * @param {Int} topic_id topic id foreign key
- * @param {String} question question in md, to use latex wrap in $$ so for ex hello $$\Theta$$ just did big theta
- * @param {String} year year of exam 2019 etc
- * @param {String} semester Spring or fall possibly summer depends
- * @param {Int} exam_num classes have x amt of exams, last exam usually means final
- * @param {Int} question_num_on_exam our question numbers have id, the exam question have numbers ie question 1 etc
- * @returns {Int} question id u just insterted.
- */
-export async function createQuestionInTopic(user_id, topic_id, question) {
-  // NOT TESTED TODO
-  const params = {
-    user_id,
-    topic_id,
-    question,
-    question_num_on_exam,
-  };
-  const result = (
-    await sqlExe.executeCommand(
-      `INSERT INTO questions (created_by,question, question_num_on_exam) VALUES(:user_id, :question, :question_num_on_exam)`,
-      params
-    )
-  ).insertId;
-  params["result"] = result;
-  const bridge_tbl_res = (
-    await sqlExe.executeCommand(
-      `INSERT INTO topic_question (topic_id,question_id) VALUES(:topic_id, :result)`,
-      params
-    )
-  ).insertId;
-  return result;
-}
-
-export async function linkQuestionToExam(exam_id, question_id) {
-  // NOT TESTED TODO
-  const params = {
-    question_id,
-    exam_id,
-  };
-  const bridge_tbl_res = await sqlExe.executeCommand(
-    `INSERT INTO exam_question (exam_id,question_id) VALUES(:exam_id, :question_id)`,
-    params
-  );
-  return bridge_tbl_res;
-}
-
-export async function createQuestionInExamAndTopic( // NOT TESTED TODO
-  user_id,
-  topic_id,
-  exam_id,
-  question,
-  question_num_on_exam
-) {
-  const params = {
-    user_id,
-    topic_id,
-    exam_id,
-    question,
-    question_num_on_exam,
-  };
-  const result = // insert question
-  (
-    await sqlExe.executeCommand(
-      `INSERT INTO questions (created_by,question, question_num_on_exam) VALUES(:user_id, :question, :question_num_on_exam)`,
-      params
-    )
-  ).insertId;
-  params["result"] = result;
-  const bridge_tbl_t_res = // link topic
-  (
-    await sqlExe.executeCommand(
-      `INSERT INTO topic_question (topic_id,question_id) VALUES(:topic_id, :result)`,
-      params
-    )
-  ).insertId;
-  const bridge_tbl_e_res = await sqlExe.executeCommand(
-    `INSERT INTO exam_question (exam_id,question_id) VALUES(:exam_id, :result)`,
-    params
-  );
-
-  return result; // useless for now;
-}
+// TODO create question in group
