@@ -6,7 +6,7 @@ import Rand, { PRNG } from "rand-seed";
  */
 export function curTimeUTCMinusGiven(given) {
   // testable
-  const diff = (new Date().getTime() - new Date(given)) / 86400000;
+  const diff = Math.abs(new Date().getTime() - new Date(given)) / 86400000;
   if (diff < 0) {
     return 0;
   } else {

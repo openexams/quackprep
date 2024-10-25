@@ -83,3 +83,12 @@ export async function deleteChoice(user_id, choice_id) {
     params
   );
 }
+
+export async function getCurrentChoicesByGroupIdAndType( // TODO answers_current
+  user_id,
+  group_id,
+  group_type
+) {
+  const params = { user_id, group_id, group_type };
+  return await sqlExe.executeCommand(` `, params);
+}

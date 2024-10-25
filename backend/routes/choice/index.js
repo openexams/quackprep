@@ -8,6 +8,7 @@ import {
   postChoice,
   updateChoice,
   upsertCurrentChoice,
+  getCurrentChoicesByGroupIdAndType,
 } from "#models/choice/index.js";
 import { checkApiKey } from "#models/auth/index.js";
 import express, { Router } from "express";
@@ -104,7 +105,7 @@ router.post("/:question_id", isAuthenticated, async function (req, res) {
   }
 });
 
-// U
+// U TODO CHECK IF WORKS
 router.patch("/:choice_id", isAuthenticated, async function (req, res) {
   const data = req.body;
   try {
@@ -131,7 +132,7 @@ router.patch("/:choice_id", isAuthenticated, async function (req, res) {
   }
 });
 
-//D
+//D TODO CHECK IF WORKS
 router.delete("/:choice_id", isAuthenticated, async function (req, res) {
   //console.log(req.headers.token);
   try {
@@ -141,6 +142,25 @@ router.delete("/:choice_id", isAuthenticated, async function (req, res) {
   } catch (error) {
     res.status(500).json({
       message: `failed to delete choice by choice id: ${req.params.choice_id}`,
+    });
+  }
+});
+
+/**
+ * pulls in the current choices that this user has,
+ */
+router.get("/current/:group_id/:group_type", async function (req, res) {
+  try {
+    const result = await getCurrentChoicesByGroupIdAndType(
+      req.user,
+      req.params.group_id,
+      req.params.group_type
+    );
+
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(500).json({
+      message: `failed to get currently selected choices: ${req.params.choice_id}`,
     });
   }
 });
