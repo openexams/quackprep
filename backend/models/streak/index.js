@@ -69,8 +69,8 @@ export async function getStreakData(userId) {
 // filters out users who dont have streaks
 export async function getTopStreaks(amt) {
   return await sqlExe.executeCommand(
-    `SELECT s.user_id, s.current_streak, u.username, u.icon FROM streak s INNER JOIN users u ON s.user_id = u.id 
-    WHERE datediff(CURRENT_TIMESTAMP,s.last_claim)  <= 2
+    `SELECT s.user_id, s.current_streak, u.username, u.icon, current_timestamp, s.last_claim FROM streak s INNER JOIN users u ON s.user_id = u.id 
+    WHERE TIMESTAMPDIFF(MINUTE, s.last_claim,CURRENT_TIMESTAMP())  <= 2880
     ORDER BY s.current_streak DESC
     LIMIT 5`,
     { amt }

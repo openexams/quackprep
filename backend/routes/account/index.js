@@ -18,6 +18,18 @@ router.post("/time_spent", async function (req, res) {
   }
 });
 
+router.patch("/icon", async function (req, res) {
+  // user could send malicious image TODO not going to work for now
+  try {
+    const icon_url = req.body;
+    res.status(500).json();
+  } catch (error) {
+    res
+      .status(500)
+      .json("server error, could not update your time spent on the site.");
+  }
+});
+
 // router.patch change username
 
 // change password

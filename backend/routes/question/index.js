@@ -1,80 +1,49 @@
 import express from "express";
 import { isAuthenticated } from "#middleware/authMiddleware.js";
 import {
-  createQuestionInTopic,
-  getQuestionsByExamId,
-  getQuestionsByTopicId,
-  linkQuestionToExam,
-  createQuestionInExamAndTopic,
+  createQuestionInGroups,
+  getQuestionsByGroupId,
 } from "#models/question/index.js";
 
 const router = express.Router();
 router.use(isAuthenticated);
 
-router.get("/topic/:group_id", async function (req, res) {
+router.get("/:group_id", async function (req, res) {
   try {
-    const result = await getQuestionsByTopicId(req.params.group_id);
-    //console.log(result);
-    res.status(200).json(result);
-  } catch (error) {
-    res.status(500).json({
-      message: `failed to get question by topic id ${req.params.group_id}`,
-    });
-  }
-});
-
-router.get("/exam/:group_id", async function (req, res) {
-  try {
-    const result = await getQuestionsByExamId(req.params.group_id);
-    //console.log(result);
-    res.status(200).json(result);
-  } catch (error) {
-    res.status(500).json({
-      message: `failed to get question by exam id ${req.params.topic_id}`,
-    });
-  }
-});
-
-// Creates Question AND links it to a topic & exam
-router.post("/", async function (req, res) {
-  // ALLA THIS SHIT NEEDS FIXED TODO
-  try {
-    if (!req.body) {
-      throw Error("bruh");
-    }
-    const data = req.body;
-    const result = await createQuestionInExamAndTopic(
-      req.user,
-      data.topic_id,
-      data.exam_id,
-      data.question,
-      data.question_num_on_exam
+    const result = await getQuestionsByGroupId(
+      req.params.group_id,
+      req.params.type
     );
-
+    //console.log(result);
     res.status(200).json(result);
   } catch (error) {
     res.status(500).json({
-      message: `failed to add question by topic id ${req.body?.topic_id} & exam id ${req.body?.exam_id}`,
+      message: `failed to get question by group id ${req.params.group_id} and grouptype ${req.params.type}`,
     });
   }
 });
 
-// C
-router.post("/exam_link", async function (req, res) {
-  // ALLA THIS SHIT NEEDS FIXED TODO
+router.post("/", async function (req, res) {
+  const data = req.body;
   try {
-    if (!req.body.exam_id || !req.body.question_id) {
-      throw Error("bruh");
+    if (!data.question || !Array.isArray(data?.group_ids)) {
+      res.status(400).json({
+        message: `pass in all req args`,
+      });
+      const result = await createQuestionInGroups(
+        req.user,
+        data.question,
+        data?.question_num_on_exam,
+        ...data.group_ids // destructure group ids into last arg
+      );
+      res.status(200).json(result);
     }
-    const data = req.body;
-    const result = await linkQuestionToExam(data.exam_id, data.question_id);
-
-    res.status(200).json(result);
   } catch (error) {
     res.status(500).json({
-      message: `failed to link question to exam id ${req.body?.exam_id}`,
+      message: `failed to add question to groups || group`,
     });
   }
 });
 
+// TODO ADD QUESTION TO GROUP
 export default router;
