@@ -14,4 +14,32 @@ export async function getQuestionsByGroupId(group_id, type) {
   );
 }
 
-// TODO create question in group
+export async function createQuestionInGroups(
+  user_id,
+  question,
+  question_num_on_exam,
+  ...group_ids
+) {
+  if (!group_ids.length) {
+    console.log("created question w NO group id??");
+    return null;
+  }
+  const params = { user_id, question, question_num_on_exam };
+  const res_id = (
+    await sqlExe.executeCommand(
+      `INSERT INTO questions (question,created_by,question_num_on_exam) 
+    VALUES(:question,:user_id,:question_num_on_exam);`,
+      params
+    )
+  ).insertId;
+  params["res"] = res_id;
+  for (let i = 0; i < group_ids.length; i++) {
+    params["cur_group_id"] = group_ids[i];
+    await sqlExe.executeCommand(
+      `INSERT INTO group_question (question_id,group_id) 
+    VALUES(:res, :cur_group_id);`,
+      params
+    );
+  }
+  return res_id;
+}

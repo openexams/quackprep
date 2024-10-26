@@ -8,16 +8,6 @@ export async function getGroupsByClassId(class_id, type) {
   );
 }
 
-// not used
-export async function getGroupIdByClassNameAndGroupName(groupName, className) {
-  const params = { groupName, className };
-  return await sqlExe.executeCommand(
-    // todo may be cooked chat
-    `SELECT g.id,g.name, g.class_id FROM cgroups g JOIN classes c ON g.class_id = c.id AND c.name = :className WHERE g.name =:groupName`,
-    params
-  );
-}
-
 export async function createGroupInClass(user_id, class_id, type, name, desc) {
   const params = { user_id, class_id, type, name, desc };
   return (
