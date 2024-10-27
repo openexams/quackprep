@@ -3,7 +3,9 @@ import sqlExe from "#db/dbFunctions.js";
 export async function getGroupsByClassId(class_id, type) {
   const params = { class_id, type };
   return await sqlExe.executeCommand(
-    `SELECT g.name,g.id,g.desc,g.created_by, g.class_id, gt.type_name as type FROM cgroups g JOIN group_types gt on g.type = gt.id WHERE gt.type_name = :type ORDER BY g.id ASC`,
+    `SELECT g.name,g.id,g.desc,g.created_by, g.class_id, gt.type_name as type 
+    FROM cgroups g JOIN group_types gt on g.type = gt.id WHERE gt.type_name = :type 
+    AND g.deleted = 0 ORDER BY g.id ASC`,
     params
   );
 }

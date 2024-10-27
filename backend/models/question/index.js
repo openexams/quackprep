@@ -7,7 +7,8 @@ export async function getQuestionsByGroupId(group_id, type) {
     `SELECT q.id, q.question, gq.id as group_id, gt.type_name as type FROM questions q 
     JOIN group_question gq ON gq.id = :group_id AND gq.question_id = q.id 
     JOIN cgroups g ON gq.id = g.id 
-    JOIN group_types gt ON gt.id = g.type
+    JOIN group_types gt ON gt.id = g.type 
+    WHERE q.deleted = 0
     ORDER BY q.id ASC
 `,
     params

@@ -22,7 +22,8 @@ export async function upsertCurrentChoice(user_id, choice_id, question_id) {
 export async function getWhichUsersAnsweredMostQuestions() {
   return await sqlExe.executeCommand(
     `SELECT a.user_id, u.username, COUNT(*) as questions_answered, u.icon FROM answers_transactional
-     a JOIN users u ON u.id = a.user_id GROUP BY a.user_id ORDER BY questions_answered DESC LIMIT 5; 
+     a JOIN users u ON u.id = a.user_id JOIN choices c ON a.choice_id = c.id AND c.deleted = 0
+       GROUP BY a.user_id ORDER BY questions_answered DESC LIMIT 5; 
     `
   ); //pull in top 5
 }
@@ -31,7 +32,9 @@ export async function getQuestionsAnsweredByMonthAndYear() {
   return await sqlExe.executeCommand(
     `SELECT YEAR(created_at) as year ,MONTH(created_at) as month ,COUNT(*) as 
     questions_answered FROM answers_transactional GROUP BY YEAR(created_at),
-     MONTH(created_at) ORDER BY YEAR ASC, MONTH ASC`
+     MONTH(created_at)
+     JOIN choices c ON a.choice_id = c.id AND c.deleted = 0
+     ORDER BY YEAR ASC, MONTH ASC`
   );
 }
 
@@ -41,7 +44,10 @@ export async function getChoicesByQuestion(question_id) {
   // TODO TEST
   const params = { question_id };
   return await sqlExe.executeCommand(
-    `SELECT c.id,c.answer,c.is_correct,c.created_by,qc.question_id FROM choices c JOIN question_choice qc ON qc.question_id = :question_id AND c.id = qc.choice_id ORDER BY id ASC`,
+    `SELECT c.id,c.answer,c.is_correct,c.created_by,qc.question_id FROM choices c 
+    JOIN question_choice qc ON qc.question_id = :question_id AND c.id = qc.choice_id
+    WHERE c.deleted=0
+     ORDER BY id ASC`,
     params
   );
 }
@@ -65,23 +71,6 @@ export async function addChoiceToQuestion( // NOT TESTED TODO
     params
   );
   return result;
-}
-
-export async function updateChoice(user_id, choice_id, newIsCorrect, newText) {
-  const params = { user_id, choice_id, newText, newIsCorrect };
-  return await sqlExe.executeCommand(
-    `UPDATE choices SET answer = :newText, is_correct=:newIsCorrect, WHERE id = :choice_id `,
-    params
-  );
-}
-
-export async function deleteChoice(user_id, choice_id) {
-  //console.log(user_id, choice_id);
-  const params = { choice_id }; // can use user_id for updated by.
-  return await sqlExe.executeCommand(
-    `UPDATE choices c SET c.deleted = 1 WHERE c.id = :choice_id `,
-    params
-  );
 }
 
 export async function getCurrentChoicesByGroupIdAndType( // TODO answers_current
