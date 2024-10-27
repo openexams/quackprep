@@ -1,16 +1,13 @@
 import { isAuthenticated } from "#middleware/authMiddleware.js";
 import {
   addChoiceToQuestion,
-  deleteChoice,
   getChoicesByQuestion,
   getQuestionsAnsweredByMonthAndYear,
   getWhichUsersAnsweredMostQuestions,
   postChoice,
-  updateChoice,
   upsertCurrentChoice,
   getCurrentChoicesByGroupIdAndType,
 } from "#models/choice/index.js";
-import { checkApiKey } from "#models/auth/index.js";
 import express, { Router } from "express";
 const router = Router();
 
