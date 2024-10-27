@@ -30,10 +30,10 @@ export async function getWhichUsersAnsweredMostQuestions() {
 
 export async function getQuestionsAnsweredByMonthAndYear() {
   return await sqlExe.executeCommand(
-    `SELECT YEAR(created_at) as year ,MONTH(created_at) as month ,COUNT(*) as 
-    questions_answered FROM answers_transactional GROUP BY YEAR(created_at),
-     MONTH(created_at)
+    `SELECT YEAR(a.created_at) as year ,MONTH(a.created_at) as month ,COUNT(*) as 
+    questions_answered FROM answers_transactional a
      JOIN choices c ON a.choice_id = c.id AND c.deleted = 0
+     GROUP BY YEAR(a.created_at),MONTH(a.created_at)
      ORDER BY YEAR ASC, MONTH ASC`
   );
 }
