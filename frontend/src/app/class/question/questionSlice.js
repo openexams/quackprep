@@ -5,7 +5,7 @@ import { createSelector } from 'reselect';
 const GET_QUESTIONS_BY_GROUP_ID = 'app/class/question/GET_QUESTIONS_BY_GROUP_ID';
 
 export function getQuestionsByGroupId(group_id, type) {
-  return standardApiCall('get', `/api/question/${type}/${group_id}`, null, GET_QUESTIONS_BY_GROUP_ID, 'QuestionPage');
+  return standardApiCall('get', `/api/question/${group_id}`, null, GET_QUESTIONS_BY_GROUP_ID, 'QuestionPage');
 }
 
 const DEFAULT_STATE = {

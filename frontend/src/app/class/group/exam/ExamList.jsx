@@ -28,7 +28,7 @@ export default function ExamList() {
             exams.map((exam, index) => (
               <Card key={index} raised>
                 <Card.Content>
-                  <Card.Header>{turnUnderscoreIntoSpace(`${exam.semester} ${exam.year} Exam ${exam.exam_num}`)}</Card.Header>
+                  <Card.Header>{`${exam.name}`}</Card.Header>
                 </Card.Content>
                 <Card.Content extra>
                   <Button
@@ -36,7 +36,7 @@ export default function ExamList() {
                     color='blue'
                     onClick={() => {
                       //dispatch(updateCurrentTopicData(topic.id, topic.name)); // TODO CHOSE EXAM UPDATE GROUP NAME AND ID
-                      dispatch(changeNavbarPage(`${exam.semester}_${exam.year}_${exam.exam_num}/question`));
+                      dispatch(changeNavbarPage(`${exam.name}/question`));
                     }}
                   >
                     <Icon name='fork' />

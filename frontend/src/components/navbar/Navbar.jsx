@@ -118,14 +118,16 @@ export default function Navbar() {
   useEffect(() => {
     if (activePage?.includes('exam') && !activePage?.includes('/auth?next')) {
       console.count('exam');
-      const exams_pulled_in = findNeedlesInArrayOfObjectsLINEAR(exams, ['class_id', 'name'], [classId, urlArr[4]], 'id'); // can do this cuz class & name in groups make a unique field;
-      //console.log(exams_pulled_in);
-
+      const exams_pulled_in = findNeedleInArrayOfObjectsLINEAR(exams, 'class_id', classId, 'id'); // can do this cuz class & name in groups make a unique field;
+      let current_exam_id;
       if (!exams_pulled_in && activePage?.includes('exam') && classId && className) {
         dispatch(getExamsByClassId(classId));
-      } else if (exams_pulled_in !== null) {
+      } else if (
+        urlArr[4] &&
+        (current_exam_id = findNeedlesInArrayOfObjectsLINEAR(exams, ['class_id', 'name'], [classId, urlArr[4]], 'id'))
+      ) {
         //console.log('updating current exam id', exams_pulled_in);
-        dispatch(updateCurrentGroupData({ id: exams_pulled_in, name: urlArr[4] }));
+        dispatch(updateCurrentGroupData({ id: current_exam_id, name: urlArr[4] }));
       }
     }
   }, [activePage, classId, className, exams]);
