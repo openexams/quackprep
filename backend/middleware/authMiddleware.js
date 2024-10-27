@@ -35,7 +35,13 @@ export async function isAuthenticated(req, res, next) {
   } else if (req.headers?.token && (await checkApiKey(req.headers.token))) {
     dlog("api token detected");
     req.user = await checkApiKey(req.headers.token); // inject into req.user temporaryily
-    next();
+    if (req.user === null) {
+      res.status(401).json({
+        message: "api key is incorrect",
+      });
+    } else {
+      next();
+    }
   } else if (checkUserAgentIsBot(req.get("User-Agent"))) {
     dlog("bot detected");
     req.user = 23; // web crawler id
