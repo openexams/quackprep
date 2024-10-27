@@ -26,15 +26,16 @@ router.post("/:type", async function (req, res) {
       res.status(400).json({
         message: `pls pass in all agrs`,
       });
-      const result = await createGroupInClass(
-        req.user,
-        data.class_id,
-        req.params.type,
-        data.name,
-        data.desc
-      );
-      res.status(400).json(result);
+      return;
     }
+    const result = await createGroupInClass(
+      req.user,
+      data.class_id,
+      req.params.type,
+      data.name,
+      data.desc
+    );
+    res.status(200).json(result);
   } catch (error) {
     res.status(500).json({
       message: `failed to create group by class id ${data.class_id}`,
