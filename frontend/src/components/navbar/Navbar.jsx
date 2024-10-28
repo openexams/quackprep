@@ -26,6 +26,7 @@ import { selectTopicState } from '@src/app/class/group/topic/topicSlice';
 import { selectQuestionState, getQuestionsByGroupId } from '@src/app/class/question/questionSlice';
 import { getExamsByClassId, selectExamsState } from '@src/app/class/group/exam/examSlice.js';
 import { replaceP20WithSpace } from '../../../../shared/globalFuncs';
+import { selectSchoolState, getSchools } from '@src/app/class/school/schoolSlice';
 
 export default function Navbar() {
   const location = useLocation();
@@ -40,6 +41,7 @@ export default function Navbar() {
   const navigate = useNavigate();
   const [sidebarOpened, setSidebarOpened] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const schools = useSelector(selectSchoolState).schools;
 
   const { className, classId, groupName, groupId, questionId } = useSelector(selectNavbarState).navbar;
 
@@ -173,6 +175,15 @@ export default function Navbar() {
       }
     }
   }, [activePage, classId, classes]); // if classId gets nulled then i need to get shit again
+
+  // another one
+  useEffect(() => {
+    if (activePage?.includes('class') && !activePage?.includes('/auth?next')) {
+      if (!Array.isArray(schools)) {
+        dispatch(getSchools());
+      }
+    }
+  }, [activePage, classId, classes, schools]); // if classId gets nulled then i need to get shit again
 
   ///  ************************************* ///
 

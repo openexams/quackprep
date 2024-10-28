@@ -15,6 +15,7 @@ import choicesReducer from '../class/question/choices/choicesSlice.js';
 import statsReducer from '../stats/statsSlice.js';
 import examSliceReducer from '../class/group/exam/examSlice.js';
 import reducer401 from '@components/401/401Slice.js';
+import schoolsReducer from '../class/school/schoolSlice.js';
 
 const app = combineReducers({
   home: homeReducer,
@@ -27,6 +28,7 @@ const app = combineReducers({
   choices: choicesReducer,
   stats: statsReducer,
   exam: examSliceReducer,
+  school: schoolsReducer,
 });
 const auth = combineReducers({ user: loginReducer });
 

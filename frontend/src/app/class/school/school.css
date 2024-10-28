@@ -1,0 +1,22 @@
+/* In your CSS file */
+.ui.button.school-button {
+  background-color: var(--school-bg-color) !important;
+  color: var(--school-text-color) !important;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(33, 133, 208, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(33, 133, 208, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(33, 133, 208, 0);
+  }
+}
+.ui.button.school-button.selected {
+  border: 2px solid rgba(0, 0, 0, 0.2) !important;
+  background-color: var(--primary-color) !important;
+  animation: pulse 1.5s infinite;
+}
