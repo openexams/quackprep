@@ -1,8 +1,7 @@
 import './class.css';
 import React, { useState } from 'react';
-import { Container, Grid, Header, Card, Icon } from 'semantic-ui-react';
+import { Container, Grid, Header, Icon } from 'semantic-ui-react';
 import { useSelector } from 'react-redux';
-import { selectClassState } from './classSlice';
 import ClassCard from './ClassCard';
 import SchoolsList from './school/SchoolsList.jsx';
 import { selectArrayOfStateById } from '@utils/functions';

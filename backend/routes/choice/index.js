@@ -102,43 +102,23 @@ router.post("/:question_id", isAuthenticated, async function (req, res) {
   }
 });
 
-// U TODO CHECK IF WORKS
-router.patch("/:choice_id", isAuthenticated, async function (req, res) {
-  const data = req.body;
+// D
+router.delete("/:choice_id", async function (req, res) {
   try {
-    if (
-      data?.isCorrect === undefined ||
-      data?.isCorrect === null ||
-      !data?.text
-    ) {
-      throw Error("pls send all json body");
-    }
-
-    const result = await updateChoice(
+    const choice_id = parseInt(req.params.choice_id);
+    const result = await cascadeSetDeleted(
       req.user,
-      req.params.choice_id,
-      data.isCorrect,
-      data.text
+      "choice",
+      choice_id,
+      0,
+      0,
+      0,
+      1
     );
-
     res.status(200).json(result);
   } catch (error) {
     res.status(500).json({
-      message: `failed to update choice by choice id: ${req.params.choice_id}`,
-    });
-  }
-});
-
-//D TODO CHECK IF WORKS
-router.delete("/:choice_id", isAuthenticated, async function (req, res) {
-  //console.log(req.headers.token);
-  try {
-    const result = await deleteChoice(req.user, req.params.choice_id);
-
-    res.status(200).json(result);
-  } catch (error) {
-    res.status(500).json({
-      message: `failed to delete choice by choice id: ${req.params.choice_id}`,
+      message: `failed to delete choice by id ${req.params.choice_id}`,
     });
   }
 });

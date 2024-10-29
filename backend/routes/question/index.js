@@ -22,6 +22,28 @@ router.get("/:group_id", async function (req, res) {
   }
 });
 
+router.delete("/:question_id", async function (req, res) {
+  try {
+    const question_id = parseInt(req.params.question_id);
+    const result = await cascadeSetDeleted(
+      req.user,
+      "question",
+      question_id,
+      0,
+      0,
+      1,
+      1
+    );
+    res.status(200).json(result);
+  } catch (error) {
+    res
+      .status(500)
+      .json({
+        message: `failed to delete question by id ${req.params.question_id}`,
+      });
+  }
+});
+
 router.post("/", async function (req, res) {
   const data = req.body;
   try {
