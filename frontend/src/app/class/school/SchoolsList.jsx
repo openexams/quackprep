@@ -3,12 +3,14 @@ import { useSelector } from 'react-redux';
 import { Segment, Button, Grid } from 'semantic-ui-react';
 import { selectSchoolState } from './schoolSlice';
 import './school.css';
+import { selectLoadingState } from '@src/app/store/loadingSlice';
 
 export default function SchoolsList({ selectedSchool, setSelectedSchool }) {
   const schools = useSelector(selectSchoolState).schools;
+  const loading = useSelector(selectLoadingState).loadingComps?.SchoolsList;
 
   return (
-    <Segment>
+    <Segment loading={loading}>
       <Grid columns={8} doubling>
         {schools?.map((school) => (
           <Grid.Column key={school.id}>

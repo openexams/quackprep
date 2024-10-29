@@ -6,8 +6,8 @@ import ClassCard from './ClassCard';
 import SchoolsList from './school/SchoolsList.jsx';
 import { selectArrayOfStateById } from '@utils/functions';
 
-const ClassList = () => {
-  const [selectedSchool, setSelectedSchool] = useState(1);
+export default function ClassList() {
+  const [selectedSchool, setSelectedSchool] = useState(1); // select what classes shown based on cur selected school
   const classes = useSelector(selectArrayOfStateById('app.class.classes', 'school_id', selectedSchool));
 
   return (
@@ -28,6 +28,4 @@ const ClassList = () => {
       </Grid>
     </Container>
   );
-};
-
-export default ClassList;
+}

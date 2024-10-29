@@ -4,7 +4,6 @@ import { useDispatch } from 'react-redux';
 import { Card, Icon } from 'semantic-ui-react';
 
 /**
- *
  * @param {String} nameOfClass
  */
 function findClassNumber(nameOfClass) {
@@ -13,7 +12,7 @@ function findClassNumber(nameOfClass) {
       return nameOfClass.slice(i);
     }
   }
-  console.log('fatal error class has no number??');
+  console.log('fatal error class has no number?? classname must include number MA"26100"');
   return null;
 }
 

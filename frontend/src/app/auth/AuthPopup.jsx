@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Modal, Button, Segment, Header, Icon, Image, Form } from 'semantic-ui-react';
 import Login from './login/Login';
-import { changeNavbarPage, selectCurrentPage, selectNavbarState } from '@components/navbar/navbarSlice';
+import { changeNavbarPage, selectNavbarState } from '@components/navbar/navbarSlice';
 import Register from './register/register';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectUser } from './authSlice';
@@ -54,7 +54,7 @@ export default function Auth() {
           </Modal.Header>
           <Modal.Content style={{ textAlign: 'center' }}>
             <Form onSubmit={() => window.open(`/api/auth/google`)}>
-              {/** may be why google no work */}
+              {/** may be why google no work , all work and no play makes maddox a dull boy*/}
               <Button
                 style={{
                   backgroundColor: 'white',
@@ -67,7 +67,7 @@ export default function Auth() {
                 }}
               >
                 <strong>{log_or_sin_txt} with Google</strong>
-                <Image src={google_icon} style={{ maxWidth: '20px' }} />
+                <Image src={google_icon} style={{ maxWidth: '20px' }} /> <span style={{ fontSize: '.8rem' }}>(Recommended)</span>
               </Button>
             </Form>
             <br></br>
