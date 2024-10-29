@@ -14,10 +14,8 @@ export async function createGroupInClass(user_id, class_id, type, name, desc) {
   const params = { user_id, class_id, type, name, desc };
   return (
     await sqlExe.executeCommand(
-      `INSERT INTO cgroups(name,type,\`desc\`,created_by,class_id) VALUES(:name,(SELECT id FROM group_types where type_name = :type),:desc,:user_id,:class_id);`, // back ticks may not work
+      `INSERT INTO cgroups(name,type,\`desc\`,created_by,class_id) VALUES(:name,(SELECT id FROM group_types where type_name = :type),:desc,:user_id,:class_id);`,
       params
     )
   ).insertId;
 }
-
-// TODO CREATE GROUP & ADD GROUP TO CLASS
