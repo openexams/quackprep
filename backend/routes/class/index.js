@@ -8,7 +8,7 @@ import { cascadeSetDeleted } from "#utils/sqlFunctions.js";
 import express from "express";
 const router = express.Router();
 
-// router.use(isAuthenticated); TODO!
+router.use(isAuthenticated);
 
 router.get("/", async function (req, res) {
   try {
