@@ -45,7 +45,6 @@ export function standardApiCall(
       dispatch(stopLoading(componentName));
       console.error('Failed req to ', error.request.responseURL);
       if (error?.response?.data?.message?.includes('401')) {
-        console.log('includes 401');
         dispatch(show401Msg());
         dispatch(hideFlashMessage());
       } else {

@@ -56,7 +56,7 @@ export default function QuestionPage() {
       </Segment>
     );
   return (
-    <Segment basic>
+    <Segment basic loading={loadingComps.QuestionPage}>
       <Header style={{ fontSize: '2.5rem' }} textAlign='center'>
         {groupName}
       </Header>

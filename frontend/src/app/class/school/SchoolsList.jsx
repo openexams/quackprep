@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Segment, Button, Grid } from 'semantic-ui-react';
 import { selectSchoolState } from './schoolSlice';
 import './school.css';
 import { selectLoadingState } from '@src/app/store/loadingSlice';
+import { changeNavbarPage } from '@components/navbar/navbarSlice';
 
-export default function SchoolsList({ selectedSchool, setSelectedSchool }) {
+export default function SchoolsList({ selectedSchool }) {
   const schools = useSelector(selectSchoolState).schools;
   const loading = useSelector(selectLoadingState).loadingComps?.SchoolsList;
+  const dispatch = useDispatch();
 
   return (
     <Segment loading={loading}>
@@ -19,7 +21,9 @@ export default function SchoolsList({ selectedSchool, setSelectedSchool }) {
               size='small'
               fluid
               basic={selectedSchool !== school.id}
-              onClick={() => setSelectedSchool(school.id)}
+              onClick={() => {
+                dispatch(changeNavbarPage(`/class/${school.school_name}`)); // bad pratice assuming class before it but works
+              }}
               style={{
                 marginBottom: '0.5em',
                 '--school-bg-color': school.color, // good ex of ovveriding !important i think the class takes in vars from this

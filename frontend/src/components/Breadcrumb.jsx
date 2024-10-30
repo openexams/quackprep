@@ -18,7 +18,7 @@ export default function HistoryNav() {
     for (let i = 0; i < urlArr.length; i++) {
       if (urlArr[i] == '' || urlArr[i] == ' ') {
         // do nothing
-      } else if (i !== 4) {
+      } else if (i !== 5) {
         // gets rid of topic / exam name from breadcrumb
         let curItemUrl = urlArr.slice(0, i + 1).join('/');
 
