@@ -28,6 +28,83 @@ import { getExamsByClassId, selectExamsState } from '@src/app/class/group/exam/e
 import { replaceP20WithSpace } from '../../../../shared/globalFuncs';
 import { selectSchoolState, getSchools } from '@src/app/class/school/schoolSlice';
 
+export function examFetchLogic(dispatch, classId, className, exams, curGroupName) {
+  console.count('exam');
+  const exams_pulled_in = findNeedleInArrayOfObjectsLINEAR(exams, 'class_id', classId, 'id'); // can do this cuz class & name in groups make a unique field;
+  const current_exam_id = findNeedlesInArrayOfObjectsLINEAR(exams, ['class_id', 'name'], [classId, curGroupName], 'id');
+  // console.log(current_exam_id);
+  if (!exams_pulled_in && classId && className) {
+    dispatch(getExamsByClassId(classId));
+  } else if (curGroupName && current_exam_id) {
+    // console.log('updating current exam id', exams_pulled_in);
+    dispatch(updateCurrentGroupData({ id: current_exam_id, name: curGroupName }));
+  }
+}
+
+export function classFetchLogic(dispatch, schools, classes, curClassName, curSchoolName) {
+  console.count('classes');
+  if (!Array.isArray(schools)) {
+    dispatch(getSchools());
+  }
+  const schoolId = findNeedleInArrayOfObjectsLINEAR(schools, 'school_name', curSchoolName, 'id');
+
+  // CLASSES DISPATCH MAIN THAT SETS OFF CHAIN OF REACTIONS
+  let tmp_c_id = null;
+  if (!classes) {
+    dispatch(getClasses());
+  } else if (
+    (tmp_c_id = findNeedlesInArrayOfObjectsLINEAR(classes, ['name', 'school_id'], [curClassName, schoolId], 'id')) !== null
+  ) {
+    dispatch(updateCurrentClassData({ name: curClassName, id: tmp_c_id }));
+  } else if (curClassName) {
+    dispatch(getClassIdByClassName(curClassName)); // updates id
+  }
+}
+
+export function topicFetchLogic(dispatch, topics, classId, groupName) {
+  console.count('topics');
+  //TODO HOLY FUCK THIS SHIT IS AIDS COMMENT IT OR FIX IT
+  // TOPICS DISPATCH
+  const do_I_alr_have_a_topic_pulled_in_with_the_current_class_id = findNeedleInArrayOfObjectsLINEAR(
+    topics,
+    'class_id',
+    classId,
+    'id',
+  );
+  if (groupName) {
+    groupName = replaceP20WithSpace(groupName);
+  }
+  let tmp_topic_id = null;
+  if (classId && !do_I_alr_have_a_topic_pulled_in_with_the_current_class_id) {
+    dispatch(getTopicsByClassId(classId));
+  } else if (
+    // i alr have topics for this class pulled in, as such find that topic id  and update cur group data
+    groupName &&
+    (tmp_topic_id = findNeedlesInArrayOfObjectsLINEAR(topics, ['name', 'class_id'], [groupName, classId], 'id')) // can do this cuz class & name in groups make a unique field;
+  ) {
+    dispatch(updateCurrentGroupData({ name: groupName, id: tmp_topic_id }));
+  }
+}
+
+export function questionFetchLogic(dispatch, questions, groupId, curGroupName, curGroupType, curQuestionId) {
+  console.count('question');
+  // QUESION DISPATCH
+  if (curGroupName) {
+    curGroupName = replaceP20WithSpace(curGroupName);
+  }
+  const do_I_alr_have_a_question_pulled_in_with_the_current_group_id = findNeedlesInArrayOfObjectsLINEAR(
+    questions,
+    ['group_id', 'type'], // >
+    [groupId, curGroupType], //I pass the type as well as when question are pulled in for one type, and the other type is loaded by the user, it may detect a question alr pulled in so then we will only have that single question when in reality the type had a lot more questions.
+    'id',
+  ); // same question may get pulled in twice once for exam once for topic
+  if (groupId && !do_I_alr_have_a_question_pulled_in_with_the_current_group_id) {
+    dispatch(getQuestionsByGroupId(groupId, curGroupType)); // url[3] is type
+  } else if (curQuestionId) {
+    dispatch(updateQuestionId(parseInt(curQuestionId)));
+  }
+}
+
 export default function Navbar() {
   const location = useLocation();
   const { questions } = useSelector(selectQuestionState);
@@ -43,7 +120,7 @@ export default function Navbar() {
   const [isMobile, setIsMobile] = useState(false);
   const schools = useSelector(selectSchoolState).schools;
 
-  const { className, classId, groupName, groupId, questionId } = useSelector(selectNavbarState).navbar;
+  const { className, classId, groupName, groupId, questionId, schoolName, groupType } = useSelector(selectNavbarState).navbar;
 
   const urlArr = useMemo(() => {
     return activePage ? activePage.split('/') : '/';
@@ -80,110 +157,27 @@ export default function Navbar() {
   }, [user.id]);
 
   ///  USE EFFECTS FOR KEEPING STORE SAME AS URL ///
-
   useEffect(() => {
-    if (activePage?.includes('exam') && !activePage?.includes('/auth?next')) {
-      dispatch(updateGroupType('exam'));
-    } else if (activePage?.includes('topic') && !activePage?.includes('/auth?next')) {
-      dispatch(updateGroupType('topic'));
-    }
-  }, [activePage]);
-
-  useEffect(() => {
-    if (activePage?.includes('topic') && !activePage?.includes('/auth?next')) {
-      console.count('topics');
-      //TODO HOLY FUCK THIS SHIT IS AIDS COMMENT IT OR FIX IT
-      // TOPICS DISPATCH
-      const do_I_alr_have_a_topic_pulled_in_with_the_current_class_id = findNeedleInArrayOfObjectsLINEAR(
-        topics,
-        'class_id',
-        classId,
-        'id',
-      );
-      if (urlArr[4]) {
-        urlArr[4] = replaceP20WithSpace(urlArr[4]);
+    if (!activePage?.includes('/auth?next')) {
+      if (activePage?.includes('class')) {
+        classFetchLogic(dispatch, schools, classes, urlArr[3], urlArr[2]);
       }
-      let tmp_topic_id = null;
-      if (activePage?.includes('topic') && classId && !do_I_alr_have_a_topic_pulled_in_with_the_current_class_id) {
-        dispatch(getTopicsByClassId(classId));
-      } else if (
-        // i alr have topics for this class pulled in, as such find that topic id  and update cur group data
-        urlArr[4] &&
-        (tmp_topic_id = findNeedlesInArrayOfObjectsLINEAR(topics, ['name', 'class_id'], [urlArr[4], classId], 'id')) // can do this cuz class & name in groups make a unique field;
-      ) {
-        dispatch(updateCurrentGroupData({ name: urlArr[4], id: tmp_topic_id }));
+      if (urlArr[5]) {
+        urlArr[5] = replaceP20WithSpace(urlArr[5]);
+      }
+      if (activePage?.includes('exam')) {
+        examFetchLogic(dispatch, classId, className, exams, urlArr[5]);
+        dispatch(updateGroupType('exam'));
+      }
+      if (activePage?.includes('topic')) {
+        topicFetchLogic(dispatch, topics, classId, urlArr[5]);
+        dispatch(updateGroupType('topic'));
+      }
+      if (activePage?.includes('question')) {
+        questionFetchLogic(dispatch, questions, groupId, urlArr[5], urlArr[4], urlArr[7]);
       }
     }
-  }, [activePage, classId, className, topics, groupId]); // why does topics watch itself [topic] may cause issue i remove it
-
-  //EXAM
-  useEffect(() => {
-    if (activePage?.includes('exam') && !activePage?.includes('/auth?next')) {
-      console.count('exam');
-      const exams_pulled_in = findNeedleInArrayOfObjectsLINEAR(exams, 'class_id', classId, 'id'); // can do this cuz class & name in groups make a unique field;
-      let current_exam_id;
-      if (!exams_pulled_in && activePage?.includes('exam') && classId && className) {
-        dispatch(getExamsByClassId(classId));
-      } else if (
-        urlArr[4] &&
-        (current_exam_id = findNeedlesInArrayOfObjectsLINEAR(exams, ['class_id', 'name'], [classId, urlArr[4]], 'id'))
-      ) {
-        //console.log('updating current exam id', exams_pulled_in);
-        dispatch(updateCurrentGroupData({ id: current_exam_id, name: urlArr[4] }));
-      }
-    }
-  }, [activePage, classId, className, exams]);
-
-  useEffect(() => {
-    if (activePage?.includes('question') && !activePage?.includes('/auth?next')) {
-      console.count('question');
-      // QUESION DISPATCH
-      if (urlArr[4]) {
-        urlArr[4] = replaceP20WithSpace(urlArr[4]);
-      }
-      const do_I_alr_have_a_question_pulled_in_with_the_current_group_id = findNeedlesInArrayOfObjectsLINEAR(
-        questions,
-        ['group_id', 'type'], // >
-        [groupId, urlArr[3]], //I pass the type as well as when question are pulled in for one type, and the other type is loaded by the user, it may detect a question alr pulled in so then we will only have that single question when in reality the type had a lot more questions.
-        'id',
-      ); // same question may get pulled in twice once for exam once for topic
-      if (groupId && !do_I_alr_have_a_question_pulled_in_with_the_current_group_id) {
-        dispatch(getQuestionsByGroupId(groupId, urlArr[3])); // url[3] is type
-      } else if (urlArr[6]) {
-        dispatch(updateQuestionId(parseInt(urlArr[6])));
-      }
-    }
-
-    //DISPATCHES EVEN IF I ALR HAVE TOPICS WITH THIS TOPIC ID LOADED IN.
-  }, [activePage, groupId]);
-
-  useEffect(() => {
-    if (activePage?.includes('class') && !activePage?.includes('/auth?next')) {
-      console.count('classes');
-
-      // CLASSES DISPATCH MAIN THAT SETS OFF CHAIN OF REACTIONS
-      let tmp_c_id = null;
-      if (!classes && activePage?.includes('class')) {
-        dispatch(getClasses());
-      } else if (
-        activePage?.includes('class') &&
-        (tmp_c_id = findNeedleInArrayOfObjectsLINEAR(classes, 'name', urlArr[2], 'id')) !== null
-      ) {
-        dispatch(updateCurrentClassData({ name: urlArr[2], id: tmp_c_id }));
-      } else if (activePage?.includes('class') && urlArr[2]) {
-        dispatch(getClassIdByClassName(urlArr[2])); // updates id
-      }
-    }
-  }, [activePage, classId, classes]); // if classId gets nulled then i need to get shit again
-
-  // another one
-  useEffect(() => {
-    if (activePage?.includes('class') && !activePage?.includes('/auth?next')) {
-      if (!Array.isArray(schools)) {
-        dispatch(getSchools());
-      }
-    }
-  }, [activePage, classId, classes, schools]); // if classId gets nulled then i need to get shit again
+  }, [activePage, classId, className, exams, topics, groupId, groupName, groupType, classes, schoolName]);
 
   ///  ************************************* ///
 

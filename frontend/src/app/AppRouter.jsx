@@ -29,15 +29,17 @@ export default function AppRouter() {
         <Route path='/account' element={<Profile />} />
         <Route path='/streak' element={<Streak />} />
         <Route path='/class' element={<ClassList />} />
-        <Route path='/class/:class_name/' element={<ClassShow />} />
+        <Route path='/class/:school_name/' element={<ClassList />} />
 
-        <Route path='/class/:class_name/topic' element={<TopicsShow />} />
-        <Route path='/class/:class_name/topic/:group_name/question' element={<QuestionPage />} />
-        <Route path='/class/:class_name/topic/:group_name/question/:question_id' element={<QuestionPage />} />
+        <Route path='/class/:school_name/:class_name/' element={<ClassShow />} />
 
-        <Route path='/class/:class_name/exam' element={<ExamList />} />
-        <Route path='/class/:class_name/exam/:group_name/question' element={<QuestionPage />} />
-        <Route path='/class/:class_name/exam/:group_name/question/:question_id' element={<QuestionPage />} />
+        <Route path='/class/:school_name/:class_name/topic' element={<TopicsShow />} />
+        <Route path='/class/:school_name/:class_name/topic/:group_name/question' element={<QuestionPage />} />
+        <Route path='/class/:school_name/:class_name/topic/:group_name/question/:question_id' element={<QuestionPage />} />
+
+        <Route path='/class/:school_name/:class_name/exam' element={<ExamList />} />
+        <Route path='/class/:school_name/:class_name/exam/:group_name/question' element={<QuestionPage />} />
+        <Route path='/class/:school_name/:class_name/exam/:group_name/question/:question_id' element={<QuestionPage />} />
 
         <Route path='/leaderboard' element={<Leaderboard />} />
         <Route path='/stats' element={<Stats />} />

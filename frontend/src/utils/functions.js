@@ -94,10 +94,12 @@ export function selectArrayOfStateById(path, idName, id) {
       if (!path || !idName || !id) {
         return null;
       }
-
+      if (!isNaN(id)) {
+        parseInt(id);
+      }
       let tmp = [];
       for (let i = 0; i < stateArr.length; i++) {
-        if (stateArr[i][idName] === parseInt(id)) {
+        if (stateArr[i][idName] === id) {
           tmp.push(stateArr[i]);
         }
       }

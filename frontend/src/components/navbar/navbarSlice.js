@@ -64,6 +64,7 @@ const DEFAULT_STATE = {
   page: null,
   classId: null,
   className: null,
+  schoolName: null,
   groupType: null,
   groupId: null, // this identifies the group, wether that means its a string or a id
   groupName: null,
@@ -77,6 +78,21 @@ export default function navbarReducer(state = DEFAULT_STATE, action) {
   }
   switch (action.type) {
     case CHANGE_NAVBAR_PAGE:
+      if (action.payload?.includes('/auth?next=')) {
+        // this in the navbar fucks the ordering of urlArr[], so change noothing
+        return {
+          ...state,
+          page: action.payload,
+          schoolName: null,
+          groupName: null,
+          className: null,
+          questionId: null,
+          classId: null,
+          groupId: null,
+          groupType: null,
+        };
+      }
+      // after base cases
       let curUrl = state.page;
       if (action.payload[0] === '/') {
         curUrl = action.payload;
@@ -87,23 +103,12 @@ export default function navbarReducer(state = DEFAULT_STATE, action) {
         // if it didnt change dont do anything.
         return state;
       }
-      if (action.payload?.includes('/auth?next=')) {
-        // this in the navbar fucks the ordering of urlArr[]
-        return {
-          ...state,
-          page: curUrl,
-          groupName: null,
-          className: null,
-          questionId: null,
-          classId: null,
-          groupId: null,
-          groupType: null,
-        };
-      }
+
       // when I change the navbar set everything back to null so navbar has to dispatch to get id values;
       const urlArr = curUrl.split('/');
-      const newClassName = urlArr[2] || null;
-      const newGroupName = urlArr[4] || null;
+      const newSchoolName = urlArr[2] || null;
+      const newClassName = urlArr[3] || null;
+      const newGroupName = urlArr[5] || null;
 
       const newQuestionId = parseInt(urlArr[6]) || null;
 
@@ -112,9 +117,10 @@ export default function navbarReducer(state = DEFAULT_STATE, action) {
         page: curUrl,
         groupName: newGroupName,
         className: newClassName,
+        schoolName: newSchoolName,
         questionId: parseInt(newQuestionId),
-        classId: urlArr[2] ? state.classId : null, // these 2 null should be brought in again, only if we changed topic or class, may cause issues when inputting new link directly into window.location TODO TEST
-        groupId: urlArr[3] ? state.groupId : null,
+        classId: urlArr[3] ? state.classId : null, // these 2 null should be brought in again, only if we changed topic or class, may cause issues when inputting new link directly into window.location TODO TEST
+        groupId: urlArr[4] ? state.groupId : null,
         groupType: null,
       };
     case UPDATE_CUR_CLASS:
@@ -125,7 +131,7 @@ export default function navbarReducer(state = DEFAULT_STATE, action) {
       return {
         ...state,
         questionId: parseInt(action.payload),
-        page: `/class/${state.className}/${state.groupType}/${state.groupName}/question/${action.payload}`,
+        page: `/class/${state.schoolName}/${state.className}/${state.groupType}/${state.groupName}/question/${action.payload}`,
       };
     case GET_CLASS_ID_BY_NAME:
       if (!action.payload) return state;
