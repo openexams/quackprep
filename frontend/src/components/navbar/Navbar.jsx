@@ -53,12 +53,10 @@ export function classFetchLogic(dispatch, schools, classes, curClassName, curSch
   }
 
   // CLASSES DISPATCH MAIN THAT SETS OFF CHAIN OF REACTIONS
-  let tmp_c_id = null;
+  const tmp_c_id = findNeedlesInArrayOfObjectsLINEAR(classes, ['name', 'school_id'], [curClassName, schoolId], 'id');
   if (!classes) {
     dispatch(getClasses());
-  } else if (
-    (tmp_c_id = findNeedlesInArrayOfObjectsLINEAR(classes, ['name', 'school_id'], [curClassName, schoolId], 'id')) !== null
-  ) {
+  } else if (tmp_c_id !== null) {
     dispatch(updateCurrentClassData({ name: curClassName, id: tmp_c_id }));
   }
 }
