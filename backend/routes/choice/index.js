@@ -7,6 +7,7 @@ import {
   postChoice,
   upsertCurrentChoice,
   getCurrentChoicesByGroupIdAndType,
+  getChoicesByGroupId,
 } from "#models/choice/index.js";
 import express, { Router } from "express";
 const router = Router();
@@ -69,7 +70,18 @@ router.get("/:question_id", isAuthenticated, async function (req, res) {
     res.status(200).json(result);
   } catch (error) {
     res.status(500).json({
-      message: `failed to get question by topic id ${req.params.question_id}`,
+      message: `failed to get choice by question id ${req.params.question_id}`,
+    });
+  }
+});
+
+router.get("/group/:group_id", isAuthenticated, async function (req, res) {
+  try {
+    const result = await getChoicesByGroupId(req.params.group_id);
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(500).json({
+      message: `failed to get question by group id ${req.params.group_id}`,
     });
   }
 });

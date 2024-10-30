@@ -52,6 +52,18 @@ export async function getChoicesByQuestion(question_id) {
   );
 }
 
+export async function getChoicesByGroupId(group_id) {
+  const params = { group_id };
+  return await sqlExe.executeCommand(
+    `
+    SELECT c.id, c.answer, c.is_correct, c.created_at, gq.question_id, gq.group_id FROM choices c 
+    JOIN question_choice qc ON qc.choice_id = c.id
+    JOIN group_question gq ON qc.question_id = gq.question_id AND gq.group_id = :group_id
+`,
+    params
+  );
+}
+
 export async function addChoiceToQuestion( // NOT TESTED TODO
   user_id,
   question_id,

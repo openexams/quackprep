@@ -28,6 +28,8 @@ import { selectQuestionState, getQuestionsByGroupId } from '@src/app/class/quest
 import { getExamsByClassId, selectExamsState } from '@src/app/class/group/exam/examSlice.js';
 import { replaceP20WithSpace } from '../../../../shared/globalFuncs';
 import { selectSchoolState, getSchools } from '@src/app/class/school/schoolSlice';
+import { selectChoicesState } from '@src/app/class/question/choices/choicesSlice';
+import { getChoicesByGroup } from '@src/app/class/question/choices/choicesSlice';
 
 export function examFetchLogic(dispatch, classId, className, exams, curGroupName, schoolName, schoolId) {
   console.count('exam');
@@ -105,6 +107,17 @@ export function questionFetchLogic(dispatch, questions, groupId, curGroupName, c
   }
 }
 
+export function choicesFetchLogic(dispatch, groupName, groupId, choices) {
+  console.count('choices');
+  if (groupName && groupId) {
+    // TODO CHECK FOR LOADING ON ALL OF THESE AS WELL
+    const do_i_alr_have_choices = findNeedleInArrayOfObjectsLINEAR(choices, 'group_id', groupId, 'id');
+    if (!do_i_alr_have_choices) {
+      dispatch(getChoicesByGroup(groupId));
+    }
+  }
+}
+
 export default function Navbar() {
   const location = useLocation();
   const { questions } = useSelector(selectQuestionState);
@@ -119,6 +132,7 @@ export default function Navbar() {
   const [sidebarOpened, setSidebarOpened] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const schools = useSelector(selectSchoolState).schools;
+  const choices = useSelector(selectChoicesState).choices;
 
   const { className, classId, groupName, groupId, questionId, schoolName, groupType, schoolId } =
     useSelector(selectNavbarState).navbar;
@@ -176,6 +190,9 @@ export default function Navbar() {
       }
       if (activePage?.includes('question')) {
         questionFetchLogic(dispatch, questions, groupId, urlArr[5], urlArr[4], urlArr[7]);
+      }
+      if (activePage?.includes('question')) {
+        choicesFetchLogic(dispatch, groupName, groupId, choices);
       }
     }
   }, [activePage, classId, className, exams, topics, groupId, groupName, groupType, classes, schoolName, schoolId]);
