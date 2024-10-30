@@ -60,8 +60,6 @@ export function classFetchLogic(dispatch, schools, classes, curClassName, curSch
     (tmp_c_id = findNeedlesInArrayOfObjectsLINEAR(classes, ['name', 'school_id'], [curClassName, schoolId], 'id')) !== null
   ) {
     dispatch(updateCurrentClassData({ name: curClassName, id: tmp_c_id }));
-  } else if (curClassName) {
-    dispatch(getClassIdByClassName(curClassName)); // updates id
   }
 }
 
