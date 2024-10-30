@@ -1,5 +1,6 @@
 import { standardApiCall } from '@utils/api';
 import { updateArrWithNewVals } from '@utils/functions';
+import { createSelector } from 'reselect';
 
 const GET_CHOICES_BY_Q = 'app/class/question/choices/GET_CHOICES_BY_Q';
 
@@ -34,6 +35,10 @@ export function getChoicesByQuestion(question_id) {
   return standardApiCall('get', `/api/choice/${question_id}`, null, GET_CHOICES_BY_Q, 'QuestionChoices');
 }
 
+export function getChoicesByGroup(group_id) {
+  return standardApiCall('get', `/api/choice/group/${group_id}`, null, GET_CHOICES_BY_Q, 'QuestionChoices'); //yes I know its same does not matter
+}
+
 const DEFAULT_STATE = {
   choices: null,
 };
@@ -46,3 +51,10 @@ export default function choicesReducer(state = DEFAULT_STATE, action) {
       return state;
   }
 }
+
+export const selectChoicesState = createSelector(
+  (state) => state,
+  function (state) {
+    return { choices: state.app.choices.choices };
+  },
+);

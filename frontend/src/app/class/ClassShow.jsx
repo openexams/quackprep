@@ -1,14 +1,13 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
 import { Container, Segment, Header, Button, Icon, Grid, Divider, Popup } from 'semantic-ui-react';
-import { selectClassStateByName } from './classSlice';
-import { changeNavbarPage } from '@components/navbar/navbarSlice';
+import { changeNavbarPage, selectNavbarState } from '@components/navbar/navbarSlice';
+import { selectArrayOfStateById } from '@utils/functions';
 
 export default function ClassShow() {
   const dispatch = useDispatch();
-  const { class_name: name } = useParams();
-  const { classes: curClass } = useSelector(selectClassStateByName(name));
+  const { classId } = useSelector(selectNavbarState).navbar;
+  const curClass = useSelector(selectArrayOfStateById('app.class.classes', 'id', classId))?.[0];
 
   if (!curClass) return null;
 
@@ -40,7 +39,12 @@ export default function ClassShow() {
 
         <Grid centered stackable columns={2}>
           <Grid.Column textAlign='center'>
-            <Button size='large' onClick={() => dispatch(changeNavbarPage('exam'))}>
+            <Button
+              size='large'
+              onClick={() => {
+                dispatch(changeNavbarPage('exam'));
+              }}
+            >
               <Icon name='list' />
               Study by Exam
             </Button>
