@@ -8,9 +8,8 @@ import { selectArrayOfStateById } from '@utils/functions';
 import { selectNavbarState } from '@components/navbar/navbarSlice';
 
 export default function ClassList() {
-  const curSchool = useSelector(selectNavbarState).navbar?.schoolName;
-  const curSchoolId = useSelector(selectArrayOfStateById('app.school.schools', 'school_name', curSchool))?.[0].id;
-  const classes = useSelector(selectArrayOfStateById('app.class.classes', 'school_id', curSchoolId));
+  const curSchool = useSelector(selectNavbarState).navbar?.schoolId;
+  const classes = useSelector(selectArrayOfStateById('app.class.classes', 'school_id', curSchool));
 
   return (
     <Container>
@@ -19,8 +18,8 @@ export default function ClassList() {
         Available Classes
         <Header.Subheader>Choose one to begin your learning journey</Header.Subheader>
       </Header>
-      <SchoolsList selectedSchool={curSchoolId} />
-      {curSchoolId == null ? (
+      <SchoolsList selectedSchool={curSchool} />
+      {curSchool == null ? (
         <Segment placeholder textAlign='center'>
           <Header icon>
             <Icon name='building' />

@@ -12,6 +12,7 @@ import {
   updateQuestionId,
   updateGroupType,
   upsertTimeSpent,
+  updateSchoolId,
 } from './navbarSlice';
 import { getCurUser } from '@src/app/auth/authSlice';
 import ProfileDropdown from './components/Profile/ProfileDropdown';
@@ -28,12 +29,12 @@ import { getExamsByClassId, selectExamsState } from '@src/app/class/group/exam/e
 import { replaceP20WithSpace } from '../../../../shared/globalFuncs';
 import { selectSchoolState, getSchools } from '@src/app/class/school/schoolSlice';
 
-export function examFetchLogic(dispatch, classId, className, exams, curGroupName) {
+export function examFetchLogic(dispatch, classId, className, exams, curGroupName, schoolName, schoolId) {
   console.count('exam');
   const exams_pulled_in = findNeedleInArrayOfObjectsLINEAR(exams, 'class_id', classId, 'id'); // can do this cuz class & name in groups make a unique field;
   const current_exam_id = findNeedlesInArrayOfObjectsLINEAR(exams, ['class_id', 'name'], [classId, curGroupName], 'id');
   // console.log(current_exam_id);
-  if (!exams_pulled_in && classId && className) {
+  if (!exams_pulled_in && classId && className && schoolName && schoolId) {
     dispatch(getExamsByClassId(classId));
   } else if (curGroupName && current_exam_id) {
     // console.log('updating current exam id', exams_pulled_in);
@@ -47,6 +48,9 @@ export function classFetchLogic(dispatch, schools, classes, curClassName, curSch
     dispatch(getSchools());
   }
   const schoolId = findNeedleInArrayOfObjectsLINEAR(schools, 'school_name', curSchoolName, 'id');
+  if (schoolId) {
+    dispatch(updateSchoolId(schoolId));
+  }
 
   // CLASSES DISPATCH MAIN THAT SETS OFF CHAIN OF REACTIONS
   let tmp_c_id = null;
@@ -61,7 +65,7 @@ export function classFetchLogic(dispatch, schools, classes, curClassName, curSch
   }
 }
 
-export function topicFetchLogic(dispatch, topics, classId, groupName) {
+export function topicFetchLogic(dispatch, topics, classId, groupName, schoolName, schoolId, className) {
   console.count('topics');
   //TODO HOLY FUCK THIS SHIT IS AIDS COMMENT IT OR FIX IT
   // TOPICS DISPATCH
@@ -75,7 +79,7 @@ export function topicFetchLogic(dispatch, topics, classId, groupName) {
     groupName = replaceP20WithSpace(groupName);
   }
   let tmp_topic_id = null;
-  if (classId && !do_I_alr_have_a_topic_pulled_in_with_the_current_class_id) {
+  if (classId && !do_I_alr_have_a_topic_pulled_in_with_the_current_class_id && className && schoolName && schoolId) {
     dispatch(getTopicsByClassId(classId));
   } else if (
     // i alr have topics for this class pulled in, as such find that topic id  and update cur group data
@@ -120,7 +124,8 @@ export default function Navbar() {
   const [isMobile, setIsMobile] = useState(false);
   const schools = useSelector(selectSchoolState).schools;
 
-  const { className, classId, groupName, groupId, questionId, schoolName, groupType } = useSelector(selectNavbarState).navbar;
+  const { className, classId, groupName, groupId, questionId, schoolName, groupType, schoolId } =
+    useSelector(selectNavbarState).navbar;
 
   const urlArr = useMemo(() => {
     return activePage ? activePage.split('/') : '/';
@@ -166,18 +171,18 @@ export default function Navbar() {
         urlArr[5] = replaceP20WithSpace(urlArr[5]);
       }
       if (activePage?.includes('exam')) {
-        examFetchLogic(dispatch, classId, className, exams, urlArr[5]);
+        examFetchLogic(dispatch, classId, className, exams, urlArr[5], schoolName, schoolId);
         dispatch(updateGroupType('exam'));
       }
       if (activePage?.includes('topic')) {
-        topicFetchLogic(dispatch, topics, classId, urlArr[5]);
+        topicFetchLogic(dispatch, topics, classId, urlArr[5], schoolName, schoolId, className);
         dispatch(updateGroupType('topic'));
       }
       if (activePage?.includes('question')) {
         questionFetchLogic(dispatch, questions, groupId, urlArr[5], urlArr[4], urlArr[7]);
       }
     }
-  }, [activePage, classId, className, exams, topics, groupId, groupName, groupType, classes, schoolName]);
+  }, [activePage, classId, className, exams, topics, groupId, groupName, groupType, classes, schoolName, schoolId]);
 
   ///  ************************************* ///
 

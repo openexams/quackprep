@@ -11,7 +11,7 @@ const UPDATE_GROUP_ID_NAME = 'components/navbar/UPDATE_GROUP_ID_NAME';
 
 const UPDATE_GROUP_TYPE = 'components/navbar/UPDATE_GROUP_TYPE';
 
-const UPSERT_TIME_SPENT = 'components/navbar/UPSERT_TIME_SPENT';
+const UPDATE_SCHOOL_ID = 'components/navbar/UPDATE_SCHOOL_ID';
 
 export function upsertTimeSpent() {
   return standardApiCall('post', '/api/account/time_spent', {});
@@ -19,11 +19,6 @@ export function upsertTimeSpent() {
 
 export function getClassIdByClassName(className) {
   return standardApiCall('get', `/api/class/${className}`, null, GET_CLASS_ID_BY_NAME, 'ClassList');
-}
-
-export function getTopicIdbyClassNameAndTopicName(topicName, className) {
-  topicName = replaceP20WithSpace(topicName);
-  return standardApiCall('get', `/api/group/topic/${topicName}/${className}`, null, UPDATE_GROUP_ID_NAME, 'TopicsShow');
 }
 
 /**
@@ -60,10 +55,15 @@ export function updateGroupType(type) {
   return { type: UPDATE_GROUP_TYPE, payload: type };
 }
 
+export function updateSchoolId(id) {
+  return { type: UPDATE_SCHOOL_ID, payload: id };
+}
+
 const DEFAULT_STATE = {
   page: null,
   classId: null,
   className: null,
+  schoolId: null,
   schoolName: null,
   groupType: null,
   groupId: null, // this identifies the group, wether that means its a string or a id
@@ -86,6 +86,7 @@ export default function navbarReducer(state = DEFAULT_STATE, action) {
           schoolName: null,
           groupName: null,
           className: null,
+          schoolId: null,
           questionId: null,
           classId: null,
           groupId: null,
@@ -110,15 +111,14 @@ export default function navbarReducer(state = DEFAULT_STATE, action) {
       const newClassName = urlArr[3] || null;
       const newGroupName = urlArr[5] || null;
 
-      const newQuestionId = parseInt(urlArr[6]) || null;
-
       return {
         ...state,
         page: curUrl,
         groupName: newGroupName,
         className: newClassName,
         schoolName: newSchoolName,
-        questionId: parseInt(newQuestionId),
+        schoolId: null,
+        questionId: parseInt(urlArr[7]) || null,
         classId: urlArr[3] ? state.classId : null, // these 2 null should be brought in again, only if we changed topic or class, may cause issues when inputting new link directly into window.location TODO TEST
         groupId: urlArr[4] ? state.groupId : null,
         groupType: null,
@@ -141,6 +141,8 @@ export default function navbarReducer(state = DEFAULT_STATE, action) {
       return { ...state, groupId: action.payload.id, groupName: action.payload.name };
     case UPDATE_GROUP_TYPE:
       return { ...state, groupType: action.payload };
+    case UPDATE_SCHOOL_ID:
+      return { ...state, schoolId: action.payload };
     default:
       return state;
   }
