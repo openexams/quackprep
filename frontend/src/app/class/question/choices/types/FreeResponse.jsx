@@ -20,7 +20,7 @@ export default function FreeResponse({ choice, selectedQuestion }) {
           onChange={(e, data) => setText(data.value)}
           style={{ width: '100%' }}
           rows={5}
-          placeholder={choice?.answer}
+          placeholder={'Input your answer here'}
         />
         <Button>Submit</Button>
       </Form>
