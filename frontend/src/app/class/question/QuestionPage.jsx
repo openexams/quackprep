@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectArrayOfStateById } from '@utils/functions';
 import { selectNavbarState } from '@components/navbar/navbarSlice';
 import { selectLoadingState } from '@src/app/store/loadingSlice';
-import MultipleChoice from './choices/MultipleChoice';
+import ChoiceRouter from './choices/ChoiceRouter';
 
 /**
  *
@@ -67,7 +67,7 @@ export default function QuestionPage() {
           </Grid.Column>
           <Grid.Column width={12}>
             {selectedQuestion ? (
-              <MultipleChoice selectedQuestion={selectedQuestion} />
+              <ChoiceRouter selectedQuestion={selectedQuestion} />
             ) : (
               <Segment>
                 <Header as='h3'>Please select a question from the list.</Header>
