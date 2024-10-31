@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Grid, Header, Segment } from 'semantic-ui-react';
 import QuestionList from './QuestionList';
-import QuestionChoices from './QuestionChoices';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectArrayOfStateById } from '@utils/functions';
 import { selectNavbarState } from '@components/navbar/navbarSlice';
 import { selectLoadingState } from '@src/app/store/loadingSlice';
+import MultipleChoice from './choices/MultipleChoice';
 
 /**
  *
@@ -67,7 +67,7 @@ export default function QuestionPage() {
           </Grid.Column>
           <Grid.Column width={12}>
             {selectedQuestion ? (
-              <QuestionChoices selectedQuestion={selectedQuestion} />
+              <MultipleChoice selectedQuestion={selectedQuestion} />
             ) : (
               <Segment>
                 <Header as='h3'>Please select a question from the list.</Header>

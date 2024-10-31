@@ -44,7 +44,7 @@ export async function getChoicesByQuestion(question_id) {
   // TODO TEST
   const params = { question_id };
   return await sqlExe.executeCommand(
-    `SELECT c.id,c.answer,c.is_correct,c.created_by,c.question_id FROM choices c 
+    `SELECT c.id,c.answer,c.is_correct,c.created_by,c.question_id,c.type FROM choices c 
     WHERE c.deleted=0
      ORDER BY id ASC`,
     params
@@ -55,7 +55,7 @@ export async function getChoicesByGroupId(group_id) {
   const params = { group_id };
   return await sqlExe.executeCommand(
     `
-    SELECT c.id, c.answer, c.is_correct, c.created_at, gq.question_id, gq.group_id FROM choices c 
+    SELECT c.id, c.answer, c.is_correct, c.created_at,c.type, gq.question_id, gq.group_id FROM choices c 
     JOIN group_question gq ON c.question_id = gq.question_id AND gq.group_id = :group_id
     WHERE c.deleted=0
      ORDER BY id ASC
@@ -69,12 +69,13 @@ export async function addChoiceToQuestion( // NOT TESTED TODO
   user_id,
   question_id,
   isCorrect,
-  text
+  text,
+  type
 ) {
-  const params = { user_id, question_id, isCorrect, text };
+  const params = { user_id, question_id, isCorrect, text, type };
   const result = (
     await sqlExe.executeCommand(
-      `INSERT INTO choices (answer,is_correct,created_by,question_id) values (:text,:isCorrect,:user_id,:question_id)`,
+      `INSERT INTO choices (answer,is_correct,created_by,question_id,type) values (:text,:isCorrect,:user_id,:question_id,:type)`,
       params
     )
   ).insertId;
@@ -93,17 +94,18 @@ export async function addChoiceToQuestion( // NOT TESTED TODO
  * "choices": [
     {
       "text": "hello",
-      "is_correct": 1
+      "is_correct": 1,
+      "type": "mcq"
     },
     {
       "text": "po",
-      "is_correct": 0
+      "is_correct": 0,
+      "type": "mcq"
     }
   ]
  */
 export async function addManyChoicesToQuestion(question_id, user_id, choices) {
   // todo test
-  console.log(choices.length);
   if (!choices?.length && !(choices.length <= 5) && !(choices.length > 0)) {
     dlog("bad");
     throw new Error("choices array incorrect len");
@@ -111,9 +113,9 @@ export async function addManyChoicesToQuestion(question_id, user_id, choices) {
   }
   // TODO
 
-  let sqlStatement = `INSERT INTO choices (question_id, answer, is_correct, created_by) VALUES `;
+  let sqlStatement = `INSERT INTO choices (question_id, answer, is_correct, created_by, type) VALUES `;
   for (let i = 0; i < choices.length; i++) {
-    sqlStatement += "(?,?,?,?)";
+    sqlStatement += "(?,?,?,?,?)";
     if (i !== choices.length - 1) {
       // dont add comma at end
       sqlStatement += ",";
@@ -123,7 +125,13 @@ export async function addManyChoicesToQuestion(question_id, user_id, choices) {
   }
   let params = [];
   for (let i = 0; i < choices.length; i++) {
-    params.push(question_id, choices[i]?.text, choices[i]?.is_correct, user_id);
+    params.push(
+      question_id,
+      choices[i]?.text,
+      choices[i]?.is_correct,
+      user_id,
+      choices[i]?.type
+    );
   }
   return await sqlExe.queryCommand(sqlStatement, params);
 }

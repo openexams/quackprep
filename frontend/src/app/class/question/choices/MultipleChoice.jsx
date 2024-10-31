@@ -1,16 +1,16 @@
-import './choices/buttonChoices.css';
+import './buttonChoices.css';
 import { selectArrayOfStateById } from '@utils/functions';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Segment, Header, List, Button, Divider } from 'semantic-ui-react';
-import { getChoicesByQuestion, postAnswer, upsertCurrentAnswer } from './choices/choicesSlice';
+import { postAnswer, upsertCurrentAnswer } from './choicesSlice';
 import { selectLoadingState } from '@src/app/store/loadingSlice';
 import MarkdownRenderer from '@components/MarkdownRenderer';
-import { randomizeArray } from '../../../../../shared/globalFuncs';
+import { randomizeArray } from '../../../../../../shared/globalFuncs';
 
-export default function QuestionChoices({ selectedQuestion }) {
+export default function MultipleChoice({ selectedQuestion }) {
   const dispatch = useDispatch();
-  const loading = useSelector(selectLoadingState).loadingComps?.QuestionChoices;
+  const loading = useSelector(selectLoadingState).loadingComps?.MultipleChoice;
 
   let choices = useSelector(selectArrayOfStateById('app.choices.choices', 'question_id', selectedQuestion?.id));
   const [showAnswers, setShowAnswers] = useState(false);
