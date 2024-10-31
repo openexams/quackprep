@@ -8,38 +8,10 @@ import {
   upsertCurrentChoice,
   getCurrentChoicesByGroupIdAndType,
   getChoicesByGroupId,
+  addManyChoicesToQuestion,
 } from "#models/choice/index.js";
 import express, { Router } from "express";
 const router = Router();
-
-// answers transactional
-router.post("/answer/:choice_id", isAuthenticated, async function (req, res) {
-  try {
-    const result = await postChoice(req.user, req.params.choice_id);
-    res.status(200).json(result);
-  } catch (error) {
-    res.status(500).json({ message: "server error, could not upload answer" });
-  }
-});
-
-router.post(
-  "/:choice_id/:question_id",
-  isAuthenticated,
-  async function (req, res) {
-    try {
-      const result = await upsertCurrentChoice(
-        req.user,
-        req.params.choice_id,
-        req.params.question_id
-      );
-      res.status(200).json(result);
-    } catch (error) {
-      res
-        .status(500)
-        .json({ message: "server error, could not upsert current answer" });
-    }
-  }
-);
 
 router.get("/top", async function (req, res) {
   try {
@@ -87,6 +59,27 @@ router.get("/group/:group_id", isAuthenticated, async function (req, res) {
 });
 
 // C
+
+router.post("/many/:question_id", isAuthenticated, async function (req, res) {
+  const data = req.body;
+  try {
+    if (!data?.choices) {
+      throw Error("pls send all json body");
+    }
+
+    const result = await addManyChoicesToQuestion(
+      req.params.question_id,
+      req.user,
+      data.choices
+    );
+
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(500).json({
+      message: `failed to add ${data?.choices?.length} choices by q id ${req.params.question_id}`,
+    });
+  }
+});
 
 router.post("/:question_id", isAuthenticated, async function (req, res) {
   const data = req.body;
@@ -153,5 +146,34 @@ router.get("/current/:group_id/:group_type", async function (req, res) {
     });
   }
 });
+
+// answers transactional
+router.post("/answer/:choice_id", isAuthenticated, async function (req, res) {
+  try {
+    const result = await postChoice(req.user, req.params.choice_id);
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(500).json({ message: "server error, could not upload answer" });
+  }
+});
+
+router.post(
+  "/:choice_id/:question_id",
+  isAuthenticated,
+  async function (req, res) {
+    try {
+      const result = await upsertCurrentChoice(
+        req.user,
+        req.params.choice_id,
+        req.params.question_id
+      );
+      res.status(200).json(result);
+    } catch (error) {
+      res
+        .status(500)
+        .json({ message: "server error, could not upsert current answer" });
+    }
+  }
+);
 
 export default router;

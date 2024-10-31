@@ -44,8 +44,7 @@ export async function getChoicesByQuestion(question_id) {
   // TODO TEST
   const params = { question_id };
   return await sqlExe.executeCommand(
-    `SELECT c.id,c.answer,c.is_correct,c.created_by,qc.question_id FROM choices c 
-    JOIN question_choice qc ON qc.question_id = :question_id AND c.id = qc.choice_id
+    `SELECT c.id,c.answer,c.is_correct,c.created_by,c.question_id FROM choices c 
     WHERE c.deleted=0
      ORDER BY id ASC`,
     params
@@ -57,8 +56,10 @@ export async function getChoicesByGroupId(group_id) {
   return await sqlExe.executeCommand(
     `
     SELECT c.id, c.answer, c.is_correct, c.created_at, gq.question_id, gq.group_id FROM choices c 
-    JOIN question_choice qc ON qc.choice_id = c.id
-    JOIN group_question gq ON qc.question_id = gq.question_id AND gq.group_id = :group_id
+    JOIN group_question gq ON c.question_id = gq.question_id AND gq.group_id = :group_id
+    WHERE c.deleted=0
+     ORDER BY id ASC
+
 `,
     params
   );
@@ -73,16 +74,58 @@ export async function addChoiceToQuestion( // NOT TESTED TODO
   const params = { user_id, question_id, isCorrect, text };
   const result = (
     await sqlExe.executeCommand(
-      `INSERT INTO choices (answer,is_correct,created_by) values (:text,:isCorrect,:user_id)`,
+      `INSERT INTO choices (answer,is_correct,created_by,question_id) values (:text,:isCorrect,:user_id,:question_id)`,
       params
     )
   ).insertId;
   params["result"] = result;
-  const bridge_tbl_res = await sqlExe.executeCommand(
-    `INSERT INTO question_choice (question_id,choice_id) values (:question_id, :result)`,
-    params
-  );
+
   return result;
+}
+
+/**
+ * adds x amt of choices to a question
+ * @param {Int} question_id
+ * @param {Int} user_id
+ * @param {Array} choices array of choices all having text and is_correct keys
+ * @returns {Object}
+ * @example
+ * "choices": [
+    {
+      "text": "hello",
+      "is_correct": 1
+    },
+    {
+      "text": "po",
+      "is_correct": 0
+    }
+  ]
+ */
+export async function addManyChoicesToQuestion(question_id, user_id, choices) {
+  // todo test
+  console.log(choices.length);
+  if (!choices?.length && !(choices.length <= 5) && !(choices.length > 0)) {
+    dlog("bad");
+    throw new Error("choices array incorrect len");
+    return;
+  }
+  // TODO
+
+  let sqlStatement = `INSERT INTO choices (question_id, answer, is_correct, created_by) VALUES `;
+  for (let i = 0; i < choices.length; i++) {
+    sqlStatement += "(?,?,?,?)";
+    if (i !== choices.length - 1) {
+      // dont add comma at end
+      sqlStatement += ",";
+    } else {
+      sqlStatement += ";";
+    }
+  }
+  let params = [];
+  for (let i = 0; i < choices.length; i++) {
+    params.push(question_id, choices[i]?.text, choices[i]?.is_correct, user_id);
+  }
+  return await sqlExe.queryCommand(sqlStatement, params);
 }
 
 export async function getCurrentChoicesByGroupIdAndType( // TODO answers_current
