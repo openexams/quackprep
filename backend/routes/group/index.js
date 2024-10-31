@@ -38,7 +38,7 @@ router.delete("/:group_id", async function (req, res) {
       .json({ message: `failed to delete group by id ${req.params.group_id}` });
   }
 });
-
+// type must be for now topic || exam
 router.post("/:type", async function (req, res) {
   const data = req.body;
   try {
