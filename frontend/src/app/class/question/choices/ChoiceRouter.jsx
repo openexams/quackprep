@@ -12,11 +12,11 @@ export default function ChoiceRouter({ selectedQuestion }) {
 
   // maybe check if choices are all the same
   let component = null;
-  if (choices[0]?.type === 'mcq') {
+  if (choices?.[0]?.type === 'mcq') {
     component = <MultipleChoice choices={choices} selectedQuestion={selectedQuestion} />;
-  } else if (choices[0]?.type === 'free') {
+  } else if (choices?.[0]?.type === 'free') {
     component = <FreeResponse choice={choices?.[0]} />;
-  } else if (choices[0]?.type === 'select') {
+  } else if (choices?.[0]?.type === 'select') {
   } else {
     return <Segment>Choice Router failed pls contact support</Segment>;
   }

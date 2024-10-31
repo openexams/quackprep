@@ -106,7 +106,7 @@ export async function addChoiceToQuestion( // NOT TESTED TODO
  */
 export async function addManyChoicesToQuestion(question_id, user_id, choices) {
   // todo test
-  if (!choices?.length && !(choices.length <= 5) && !(choices.length > 0)) {
+  if (!choices?.length && !(choices.length <= 5) && !(choices.length >= 1)) {
     dlog("bad");
     throw new Error("choices array incorrect len");
     return;
