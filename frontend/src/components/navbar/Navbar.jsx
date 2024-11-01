@@ -29,6 +29,7 @@ import { selectSchoolState, getSchools } from '@src/app/class/school/schoolSlice
 import { selectChoicesState } from '@src/app/class/question/choices/choicesSlice';
 import { getChoicesByGroup } from '@src/app/class/question/choices/choicesSlice';
 import { selectLoadingState } from '@src/app/store/loadingSlice';
+import { select401CompState } from '@components/401/401Slice';
 
 export function examFetchLogic(dispatch, classId, className, exams, curGroupName, schoolName, schoolId) {
   console.count('exam');
@@ -133,6 +134,7 @@ export default function Navbar() {
   const schools = useSelector(selectSchoolState).schools;
   const choices = useSelector(selectChoicesState).choices;
   const loading = useSelector(selectLoadingState)?.loadingComps;
+  const State401 = useSelector(select401CompState).show;
 
   const { className, classId, groupName, groupId, questionId, schoolName, groupType, schoolId } =
     useSelector(selectNavbarState).navbar;
@@ -173,12 +175,12 @@ export default function Navbar() {
 
   ///  USE EFFECTS FOR KEEPING STORE SAME AS URL ///
   useEffect(() => {
-    if (!activePage?.includes('/auth?next')) {
-      if (activePage?.includes('class') && !loading?.ClassList) {
-        classFetchLogic(dispatch, schools, classes, urlArr[3], urlArr[2]);
-      }
+    if (!activePage?.includes('/auth?next') && !State401) {
       if (urlArr[5]) {
         urlArr[5] = replaceP20WithSpace(urlArr[5]);
+      }
+      if (activePage?.includes('class') && !loading?.ClassList) {
+        classFetchLogic(dispatch, schools, classes, urlArr[3], urlArr[2]);
       }
       if (activePage?.includes('exam') && !loading?.ExamList) {
         examFetchLogic(dispatch, classId, className, exams, urlArr[5], schoolName, schoolId);
