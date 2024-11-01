@@ -10,6 +10,7 @@ import {
   getChoicesByGroupId,
   addManyChoicesToQuestion,
 } from "#models/choice/index.js";
+import { cascadeSetDeleted } from "#utils/sqlFunctions.js";
 import express, { Router } from "express";
 const router = Router();
 

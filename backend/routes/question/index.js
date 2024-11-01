@@ -4,6 +4,7 @@ import {
   createQuestionInGroups,
   getQuestionsByGroupId,
 } from "#models/question/index.js";
+import { cascadeSetDeleted } from "#utils/sqlFunctions.js";
 
 const router = express.Router();
 router.use(isAuthenticated);
@@ -36,11 +37,9 @@ router.delete("/:question_id", async function (req, res) {
     );
     res.status(200).json(result);
   } catch (error) {
-    res
-      .status(500)
-      .json({
-        message: `failed to delete question by id ${req.params.question_id}`,
-      });
+    res.status(500).json({
+      message: `failed to delete question by id ${req.params.question_id}`,
+    });
   }
 });
 

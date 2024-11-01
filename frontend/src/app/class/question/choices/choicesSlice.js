@@ -14,7 +14,7 @@ export function getCurrentChoices(user_id) {
   if (user_id === null) {
     return;
   }
-  return standardApiCall('get', '/api/choice/current', null, GET_CURRENT_CHOICES, 'QuestionChoices');
+  return standardApiCall('get', '/api/choice/current', null, GET_CURRENT_CHOICES, 'ChoiceRouter');
 }
 
 // not used right now needs to be used and setup. TODO

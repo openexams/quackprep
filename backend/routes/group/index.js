@@ -1,6 +1,7 @@
 import express from "express";
 import { isAuthenticated } from "#middleware/authMiddleware.js";
 import { createGroupInClass, getGroupsByClassId } from "#models/group/index.js";
+import { cascadeSetDeleted } from "#utils/sqlFunctions.js";
 
 const router = express.Router();
 router.use(isAuthenticated);

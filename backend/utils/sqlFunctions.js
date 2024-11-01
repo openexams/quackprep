@@ -54,14 +54,14 @@ export async function cascadeSetDeleted( // todo learn more about how the join w
   const params = { delChoice, delClass, delGroup, delQuestion, user_id };
   return (
     await sqlExe.executeCommand(
-      // TODO TEST WITH CHOICES SWITCH
-      `
+      // left join because we want all rows from the prev table and the matching from the new to be joined table, as inner join for example would not delete groups that didnt have questions
+      ` 
     UPDATE classes c 
-    JOIN cgroups g ON g.class_id = c.id --  join groups with that certain class id
-    JOIN group_question gq ON g.id = gq.group_id -- join qs in that certain groupid
-    JOIN questions q ON q.id = gq.question_id   -- ^^
-    JOIN choices ch ON ch.question_id = gq.question_id      -- ^
-    SET c.deleted=:delClass,g.deleted=:delGroup,q.deleted=:delQuestion,ch.deleted=:delChoice
+    LEFT JOIN cgroups g ON g.class_id = c.id --  join groups with that certain class id
+    LEFT JOIN group_question gq ON g.id = gq.group_id -- join qs in that certain groupid
+    LEFT JOIN questions q ON q.id = gq.question_id   -- ^^
+    LEFT JOIN choices ch ON ch.question_id = gq.question_id      -- ^
+    SET c.deleted=0,g.deleted=1,q.deleted=1,ch.deleted=1
     WHERE c.created_by = :user_id AND ${where} 
 `, // if user created the class they have access to do anything they want inside that class.
       params
