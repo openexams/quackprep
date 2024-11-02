@@ -69,7 +69,7 @@ router.post("/many/:question_id", isAuthenticated, async function (req, res) {
     }
 
     const result = await addManyChoicesToQuestion(
-      req.params.question_id,
+      parseInt(req.params.question_id),
       req.user,
       data.choices
     );
