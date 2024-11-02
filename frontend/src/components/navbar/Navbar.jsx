@@ -193,7 +193,18 @@ export default function Navbar() {
       if (user && activePage?.includes('question') && !loading?.QuestionPage && className && classId && groupId && urlArr[5]) {
         questionFetchLogic(dispatch, questions, groupId, urlArr[5], urlArr[4], urlArr[7]);
       }
-      if (user && activePage?.includes('question/') && !loading?.ChoiceRouter && className && classId && groupId && urlArr[5]) {
+      if (
+        user &&
+        activePage?.includes('question/') &&
+        !loading?.ChoiceRouter &&
+        className &&
+        classId &&
+        groupId &&
+        urlArr[5] &&
+        groupName &&
+        groupType &&
+        questions
+      ) {
         // for choices
         choicesFetchLogic(dispatch, groupName, groupId, choices);
       }

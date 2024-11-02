@@ -32,11 +32,11 @@ export function postAnswer(choice_id) {
 }
 
 export function getChoicesByQuestion(question_id) {
-  return standardApiCall('get', `/api/choice/${question_id}`, null, GET_CHOICES_BY_Q, 'QuestionChoices');
+  return standardApiCall('get', `/api/choice/${question_id}`, null, GET_CHOICES_BY_Q, 'ChoiceRouter');
 }
 
 export function getChoicesByGroup(group_id) {
-  return standardApiCall('get', `/api/choice/group/${group_id}`, null, GET_CHOICES_BY_Q, 'QuestionChoices'); //yes I know its same does not matter
+  return standardApiCall('get', `/api/choice/group/${group_id}`, null, GET_CHOICES_BY_Q, 'ChoiceRouter'); //yes I know its same does not matter
 }
 
 const DEFAULT_STATE = {
