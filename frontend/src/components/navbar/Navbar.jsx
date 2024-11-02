@@ -182,18 +182,18 @@ export default function Navbar() {
       if (activePage?.includes('class') && !loading?.ClassList) {
         classFetchLogic(dispatch, schools, classes, urlArr[3], urlArr[2]);
       }
-      if (activePage?.includes('exam') && !loading?.ExamList) {
+      if (user && activePage?.includes('exam') && !loading?.ExamList && className && classId) {
         examFetchLogic(dispatch, classId, className, exams, urlArr[5], schoolName, schoolId);
         dispatch(updateGroupType('exam'));
       }
-      if (activePage?.includes('topic') && !loading?.TopicsShow) {
+      if (user && activePage?.includes('topic') && !loading?.TopicsShow && className && classId) {
         topicFetchLogic(dispatch, topics, classId, urlArr[5], schoolName, schoolId, className);
         dispatch(updateGroupType('topic'));
       }
-      if (activePage?.includes('question') && !loading?.QuestionPage) {
+      if (user && activePage?.includes('question') && !loading?.QuestionPage && className && classId && groupId && urlArr[5]) {
         questionFetchLogic(dispatch, questions, groupId, urlArr[5], urlArr[4], urlArr[7]);
       }
-      if (activePage?.includes('question') && !loading?.ChoiceRouter) {
+      if (user && activePage?.includes('question/') && !loading?.ChoiceRouter && className && classId && groupId && urlArr[5]) {
         // for choices
         choicesFetchLogic(dispatch, groupName, groupId, choices);
       }
