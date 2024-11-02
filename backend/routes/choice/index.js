@@ -10,6 +10,7 @@ import {
   getChoicesByGroupId,
   addManyChoicesToQuestion,
 } from "#models/choice/index.js";
+import { cascadeSetDeleted } from "#utils/sqlFunctions.js";
 import express, { Router } from "express";
 const router = Router();
 
@@ -68,7 +69,7 @@ router.post("/many/:question_id", isAuthenticated, async function (req, res) {
     }
 
     const result = await addManyChoicesToQuestion(
-      req.params.question_id,
+      parseInt(req.params.question_id),
       req.user,
       data.choices
     );

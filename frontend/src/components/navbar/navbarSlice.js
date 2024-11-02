@@ -17,10 +17,6 @@ export function upsertTimeSpent() {
   return standardApiCall('post', '/api/account/time_spent', {});
 }
 
-export function getClassIdByClassName(className) {
-  return standardApiCall('get', `/api/class/${className}`, null, GET_CLASS_ID_BY_NAME, 'ClassList');
-}
-
 /**
  *
  * @param {String} name

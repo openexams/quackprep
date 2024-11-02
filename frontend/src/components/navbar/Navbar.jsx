@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectUser } from '@src/app/auth/authSlice';
 import {
   changeNavbarPage,
-  getClassIdByClassName,
   selectCurrentPage,
   selectNavbarState,
   updateCurrentClassData,
@@ -19,8 +18,7 @@ import ProfileDropdown from './components/Profile/ProfileDropdown';
 import { useLocation, useNavigate } from 'react-router-dom';
 import BrandLogo from './components/BrandLogo';
 import { getHasStreak, selectHasStreak } from '@src/app/streak/streakSlice.js';
-import { selectClassState } from '@src/app/class/classSlice';
-import { getClasses } from '@src/app/class/classSlice';
+import { selectClassState, getClasses } from '@src/app/class/classSlice';
 import { getTopicsByClassId } from '@src/app/class//group/topic/topicSlice';
 import { findNeedleInArrayOfObjectsLINEAR, findNeedlesInArrayOfObjectsLINEAR } from '@utils/functions';
 import { selectTopicState } from '@src/app/class/group/topic/topicSlice';
@@ -30,6 +28,8 @@ import { replaceP20WithSpace } from '../../../../shared/globalFuncs';
 import { selectSchoolState, getSchools } from '@src/app/class/school/schoolSlice';
 import { selectChoicesState } from '@src/app/class/question/choices/choicesSlice';
 import { getChoicesByGroup } from '@src/app/class/question/choices/choicesSlice';
+import { selectLoadingState } from '@src/app/store/loadingSlice';
+import { select401CompState } from '@components/401/401Slice';
 
 export function examFetchLogic(dispatch, classId, className, exams, curGroupName, schoolName, schoolId) {
   console.count('exam');
@@ -133,6 +133,8 @@ export default function Navbar() {
   const [isMobile, setIsMobile] = useState(false);
   const schools = useSelector(selectSchoolState).schools;
   const choices = useSelector(selectChoicesState).choices;
+  const loading = useSelector(selectLoadingState)?.loadingComps;
+  const State401 = useSelector(select401CompState).show;
 
   const { className, classId, groupName, groupId, questionId, schoolName, groupType, schoolId } =
     useSelector(selectNavbarState).navbar;
@@ -173,29 +175,50 @@ export default function Navbar() {
 
   ///  USE EFFECTS FOR KEEPING STORE SAME AS URL ///
   useEffect(() => {
-    if (!activePage?.includes('/auth?next')) {
-      if (activePage?.includes('class')) {
-        classFetchLogic(dispatch, schools, classes, urlArr[3], urlArr[2]);
-      }
+    if (!activePage?.includes('/auth?next') && !State401) {
       if (urlArr[5]) {
         urlArr[5] = replaceP20WithSpace(urlArr[5]);
       }
-      if (activePage?.includes('exam')) {
+      if (activePage?.includes('class') && !loading?.ClassList) {
+        classFetchLogic(dispatch, schools, classes, urlArr[3], urlArr[2]);
+      }
+      if (user && activePage?.includes('exam') && !loading?.ExamList && className && classId) {
         examFetchLogic(dispatch, classId, className, exams, urlArr[5], schoolName, schoolId);
         dispatch(updateGroupType('exam'));
       }
-      if (activePage?.includes('topic')) {
+      if (user && activePage?.includes('topic') && !loading?.TopicsShow && className && classId) {
         topicFetchLogic(dispatch, topics, classId, urlArr[5], schoolName, schoolId, className);
         dispatch(updateGroupType('topic'));
       }
-      if (activePage?.includes('question')) {
+      if (user && activePage?.includes('question') && !loading?.QuestionPage && className && classId && groupId && urlArr[5]) {
         questionFetchLogic(dispatch, questions, groupId, urlArr[5], urlArr[4], urlArr[7]);
       }
-      if (activePage?.includes('question')) {
+      if (user && activePage?.includes('question/') && !loading?.ChoiceRouter && className && classId && groupId && urlArr[5]) {
+        // for choices
         choicesFetchLogic(dispatch, groupName, groupId, choices);
       }
     }
-  }, [activePage, classId, className, exams, topics, groupId, groupName, groupType, classes, schoolName, schoolId]);
+  }, [
+    activePage,
+    classId,
+    className,
+    exams,
+    topics,
+    groupId,
+    groupName,
+    groupType,
+    classes,
+    schoolName,
+    schools,
+    urlArr,
+    schoolId,
+    questionId,
+    loading?.ClassList,
+    loading?.ExamList,
+    loading?.TopicsShow,
+    loading?.QuestionPage,
+    loading?.ChoiceRouter,
+  ]);
 
   ///  ************************************* ///
 
