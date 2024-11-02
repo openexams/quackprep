@@ -10,15 +10,16 @@ export default function ChoiceRouter({ selectedQuestion }) {
   const choices = useSelector(selectArrayOfStateById('app.choices.choices', 'question_id', selectedQuestion?.id));
   const loading = useSelector(selectLoadingState).loadingComps?.ChoiceRouter; // todo fix
 
-  // maybe check if choices are all the same
+  // maybe check if choices are all the same what if one choice was mcq and other was select (should not be possible)
   let component = null;
   if (choices?.[0]?.type === 'mcq') {
     component = <MultipleChoice choices={choices} selectedQuestion={selectedQuestion} />;
   } else if (choices?.[0]?.type === 'free') {
     component = <FreeResponse choice={choices?.[0]} />;
   } else if (choices?.[0]?.type === 'select') {
+    <div>not out yet how this possible</div>;
   } else {
-    return <Segment>Choice Router failed pls contact support</Segment>;
+    return <Segment>No Choices Found, or bad choices inputted</Segment>;
   }
   return (
     <Segment loading={loading}>
