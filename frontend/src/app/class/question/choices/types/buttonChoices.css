@@ -34,3 +34,10 @@
   transform: scale(0.95);
   background-color: white !important;
 }
+
+.reset-button.extra {
+  background-color: gray !important;
+}
+.reset-button.extra:hover {
+  background-color: red !important;
+}

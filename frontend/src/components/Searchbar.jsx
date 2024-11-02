@@ -1,7 +1,7 @@
 import { Input, Icon, Transition } from 'semantic-ui-react';
 import { useState } from 'react';
 
-export default function Searchbar({ value, setValue }) {
+export default function Searchbar({ value, setValue, placeholder }) {
   const [isFocused, setIsFocused] = useState(false);
 
   return (
@@ -12,7 +12,7 @@ export default function Searchbar({ value, setValue }) {
         icon
         value={value}
         onChange={(e, data) => setValue(data.value)}
-        placeholder='Search your courses...'
+        placeholder={placeholder}
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
         className={isFocused ? 'focused-search' : ''}

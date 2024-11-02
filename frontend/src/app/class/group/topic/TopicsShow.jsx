@@ -29,7 +29,7 @@ export default function TopicsShow() {
             <Header.Subheader>Select a topic to start studying</Header.Subheader>
           </Header.Content>
         </Header>
-        <Searchbar setValue={setSearchVal} value={searchValue} />
+        <Searchbar setValue={setSearchVal} value={searchValue} placeholder={'Search Topics'} />
         <Card.Group itemsPerRow={3} stackable>
           {topics &&
             topics.map((topic) => (

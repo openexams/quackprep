@@ -48,6 +48,16 @@ export default function MultipleChoice({ choices, selectedQuestion }) {
           </List.Item>
         ),
       )}
+      <Button
+        className='reset-button extra'
+        floated='right'
+        onClick={() => {
+          // make dispatch to reset answers current as well TODO
+          setShowAnswers(false);
+        }}
+      >
+        Reset
+      </Button>
     </List>
   );
 }
