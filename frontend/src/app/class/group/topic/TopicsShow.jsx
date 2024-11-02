@@ -1,15 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Header, Segment, Card, Button, Container, Icon } from 'semantic-ui-react';
-import { selectArrayOfStateById, turnUnderscoreIntoSpace } from '@utils/functions';
+import { selectArrayOfIncludingItems, selectArrayOfStateById, turnUnderscoreIntoSpace } from '@utils/functions';
 import { changeNavbarPage, selectNavbarState, updateCurrentGroupData } from '@components/navbar/navbarSlice';
 import { selectLoadingState } from '@src/app/store/loadingSlice';
+import Searchbar from '@components/Searchbar';
 
 export default function TopicsShow() {
+  const [searchValue, setSearchVal] = useState('');
   const { navbar } = useSelector(selectNavbarState);
   const { className, classId } = navbar;
   const loadingObject = useSelector(selectLoadingState).loadingComps;
-  const topics = useSelector(selectArrayOfStateById('app.topic.topics', 'class_id', classId));
+  const topics = selectArrayOfIncludingItems(
+    useSelector(selectArrayOfStateById('app.topic.topics', 'class_id', classId)),
+    'name',
+    searchValue,
+  );
+  console.log(topics);
   const dispatch = useDispatch();
 
   return (
@@ -22,7 +29,7 @@ export default function TopicsShow() {
             <Header.Subheader>Select a topic to start studying</Header.Subheader>
           </Header.Content>
         </Header>
-
+        <Searchbar setValue={setSearchVal} value={searchValue} />
         <Card.Group itemsPerRow={3} stackable>
           {topics &&
             topics.map((topic) => (

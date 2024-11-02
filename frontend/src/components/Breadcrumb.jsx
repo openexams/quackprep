@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { Breadcrumb, Segment } from 'semantic-ui-react';
+import { Breadcrumb, Segment, Transition } from 'semantic-ui-react';
 import { changeNavbarPage, selectNavbarState } from './navbar/navbarSlice';
 import { useDispatch } from 'react-redux';
 import { useMemo } from 'react';
@@ -7,11 +7,7 @@ import { useMemo } from 'react';
 export default function HistoryNav() {
   const dispatch = useDispatch();
   const urlArr = useSelector(selectNavbarState).navbar.page?.split('/');
-  /**
-   *
-   * @param {Array} urlArr
-   * @returns
-   */
+
   function mapCurrentNavbarStateToSectionsOfBreadcrumb(urlArr) {
     if (!urlArr) return null;
     let sections = [];
@@ -19,7 +15,6 @@ export default function HistoryNav() {
       if (urlArr[i] == '' || urlArr[i] == ' ') {
         // do nothing
       } else if (i !== 5) {
-        // gets rid of topic / exam name from breadcrumb
         let curItemUrl = urlArr.slice(0, i + 1).join('/');
 
         sections.push({
@@ -36,9 +31,16 @@ export default function HistoryNav() {
   const sections = useMemo(() => {
     return mapCurrentNavbarStateToSectionsOfBreadcrumb(urlArr);
   }, [urlArr]);
+
   const breadcrumbStyle = {
-    marginTop: '5rem', // todo fix pushes everything down
-    marginBottom: '0',
+    position: 'fixed', // Changed to fixed instead of absolute
+    top: '5rem',
+    left: 0,
+    right: 0,
+    zIndex: 10,
+    padding: '0.5rem 1rem',
+    backgroundColor: 'transparent', // Removed background
+    margin: 0,
   };
 
   const sectionStyle = {
@@ -46,7 +48,12 @@ export default function HistoryNav() {
     fontWeight: 500,
     padding: '0.5em 0.75em',
     borderRadius: '3px',
-    transition: 'background-color 0.2s ease',
+    transition: 'all 0.2s ease',
+    cursor: 'pointer',
+    ':hover': {
+      backgroundColor: '#f8f9fa',
+      transform: 'translateY(-1px)',
+    },
   };
 
   const activeSectionStyle = {
@@ -58,17 +65,19 @@ export default function HistoryNav() {
 
   return (
     <>
-      {sections?.length && sections.length !== 1 ? (
-        <Segment basic style={breadcrumbStyle}>
+      <Transition visible={sections?.length > 1} animation='fade down' duration={300}>
+        <div style={breadcrumbStyle}>
           <Breadcrumb
             icon='right angle'
-            sections={sections.map((section) => ({
+            sections={sections?.map((section) => ({
               ...section,
               style: section.active ? activeSectionStyle : sectionStyle,
             }))}
           />
-        </Segment>
-      ) : null}
+        </div>
+      </Transition>
+
+      {sections?.length && sections.length !== 1 ? <div style={{ height: '3rem' }} /> : null}
     </>
   );
 }

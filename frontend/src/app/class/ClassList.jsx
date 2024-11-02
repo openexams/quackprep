@@ -12,7 +12,7 @@ export default function ClassList() {
   const classes = useSelector(selectArrayOfStateById('app.class.classes', 'school_id', curSchool));
 
   return (
-    <Container>
+    <Container style={{ marginTop: '-5rem' }}>
       <Header as='h1' textAlign='center' icon>
         <Icon name='graduation cap' />
         Available Classes
@@ -29,7 +29,7 @@ export default function ClassList() {
         </Segment>
       ) : (
         <Segment placeholder textAlign='center'>
-          <Grid columns={3} stackable doubling centered style={{ marginTop: '2rem' }}>
+          <Grid columns={3} stackable doubling centered style={{ marginTop: '.3rem' }}>
             {classes &&
               classes.map((cl) => (
                 <Grid.Column key={cl.id}>

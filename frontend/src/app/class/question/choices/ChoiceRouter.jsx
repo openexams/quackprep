@@ -12,14 +12,16 @@ export default function ChoiceRouter({ selectedQuestion }) {
 
   // maybe check if choices are all the same what if one choice was mcq and other was select (should not be possible)
   let component = null;
-  if (choices?.[0]?.type === 'mcq') {
-    component = <MultipleChoice choices={choices} selectedQuestion={selectedQuestion} />;
-  } else if (choices?.[0]?.type === 'free') {
-    component = <FreeResponse choice={choices?.[0]} />;
-  } else if (choices?.[0]?.type === 'select') {
-    <div>not out yet how this possible</div>;
-  } else {
-    return <Segment>No Choices Found, or bad choices inputted</Segment>;
+  if (!loading) {
+    if (choices?.[0]?.type === 'mcq') {
+      component = <MultipleChoice choices={choices} selectedQuestion={selectedQuestion} />;
+    } else if (choices?.[0]?.type === 'free') {
+      component = <FreeResponse choice={choices?.[0]} />;
+    } else if (choices?.[0]?.type === 'select') {
+      <div>not out yet how this possible</div>;
+    } else {
+      return <Segment>No Choices Found, or bad choices inputted</Segment>;
+    }
   }
   return (
     <Segment loading={loading}>
