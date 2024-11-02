@@ -10,7 +10,7 @@ router.use(isAuthenticated);
 router.post("/time_spent", async function (req, res) {
   try {
     const result = await upsertTimeSpent(req.user); // always 5 min
-    res.status(200).json(result);
+    res.status(201).json(result);
   } catch (error) {
     res
       .status(500)

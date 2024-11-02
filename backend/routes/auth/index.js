@@ -77,7 +77,7 @@ router.post("/register", async function (req, res) {
   );
 
   if (result) {
-    res.status(200).json({ message: "successfully created a account" });
+    res.status(201).json({ message: "successfully created a account" });
   } else {
     res.status(500).json({
       message:
@@ -102,7 +102,7 @@ router.post("/login", (req, res, next) => {
         dlog(err);
         return res.status(status);
       }
-      return res.status(200).json(user);
+      return res.status(201).json(user);
     });
   })(req, res, next);
 });
@@ -119,7 +119,7 @@ router.get("/verify", async function (req, res) {
 router.post("/signout", function (req, res) {
   req.logOut(function (err) {
     if (err) return res.status(500).json({ message: "failed to logout" });
-    else res.status(200).json({ message: "logged out" });
+    else res.status(201).json({ message: "logged out" });
   });
 });
 

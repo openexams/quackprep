@@ -58,7 +58,7 @@ router.post("/", async function (req, res) {
       data?.question_num_on_exam,
       ...data.group_ids // destructure group ids into last arg
     );
-    res.status(200).json(result);
+    res.status(201).json(result);
   } catch (error) {
     res.status(500).json({
       message: `failed to add question to groups || group`,

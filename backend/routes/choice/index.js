@@ -74,7 +74,7 @@ router.post("/many/:question_id", isAuthenticated, async function (req, res) {
       data.choices
     );
 
-    res.status(200).json(result);
+    res.status(201).json(result);
   } catch (error) {
     res.status(500).json({
       message: `failed to add ${data?.choices?.length} choices by q id ${req.params.question_id}`,
@@ -100,7 +100,7 @@ router.post("/:question_id", isAuthenticated, async function (req, res) {
       data.text
     );
 
-    res.status(200).json(result);
+    res.status(201).json(result);
   } catch (error) {
     res.status(500).json({
       message: `failed to add choice by q id ${req.params.question_id}`,
@@ -152,7 +152,7 @@ router.get("/current/:group_id/:group_type", async function (req, res) {
 router.post("/answer/:choice_id", isAuthenticated, async function (req, res) {
   try {
     const result = await postChoice(req.user, req.params.choice_id);
-    res.status(200).json(result);
+    res.status(201).json(result);
   } catch (error) {
     res.status(500).json({ message: "server error, could not upload answer" });
   }
@@ -168,7 +168,7 @@ router.post(
         req.params.choice_id,
         req.params.question_id
       );
-      res.status(200).json(result);
+      res.status(201).json(result);
     } catch (error) {
       res
         .status(500)

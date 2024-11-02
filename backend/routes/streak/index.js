@@ -51,7 +51,7 @@ router.post("/", isAuthenticated, async function (req, res) {
       res.status(400).json({ message: "u alr have a streak" });
       return;
     }
-    res.status(200).json(data);
+    res.status(201).json(data);
   } catch (error) {
     res.status(500).json({ message: "failed to claim streak" });
   }
