@@ -2,6 +2,7 @@ import { show401Msg } from '@components/401/401Slice.js';
 import axios from './axios.js';
 import { hideFlashMessage, showFlashMessage } from '@components/flashmessage/flashMessageSlice.js';
 import { startLoading, stopLoading } from '@src/app/store/loadingSlice.js';
+import { signOut } from '@src/app/auth/login/loginSlice.js';
 
 /**
  * A redux thunk standard api call
@@ -45,6 +46,7 @@ export function standardApiCall(
       dispatch(stopLoading(componentName));
       console.error('Failed req to ', error.request.responseURL);
       if (error?.response?.data?.message?.includes('401')) {
+        dispatch(signOut());
         dispatch(show401Msg());
         dispatch(hideFlashMessage());
       } else {

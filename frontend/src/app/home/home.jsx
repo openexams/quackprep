@@ -34,7 +34,7 @@ export default function Home() {
       author: '- ChatGPT',
     },
     {
-      text: 'The video tutorials explained complex topics so well, even my pet rock aced the test! Highly recommended for humans and rocks alike!',
+      text: 'Even my pet rock aced the test! Highly recommended for humans and rocks alike!',
       author: '- Claude AI',
     },
   ];

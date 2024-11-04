@@ -4,7 +4,7 @@ import { createSelector } from 'reselect';
 const GET_USERS_COUNT = 'app/home/GET_USERS_COUNT';
 
 export function getUserCount() {
-  return standardApiCall('get', '/api/auth/users/count', null, GET_USERS_COUNT, 'home', null, null);
+  return standardApiCall('get', '/api/auth/users/count', null, GET_USERS_COUNT, null, null, null);
 }
 const DEFAULT_STATE = {
   userCount: null,
@@ -18,7 +18,7 @@ export default function homeReducer(state = DEFAULT_STATE, action) {
   }
 }
 
-export const selectHomeState = createSelector(
+export const selectUserCount = createSelector(
   (state) => state,
   function (state) {
     return { userCount: state.app.home.userCount };

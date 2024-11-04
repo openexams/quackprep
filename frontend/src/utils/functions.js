@@ -196,7 +196,7 @@ export function findNeedlesInArrayOfObjectsLINEAR(array, keyNamesToCheck, needle
  * @param {*} including
  */
 export function selectArrayOfIncludingItems(array, objectKeyToCheck, including) {
-  if (including === '' || objectKeyToCheck === '' || array?.length === 0) {
+  if (including === '' || objectKeyToCheck === '' || array?.length === 0 || !array) {
     return array;
   }
   let ret = [];
