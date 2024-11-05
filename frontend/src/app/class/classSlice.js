@@ -9,7 +9,7 @@ export function getClasses() {
 
 export function getClassesByUserId() {
   // TODO maybe make it so stdapicall can take a arrsay of loading comps
-  return standardApiCall('get', `/api/class/user/`, null, GET_CLASSES, ['ClassList', 'Create']);
+  return standardApiCall('get', `/api/class/user`, null, GET_CLASSES, ['ClassList', 'Create']);
 }
 
 const DEFAULT_STATE = {

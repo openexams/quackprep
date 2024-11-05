@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getClassesByUserId, selectClassState } from '../class/classSlice';
 import { getTopicsByUserId, selectTopicState } from '../class/group/topic/topicSlice';
@@ -6,6 +7,9 @@ import { getQuestionsByUserId, selectQuestionState } from '../class/question/que
 import { getChoicesByUserId, selectChoicesState } from '../class/question/choices/choicesSlice';
 import { useEffect } from 'react';
 import { selectUser } from '../auth/authSlice';
+import { selectLoadingState } from '../store/loadingSlice';
+import { Accordion, Segment, Container, Icon, Grid } from 'semantic-ui-react';
+import ClassList from '../class/ClassList';
 
 export default function Create() {
   const dispatch = useDispatch();
@@ -15,6 +19,35 @@ export default function Create() {
   const questions = useSelector(selectQuestionState).questions;
   const choices = useSelector(selectChoicesState).choices;
   const user = useSelector(selectUser).user;
+  const loading = useSelector(selectLoadingState).loadingComps?.Create;
+
+  const [activeIndex, setActiveIndex] = useState(null);
+  // data.active is what it active before the click
+  function handleAccordClick(event, data) {
+    if (data.active === false) {
+      setActiveIndex(data.index);
+    } else {
+      setActiveIndex(-1);
+    }
+  }
+
+  function loadAccords(arr) {
+    return arr.map((val, index) => {
+      return (
+        <Accordion>
+          <Accordion.Title active={activeIndex === index} index={index} onClick={handleAccordClick}>
+            <Icon name='dropdown' />
+            {val.name}
+          </Accordion.Title>
+          <Accordion.Content active={activeIndex === index}>
+            <Grid columns={3} stackable doubling centered style={{ marginTop: '.3rem' }}>
+              {val.component}
+            </Grid>
+          </Accordion.Content>
+        </Accordion>
+      );
+    });
+  }
 
   useEffect(() => {
     if (user.id) {
@@ -27,5 +60,9 @@ export default function Create() {
       console.log('got');
     }
   }, [user?.id]);
-  return <div>x</div>;
+  return (
+    <Container>
+      <Segment loading={loading}>{loadAccords([{ name: 'Classes', component: <ClassList classes={classes} /> }])}</Segment>
+    </Container>
+  );
 }
