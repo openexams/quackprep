@@ -38,8 +38,10 @@ function getIconByCategory(category) {
   switch (category) {
     case 'CS':
       return 'code';
-    case 'MA':
+    case 'MA' || 'MAT':
       return 'cube';
+    case 'ECO' || 'ECON':
+      return 'cog';
     default:
       return 'beer';
   }
