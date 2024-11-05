@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Container, Grid, Header, Icon, Segment, Button, Card, List, Image, Feed } from 'semantic-ui-react';
 import { getUserCount, selectUserCount } from '../home/homeSlice';
+import { changeNavbarPage } from '@components/navbar/navbarSlice';
 
 export default function CreatorDashboard() {
   const dispatch = useDispatch();
@@ -11,14 +12,15 @@ export default function CreatorDashboard() {
     if (!userCount) dispatch(getUserCount());
   }, []);
   return (
+    // ADD STATS AS WELL TODO
     <Container style={{ padding: '3rem 0' }}>
       {/* Hero Section */}
       <Segment basic textAlign='center' style={{ marginBottom: '3rem' }}>
         <Icon name='graduation cap' color='blue' style={{ textAlign: 'center', marginBottom: '-8rem' }} size='huge' />
         <Header as='h1' size='huge' textAlign='center'>
-          Become an QuackPrep Creator
+          Become an QuackPrep Creator (COMING SOON!)
           <Header.Subheader style={{ marginTop: '1rem' }}>
-            (COMING SOON) Share your knowledge and help students ace their exams
+            Share your knowledge and help students ace their exams
           </Header.Subheader>
         </Header>
         <Button
@@ -26,7 +28,7 @@ export default function CreatorDashboard() {
           size='huge'
           style={{ marginTop: '2rem' }}
           onClick={() => {
-            /* Navigate to creator form */
+            dispatch(changeNavbarPage('/create'));
           }}
         >
           <Icon name='plus' />
@@ -111,7 +113,7 @@ export default function CreatorDashboard() {
           inverted
           style={{ marginTop: '2rem' }}
           onClick={() => {
-            /* Navigate to creator form */
+            dispatch(changeNavbarPage('/create'));
           }}
         >
           Begin Your Journey

@@ -1,6 +1,7 @@
 import { isAuthenticated } from "#middleware/authMiddleware.js";
 import {
   getClasses,
+  getClassesByUserId,
   getClassIdByClassName,
   getSchools,
 } from "#models/class/index.js";
@@ -48,6 +49,17 @@ router.get("/:className", async function (req, res) {
     res
       .status(500)
       .json({ message: "server error could not get classes by classname" });
+  }
+});
+
+router.get("/user/", async function (req, res) {
+  try {
+    const result = await getClassesByUserId(req.user);
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(500).json({
+      message: `server error could not get classes by user id ${req.user}`,
+    });
   }
 });
 

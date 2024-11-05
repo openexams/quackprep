@@ -2,7 +2,7 @@ import { standardApiCall } from '@utils/api';
 import { updateArrWithNewVals } from '@utils/functions';
 import { createSelector } from 'reselect';
 
-const GET_CHOICES_BY_Q = 'app/class/question/choices/GET_CHOICES_BY_Q';
+const GET_CHOICES = 'app/class/question/choices/GET_CHOICES';
 
 const POST_ANSWER = 'app/class/question/choices/POST_ANSWER';
 const POST_FAVORITE_ANSWER = 'app/class/question/choices/POST_ANSWER_CURRENT';
@@ -32,11 +32,15 @@ export function postAnswer(choice_id) {
 }
 
 export function getChoicesByQuestion(question_id) {
-  return standardApiCall('get', `/api/choice/${question_id}`, null, GET_CHOICES_BY_Q, 'ChoiceRouter');
+  return standardApiCall('get', `/api/choice/${question_id}`, null, GET_CHOICES, 'ChoiceRouter');
 }
 
 export function getChoicesByGroup(group_id) {
-  return standardApiCall('get', `/api/choice/group/${group_id}`, null, GET_CHOICES_BY_Q, 'ChoiceRouter'); //yes I know its same does not matter
+  return standardApiCall('get', `/api/choice/group/${group_id}`, null, GET_CHOICES, 'ChoiceRouter'); //yes I know its same does not matter
+}
+
+export function getChoicesByUserId() {
+  return standardApiCall('get', `/api/choice/user`, null, GET_CHOICES, 'Create'); //yes I know its same does not matter
 }
 
 const DEFAULT_STATE = {
@@ -45,7 +49,7 @@ const DEFAULT_STATE = {
 
 export default function choicesReducer(state = DEFAULT_STATE, action) {
   switch (action.type) {
-    case GET_CHOICES_BY_Q:
+    case GET_CHOICES:
       return { ...state, choices: updateArrWithNewVals(state.choices, action.payload) };
     default:
       return state;

@@ -12,7 +12,7 @@ import { signOut } from '@src/app/auth/login/loginSlice.js';
  * @param {Object} [data] data you wanna send
  * @param {String} [requestAction] the constant you have in your redu cer to do set loading
  * @param {String} resultAction the constant you have in your reducer to set the data
- * @param {String} [componentName] the components name you want to load, will be added to the loadingComps state obj
+ * @param {String || Array} [componentName] the components name you want to load, will be added to the loadingComps state obj
  * @param {AxiosRequestConfig} [config] axios config to send the axios get
  * @param {String} [errorMsg] custom error message you want to show on screen if there an error
  * @returns dispatches an action to the reducer with a action.payload of the data
@@ -27,7 +27,11 @@ export function standardApiCall(
   errorMsg = 'Server Error, servers may be down. Go to about and contact someone for help.',
 ) {
   return async function (dispatch) {
-    if (componentName !== null) dispatch(startLoading(componentName));
+    if (Array.isArray(componentName)) {
+      for (let i in componentName) {
+        dispatch(startLoading(i));
+      }
+    } else if (componentName !== null) dispatch(startLoading(componentName));
     try {
       let result = null;
       if (method === 'post' || method === 'put' || method === 'patch') {

@@ -10,6 +10,16 @@ export async function getGroupsByClassId(class_id, type) {
   );
 }
 
+export async function getGroupsByUserId(user_id, type) {
+  const params = { user_id, type };
+  return await sqlExe.executeCommand(
+    `SELECT g.name,g.id,g.desc,g.created_by, g.class_id, gt.type_name as type 
+    FROM cgroups g JOIN group_types gt on g.type = gt.id WHERE gt.type_name = :type 
+    AND g.deleted = 0 AND g.created_by =:user_id ORDER BY g.id ASC`,
+    params
+  );
+}
+
 export async function createGroupInClass(user_id, class_id, type, name, desc) {
   const params = { user_id, class_id, type, name, desc };
   return (

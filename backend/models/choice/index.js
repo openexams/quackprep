@@ -45,7 +45,18 @@ export async function getChoicesByQuestion(question_id) {
   const params = { question_id };
   return await sqlExe.executeCommand(
     `SELECT c.id,c.answer,c.is_correct,c.created_by,c.question_id,c.type FROM choices c 
-    WHERE c.deleted=0
+    WHERE c.deleted=0 AND c.question_id = :question_id
+     ORDER BY id ASC`,
+    params
+  );
+}
+
+export async function getChoicesByUserId(user_id) {
+  // TODO TEST
+  const params = { user_id };
+  return await sqlExe.executeCommand(
+    `SELECT c.id,c.answer,c.is_correct,c.created_by,c.question_id,c.type FROM choices c 
+    WHERE c.deleted=0 AND c.created_by = :user_id
      ORDER BY id ASC`,
     params
   );

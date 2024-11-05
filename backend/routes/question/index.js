@@ -3,11 +3,23 @@ import { isAuthenticated } from "#middleware/authMiddleware.js";
 import {
   createQuestionInGroups,
   getQuestionsByGroupId,
+  getQuestionsByUserId,
 } from "#models/question/index.js";
 import { cascadeSetDeleted } from "#utils/sqlFunctions.js";
 
 const router = express.Router();
 router.use(isAuthenticated);
+
+router.get("/user", async function (req, res) {
+  try {
+    const result = await getQuestionsByUserId(req.user);
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(500).json({
+      message: `failed to get question by user id ${req.user}`,
+    });
+  }
+});
 
 router.get("/:group_id", async function (req, res) {
   try {

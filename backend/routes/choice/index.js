@@ -9,6 +9,7 @@ import {
   getCurrentChoicesByGroupIdAndType,
   getChoicesByGroupId,
   addManyChoicesToQuestion,
+  getChoicesByUserId,
 } from "#models/choice/index.js";
 import { cascadeSetDeleted } from "#utils/sqlFunctions.js";
 import express, { Router } from "express";
@@ -37,6 +38,17 @@ router.get("/qsansweredbymandy", async function (req, res) {
 /// CRUD CHOICES
 
 //// R
+router.get("/user", isAuthenticated, async function (req, res) {
+  try {
+    const result = await getChoicesByUserId(req.user);
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(500).json({
+      message: `failed to get choices by user id ${req.user}`,
+    });
+  }
+});
+
 router.get("/:question_id", isAuthenticated, async function (req, res) {
   try {
     const result = await getChoicesByQuestion(req.params.question_id);

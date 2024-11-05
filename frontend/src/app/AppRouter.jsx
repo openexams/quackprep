@@ -14,6 +14,7 @@ import NotFoundPage from '@components/NotFound.jsx';
 import ApiDocs from './docs/api/ApiDocs.jsx';
 import ExamList from './class/group/exam/ExamList.jsx';
 import CreatorDashboard from './creator/CreatorDashboard.jsx';
+import Create from './creator/Create.jsx';
 
 {
   /* topic could be a actual topic or a group of question such as a exam */
@@ -30,7 +31,8 @@ export default function AppRouter() {
         <Route path='/account' element={<Profile />} />
         <Route path='/streak' element={<Streak />} />
         <Route path='/class' element={<ClassList />} />
-        <Route path='/create' element={<CreatorDashboard />} />
+        <Route path='/creatordashboard' element={<CreatorDashboard />} />
+        <Route path='/create' element={<Create />} />
 
         <Route path='/class/:school_name/' element={<ClassList />} />
 
