@@ -4,6 +4,7 @@ import CreateInputForm from '@components/CreateInputForm';
 import ConfirmButton from '@components/ConfirmButton';
 import { upsertClass, deleteClassById } from './classSlice';
 import { useDispatch } from 'react-redux';
+import PlusIconCard from '@components/PlusIconCard';
 export default function ClassEdit({ id, name = '', description = '', category = '', school_id = '' }) {
   const dispatch = useDispatch();
   const [isEditing, setIsEditing] = useState(false);
@@ -32,29 +33,33 @@ export default function ClassEdit({ id, name = '', description = '', category = 
 
   return (
     <>
-      <Card
-        style={{
-          transition: 'transform 0.3s ease, box-shadow 0.3s ease',
-          transform: hovered ? 'scale(1.05)' : 'scale(1)',
-          cursor: 'pointer',
-        }}
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
-        onClick={() => setIsEditing(true)}
-      >
-        <Card.Content>
-          <Card.Header>{`id:${id || 'na'} ${name}`}</Card.Header>
-          <Card.Description>{description}</Card.Description>
-        </Card.Content>
-        <Card.Content extra>
-          <Icon name='folder' />
-          {category}
-          <span style={{ float: 'right' }}>
-            <Icon name='building' />
-            ID: {school_id}
-          </span>
-        </Card.Content>
-      </Card>
+      {name !== '' ? (
+        <Card
+          style={{
+            transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+            transform: hovered ? 'scale(1.05)' : 'scale(1)',
+            cursor: 'pointer',
+          }}
+          onMouseEnter={() => setHovered(true)}
+          onMouseLeave={() => setHovered(false)}
+          onClick={() => setIsEditing(true)}
+        >
+          <Card.Content>
+            <Card.Header>{`id:${id || 'na'} ${name}`}</Card.Header>
+            <Card.Description>{description}</Card.Description>
+          </Card.Content>
+          <Card.Content extra>
+            <Icon name='folder' />
+            {category}
+            <span style={{ float: 'right' }}>
+              <Icon name='building' />
+              ID: {school_id}
+            </span>
+          </Card.Content>
+        </Card>
+      ) : (
+        <PlusIconCard Title={'Add a Class'} onClick={() => setIsEditing(true)} />
+      )}
 
       <Modal closeIcon open={isEditing} onClose={() => setIsEditing(false)} size='small'>
         <Modal.Header>Edit Class</Modal.Header>

@@ -27,7 +27,7 @@ export default function ClassList({ classes, editMode }) {
         ))}
       {editMode && ( // do one extra for class edit, meaning there will be a null class that can be added
         <GridColumn>
-          <ClassEdit name='NEW CLASS (TEMPLATE)' />
+          <ClassEdit />
         </GridColumn>
       )}
     </Grid>
