@@ -1,4 +1,5 @@
 import sqlExe from "#db/dbFunctions.js";
+import { getLastRowManipulated } from "#utils/sqlFunctions.js";
 
 export async function getClasses() {
   return await sqlExe.executeCommand(
@@ -41,4 +42,26 @@ export async function getClassesByUserId(user_id) {
   );
 }
 
-// 3 new functions not tested
+export async function upsertClass(
+  school_id,
+  name,
+  description,
+  category,
+  user_id
+) {
+  const params = { school_id, name, description, category, user_id };
+  const result = (
+    await sqlExe.executeCommand(
+      `INSERT INTO classes (school_id,name,description,category,created_by)
+     VALUES(:school_id, :name, :description, :category, :user_id)
+     ON DUPLICATE KEY UPDATE
+      name = :name,
+      description = :description,
+      category = :category`,
+      params
+    )
+  ).insertId;
+  return await sqlExe.executeCommand(
+    `${getLastRowManipulated("classes", result)}`
+  );
+}

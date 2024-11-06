@@ -10,6 +10,8 @@ import { selectUser } from '../auth/authSlice';
 import { selectLoadingState } from '../store/loadingSlice';
 import { Accordion, Segment, Container, Icon, Grid } from 'semantic-ui-react';
 import ClassList from '../class/ClassList';
+import CCreate from '../class/CCreate';
+import ClassEdit from '../class/ClassEdit';
 
 export default function Create() {
   const dispatch = useDispatch();
@@ -62,7 +64,9 @@ export default function Create() {
   }, [user?.id]);
   return (
     <Container>
-      <Segment loading={loading}>{loadAccords([{ name: 'Classes', component: <ClassList classes={classes} /> }])}</Segment>
+      <Segment loading={loading}>
+        {loadAccords([{ name: 'Classes', component: <ClassList editMode={true} classes={classes} /> }])}
+      </Segment>
     </Container>
   );
 }

@@ -52,7 +52,7 @@ export default function ClassCard({ id, name, category, desc }) {
   const dispatch = useDispatch();
 
   const level = useMemo(() => {
-    return findClassNumber(name)[0];
+    return findClassNumber(name)?.[0];
   }, [name]);
 
   const icon = useMemo(() => {

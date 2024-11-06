@@ -1,5 +1,6 @@
 import { isAuthenticated } from "#middleware/authMiddleware.js";
 import {
+  upsertClass,
   getClasses,
   getClassesByUserId,
   getClassIdByClassName,
@@ -48,6 +49,29 @@ router.delete("/:class_id", async function (req, res) {
     res
       .status(500)
       .json({ message: `failed to delete class by id ${req.params.class_id}` });
+  }
+});
+
+router.post("/", async function (req, res) {
+  const data = req.body;
+  try {
+    if (!data.school_id || !data.name || !data.description || !data.category) {
+      res.status(400).json({ message: `pls provide all needed values ` });
+      return;
+    }
+
+    const result = await upsertClass(
+      data.school_id,
+      data.name,
+      data.description,
+      data.category,
+      req.user
+    );
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(500).json({
+      message: `server error could not create class with user id ${req.user}`,
+    });
   }
 });
 
