@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import MultipleChoice from './types/MultipleChoice';
+import MultipleChoice from './types/MultipleChoice/MultipleChoice';
 import { selectArrayOfStateById } from '@utils/functions';
 import { Segment, Header, Divider } from 'semantic-ui-react';
 import MarkdownRenderer from '@components/MarkdownRenderer';

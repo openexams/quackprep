@@ -1,0 +1,103 @@
+/* AnswerButton.css */
+.answer-list-item {
+  margin-bottom: 1rem !important;
+}
+
+.answer-wrapper {
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.answer-wrapper:hover {
+  transform: translateY(-1px);
+}
+
+.answer-button {
+  min-height: 60px !important;
+  padding: 1rem 1.5rem !important;
+  background-color: #ffffff !important;
+  border: 2px solid #e0e1e2 !important;
+  border-radius: 8px !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05) !important;
+  transition: all 0.2s ease !important;
+}
+
+.answer-button:hover:not(.disabled) {
+  background-color: #f8f9fa !important;
+  border-color: #dadbdc !important;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08) !important;
+}
+
+.answer-button.disabled {
+  opacity: 0.7 !important;
+  background-color: #f5f5f5 !important;
+  border-color: #e0e1e2 !important;
+  cursor: not-allowed !important;
+}
+
+.answer-button.correct {
+  background-color: #f0fff4 !important;
+  border-color: #48bb78 !important;
+  color: #2f855a !important;
+}
+
+.answer-button.incorrect {
+  background-color: #fff5f5 !important;
+  border-color: #f56565 !important;
+  color: #c53030 !important;
+}
+
+.answer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.result-indicator {
+  display: flex;
+  align-items: center;
+  font-size: 1.25rem;
+}
+
+.result-indicator.correct i {
+  color: #48bb78;
+}
+
+.result-indicator.incorrect i {
+  color: #f56565;
+}
+
+.disable-toggle.extra {
+  background-color: #718096 !important;
+  color: #718096 !important;
+  padding: 6px !important;
+  margin: 0 !important;
+  min-width: 32px !important;
+  height: 32px !important;
+  opacity: 1 !important;
+  transition: opacity 0.2s ease !important;
+  border-radius: 4px !important;
+}
+
+.disable-toggle.extra:hover:not(:disabled) {
+  opacity: 1 !important;
+  background-color: #f7fafc !important;
+}
+
+.disable-toggle.extra.disabled {
+  opacity: 0.3 !important;
+  cursor: not-allowed !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .answer-button {
+    min-height: 50px !important;
+    padding: 0.75rem 1rem !important;
+  }
+
+  .button-indicators {
+    padding-left: 0.5rem;
+  }
+}
