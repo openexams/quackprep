@@ -9,7 +9,7 @@ export default function Login() {
     <CreateInputForm
       formFields={[
         { name: 'email', value: '', required: true },
-        { name: 'password', value: '', required: true },
+        { name: 'password', value: '', required: true, type: 'password' },
       ]}
       onSubmit={({ email, password }) => dispatch(login(email, password))}
     />

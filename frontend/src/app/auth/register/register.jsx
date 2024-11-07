@@ -12,7 +12,7 @@ export default function Register() {
         { name: 'lastName', value: '', required: true },
         { name: 'username', value: '', required: true },
         { name: 'email', value: '', required: true },
-        { name: 'password', value: '', required: true },
+        { name: 'password', value: '', required: true, type: 'password' },
       ]}
       onSubmit={({ firstName, lastName, username, email, password }) =>
         dispatch(register(firstName, lastName, username, email, password))
