@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { List, Button, Transition } from 'semantic-ui-react';
 import './AnswerButton.css';
 import MarkdownRenderer from '@components/MarkdownRenderer';
 import { useDispatch } from 'react-redux';
 import { postAnswer, upsertCurrentAnswer } from '../../choicesSlice';
 
-export default function ChoiceShow({ id, answer, is_correct, showAnswers, setShowAnswers, selectedQuestionId }) {
-  const [disabled, setDisabled] = useState(false);
+export default function ChoiceShow({ id, answer, is_correct, showAnswers, setShowAnswers, selectedQuestionId, resetClicked }) {
+  const [disabled, setDisabled] = useState();
   const dispatch = useDispatch();
   const getButtonClass = () => {
     let classes = ['answer-button'];
@@ -16,6 +16,9 @@ export default function ChoiceShow({ id, answer, is_correct, showAnswers, setSho
     }
     return classes.join(' ');
   };
+  useEffect(() => {
+    setDisabled(false);
+  }, [resetClicked]);
 
   return (
     <List.Item className='answer-list-item'>

@@ -8,6 +8,7 @@ import ChoiceShow from './ChoiceShow';
 
 export default function MultipleChoice({ choices, selectedQuestion }) {
   const [showAnswers, setShowAnswers] = useState(false);
+  const [resetClicked, setResetClicked] = useState(0);
 
   // give choices a random order TODO LET THE USER DO THIS.
   choices = randomizeArray(choices, 1234);
@@ -33,6 +34,7 @@ export default function MultipleChoice({ choices, selectedQuestion }) {
               selectedQuestionId={selectedQuestion?.id}
               setShowAnswers={setShowAnswers}
               showAnswers={showAnswers}
+              resetClicked={resetClicked}
             />
           ),
         )}
@@ -42,6 +44,7 @@ export default function MultipleChoice({ choices, selectedQuestion }) {
         floated='right'
         onClick={() => {
           // make dispatch to reset answers current as well TODO
+          setResetClicked(resetClicked + 1);
           setShowAnswers(false);
         }}
       >
