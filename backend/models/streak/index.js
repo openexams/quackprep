@@ -43,7 +43,7 @@ export async function hasStreak(userId) {
   const params = {
     userId,
   };
-  const streak_data = (await sqlExe.executeCommand(sqlCommand, params))[0];
+  const streak_data = (await sqlExe.executeCommand(sqlCommand, params))?.[0];
   if (!streak_data?.last_claim) {
     return false;
   }
@@ -55,7 +55,7 @@ export async function getStreakData(userId) {
   const params = {
     userId,
   };
-  const result = (await sqlExe.executeCommand(sqlCommand, params))[0];
+  const result = (await sqlExe.executeCommand(sqlCommand, params))?.[0];
 
   // calulate if has_streak
   if (!result?.last_claim) {

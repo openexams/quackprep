@@ -20,7 +20,7 @@ const router = Router();
 router.get("/users/count", isAuthenticated, async function (req, res) {
   try {
     const result = await getUserCount();
-    res.status(200).json(result[0].COUNT);
+    res.status(200).json(result?.[0].COUNT);
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "failed to get user count" });

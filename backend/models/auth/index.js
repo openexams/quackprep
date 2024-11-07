@@ -7,7 +7,7 @@ export async function checkIfProviderIdExistsInUsers(provider, provider_id) {
     "SELECT u.provider_id, u.id FROM users u WHERE u.provider = :provider AND u.provider_id = :provider_id",
     params
   );
-  if (result[0]?.provider_id) return result[0].id;
+  if (result?.[0]?.provider_id) return result?.[0].id;
   return false;
 }
 
@@ -76,12 +76,12 @@ export async function findLocalUserByEmailPassword(email, password) {
     { email }
   );
 
-  if (!exists[0] || exists[0].email !== email) {
+  if (!exists?.[0] || exists?.[0].email !== email) {
     return -1;
-  } else if (!(await bcrypt.compare(password, exists[0].password_hash))) {
+  } else if (!(await bcrypt.compare(password, exists?.[0].password_hash))) {
     return -2;
   }
-  const curUser = exists[0];
+  const curUser = exists?.[0];
   return {
     id: curUser.id,
     username: curUser.username,
@@ -97,10 +97,10 @@ export async function findUserById(id) {
     `SELECT u.icon, u.id,u.username,u.email,u.first_name,u.last_name FROM users u WHERE id = :id`,
     { id }
   );
-  if (!exists[0]) {
+  if (!exists?.[0]) {
     return -1;
   } else {
-    return exists[0];
+    return exists?.[0];
   }
 }
 
@@ -114,8 +114,8 @@ export async function checkApiKey(key) {
     { key }
   );
 
-  if (result[0]) {
-    return result[0].user_id;
+  if (result?.[0]) {
+    return result?.[0].user_id;
   }
   return null;
 }

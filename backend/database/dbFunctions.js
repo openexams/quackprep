@@ -20,7 +20,7 @@ export default class sqlExe {
   static async executeCommand(sqlCommand, params) {
     try {
       const response = await sqlExe.pool.execute(sqlCommand, params);
-      return response[0];
+      return response?.[0];
     } catch (error) {
       console.log("Failed @executeCommand\n", error);
       throw error;
@@ -38,7 +38,7 @@ export default class sqlExe {
   static async queryCommand(sqlCommand, params) {
     try {
       const response = await sqlExe.pool.query(sqlCommand, params);
-      return response[0];
+      return response?.[0];
     } catch (error) {
       console.log("Failed @queryCommand\n", error);
       throw error;

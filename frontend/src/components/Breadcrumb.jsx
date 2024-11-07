@@ -19,7 +19,7 @@ export default function HistoryNav() {
 
         sections.push({
           key: urlArr[i],
-          content: urlArr[i][0].toUpperCase() + urlArr[i].slice(1),
+          content: urlArr[i]?.[0].toUpperCase() + urlArr[i].slice(1),
           onClick: () => dispatch(changeNavbarPage(curItemUrl)),
           active: urlArr[urlArr.length - 1] == urlArr[i] ? true : false,
         });

@@ -101,7 +101,7 @@ export default function navbarReducer(state = DEFAULT_STATE, action) {
       }
       // after base cases
 
-      if (action.payload[0] === '/') {
+      if (action.payload?.[0] === '/') {
         curUrl = action.payload;
       } else {
         curUrl = state.page + '/' + action.payload;

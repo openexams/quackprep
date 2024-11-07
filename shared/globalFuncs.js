@@ -47,9 +47,9 @@ export class Streak {
 export function parseExamNameId(examNameString) {
   examNameString = examNameString.split("_");
   return {
-    semester: examNameString[0],
-    year: examNameString[1],
-    exam_num: examNameString[2],
+    semester: examNameString?.[0],
+    year: examNameString?.[1],
+    exam_num: examNameString?.[2],
   };
 }
 

@@ -80,7 +80,7 @@ router.get("/:className", async function (req, res) {
   try {
     const result = await getClassIdByClassName(req.params.className);
 
-    res.status(200).json(result[0]);
+    res.status(200).json(result?.[0]);
   } catch (error) {
     res
       .status(500)
