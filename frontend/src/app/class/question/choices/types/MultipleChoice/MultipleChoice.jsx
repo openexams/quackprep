@@ -7,8 +7,6 @@ import { randomizeArray } from '../../../../../../../../shared/globalFuncs';
 import ChoiceShow from './ChoiceShow';
 
 export default function MultipleChoice({ choices, selectedQuestion }) {
-  const dispatch = useDispatch();
-
   const [showAnswers, setShowAnswers] = useState(false);
 
   // give choices a random order TODO LET THE USER DO THIS.
@@ -20,7 +18,7 @@ export default function MultipleChoice({ choices, selectedQuestion }) {
   }, [selectedQuestion]);
 
   return (
-    <>
+    <Segment basic>
       <List>
         {choices.map(
           (
@@ -49,6 +47,6 @@ export default function MultipleChoice({ choices, selectedQuestion }) {
       >
         Reset
       </Button>
-    </>
+    </Segment>
   );
 }
