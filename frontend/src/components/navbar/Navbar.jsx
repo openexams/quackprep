@@ -1,5 +1,5 @@
 // not using navbar css file
-import { Menu, Container, Icon, Sidebar, Button } from 'semantic-ui-react';
+import { Menu, Container, Icon, Sidebar, Button, Transition } from 'semantic-ui-react';
 import { useState, useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectUser } from '@src/app/auth/authSlice';
@@ -13,6 +13,7 @@ import {
   updateGroupType,
   upsertTimeSpent,
   updateSchoolId,
+  updateLastPage,
 } from './navbarSlice';
 import { getCurUser } from '@src/app/auth/authSlice';
 import ProfileDropdown from './components/Profile/ProfileDropdown';
@@ -146,6 +147,7 @@ export default function Navbar() {
 
   function handlePageChange(e, data) {
     e.preventDefault();
+    dispatch(updateLastPage(activePage));
     dispatch(changeNavbarPage(data.name));
     setSidebarOpened(false); // Close sidebar on item click
   }

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Modal, Button, Segment, Header, Icon, Image, Form } from 'semantic-ui-react';
 import Login from './login/Login';
-import { changeNavbarPage, selectNavbarState } from '@components/navbar/navbarSlice';
+import { changeNavbarPage, selectLastPage, selectNavbarState } from '@components/navbar/navbarSlice';
 import Register from './register/register';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectUser } from './authSlice';
@@ -9,18 +9,19 @@ import google_icon from '/img/google_icon.webp';
 import { useSearchParams } from 'react-router-dom';
 
 export default function Auth() {
-  const linkAfterAuthNext = useSelector(selectNavbarState).navbar.page?.split('/auth?next=')?.[1];
   const loading = useSelector((state) => state.loading.loadingComps.AuthPopup);
   const dispatch = useDispatch();
   const { user } = useSelector(selectUser);
   const [open, setOpen] = useState(true);
   const [loggingIn, setLoggingIn] = useState(true);
   const log_or_sin_txt = loggingIn ? 'Login' : 'Sign Up';
+  const lastPage = useSelector(selectLastPage).lastPage;
 
   const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
-    if (user?.id && searchParams.has('next')) dispatch(changeNavbarPage(searchParams.get('next')));
+    //if (user?.id && searchParams.has('next')) dispatch(changeNavbarPage(searchParams.get('next'))); // if forced to auth page
+    if (user?.id && lastPage) dispatch(changeNavbarPage(lastPage));
     else if (user?.id) dispatch(changeNavbarPage('/home'));
   }, [user]);
 
@@ -44,10 +45,8 @@ export default function Auth() {
               <Header.Content>
                 {log_or_sin_txt} to Your Account
                 <Header.Subheader style={{ color: '#ddd' }}>Welcome to quackprep</Header.Subheader>
-                {linkAfterAuthNext && (
-                  <Header.Subheader style={{ color: '#ddd' }}>
-                    You must be logged in to use **{linkAfterAuthNext}**
-                  </Header.Subheader>
+                {lastPage && ( // error now that last page
+                  <Header.Subheader style={{ color: '#ddd' }}>You must be logged in to use **{lastPage}**</Header.Subheader>
                 )}
               </Header.Content>
             </Header>

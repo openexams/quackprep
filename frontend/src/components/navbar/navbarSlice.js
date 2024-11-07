@@ -3,6 +3,8 @@ import { standardApiCall } from '@utils/api';
 import { replaceP20WithSpace } from '../../../../shared/globalFuncs';
 
 const CHANGE_NAVBAR_PAGE = 'components/navbar/CHANGE_NAVBAR_PAGE';
+const UPDATE_LAST_PAGE = 'components/navbar/UPDATE_LAST_PAGE';
+
 const UPDATE_CUR_CLASS = 'components/navbar/UPDATE_CUR_CLASS';
 const UPDATE_CUR_GROUP = 'components/navbar/UPDATE_CUR_GROUP';
 const UPDATE_CUR_QUESTION = 'components/navbar/UPDATE_CUR_QUESTION';
@@ -55,6 +57,10 @@ export function updateSchoolId(id) {
   return { type: UPDATE_SCHOOL_ID, payload: id };
 }
 
+export function updateLastPage(lastPage) {
+  return { type: UPDATE_LAST_PAGE, payload: lastPage };
+}
+
 const DEFAULT_STATE = {
   page: null,
   classId: null,
@@ -65,6 +71,7 @@ const DEFAULT_STATE = {
   groupId: null, // this identifies the group, wether that means its a string or a id
   groupName: null,
   questionId: null,
+  lastPage: null,
 };
 
 export default function navbarReducer(state = DEFAULT_STATE, action) {
@@ -74,7 +81,9 @@ export default function navbarReducer(state = DEFAULT_STATE, action) {
   }
   switch (action.type) {
     case CHANGE_NAVBAR_PAGE:
-      if (action.payload?.includes('/auth?next=')) {
+      let curUrl = state.page;
+      const newLastPage = state.page;
+      if (action.payload?.includes('/auth')) {
         // this in the navbar fucks the ordering of urlArr[], so change noothing
         return {
           ...state,
@@ -87,10 +96,11 @@ export default function navbarReducer(state = DEFAULT_STATE, action) {
           classId: null,
           groupId: null,
           groupType: null,
+          lastPage: newLastPage,
         };
       }
       // after base cases
-      let curUrl = state.page;
+
       if (action.payload[0] === '/') {
         curUrl = action.payload;
       } else {
@@ -118,6 +128,7 @@ export default function navbarReducer(state = DEFAULT_STATE, action) {
         classId: urlArr[3] ? state.classId : null, // these 2 null should be brought in again, only if we changed topic or class, may cause issues when inputting new link directly into window.location TODO TEST
         groupId: urlArr[4] ? state.groupId : null,
         groupType: null,
+        lastPage: newLastPage,
       };
     case UPDATE_CUR_CLASS:
       return { ...state, classId: action.payload.id || state.classId, className: action.payload.name || state.className };
@@ -155,5 +166,12 @@ export const selectNavbarState = createSelector(
   (state) => state,
   function (state) {
     return { navbar: state.app.navbar };
+  },
+);
+
+export const selectLastPage = createSelector(
+  (state) => state,
+  function (state) {
+    return { lastPage: state.app.navbar.lastPage };
   },
 );

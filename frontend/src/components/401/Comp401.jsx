@@ -18,7 +18,7 @@ export default function Comp401() {
 
   const handleSignIn = () => {
     dispatch(hide401Msg());
-    dispatch(changeNavbarPage(`/auth?next=${curPage}`));
+    dispatch(changeNavbarPage(`/auth`));
   };
 
   return (
