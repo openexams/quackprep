@@ -23,7 +23,7 @@
 }
 
 .answer-button:hover:not(.disabled) {
-  background-color: #f8f9fa !important;
+  background-color: black !important;
   border-color: #dadbdc !important;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08) !important;
 }
