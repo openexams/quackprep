@@ -196,7 +196,7 @@ export function findNeedlesInArrayOfObjectsLINEAR(array, keyNamesToCheck, needle
  * @param {*} including
  */
 export function selectArrayOfIncludingItems(array, objectKeyToCheck, including) {
-  if (including === '' || objectKeyToCheck === '' || array?.length === 0) {
+  if (including === '' || objectKeyToCheck === '' || array?.length === 0 || !array) {
     return array;
   }
   let ret = [];
@@ -205,5 +205,50 @@ export function selectArrayOfIncludingItems(array, objectKeyToCheck, including) 
       ret.push(array[i]);
     }
   }
+  return ret;
+}
+
+export function filterArr(arr, id) {
+  if (!Array.isArray(arr) || !id) {
+    return [];
+  }
+  let ret = [];
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i]?.id !== id) {
+      ret.push(arr[i]);
+    }
+  }
+
+  return ret;
+}
+
+/**
+ * Handles Creation of new obj and editing of object
+ * @param {Array} arr
+ * @param {*} obj
+ * @returns {Array} updated arr
+ */
+export function upsertArray(arr, obj) {
+  if (!Array.isArray(arr) || !obj) {
+    return [];
+  }
+  let ret = [];
+  if (arr.length === 0) {
+    ret.push(obj);
+    return ret;
+  }
+  let added = false;
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i]?.id !== obj.id) {
+      ret.push(arr[i]);
+    } else {
+      ret.push(obj);
+      added = true;
+    }
+  }
+  if (added === false) {
+    ret.push(obj);
+  }
+
   return ret;
 }

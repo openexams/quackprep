@@ -4,7 +4,6 @@ import AuthPopup from '@src/app/auth/AuthPopup';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Profile from './profile/Profile.jsx';
 import Streak from './streak/Streak.jsx';
-import ClassList from './class/ClassList.jsx';
 import Leaderboard from './leaderboard/Leaderboard.jsx';
 import Stats from './stats/Stats.jsx';
 import ClassShow from './class/ClassShow.jsx';
@@ -13,6 +12,9 @@ import TopicsShow from './class/group/topic/TopicsShow.jsx';
 import NotFoundPage from '@components/NotFound.jsx';
 import ApiDocs from './docs/api/ApiDocs.jsx';
 import ExamList from './class/group/exam/ExamList.jsx';
+import CreatorDashboard from './creator/CreatorDashboard.jsx';
+import Create from './creator/Create.jsx';
+import ClassPage from './class/ClassPage.jsx';
 
 {
   /* topic could be a actual topic or a group of question such as a exam */
@@ -28,8 +30,11 @@ export default function AppRouter() {
         <Route path='/auth' element={<AuthPopup />} />
         <Route path='/account' element={<Profile />} />
         <Route path='/streak' element={<Streak />} />
-        <Route path='/class' element={<ClassList />} />
-        <Route path='/class/:school_name/' element={<ClassList />} />
+        <Route path='/class' element={<ClassPage />} />
+        <Route path='/creatordashboard' element={<CreatorDashboard />} />
+        <Route path='/create' element={<Create />} />
+
+        <Route path='/class/:school_name/' element={<ClassPage />} />
 
         <Route path='/class/:school_name/:class_name/' element={<ClassShow />} />
 

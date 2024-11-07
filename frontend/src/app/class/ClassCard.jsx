@@ -38,8 +38,10 @@ function getIconByCategory(category) {
   switch (category) {
     case 'CS':
       return 'code';
-    case 'MA':
+    case 'MA' || 'MAT':
       return 'cube';
+    case 'ECO' || 'ECON':
+      return 'cog';
     default:
       return 'beer';
   }
@@ -50,7 +52,7 @@ export default function ClassCard({ id, name, category, desc }) {
   const dispatch = useDispatch();
 
   const level = useMemo(() => {
-    return findClassNumber(name)[0];
+    return findClassNumber(name)?.[0];
   }, [name]);
 
   const icon = useMemo(() => {
