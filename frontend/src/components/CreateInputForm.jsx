@@ -25,7 +25,7 @@ function InputWLabel({ state, setState, curStateIndex }) {
       <Grid>
         <Grid.Row verticalAlign='middle' columns={2}>
           <Grid.Column width={4}>
-            <Label basic pointing='right' color='blue' size='large'>
+            <Label basic pointing='right' size='large'>
               {field.name}
             </Label>
           </Grid.Column>
@@ -113,7 +113,7 @@ function removeErrFromFormField(formFieldArr, index) {
           {res}
         
  */
-export default function CreateInputForm({ onSubmit, formFields, buttonText = 'Submit' }) {
+export default function CreateInputForm({ onSubmit, formFields, buttonText = 'Submit', title }) {
   const [inputFields, setInputFields] = useState(formFields);
 
   function mapStateToObject() {
@@ -158,7 +158,7 @@ export default function CreateInputForm({ onSubmit, formFields, buttonText = 'Su
         }}
       >
         <Header as='h2' color='blue' dividing>
-          Input Form
+          {title}
         </Header>
 
         <div style={{ marginTop: '2em', marginBottom: '2em' }}>{CreateInputs(inputFields, setInputFields)}</div>
