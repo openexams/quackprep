@@ -1,0 +1,63 @@
+/* Navbar.css */
+.custom-navbar {
+  background: linear-gradient(90deg, #2185d0 0%, #1678c2 100%) !important;
+  height: 65px !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+}
+
+.custom-navbar .container {
+  height: 100%;
+}
+
+.nav-item {
+  height: 100%;
+  display: flex !important;
+  align-items: center !important;
+  font-size: 1.1em !important;
+  font-weight: 500 !important;
+  transition: background-color 0.2s ease !important;
+}
+
+.nav-item:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.nav-item.active {
+  background-color: rgba(255, 255, 255, 0.15) !important;
+  border-bottom: 3px solid white !important;
+}
+
+.nav-item i.icon {
+  margin-right: 8px !important;
+}
+
+.auth-button {
+  background-color: rgba(255, 255, 255, 0.15) !important;
+  border-radius: 4px !important;
+  margin: 12px 0 !important;
+}
+
+.auth-button:hover {
+  background-color: rgba(255, 255, 255, 0.25) !important;
+}
+
+.custom-sidebar {
+  box-shadow: 2px 0 4px rgba(0, 0, 0, 0.1) !important;
+  background: linear-gradient(180deg, #2185d0 0%, #1678c2 100%) !important;
+  padding-top: 1rem !important;
+}
+
+.sidebar-brand {
+  margin-bottom: 1rem !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+.sidebar-toggle {
+  padding: 0 1.5rem !important;
+}
+
+@media (max-width: 767px) {
+  .custom-navbar {
+    height: 56px !important;
+  }
+}

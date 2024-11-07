@@ -1,5 +1,8 @@
 import sqlExe from "#db/dbFunctions.js";
-import { getLastRowManipulated } from "#utils/sqlFunctions.js";
+import {
+  getLastRowManipulated,
+  verifyUserOwnsId,
+} from "#utils/sqlFunctions.js";
 
 export async function getClasses() {
   return await sqlExe.executeCommand(
@@ -43,21 +46,28 @@ export async function getClassesByUserId(user_id) {
 }
 
 export async function upsertClass(
+  id,
   school_id,
   name,
   description,
   category,
   user_id
 ) {
-  const params = { school_id, name, description, category, user_id };
+  // this should only run if editing, not if creating
+  if (id && verifyUserOwnsId(id, user_id, "classes") === false) {
+    throw new Error("user does not own the row they are trying to edit");
+    return;
+  }
+  const params = { id, school_id, name, description, category, user_id };
   const result = (
     await sqlExe.executeCommand(
-      `INSERT INTO classes (school_id,name,description,category,created_by)
-     VALUES(:school_id, :name, :description, :category, :user_id)
+      `INSERT INTO classes (id,school_id,name,description,category,created_by)
+     VALUES(:id, :school_id, :name, :description, :category, :user_id)
      ON DUPLICATE KEY UPDATE
       name = :name,
       description = :description,
-      category = :category`,
+      category = :category,
+      school_id = :school_id`,
       params
     )
   ).insertId;

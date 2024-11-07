@@ -11,7 +11,7 @@ export default function ClassEdit({ id, name = '', description = '', category = 
   const [hovered, setHovered] = useState(false);
 
   const handleSubmit = ({ name, description, category, school_id }) => {
-    dispatch(upsertClass(school_id, name, description, category));
+    dispatch(upsertClass(id, school_id, name, description, category));
     setIsEditing(false);
   };
 

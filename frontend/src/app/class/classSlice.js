@@ -15,8 +15,8 @@ export function getClassesByUserId() {
 }
 
 // returns the created class
-export function upsertClass(school_id, name, description, category) {
-  return standardApiCall('post', `/api/class/`, { school_id, name, description, category }, UPSERT_CLASSES, ['Create']); // have a action that puts this created class into the classlist
+export function upsertClass(id, school_id, name, description, category) {
+  return standardApiCall('post', `/api/class/`, { id, school_id, name, description, category }, UPSERT_CLASSES, ['Create']); // have a action that puts this created class into the classlist
 }
 
 export function deleteClassById(id) {

@@ -61,6 +61,7 @@ router.post("/", async function (req, res) {
     }
 
     const result = await upsertClass(
+      data.id || null,
       data.school_id,
       data.name,
       data.description,

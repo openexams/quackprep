@@ -69,3 +69,27 @@ export async function cascadeSetDeleted( // todo learn more about how the join w
   ).affectedRows;
   return id;
 }
+
+function verifyTableName(tableName) {
+  const allowed_tables = ["classes", "cgroups", "questions", "choices"];
+
+  if (tableName in allowed_tables) {
+    return true;
+  }
+  return false;
+}
+
+export async function verifyUserOwnsId(id, user_id, tableName) {
+  if (verifyTableName(tableName) === false) {
+    return false;
+  }
+  const owned = await sqlExe.executeCommand(
+    `SELECT * FROM ${tableName} x WHERE x.id = :id`,
+    { id }
+  );
+  owned = owned?.[0]?.created_by;
+  if (owned === user_id) {
+    return true;
+  }
+  return false;
+}

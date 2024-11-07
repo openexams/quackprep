@@ -1,3 +1,4 @@
+// not using navbar css file
 import { Menu, Container, Icon, Sidebar, Button } from 'semantic-ui-react';
 import { useState, useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -266,60 +267,123 @@ export default function Navbar() {
     <>
       {isMobile ? (
         <>
-          <Menu fixed='top' inverted>
+          <Menu fixed='top' inverted size='large' className='custom-navbar'>
             <Container>
-              <Menu.Item onClick={handleSidebarToggle}>
-                <Icon name='sidebar' />
+              <Menu.Item onClick={handleSidebarToggle} className='sidebar-toggle'>
+                <Icon name='sidebar' size='large' />
               </Menu.Item>
               <BrandLogo handlePageChange={handlePageChange} />
             </Container>
           </Menu>
 
-          <Sidebar as={Menu} animation='overlay' inverted vertical visible={sidebarOpened} onHide={() => setSidebarOpened(false)}>
-            <Menu.Item onClick={handlePageChange} as='a' href='/home' active={activePage === '/home'} name='/home'>
-              Home
-            </Menu.Item>
-            <Menu.Item
-              onClick={handlePageChange}
-              as='a'
-              href='/leaderboard'
-              active={activePage === '/leaderboard'}
-              name='/leaderboard'
+          <Transition visible={sidebarOpened} animation='overlay' duration={300}>
+            <Sidebar
+              as={Menu}
+              animation='overlay'
+              inverted
+              vertical
+              visible={sidebarOpened}
+              onHide={() => setSidebarOpened(false)}
+              className='custom-sidebar'
             >
-              Leaderboard
-            </Menu.Item>
-            <Menu.Item onClick={handlePageChange} as='a' href='/stats' active={activePage === '/stats'} name='/stats'>
-              Stats
-            </Menu.Item>
+              <Menu.Item className='sidebar-brand'>
+                <BrandLogo handlePageChange={handlePageChange} />
+              </Menu.Item>
 
-            {user.id ? (
-              <Menu.Item>
-                <ProfileDropdown hasStreak={hasStreak} activePage={activePage} handlePageChange={handlePageChange} />
+              <Menu.Item
+                onClick={handlePageChange}
+                as='a'
+                href='/home'
+                active={activePage === '/home'}
+                name='/home'
+                className='nav-item'
+              >
+                <Icon name='home' />
+                Home
               </Menu.Item>
-            ) : (
-              <Menu.Item onClick={handlePageChange} as='a' href='/auth' active={activePage === '/auth'} name='/auth'>
-                Login/Signup
+
+              <Menu.Item
+                onClick={handlePageChange}
+                as='a'
+                href='/leaderboard'
+                active={activePage === '/leaderboard'}
+                name='/leaderboard'
+                className='nav-item'
+              >
+                <Icon name='trophy' />
+                Leaderboard
               </Menu.Item>
-            )}
-          </Sidebar>
+
+              <Menu.Item
+                onClick={handlePageChange}
+                as='a'
+                href='/stats'
+                active={activePage === '/stats'}
+                name='/stats'
+                className='nav-item'
+              >
+                <Icon name='chart bar' />
+                Stats
+              </Menu.Item>
+
+              {user.id ? (
+                <Menu.Item className='nav-item'>
+                  <ProfileDropdown hasStreak={hasStreak} activePage={activePage} handlePageChange={handlePageChange} />
+                </Menu.Item>
+              ) : (
+                <Menu.Item
+                  onClick={handlePageChange}
+                  as='a'
+                  href='/auth'
+                  active={activePage === '/auth'}
+                  name='/auth'
+                  className='nav-item'
+                >
+                  <Icon name='user' />
+                  Login/Signup
+                </Menu.Item>
+              )}
+            </Sidebar>
+          </Transition>
         </>
       ) : (
-        <Menu fixed='top' inverted>
+        <Menu fixed='top' inverted size='large' className='custom-navbar'>
           <Container>
             <BrandLogo handlePageChange={handlePageChange} />
-            <Menu.Item onClick={handlePageChange} as='a' href='/home' active={activePage === '/home'} name='/home'>
+
+            <Menu.Item
+              onClick={handlePageChange}
+              as='a'
+              href='/home'
+              active={activePage === '/home'}
+              name='/home'
+              className='nav-item'
+            >
+              <Icon name='home' />
               Home
             </Menu.Item>
+
             <Menu.Item
               onClick={handlePageChange}
               as='a'
               href='/leaderboard'
               active={activePage === '/leaderboard'}
               name='/leaderboard'
+              className='nav-item'
             >
+              <Icon name='trophy' />
               Leaderboard
             </Menu.Item>
-            <Menu.Item onClick={handlePageChange} as='a' href='/stats' active={activePage === '/stats'} name='/stats'>
+
+            <Menu.Item
+              onClick={handlePageChange}
+              as='a'
+              href='/stats'
+              active={activePage === '/stats'}
+              name='/stats'
+              className='nav-item'
+            >
+              <Icon name='chart bar' />
               Stats
             </Menu.Item>
 
@@ -335,7 +399,9 @@ export default function Navbar() {
                 active={activePage === '/auth'}
                 name='/auth'
                 position='right'
+                className='nav-item auth-button'
               >
+                <Icon name='user' />
                 Login/Signup
               </Menu.Item>
             )}
