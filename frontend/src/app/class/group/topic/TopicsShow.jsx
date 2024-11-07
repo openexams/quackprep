@@ -16,7 +16,6 @@ export default function TopicsShow() {
     'name',
     searchValue,
   );
-  console.log(topics);
   const dispatch = useDispatch();
 
   return (

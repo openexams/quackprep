@@ -18,10 +18,10 @@ export default function Searchbar({ value, setValue, placeholder }) {
         className={isFocused ? 'focused-search' : ''}
       >
         <input />
-        <Transition visible={!value} animation='scale' duration={200}>
+        <Transition animation='scale' duration={200}>
           <Icon name='search' color='grey' />
         </Transition>
-        <Transition visible={value} animation='scale' duration={200}>
+        <Transition animation='scale' duration={200}>
           <Icon name='close' color='grey' link onClick={() => setValue('')} style={{ cursor: 'pointer' }} />
         </Transition>
       </Input>
