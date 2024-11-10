@@ -1,7 +1,7 @@
 import express from "express";
 import { isAuthenticated } from "#middleware/authMiddleware.js";
 import {
-  createGroupInClass,
+  upsertGroupInClass,
   getGroupsByClassId,
   getGroupsByUserId,
 } from "#models/group/index.js";
@@ -64,12 +64,13 @@ router.post("/:type", async function (req, res) {
       });
       return;
     }
-    const result = await createGroupInClass(
+    const result = await upsertGroupInClass(
       req.user,
       data.class_id,
       req.params.type,
       data.name,
-      data.desc
+      data.desc,
+      data?.id
     );
     res.status(201).json(result);
   } catch (error) {

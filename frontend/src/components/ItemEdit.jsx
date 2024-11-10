@@ -1,35 +1,38 @@
 import React, { useState } from 'react';
-import { Card, Icon, Button, Modal } from 'semantic-ui-react';
+import { Card, Button, Modal } from 'semantic-ui-react';
 import CreateInputForm from '@components/CreateInputForm';
 import ConfirmButton from '@components/ConfirmButton';
-import { upsertClass, deleteClassById } from './classSlice';
-import { useDispatch } from 'react-redux';
 import PlusIconCard from '@components/PlusIconCard';
-export default function ClassEdit({ id, name = '', description = '', category = '', school_id = '' }) {
-  const dispatch = useDispatch();
+
+/**
+ * Creates a card that can be edited and deleted or if no name is present it will show a card with a plus icon
+ * @param {*} props
+ * @param {Int} props.id
+ * @param {String} props.name
+ * @param {String} props.desc
+ * @param {import('./CreateInputForm').FormField[]} props.formFields
+ * @param {Function} props.onSubmit
+ * @param {Function} props.onDelete
+ *
+ * @returns {JSX.Element}
+ */
+export default function ItemEdit({ id, name, desc, formFields, onSubmit, onDelete }) {
   const [isEditing, setIsEditing] = useState(false);
   const [hovered, setHovered] = useState(false);
 
-  const handleSubmit = ({ name, description, category, school_id }) => {
-    dispatch(upsertClass(id, school_id, name, description, category));
+  const handleSubmit = (fields) => {
+    onSubmit(fields);
     setIsEditing(false);
   };
 
   function handleDelete() {
     if (id) {
-      dispatch(deleteClassById(id));
+      onDelete(id);
     } else {
-      console.log('Cant delete a class thats not even created!');
+      console.log('Cant delete a item thats not even created!');
     }
     setIsEditing(false);
   }
-
-  const formFields = [
-    { name: 'name', value: name, required: true },
-    { name: 'description', value: description, required: true },
-    { name: 'category', value: category, required: true },
-    { name: 'school_id', value: school_id, required: true },
-  ];
 
   return (
     <>
@@ -46,23 +49,15 @@ export default function ClassEdit({ id, name = '', description = '', category = 
         >
           <Card.Content>
             <Card.Header>{`id:${id || 'na'} ${name}`}</Card.Header>
-            <Card.Description>{description}</Card.Description>
-          </Card.Content>
-          <Card.Content extra>
-            <Icon name='folder' />
-            {category}
-            <span style={{ float: 'right' }}>
-              <Icon name='building' />
-              ID: {school_id}
-            </span>
+            <Card.Description>{desc}</Card.Description>
           </Card.Content>
         </Card>
       ) : (
-        <PlusIconCard Title={'Add a Class'} onClick={() => setIsEditing(true)} />
+        <PlusIconCard Title={'Add a Item'} onClick={() => setIsEditing(true)} />
       )}
 
       <Modal closeIcon open={isEditing} onClose={() => setIsEditing(false)} size='small'>
-        <Modal.Header>Edit Class</Modal.Header>
+        <Modal.Header>Edit Item</Modal.Header>
         <Modal.Content>
           <CreateInputForm formFields={formFields} onSubmit={handleSubmit} buttonText='Save Changes' />
           {id && <ConfirmButton confirmText='Are u sure u wanan delete' buttonName='delete' onClick={handleDelete} />}

@@ -9,9 +9,9 @@ import { useEffect } from 'react';
 import { selectUser } from '../auth/authSlice';
 import { selectLoadingState } from '../store/loadingSlice';
 import { Accordion, Segment, Container, Icon, Grid } from 'semantic-ui-react';
-import ClassList from '../class/ClassList';
-import CCreate from '../class/CCreate';
-import ClassEdit from '../class/ClassEdit';
+import { upsertClass, deleteClassById } from '../class/classSlice';
+import ItemEdit from '@components/ItemEdit';
+import { upsertTopic, deleteTopicById } from '../class/group/topic/topicSlice';
 
 export default function Create() {
   const dispatch = useDispatch();
@@ -36,7 +36,7 @@ export default function Create() {
   function loadAccords(arr) {
     return arr.map((val, index) => {
       return (
-        <Accordion>
+        <Accordion key={index}>
           <Accordion.Title active={activeIndex === index} index={index} onClick={handleAccordClick}>
             <Icon name='dropdown' />
             {val.name}
@@ -49,6 +49,98 @@ export default function Create() {
         </Accordion>
       );
     });
+  }
+
+  // maps the classes into a array of itemedit components
+  function mapClassesToItems() {
+    // DO THIS SHIT TO MUCH IS THERE A WAY TO ABSTRACT?
+    let ret = classes.map((cl) => {
+      return (
+        <ItemEdit
+          key={cl.id}
+          id={cl.id}
+          name={cl.name}
+          desc={cl.description}
+          formFields={[
+            { name: 'name', value: cl.name, required: true },
+            { name: 'description', value: cl.description, required: true },
+            { name: 'category', value: cl.category, required: true },
+            { name: 'school_id', value: cl.school_id, required: true },
+          ]}
+          onSubmit={({ name, description, category, school_id }) => {
+            dispatch(upsertClass(cl.id, school_id, name, description, category));
+          }}
+          onDelete={(id) => {
+            dispatch(deleteClassById(id));
+          }}
+        />
+      );
+    });
+    ret.push(
+      <ItemEdit
+        key='cplus'
+        id={null}
+        name=''
+        desc=''
+        formFields={[
+          { name: 'name', value: '', required: true },
+          { name: 'description', value: '', required: true },
+          { name: 'category', value: '', required: true },
+          { name: 'school_id', value: '', required: true },
+        ]}
+        onSubmit={({ name, description, category, school_id }) => {
+          dispatch(upsertClass(null, school_id, name, description, category));
+        }}
+        onDelete={(id) => {
+          console.log('Cant delete a item thats not even created!');
+        }}
+      />,
+    );
+    return ret;
+  }
+
+  function mapTopicsToItems() {
+    let ret = topics.map((topic) => {
+      return (
+        <ItemEdit
+          key={topic.id}
+          id={topic.id}
+          name={topic.name}
+          desc={topic.desc}
+          formFields={[
+            { name: 'name', value: topic.name, required: true },
+            { name: 'description', value: topic.description, required: true },
+            { name: 'class_id', value: topic.class_id, required: true },
+          ]}
+          onSubmit={({ name, description, class_id }) => {
+            dispatch(upsertTopic(topic.id, name, class_id, description));
+          }}
+          onDelete={(id) => {
+            dispatch(deleteTopicById(id));
+          }}
+        />
+      );
+    });
+    ret.push(
+      <ItemEdit
+        key='tplus'
+        id={null}
+        name=''
+        desc=''
+        formFields={[
+          { name: 'name', value: '', required: true },
+          { name: 'description', value: '', required: true },
+          { name: 'class_id', value: '', required: true },
+        ]}
+        onSubmit={({ name, description, class_id }) => {
+          dispatch(upsertTopic(null, name, class_id, description));
+        }}
+        onDelete={(id) => {
+          console.log('Cant delete a item thats not even created!');
+        }}
+      />,
+    );
+    return ret;
   }
 
   useEffect(() => {
@@ -65,7 +157,15 @@ export default function Create() {
   return (
     <Container>
       <Segment loading={loading}>
-        {loadAccords([{ name: 'Classes', component: <ClassList editMode={true} classes={classes} /> }])}
+        {classes &&
+          topics &&
+          exams &&
+          questions &&
+          choices &&
+          loadAccords([
+            { name: 'Classes', component: mapClassesToItems() },
+            { name: 'Topics', component: mapTopicsToItems() },
+          ])}
       </Segment>
     </Container>
   );

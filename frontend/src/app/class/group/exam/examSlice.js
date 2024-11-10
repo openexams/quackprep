@@ -1,8 +1,10 @@
 import { standardApiCall } from '@utils/api';
 import { createSelector } from 'reselect';
-import getGroupsByUserId from '../groupSlice';
+import { deleteGroupById, getGroupsByUserId, upsertGroup } from '../groupSlice';
 
 const GET_EXAMS = 'app/class/exam/GET_EXAMS';
+const DELETE_EXAM = 'app/class/exam/DELETE_EXAM';
+const UPSERT_EXAM = 'app/class/exam/UPSERT_EXAM';
 
 export function getExamsByClassId(classId) {
   return standardApiCall('get', `/api/group/exam/${classId}`, null, GET_EXAMS, 'ExamList');
@@ -10,6 +12,14 @@ export function getExamsByClassId(classId) {
 
 export function getExamsByUserId() {
   return getGroupsByUserId('exam', GET_EXAMS);
+}
+
+export function deleteExamById(id) {
+  return deleteGroupById(id, DELETE_EXAM); //TODO
+}
+
+export function upsertExam(id, name, class_id, desc) {
+  return upsertGroup(id, name, class_id, 'exam', desc, UPSERT_EXAM);
 }
 
 const DEFAULT_STATE = {

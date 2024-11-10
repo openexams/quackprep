@@ -20,11 +20,30 @@ export async function getGroupsByUserId(user_id, type) {
   );
 }
 
-export async function createGroupInClass(user_id, class_id, type, name, desc) {
-  const params = { user_id, class_id, type, name, desc };
+export async function upsertGroupInClass(
+  user_id,
+  class_id,
+  type,
+  name,
+  desc,
+  id = null
+) {
+  // this should only run if editing, not if creating
+  if (id && verifyUserOwnsId(id, user_id, "cgroups") === false) {
+    throw new Error("user does not own the row they are trying to edit");
+    return;
+  }
+  const params = { user_id, class_id, type, name, desc, id };
   return (
     await sqlExe.executeCommand(
-      `INSERT INTO cgroups(name,type,\`desc\`,created_by,class_id) VALUES(:name,(SELECT id FROM group_types where type_name = :type),:desc,:user_id,:class_id);`,
+      `INSERT INTO cgroups(id,name,type,\`desc\`,created_by,class_id) VALUES(id,:name,(SELECT id FROM group_types where type_name = :type),:desc,:user_id,:class_id)
+      ON DUPLICATE KEY UPDATE
+      name =:name,
+      type=(SELECT id FROM group_types where type_name = :type),
+      \`desc\`=:desc,
+      class_id=:class_id
+      
+      `,
       params
     )
   ).insertId;

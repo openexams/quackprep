@@ -1,8 +1,11 @@
 import { standardApiCall } from '@utils/api';
 import { updateArrWithNewVals } from '@utils/functions';
 import { createSelector } from 'reselect';
-import getGroupsByUserId from '../groupSlice';
+import { deleteGroupById, getGroupsByUserId, upsertGroup } from '../groupSlice';
+
 const GET_TOPICS = 'app/class/topic/GET_TOPICS';
+const DELETE_TOPIC = 'app/class/topic/DELETE_TOPIC';
+const UPSERT_TOPIC = 'app/class/topic/UPSERT_TOPIC';
 
 export function getTopicsByClassId(classId) {
   //console.log('getting topics by clas id', classId);
@@ -11,6 +14,13 @@ export function getTopicsByClassId(classId) {
 
 export function getTopicsByUserId() {
   return getGroupsByUserId('topic', GET_TOPICS);
+}
+export function deleteTopicById(id) {
+  return deleteGroupById(id, DELETE_TOPIC); //TODO
+}
+
+export function upsertTopic(id, name, class_id, desc) {
+  return upsertGroup(id, name, class_id, 'topic', desc, UPSERT_TOPIC);
 }
 
 const DEFAULT_STATE = {
