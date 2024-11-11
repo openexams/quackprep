@@ -29,11 +29,21 @@ export async function upsertGroupInClass(
   id = null
 ) {
   // this should only run if editing, not if creating
+  const params = { user_id, class_id, type, name, desc, id };
   if (id && verifyUserOwnsId(id, user_id, "cgroups") === false) {
     throw new Error("user does not own the row they are trying to edit");
     return;
   }
-  const params = { user_id, class_id, type, name, desc, id };
+  const unique = await sqlExe.executeCommand(
+    `SELECT * from cgroups WHERE class_id = :class_id AND name =:name`,
+    params
+  );
+  if (!id && unique?.[0]?.class_id) {
+    throw new Error(
+      "verifys issue where you create a group with same name and same class as other person."
+    );
+    return;
+  }
   return (
     await sqlExe.executeCommand(
       `INSERT INTO cgroups(id,name,type,\`desc\`,created_by,class_id) VALUES(id,:name,(SELECT id FROM group_types where type_name = :type),:desc,:user_id,:class_id)

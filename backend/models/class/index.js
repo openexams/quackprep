@@ -53,12 +53,25 @@ export async function upsertClass(
   category,
   user_id
 ) {
+  const params = { id, school_id, name, description, category, user_id };
+
   // this should only run if editing, not if creating
   if (id && verifyUserOwnsId(id, user_id, "classes") === false) {
     throw new Error("user does not own the row they are trying to edit");
     return;
   }
-  const params = { id, school_id, name, description, category, user_id };
+
+  const unique = await sqlExe.executeCommand(
+    `SELECT * from classes WHERE school_id = :school_id AND name =:name`,
+    params
+  );
+  if (!id && unique?.[0]?.class_id) {
+    // verifys issue where you create a class with same name and school as other person.
+    throw new Error(
+      "verifys issue where you create a class with same name and school as other person."
+    );
+    return;
+  }
   const result = (
     await sqlExe.executeCommand(
       `INSERT INTO classes (id,school_id,name,description,category,created_by)

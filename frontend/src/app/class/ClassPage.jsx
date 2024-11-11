@@ -1,15 +1,17 @@
 import './class.css';
 import React, { useState } from 'react';
-import { Container, Grid, Header, Icon, Segment } from 'semantic-ui-react';
-import { useSelector } from 'react-redux';
+import { Button, Accordion, Container, Grid, Header, Icon, Segment } from 'semantic-ui-react';
+import { useSelector, useDispatch } from 'react-redux';
 import SchoolsList from './school/SchoolsList.jsx';
 import { selectArrayOfStateById } from '@utils/functions';
-import { selectNavbarState } from '@components/navbar/navbarSlice';
+import { changeNavbarPage, selectNavbarState } from '@components/navbar/navbarSlice';
 import ClassList from './ClassList';
 
 export default function ClassPage() {
   const curSchool = useSelector(selectNavbarState).navbar?.schoolId;
   const classes = useSelector(selectArrayOfStateById('app.class.classes', 'school_id', curSchool));
+  const dispatch = useDispatch();
+  const [isActive, setIsActive] = useState(false);
 
   return (
     <Container style={{ marginTop: '-5rem' }}>
@@ -34,6 +36,35 @@ export default function ClassPage() {
           </Grid>
         </Segment>
       )}
+      <Segment padded='very' textAlign='center' raised secondary={isActive} basic={!isActive}>
+        <Accordion>
+          <Accordion.Title active={isActive} onClick={() => setIsActive(!isActive)}>
+            <Header as='h2'>
+              <Icon name='dropdown' />
+              Don't See a Class?
+            </Header>
+          </Accordion.Title>
+          <Accordion.Content active={isActive}>
+            <Header.Subheader style={{ marginBottom: '1.5em' }}>Create your own and start teaching today!</Header.Subheader>
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
+              <Icon
+                name='plus circle'
+                size='massive'
+                color='blue'
+                className='pointer'
+                onClick={() => dispatch(changeNavbarPage('/creatordashboard'))}
+                style={{
+                  cursor: 'pointer',
+                  transition: 'transform 0.2s ease',
+                  fontSize: '5em',
+                }}
+                onMouseOver={(e) => (e.currentTarget.style.transform = 'scale(1.1)')}
+                onMouseOut={(e) => (e.currentTarget.style.transform = 'scale(1)')}
+              />
+            </div>
+          </Accordion.Content>
+        </Accordion>
+      </Segment>
     </Container>
   );
 }

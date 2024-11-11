@@ -74,6 +74,7 @@ router.post("/:type", async function (req, res) {
     );
     res.status(201).json(result);
   } catch (error) {
+    console.log(error);
     res.status(500).json({
       message: `failed to create group by class id ${data.class_id}`,
     });

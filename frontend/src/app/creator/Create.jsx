@@ -12,6 +12,7 @@ import { Accordion, Segment, Container, Icon, Grid } from 'semantic-ui-react';
 import { upsertClass, deleteClassById } from '../class/classSlice';
 import ItemEdit from '@components/ItemEdit';
 import { upsertTopic, deleteTopicById } from '../class/group/topic/topicSlice';
+import { deleteExamById, upsertExam } from '../class/group/exam/examSlice';
 
 export default function Create() {
   const dispatch = useDispatch();
@@ -143,6 +144,50 @@ export default function Create() {
     return ret;
   }
 
+  function mapExamsToItems() {
+    let ret = exams.map((exam) => {
+      return (
+        <ItemEdit
+          key={exam.id}
+          id={exam.id}
+          name={exam.name}
+          desc={exam.desc}
+          formFields={[
+            { name: 'name', value: exam.name, required: true },
+            { name: 'description', value: exam.description, required: true },
+            { name: 'class_id', value: exam.class_id, required: true },
+          ]}
+          onSubmit={({ name, description, class_id }) => {
+            dispatch(upsertExam(exam.id, name, class_id, description));
+          }}
+          onDelete={(id) => {
+            dispatch(deleteExamById(id));
+          }}
+        />
+      );
+    });
+    ret.push(
+      <ItemEdit
+        key='eplus'
+        id={null}
+        name=''
+        desc=''
+        formFields={[
+          { name: 'name', value: '', required: true },
+          { name: 'description', value: '', required: true },
+          { name: 'class_id', value: '', required: true },
+        ]}
+        onSubmit={({ name, description, class_id }) => {
+          dispatch(upsertExam(null, name, class_id, description));
+        }}
+        onDelete={(id) => {
+          console.log('Cant delete a item thats not even created!');
+        }}
+      />,
+    );
+    return ret;
+  }
+
   useEffect(() => {
     if (user.id) {
       dispatch(getClassesByUserId());
@@ -165,6 +210,7 @@ export default function Create() {
           loadAccords([
             { name: 'Classes', component: mapClassesToItems() },
             { name: 'Topics', component: mapTopicsToItems() },
+            { name: 'Exams', component: mapExamsToItems() },
           ])}
       </Segment>
     </Container>
