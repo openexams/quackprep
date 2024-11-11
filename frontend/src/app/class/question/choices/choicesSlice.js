@@ -9,6 +9,10 @@ const POST_FAVORITE_ANSWER = 'app/class/question/choices/POST_ANSWER_CURRENT';
 
 const GET_CURRENT_CHOICES = 'app/class/question/choices/POST_ANSWER_CURRENT';
 
+const UPSERT_CHOICE = 'app/class/question/choices/UPSERT_CHOICE';
+
+const DELETE_CHOICE = 'app/class/question/choices/DELETE_CHOICE';
+
 //TODO
 export function getCurrentChoices(user_id) {
   if (user_id === null) {
@@ -41,6 +45,14 @@ export function getChoicesByGroup(group_id) {
 
 export function getChoicesByUserId() {
   return standardApiCall('get', `/api/choice/user`, null, GET_CHOICES, 'Create'); //yes I know its same does not matter
+}
+
+export function upsertChoice(text, question_id, isCorrect, type, id = null) {
+  return standardApiCall('post', `/api/choice/${question_id}`, { text, isCorrect, type, id }, UPSERT_CHOICE, 'Create');
+}
+
+export function deleteChoiceById(id) {
+  return standardApiCall('delete', `/api/choice/${id}`, null, DELETE_CHOICE, 'Create');
 }
 
 const DEFAULT_STATE = {

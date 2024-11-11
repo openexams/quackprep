@@ -8,11 +8,12 @@ import { getChoicesByUserId, selectChoicesState } from '../class/question/choice
 import { useEffect } from 'react';
 import { selectUser } from '../auth/authSlice';
 import { selectLoadingState } from '../store/loadingSlice';
-import { Accordion, Segment, Container, Icon, Grid } from 'semantic-ui-react';
+import { Accordion, Segment, Container, Icon, Grid, Header, Divider } from 'semantic-ui-react';
 import { upsertClass, deleteClassById } from '../class/classSlice';
 import ItemEdit from '@components/ItemEdit';
 import { upsertTopic, deleteTopicById } from '../class/group/topic/topicSlice';
 import { deleteExamById, upsertExam } from '../class/group/exam/examSlice';
+import { upsertChoice, deleteChoiceById } from '../class/question/choices/choicesSlice';
 
 export default function Create() {
   const dispatch = useDispatch();
@@ -188,6 +189,53 @@ export default function Create() {
     return ret;
   }
 
+  // need to do one of those above for choice now :(
+  function mapChoicesToItems() {
+    let ret = choices.map((choice) => {
+      return (
+        <ItemEdit
+          key={choice.id}
+          id={choice.id}
+          name={choice.answer}
+          desc={choice.is_correct ? 'Correct' : 'Incorrect'}
+          formFields={[
+            { name: 'text', value: choice.answer, required: true },
+            { name: 'is_correct', value: choice.is_correct, required: true },
+            { name: 'question_id', value: choice.question_id, required: true },
+            { name: 'type', value: choice.type, required: true },
+          ]}
+          onSubmit={({ text, is_correct, question_id, type }) => {
+            dispatch(upsertChoice(text, question_id, is_correct, type, choice.id));
+          }}
+          onDelete={(id) => {
+            dispatch(deleteChoiceById(id));
+          }}
+        />
+      );
+    });
+    ret.push(
+      <ItemEdit
+        key='chplus'
+        id={null}
+        name=''
+        desc=''
+        formFields={[
+          { name: 'text', value: '', required: true },
+          { name: 'is_correct', value: '', required: true },
+          { name: 'question_id', value: '', required: true },
+          { name: 'type', value: '', required: true },
+        ]}
+        onSubmit={({ text, is_correct, question_id, type }) => {
+          dispatch(upsertChoice(text, question_id, is_correct, type, null));
+        }}
+        onDelete={(id) => {
+          console.log('Cant delete a item thats not even created!');
+        }}
+      />,
+    );
+    return ret;
+  }
+
   useEffect(() => {
     if (user.id) {
       dispatch(getClassesByUserId());
@@ -200,8 +248,14 @@ export default function Create() {
     }
   }, [user?.id]);
   return (
-    <Container>
-      <Segment loading={loading}>
+    <Container style={{ padding: '2em 0' }}>
+      <Header as='h1' textAlign='center' color='blue'>
+        Course Management
+        <Header.Subheader>Manage your classes, topics, and exams (refresh to update*)</Header.Subheader>
+      </Header>
+      <Divider hidden />
+
+      <Segment raised padded='very' loading={loading} style={{ backgroundColor: '#f8f9fa' }}>
         {classes &&
           topics &&
           exams &&
@@ -211,6 +265,8 @@ export default function Create() {
             { name: 'Classes', component: mapClassesToItems() },
             { name: 'Topics', component: mapTopicsToItems() },
             { name: 'Exams', component: mapExamsToItems() },
+            //{ name: 'Questions', component: mapQuestionsToItems() },
+            { name: 'Choices', component: mapChoicesToItems() },
           ])}
       </Segment>
     </Container>

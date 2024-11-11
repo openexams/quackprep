@@ -1,4 +1,5 @@
 import sqlExe from "#db/dbFunctions.js";
+import { verifyUserOwnsId } from "#utils/sqlFunctions.js";
 
 export async function getGroupsByClassId(class_id, type) {
   const params = { class_id, type };
@@ -35,7 +36,7 @@ export async function upsertGroupInClass(
     return;
   }
   const unique = await sqlExe.executeCommand(
-    `SELECT * from cgroups WHERE class_id = :class_id AND name =:name`,
+    `SELECT * from cgroups WHERE class_id = :class_id AND name =:name AND created_by != :user_id`,
     params
   );
   if (!id && unique?.[0]?.class_id) {

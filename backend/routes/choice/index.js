@@ -1,6 +1,6 @@
 import { isAuthenticated } from "#middleware/authMiddleware.js";
 import {
-  addChoiceToQuestion,
+  upsertChoiceToQuestion,
   getChoicesByQuestion,
   getQuestionsAnsweredByMonthAndYear,
   getWhichUsersAnsweredMostQuestions,
@@ -97,23 +97,22 @@ router.post("/many/:question_id", isAuthenticated, async function (req, res) {
 router.post("/:question_id", isAuthenticated, async function (req, res) {
   const data = req.body;
   try {
-    if (
-      data?.isCorrect === undefined ||
-      data?.isCorrect === null ||
-      !data?.text
-    ) {
+    if (data?.text == null || data?.isCorrect == null || !data?.type) {
       throw Error("pls send all json body");
     }
 
-    const result = await addChoiceToQuestion(
+    const result = await upsertChoiceToQuestion(
       req.user,
       req.params.question_id,
       data.isCorrect,
-      data.text
+      data.text,
+      data.type,
+      data?.id || null
     );
 
     res.status(201).json(result);
   } catch (error) {
+    console.log(error);
     res.status(500).json({
       message: `failed to add choice by q id ${req.params.question_id}`,
     });

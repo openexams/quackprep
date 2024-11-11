@@ -1,4 +1,5 @@
 import sqlExe from "#db/dbFunctions.js";
+import { verifyUserOwnsId } from "#utils/sqlFunctions.js";
 
 export async function postChoice(user_id, choice_id) {
   const params = { choice_id, user_id };
@@ -76,21 +77,32 @@ export async function getChoicesByGroupId(group_id) {
   );
 }
 
-export async function addChoiceToQuestion( // NOT TESTED TODO
+export async function upsertChoiceToQuestion( // TODO VERIFY USER OWN QUESTIONs
   user_id,
   question_id,
   isCorrect,
   text,
-  type
+  type,
+  id = null
 ) {
-  const params = { user_id, question_id, isCorrect, text, type };
+  const params = { user_id, question_id, isCorrect, text, type, id };
+
+  if (id && verifyUserOwnsId(id, user_id, "choices") === false) {
+    throw new Error("user does not own the row they are trying to edit");
+    return;
+  }
+
   const result = (
     await sqlExe.executeCommand(
-      `INSERT INTO choices (answer,is_correct,created_by,question_id,type) values (:text,:isCorrect,:user_id,:question_id,:type)`,
+      `INSERT INTO choices (id,answer,is_correct,created_by,question_id,type) values (:id,:text,:isCorrect,:user_id,:question_id,:type)
+      ON DUPLICATE KEY UPDATE
+      answer=:text,
+      is_correct=:isCorrect,
+      question_id=:question_id,
+      type=:type`,
       params
     )
   ).insertId;
-  params["result"] = result;
 
   return result;
 }
