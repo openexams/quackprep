@@ -65,7 +65,7 @@ export async function upsertClass(
     `SELECT * from classes WHERE school_id = :school_id AND name =:name`,
     params
   );
-  if (!id && unique?.[0]?.class_id) {
+  if (!id && unique?.[0]?.name) {
     // verifys issue where you create a class with same name and school as other person.
     throw new Error(
       "verifys issue where you create a class with same name and school as other person."
