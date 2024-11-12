@@ -93,3 +93,18 @@ export async function verifyUserOwnsId(id, user_id, tableName) {
   }
   return false;
 }
+/**
+ *
+ * @param {Int} user_id
+ * @param {String} tableName tableName must have created_by column DO NOT LET USERS RUN THIS SQL INJECTION
+ */
+export async function verifyRowCreatedByUser(id, user_id, tableName) {
+  const result = await sqlExe.executeCommand(
+    `SELECT * from ${tableName} WHERE id = :id AND created_by = :user_id`,
+    { user_id }
+  );
+  if (result?.[0]?.created_by) {
+    return true;
+  }
+  return false;
+}

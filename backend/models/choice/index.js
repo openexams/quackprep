@@ -1,5 +1,8 @@
 import sqlExe from "#db/dbFunctions.js";
-import { verifyUserOwnsId } from "#utils/sqlFunctions.js";
+import {
+  verifyRowCreatedByUser,
+  verifyUserOwnsId,
+} from "#utils/sqlFunctions.js";
 
 export async function postChoice(user_id, choice_id) {
   const params = { choice_id, user_id };
@@ -87,7 +90,14 @@ export async function upsertChoiceToQuestion( // TODO VERIFY USER OWN QUESTIONs
 ) {
   const params = { user_id, question_id, isCorrect, text, type, id };
 
-  if (id && verifyUserOwnsId(id, user_id, "choices") === false) {
+  if (!(await verifyRowCreatedByUser(question_id, user_id, "questions"))) {
+    throw new Error(
+      "user does not own the question they are trying to create/edit"
+    );
+    return;
+  }
+
+  if (id && (await verifyUserOwnsId(id, user_id, "choices")) === false) {
     throw new Error("user does not own the row they are trying to edit");
     return;
   }
