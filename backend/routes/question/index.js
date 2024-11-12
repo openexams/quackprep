@@ -1,9 +1,11 @@
 import express from "express";
 import { isAuthenticated } from "#middleware/authMiddleware.js";
 import {
-  createQuestionInGroups,
+  deleteAllQuestionLinks,
   getQuestionsByGroupId,
   getQuestionsByUserId,
+  linkQuestionToGroups,
+  upsertQuestion,
 } from "#models/question/index.js";
 import { cascadeSetDeleted } from "#utils/sqlFunctions.js";
 
@@ -64,14 +66,22 @@ router.post("/", async function (req, res) {
       });
       return;
     }
-    const result = await createQuestionInGroups(
-      req.user,
+    const question_id = await upsertQuestion(
+      data?.id,
       data.question,
       data?.question_num_on_exam,
-      ...data.group_ids // destructure group ids into last arg
+      req.user,
+      data.group_ids // destructure group ids into last arg
     );
-    res.status(201).json(result);
+    if (data?.id) await deleteAllQuestionLinks(question_id); // deletes all of them only when its edited, if its being created it will have no links
+    const affectedRows = await linkQuestionToGroups(
+      question_id,
+      data.group_ids
+    );
+
+    res.status(201).json(affectedRows);
   } catch (error) {
+    console.log(error);
     res.status(500).json({
       message: `failed to add question to groups || group`,
     });

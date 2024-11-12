@@ -3,7 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getClassesByUserId, selectClassState } from '../class/classSlice';
 import { getTopicsByUserId, selectTopicState } from '../class/group/topic/topicSlice';
 import { getExamsByUserId, selectExamsState } from '../class/group/exam/examSlice';
-import { getQuestionsByUserId, selectQuestionState } from '../class/question/questionSlice';
+import {
+  deleteQuestionById,
+  getQuestionsByUserId,
+  selectQuestionState,
+  upsertQuestionWithGroupIds,
+} from '../class/question/questionSlice';
 import { getChoicesByUserId, selectChoicesState } from '../class/question/choices/choicesSlice';
 import { useEffect } from 'react';
 import { selectUser } from '../auth/authSlice';
@@ -14,16 +19,48 @@ import ItemEdit from '@components/ItemEdit';
 import { upsertTopic, deleteTopicById } from '../class/group/topic/topicSlice';
 import { deleteExamById, upsertExam } from '../class/group/exam/examSlice';
 import { upsertChoice, deleteChoiceById } from '../class/question/choices/choicesSlice';
+import { deepCopyArrayOfObjects } from '@utils/functions';
+
+/**
+ * Merges questions that were duplicated if they were linked to more than 1 group
+ * TODO TEST DEF YES
+ * @param {Array} questions
+ */
+function mergeQuestions(questions) {
+  if (!Array.isArray(questions)) {
+    return [];
+  }
+  questions = deepCopyArrayOfObjects(questions); // TODO OPTIMIZE
+  let newb = [];
+  let tmp_groups = [];
+  let j = 0;
+  for (let i = 0; i < questions.length; i = j) {
+    tmp_groups.push(questions[i]?.group_id);
+    for (j = i + 1; j < questions.length; j++) {
+      if (questions[i]?.id === questions[j]?.id) {
+        tmp_groups.push(questions[j]?.group_id);
+      } else {
+        break;
+      }
+    }
+    questions[i]['group_ids'] = tmp_groups; // group_ids diff from group_id
+    newb.push(questions[i]);
+    tmp_groups = [];
+  }
+  return newb;
+}
 
 export default function Create() {
   const dispatch = useDispatch();
   const classes = useSelector(selectClassState).classes;
   const topics = useSelector(selectTopicState).topics;
   const exams = useSelector(selectExamsState).exams;
-  const questions = useSelector(selectQuestionState).questions;
+  const questions = mergeQuestions(useSelector(selectQuestionState).questions);
   const choices = useSelector(selectChoicesState).choices;
   const user = useSelector(selectUser).user;
   const loading = useSelector(selectLoadingState).loadingComps?.Create;
+
+  // map questions so that questions with different group ids are merged into one
 
   const [activeIndex, setActiveIndex] = useState(null);
   // data.active is what it active before the click
@@ -59,7 +96,7 @@ export default function Create() {
     let ret = classes.map((cl) => {
       return (
         <ItemEdit
-          key={cl.id}
+          key={'cc' + cl.id}
           id={cl.id}
           name={cl.name}
           desc={cl.description}
@@ -72,8 +109,8 @@ export default function Create() {
           onSubmit={({ name, description, category, school_id }) => {
             dispatch(upsertClass(cl.id, school_id, name, description, category));
           }}
-          onDelete={(id) => {
-            dispatch(deleteClassById(id));
+          onDelete={() => {
+            dispatch(deleteClassById(cl.id));
           }}
         />
       );
@@ -93,7 +130,7 @@ export default function Create() {
         onSubmit={({ name, description, category, school_id }) => {
           dispatch(upsertClass(null, school_id, name, description, category));
         }}
-        onDelete={(id) => {
+        onDelete={() => {
           console.log('Cant delete a item thats not even created!');
         }}
       />,
@@ -105,7 +142,7 @@ export default function Create() {
     let ret = topics.map((topic) => {
       return (
         <ItemEdit
-          key={topic.id}
+          key={'t' + topic.id}
           id={topic.id}
           name={topic.name}
           desc={topic.desc}
@@ -117,8 +154,8 @@ export default function Create() {
           onSubmit={({ name, description, class_id }) => {
             dispatch(upsertTopic(topic.id, name, class_id, description));
           }}
-          onDelete={(id) => {
-            dispatch(deleteTopicById(id));
+          onDelete={() => {
+            dispatch(deleteTopicById(topic.id));
           }}
         />
       );
@@ -137,7 +174,7 @@ export default function Create() {
         onSubmit={({ name, description, class_id }) => {
           dispatch(upsertTopic(null, name, class_id, description));
         }}
-        onDelete={(id) => {
+        onDelete={() => {
           console.log('Cant delete a item thats not even created!');
         }}
       />,
@@ -149,7 +186,7 @@ export default function Create() {
     let ret = exams.map((exam) => {
       return (
         <ItemEdit
-          key={exam.id}
+          key={'e' + exam.id}
           id={exam.id}
           name={exam.name}
           desc={exam.desc}
@@ -161,8 +198,8 @@ export default function Create() {
           onSubmit={({ name, description, class_id }) => {
             dispatch(upsertExam(exam.id, name, class_id, description));
           }}
-          onDelete={(id) => {
-            dispatch(deleteExamById(id));
+          onDelete={() => {
+            dispatch(deleteExamById(exam.id));
           }}
         />
       );
@@ -181,7 +218,63 @@ export default function Create() {
         onSubmit={({ name, description, class_id }) => {
           dispatch(upsertExam(null, name, class_id, description));
         }}
-        onDelete={(id) => {
+        onDelete={() => {
+          console.log('Cant delete a item thats not even created!');
+        }}
+      />,
+    );
+    return ret;
+  }
+
+  function mapQuestionsToItems() {
+    let ret = questions.map((question) => {
+      return (
+        <ItemEdit
+          key={'q' + question.id}
+          id={question.id}
+          name={question.question}
+          desc={null}
+          formFields={[
+            { name: 'question', value: question.question, required: true },
+            { name: 'group_ids', value: question.group_ids, required: true },
+            { name: 'question_num_on_exam', value: question.question_num_on_exam, required: false },
+          ]}
+          onSubmit={({ question, question_num_on_exam, group_ids }) => {
+            if (group_ids.include(',')) group_ids = group_ids.split(',');
+            else {
+              let tmp = [];
+              tmp.push(group_ids);
+              group_ids = tmp;
+            }
+            dispatch(upsertQuestionWithGroupIds(question.id, question, question_num_on_exam, group_ids));
+          }}
+          onDelete={() => {
+            dispatch(deleteQuestionById(question.id));
+          }}
+        />
+      );
+    });
+    ret.push(
+      <ItemEdit
+        key='qplus'
+        id={null}
+        name=''
+        desc=''
+        formFields={[
+          { name: 'question', value: '', required: true },
+          { name: 'group_ids', value: '', required: true },
+          { name: 'question_num_on_exam', value: null, required: false },
+        ]}
+        onSubmit={({ question, question_num_on_exam, group_ids }) => {
+          if (group_ids.includes(',')) group_ids = group_ids.split(',');
+          else {
+            let tmp = [];
+            tmp.push(group_ids);
+            group_ids = tmp;
+          }
+          dispatch(upsertQuestionWithGroupIds(null, question, question_num_on_exam, group_ids));
+        }}
+        onDelete={() => {
           console.log('Cant delete a item thats not even created!');
         }}
       />,
@@ -194,7 +287,7 @@ export default function Create() {
     let ret = choices.map((choice) => {
       return (
         <ItemEdit
-          key={choice.id}
+          key={'c' + choice.id}
           id={choice.id}
           name={choice.answer}
           desc={choice.is_correct ? 'Correct' : 'Incorrect'}
@@ -265,7 +358,7 @@ export default function Create() {
             { name: 'Classes', component: mapClassesToItems() },
             { name: 'Topics', component: mapTopicsToItems() },
             { name: 'Exams', component: mapExamsToItems() },
-            //{ name: 'Questions', component: mapQuestionsToItems() },
+            { name: 'Questions', component: mapQuestionsToItems() },
             { name: 'Choices', component: mapChoicesToItems() },
           ])}
       </Segment>

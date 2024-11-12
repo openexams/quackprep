@@ -1,7 +1,7 @@
 import sqlExe from "#db/dbFunctions.js";
 import {
   getLastRowManipulated,
-  verifyUserOwnsId,
+  verifyUserOwnsRowId,
 } from "#utils/sqlFunctions.js";
 
 export async function getClasses() {
@@ -56,7 +56,7 @@ export async function upsertClass(
   const params = { id, school_id, name, description, category, user_id }; // TODO CAN THIS USER CREATE A CLASS IN THIS SCHOOL?
 
   // this should only run if editing, not if creating
-  if (id && (await verifyUserOwnsId(id, user_id, "classes")) === false) {
+  if (id && (await verifyUserOwnsRowId(id, user_id, "classes")) === false) {
     throw new Error("user does not own the row they are trying to edit");
     return;
   }

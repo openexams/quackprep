@@ -79,7 +79,7 @@ function verifyTableName(tableName) {
   return false;
 }
 
-export async function verifyUserOwnsId(id, user_id, tableName) {
+export async function verifyUserOwnsRowId(id, user_id, tableName) {
   if (verifyTableName(tableName) === false) {
     return false;
   }
@@ -101,7 +101,7 @@ export async function verifyUserOwnsId(id, user_id, tableName) {
 export async function verifyRowCreatedByUser(id, user_id, tableName) {
   const result = await sqlExe.executeCommand(
     `SELECT * from ${tableName} WHERE id = :id AND created_by = :user_id`,
-    { user_id }
+    { id, user_id }
   );
   if (result?.[0]?.created_by) {
     return true;

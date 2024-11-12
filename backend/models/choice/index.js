@@ -1,7 +1,7 @@
 import sqlExe from "#db/dbFunctions.js";
 import {
   verifyRowCreatedByUser,
-  verifyUserOwnsId,
+  verifyUserOwnsRowId,
 } from "#utils/sqlFunctions.js";
 
 export async function postChoice(user_id, choice_id) {
@@ -97,7 +97,7 @@ export async function upsertChoiceToQuestion( // TODO VERIFY USER OWN QUESTIONs
     return;
   }
 
-  if (id && (await verifyUserOwnsId(id, user_id, "choices")) === false) {
+  if (id && (await verifyUserOwnsRowId(id, user_id, "choices")) === false) {
     throw new Error("user does not own the row they are trying to edit");
     return;
   }

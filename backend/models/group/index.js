@@ -1,7 +1,7 @@
 import sqlExe from "#db/dbFunctions.js";
 import {
   verifyRowCreatedByUser,
-  verifyUserOwnsId,
+  verifyUserOwnsRowId,
 } from "#utils/sqlFunctions.js";
 
 export async function getGroupsByClassId(class_id, type) {
@@ -41,7 +41,7 @@ export async function upsertGroupInClass(
     );
     return; // all work end no play makea maddox a dull boy
   }
-  if (id && (await verifyUserOwnsId(id, user_id, "cgroups")) === false) {
+  if (id && (await verifyUserOwnsRowId(id, user_id, "cgroups")) === false) {
     throw new Error("user does not own the row they are trying to edit");
     return;
   }
