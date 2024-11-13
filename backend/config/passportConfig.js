@@ -36,6 +36,7 @@ passport.use(
       dlog("LoggedIn user:", user); //dlog cannot take params yet
       return done(null, user);
     } else {
+      // user not registered create a user.
       const rowId = await OAuthRegister(
         first_name,
         last_name,
@@ -67,7 +68,7 @@ passport.use(
       passwordField: "password",
     },
     async (email, password, done) => {
-      const user = await findLocalUserByEmailPassword(email, password);
+      const user = await findLocalUserByEmailPassword(email, password); // email is unique
       if (user === -1) {
         dlog("Incorrect Email");
         return done(null, false, { message: "Incorrect email." });
