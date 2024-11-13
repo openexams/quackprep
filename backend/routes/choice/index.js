@@ -1,4 +1,5 @@
 import { isAuthenticated } from "#middleware/authMiddleware.js";
+import { isCreator } from "#middleware/creatorMiddleware";
 import {
   upsertChoiceToQuestion,
   getChoicesByQuestion,
@@ -73,51 +74,61 @@ router.get("/group/:group_id", isAuthenticated, async function (req, res) {
 
 // C
 
-router.post("/many/:question_id", isAuthenticated, async function (req, res) {
-  const data = req.body;
-  try {
-    if (!data?.choices) {
-      throw Error("pls send all json body");
+router.post(
+  "/many/:question_id",
+  isAuthenticated,
+  isCreator,
+  async function (req, res) {
+    const data = req.body;
+    try {
+      if (!data?.choices) {
+        throw Error("pls send all json body");
+      }
+
+      const result = await addManyChoicesToQuestion(
+        parseInt(req.params.question_id),
+        req.user,
+        data.choices
+      );
+
+      res.status(201).json(result);
+    } catch (error) {
+      res.status(500).json({
+        message: `failed to add ${data?.choices?.length} choices by q id ${req.params.question_id}`,
+      });
     }
-
-    const result = await addManyChoicesToQuestion(
-      parseInt(req.params.question_id),
-      req.user,
-      data.choices
-    );
-
-    res.status(201).json(result);
-  } catch (error) {
-    res.status(500).json({
-      message: `failed to add ${data?.choices?.length} choices by q id ${req.params.question_id}`,
-    });
   }
-});
+);
 
-router.post("/:question_id", isAuthenticated, async function (req, res) {
-  const data = req.body;
-  try {
-    if (data?.text == null || data?.isCorrect == null || !data?.type) {
-      throw Error("pls send all json body");
+router.post(
+  "/:question_id",
+  isAuthenticated,
+  isCreator,
+  async function (req, res) {
+    const data = req.body;
+    try {
+      if (data?.text == null || data?.isCorrect == null || !data?.type) {
+        throw Error("pls send all json body");
+      }
+
+      const result = await upsertChoiceToQuestion(
+        req.user,
+        req.params.question_id,
+        data.isCorrect,
+        data.text,
+        data.type,
+        data?.id || null
+      );
+
+      res.status(201).json(result);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({
+        message: `failed to add choice by q id ${req.params.question_id}`,
+      });
     }
-
-    const result = await upsertChoiceToQuestion(
-      req.user,
-      req.params.question_id,
-      data.isCorrect,
-      data.text,
-      data.type,
-      data?.id || null
-    );
-
-    res.status(201).json(result);
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({
-      message: `failed to add choice by q id ${req.params.question_id}`,
-    });
   }
-});
+);
 
 // D
 router.delete("/:choice_id", async function (req, res) {
@@ -169,6 +180,7 @@ router.post("/answer/:choice_id", isAuthenticated, async function (req, res) {
   }
 });
 
+// answers current
 router.post(
   "/:choice_id/:question_id",
   isAuthenticated,

@@ -6,6 +6,7 @@ import {
   getGroupsByUserId,
 } from "#models/group/index.js";
 import { cascadeSetDeleted } from "#utils/sqlFunctions.js";
+import { isCreator } from "#middleware/creatorMiddleware";
 
 const router = express.Router();
 router.use(isAuthenticated);
@@ -55,7 +56,7 @@ router.delete("/:group_id", async function (req, res) {
   }
 });
 // type must be for now topic || exam
-router.post("/:type", async function (req, res) {
+router.post("/:type", isCreator, async function (req, res) {
   const data = req.body;
   try {
     if (!req.params.type || !data.name || !data.desc || !data.class_id) {

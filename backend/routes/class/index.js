@@ -1,4 +1,5 @@
 import { isAuthenticated } from "#middleware/authMiddleware.js";
+import { isCreator } from "#middleware/creatorMiddleware";
 import {
   upsertClass,
   getClasses,
@@ -52,7 +53,7 @@ router.delete("/:class_id", async function (req, res) {
   }
 });
 
-router.post("/", async function (req, res) {
+router.post("/", isCreator, async function (req, res) {
   const data = req.body;
   try {
     if (!data.school_id || !data.name || !data.description || !data.category) {

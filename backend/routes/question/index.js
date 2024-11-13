@@ -8,6 +8,7 @@ import {
   upsertQuestion,
 } from "#models/question/index.js";
 import { cascadeSetDeleted } from "#utils/sqlFunctions.js";
+import { isCreator } from "#middleware/creatorMiddleware";
 
 const router = express.Router();
 router.use(isAuthenticated);
@@ -57,7 +58,7 @@ router.delete("/:question_id", async function (req, res) {
   }
 });
 
-router.post("/", async function (req, res) {
+router.post("/", isCreator, async function (req, res) {
   const data = req.body;
   try {
     if (!data.question || !Array.isArray(data?.group_ids)) {
