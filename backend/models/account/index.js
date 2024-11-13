@@ -8,3 +8,15 @@ export async function upsertTimeSpent(user_id) {
     { user_id }
   );
 }
+
+export async function checkIfCreator(user_id) {
+  const result = await sqlExe.executeCommand(
+    `SELECT u.is_creator FROM users u WHERE id = :user_id`,
+    { user_id }
+  );
+  if (result?.[0]?.is_creator === 1) {
+    // may not return a int may return 1 as a string
+    return true;
+  }
+  return false;
+}
