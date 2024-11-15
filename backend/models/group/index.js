@@ -7,8 +7,10 @@ import {
 export async function getGroupsByClassId(class_id, type) {
   const params = { class_id, type };
   return await sqlExe.executeCommand(
-    `SELECT g.name,g.id,g.desc,g.created_by, g.class_id, gt.type_name as type 
-    FROM cgroups g JOIN group_types gt on g.type = gt.id WHERE gt.type_name = :type 
+    `SELECT g.name,g.id,g.desc,g.created_by, g.class_id, gt.type_name as type, cl.category as class_category, cl.school_id
+    FROM cgroups g JOIN group_types gt on g.type = gt.id 
+    JOIN classes cl ON g.class_id = cl.id
+    WHERE gt.type_name = :type 
     AND g.deleted = 0 ORDER BY g.id ASC`,
     params
   );
@@ -17,8 +19,9 @@ export async function getGroupsByClassId(class_id, type) {
 export async function getGroupsByUserId(user_id, type) {
   const params = { user_id, type };
   return await sqlExe.executeCommand(
-    `SELECT g.name,g.id,g.desc,g.created_by, g.class_id, gt.type_name as type 
-    FROM cgroups g JOIN group_types gt on g.type = gt.id WHERE gt.type_name = :type 
+    `SELECT g.name,g.id,g.desc,g.created_by, g.class_id, gt.type_name as type, cl.category, cl.school_id
+    FROM cgroups g JOIN group_types gt on g.type = gt.id 
+    JOIN classes cl ON g.class_id = cl.id WHERE gt.type_name = :type 
     AND g.deleted = 0 AND g.created_by =:user_id ORDER BY g.id ASC`,
     params
   );

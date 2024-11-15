@@ -19,7 +19,8 @@ import ItemEdit from '@components/ItemEdit';
 import { upsertTopic, deleteTopicById } from '../class/group/topic/topicSlice';
 import { deleteExamById, upsertExam } from '../class/group/exam/examSlice';
 import { upsertChoice, deleteChoiceById } from '../class/question/choices/choicesSlice';
-import { deepCopyArrayOfObjects } from '@utils/functions';
+import { deepCopyArrayOfObjects, selectArrayOfIncludingItems } from '@utils/functions';
+import CreateFilter from './CreateFilter';
 
 /**
  * Merges questions that were duplicated if they were linked to more than 1 group
@@ -51,12 +52,24 @@ function mergeQuestions(questions) {
 }
 
 export default function Create() {
+  const [filter, setFilter] = useState({
+    school_id: '',
+    class_type: '',
+    class_id: '',
+    group_id: '',
+    question_id: '',
+    choice_id: '',
+  });
   const dispatch = useDispatch();
-  const classes = useSelector(selectClassState).classes;
-  const topics = useSelector(selectTopicState).topics;
-  const exams = useSelector(selectExamsState).exams;
-  const questions = mergeQuestions(useSelector(selectQuestionState).questions);
-  const choices = useSelector(selectChoicesState).choices;
+  let classes = selectArrayOfIncludingItems(
+    useSelector(selectClassState).classes,
+    ['school_id', 'category', 'id'],
+    [filter.school_id, filter.class_type, filter.class_id],
+  );
+  let topics = useSelector(selectTopicState).topics;
+  let exams = useSelector(selectExamsState).exams;
+  let questions = mergeQuestions(useSelector(selectQuestionState).questions);
+  let choices = useSelector(selectChoicesState).choices;
   const user = useSelector(selectUser).user;
   const loading = useSelector(selectLoadingState).loadingComps?.Create;
 
@@ -330,7 +343,7 @@ export default function Create() {
   }
 
   useEffect(() => {
-    if (user.id) {
+    if (true) {
       dispatch(getClassesByUserId());
       dispatch(getTopicsByUserId());
       dispatch(getExamsByUserId());
@@ -339,7 +352,7 @@ export default function Create() {
 
       console.log('got');
     }
-  }, [user?.id]);
+  }, []);
   return (
     <Container style={{ padding: '2em 0' }}>
       <Header as='h1' textAlign='center' color='blue'>
@@ -349,6 +362,7 @@ export default function Create() {
       <Divider hidden />
 
       <Segment raised padded='very' loading={loading} style={{ backgroundColor: '#f8f9fa' }}>
+        <CreateFilter filter={filter} setFilter={setFilter} />
         {classes &&
           topics &&
           exams &&

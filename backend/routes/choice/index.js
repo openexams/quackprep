@@ -1,5 +1,5 @@
 import { isAuthenticated } from "#middleware/authMiddleware.js";
-import { isCreator } from "#middleware/creatorMiddleware";
+import { isCreator } from "#middleware/creatorMiddleware.js";
 import {
   upsertChoiceToQuestion,
   getChoicesByQuestion,

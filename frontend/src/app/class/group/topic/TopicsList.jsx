@@ -1,22 +1,29 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Header, Segment, Card, Button, Container, Icon } from 'semantic-ui-react';
-import { selectArrayOfIncludingItems, selectArrayOfStateById, turnUnderscoreIntoSpace } from '@utils/functions';
+import { selectArrayOfIncludingItem, selectArrayOfStateById, turnUnderscoreIntoSpace } from '@utils/functions';
 import { changeNavbarPage, selectNavbarState, updateCurrentGroupData } from '@components/navbar/navbarSlice';
 import { selectLoadingState } from '@src/app/store/loadingSlice';
 import Searchbar from '@components/Searchbar';
+import { useSearchParams } from 'react-router-dom';
 
 export default function TopicsShow() {
-  const [searchValue, setSearchVal] = useState('');
+  const [searchParams, setSearchParams] = useSearchParams();
+  const filter = searchParams.get('filter');
   const { navbar } = useSelector(selectNavbarState);
-  const { className, classId } = navbar;
+  const { className, classId, schoolName } = navbar;
   const loadingObject = useSelector(selectLoadingState).loadingComps;
-  const topics = selectArrayOfIncludingItems(
+  const topics = selectArrayOfIncludingItem(
     useSelector(selectArrayOfStateById('app.topic.topics', 'class_id', classId)),
     'name',
-    searchValue,
+    filter || '',
   );
   const dispatch = useDispatch();
+
+  function setFilter(newStr) {
+    searchParams.set('filter', newStr);
+    setSearchParams(searchParams);
+  }
 
   return (
     <Container>
@@ -28,7 +35,7 @@ export default function TopicsShow() {
             <Header.Subheader>Select a topic to start studying</Header.Subheader>
           </Header.Content>
         </Header>
-        <Searchbar setValue={setSearchVal} value={searchValue} placeholder={'Search Topics'} />
+        <Searchbar setValue={setFilter} value={filter} placeholder={'Search Topics'} />
         <Card.Group itemsPerRow={3} stackable>
           {topics &&
             topics.map((topic) => (
@@ -43,7 +50,7 @@ export default function TopicsShow() {
                     color='blue'
                     onClick={() => {
                       dispatch(updateCurrentGroupData(topic.id, topic.name));
-                      dispatch(changeNavbarPage(`${topic.name}/question`));
+                      dispatch(changeNavbarPage(`/class/${schoolName}/${className}/topic/${topic.name}/question`));
                     }}
                   >
                     <Icon name='fork' />

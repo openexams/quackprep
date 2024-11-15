@@ -1,4 +1,4 @@
-import { checkIfCreator } from "#models/account";
+import { checkIfCreator } from "#models/account/index.js";
 
 export async function isCreator(req, res, next) {
   // todo

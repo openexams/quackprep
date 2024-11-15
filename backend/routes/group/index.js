@@ -6,7 +6,7 @@ import {
   getGroupsByUserId,
 } from "#models/group/index.js";
 import { cascadeSetDeleted } from "#utils/sqlFunctions.js";
-import { isCreator } from "#middleware/creatorMiddleware";
+import { isCreator } from "#middleware/creatorMiddleware.js";
 
 const router = express.Router();
 router.use(isAuthenticated);

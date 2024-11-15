@@ -48,7 +48,12 @@ export async function getChoicesByQuestion(question_id) {
   // TODO TEST
   const params = { question_id };
   return await sqlExe.executeCommand(
-    `SELECT c.id,c.answer,c.is_correct,c.created_by,c.question_id,c.type FROM choices c 
+    `SELECT c.id,c.answer,c.is_correct,c.created_by,c.question_id,c.type, cl.id as class_id, g.id as group_id, 
+    cl.school_id, cl.category as class_category
+     FROM choices c 
+     JOIN group_question gq ON c.question_id = gq.question_id
+     JOIN cgroups g on g.id = gq.group_id 
+     JOIN classes cl ON cl.id = g.class_id
     WHERE c.deleted=0 AND c.question_id = :question_id
      ORDER BY id ASC`,
     params
@@ -59,7 +64,12 @@ export async function getChoicesByUserId(user_id) {
   // TODO TEST
   const params = { user_id };
   return await sqlExe.executeCommand(
-    `SELECT c.id,c.answer,c.is_correct,c.created_by,c.question_id,c.type FROM choices c 
+    `SELECT c.id,c.answer,c.is_correct,c.created_by,c.question_id,c.type, cl.id as class_id, g.id as group_id, 
+    cl.school_id, cl.category as class_category
+     FROM choices c 
+     JOIN group_question gq ON c.question_id = gq.question_id
+     JOIN cgroups g on g.id = gq.group_id 
+     JOIN classes cl ON cl.id = g.class_id 
     WHERE c.deleted=0 AND c.created_by = :user_id
      ORDER BY id ASC`,
     params
@@ -70,9 +80,13 @@ export async function getChoicesByGroupId(group_id) {
   const params = { group_id };
   return await sqlExe.executeCommand(
     `
-    SELECT c.id, c.answer, c.is_correct, c.created_at,c.type, gq.question_id, gq.group_id FROM choices c 
-    JOIN group_question gq ON c.question_id = gq.question_id AND gq.group_id = :group_id
-    WHERE c.deleted=0
+    SELECT c.id,c.answer,c.is_correct,c.created_by,c.question_id,c.type, cl.id as class_id, g.id as group_id, 
+    cl.school_id, cl.category as class_category
+     FROM choices c 
+     JOIN group_question gq ON c.question_id = gq.question_id
+     JOIN cgroups g on g.id = gq.group_id 
+     JOIN classes cl ON cl.id = g.class_id
+    WHERE c.deleted=0 AND g.id = :group_id
      ORDER BY id ASC
 
 `,
@@ -92,7 +106,7 @@ export async function upsertChoiceToQuestion( // TODO VERIFY USER OWN QUESTIONs
 
   if (!(await verifyRowCreatedByUser(question_id, user_id, "questions"))) {
     throw new Error(
-      "user does not own the question they are trying to create/edit"
+      "user does not own the question they are trying to create/edit a choice in"
     );
     return;
   }

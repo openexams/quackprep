@@ -195,13 +195,52 @@ export function findNeedlesInArrayOfObjectsLINEAR(array, keyNamesToCheck, needle
  * @param {*} objectKeyToCheck
  * @param {String} including
  */
-export function selectArrayOfIncludingItems(array, objectKeyToCheck, including) {
+export function selectArrayOfIncludingItem(array, objectKeyToCheck, including) {
   if (including === '' || objectKeyToCheck === '' || array?.length === 0 || !array) {
     return array;
   }
   let ret = [];
   for (let i = 0; i < array.length; i++) {
-    if (array[i]?.[objectKeyToCheck]?.toLowerCase()?.includes(including?.toLowerCase())) {
+    if (String(array[i]?.[objectKeyToCheck])?.toLowerCase()?.includes(including?.toLowerCase())) {
+      ret.push(array[i]);
+    }
+  }
+  return ret;
+}
+
+/**
+ * TODO TEST
+ * @param {Array} array
+ * @param {Array} keysToCheck
+ * @param {Array} valuesIncluded
+ */
+export function selectArrayOfIncludingItems(array, keysToCheck, valuesIncluded) {
+  if (!Array.isArray(array) || keysToCheck == null) {
+    return array;
+  }
+
+  let canRetEarly = true;
+  for (let i = 0; i < keysToCheck?.length; i++) {
+    if (valuesIncluded[i] == '' || valuesIncluded[i] == null) {
+    } else {
+      canRetEarly = false;
+    }
+  }
+  if (canRetEarly) {
+    return array;
+  }
+
+  let ret = [];
+  for (let i = 0; i < array.length; i++) {
+    let canAdd = true;
+    for (let j = 0; j < keysToCheck.length; j++) {
+      // go through keys
+      if (String(array[i]?.[keysToCheck[j]])?.toLowerCase()?.includes(valuesIncluded[j]?.toLowerCase())) {
+      } else {
+        canAdd = false;
+      }
+    }
+    if (canAdd) {
       ret.push(array[i]);
     }
   }
