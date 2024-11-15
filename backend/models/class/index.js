@@ -6,7 +6,7 @@ import {
 
 export async function getClasses() {
   return await sqlExe.executeCommand(
-    `SELECT cl.id, cl.name, cl.school_id, cl.description, c.name as category FROM classes 
+    `SELECT cl.id, cl.name, cl.school_id, cl.description, cl.category FROM classes 
     cl JOIN class_categories c on c.id = cl.category AND cl.deleted = 0 ORDER BY cl.id ASC`
   );
 }

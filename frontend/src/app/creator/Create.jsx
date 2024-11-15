@@ -23,29 +23,28 @@ import { deepCopyArrayOfObjects, selectArrayOfIncludingItems } from '@utils/func
 import CreateFilter from './CreateFilter';
 
 /**
- * Merges questions that were duplicated if they were linked to more than 1 group
- * TODO TEST DEF YES
- * @param {Array} questions
+ * Merges data pulled in w multiple group ids into one
+ * @param {Array} data
  */
-function mergeQuestions(questions) {
-  if (!Array.isArray(questions)) {
+function mergeGroupIds(data) {
+  if (!Array.isArray(data)) {
     return [];
   }
-  questions = deepCopyArrayOfObjects(questions); // TODO OPTIMIZE
+  data = deepCopyArrayOfObjects(data); // TODO OPTIMIZE
   let newb = [];
   let tmp_groups = [];
   let j = 0;
-  for (let i = 0; i < questions.length; i = j) {
-    tmp_groups.push(questions[i]?.group_id);
-    for (j = i + 1; j < questions.length; j++) {
-      if (questions[i]?.id === questions[j]?.id) {
-        tmp_groups.push(questions[j]?.group_id);
+  for (let i = 0; i < data.length; i = j) {
+    tmp_groups.push(data[i]?.group_id);
+    for (j = i + 1; j < data.length; j++) {
+      if (data[i]?.id === data[j]?.id) {
+        tmp_groups.push(data[j]?.group_id);
       } else {
         break;
       }
     }
-    questions[i]['group_ids'] = tmp_groups; // group_ids diff from group_id
-    newb.push(questions[i]);
+    data[i]['group_ids'] = tmp_groups; // group_ids diff from group_id
+    newb.push(data[i]);
     tmp_groups = [];
   }
   return newb;
@@ -60,16 +59,39 @@ export default function Create() {
     question_id: '',
     choice_id: '',
   });
+  console.log(filter);
   const dispatch = useDispatch();
+
+  /**
+   * Get the classes, topics, exams, questions, and choices that match the filter
+   */
   let classes = selectArrayOfIncludingItems(
     useSelector(selectClassState).classes,
     ['school_id', 'category', 'id'],
     [filter.school_id, filter.class_type, filter.class_id],
   );
-  let topics = useSelector(selectTopicState).topics;
-  let exams = useSelector(selectExamsState).exams;
-  let questions = mergeQuestions(useSelector(selectQuestionState).questions);
-  let choices = useSelector(selectChoicesState).choices;
+  let topics = selectArrayOfIncludingItems(
+    useSelector(selectTopicState).topics,
+    ['school_id', 'class_category', 'class_id', 'id'],
+    [filter.school_id, filter.class_type, filter.class_id, filter.group_id],
+  );
+  let exams = selectArrayOfIncludingItems(
+    useSelector(selectExamsState).exams,
+    ['school_id', 'class_category', 'class_id', 'id'],
+    [filter.school_id, filter.class_type, filter.class_id, filter.group_id],
+  );
+  let questions = selectArrayOfIncludingItems(
+    mergeGroupIds(useSelector(selectQuestionState).questions),
+    ['school_id', 'class_category', 'class_id', 'group_id', 'id'],
+    [filter.school_id, filter.class_type, filter.class_id, filter.group_id, filter.question_id],
+  );
+  let choices = selectArrayOfIncludingItems(
+    mergeGroupIds(useSelector(selectChoicesState).choices),
+    ['school_id', 'class_category', 'class_id', 'group_id', 'question_id', 'id'],
+    [filter.school_id, filter.class_type, filter.class_id, filter.group_id, filter.question_id, filter.choice_id],
+  );
+  // ******************************* //
+
   const user = useSelector(selectUser).user;
   const loading = useSelector(selectLoadingState).loadingComps?.Create;
 

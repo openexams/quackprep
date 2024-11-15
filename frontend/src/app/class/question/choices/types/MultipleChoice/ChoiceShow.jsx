@@ -4,7 +4,7 @@ import './AnswerButton.css';
 import MarkdownRenderer from '@components/MarkdownRenderer';
 import { useDispatch, useSelector } from 'react-redux';
 import { postAnswer, upsertCurrentAnswer } from '../../choicesSlice';
-import { selectUser } from 'src/app/auth/authSlice';
+import { selectUser } from '@src/app/auth/authSlice';
 
 export default function ChoiceShow({ id, answer, is_correct, showAnswers, setShowAnswers, selectedQuestionId, resetClicked }) {
   const [disabled, setDisabled] = useState();

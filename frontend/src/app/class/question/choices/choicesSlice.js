@@ -62,6 +62,7 @@ const DEFAULT_STATE = {
 export default function choicesReducer(state = DEFAULT_STATE, action) {
   switch (action.type) {
     case GET_CHOICES:
+      console.log(action.payload);
       return { ...state, choices: updateArrWithNewVals(state.choices, action.payload) };
     default:
       return state;
