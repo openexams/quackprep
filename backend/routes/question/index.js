@@ -11,9 +11,8 @@ import { cascadeSetDeleted } from "#utils/sqlFunctions.js";
 import { isCreator } from "#middleware/creatorMiddleware.js";
 
 const router = express.Router();
-router.use(isAuthenticated);
 
-router.get("/user", async function (req, res) {
+router.get("/user", isAuthenticated, async function (req, res) {
   try {
     const result = await getQuestionsByUserId(req.user);
     res.status(200).json(result);
@@ -38,27 +37,32 @@ router.get("/:group_id", async function (req, res) {
   }
 });
 
-router.delete("/:question_id", async function (req, res) {
-  try {
-    const question_id = parseInt(req.params.question_id);
-    const result = await cascadeSetDeleted(
-      req.user,
-      "question",
-      question_id,
-      0,
-      0,
-      1,
-      1
-    );
-    res.status(200).json(result);
-  } catch (error) {
-    res.status(500).json({
-      message: `failed to delete question by id ${req.params.question_id}`,
-    });
+router.delete(
+  "/:question_id",
+  isAuthenticated,
+  isCreator,
+  async function (req, res) {
+    try {
+      const question_id = parseInt(req.params.question_id);
+      const result = await cascadeSetDeleted(
+        req.user,
+        "question",
+        question_id,
+        0,
+        0,
+        1,
+        1
+      );
+      res.status(200).json(result);
+    } catch (error) {
+      res.status(500).json({
+        message: `failed to delete question by id ${req.params.question_id}`,
+      });
+    }
   }
-});
+);
 
-router.post("/", isCreator, async function (req, res) {
+router.post("/", isAuthenticated, isCreator, async function (req, res) {
   const data = req.body;
   try {
     if (!data.question || !Array.isArray(data?.group_ids)) {

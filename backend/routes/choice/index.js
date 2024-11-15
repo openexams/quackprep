@@ -50,7 +50,7 @@ router.get("/user", isAuthenticated, async function (req, res) {
   }
 });
 
-router.get("/:question_id", isAuthenticated, async function (req, res) {
+router.get("/:question_id", async function (req, res) {
   try {
     const result = await getChoicesByQuestion(req.params.question_id);
     res.status(200).json(result);
@@ -61,7 +61,7 @@ router.get("/:question_id", isAuthenticated, async function (req, res) {
   }
 });
 
-router.get("/group/:group_id", isAuthenticated, async function (req, res) {
+router.get("/group/:group_id", async function (req, res) {
   try {
     const result = await getChoicesByGroupId(req.params.group_id);
     res.status(200).json(result);
@@ -131,44 +131,53 @@ router.post(
 );
 
 // D
-router.delete("/:choice_id", async function (req, res) {
-  try {
-    const choice_id = parseInt(req.params.choice_id);
-    const result = await cascadeSetDeleted(
-      req.user,
-      "choice",
-      choice_id,
-      0,
-      0,
-      0,
-      1
-    );
-    res.status(200).json(result);
-  } catch (error) {
-    res.status(500).json({
-      message: `failed to delete choice by id ${req.params.choice_id}`,
-    });
+router.delete(
+  "/:choice_id",
+  isAuthenticated,
+  isCreator,
+  async function (req, res) {
+    try {
+      const choice_id = parseInt(req.params.choice_id);
+      const result = await cascadeSetDeleted(
+        req.user,
+        "choice",
+        choice_id,
+        0,
+        0,
+        0,
+        1
+      );
+      res.status(200).json(result);
+    } catch (error) {
+      res.status(500).json({
+        message: `failed to delete choice by id ${req.params.choice_id}`,
+      });
+    }
   }
-});
+);
 
 /**
  * pulls in the current choices that this user has,
  */
-router.get("/current/:group_id/:group_type", async function (req, res) {
-  try {
-    const result = await getCurrentChoicesByGroupIdAndType(
-      req.user,
-      req.params.group_id,
-      req.params.group_type
-    );
+router.get(
+  "/current/:group_id/:group_type",
+  isAuthenticated,
+  async function (req, res) {
+    try {
+      const result = await getCurrentChoicesByGroupIdAndType(
+        req.user,
+        req.params.group_id,
+        req.params.group_type
+      );
 
-    res.status(200).json(result);
-  } catch (error) {
-    res.status(500).json({
-      message: `failed to get currently selected choices: ${req.params.choice_id}`,
-    });
+      res.status(200).json(result);
+    } catch (error) {
+      res.status(500).json({
+        message: `failed to get currently selected choices: ${req.params.choice_id}`,
+      });
+    }
   }
-});
+);
 
 // answers transactional
 router.post("/answer/:choice_id", isAuthenticated, async function (req, res) {

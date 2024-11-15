@@ -2,11 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { List, Button, Transition } from 'semantic-ui-react';
 import './AnswerButton.css';
 import MarkdownRenderer from '@components/MarkdownRenderer';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { postAnswer, upsertCurrentAnswer } from '../../choicesSlice';
+import { selectUser } from 'src/app/auth/authSlice';
 
 export default function ChoiceShow({ id, answer, is_correct, showAnswers, setShowAnswers, selectedQuestionId, resetClicked }) {
   const [disabled, setDisabled] = useState();
+  const user = useSelector(selectUser).user;
   const dispatch = useDispatch();
   const getButtonClass = () => {
     let classes = ['answer-button'];
@@ -27,7 +29,8 @@ export default function ChoiceShow({ id, answer, is_correct, showAnswers, setSho
           disabled={disabled}
           className={getButtonClass()}
           onClick={() => {
-            if (!showAnswers) {
+            if (!showAnswers && user?.id) {
+              // only do a request if a user is logged in
               setShowAnswers(true);
               dispatch(postAnswer(id));
               dispatch(upsertCurrentAnswer(id, selectedQuestionId));
