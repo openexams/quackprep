@@ -9,7 +9,7 @@ import ClassList from './ClassList';
 
 export default function ClassPage() {
   const curSchool = useSelector(selectNavbarState).navbar?.schoolId;
-  const classes = useSelector(selectArrayOfStateById('app.class.classes', 'school_id', curSchool));
+  const classes = useSelector(selectArrayOfStateById('app.class.classes.classes', 'school_id', curSchool));
   const dispatch = useDispatch();
   const [isActive, setIsActive] = useState(false);
 

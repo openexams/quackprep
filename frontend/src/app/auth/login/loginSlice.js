@@ -19,12 +19,13 @@ const DEFAULT_STATE = {
   firstName: null,
   lastName: null,
   icon: null,
+  is_creator: null,
 };
 export default function loginReducer(state = DEFAULT_STATE, action) {
   switch (action.type) {
     case LOGIN:
-      const { id, username, email, first_name, last_name, icon } = action.payload;
-      return { ...state, id, username, email, firstName: first_name, lastName: last_name, icon };
+      const { id, username, email, first_name, last_name, icon, is_creator } = action.payload;
+      return { ...state, id, username, email, firstName: first_name, lastName: last_name, icon, is_creator };
     case SIGN_OUT:
       return {
         ...state,
@@ -34,6 +35,7 @@ export default function loginReducer(state = DEFAULT_STATE, action) {
         firstName: DEFAULT_STATE.first_name,
         lastName: DEFAULT_STATE.last_name,
         icon: DEFAULT_STATE.icon,
+        is_creator: DEFAULT_STATE.is_creator,
       };
     default:
       return state;

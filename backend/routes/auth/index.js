@@ -17,7 +17,7 @@ const matcher = new RegExpMatcher({
 
 const router = Router();
 
-router.get("/users/count", isAuthenticated, async function (req, res) {
+router.get("/users/count", async function (req, res) {
   try {
     const result = await getUserCount();
     res.status(200).json(result?.[0].COUNT);

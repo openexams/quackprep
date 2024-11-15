@@ -6,6 +6,7 @@ import {
   getClassesByUserId,
   getClassIdByClassName,
   getSchools,
+  getClassCategories,
 } from "#models/class/index.js";
 import { cascadeSetDeleted } from "#utils/sqlFunctions.js";
 import express from "express";
@@ -31,6 +32,17 @@ router.get("/user", isAuthenticated, async function (req, res) {
   }
 });
 
+router.get("/categories", async function (req, res) {
+  try {
+    const result = await getClassCategories();
+    res.status(200).json(result);
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "server error could not get class categories" });
+  }
+});
+
 router.delete(
   "/:class_id",
   isAuthenticated,
@@ -49,11 +61,9 @@ router.delete(
       );
       res.status(200).json(result);
     } catch (error) {
-      res
-        .status(500)
-        .json({
-          message: `failed to delete class by id ${req.params.class_id}`,
-        });
+      res.status(500).json({
+        message: `failed to delete class by id ${req.params.class_id}`,
+      });
     }
   }
 );

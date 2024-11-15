@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getClassesByUserId, selectClassState } from '../class/classSlice';
+import { getClasses, getClassesByUserId, selectClassState } from '../class/classSlice';
 import { getTopicsByUserId, selectTopicState } from '../class/group/topic/topicSlice';
 import { getExamsByUserId, selectExamsState } from '../class/group/exam/examSlice';
 import {
@@ -21,6 +21,10 @@ import { deleteExamById, upsertExam } from '../class/group/exam/examSlice';
 import { upsertChoice, deleteChoiceById } from '../class/question/choices/choicesSlice';
 import { deepCopyArrayOfObjects, selectArrayOfIncludingItems } from '@utils/functions';
 import CreateFilter from './CreateFilter';
+import SchoolsList from '../class/school/SchoolsList';
+import { getSchools, selectSchoolState } from '../class/school/schoolSlice';
+import { getClassCategories } from '../class/class_categories/classCategorySlice';
+import CategoryList from '../class/class_categories/CategoryList';
 
 /**
  * Merges data pulled in w multiple group ids into one
@@ -28,10 +32,10 @@ import CreateFilter from './CreateFilter';
  */
 function mergeGroupIds(data) {
   if (!Array.isArray(data)) {
-    return [];
+    return null;
   }
   data = deepCopyArrayOfObjects(data); // TODO OPTIMIZE
-  let newb = [];
+  let updated_arr = [];
   let tmp_groups = [];
   let j = 0;
   for (let i = 0; i < data.length; i = j) {
@@ -44,10 +48,10 @@ function mergeGroupIds(data) {
       }
     }
     data[i]['group_ids'] = tmp_groups; // group_ids diff from group_id
-    newb.push(data[i]);
+    updated_arr.push(data[i]);
     tmp_groups = [];
   }
-  return newb;
+  return updated_arr;
 }
 
 export default function Create() {
@@ -59,7 +63,6 @@ export default function Create() {
     question_id: '',
     choice_id: '',
   });
-  console.log(filter);
   const dispatch = useDispatch();
 
   /**
@@ -365,16 +368,21 @@ export default function Create() {
   }
 
   useEffect(() => {
-    if (true) {
+    if (user?.is_creator) {
       dispatch(getClassesByUserId());
       dispatch(getTopicsByUserId());
       dispatch(getExamsByUserId());
       dispatch(getQuestionsByUserId());
       dispatch(getChoicesByUserId());
+      dispatch(getSchools());
+      dispatch(getClassCategories());
 
       console.log('got');
+    } else {
+      // prompt a sign in
+      dispatch(getChoicesByUserId());
     }
-  }, []);
+  }, [user?.is_creator]);
   return (
     <Container style={{ padding: '2em 0' }}>
       <Header as='h1' textAlign='center' color='blue'>
@@ -383,21 +391,32 @@ export default function Create() {
       </Header>
       <Divider hidden />
 
-      <Segment raised padded='very' loading={loading} style={{ backgroundColor: '#f8f9fa' }}>
-        <CreateFilter filter={filter} setFilter={setFilter} />
-        {classes &&
-          topics &&
-          exams &&
-          questions &&
-          choices &&
-          loadAccords([
-            { name: 'Classes', component: mapClassesToItems() },
-            { name: 'Topics', component: mapTopicsToItems() },
-            { name: 'Exams', component: mapExamsToItems() },
-            { name: 'Questions', component: mapQuestionsToItems() },
-            { name: 'Choices', component: mapChoicesToItems() },
-          ])}
-      </Segment>
+      {user?.is_creator ? (
+        <Segment raised padded='very' loading={loading} style={{ backgroundColor: '#f8f9fa' }}>
+          <Segment basic>
+            <Header as={'h2'}>Key</Header>
+            Schools:
+            <SchoolsList onCreator={true} />
+            Class Categories:
+            <CategoryList />
+          </Segment>
+          <CreateFilter filter={filter} setFilter={setFilter} />
+          {classes &&
+            topics &&
+            exams &&
+            questions &&
+            choices &&
+            loadAccords([
+              { name: 'Classes', component: mapClassesToItems() },
+              { name: 'Topics', component: mapTopicsToItems() },
+              { name: 'Exams', component: mapExamsToItems() },
+              { name: 'Questions', component: mapQuestionsToItems() },
+              { name: 'Choices', component: mapChoicesToItems() },
+            ])}
+        </Segment>
+      ) : (
+        <Segment>You must be a creator! How did you get here? {';)'}</Segment>
+      )}
     </Container>
   );
 }

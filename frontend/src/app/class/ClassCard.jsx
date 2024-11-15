@@ -35,12 +35,14 @@ function getColorByLevel(level) {
 }
 
 function getIconByCategory(category) {
-  switch (category) {
-    case 'CS':
+  switch (
+    category // should pull in master table w this but im to lazy
+  ) {
+    case 1:
       return 'code';
-    case 'MA' || 'MAT':
+    case 2 || 'MAT':
       return 'cube';
-    case 'ECO' || 'ECON':
+    case 3 || 'ECON':
       return 'cog';
     default:
       return 'beer';

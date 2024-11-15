@@ -7,7 +7,7 @@ import { selectArrayOfStateById } from '@utils/functions';
 export default function ClassShow() {
   const dispatch = useDispatch();
   const { classId } = useSelector(selectNavbarState).navbar;
-  const curClass = useSelector(selectArrayOfStateById('app.class.classes', 'id', classId))?.[0];
+  const curClass = useSelector(selectArrayOfStateById('app.class.classes.classes', 'id', classId))?.[0];
 
   if (!curClass) return null;
 

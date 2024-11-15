@@ -4,6 +4,10 @@ import {
   verifyUserOwnsRowId,
 } from "#utils/sqlFunctions.js";
 
+export async function getClassCategories() {
+  return await sqlExe.executeCommand(`SELECT * FROM class_categories`);
+}
+
 export async function getClasses() {
   return await sqlExe.executeCommand(
     `SELECT cl.id, cl.name, cl.school_id, cl.description, cl.category FROM classes 

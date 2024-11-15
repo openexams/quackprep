@@ -44,7 +44,7 @@ export default function classReducer(state = DEFAULT_STATE, action) {
 export const selectClassState = createSelector(
   (state) => state,
   function (state) {
-    return { classes: state.app.class.classes };
+    return { classes: state.app.class.classes.classes };
   },
 );
 
@@ -52,8 +52,8 @@ export function selectClassStateById(id) {
   return createSelector(
     (state) => state,
     function (state) {
-      if (!state.app.class.classes) return [];
-      return { classes: state.app.class.classes[id - 1] };
+      if (!state.app.class.classes.classes) return [];
+      return { classes: state.app.class.classes.classes[id - 1] };
     },
   );
 }
@@ -72,9 +72,9 @@ export function selectClassStateByName(name) {
   return createSelector(
     (state) => state,
     function (state) {
-      if (!state.app.class.classes) return [];
+      if (!state.app.class.classes.classes) return [];
 
-      return { classes: state.app.class.classes[findClassIndexByName(state.app.class.classes, name)] };
+      return { classes: state.app.class.classes[findClassIndexByName(state.app.class.classes.classes, name)] };
     },
   );
 }
