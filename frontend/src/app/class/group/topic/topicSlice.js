@@ -16,7 +16,7 @@ export function getTopicsByUserId() {
   return getGroupsByUserId('topic', GET_TOPICS);
 }
 export function deleteTopicById(id) {
-  return deleteGroupById(id, DELETE_TOPIC); //TODO
+  return deleteGroupById(id, DELETE_TOPIC);
 }
 
 export function upsertTopic(id, name, class_id, desc) {
@@ -30,11 +30,7 @@ const DEFAULT_STATE = {
 export default function topicReducer(state = DEFAULT_STATE, action) {
   switch (action.type) {
     case GET_TOPICS: // something to map topics in just in case same topics are grabbed twice.
-      if (state.topics) {
-        return { ...state, topics: updateArrWithNewVals(state.topics, action.payload) };
-      } else {
-        return { ...state, topics: [...action.payload] };
-      }
+      return { ...state, topics: updateArrWithNewVals(state.topics, action.payload) };
     default:
       return state;
   }

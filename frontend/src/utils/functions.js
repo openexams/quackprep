@@ -17,7 +17,7 @@ export function deepCopyArrayOfObjects(arr) {
  * @param {JSON} item item to copy must be a json object
  * @returns {JSON} copy of array u give
  */
-export function deepCopy(item) {
+export function deepCopyObject(item) {
   return JSON.parse(JSON.stringify(item));
 }
 
@@ -253,6 +253,13 @@ export function selectArrayOfIncludingItems(array, keysToCheck, valuesIncluded) 
   return ret;
 }
 
+/**
+ * unoptimal because of how state works
+ * You pass in the id of the object u want to remove from the array
+ * @param {Array<Object>} arr
+ * @param {Int} id must be in the array which is a array of objects
+ * @returns
+ */
 export function filterArr(arr, id) {
   if (!Array.isArray(arr) || !id) {
     return [];
@@ -260,7 +267,7 @@ export function filterArr(arr, id) {
   let ret = [];
   for (let i = 0; i < arr.length; i++) {
     if (arr[i]?.id !== id) {
-      ret.push(arr[i]);
+      ret.push(deepCopyObject(arr[i]));
     }
   }
 
@@ -268,7 +275,7 @@ export function filterArr(arr, id) {
 }
 
 /**
- * Handles Creation of new obj and editing of object
+ * Handles Creation of new obj and editing of object BY ID
  * @param {Array} arr
  * @param {*} obj
  * @returns {Array} updated arr

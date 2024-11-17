@@ -25,6 +25,7 @@ import SchoolsList from '../class/school/SchoolsList';
 import { getSchools } from '../class/school/schoolSlice';
 import { getClassCategories } from '../class/class_categories/classCategorySlice';
 import CategoryList from '../class/class_categories/CategoryList';
+import { hide401Msg, show401Msg } from '@components/401/401Slice';
 
 /**
  * Merges data pulled in w multiple group ids into one
@@ -369,8 +370,11 @@ export default function Create() {
     return ret;
   }
 
+  // kinda like navbar.jsx
   useEffect(() => {
     if (user?.is_creator) {
+      dispatch(hide401Msg());
+
       dispatch(getSchools());
       dispatch(getClassCategories());
       dispatch(getClassesByUserId());
@@ -378,11 +382,8 @@ export default function Create() {
       dispatch(getExamsByUserId());
       dispatch(getQuestionsByUserId());
       dispatch(getChoicesByUserId());
-
-      console.log('got');
     } else {
-      // prompt a sign in
-      dispatch(getChoicesByUserId());
+      dispatch(show401Msg());
     }
   }, [user?.is_creator]);
   return (
