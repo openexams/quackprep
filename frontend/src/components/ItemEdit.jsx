@@ -38,6 +38,7 @@ export default function ItemEdit({ id, name, desc, formFields, onSubmit, onDelet
     <>
       {name !== '' ? (
         <Card
+          key={id}
           style={{
             transition: 'transform 0.3s ease, box-shadow 0.3s ease',
             transform: hovered ? 'scale(1.05)' : 'scale(1)',

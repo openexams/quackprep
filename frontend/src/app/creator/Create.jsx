@@ -22,7 +22,7 @@ import { upsertChoice, deleteChoiceById } from '../class/question/choices/choice
 import { deepCopyArrayOfObjects, selectArrayOfIncludingItems } from '@utils/functions';
 import CreateFilter from './CreateFilter';
 import SchoolsList from '../class/school/SchoolsList';
-import { getSchools, selectSchoolState } from '../class/school/schoolSlice';
+import { getSchools } from '../class/school/schoolSlice';
 import { getClassCategories } from '../class/class_categories/classCategorySlice';
 import CategoryList from '../class/class_categories/CategoryList';
 
@@ -88,11 +88,13 @@ export default function Create() {
     ['school_id', 'class_category', 'class_id', 'group_id', 'id'],
     [filter.school_id, filter.class_type, filter.class_id, filter.group_id, filter.question_id],
   );
+
   let choices = selectArrayOfIncludingItems(
     mergeGroupIds(useSelector(selectChoicesState).choices),
     ['school_id', 'class_category', 'class_id', 'group_id', 'question_id', 'id'],
     [filter.school_id, filter.class_type, filter.class_id, filter.group_id, filter.question_id, filter.choice_id],
   );
+
   // ******************************* //
 
   const user = useSelector(selectUser).user;
@@ -119,7 +121,7 @@ export default function Create() {
             {val.name}
           </Accordion.Title>
           <Accordion.Content active={activeIndex === index}>
-            <Grid columns={3} stackable doubling centered style={{ marginTop: '.3rem' }}>
+            <Grid key={index} columns={3} stackable doubling centered style={{ marginTop: '.3rem' }}>
               {val.component}
             </Grid>
           </Accordion.Content>
@@ -265,10 +267,10 @@ export default function Create() {
   }
 
   function mapQuestionsToItems() {
-    let ret = questions.map((question) => {
+    let ret = questions.map((question, index) => {
       return (
         <ItemEdit
-          key={'q' + question.id}
+          key={'q' + question.id + index}
           id={question.id}
           name={question.question}
           desc={null}
@@ -322,10 +324,10 @@ export default function Create() {
 
   // need to do one of those above for choice now :(
   function mapChoicesToItems() {
-    let ret = choices.map((choice) => {
+    let ret = choices?.map((choice, index) => {
       return (
         <ItemEdit
-          key={'c' + choice.id}
+          key={'choice' + choice.id}
           id={choice.id}
           name={choice.answer}
           desc={choice.is_correct ? 'Correct' : 'Incorrect'}
@@ -369,13 +371,13 @@ export default function Create() {
 
   useEffect(() => {
     if (user?.is_creator) {
+      dispatch(getSchools());
+      dispatch(getClassCategories());
       dispatch(getClassesByUserId());
       dispatch(getTopicsByUserId());
       dispatch(getExamsByUserId());
       dispatch(getQuestionsByUserId());
       dispatch(getChoicesByUserId());
-      dispatch(getSchools());
-      dispatch(getClassCategories());
 
       console.log('got');
     } else {

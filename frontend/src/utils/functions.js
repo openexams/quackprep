@@ -110,10 +110,12 @@ export function selectArrayOfStateById(path, idName, id) {
 
 // pls pass in two objs with same keys TODO TEST
 export function checkEquivalenceOfObjects(obj1, obj2) {
+  if (!obj1 || !obj2) return false;
   let o1keys = Object.keys(obj1);
   for (let i = 0; i < o1keys.length; i++) {
     if (obj1[o1keys[i]] == obj2[o1keys[i]]) {
     } else {
+      //console.log(obj1, 'and ', obj2, ' are not equal');
       return false;
     }
   }
@@ -121,24 +123,28 @@ export function checkEquivalenceOfObjects(obj1, obj2) {
 }
 
 /**
+ * TODO MAKE MORE EFFICIENT
+ * had to be modified because for choice & questions there id shows up twice, so couldnt use a hashtable
+ * not gaurenteed to keep arr sorted in any way
  * if what you are trying to add (a arr of obj) id is the same as it was before then dont add it.
  * @param {Array} old
  * @param {Array} newA
  * @returns {Array}
  */
 export function updateArrWithNewVals(old, newA) {
-  const map = {};
-  if (old) {
-    for (let i = 0; i < old.length; i++) {
-      map[old[i].id] = old[i];
-    }
-  } else {
-    old = [];
+  if (old === null || old?.length === 0) {
+    return newA;
   }
   let ret = [...old];
   for (let i = 0; i < newA.length; i++) {
-    if (map && newA[i].id in map && checkEquivalenceOfObjects(map[newA[i].id], newA[i])) {
-    } else {
+    let canAdd = false;
+    for (let j = 0; j < old.length; j++) {
+      if (checkEquivalenceOfObjects(newA[i], old[j])) {
+        canAdd = false;
+        break;
+      }
+    }
+    if (canAdd) {
       ret.push(newA[i]);
     }
   }
