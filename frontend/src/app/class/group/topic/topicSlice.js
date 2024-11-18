@@ -1,7 +1,7 @@
 import { standardApiCall } from '@utils/api';
-import { updateArrWithNewVals } from '@utils/functions';
 import { createSelector } from 'reselect';
 import { deleteGroupById, getGroupsByUserId, upsertGroup } from '../groupSlice';
+import { updateArrWithNewVals, filterArr, upsertArray } from '@utils/functions';
 
 const GET_TOPICS = 'app/class/topic/GET_TOPICS';
 const DELETE_TOPIC = 'app/class/topic/DELETE_TOPIC';
@@ -29,8 +29,12 @@ const DEFAULT_STATE = {
 
 export default function topicReducer(state = DEFAULT_STATE, action) {
   switch (action.type) {
-    case GET_TOPICS: // something to map topics in just in case same topics are grabbed twice.
+    case GET_TOPICS:
       return { ...state, topics: updateArrWithNewVals(state.topics, action.payload) };
+    case DELETE_TOPIC:
+      return { ...state, topics: filterArr(state.topics, action.payload) };
+    case UPSERT_TOPIC:
+      return { ...state, topics: upsertArray(state.topics, action.payload?.[0]) };
     default:
       return state;
   }

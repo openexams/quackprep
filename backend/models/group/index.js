@@ -3,6 +3,7 @@ import {
   verifyRowCreatedByUser,
   verifyUserOwnsRowId,
 } from "#utils/sqlFunctions.js";
+import { getLastRowManipulated } from "#utils/sqlFunctions.js";
 
 export async function getGroupsByClassId(class_id, type) {
   const params = { class_id, type };
@@ -58,9 +59,9 @@ export async function upsertGroupInClass(
     );
     return;
   }
-  return (
+  const result = (
     await sqlExe.executeCommand(
-      `INSERT INTO cgroups(id,name,type,\`desc\`,created_by,class_id) VALUES(id,:name,(SELECT id FROM group_types where type_name = :type),:desc,:user_id,:class_id)
+      `INSERT INTO cgroups(id,name,type,\`desc\`,created_by,class_id) VALUES(:id,:name,(SELECT id FROM group_types where type_name = :type),:desc,:user_id,:class_id)
       ON DUPLICATE KEY UPDATE
       name =:name,
       type=(SELECT id FROM group_types where type_name = :type),
@@ -71,4 +72,7 @@ export async function upsertGroupInClass(
       params
     )
   ).insertId;
+  return await sqlExe.executeCommand(
+    `${getLastRowManipulated("cgroups", result)}`
+  );
 }

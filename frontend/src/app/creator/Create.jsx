@@ -233,7 +233,7 @@ export default function Create() {
           desc={exam.desc}
           formFields={[
             { name: 'name', value: exam.name, required: true },
-            { name: 'description', value: exam.description, required: true },
+            { name: 'description', value: exam.desc, required: true },
             { name: 'class_id', value: exam.class_id, required: true },
           ]}
           onSubmit={({ name, description, class_id }) => {

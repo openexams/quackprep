@@ -1,28 +1,26 @@
 import { standardApiCall } from '@utils/api';
 import { createSelector } from 'reselect';
-import { filterArr, upsertArray, updateArrWithNewVals } from '@utils/functions';
-import { defaultCRUDReducer } from '../store/helperSlice';
-import { act } from 'react';
+import { updateArrWithNewVals, filterArr, upsertArray } from '@utils/functions';
 
-const GET_CLASSES = 'app/class/GET_CLASSES';
-const DELETE_CLASS = 'app/class/DELETE_CLASS';
-const UPSERT_CLASSES = 'app/class/UPSERT_CLASSES';
+const GET_CRUD_CLASSES = 'app/class/GET_CRUD_CLASSES';
+const DELETE_CRUD_CLASS = 'app/class/DELETE_CRUD_CLASS';
+const UPSERT_CRUD_CLASSES = 'app/class/UPSERT_CRUD_CLASSES';
 
 export function getClasses() {
-  return standardApiCall('get', '/api/class/', null, GET_CLASSES, 'ClassList');
+  return standardApiCall('get', '/api/class/', null, GET_CRUD_CLASSES, 'ClassList');
 }
 
 export function getClassesByUserId() {
-  return standardApiCall('get', `/api/class/user`, null, GET_CLASSES, ['ClassList', 'Create']);
+  return standardApiCall('get', `/api/class/user`, null, GET_CRUD_CLASSES, ['ClassList', 'Create']);
 }
 
 // returns the created class
 export function upsertClass(id, school_id, name, description, category) {
-  return standardApiCall('post', `/api/class/`, { id, school_id, name, description, category }, UPSERT_CLASSES, ['Create']); // have a action that puts this created class into the classlist
+  return standardApiCall('post', `/api/class/`, { id, school_id, name, description, category }, UPSERT_CRUD_CLASSES, ['Create']); // have a action that puts this created class into the classlist
 }
 
 export function deleteClassById(id) {
-  return standardApiCall('delete', `/api/class/${id}`, null, DELETE_CLASS, ['Create']); // have a action that puts this created class into the classlist
+  return standardApiCall('delete', `/api/class/${id}`, null, DELETE_CRUD_CLASS, ['Create']); // have a action that puts this created class into the classlist
 }
 
 const DEFAULT_STATE = {
@@ -30,7 +28,16 @@ const DEFAULT_STATE = {
 };
 
 export default function classReducer(state = DEFAULT_STATE, action) {
-  return defaultCRUDReducer(state, action, 'classes', state.classes);
+  switch (action.type) {
+    case GET_CRUD_CLASSES:
+      return { ...state, classes: updateArrWithNewVals(state.classes, action.payload) };
+    case DELETE_CRUD_CLASS:
+      return { ...state, classes: filterArr(state.classes, action.payload) };
+    case UPSERT_CRUD_CLASSES:
+      return { ...state, classes: upsertArray(state.classes, action.payload?.[0]) };
+    default:
+      return state;
+  }
 }
 
 export const selectClassState = createSelector(
