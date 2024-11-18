@@ -1,12 +1,14 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Container, Grid, Header, Icon, Segment, Button, Card, List, Image, Feed } from 'semantic-ui-react';
+import { Container, Grid, Header, Icon, Segment, Button, Card, List, Image, Feed, Popup } from 'semantic-ui-react';
 import { getUserCount, selectUserCount } from '../home/homeSlice';
 import { changeNavbarPage } from '@components/navbar/navbarSlice';
+import { selectUser } from '../auth/authSlice';
 
 export default function CreatorDashboard() {
   const dispatch = useDispatch();
   const userCount = useSelector(selectUserCount).userCount;
+  const user = useSelector(selectUser).user;
 
   useEffect(() => {
     if (!userCount) dispatch(getUserCount());
@@ -23,17 +25,30 @@ export default function CreatorDashboard() {
             Share your knowledge and help students ace their exams
           </Header.Subheader>
         </Header>
-        <Button
-          primary
-          size='huge'
-          style={{ marginTop: '2rem' }}
-          onClick={() => {
-            dispatch(changeNavbarPage('/create'));
-          }}
-        >
-          <Icon name='plus' />
-          Start Creating
-        </Button>
+        {user?.is_creator ? (
+          <Button
+            primary
+            size='huge'
+            style={{ marginTop: '2rem' }}
+            onClick={() => {
+              dispatch(changeNavbarPage('/create'));
+            }}
+          >
+            <Icon name='plus' />
+            Start Creating
+          </Button>
+        ) : (
+          <Popup
+            position='bottom center'
+            content='email quackprep@gmail.com'
+            trigger={
+              <Button primary size='huge' as='a' href='mailto:quackprep@gmail.com' style={{ marginTop: '2rem' }}>
+                <Icon name='briefcase' />
+                Apply Now
+              </Button>
+            }
+          />
+        )}
       </Segment>
 
       {/* Benefits Section */}
@@ -65,18 +80,18 @@ export default function CreatorDashboard() {
           <Grid.Column>
             <Card fluid>
               <Card.Content textAlign='center'>
-                <Icon name='pencil' size='big' color='blue' />
-                <Card.Header style={{ marginTop: '1rem' }}>2. Create Content</Card.Header>
-                <Card.Description>Upload your exam prep materials</Card.Description>
+                <Icon name='check circle' size='big' color='blue' />
+                <Card.Header style={{ marginTop: '1rem' }}>2. Get Approved</Card.Header>
+                <Card.Description>Quick review process for quality</Card.Description>
               </Card.Content>
             </Card>
           </Grid.Column>
           <Grid.Column>
             <Card fluid>
               <Card.Content textAlign='center'>
-                <Icon name='check circle' size='big' color='blue' />
-                <Card.Header style={{ marginTop: '1rem' }}>3. Get Approved</Card.Header>
-                <Card.Description>Quick review process for quality</Card.Description>
+                <Icon name='pencil' size='big' color='blue' />
+                <Card.Header style={{ marginTop: '1rem' }}>3. Create Content</Card.Header>
+                <Card.Description>Upload your exam prep materials</Card.Description>
               </Card.Content>
             </Card>
           </Grid.Column>

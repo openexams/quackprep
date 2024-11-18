@@ -1,6 +1,5 @@
 import { createSelector } from 'reselect';
 import { standardApiCall } from '@utils/api';
-import { replaceP20WithSpace } from '../../../../shared/globalFuncs';
 
 const CHANGE_NAVBAR_PAGE = 'components/navbar/CHANGE_NAVBAR_PAGE';
 const UPDATE_LAST_PAGE = 'components/navbar/UPDATE_LAST_PAGE';

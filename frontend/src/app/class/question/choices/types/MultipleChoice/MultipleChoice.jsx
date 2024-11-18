@@ -1,6 +1,5 @@
 import './buttonChoices.css';
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { Segment, Header, List, Button, Divider } from 'semantic-ui-react';
 
 import { randomizeArray } from '../../../../../../../../shared/globalFuncs';

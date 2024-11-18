@@ -17,7 +17,7 @@ export function deepCopyArrayOfObjects(arr) {
  * @param {JSON} item item to copy must be a json object
  * @returns {JSON} copy of array u give
  */
-export function deepCopy(item) {
+export function deepCopyObject(item) {
   return JSON.parse(JSON.stringify(item));
 }
 
@@ -110,10 +110,12 @@ export function selectArrayOfStateById(path, idName, id) {
 
 // pls pass in two objs with same keys TODO TEST
 export function checkEquivalenceOfObjects(obj1, obj2) {
+  if (!obj1 || !obj2) return false;
   let o1keys = Object.keys(obj1);
   for (let i = 0; i < o1keys.length; i++) {
     if (obj1[o1keys[i]] == obj2[o1keys[i]]) {
     } else {
+      //console.log(obj1, 'and ', obj2, ' are not equal');
       return false;
     }
   }
@@ -121,24 +123,28 @@ export function checkEquivalenceOfObjects(obj1, obj2) {
 }
 
 /**
+ * TODO MAKE MORE EFFICIENT
+ * had to be modified because for choice & questions there id shows up twice, so couldnt use a hashtable
+ * not gaurenteed to keep arr sorted in any way
  * if what you are trying to add (a arr of obj) id is the same as it was before then dont add it.
  * @param {Array} old
  * @param {Array} newA
  * @returns {Array}
  */
 export function updateArrWithNewVals(old, newA) {
-  const map = {};
-  if (old) {
-    for (let i = 0; i < old.length; i++) {
-      map[old[i].id] = old[i];
-    }
-  } else {
-    old = [];
+  if (old === null || old?.length === 0) {
+    return newA;
   }
   let ret = [...old];
   for (let i = 0; i < newA.length; i++) {
-    if (map && newA[i].id in map && checkEquivalenceOfObjects(map[newA[i].id], newA[i])) {
-    } else {
+    let canAdd = false;
+    for (let j = 0; j < old.length; j++) {
+      if (checkEquivalenceOfObjects(newA[i], old[j])) {
+        canAdd = false;
+        break;
+      }
+    }
+    if (canAdd) {
       ret.push(newA[i]);
     }
   }
@@ -195,19 +201,65 @@ export function findNeedlesInArrayOfObjectsLINEAR(array, keyNamesToCheck, needle
  * @param {*} objectKeyToCheck
  * @param {String} including
  */
-export function selectArrayOfIncludingItems(array, objectKeyToCheck, including) {
+export function selectArrayOfIncludingItem(array, objectKeyToCheck, including) {
   if (including === '' || objectKeyToCheck === '' || array?.length === 0 || !array) {
     return array;
   }
   let ret = [];
   for (let i = 0; i < array.length; i++) {
-    if (array[i]?.[objectKeyToCheck]?.toLowerCase()?.includes(including?.toLowerCase())) {
+    if (String(array[i]?.[objectKeyToCheck])?.toLowerCase()?.includes(including?.toLowerCase())) {
       ret.push(array[i]);
     }
   }
   return ret;
 }
 
+/**
+ * TODO TEST
+ * @param {Array} array
+ * @param {Array} keysToCheck
+ * @param {Array} valuesIncluded
+ */
+export function selectArrayOfIncludingItems(array, keysToCheck, valuesIncluded) {
+  if (!Array.isArray(array) || keysToCheck == null) {
+    return array;
+  }
+
+  let canRetEarly = true;
+  for (let i = 0; i < keysToCheck?.length; i++) {
+    if (valuesIncluded[i] == '' || valuesIncluded[i] == null) {
+    } else {
+      canRetEarly = false;
+    }
+  }
+  if (canRetEarly) {
+    return array;
+  }
+
+  let ret = [];
+  for (let i = 0; i < array.length; i++) {
+    let canAdd = true;
+    for (let j = 0; j < keysToCheck.length; j++) {
+      // go through keys
+      if (String(array[i]?.[keysToCheck[j]])?.toLowerCase()?.includes(valuesIncluded[j]?.toLowerCase())) {
+      } else {
+        canAdd = false;
+      }
+    }
+    if (canAdd) {
+      ret.push(array[i]);
+    }
+  }
+  return ret;
+}
+
+/**
+ * unoptimal because of how state works
+ * You pass in the id of the object u want to remove from the array
+ * @param {Array<Object>} arr
+ * @param {Int} id must be in the array which is a array of objects
+ * @returns
+ */
 export function filterArr(arr, id) {
   if (!Array.isArray(arr) || !id) {
     return [];
@@ -215,7 +267,7 @@ export function filterArr(arr, id) {
   let ret = [];
   for (let i = 0; i < arr.length; i++) {
     if (arr[i]?.id !== id) {
-      ret.push(arr[i]);
+      ret.push(deepCopyObject(arr[i]));
     }
   }
 
@@ -223,7 +275,7 @@ export function filterArr(arr, id) {
 }
 
 /**
- * Handles Creation of new obj and editing of object
+ * Handles Creation of new obj and editing of object BY ID
  * @param {Array} arr
  * @param {*} obj
  * @returns {Array} updated arr

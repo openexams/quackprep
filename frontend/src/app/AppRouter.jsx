@@ -10,7 +10,6 @@ import ClassShow from './class/ClassShow.jsx';
 import QuestionPage from './class/question/QuestionPage.jsx';
 import TopicsShow from './class/group/topic/TopicsList.jsx';
 import NotFoundPage from '@components/NotFound.jsx';
-import ApiDocs from './docs/api/ApiDocs.jsx';
 import ExamList from './class/group/exam/ExamList.jsx';
 import CreatorDashboard from './creator/CreatorDashboard.jsx';
 import Create from './creator/Create.jsx';
@@ -48,7 +47,6 @@ export default function AppRouter() {
 
         <Route path='/leaderboard' element={<Leaderboard />} />
         <Route path='/stats' element={<Stats />} />
-        <Route path='/docs/api' element={<ApiDocs />} />
 
         <Route path='*' element={<NotFoundPage />} />
       </Routes>

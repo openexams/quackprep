@@ -143,7 +143,7 @@ export default function Navbar() {
 
   const urlArr = useMemo(() => {
     return activePage ? activePage.split('/') : '/';
-  }, [activePage]); // const url = location.pathname + location.search + location.hash only contructs once FATAL ERR MADDOX
+  }, [activePage]);
 
   function handlePageChange(e, data) {
     e.preventDefault();

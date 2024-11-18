@@ -6,23 +6,28 @@ import './school.css';
 import { selectLoadingState } from '@src/app/store/loadingSlice';
 import { changeNavbarPage } from '@components/navbar/navbarSlice';
 
-export default function SchoolsList({ selectedSchool }) {
+export default function SchoolsList({ selectedSchool, onCreator = false }) {
   const schools = useSelector(selectSchoolState).schools;
   const loading = useSelector(selectLoadingState).loadingComps?.SchoolsList;
   const dispatch = useDispatch();
+  if (onCreator) {
+    selectedSchool = schools?.[0];
+  }
 
   return (
     <Segment loading={loading}>
       <Grid columns={8} doubling>
         {schools?.map((school) => (
-          <Grid.Column key={school.id}>
+          <Grid.Column key={'s' + school.id}>
             <Button
               className={`school-button ${selectedSchool === school.id ? 'selected' : ''}`}
               size='small'
               fluid
               basic={selectedSchool !== school.id}
               onClick={() => {
-                dispatch(changeNavbarPage(`/class/${school.school_name}`)); // bad pratice assuming class before it but works
+                if (!onCreator) {
+                  dispatch(changeNavbarPage(`/class/${school.school_name}`));
+                } // bad pratice assuming class before it but works
               }}
               style={{
                 marginBottom: '0.5em',
@@ -31,6 +36,11 @@ export default function SchoolsList({ selectedSchool }) {
               }}
             >
               {school.school_name}
+              {onCreator && (
+                <span style={{ fontSize: '1rem' }}>
+                  {'  id:'} {school.id}
+                </span>
+              )}
             </Button>
           </Grid.Column>
         ))}

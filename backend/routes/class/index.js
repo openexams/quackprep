@@ -1,16 +1,16 @@
 import { isAuthenticated } from "#middleware/authMiddleware.js";
+import { isCreator } from "#middleware/creatorMiddleware.js";
 import {
   upsertClass,
   getClasses,
   getClassesByUserId,
   getClassIdByClassName,
   getSchools,
+  getClassCategories,
 } from "#models/class/index.js";
 import { cascadeSetDeleted } from "#utils/sqlFunctions.js";
 import express from "express";
 const router = express.Router();
-
-router.use(isAuthenticated);
 
 router.get("/", async function (req, res) {
   try {
@@ -21,7 +21,7 @@ router.get("/", async function (req, res) {
   }
 });
 
-router.get("/user", async function (req, res) {
+router.get("/user", isAuthenticated, async function (req, res) {
   try {
     const result = await getClassesByUserId(req.user);
     res.status(200).json(result);
@@ -32,27 +32,43 @@ router.get("/user", async function (req, res) {
   }
 });
 
-router.delete("/:class_id", async function (req, res) {
+router.get("/categories", async function (req, res) {
   try {
-    const class_id = parseInt(req.params.class_id);
-    const result = await cascadeSetDeleted(
-      req.user,
-      "class",
-      class_id,
-      1,
-      1,
-      1,
-      1
-    );
+    const result = await getClassCategories();
     res.status(200).json(result);
   } catch (error) {
     res
       .status(500)
-      .json({ message: `failed to delete class by id ${req.params.class_id}` });
+      .json({ message: "server error could not get class categories" });
   }
 });
 
-router.post("/", async function (req, res) {
+router.delete(
+  "/:class_id",
+  isAuthenticated,
+  isCreator,
+  async function (req, res) {
+    try {
+      const class_id = parseInt(req.params.class_id);
+      const result = await cascadeSetDeleted(
+        req.user,
+        "class",
+        class_id,
+        1,
+        1,
+        1,
+        1
+      );
+      res.status(200).json(result);
+    } catch (error) {
+      res.status(500).json({
+        message: `failed to delete class by id ${req.params.class_id}`,
+      });
+    }
+  }
+);
+
+router.post("/", isAuthenticated, isCreator, async function (req, res) {
   const data = req.body;
   try {
     if (!data.school_id || !data.name || !data.description || !data.category) {

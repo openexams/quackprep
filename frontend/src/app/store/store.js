@@ -16,12 +16,13 @@ import statsReducer from '../stats/statsSlice.js';
 import examSliceReducer from '../class/group/exam/examSlice.js';
 import reducer401 from '@components/401/401Slice.js';
 import schoolsReducer from '../class/school/schoolSlice.js';
+import classCategoriesReducer from '../class/class_categories/classCategorySlice.js';
 
 const app = combineReducers({
   home: homeReducer,
   navbar: navbarReducer,
   streak: streakReducer,
-  class: classReducer,
+  class: combineReducers({ classes: classReducer, classCategories: classCategoriesReducer }),
   topic: topicReducer,
   question: questionsReducer,
   leaderboard: leadboardReducer,

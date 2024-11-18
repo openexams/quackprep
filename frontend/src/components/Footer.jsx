@@ -25,25 +25,19 @@ export default function Footer() {
                   <List.Item as={Link} to='https://www.youtube.com/watch?v=dQw4w9WgXcQ'>
                     Company
                   </List.Item>
-                  <List.Item as={Link} to='https://www.youtube.com/watch?v=dQw4w9WgXcQ'>
+                  <List.Item as={Link} to='mailto:quackprep@gmail.com'>
                     Contact Us
-                  </List.Item>
-                  <List.Item as={Link} to='https://www.youtube.com/watch?v=dQw4w9WgXcQ'>
-                    Careers
                   </List.Item>
                 </List>
               </Grid.Column>
               <Grid.Column width={3}>
-                <Header inverted as='h4' content='Services' />
+                <Header inverted as='h4' content='Feedback' />
                 <List link inverted>
-                  <List.Item as={Link} to='https://www.youtube.com/watch?v=dQw4w9WgXcQ'>
-                    Web Design
+                  <List.Item as={Link} to='https://discord.gg/APy5379qT8'>
+                    Feature Request
                   </List.Item>
-                  <List.Item as={Link} to='https://www.youtube.com/watch?v=dQw4w9WgXcQ'>
-                    Development
-                  </List.Item>
-                  <List.Item as={Link} to='https://www.youtube.com/watch?v=dQw4w9WgXcQ'>
-                    Hosting
+                  <List.Item as={Link} to='https://discord.gg/APy5379qT8'>
+                    Bug Report
                   </List.Item>
                 </List>
               </Grid.Column>

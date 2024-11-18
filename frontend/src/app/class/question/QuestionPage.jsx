@@ -3,7 +3,7 @@ import { Grid, Header, Segment } from 'semantic-ui-react';
 import QuestionList from './QuestionList';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectArrayOfStateById } from '@utils/functions';
-import { selectNavbarState } from '@components/navbar/navbarSlice';
+import { changeNavbarPage, selectNavbarState } from '@components/navbar/navbarSlice';
 import { selectLoadingState } from '@src/app/store/loadingSlice';
 import ChoiceRouter from './choices/ChoiceRouter';
 
@@ -35,12 +35,18 @@ export default function QuestionPage() {
   const [selectedQuestion, setSelectedQuestion] = useState(null);
 
   useEffect(() => {
+    // if the user didnt start w a question id
+    if (questions != null && questions != [] && !questionId) {
+      dispatch(changeNavbarPage(parseInt(questions?.[0]?.id)));
+    }
+  }, [questions?.[0]]);
+
+  useEffect(() => {
     // init for selected question
     if (questions != null && questions != [] && questionId && selectedQuestion == null) {
       setSelectedQuestion(findQuestionById(questions, parseInt(questionId)));
     }
   }, [questionId, questions]);
-
   useEffect(() => {
     if (questions != null && questions != [] && questionId) {
       setSelectedQuestion(findQuestionById(questions, parseInt(questionId)));

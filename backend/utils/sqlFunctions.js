@@ -73,22 +73,40 @@ export async function cascadeSetDeleted( // todo learn more about how the join w
 function verifyTableName(tableName) {
   const allowed_tables = ["classes", "cgroups", "questions", "choices"];
 
-  if (tableName in allowed_tables) {
-    return true;
+  for (let i = 0; i < allowed_tables.length; i++) {
+    if (tableName === allowed_tables[i]) {
+      return true;
+    }
   }
+  console.log("table name not in allowed tables");
   return false;
 }
 
-export async function verifyUserOwnsId(id, user_id, tableName) {
+export async function verifyUserOwnsRowId(id, user_id, tableName) {
   if (verifyTableName(tableName) === false) {
     return false;
   }
-  const owned = await sqlExe.executeCommand(
+  let owned = await sqlExe.executeCommand(
     `SELECT * FROM ${tableName} x WHERE x.id = :id`,
     { id }
   );
   owned = owned?.[0]?.created_by;
-  if (owned === user_id) {
+  if (parseInt(owned) === user_id) {
+    return true;
+  }
+  return false;
+}
+/**
+ *
+ * @param {Int} user_id
+ * @param {String} tableName tableName must have created_by column DO NOT LET USERS RUN THIS SQL INJECTION
+ */
+export async function verifyRowCreatedByUser(id, user_id, tableName) {
+  const result = await sqlExe.executeCommand(
+    `SELECT * from ${tableName} WHERE id = :id AND created_by = :user_id`,
+    { id, user_id }
+  );
+  if (result?.[0]?.created_by) {
     return true;
   }
   return false;

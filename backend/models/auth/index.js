@@ -89,12 +89,13 @@ export async function findLocalUserByEmailPassword(email, password) {
     first_name: curUser.first_name,
     last_name: curUser.last_name,
     icon: curUser.icon,
+    is_creator: curUser.is_creator,
   };
 }
 
 export async function findUserById(id) {
   const exists = await sqlExe.executeCommand(
-    `SELECT u.icon, u.id,u.username,u.email,u.first_name,u.last_name FROM users u WHERE id = :id`,
+    `SELECT u.icon, u.id,u.username,u.email,u.first_name,u.last_name,u.is_creator FROM users u WHERE id = :id`,
     { id }
   );
   if (!exists?.[0]) {

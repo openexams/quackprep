@@ -1,4 +1,8 @@
 import sqlExe from "#db/dbFunctions.js";
+import {
+  verifyRowCreatedByUser,
+  verifyUserOwnsRowId,
+} from "#utils/sqlFunctions.js";
 
 export async function postChoice(user_id, choice_id) {
   const params = { choice_id, user_id };
@@ -44,7 +48,12 @@ export async function getChoicesByQuestion(question_id) {
   // TODO TEST
   const params = { question_id };
   return await sqlExe.executeCommand(
-    `SELECT c.id,c.answer,c.is_correct,c.created_by,c.question_id,c.type FROM choices c 
+    `SELECT c.id,c.answer,c.is_correct,c.created_by,c.question_id,c.type, cl.id as class_id, g.id as group_id, 
+    cl.school_id, cl.category as class_category
+     FROM choices c 
+     JOIN group_question gq ON c.question_id = gq.question_id
+     JOIN cgroups g on g.id = gq.group_id 
+     JOIN classes cl ON cl.id = g.class_id
     WHERE c.deleted=0 AND c.question_id = :question_id
      ORDER BY id ASC`,
     params
@@ -55,7 +64,12 @@ export async function getChoicesByUserId(user_id) {
   // TODO TEST
   const params = { user_id };
   return await sqlExe.executeCommand(
-    `SELECT c.id,c.answer,c.is_correct,c.created_by,c.question_id,c.type FROM choices c 
+    `SELECT c.id,c.answer,c.is_correct,c.created_by,c.question_id,c.type, cl.id as class_id, g.id as group_id, 
+    cl.school_id, cl.category as class_category
+     FROM choices c 
+     JOIN group_question gq ON c.question_id = gq.question_id
+     JOIN cgroups g on g.id = gq.group_id 
+     JOIN classes cl ON cl.id = g.class_id 
     WHERE c.deleted=0 AND c.created_by = :user_id
      ORDER BY id ASC`,
     params
@@ -66,9 +80,13 @@ export async function getChoicesByGroupId(group_id) {
   const params = { group_id };
   return await sqlExe.executeCommand(
     `
-    SELECT c.id, c.answer, c.is_correct, c.created_at,c.type, gq.question_id, gq.group_id FROM choices c 
-    JOIN group_question gq ON c.question_id = gq.question_id AND gq.group_id = :group_id
-    WHERE c.deleted=0
+    SELECT c.id,c.answer,c.is_correct,c.created_by,c.question_id,c.type, cl.id as class_id, g.id as group_id, 
+    cl.school_id, cl.category as class_category
+     FROM choices c 
+     JOIN group_question gq ON c.question_id = gq.question_id
+     JOIN cgroups g on g.id = gq.group_id 
+     JOIN classes cl ON cl.id = g.class_id
+    WHERE c.deleted=0 AND g.id = :group_id
      ORDER BY id ASC
 
 `,
@@ -76,21 +94,39 @@ export async function getChoicesByGroupId(group_id) {
   );
 }
 
-export async function addChoiceToQuestion( // NOT TESTED TODO
+export async function upsertChoiceToQuestion( // TODO VERIFY USER OWN QUESTIONs
   user_id,
   question_id,
   isCorrect,
   text,
-  type
+  type,
+  id = null
 ) {
-  const params = { user_id, question_id, isCorrect, text, type };
+  const params = { user_id, question_id, isCorrect, text, type, id };
+
+  if (!(await verifyRowCreatedByUser(question_id, user_id, "questions"))) {
+    throw new Error(
+      "user does not own the question they are trying to create/edit a choice in"
+    );
+    return;
+  }
+
+  if (id && (await verifyUserOwnsRowId(id, user_id, "choices")) === false) {
+    throw new Error("user does not own the row they are trying to edit");
+    return;
+  }
+
   const result = (
     await sqlExe.executeCommand(
-      `INSERT INTO choices (answer,is_correct,created_by,question_id,type) values (:text,:isCorrect,:user_id,:question_id,:type)`,
+      `INSERT INTO choices (id,answer,is_correct,created_by,question_id,type) values (:id,:text,:isCorrect,:user_id,:question_id,:type)
+      ON DUPLICATE KEY UPDATE
+      answer=:text,
+      is_correct=:isCorrect,
+      question_id=:question_id,
+      type=:type`,
       params
     )
   ).insertId;
-  params["result"] = result;
 
   return result;
 }

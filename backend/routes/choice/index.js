@@ -1,6 +1,7 @@
 import { isAuthenticated } from "#middleware/authMiddleware.js";
+import { isCreator } from "#middleware/creatorMiddleware.js";
 import {
-  addChoiceToQuestion,
+  upsertChoiceToQuestion,
   getChoicesByQuestion,
   getQuestionsAnsweredByMonthAndYear,
   getWhichUsersAnsweredMostQuestions,
@@ -49,7 +50,7 @@ router.get("/user", isAuthenticated, async function (req, res) {
   }
 });
 
-router.get("/:question_id", isAuthenticated, async function (req, res) {
+router.get("/:question_id", async function (req, res) {
   try {
     const result = await getChoicesByQuestion(req.params.question_id);
     res.status(200).json(result);
@@ -60,7 +61,7 @@ router.get("/:question_id", isAuthenticated, async function (req, res) {
   }
 });
 
-router.get("/group/:group_id", isAuthenticated, async function (req, res) {
+router.get("/group/:group_id", async function (req, res) {
   try {
     const result = await getChoicesByGroupId(req.params.group_id);
     res.status(200).json(result);
@@ -73,92 +74,110 @@ router.get("/group/:group_id", isAuthenticated, async function (req, res) {
 
 // C
 
-router.post("/many/:question_id", isAuthenticated, async function (req, res) {
-  const data = req.body;
-  try {
-    if (!data?.choices) {
-      throw Error("pls send all json body");
+router.post(
+  "/many/:question_id",
+  isAuthenticated,
+  isCreator,
+  async function (req, res) {
+    const data = req.body;
+    try {
+      if (!data?.choices) {
+        throw Error("pls send all json body");
+      }
+
+      const result = await addManyChoicesToQuestion(
+        parseInt(req.params.question_id),
+        req.user,
+        data.choices
+      );
+
+      res.status(201).json(result);
+    } catch (error) {
+      res.status(500).json({
+        message: `failed to add ${data?.choices?.length} choices by q id ${req.params.question_id}`,
+      });
     }
-
-    const result = await addManyChoicesToQuestion(
-      parseInt(req.params.question_id),
-      req.user,
-      data.choices
-    );
-
-    res.status(201).json(result);
-  } catch (error) {
-    res.status(500).json({
-      message: `failed to add ${data?.choices?.length} choices by q id ${req.params.question_id}`,
-    });
   }
-});
+);
 
-router.post("/:question_id", isAuthenticated, async function (req, res) {
-  const data = req.body;
-  try {
-    if (
-      data?.isCorrect === undefined ||
-      data?.isCorrect === null ||
-      !data?.text
-    ) {
-      throw Error("pls send all json body");
+router.post(
+  "/:question_id",
+  isAuthenticated,
+  isCreator,
+  async function (req, res) {
+    const data = req.body;
+    try {
+      if (data?.text == null || data?.isCorrect == null || !data?.type) {
+        throw Error("pls send all json body");
+      }
+
+      const result = await upsertChoiceToQuestion(
+        req.user,
+        req.params.question_id,
+        data.isCorrect,
+        data.text,
+        data.type,
+        data?.id || null
+      );
+
+      res.status(201).json(result);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({
+        message: `failed to add choice by q id ${req.params.question_id}`,
+      });
     }
-
-    const result = await addChoiceToQuestion(
-      req.user,
-      req.params.question_id,
-      data.isCorrect,
-      data.text
-    );
-
-    res.status(201).json(result);
-  } catch (error) {
-    res.status(500).json({
-      message: `failed to add choice by q id ${req.params.question_id}`,
-    });
   }
-});
+);
 
 // D
-router.delete("/:choice_id", async function (req, res) {
-  try {
-    const choice_id = parseInt(req.params.choice_id);
-    const result = await cascadeSetDeleted(
-      req.user,
-      "choice",
-      choice_id,
-      0,
-      0,
-      0,
-      1
-    );
-    res.status(200).json(result);
-  } catch (error) {
-    res.status(500).json({
-      message: `failed to delete choice by id ${req.params.choice_id}`,
-    });
+router.delete(
+  "/:choice_id",
+  isAuthenticated,
+  isCreator,
+  async function (req, res) {
+    try {
+      const choice_id = parseInt(req.params.choice_id);
+      const result = await cascadeSetDeleted(
+        req.user,
+        "choice",
+        choice_id,
+        0,
+        0,
+        0,
+        1
+      );
+      res.status(200).json(result);
+    } catch (error) {
+      res.status(500).json({
+        message: `failed to delete choice by id ${req.params.choice_id}`,
+      });
+    }
   }
-});
+);
 
 /**
  * pulls in the current choices that this user has,
  */
-router.get("/current/:group_id/:group_type", async function (req, res) {
-  try {
-    const result = await getCurrentChoicesByGroupIdAndType(
-      req.user,
-      req.params.group_id,
-      req.params.group_type
-    );
+router.get(
+  "/current/:group_id/:group_type",
+  isAuthenticated,
+  async function (req, res) {
+    try {
+      const result = await getCurrentChoicesByGroupIdAndType(
+        req.user,
+        req.params.group_id,
+        req.params.group_type
+      );
 
-    res.status(200).json(result);
-  } catch (error) {
-    res.status(500).json({
-      message: `failed to get currently selected choices: ${req.params.choice_id}`,
-    });
+      res.status(200).json(result);
+    } catch (error) {
+      res.status(500).json({
+        message: `failed to get currently selected choices: ${req.params.choice_id}`,
+      });
+    }
   }
-});
+);
 
 // answers transactional
 router.post("/answer/:choice_id", isAuthenticated, async function (req, res) {
@@ -170,6 +189,7 @@ router.post("/answer/:choice_id", isAuthenticated, async function (req, res) {
   }
 });
 
+// answers current
 router.post(
   "/:choice_id/:question_id",
   isAuthenticated,
