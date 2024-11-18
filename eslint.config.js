@@ -4,7 +4,7 @@ export default [
   {
     files: ["**/*.js"], // Adjust the glob pattern as needed
     languageOptions: {
-      ecmaVersion: 2020,
+      ecmaVersion: 2023,
       sourceType: "module",
       globals: {
         // Define global variables for Node.js and ES6

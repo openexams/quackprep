@@ -136,7 +136,7 @@ router.get(
 router.get(
   "/google/callback",
   passport.authenticate("google"),
-  async function (req, res) {
+  function (req, res) {
     res.redirect(`/`);
   }
 );

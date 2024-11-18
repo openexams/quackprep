@@ -28,7 +28,7 @@ export function standardApiCall(
 ) {
   return async function (dispatch) {
     if (Array.isArray(componentName)) {
-      for (let i in componentName) {
+      for (const i in componentName) {
         dispatch(startLoading(i));
       }
     } else if (componentName !== null) dispatch(startLoading(componentName));
