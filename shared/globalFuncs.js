@@ -58,6 +58,9 @@ export function parseExamNameId(examNameString) {
  * @param {String} string
  */
 export function replaceP20WithSpace(string) {
+  if (!string) {
+    return null;
+  }
   if (string.includes("%20")) {
     // optimize
     return string.replace(/%20/g, " ");

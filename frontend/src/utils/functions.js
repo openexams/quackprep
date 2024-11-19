@@ -337,3 +337,22 @@ export function isKeyInObject(object, key) {
   }
   return false;
 }
+
+/**
+ * Values will be overwritten
+ * @param {Object} objects
+ * @param {Array} keys
+ */
+export function updateObjectWithFirstKeyNotInObject(object, keys) {
+  object = deepCopyObject(object);
+  for (let i = 0; i < keys.length; i++) {
+    if (object[keys[i]] !== undefined) {
+      object[keys[i]]++;
+      continue;
+    } else {
+      object[keys[i]] = 1;
+      break;
+    }
+  }
+  return object;
+}

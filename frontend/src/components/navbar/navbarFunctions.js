@@ -1,6 +1,17 @@
+import { getClasses } from '@src/app/class/classSlice';
+import { getSchools } from '@src/app/class/school/schoolSlice';
+import { getTopicsByClassId } from '@src/app/class/group/topic/topicSlice';
+import { getExamsByClassId } from '@src/app/class/group/exam/examSlice';
+import { getQuestionsByGroupId } from '@src/app/class/question/questionSlice';
+import { getChoicesByGroup } from '@src/app/class/question/choices/choicesSlice';
+import { updateCurrentClassData, updateCurrentGroupData, updateQuestionId, updateSchoolId } from './navbarSlice';
+import { findNeedleInArrayOfObjectsLINEAR, findNeedlesInArrayOfObjectsLINEAR } from '@utils/functions';
+import { replaceP20WithSpace } from '../../../../shared/globalFuncs';
+
 /**
  * Returns all possible page permuations with the given url
  * @param {String} url
+ * @returns {Array<String>}
  */
 export function parseUrlIntoPages(url) {
   if (!url) {
@@ -12,7 +23,85 @@ export function parseUrlIntoPages(url) {
   // i is off by one so i can be used by slice
   for (let i = urlArr.length; i > 1; i--) {
     const curStr = urlArr.slice(0, i).join('/');
-    total.push(curStr);
+    total.unshift(curStr);
   }
   return total;
+}
+
+export function classFetchLogic(dispatch, classes) {
+  if (!Array.isArray(classes)) {
+    dispatch(getClasses());
+  }
+}
+
+export function classUpdateLogic(dispatch, classes, curClassName) {
+  const tmp_c_id = findNeedleInArrayOfObjectsLINEAR(classes, 'name', curClassName, 'id');
+  dispatch(updateCurrentClassData({ name: curClassName, id: tmp_c_id }));
+}
+
+// fetches all schools
+export function schoolFetchLogic(dispatch, schools) {
+  if (!Array.isArray(schools)) {
+    dispatch(getSchools());
+  }
+}
+export function schoolUpdateLogic(dispatch, schools, school_name) {
+  const schoolId = findNeedleInArrayOfObjectsLINEAR(schools, 'school_name', school_name, 'id');
+  if (schoolId) {
+    dispatch(updateSchoolId(schoolId));
+  }
+}
+
+export function topicUpdateLogic(dispatch, groupName, class_id, topics) {
+  const tmp_topic_id = findNeedlesInArrayOfObjectsLINEAR(
+    topics,
+    ['name', 'class_id'],
+    [replaceP20WithSpace(groupName), class_id],
+    'id',
+  );
+  if ((tmp_topic_id, groupName)) {
+    dispatch(updateCurrentGroupData({ name: groupName, id: tmp_topic_id }));
+  }
+}
+
+export function topicFetchLogic(dispatch, classId) {
+  if (classId) {
+    dispatch(getTopicsByClassId(classId));
+  }
+}
+
+export function examUpdateLogic(dispatch, groupName, class_id, exams) {
+  const current_exam_id = findNeedlesInArrayOfObjectsLINEAR(
+    exams,
+    ['class_id', 'name'],
+    [class_id, replaceP20WithSpace(groupName)],
+    'id',
+  );
+  if (groupName && current_exam_id) {
+    dispatch(updateCurrentGroupData({ id: current_exam_id, name: groupName }));
+  }
+}
+
+export function examFetchLogic(dispatch, classId) {
+  if (classId) {
+    dispatch(getExamsByClassId(classId));
+  }
+}
+
+export function questionUpdateLogic(dispatch, question_id) {
+  if (question_id) {
+    dispatch(updateQuestionId(parseInt(question_id)));
+  }
+}
+
+export function questionFetchLogic(dispatch, groupId) {
+  if (groupId) {
+    dispatch(getQuestionsByGroupId(groupId));
+  }
+}
+
+export function choicesFetchLogic(dispatch, groupName, groupId) {
+  if (groupName && groupId) {
+    dispatch(getChoicesByGroup(groupId));
+  }
 }

@@ -1,6 +1,13 @@
 import { createSelector } from 'reselect';
 import { standardApiCall } from '@utils/api';
-import { copyArray, deepCopyArrayOfObjects, deepCopyObject, updateObjectWithKey } from '@utils/functions';
+import {
+  copyArray,
+  deepCopyArrayOfObjects,
+  deepCopyObject,
+  updateObjectWithFirstKeyNotInObject,
+  updateObjectWithKey,
+} from '@utils/functions';
+import { parseUrlIntoPages } from './navbarFunctions';
 
 const CHANGE_NAVBAR_PAGE = 'components/navbar/CHANGE_NAVBAR_PAGE';
 const UPDATE_LAST_PAGE = 'components/navbar/UPDATE_LAST_PAGE';
@@ -87,7 +94,8 @@ export default function navbarReducer(state = DEFAULT_STATE, action) {
   }
   switch (action.type) {
     case UPDATE_FETCH_HISTORY:
-      return { ...state, fetchHistory: updateObjectWithKey(state.fetchHistory, action.payload) };
+      const pagesFetched = parseUrlIntoPages(action.payload);
+      return { ...state, fetchHistory: updateObjectWithFirstKeyNotInObject(state.fetchHistory, pagesFetched) };
     case CHANGE_NAVBAR_PAGE:
       let curUrl = state.page;
       const newLastPage = state.page;

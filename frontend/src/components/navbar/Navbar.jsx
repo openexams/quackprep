@@ -7,12 +7,8 @@ import {
   changeNavbarPage,
   selectCurrentPage,
   selectNavbarState,
-  updateCurrentClassData,
-  updateCurrentGroupData,
-  updateQuestionId,
   updateGroupType,
   upsertTimeSpent,
-  updateSchoolId,
   updateLastPage,
 } from './navbarSlice';
 import { getCurUser } from '@src/app/auth/authSlice';
@@ -20,86 +16,28 @@ import ProfileDropdown from './components/Profile/ProfileDropdown';
 import { useLocation, useNavigate } from 'react-router-dom';
 import BrandLogo from './components/BrandLogo';
 import { getHasStreak, selectHasStreak } from '@src/app/streak/streakSlice.js';
-import { selectClassState, getClasses } from '@src/app/class/classSlice';
-import { getTopicsByClassId } from '@src/app/class//group/topic/topicSlice';
-import { findNeedleInArrayOfObjectsLINEAR, findNeedlesInArrayOfObjectsLINEAR } from '@utils/functions';
+import { selectClassState } from '@src/app/class/classSlice';
 import { selectTopicState } from '@src/app/class/group/topic/topicSlice';
-import { selectQuestionState, getQuestionsByGroupId } from '@src/app/class/question/questionSlice';
-import { getExamsByClassId, selectExamsState } from '@src/app/class/group/exam/examSlice.js';
+import { selectQuestionState } from '@src/app/class/question/questionSlice';
+import { selectExamsState } from '@src/app/class/group/exam/examSlice.js';
 import { replaceP20WithSpace } from '../../../../shared/globalFuncs';
-import { selectSchoolState, getSchools } from '@src/app/class/school/schoolSlice';
+import { selectSchoolState } from '@src/app/class/school/schoolSlice';
 import { selectChoicesState } from '@src/app/class/question/choices/choicesSlice';
-import { getChoicesByGroup } from '@src/app/class/question/choices/choicesSlice';
 import { selectLoadingState } from '@src/app/store/loadingSlice';
 import { select401CompState } from '@components/401/401Slice';
-
-export function classFetchLogic(dispatch, classes) {
-  if (!Array.isArray(classes)) {
-    dispatch(getClasses());
-  }
-}
-
-export function classUpdateLogic(dispatch, classes, curClassName) {
-  const tmp_c_id = findNeedleInArrayOfObjectsLINEAR(classes, 'name', curClassName, 'id');
-  dispatch(updateCurrentClassData({ name: curClassName, id: tmp_c_id }));
-}
-
-// fetches all schools
-export function schoolFetchLogic(dispatch, schools) {
-  if (!Array.isArray(schools)) {
-    dispatch(getSchools());
-  }
-}
-export function schoolUpdateLogic(dispatch, schools, school_name) {
-  const schoolId = findNeedleInArrayOfObjectsLINEAR(schools, 'school_name', school_name, 'id');
-  if (schoolId) {
-    dispatch(updateSchoolId(schoolId));
-  }
-}
-
-export function topicUpdateLogic(dispatch, groupName, class_id, topics) {
-  const tmp_topic_id = findNeedlesInArrayOfObjectsLINEAR(topics, ['name', 'class_id'], [groupName, class_id], 'id');
-  if ((tmp_topic_id, groupName)) {
-    dispatch(updateCurrentGroupData({ name: groupName, id: tmp_topic_id }));
-  }
-}
-
-export function topicFetchLogic(dispatch, classId) {
-  if (classId) {
-    dispatch(getTopicsByClassId(classId));
-  }
-}
-
-export function examUpdateLogic(dispatch, groupName, class_id, exams) {
-  const current_exam_id = findNeedlesInArrayOfObjectsLINEAR(exams, ['class_id', 'name'], [class_id, groupName], 'id');
-  if (groupName && current_exam_id) {
-    dispatch(updateCurrentGroupData({ id: current_exam_id, name: groupName }));
-  }
-}
-
-export function examFetchLogic(dispatch, classId) {
-  if (classId) {
-    dispatch(getExamsByClassId(classId));
-  }
-}
-
-export function questionUpdateLogic(dispatch, question_id) {
-  if (question_id) {
-    dispatch(updateQuestionId(parseInt(question_id)));
-  }
-}
-
-export function questionFetchLogic(dispatch, groupId) {
-  if (groupId) {
-    dispatch(getQuestionsByGroupId(groupId));
-  }
-}
-
-export function choicesFetchLogic(dispatch, groupName, groupId) {
-  if (groupName && groupId) {
-    dispatch(getChoicesByGroup(groupId));
-  }
-}
+import {
+  classFetchLogic,
+  examFetchLogic,
+  topicFetchLogic,
+  topicUpdateLogic,
+  examUpdateLogic,
+  classUpdateLogic,
+  schoolFetchLogic,
+  schoolUpdateLogic,
+  questionFetchLogic,
+  questionUpdateLogic,
+  choicesFetchLogic,
+} from './navbarFunctions';
 
 export default function Navbar() {
   const location = useLocation();
@@ -120,6 +58,7 @@ export default function Navbar() {
   const State401 = useSelector(select401CompState).show;
   const userIdRef = useRef(user.id);
 
+  // spaces in stuff is a issue!!
   const { className, classId, groupName, groupId, questionId, schoolName, groupType, schoolId, fetchHistory } =
     useSelector(selectNavbarState).navbar;
 
@@ -166,8 +105,16 @@ export default function Navbar() {
   ///  USE EFFECTS FOR KEEPING STORE SAME AS URL ///
   useEffect(() => {
     if (urlArr[5]) {
-      urlArr[5] = replaceP20WithSpace(urlArr[5]);
+      urlArr[5] = replaceP20WithSpace(urlArr[5]); // for search purpposes
     }
+
+    if (activePage?.includes('exam') && className && classId) {
+      dispatch(updateGroupType('exam'));
+    }
+    if (activePage?.includes('topic') && className && classId) {
+      dispatch(updateGroupType('topic'));
+    }
+
     if (!activePage?.includes('/auth?next') && !State401 && !fetchHistory[activePage]) {
       if (activePage?.includes('class') && !loading?.SchoolsList) {
         schoolFetchLogic(dispatch, schools);
@@ -210,11 +157,9 @@ export default function Navbar() {
 
       if (activePage?.includes('exam') && !loading?.ExamList && className && classId) {
         examUpdateLogic(dispatch, groupName, classId, exams);
-        dispatch(updateGroupType('exam'));
       }
       if (activePage?.includes('topic') && !loading?.TopicsShow && className && classId) {
         topicUpdateLogic(dispatch, groupName, classId, topics);
-        dispatch(updateGroupType('topic'));
       }
       if (activePage?.includes('question') && !loading?.QuestionPage && className && classId && groupId && urlArr[5]) {
         questionUpdateLogic(dispatch, questionId);
