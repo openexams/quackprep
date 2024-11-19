@@ -95,8 +95,7 @@ export default function navbarReducer(state = DEFAULT_STATE, action) {
   }
   switch (action.type) {
     case UPDATE_FETCH_HISTORY:
-      const pagesFetched = parseUrlIntoPages(action.payload);
-      return { ...state, fetchHistory: updateObjectWithFirstKeyNotInObject(state.fetchHistory, pagesFetched) };
+      return { ...state, fetchHistory: updateObjectWithKey(state.fetchHistory, action.payload) };
     case CHANGE_NAVBAR_PAGE:
       let curUrl = state.page;
       const newLastPage = state.page;

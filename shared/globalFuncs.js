@@ -95,7 +95,7 @@ export function randomizeArray(array, seed) {
 }
 
 /**
- * Merges data pulled in w multiple group ids into one
+ * Merges data pulled in w multiple [keyName] ids into one
  * @param {Array} data
  * @param {String} keyName
  * @returns {Array} updated data

@@ -15,16 +15,6 @@ export async function getClasses() {
   );
 }
 
-// since class names must be distinct
-export async function getClassIdByClassName(className) {
-  const params = { className };
-  return await sqlExe.executeCommand(
-    `SELECT cl.id, cl.name FROM classes cl WHERE cl.name = :className
-     AND cl.deleted=0`,
-    params
-  );
-}
-
 // school table in class
 export async function getSchools() {
   return await sqlExe.executeCommand(`SELECT * FROM schools`);
@@ -77,7 +67,7 @@ export async function upsertClass(
     );
     return;
   }
-  const result = (
+  const class_id = (
     await sqlExe.executeCommand(
       `INSERT INTO classes (id,school_id,name,description,category,created_by)
      VALUES(:id, :school_id, :name, :description, :category, :user_id)
@@ -90,6 +80,6 @@ export async function upsertClass(
     )
   ).insertId;
   return await sqlExe.executeCommand(
-    `${getLastRowManipulated("classes", result)}`
+    `${getLastRowManipulated("classes", class_id)}`
   );
 }

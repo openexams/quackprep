@@ -21,12 +21,26 @@ const DEFAULT_STATE = {
   loadingComps: {},
 };
 
+function loadComps(state, toLoad, bool) {
+  let compsCopy = structuredClone(state.loadingComps);
+  if (Array.isArray(toLoad)) {
+    for (let i = 0; i < toLoad.length; i++) {
+      compsCopy = { ...compsCopy, [toLoad[i]]: bool };
+    }
+  } else {
+    compsCopy = { ...compsCopy, [toLoad]: bool };
+  }
+  return { ...state, loadingComps: compsCopy };
+}
+
 export default function loadingReducer(state = DEFAULT_STATE, action) {
   switch (action.type) {
-    case LOADING_START:
-      return { ...state, loadingComps: { ...state.loadingComps, [action.payload]: true } };
-    case LOADING_STOP:
-      return { ...state, loadingComps: { ...state.loadingComps, [action.payload]: false } };
+    case LOADING_START: {
+      return loadComps(state, action.payload, true);
+    }
+    case LOADING_STOP: {
+      return loadComps(state, action.payload, false);
+    }
     default:
       return state;
   }

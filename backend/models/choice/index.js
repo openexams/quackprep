@@ -1,8 +1,10 @@
 import sqlExe from "#db/dbFunctions.js";
 import {
+  getLastRowManipulated,
   verifyRowCreatedByUser,
   verifyUserOwnsRowId,
 } from "#utils/sqlFunctions.js";
+import { mergeKeys } from "../../../shared/globalFuncs.js";
 
 export async function postChoice(user_id, choice_id) {
   const params = { choice_id, user_id };
@@ -44,36 +46,30 @@ export async function getQuestionsAnsweredByMonthAndYear() {
 
 //CRUD
 
-export async function getChoicesByQuestion(question_id) {
-  // TODO TEST
-  const params = { question_id };
-  return await sqlExe.executeCommand(
-    `SELECT c.id,c.answer,c.is_correct,c.created_by,c.question_id,c.type, cl.id as class_id, g.id as group_id, 
+export async function selectChoices(WHERE, params) {
+  const result = await sqlExe.executeCommand(
+    `
+    SELECT c.id,c.answer,c.is_correct,c.created_by,c.question_id,c.type, cl.id as class_id, g.id as group_id, 
     cl.school_id, cl.category as class_category
      FROM choices c 
      JOIN group_question gq ON c.question_id = gq.question_id
      JOIN cgroups g on g.id = gq.group_id 
      JOIN classes cl ON cl.id = g.class_id
-    WHERE c.deleted=0 AND c.question_id = :question_id
+    WHERE c.deleted=0 AND ${WHERE}
      ORDER BY id ASC`,
     params
   );
+  return mergeKeys(result, "group_id");
+}
+
+export async function getChoicesByQuestion(question_id) {
+  const params = { question_id };
+  return await selectChoices("c.question_id = :question_id", params);
 }
 
 export async function getChoicesByUserId(user_id) {
-  // TODO TEST
   const params = { user_id };
-  return await sqlExe.executeCommand(
-    `SELECT c.id,c.answer,c.is_correct,c.created_by,c.question_id,c.type, cl.id as class_id, g.id as group_id, 
-    cl.school_id, cl.category as class_category
-     FROM choices c 
-     JOIN group_question gq ON c.question_id = gq.question_id
-     JOIN cgroups g on g.id = gq.group_id 
-     JOIN classes cl ON cl.id = g.class_id 
-    WHERE c.deleted=0 AND c.created_by = :user_id
-     ORDER BY id ASC`,
-    params
-  );
+  return await selectChoices("c.created_by = :user_id", params);
 }
 
 export async function getChoicesByGroupId(group_id) {
@@ -94,7 +90,7 @@ export async function getChoicesByGroupId(group_id) {
   );
 }
 
-export async function upsertChoiceToQuestion( // TODO VERIFY USER OWN QUESTIONs
+export async function upsertChoiceToQuestion(
   user_id,
   question_id,
   isCorrect,
@@ -116,7 +112,7 @@ export async function upsertChoiceToQuestion( // TODO VERIFY USER OWN QUESTIONs
     return;
   }
 
-  const result = (
+  const choice_id = (
     await sqlExe.executeCommand(
       `INSERT INTO choices (id,answer,is_correct,created_by,question_id,type) values (:id,:text,:isCorrect,:user_id,:question_id,:type)
       ON DUPLICATE KEY UPDATE
@@ -127,8 +123,11 @@ export async function upsertChoiceToQuestion( // TODO VERIFY USER OWN QUESTIONs
       params
     )
   ).insertId;
+  console.log(choice_id);
 
-  return result;
+  return await sqlExe.executeCommand(
+    `${getLastRowManipulated("choices", choice_id)}`
+  );
 }
 
 /**

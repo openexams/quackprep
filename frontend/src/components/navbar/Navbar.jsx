@@ -105,29 +105,32 @@ export default function Navbar() {
 
   ///  USE EFFECTS FOR KEEPING STORE SAME AS URL ///
   useEffect(() => {
-    if (activePage?.includes('exam') && groupType !== 'exam' && className && classId) {
-      dispatch(updateGroupType('exam'));
-    }
-    if (activePage?.includes('topic') && groupType !== 'topic' && className && classId) {
-      dispatch(updateGroupType('topic'));
-    }
+    if (activePage?.includes('class') && !activePage?.includes('/auth?next') && !State401) {
+      if (activePage?.includes('exam') && className && classId) {
+        dispatch(updateGroupType('exam'));
+      }
+      if (activePage?.includes('topic') && className && classId) {
+        dispatch(updateGroupType('topic'));
+      }
 
-    if (!activePage?.includes('/auth?next') && !State401 && !hasCurPageBeenFetched(fetchHistory, activePage)) {
-      if (activePage?.includes('class') && !loading?.SchoolsList) {
+      if (!loading?.SchoolsList) {
         schoolFetchLogic(dispatch, schools);
+        schoolUpdateLogic(dispatch, schools, schoolName);
       }
-      if (activePage?.includes('class') && !loading?.ClassList) {
+      if (!loading?.ClassList) {
         classFetchLogic(dispatch, classes);
+        classUpdateLogic(dispatch, classes, className, schoolId);
       }
 
-      if (activePage?.includes('class') && activePage?.includes('exam') && !loading?.ExamList && className && classId) {
+      if (activePage?.includes('exam') && !loading?.ExamList && className && classId) {
+        examUpdateLogic(dispatch, groupName, classId, exams);
         examFetchLogic(dispatch, classId);
       }
-      if (activePage?.includes('class') && activePage?.includes('topic') && !loading?.TopicsShow && className && classId) {
+      if (activePage?.includes('topic') && !loading?.TopicsShow && className && classId) {
+        topicUpdateLogic(dispatch, groupName, classId, topics);
         topicFetchLogic(dispatch, classId);
       }
       if (
-        activePage?.includes('class') &&
         (activePage?.includes('exam') || activePage?.includes('topic')) &&
         activePage?.includes('question') &&
         !loading?.QuestionPage &&
@@ -137,10 +140,10 @@ export default function Navbar() {
         groupName &&
         groupType
       ) {
+        questionUpdateLogic(dispatch, questionId);
         questionFetchLogic(dispatch, groupId);
       }
       if (
-        activePage?.includes('class') &&
         (activePage?.includes('exam') || activePage?.includes('topic')) &&
         activePage?.includes('question') &&
         !loading?.ChoiceRouter &&
@@ -153,33 +156,6 @@ export default function Navbar() {
         choicesFetchLogic(dispatch, groupId);
       }
     }
-    if (!activePage?.includes('/auth?next') && !State401) {
-      if (activePage?.includes('class') && !loading?.SchoolsList) {
-        schoolUpdateLogic(dispatch, schools, schoolName);
-      }
-      if (activePage?.includes('class') && !loading?.ClassList) {
-        classUpdateLogic(dispatch, classes, className);
-      }
-
-      if (activePage?.includes('class') && activePage?.includes('exam') && !loading?.ExamList && className && classId) {
-        examUpdateLogic(dispatch, groupName, classId, exams);
-      }
-      if (activePage?.includes('class') && activePage?.includes('topic') && !loading?.TopicsShow && className && classId) {
-        topicUpdateLogic(dispatch, groupName, classId, topics);
-      }
-      if (
-        activePage?.includes('class') &&
-        (activePage?.includes('exam') || activePage?.includes('topic')) &&
-        activePage?.includes('question') &&
-        !loading?.QuestionPage &&
-        className &&
-        classId &&
-        groupId &&
-        urlArr[5]
-      ) {
-        questionUpdateLogic(dispatch, questionId);
-      }
-    }
   }, [
     activePage,
     classId,
@@ -187,12 +163,11 @@ export default function Navbar() {
     exams,
     topics,
     groupId,
-    groupName,
     groupType,
+    groupName,
     classes,
     schoolName,
     schools,
-    urlArr,
     schoolId,
     questionId,
     loading?.ClassList,

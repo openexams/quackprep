@@ -4,7 +4,7 @@ export default [
   {
     files: ["**/*.js"], // Adjust the glob pattern as needed
     languageOptions: {
-      ecmaVersion: 2023,
+      ecmaVersion: 2024,
       sourceType: "module",
       globals: {
         console: "readonly",
