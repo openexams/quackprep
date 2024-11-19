@@ -29,11 +29,15 @@ export default function ChoiceShow({ id, answer, is_correct, showAnswers, setSho
           disabled={disabled}
           className={getButtonClass()}
           onClick={() => {
-            if (!showAnswers && user?.id) {
-              // only do a request if a user is logged in
+            if (!showAnswers) {
               setShowAnswers(true);
-              dispatch(postAnswer(id));
-              dispatch(upsertCurrentAnswer(id, selectedQuestionId));
+              if (user?.id) {
+                // only do a request if a user is logged in
+
+                dispatch(postAnswer(id));
+                dispatch(upsertCurrentAnswer(id, selectedQuestionId));
+              }
+
               if (is_correct) {
                 console.log('correct! yay!');
               }

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Grid, Header, Segment } from 'semantic-ui-react';
 import QuestionList from './QuestionList';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectArrayOfStateById } from '@utils/functions';
+import { selectArrayOfStateByGroupId, selectArrayOfStateById } from '@utils/functions';
 import { changeNavbarPage, selectNavbarState } from '@components/navbar/navbarSlice';
 import { selectLoadingState } from '@src/app/store/loadingSlice';
 import ChoiceRouter from './choices/ChoiceRouter';
@@ -28,7 +28,7 @@ export default function QuestionPage() {
   const dispatch = useDispatch();
   const { groupId, groupName, questionId, groupType } = useSelector(selectNavbarState).navbar;
 
-  const questions = useSelector(selectArrayOfStateById('app.question.questions', 'group_id', groupId));
+  const questions = useSelector(selectArrayOfStateByGroupId('app.question.questions', groupId));
 
   const loadingComps = useSelector(selectLoadingState).loadingComps;
 
@@ -36,22 +36,21 @@ export default function QuestionPage() {
 
   useEffect(() => {
     // if the user didnt start w a question id
-    if (questions != null && questions != [] && !questionId) {
+    if (questions != null && questions?.length !== 0 && !questionId) {
       dispatch(changeNavbarPage(parseInt(questions?.[0]?.id)));
     }
-  }, [questions?.[0]]);
+  }, [questions?.[0]]); // could lead to issues
 
   useEffect(() => {
-    // init for selected question
-    if (questions != null && questions != [] && questionId && selectedQuestion == null) {
-      setSelectedQuestion(findQuestionById(questions, parseInt(questionId)));
+    if (Array.isArray(questions)) {
+      if (questionId) {
+        const selectedQ = findQuestionById(questions, parseInt(questionId));
+        if (selectedQ) {
+          setSelectedQuestion(selectedQ);
+        }
+      }
     }
-  }, [questionId, questions]);
-  useEffect(() => {
-    if (questions != null && questions != [] && questionId) {
-      setSelectedQuestion(findQuestionById(questions, parseInt(questionId)));
-    }
-  }, [questionId]);
+  }, [questions?.[0], questionId]);
 
   // handles selected question locally
 

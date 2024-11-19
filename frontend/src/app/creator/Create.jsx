@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getClasses, getClassesByUserId, selectClassState } from '../class/classSlice';
+import { getClassesByUserId, selectClassState } from '../class/classSlice';
 import { getTopicsByUserId, selectTopicState } from '../class/group/topic/topicSlice';
 import { getExamsByUserId, selectExamsState } from '../class/group/exam/examSlice';
 import {
@@ -26,34 +26,6 @@ import { getSchools } from '../class/school/schoolSlice';
 import { getClassCategories } from '../class/class_categories/classCategorySlice';
 import CategoryList from '../class/class_categories/CategoryList';
 import { hide401Msg, show401Msg } from '@components/401/401Slice';
-
-/**
- * Merges data pulled in w multiple group ids into one
- * @param {Array} data
- */
-function mergeGroupIds(data) {
-  if (!Array.isArray(data)) {
-    return null;
-  }
-  data = deepCopyArrayOfObjects(data); // TODO OPTIMIZE
-  let updated_arr = [];
-  let tmp_groups = [];
-  let j = 0;
-  for (let i = 0; i < data.length; i = j) {
-    tmp_groups.push(data[i]?.group_id);
-    for (j = i + 1; j < data.length; j++) {
-      if (data[i]?.id === data[j]?.id) {
-        tmp_groups.push(data[j]?.group_id);
-      } else {
-        break;
-      }
-    }
-    data[i]['group_ids'] = tmp_groups; // group_ids diff from group_id
-    updated_arr.push(data[i]);
-    tmp_groups = [];
-  }
-  return updated_arr;
-}
 
 export default function Create() {
   const [filter, setFilter] = useState({
@@ -85,13 +57,13 @@ export default function Create() {
     [filter.school_id, filter.class_type, filter.class_id, filter.group_id],
   );
   let questions = selectArrayOfIncludingItems(
-    mergeGroupIds(useSelector(selectQuestionState).questions),
+    useSelector(selectQuestionState).questions,
     ['school_id', 'class_category', 'class_id', 'group_id', 'id'],
     [filter.school_id, filter.class_type, filter.class_id, filter.group_id, filter.question_id],
   );
 
   let choices = selectArrayOfIncludingItems(
-    mergeGroupIds(useSelector(selectChoicesState).choices),
+    useSelector(selectChoicesState).choices,
     ['school_id', 'class_category', 'class_id', 'group_id', 'question_id', 'id'],
     [filter.school_id, filter.class_type, filter.class_id, filter.group_id, filter.question_id, filter.choice_id],
   );
