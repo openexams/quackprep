@@ -105,33 +105,34 @@ export default function Navbar() {
 
   ///  USE EFFECTS FOR KEEPING STORE SAME AS URL ///
   useEffect(() => {
-    if (activePage?.includes('exam') && groupType !== 'exam' && className && classId) {
-      dispatch(updateGroupType('exam'));
-    }
-    if (activePage?.includes('topic') && groupType !== 'topic' && className && classId) {
-      dispatch(updateGroupType('topic'));
-    }
+    console.count('rip');
 
-    if (!activePage?.includes('/auth?next') && !State401) {
-      if (activePage?.includes('class') && !loading?.SchoolsList) {
+    if (activePage?.includes('class') && !activePage?.includes('/auth?next') && !State401) {
+      if (activePage?.includes('exam') && groupType !== 'exam' && className && classId) {
+        dispatch(updateGroupType('exam'));
+      }
+      if (activePage?.includes('topic') && groupType !== 'topic' && className && classId) {
+        dispatch(updateGroupType('topic'));
+      }
+
+      if (!loading?.SchoolsList) {
         schoolFetchLogic(dispatch, schools);
         schoolUpdateLogic(dispatch, schools, schoolName);
       }
-      if (activePage?.includes('class') && !loading?.ClassList) {
+      if (!loading?.ClassList) {
         classFetchLogic(dispatch, classes);
         classUpdateLogic(dispatch, classes, className, schoolId);
       }
 
-      if (activePage?.includes('class') && activePage?.includes('exam') && !loading?.ExamList && className && classId) {
+      if (activePage?.includes('exam') && !loading?.ExamList && className && classId) {
         examUpdateLogic(dispatch, groupName, classId, exams);
         examFetchLogic(dispatch, classId);
       }
-      if (activePage?.includes('class') && activePage?.includes('topic') && !loading?.TopicsShow && className && classId) {
+      if (activePage?.includes('topic') && !loading?.TopicsShow && className && classId) {
         topicUpdateLogic(dispatch, groupName, classId, topics);
         topicFetchLogic(dispatch, classId);
       }
       if (
-        activePage?.includes('class') &&
         (activePage?.includes('exam') || activePage?.includes('topic')) &&
         activePage?.includes('question') &&
         !loading?.QuestionPage &&
@@ -145,7 +146,6 @@ export default function Navbar() {
         questionFetchLogic(dispatch, groupId);
       }
       if (
-        activePage?.includes('class') &&
         (activePage?.includes('exam') || activePage?.includes('topic')) &&
         activePage?.includes('question') &&
         !loading?.ChoiceRouter &&
@@ -170,9 +170,9 @@ export default function Navbar() {
     classes,
     schoolName,
     schools,
-    urlArr,
     schoolId,
     questionId,
+    choices,
     loading?.ClassList,
     loading?.ExamList,
     loading?.TopicsShow,
