@@ -3,40 +3,34 @@ import {
   verifyRowCreatedByUser,
   verifyUserOwnsRowId,
 } from "#utils/sqlFunctions.js";
+import { mergeKeys } from "../../../shared/globalFuncs.js";
 
-export async function getQuestionsByGroupId(group_id, type) {
-  const params = { group_id, type };
-  return await sqlExe.executeCommand(
-    // PULL IN MORE! TODO WTF TEST SPENT10 MIN
-    `SELECT q.id, q.question, g.id as group_id, gt.type_name as type, q.question_num_on_exam,
+export async function selectQuestion(WHERE, params) {
+  const result = await sqlExe.executeCommand(
+    `SELECT q.id, q.question, g.id as group_id, q.question_num_on_exam,
     cl.id as class_id, cl.school_id,cl.category as class_category
     FROM questions q 
-    JOIN group_question gq ON gq.group_id = :group_id AND gq.question_id = q.id 
-    JOIN cgroups g ON gq.group_id = g.id 
-    JOIN group_types gt ON gt.id = g.type
+    JOIN group_question gq ON q.id = gq.question_id
+    JOIN questions qq -- join questions back
+    JOIN group_question new_gq ON qq.id = gq.question_id -- join new group which has all pulled in questions & ALL groups they relate to
+    JOIN cgroups g ON g.id = new_gq.group_id AND new_gq.question_id = q.id -- join groups where pulled in questions map to a group (pulling in all groups now)
     JOIN classes cl ON g.class_id = cl.id 
-    WHERE q.deleted = 0
-    ORDER BY q.id ASC
-`, // AND gt.type_name = :type
+    WHERE q.deleted = 0 AND ${WHERE}
+    ORDER BY q.id ASC`,
     params
   );
+  return mergeKeys(result, "group_id");
+  // group together group ids into an array
+}
+
+export async function getQuestionsByGroupId(group_id) {
+  const params = { group_id };
+  return await selectQuestion("gq.group_id=:group_id", params);
 }
 
 export async function getQuestionsByUserId(user_id) {
   const params = { user_id };
-  return await sqlExe.executeCommand(
-    `SELECT q.id, q.question, g.id as group_id, gt.type_name as type, q.question_num_on_exam,
-    cl.id as class_id, cl.school_id,cl.category as class_category
-     FROM questions q 
-    JOIN group_question gq ON gq.question_id = q.id 
-    JOIN cgroups g ON gq.group_id = g.id
-    JOIN group_types gt ON gt.id = g.type 
-    JOIN classes cl ON g.class_id = cl.id 
-    WHERE q.deleted = 0 AND q.created_by = :user_id
-    ORDER BY q.id ASC
-`, // if a question maps to multiple groups, it will duplicate the question for each group id its linked to
-    params
-  );
+  return await selectQuestion("q.created_by = :user_id", params);
 }
 
 // export async function createQuestionInGroups(

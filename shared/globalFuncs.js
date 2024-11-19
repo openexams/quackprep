@@ -93,3 +93,33 @@ export function randomizeArray(array, seed) {
   }
   return newArr;
 }
+
+/**
+ * Merges data pulled in w multiple group ids into one
+ * @param {Array} data
+ * @param {String} keyName
+ * @returns {Array} updated data
+ */
+export function mergeKeys(data, keyName) {
+  if (!Array.isArray(data)) {
+    return null;
+  }
+  data = structuredClone(data); // TODO OPTIMIZE
+  let updated_arr = [];
+  let tmp_groups = [];
+  let j = 0;
+  for (let i = 0; i < data.length; i = j) {
+    tmp_groups.push(data[i]?.[keyName]);
+    for (j = i + 1; j < data.length; j++) {
+      if (data[i]?.id === data[j]?.id) {
+        tmp_groups.push(data[j]?.[keyName]);
+      } else {
+        break;
+      }
+    }
+    data[i][keyName] = tmp_groups; // group_ids diff from group_id
+    updated_arr.push(data[i]);
+    tmp_groups = [];
+  }
+  return updated_arr;
+}

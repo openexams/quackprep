@@ -8,6 +8,7 @@ import {
   updateObjectWithKey,
 } from '@utils/functions';
 import { parseUrlIntoPages } from './navbarFunctions';
+import { replaceP20WithSpace } from '../../../../shared/globalFuncs';
 
 const CHANGE_NAVBAR_PAGE = 'components/navbar/CHANGE_NAVBAR_PAGE';
 const UPDATE_LAST_PAGE = 'components/navbar/UPDATE_LAST_PAGE';
@@ -132,7 +133,7 @@ export default function navbarReducer(state = DEFAULT_STATE, action) {
       const urlArr = curUrl.split('/');
       const newSchoolName = urlArr[2] || null;
       const newClassName = urlArr[3] || null;
-      const newGroupName = urlArr[5] || null;
+      const newGroupName = replaceP20WithSpace(urlArr[5]) || null;
 
       return {
         ...state,
@@ -163,7 +164,7 @@ export default function navbarReducer(state = DEFAULT_STATE, action) {
       return { ...state, classId: action.payload.id, className: action.payload.name };
     case UPDATE_GROUP_ID_NAME: // TODO FIX
       if (!action.payload) return state;
-      return { ...state, groupId: action.payload.id, groupName: action.payload.name };
+      return { ...state, groupId: action.payload.id, groupName: replaceP20WithSpace(action.payload.name) };
     case UPDATE_GROUP_TYPE:
       return { ...state, groupType: action.payload };
     case UPDATE_SCHOOL_ID:

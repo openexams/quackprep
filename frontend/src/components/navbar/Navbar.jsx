@@ -37,6 +37,7 @@ import {
   questionFetchLogic,
   questionUpdateLogic,
   choicesFetchLogic,
+  hasCurPageBeenFetched,
 } from './navbarFunctions';
 
 export default function Navbar() {
@@ -104,18 +105,14 @@ export default function Navbar() {
 
   ///  USE EFFECTS FOR KEEPING STORE SAME AS URL ///
   useEffect(() => {
-    if (urlArr[5]) {
-      urlArr[5] = replaceP20WithSpace(urlArr[5]); // for search purpposes
-    }
-
-    if (activePage?.includes('exam') && className && classId) {
+    if (activePage?.includes('exam') && groupType !== 'exam' && className && classId) {
       dispatch(updateGroupType('exam'));
     }
-    if (activePage?.includes('topic') && className && classId) {
+    if (activePage?.includes('topic') && groupType !== 'topic' && className && classId) {
       dispatch(updateGroupType('topic'));
     }
 
-    if (!activePage?.includes('/auth?next') && !State401 && !fetchHistory[activePage]) {
+    if (!activePage?.includes('/auth?next') && !State401 && !hasCurPageBeenFetched(fetchHistory, activePage)) {
       if (activePage?.includes('class') && !loading?.SchoolsList) {
         schoolFetchLogic(dispatch, schools);
       }
@@ -123,28 +120,37 @@ export default function Navbar() {
         classFetchLogic(dispatch, classes);
       }
 
-      if (activePage?.includes('exam') && !loading?.ExamList && className && classId) {
+      if (activePage?.includes('class') && activePage?.includes('exam') && !loading?.ExamList && className && classId) {
         examFetchLogic(dispatch, classId);
       }
-      if (activePage?.includes('topic') && !loading?.TopicsShow && className && classId) {
+      if (activePage?.includes('class') && activePage?.includes('topic') && !loading?.TopicsShow && className && classId) {
         topicFetchLogic(dispatch, classId);
       }
-      if (activePage?.includes('question') && !loading?.QuestionPage && className && classId && groupId && urlArr[5]) {
+      if (
+        activePage?.includes('class') &&
+        (activePage?.includes('exam') || activePage?.includes('topic')) &&
+        activePage?.includes('question') &&
+        !loading?.QuestionPage &&
+        className &&
+        classId &&
+        groupId &&
+        groupName &&
+        groupType
+      ) {
         questionFetchLogic(dispatch, groupId);
       }
       if (
-        user &&
-        activePage?.includes('question/') &&
+        activePage?.includes('class') &&
+        (activePage?.includes('exam') || activePage?.includes('topic')) &&
+        activePage?.includes('question') &&
         !loading?.ChoiceRouter &&
         className &&
         classId &&
         groupId &&
-        urlArr[5] &&
         groupName &&
-        groupType &&
-        questions
+        groupType
       ) {
-        choicesFetchLogic(dispatch, groupName, groupId);
+        choicesFetchLogic(dispatch, groupId);
       }
     }
     if (!activePage?.includes('/auth?next') && !State401) {
@@ -155,13 +161,22 @@ export default function Navbar() {
         classUpdateLogic(dispatch, classes, className);
       }
 
-      if (activePage?.includes('exam') && !loading?.ExamList && className && classId) {
+      if (activePage?.includes('class') && activePage?.includes('exam') && !loading?.ExamList && className && classId) {
         examUpdateLogic(dispatch, groupName, classId, exams);
       }
-      if (activePage?.includes('topic') && !loading?.TopicsShow && className && classId) {
+      if (activePage?.includes('class') && activePage?.includes('topic') && !loading?.TopicsShow && className && classId) {
         topicUpdateLogic(dispatch, groupName, classId, topics);
       }
-      if (activePage?.includes('question') && !loading?.QuestionPage && className && classId && groupId && urlArr[5]) {
+      if (
+        activePage?.includes('class') &&
+        (activePage?.includes('exam') || activePage?.includes('topic')) &&
+        activePage?.includes('question') &&
+        !loading?.QuestionPage &&
+        className &&
+        classId &&
+        groupId &&
+        urlArr[5]
+      ) {
         questionUpdateLogic(dispatch, questionId);
       }
     }

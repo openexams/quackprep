@@ -33,7 +33,6 @@ export function standardApiCall(
   return async function (dispatch, getState) {
     // new function to figure out what was actually fetched, as it may not hit what the x amt of items it needed to fetch before this value updates
     const pageFetched = getState()?.app?.navbar?.page; // this is not delayed and gets called the second the user clicks it
-    console.log(pageFetched);
     if (Array.isArray(componentName)) {
       for (let i = 0; i < componentName.length; i++) {
         dispatch(startLoading(componentName[i]));

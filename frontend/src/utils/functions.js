@@ -74,6 +74,7 @@ export function turnUnderscoreIntoSpace(input) {
 }
 
 import { createSelector } from 'reselect';
+
 /**
  *
  * @param {String} path ex app.home.userCount
@@ -108,6 +109,36 @@ export function selectArrayOfStateById(path, idName, id) {
   );
 }
 
+export function selectArrayOfStateByGroupId(path, id) {
+  // make a function that takes in the state and the path and finds the state at that path or returns null.
+  return createSelector(
+    (state) => state,
+    function (state) {
+      const stateArr = sendObjToPath(state, path);
+      if (!stateArr) {
+        //console.count('no state found');
+        return null;
+      }
+      if (!path || !id) {
+        return null;
+      }
+      if (!isNaN(id)) {
+        parseInt(id);
+      }
+      let tmp = [];
+      for (let i = 0; i < stateArr.length; i++) {
+        for (let j = 0; j < stateArr[i]?.group_id?.length; j++) {
+          if (stateArr[i]?.group_id[j] === id) {
+            tmp.push(stateArr[i]);
+            break; // we can add this so go next
+          }
+        }
+      }
+      return tmp;
+    },
+  );
+}
+
 // pls pass in two objs with same keys TODO TEST
 export function checkEquivalenceOfObjects(obj1, obj2) {
   if (!obj1 || !obj2) return false;
@@ -123,34 +154,30 @@ export function checkEquivalenceOfObjects(obj1, obj2) {
 }
 
 /**
- * TODO MAKE MORE EFFICIENT
- * had to be modified because for choice & questions there id shows up twice, so couldnt use a hashtable
- * not gaurenteed to keep arr sorted in any way
  * if what you are trying to add (a arr of obj) id is the same as it was before then dont add it.
  * @param {Array} old
  * @param {Array} newA
  * @returns {Array}
  */
 export function updateArrObjectsWithNewVals(old, newA) {
-  if (old === null || old?.length === 0) {
-    return newA;
+  const map = {};
+  if (old) {
+    for (let i = 0; i < old.length; i++) {
+      map[old[i].id] = old[i];
+    }
+  } else {
+    old = [];
   }
   let ret = [...old];
   for (let i = 0; i < newA.length; i++) {
-    let canAdd = false;
-    for (let j = 0; j < old.length; j++) {
-      if (checkEquivalenceOfObjects(newA[i], old[j])) {
-        canAdd = false;
-        break;
-      }
-    }
-    if (canAdd) {
+    if (map && newA[i].id in map) {
+      //checkEquivalenceOfObjects(map[newA[i].id], newA[i])
+    } else {
       ret.push(newA[i]);
     }
   }
   return ret;
 }
-
 /**
  * Finds first occurence of needle in arr does not care  1 == "1" true
  * LINEAR SEARCH
@@ -344,6 +371,9 @@ export function isKeyInObject(object, key) {
  * @param {Array} keys
  */
 export function updateObjectWithFirstKeyNotInObject(object, keys) {
+  if (!keys || !object) {
+    return object;
+  }
   object = deepCopyObject(object);
   for (let i = 0; i < keys.length; i++) {
     if (object[keys[i]] !== undefined) {

@@ -24,7 +24,7 @@ export default [
       "prefer-const": "warn", // Suggests using const if a variable is not reassigned
       "no-unused-vars": ["warn", { argsIgnorePattern: "^_" }], // Warns on unused variables but ignores those starting with _
       "require-await": "error", // Ensures that async functions have an await expression
-      "no-return-await": "warn", // Warns on returning await unnecessarily
+      //"no-return-await": "warn", // Warns on returning await unnecessarily
       "promise/always-return": "off", // Turns off strict promise handling rules
       "promise/no-return-in-finally": "warn", // Warns about returning inside finally blocks
       "promise/catch-or-return": "warn", // Warns if a promise does not have a catch or return
