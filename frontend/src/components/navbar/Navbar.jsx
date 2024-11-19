@@ -33,90 +33,71 @@ import { getChoicesByGroup } from '@src/app/class/question/choices/choicesSlice'
 import { selectLoadingState } from '@src/app/store/loadingSlice';
 import { select401CompState } from '@components/401/401Slice';
 
-export function examFetchLogic(dispatch, classId, className, exams, curGroupName, schoolName, schoolId) {
-  console.count('exam');
-  const exams_pulled_in = findNeedleInArrayOfObjectsLINEAR(exams, 'class_id', classId, 'id'); // can do this cuz class & name in groups make a unique field;
-  const current_exam_id = findNeedlesInArrayOfObjectsLINEAR(exams, ['class_id', 'name'], [classId, curGroupName], 'id');
-  // console.log(current_exam_id);
-  if (!exams_pulled_in && classId && className && schoolName && schoolId) {
-    dispatch(getExamsByClassId(classId));
-  } else if (curGroupName && current_exam_id) {
-    // console.log('updating current exam id', exams_pulled_in);
-    dispatch(updateCurrentGroupData({ id: current_exam_id, name: curGroupName }));
+export function classFetchLogic(dispatch, classes) {
+  if (!Array.isArray(classes)) {
+    dispatch(getClasses());
   }
 }
 
-export function classFetchLogic(dispatch, schools, classes, curClassName, curSchoolName) {
-  console.count('classes');
+export function classUpdateLogic(dispatch, classes, curClassName) {
+  const tmp_c_id = findNeedleInArrayOfObjectsLINEAR(classes, 'name', curClassName, 'id');
+  dispatch(updateCurrentClassData({ name: curClassName, id: tmp_c_id }));
+}
+
+// fetches all schools
+export function schoolFetchLogic(dispatch, schools) {
   if (!Array.isArray(schools)) {
     dispatch(getSchools());
   }
-  const schoolId = findNeedleInArrayOfObjectsLINEAR(schools, 'school_name', curSchoolName, 'id');
+}
+export function schoolUpdateLogic(dispatch, schools, school_name) {
+  const schoolId = findNeedleInArrayOfObjectsLINEAR(schools, 'school_name', school_name, 'id');
   if (schoolId) {
     dispatch(updateSchoolId(schoolId));
   }
-
-  // CLASSES DISPATCH MAIN THAT SETS OFF CHAIN OF REACTIONS
-  const tmp_c_id = findNeedlesInArrayOfObjectsLINEAR(classes, ['name', 'school_id'], [curClassName, schoolId], 'id');
-  if (!classes) {
-    dispatch(getClasses());
-  } else if (tmp_c_id !== null) {
-    dispatch(updateCurrentClassData({ name: curClassName, id: tmp_c_id }));
-  }
 }
 
-export function topicFetchLogic(dispatch, topics, classId, groupName, schoolName, schoolId, className) {
-  console.count('topics');
-  //TODO HOLY FUCK THIS SHIT IS AIDS COMMENT IT OR FIX IT
-  // TOPICS DISPATCH
-  const do_I_alr_have_a_topic_pulled_in_with_the_current_class_id = findNeedleInArrayOfObjectsLINEAR(
-    topics,
-    'class_id',
-    classId,
-    'id',
-  );
-  if (groupName) {
-    groupName = replaceP20WithSpace(groupName);
-  }
-  let tmp_topic_id = null;
-  if (classId && !do_I_alr_have_a_topic_pulled_in_with_the_current_class_id && className && schoolName && schoolId) {
-    dispatch(getTopicsByClassId(classId));
-  } else if (
-    // i alr have topics for this class pulled in, as such find that topic id  and update cur group data
-    groupName &&
-    (tmp_topic_id = findNeedlesInArrayOfObjectsLINEAR(topics, ['name', 'class_id'], [groupName, classId], 'id')) // can do this cuz class & name in groups make a unique field;
-  ) {
+export function topicUpdateLogic(dispatch, groupName, class_id, topics) {
+  const tmp_topic_id = findNeedlesInArrayOfObjectsLINEAR(topics, ['name', 'class_id'], [groupName, class_id], 'id');
+  if ((tmp_topic_id, groupName)) {
     dispatch(updateCurrentGroupData({ name: groupName, id: tmp_topic_id }));
   }
 }
 
-export function questionFetchLogic(dispatch, questions, groupId, curGroupName, curGroupType, curQuestionId) {
-  console.count('question');
-  // QUESION DISPATCH
-  if (curGroupName) {
-    curGroupName = replaceP20WithSpace(curGroupName);
-  }
-  const do_I_alr_have_a_question_pulled_in_with_the_current_group_id = findNeedlesInArrayOfObjectsLINEAR(
-    questions,
-    ['group_id', 'type'], // >
-    [groupId, curGroupType], //I pass the type as well as when question are pulled in for one type, and the other type is loaded by the user, it may detect a question alr pulled in so then we will only have that single question when in reality the type had a lot more questions.
-    'id',
-  ); // same question may get pulled in twice once for exam once for topic
-  if (groupId && !do_I_alr_have_a_question_pulled_in_with_the_current_group_id) {
-    dispatch(getQuestionsByGroupId(groupId, curGroupType)); // url[3] is type
-  } else if (curQuestionId) {
-    dispatch(updateQuestionId(parseInt(curQuestionId)));
+export function topicFetchLogic(dispatch, classId) {
+  if (classId) {
+    dispatch(getTopicsByClassId(classId));
   }
 }
 
-export function choicesFetchLogic(dispatch, groupName, groupId, choices) {
-  console.count('choices');
+export function examUpdateLogic(dispatch, groupName, class_id, exams) {
+  const current_exam_id = findNeedlesInArrayOfObjectsLINEAR(exams, ['class_id', 'name'], [class_id, groupName], 'id');
+  if (groupName && current_exam_id) {
+    dispatch(updateCurrentGroupData({ id: current_exam_id, name: groupName }));
+  }
+}
+
+export function examFetchLogic(dispatch, classId) {
+  if (classId) {
+    dispatch(getExamsByClassId(classId));
+  }
+}
+
+export function questionUpdateLogic(dispatch, question_id) {
+  if (question_id) {
+    dispatch(updateQuestionId(parseInt(question_id)));
+  }
+}
+
+export function questionFetchLogic(dispatch, groupId) {
+  if (groupId) {
+    dispatch(getQuestionsByGroupId(groupId));
+  }
+}
+
+export function choicesFetchLogic(dispatch, groupName, groupId) {
   if (groupName && groupId) {
-    // TODO CHECK FOR LOADING ON ALL OF THESE AS WELL
-    const do_i_alr_have_choices = findNeedleInArrayOfObjectsLINEAR(choices, 'group_id', groupId, 'id');
-    if (!do_i_alr_have_choices) {
-      dispatch(getChoicesByGroup(groupId));
-    }
+    dispatch(getChoicesByGroup(groupId));
   }
 }
 
@@ -139,7 +120,7 @@ export default function Navbar() {
   const State401 = useSelector(select401CompState).show;
   const userIdRef = useRef(user.id);
 
-  const { className, classId, groupName, groupId, questionId, schoolName, groupType, schoolId } =
+  const { className, classId, groupName, groupId, questionId, schoolName, groupType, schoolId, fetchHistory } =
     useSelector(selectNavbarState).navbar;
 
   const urlArr = useMemo(() => {
@@ -165,6 +146,7 @@ export default function Navbar() {
   useEffect(() => {
     const interval = setInterval(() => {
       if (userIdRef.current) {
+        // cant use user.id here as it takes the user.id value and saves it for every callm, while useRef.current is a pointer to the value ( thats how I like to think ab it )
         dispatch(upsertTimeSpent()); // TODO TEST
       }
     }, 300000); // runs every 5 minute
@@ -183,23 +165,25 @@ export default function Navbar() {
 
   ///  USE EFFECTS FOR KEEPING STORE SAME AS URL ///
   useEffect(() => {
-    if (!activePage?.includes('/auth?next') && !State401) {
-      if (urlArr[5]) {
-        urlArr[5] = replaceP20WithSpace(urlArr[5]);
+    if (urlArr[5]) {
+      urlArr[5] = replaceP20WithSpace(urlArr[5]);
+    }
+    if (!activePage?.includes('/auth?next') && !State401 && !fetchHistory[activePage]) {
+      if (activePage?.includes('class') && !loading?.SchoolsList) {
+        schoolFetchLogic(dispatch, schools);
       }
       if (activePage?.includes('class') && !loading?.ClassList) {
-        classFetchLogic(dispatch, schools, classes, urlArr[3], urlArr[2]);
+        classFetchLogic(dispatch, classes);
       }
-      if (user && activePage?.includes('exam') && !loading?.ExamList && className && classId) {
-        examFetchLogic(dispatch, classId, className, exams, urlArr[5], schoolName, schoolId);
-        dispatch(updateGroupType('exam'));
+
+      if (activePage?.includes('exam') && !loading?.ExamList && className && classId) {
+        examFetchLogic(dispatch, classId);
       }
-      if (user && activePage?.includes('topic') && !loading?.TopicsShow && className && classId) {
-        topicFetchLogic(dispatch, topics, classId, urlArr[5], schoolName, schoolId, className);
-        dispatch(updateGroupType('topic'));
+      if (activePage?.includes('topic') && !loading?.TopicsShow && className && classId) {
+        topicFetchLogic(dispatch, classId);
       }
-      if (user && activePage?.includes('question') && !loading?.QuestionPage && className && classId && groupId && urlArr[5]) {
-        questionFetchLogic(dispatch, questions, groupId, urlArr[5], urlArr[4], urlArr[7]);
+      if (activePage?.includes('question') && !loading?.QuestionPage && className && classId && groupId && urlArr[5]) {
+        questionFetchLogic(dispatch, groupId);
       }
       if (
         user &&
@@ -213,8 +197,27 @@ export default function Navbar() {
         groupType &&
         questions
       ) {
-        // for choices
-        choicesFetchLogic(dispatch, groupName, groupId, choices);
+        choicesFetchLogic(dispatch, groupName, groupId);
+      }
+    }
+    if (!activePage?.includes('/auth?next') && !State401) {
+      if (activePage?.includes('class') && !loading?.SchoolsList) {
+        schoolUpdateLogic(dispatch, schools, schoolName);
+      }
+      if (activePage?.includes('class') && !loading?.ClassList) {
+        classUpdateLogic(dispatch, classes, className);
+      }
+
+      if (activePage?.includes('exam') && !loading?.ExamList && className && classId) {
+        examUpdateLogic(dispatch, groupName, classId, exams);
+        dispatch(updateGroupType('exam'));
+      }
+      if (activePage?.includes('topic') && !loading?.TopicsShow && className && classId) {
+        topicUpdateLogic(dispatch, groupName, classId, topics);
+        dispatch(updateGroupType('topic'));
+      }
+      if (activePage?.includes('question') && !loading?.QuestionPage && className && classId && groupId && urlArr[5]) {
+        questionUpdateLogic(dispatch, questionId);
       }
     }
   }, [
@@ -244,6 +247,7 @@ export default function Navbar() {
   useEffect(() => {
     navigate(activePage);
     const handlePopState = (event) => {
+      const curPage = location.pathname + location.search + location.hash;
       //console.log('Back or forward button clicked');
       dispatch(changeNavbarPage(location.pathname + location.search + location.hash));
     };
@@ -257,7 +261,8 @@ export default function Navbar() {
 
   useEffect(() => {
     //console.log('init the navbar page store');
-    dispatch(changeNavbarPage(location.pathname + location.search + location.hash));
+    const curPage = location.pathname + location.search + location.hash;
+    dispatch(changeNavbarPage(curPage));
   }, []);
 
   // Detect if mobile view

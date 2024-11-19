@@ -1,4 +1,4 @@
-import { filterArr, updateArrWithNewVals, upsertArray } from '@utils/functions';
+import { filterArr, updateArrObjectsWithNewVals, upsertArray } from '@utils/functions';
 
 /**
  * DO NOT USE UNDER ANY CIRCUMSTANCE, just for refernce, cannot be used to abstract because of how redux combine reducers works
@@ -10,7 +10,7 @@ import { filterArr, updateArrWithNewVals, upsertArray } from '@utils/functions';
  */
 export function defaultCRUDReducer(state, action, stateKey, originalStateArr) {
   if (action.type?.includes('GET_CRUD')) {
-    return { ...state, [stateKey]: updateArrWithNewVals(originalStateArr, action.payload) };
+    return { ...state, [stateKey]: updateArrObjectsWithNewVals(originalStateArr, action.payload) };
   } else if (action.type?.includes('UPSERT_CRUD')) {
     return { ...state, [stateKey]: upsertArray(originalStateArr, action.payload?.[0]) };
   } else if (action.type?.includes('DELETE_CRUD')) {

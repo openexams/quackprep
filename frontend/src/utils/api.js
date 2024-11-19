@@ -3,14 +3,16 @@ import axios from './axios.js';
 import { hideFlashMessage, showFlashMessage } from '@components/flashmessage/flashMessageSlice.js';
 import { startLoading, stopLoading } from '@src/app/store/loadingSlice.js';
 import { signOut } from '@src/app/auth/login/loginSlice.js';
+import { updateFetchHistory } from '@components/navbar/navbarSlice.js';
 
 /**
  * A redux thunk standard api call
+ * dispatches side affect actions such as loading, flash messages, adding the page to the fetch history
  *
  * @param {String} method get post put patch delete
  * @param {String} route where you wanna send data
  * @param {Object} [data] data you wanna send
- * @param {String} [requestAction] the constant you have in your redu cer to do set loading
+ * @param {String} [requestAction] the constant you have in your reducer to do set loading
  * @param {String} resultAction the constant you have in your reducer to set the data
  * @param {String || Array} [componentName] the components name you want to load, will be added to the loadingComps state obj
  * @param {AxiosRequestConfig} [config] axios config to send the axios get
@@ -28,7 +30,9 @@ export function standardApiCall(
   errorMsg = 'Server Error, servers may be down. Go to about and contact someone for help.',
   noticeOfSuccess = null,
 ) {
-  return async function (dispatch) {
+  return async function (dispatch, getState) {
+    // new function to figure out what was actually fetched, as it may not hit what the x amt of items it needed to fetch before this value updates
+    const pageFetched = getState()?.app?.navbar?.page; // this is not delayed and gets called the second the user clicks it
     if (Array.isArray(componentName)) {
       for (let i = 0; i < componentName.length; i++) {
         dispatch(startLoading(componentName[i]));
@@ -46,11 +50,9 @@ export function standardApiCall(
       }
       if (resultAction) dispatch({ type: resultAction, payload: result.data });
       dispatch(hideFlashMessage());
+      dispatch(updateFetchHistory(pageFetched));
       if (noticeOfSuccess) {
         dispatch(showFlashMessage(noticeOfSuccess, null));
-        // setTimeout(() => {
-        //   dispatch(hideFlashMessage());
-        // }, 4000);
       }
       dispatch(stopLoading(componentName));
     } catch (error) {

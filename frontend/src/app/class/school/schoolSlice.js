@@ -1,6 +1,6 @@
 import { standardApiCall } from '@utils/api';
 import { createSelector } from 'reselect';
-import { updateArrWithNewVals } from '@utils/functions';
+import { updateArrObjectsWithNewVals } from '@utils/functions';
 
 const GET_SCHOOLS = 'app/class/school/GET_SCHOOLS';
 
@@ -14,7 +14,7 @@ const DEFAULT_STATE = {
 export default function schoolsReducer(state = DEFAULT_STATE, action) {
   switch (action.type) {
     case GET_SCHOOLS:
-      return { ...state, schools: updateArrWithNewVals(state.schools, action.payload) };
+      return { ...state, schools: updateArrObjectsWithNewVals(state.schools, action.payload) };
     default:
       return state;
   }

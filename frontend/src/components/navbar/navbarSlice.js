@@ -1,5 +1,6 @@
 import { createSelector } from 'reselect';
 import { standardApiCall } from '@utils/api';
+import { copyArray, deepCopyArrayOfObjects, deepCopyObject, updateObjectWithKey } from '@utils/functions';
 
 const CHANGE_NAVBAR_PAGE = 'components/navbar/CHANGE_NAVBAR_PAGE';
 const UPDATE_LAST_PAGE = 'components/navbar/UPDATE_LAST_PAGE';
@@ -13,6 +14,7 @@ const UPDATE_GROUP_ID_NAME = 'components/navbar/UPDATE_GROUP_ID_NAME';
 const UPDATE_GROUP_TYPE = 'components/navbar/UPDATE_GROUP_TYPE';
 
 const UPDATE_SCHOOL_ID = 'components/navbar/UPDATE_SCHOOL_ID';
+const UPDATE_FETCH_HISTORY = 'components/navbar/UPDATE_FETCH_HISTORY';
 
 export function upsertTimeSpent() {
   return standardApiCall('post', '/api/account/time_spent', {});
@@ -60,6 +62,10 @@ export function updateLastPage(lastPage) {
   return { type: UPDATE_LAST_PAGE, payload: lastPage };
 }
 
+export function updateFetchHistory(fetechedPage) {
+  return { type: UPDATE_FETCH_HISTORY, payload: fetechedPage };
+}
+
 const DEFAULT_STATE = {
   page: null,
   classId: null,
@@ -71,6 +77,7 @@ const DEFAULT_STATE = {
   groupName: null,
   questionId: null,
   lastPage: null,
+  fetchHistory: {},
 };
 
 export default function navbarReducer(state = DEFAULT_STATE, action) {
@@ -79,6 +86,8 @@ export default function navbarReducer(state = DEFAULT_STATE, action) {
     return state; // was trying to do stuff with page that had auth?next= in it, since I parse the page using a array split("/") that did not go well
   }
   switch (action.type) {
+    case UPDATE_FETCH_HISTORY:
+      return { ...state, fetchHistory: updateObjectWithKey(state.fetchHistory, action.payload) };
     case CHANGE_NAVBAR_PAGE:
       let curUrl = state.page;
       const newLastPage = state.page;
@@ -96,6 +105,7 @@ export default function navbarReducer(state = DEFAULT_STATE, action) {
           groupId: null,
           groupType: null,
           lastPage: newLastPage,
+          fetchHistory: state.fetchHistory,
         };
       }
       // after base cases
@@ -128,6 +138,7 @@ export default function navbarReducer(state = DEFAULT_STATE, action) {
         groupId: urlArr[4] ? state.groupId : null,
         groupType: null,
         lastPage: newLastPage,
+        fetchHistory: state.fetchHistory,
       };
     case UPDATE_CUR_CLASS:
       return { ...state, classId: action.payload.id || state.classId, className: action.payload.name || state.className };

@@ -131,7 +131,7 @@ export function checkEquivalenceOfObjects(obj1, obj2) {
  * @param {Array} newA
  * @returns {Array}
  */
-export function updateArrWithNewVals(old, newA) {
+export function updateArrObjectsWithNewVals(old, newA) {
   if (old === null || old?.length === 0) {
     return newA;
   }
@@ -303,4 +303,37 @@ export function upsertArray(arr, obj) {
   }
 
   return ret;
+}
+
+export function copyArray(arr) {
+  if (!Array.isArray(arr)) {
+    return [];
+  }
+  let newArr = [];
+  for (let i = 0; i < arr.length; i++) {
+    newArr.push(arr[i]);
+  }
+  return newArr;
+}
+
+/**
+ * Adds key, value is amt of times you have tried to update it
+ * @param {Object} map
+ * @param {*} key
+ */
+export function updateObjectWithKey(map, key) {
+  map = deepCopyObject(map);
+  if (map[key] === undefined) {
+    map[key] = 1;
+  } else {
+    map[key]++;
+  }
+  return map;
+}
+
+export function isKeyInObject(object, key) {
+  if (object[key] !== undefined) {
+    return true;
+  }
+  return false;
 }

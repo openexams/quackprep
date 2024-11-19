@@ -1,12 +1,12 @@
 import { standardApiCall } from '@utils/api';
-import { updateArrWithNewVals } from '@utils/functions';
+import { updateArrObjectsWithNewVals } from '@utils/functions';
 import { createSelector } from 'reselect';
 
 const GET_QUESTIONS = 'app/class/question/GET_QUESTIONS';
 const UPSERT_QUESTION = 'app/class/question/UPSERT_QUESTION';
 const DELETE_QUESTION = 'app/class/question/DELETE_QUESTION';
 
-export function getQuestionsByGroupId(group_id, type) {
+export function getQuestionsByGroupId(group_id) {
   return standardApiCall('get', `/api/question/${group_id}`, null, GET_QUESTIONS, 'QuestionPage');
 }
 
@@ -37,7 +37,7 @@ const DEFAULT_STATE = {
 export default function questionsReducer(state = DEFAULT_STATE, action) {
   switch (action.type) {
     case GET_QUESTIONS:
-      return { ...state, questions: updateArrWithNewVals(state.questions, action.payload) };
+      return { ...state, questions: updateArrObjectsWithNewVals(state.questions, action.payload) };
     default:
       return state;
   }

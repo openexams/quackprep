@@ -1,6 +1,6 @@
 import { standardApiCall } from '@utils/api';
 import { createSelector } from 'reselect';
-import { updateArrWithNewVals, filterArr, upsertArray } from '@utils/functions';
+import { updateArrObjectsWithNewVals, filterArr, upsertArray } from '@utils/functions';
 
 const GET_CRUD_CLASSES = 'app/class/GET_CRUD_CLASSES';
 const DELETE_CRUD_CLASS = 'app/class/DELETE_CRUD_CLASS';
@@ -48,7 +48,7 @@ const DEFAULT_STATE = {
 export default function classReducer(state = DEFAULT_STATE, action) {
   switch (action.type) {
     case GET_CRUD_CLASSES:
-      return { ...state, classes: updateArrWithNewVals(state.classes, action.payload) };
+      return { ...state, classes: updateArrObjectsWithNewVals(state.classes, action.payload) };
     case DELETE_CRUD_CLASS:
       return { ...state, classes: filterArr(state.classes, action.payload) };
     case UPSERT_CRUD_CLASSES:

@@ -1,7 +1,7 @@
 import { standardApiCall } from '@utils/api';
 import { createSelector } from 'reselect';
 import { deleteGroupById, getGroupsByUserId, upsertGroup } from '../groupSlice';
-import { updateArrWithNewVals, filterArr, upsertArray } from '@utils/functions';
+import { updateArrObjectsWithNewVals, filterArr, upsertArray } from '@utils/functions';
 
 const GET_TOPICS = 'app/class/topic/GET_TOPICS';
 const DELETE_TOPIC = 'app/class/topic/DELETE_TOPIC';
@@ -30,7 +30,7 @@ const DEFAULT_STATE = {
 export default function topicReducer(state = DEFAULT_STATE, action) {
   switch (action.type) {
     case GET_TOPICS:
-      return { ...state, topics: updateArrWithNewVals(state.topics, action.payload) };
+      return { ...state, topics: updateArrObjectsWithNewVals(state.topics, action.payload) };
     case DELETE_TOPIC:
       return { ...state, topics: filterArr(state.topics, action.payload) };
     case UPSERT_TOPIC:

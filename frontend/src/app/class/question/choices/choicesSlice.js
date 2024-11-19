@@ -1,5 +1,5 @@
 import { standardApiCall } from '@utils/api';
-import { updateArrWithNewVals } from '@utils/functions';
+import { updateArrObjectsWithNewVals } from '@utils/functions';
 import { createSelector } from 'reselect';
 
 const GET_CHOICES = 'app/class/question/choices/GET_CHOICES';
@@ -62,7 +62,7 @@ const DEFAULT_STATE = {
 export default function choicesReducer(state = DEFAULT_STATE, action) {
   switch (action.type) {
     case GET_CHOICES:
-      return { ...state, choices: updateArrWithNewVals(state.choices, action.payload) };
+      return { ...state, choices: updateArrObjectsWithNewVals(state.choices, action.payload) };
     default:
       return state;
   }
