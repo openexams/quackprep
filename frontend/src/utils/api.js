@@ -4,9 +4,10 @@ import { hideFlashMessage, showFlashMessage } from '@components/flashmessage/fla
 import { startLoading, stopLoading } from '@src/app/store/loadingSlice.js';
 import { signOut } from '@src/app/auth/login/loginSlice.js';
 import { updateFetchHistory } from '@components/navbar/navbarSlice.js';
+import { doesWordContainNavbarKeyword } from '@components/navbar/navbarFunctions.js';
 
 /**
- * A redux thunk standard api call
+ * A redux thunk standard api call THIS IS BASICALLY A MIDDELWARE (idk how to make a real one yet) IF YOU ARE TALKING TO THE API PLS USE THIS
  * dispatches side affect actions such as loading, flash messages, adding the page to the fetch history
  *
  * @param {String} method get post put patch delete
@@ -31,13 +32,16 @@ export function standardApiCall(
   noticeOfSuccess = null,
 ) {
   return async function (dispatch, getState) {
-    // new function to figure out what was actually fetched, as it may not hit what the x amt of items it needed to fetch before this value updates
-    const pageFetched = getState()?.app?.navbar?.page; // this is not delayed and gets called the second the user clicks it
-    if (Array.isArray(componentName)) {
-      for (let i = 0; i < componentName.length; i++) {
-        dispatch(startLoading(componentName[i]));
+    const fetchHistory = getState().app.navbar.fetchHistory;
+    if (method === 'get') {
+      if (fetchHistory[route] !== undefined) {
+        // && doesWordContainNavbarKeyword(route)
+        return;
       }
-    } else if (componentName !== null) dispatch(startLoading(componentName));
+      dispatch(updateFetchHistory(route));
+    }
+
+    dispatch(startLoading(componentName));
     try {
       let result = null;
       if (method === 'post' || method === 'put' || method === 'patch') {
@@ -50,7 +54,7 @@ export function standardApiCall(
       }
       if (resultAction) dispatch({ type: resultAction, payload: result.data });
       dispatch(hideFlashMessage());
-      dispatch(updateFetchHistory(pageFetched));
+
       if (noticeOfSuccess) {
         dispatch(showFlashMessage(noticeOfSuccess, null));
       }
@@ -61,8 +65,8 @@ export function standardApiCall(
       console.error('Failed req to ', error.request.responseURL);
       if (error?.response?.data?.message?.includes('401')) {
         dispatch(signOut());
-        dispatch(show401Msg());
         dispatch(hideFlashMessage());
+        dispatch(show401Msg());
       } else {
         dispatch(showFlashMessage('Error', error?.response?.data?.message || errorMsg || error.message));
       }

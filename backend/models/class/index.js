@@ -77,7 +77,7 @@ export async function upsertClass(
     );
     return;
   }
-  const result = (
+  const class_id = (
     await sqlExe.executeCommand(
       `INSERT INTO classes (id,school_id,name,description,category,created_by)
      VALUES(:id, :school_id, :name, :description, :category, :user_id)
@@ -90,6 +90,6 @@ export async function upsertClass(
     )
   ).insertId;
   return await sqlExe.executeCommand(
-    `${getLastRowManipulated("classes", result)}`
+    `${getLastRowManipulated("classes", class_id)}`
   );
 }

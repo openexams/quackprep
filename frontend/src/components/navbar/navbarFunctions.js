@@ -52,14 +52,35 @@ export function hasCurPageBeenFetched(fetchHistory, curUrl) {
   return false;
 }
 
+/**
+ *
+ * @param {String} word
+ * @returns {Boolean}
+ */
+export function doesWordContainNavbarKeyword(word) {
+  if (!word) {
+    return false;
+  }
+  if (
+    word.includes('class') ||
+    word.includes('topic') ||
+    word.includes('exam') ||
+    word.includes('question') ||
+    word.includes('choice')
+  ) {
+    return true;
+  }
+  return false;
+}
+
 export function classFetchLogic(dispatch, classes) {
   if (!Array.isArray(classes)) {
     dispatch(getClasses());
   }
 }
 
-export function classUpdateLogic(dispatch, classes, curClassName) {
-  const tmp_c_id = findNeedleInArrayOfObjectsLINEAR(classes, 'name', curClassName, 'id');
+export function classUpdateLogic(dispatch, classes, curClassName, school_id) {
+  const tmp_c_id = findNeedlesInArrayOfObjectsLINEAR(classes, ['name', 'school_id'], [curClassName, school_id], 'id');
   dispatch(updateCurrentClassData({ name: curClassName, id: tmp_c_id }));
 }
 

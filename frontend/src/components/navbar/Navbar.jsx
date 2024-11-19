@@ -112,18 +112,22 @@ export default function Navbar() {
       dispatch(updateGroupType('topic'));
     }
 
-    if (!activePage?.includes('/auth?next') && !State401 && !hasCurPageBeenFetched(fetchHistory, activePage)) {
+    if (!activePage?.includes('/auth?next') && !State401) {
       if (activePage?.includes('class') && !loading?.SchoolsList) {
         schoolFetchLogic(dispatch, schools);
+        schoolUpdateLogic(dispatch, schools, schoolName);
       }
       if (activePage?.includes('class') && !loading?.ClassList) {
         classFetchLogic(dispatch, classes);
+        classUpdateLogic(dispatch, classes, className, schoolId);
       }
 
       if (activePage?.includes('class') && activePage?.includes('exam') && !loading?.ExamList && className && classId) {
+        examUpdateLogic(dispatch, groupName, classId, exams);
         examFetchLogic(dispatch, classId);
       }
       if (activePage?.includes('class') && activePage?.includes('topic') && !loading?.TopicsShow && className && classId) {
+        topicUpdateLogic(dispatch, groupName, classId, topics);
         topicFetchLogic(dispatch, classId);
       }
       if (
@@ -137,6 +141,7 @@ export default function Navbar() {
         groupName &&
         groupType
       ) {
+        questionUpdateLogic(dispatch, questionId);
         questionFetchLogic(dispatch, groupId);
       }
       if (
@@ -151,33 +156,6 @@ export default function Navbar() {
         groupType
       ) {
         choicesFetchLogic(dispatch, groupId);
-      }
-    }
-    if (!activePage?.includes('/auth?next') && !State401) {
-      if (activePage?.includes('class') && !loading?.SchoolsList) {
-        schoolUpdateLogic(dispatch, schools, schoolName);
-      }
-      if (activePage?.includes('class') && !loading?.ClassList) {
-        classUpdateLogic(dispatch, classes, className);
-      }
-
-      if (activePage?.includes('class') && activePage?.includes('exam') && !loading?.ExamList && className && classId) {
-        examUpdateLogic(dispatch, groupName, classId, exams);
-      }
-      if (activePage?.includes('class') && activePage?.includes('topic') && !loading?.TopicsShow && className && classId) {
-        topicUpdateLogic(dispatch, groupName, classId, topics);
-      }
-      if (
-        activePage?.includes('class') &&
-        (activePage?.includes('exam') || activePage?.includes('topic')) &&
-        activePage?.includes('question') &&
-        !loading?.QuestionPage &&
-        className &&
-        classId &&
-        groupId &&
-        urlArr[5]
-      ) {
-        questionUpdateLogic(dispatch, questionId);
       }
     }
   }, [
