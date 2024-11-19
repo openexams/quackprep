@@ -32,11 +32,11 @@ export function standardApiCall(
   noticeOfSuccess = null,
 ) {
   return async function (dispatch, getState) {
-    const fetchHistory = getState().app.navbar.fetchHistory;
     if (method === 'get') {
+      const fetchHistory = getState().app.navbar.fetchHistory;
       if (fetchHistory[route] !== undefined) {
         // && doesWordContainNavbarKeyword(route)
-        return;
+        return; //"same get route hit twice!"
       }
       dispatch(updateFetchHistory(route));
     }
@@ -49,7 +49,7 @@ export function standardApiCall(
       } else if (method === 'get' || method === 'delete') {
         result = await axios[method.toLowerCase()](route, config);
       } else {
-        dispatch(showFlashMessage('axios function not found', 'err'));
+        dispatch(showFlashMessage('axios method not found, this is a developer error. email support for help', 'err'));
         return;
       }
       if (resultAction) dispatch({ type: resultAction, payload: result.data });

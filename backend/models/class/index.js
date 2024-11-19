@@ -15,16 +15,6 @@ export async function getClasses() {
   );
 }
 
-// since class names must be distinct
-export async function getClassIdByClassName(className) {
-  const params = { className };
-  return await sqlExe.executeCommand(
-    `SELECT cl.id, cl.name FROM classes cl WHERE cl.name = :className
-     AND cl.deleted=0`,
-    params
-  );
-}
-
 // school table in class
 export async function getSchools() {
   return await sqlExe.executeCommand(`SELECT * FROM schools`);

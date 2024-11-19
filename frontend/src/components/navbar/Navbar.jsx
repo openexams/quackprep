@@ -105,13 +105,11 @@ export default function Navbar() {
 
   ///  USE EFFECTS FOR KEEPING STORE SAME AS URL ///
   useEffect(() => {
-    console.count('rip');
-
     if (activePage?.includes('class') && !activePage?.includes('/auth?next') && !State401) {
-      if (activePage?.includes('exam') && groupType !== 'exam' && className && classId) {
+      if (activePage?.includes('exam') && className && classId) {
         dispatch(updateGroupType('exam'));
       }
-      if (activePage?.includes('topic') && groupType !== 'topic' && className && classId) {
+      if (activePage?.includes('topic') && className && classId) {
         dispatch(updateGroupType('topic'));
       }
 
@@ -165,14 +163,13 @@ export default function Navbar() {
     exams,
     topics,
     groupId,
-    groupName,
     groupType,
+    groupName,
     classes,
     schoolName,
     schools,
     schoolId,
     questionId,
-    choices,
     loading?.ClassList,
     loading?.ExamList,
     loading?.TopicsShow,

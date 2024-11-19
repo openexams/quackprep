@@ -4,7 +4,6 @@ import {
   upsertClass,
   getClasses,
   getClassesByUserId,
-  getClassIdByClassName,
   getSchools,
   getClassCategories,
 } from "#models/class/index.js";
@@ -89,18 +88,6 @@ router.post("/", isAuthenticated, isCreator, async function (req, res) {
     res.status(500).json({
       message: `server error could not create class with user id ${req.user}`,
     });
-  }
-});
-
-router.get("/:className", async function (req, res) {
-  try {
-    const result = await getClassIdByClassName(req.params.className);
-
-    res.status(200).json(result?.[0]);
-  } catch (error) {
-    res
-      .status(500)
-      .json({ message: "server error could not get classes by classname" });
   }
 });
 
