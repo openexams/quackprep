@@ -15,6 +15,7 @@ import { signOut } from '@src/app/auth/login/loginSlice.js';
  * @param {String || Array} [componentName] the components name you want to load, will be added to the loadingComps state obj
  * @param {AxiosRequestConfig} [config] axios config to send the axios get
  * @param {String} [errorMsg] custom error message you want to show on screen if there an error
+ * @param {String} [noticeOfSuccess] success message that the request was successfull.
  * @returns dispatches an action to the reducer with a action.payload of the data
  */
 export function standardApiCall(
@@ -25,11 +26,12 @@ export function standardApiCall(
   componentName = null,
   config = null,
   errorMsg = 'Server Error, servers may be down. Go to about and contact someone for help.',
+  noticeOfSuccess = null,
 ) {
   return async function (dispatch) {
     if (Array.isArray(componentName)) {
-      for (const i in componentName) {
-        dispatch(startLoading(i));
+      for (let i = 0; i < componentName.length; i++) {
+        dispatch(startLoading(componentName[i]));
       }
     } else if (componentName !== null) dispatch(startLoading(componentName));
     try {
@@ -44,6 +46,12 @@ export function standardApiCall(
       }
       if (resultAction) dispatch({ type: resultAction, payload: result.data });
       dispatch(hideFlashMessage());
+      if (noticeOfSuccess) {
+        dispatch(showFlashMessage(noticeOfSuccess, null));
+        // setTimeout(() => {
+        //   dispatch(hideFlashMessage());
+        // }, 4000);
+      }
       dispatch(stopLoading(componentName));
     } catch (error) {
       console.error(error);

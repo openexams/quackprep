@@ -11,16 +11,34 @@ export function getClasses() {
 }
 
 export function getClassesByUserId() {
-  return standardApiCall('get', `/api/class/user`, null, GET_CRUD_CLASSES, ['ClassList', 'Create']);
+  return standardApiCall('get', `/api/class/user`, null, GET_CRUD_CLASSES, ['ClassList', 'Create'], null, null, null);
 }
 
 // returns the created class
 export function upsertClass(id, school_id, name, description, category) {
-  return standardApiCall('post', `/api/class/`, { id, school_id, name, description, category }, UPSERT_CRUD_CLASSES, ['Create']); // have a action that puts this created class into the classlist
+  return standardApiCall(
+    'post',
+    `/api/class/`,
+    { id, school_id, name, description, category },
+    UPSERT_CRUD_CLASSES,
+    ['Create'],
+    null,
+    null,
+    'successfully upserted class!',
+  ); // have a action that puts this created class into the classlist
 }
 
 export function deleteClassById(id) {
-  return standardApiCall('delete', `/api/class/${id}`, null, DELETE_CRUD_CLASS, ['Create']); // have a action that puts this created class into the classlist
+  return standardApiCall(
+    'delete',
+    `/api/class/${id}`,
+    null,
+    DELETE_CRUD_CLASS,
+    ['Create'],
+    null,
+    null,
+    'successfully deleted class!',
+  ); // have a action that puts this created class into the classlist
 }
 
 const DEFAULT_STATE = {

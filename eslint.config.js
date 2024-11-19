@@ -7,7 +7,6 @@ export default [
       ecmaVersion: 2023,
       sourceType: "module",
       globals: {
-        // Define global variables for Node.js and ES6
         console: "readonly",
         process: "readonly",
         __dirname: "readonly",

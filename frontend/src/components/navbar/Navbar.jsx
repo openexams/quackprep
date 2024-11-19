@@ -1,6 +1,6 @@
 // not using navbar css file
 import { Menu, Container, Icon, Sidebar, Button, Transition } from 'semantic-ui-react';
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectUser } from '@src/app/auth/authSlice';
 import {
@@ -137,6 +137,7 @@ export default function Navbar() {
   const choices = useSelector(selectChoicesState).choices;
   const loading = useSelector(selectLoadingState)?.loadingComps;
   const State401 = useSelector(select401CompState).show;
+  const userIdRef = useRef(user.id);
 
   const { className, classId, groupName, groupId, questionId, schoolName, groupType, schoolId } =
     useSelector(selectNavbarState).navbar;
@@ -158,8 +159,12 @@ export default function Navbar() {
   };
 
   useEffect(() => {
+    userIdRef.current = user.id;
+  }, [user.id]); // keep userIdRef.current up to date with user.id
+
+  useEffect(() => {
     const interval = setInterval(() => {
-      if (user.id) {
+      if (userIdRef.current) {
         dispatch(upsertTimeSpent()); // TODO TEST
       }
     }, 300000); // runs every 5 minute
