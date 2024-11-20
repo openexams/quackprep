@@ -38,7 +38,7 @@ export default function HistoryNav() {
     left: 0,
     right: 0,
     zIndex: 10,
-    padding: '0.5rem 1rem',
+    padding: '1.5rem 1rem',
     backgroundColor: 'transparent', // Removed background
     margin: 0,
   };
