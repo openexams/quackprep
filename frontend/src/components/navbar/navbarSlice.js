@@ -1,17 +1,10 @@
 import { createSelector } from 'reselect';
 import { standardApiCall } from '@utils/api';
-import {
-  copyArray,
-  deepCopyArrayOfObjects,
-  deepCopyObject,
-  updateObjectWithFirstKeyNotInObject,
-  updateObjectWithKey,
-} from '@utils/functions';
-import { parseUrlIntoPages } from './navbarFunctions';
+import { copyArray, updateObjectWithKey } from '@utils/functions';
 import { replaceP20WithSpace } from '../../../../shared/globalFuncs';
 
 const CHANGE_NAVBAR_PAGE = 'components/navbar/CHANGE_NAVBAR_PAGE';
-const UPDATE_LAST_PAGE = 'components/navbar/UPDATE_LAST_PAGE';
+const GO_LAST_PAGE = 'components/navbar/GO_LAST_PAGE';
 
 const UPDATE_CUR_CLASS = 'components/navbar/UPDATE_CUR_CLASS';
 const UPDATE_CUR_GROUP = 'components/navbar/UPDATE_CUR_GROUP';
@@ -66,10 +59,6 @@ export function updateSchoolId(id) {
   return { type: UPDATE_SCHOOL_ID, payload: id };
 }
 
-export function updateLastPage(lastPage) {
-  return { type: UPDATE_LAST_PAGE, payload: lastPage };
-}
-
 export function updateFetchHistory(fetechedPage) {
   return { type: UPDATE_FETCH_HISTORY, payload: fetechedPage };
 }
@@ -84,7 +73,7 @@ const DEFAULT_STATE = {
   groupId: null, // this identifies the group, wether that means its a string or a id
   groupName: null,
   questionId: null,
-  lastPage: null,
+  lastPage: [],
   fetchHistory: {},
 };
 
@@ -98,7 +87,8 @@ export default function navbarReducer(state = DEFAULT_STATE, action) {
       return { ...state, fetchHistory: updateObjectWithKey(state.fetchHistory, action.payload) };
     case CHANGE_NAVBAR_PAGE:
       let curUrl = state.page;
-      const newLastPage = state.page;
+      const newLastPage = copyArray(state.lastPage);
+      newLastPage.push(state.page);
       if (action.payload?.includes('/auth')) {
         // this in the navbar fucks the ordering of urlArr[], so change noothing
         return {
@@ -190,6 +180,11 @@ export const selectNavbarState = createSelector(
 export const selectLastPage = createSelector(
   (state) => state,
   function (state) {
-    return { lastPage: state.app.navbar.lastPage };
+    let lastPage = state.app.navbar.lastPage;
+    if (!Array.isArray(lastPage)) {
+      return null;
+    }
+    lastPage = lastPage[lastPage.length - 1];
+    return { lastPage: lastPage };
   },
 );

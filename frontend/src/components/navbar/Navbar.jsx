@@ -3,14 +3,7 @@ import { Menu, Container, Icon, Sidebar, Button, Transition } from 'semantic-ui-
 import { useState, useEffect, useMemo, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectUser } from '@src/app/auth/authSlice';
-import {
-  changeNavbarPage,
-  selectCurrentPage,
-  selectNavbarState,
-  updateGroupType,
-  upsertTimeSpent,
-  updateLastPage,
-} from './navbarSlice';
+import { changeNavbarPage, selectCurrentPage, selectNavbarState, updateGroupType, upsertTimeSpent } from './navbarSlice';
 import { getCurUser } from '@src/app/auth/authSlice';
 import ProfileDropdown from './components/Profile/ProfileDropdown';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -20,7 +13,6 @@ import { selectClassState } from '@src/app/class/classSlice';
 import { selectTopicState } from '@src/app/class/group/topic/topicSlice';
 import { selectQuestionState } from '@src/app/class/question/questionSlice';
 import { selectExamsState } from '@src/app/class/group/exam/examSlice.js';
-import { replaceP20WithSpace } from '../../../../shared/globalFuncs';
 import { selectSchoolState } from '@src/app/class/school/schoolSlice';
 import { selectChoicesState } from '@src/app/class/question/choices/choicesSlice';
 import { selectLoadingState } from '@src/app/store/loadingSlice';
@@ -37,7 +29,6 @@ import {
   questionFetchLogic,
   questionUpdateLogic,
   choicesFetchLogic,
-  hasCurPageBeenFetched,
 } from './navbarFunctions';
 
 export default function Navbar() {
@@ -69,7 +60,6 @@ export default function Navbar() {
 
   function handlePageChange(e, data) {
     e.preventDefault();
-    dispatch(updateLastPage(activePage));
     dispatch(changeNavbarPage(data.name));
     setSidebarOpened(false); // Close sidebar on item click
   }
@@ -180,11 +170,21 @@ export default function Navbar() {
   ///  ************************************* ///
 
   useEffect(() => {
+    // when my navbar state changes change the active page
     navigate(activePage);
+  }, [activePage]);
+
+  useEffect(() => {
+    const curPage = location.pathname + location.search + location.hash;
+    dispatch(changeNavbarPage(curPage));
+  }, []);
+
+  useEffect(() => {
+    // handle back or foward button TODO fix
     const handlePopState = (event) => {
-      const curPage = location.pathname + location.search + location.hash;
-      //console.log('Back or forward button clicked');
-      dispatch(changeNavbarPage(location.pathname + location.search + location.hash));
+      const pathAfterDomain = window.location.pathname + window.location.search + window.location.hash;
+
+      dispatch(changeNavbarPage(pathAfterDomain));
     };
 
     window.addEventListener('popstate', handlePopState);
@@ -192,12 +192,6 @@ export default function Navbar() {
     return () => {
       window.removeEventListener('popstate', handlePopState);
     };
-  }, [activePage]);
-
-  useEffect(() => {
-    //console.log('init the navbar page store');
-    const curPage = location.pathname + location.search + location.hash;
-    dispatch(changeNavbarPage(curPage));
   }, []);
 
   // Detect if mobile view

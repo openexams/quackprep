@@ -23,7 +23,7 @@ export default function QuestionReport({ questionId }) {
       >
         <Segment basic>
           <CreateInputForm
-            title={'Report A Question'}
+            title={`Report Question ${questionId}`}
             formFields={[{ name: 'text', value: '', required: true }]}
             onSubmit={({ text }) => {
               dispatch(postQuestionReport(questionId, text));
