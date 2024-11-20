@@ -1,12 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Header, Segment, Card, Button, Container, Icon } from 'semantic-ui-react';
-import {
-  selectArrayOfIncludingItem,
-  selectArrayOfStateById,
-  selectBINARYArrayOfStateById,
-  turnUnderscoreIntoSpace,
-} from '@utils/functions';
+import { selectArrayOfIncludingItem, selectBINARYArrayOfStateById, turnUnderscoreIntoSpace } from '@utils/functions';
 import { changeNavbarPage, selectNavbarState, updateCurrentGroupData } from '@components/navbar/navbarSlice';
 import { selectLoadingState } from '@src/app/store/loadingSlice';
 import Searchbar from '@components/Searchbar';
@@ -14,7 +9,7 @@ import { useSearchParams } from 'react-router-dom';
 
 export default function TopicsShow() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const filter = searchParams.get('filter');
+  const filter = searchParams.get('filter') || '';
   const { navbar } = useSelector(selectNavbarState);
   const { className, classId, schoolName } = navbar;
   const loadingObject = useSelector(selectLoadingState).loadingComps;
