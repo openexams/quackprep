@@ -1,6 +1,7 @@
 import express from "express";
 import { isAuthenticated } from "#middleware/authMiddleware.js";
 import {
+  createQuestionReport,
   deleteAllQuestionLinks,
   getQuestionsByGroupId,
   getQuestionsByUserId,
@@ -93,5 +94,26 @@ router.post("/", isAuthenticated, isCreator, async function (req, res) {
   }
 });
 
-// TODO ADD QUESTION TO GROUP
+router.post("/report/:question_id", isAuthenticated, async function (req, res) {
+  const { text } = req.body;
+  if (!text || !req.params.question_id) {
+    res.status(400).json({
+      message: `pass in all req args`,
+    });
+    return;
+  }
+  try {
+    const result = await createQuestionReport(
+      req.user,
+      req.params.question_id,
+      text
+    );
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(500).json({
+      message: `failed to report question: ${req.params.question_id}`,
+    });
+  }
+});
+
 export default router;

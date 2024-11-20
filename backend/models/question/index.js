@@ -6,6 +6,14 @@ import {
 } from "#utils/sqlFunctions.js";
 import { mergeKeys } from "../../../shared/globalFuncs.js";
 
+export async function createQuestionReport(user_id, question_id, text) {
+  const params = { user_id, question_id, text };
+  return await sqlExe.executeCommand(
+    `INSERT INTO question_reports (created_by,text,question_id) VALUES(:user_id, :text,:question_id)`,
+    params
+  );
+}
+
 async function selectQuestion(WHERE, params) {
   const result = await sqlExe.executeCommand(
     `SELECT q.id, q.question, g.id as group_id, q.question_num_on_exam,

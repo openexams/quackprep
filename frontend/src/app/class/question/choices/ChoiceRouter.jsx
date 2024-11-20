@@ -5,6 +5,7 @@ import { Segment, Header, Divider } from 'semantic-ui-react';
 import MarkdownRenderer from '@components/MarkdownRenderer';
 import { selectLoadingState } from '@src/app/store/loadingSlice';
 import FreeResponse from './types/FreeResponse';
+import QuestionReport from '../QuestionReport';
 
 export default function ChoiceRouter({ selectedQuestion }) {
   const choices = useSelector(selectArrayOfStateById('app.choices.choices', 'question_id', selectedQuestion?.id));
@@ -36,6 +37,7 @@ export default function ChoiceRouter({ selectedQuestion }) {
       ) : (
         <Header as='h3'>Please select a question from the list.</Header>
       )}
+      {selectedQuestion?.id && <QuestionReport questionId={selectedQuestion?.id} />}
     </Segment>
   );
 }

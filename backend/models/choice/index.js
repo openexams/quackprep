@@ -123,7 +123,6 @@ export async function upsertChoiceToQuestion(
       params
     )
   ).insertId;
-  console.log(choice_id);
 
   return await sqlExe.executeCommand(
     `${getLastRowManipulated("choices", choice_id)}`
