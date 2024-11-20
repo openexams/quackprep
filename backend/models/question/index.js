@@ -6,7 +6,7 @@ import {
 } from "#utils/sqlFunctions.js";
 import { mergeKeys } from "../../../shared/globalFuncs.js";
 
-export async function selectQuestion(WHERE, params) {
+async function selectQuestion(WHERE, params) {
   const result = await sqlExe.executeCommand(
     `SELECT q.id, q.question, g.id as group_id, q.question_num_on_exam,
     cl.id as class_id, cl.school_id,cl.category as class_category

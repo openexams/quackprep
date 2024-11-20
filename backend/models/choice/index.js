@@ -46,7 +46,7 @@ export async function getQuestionsAnsweredByMonthAndYear() {
 
 //CRUD
 
-export async function selectChoices(WHERE, params) {
+async function selectChoices(WHERE, params) {
   const result = await sqlExe.executeCommand(
     `
     SELECT c.id,c.answer,c.is_correct,c.created_by,c.question_id,c.type, cl.id as class_id, g.id as group_id, 
@@ -153,7 +153,6 @@ export async function upsertChoiceToQuestion(
 export async function addManyChoicesToQuestion(question_id, user_id, choices) {
   // todo test
   if (!choices?.length && !(choices.length <= 5) && !(choices.length >= 1)) {
-    dlog("bad");
     throw new Error("choices array incorrect len");
     return;
   }
