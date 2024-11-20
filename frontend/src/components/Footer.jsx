@@ -48,10 +48,10 @@ export default function Footer() {
                 </Header>
                 <p>Follow us on social media for updates and news.</p>
                 <List horizontal inverted divided link size='small'>
-                  <List.Item as='a' href='https://www.youtube.com/watch?v=dQw4w9WgXcQ'>
-                    <Icon name='twitter' /> Twitter
+                  <List.Item as='a' href='https://www.youtube.com/@quackprep'>
+                    <Icon name='youtube' /> Youtube
                   </List.Item>
-                  <List.Item as='a' href='https://www.youtube.com/watch?v=dQw4w9WgXcQ'>
+                  <List.Item as='a' href='https://www.tiktok.com/@quackprep'>
                     Tiktok
                   </List.Item>
                   <List.Item as='a' href='https://www.youtube.com/watch?v=dQw4w9WgXcQ'>
