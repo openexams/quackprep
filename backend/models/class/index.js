@@ -8,11 +8,18 @@ export async function getClassCategories() {
   return await sqlExe.executeCommand(`SELECT * FROM class_categories`);
 }
 
-export async function getClasses() {
+async function selectClasses(WHERE, params) {
   return await sqlExe.executeCommand(
-    `SELECT cl.id, cl.name, cl.school_id, cl.description, cl.category FROM classes 
-    cl JOIN class_categories c on c.id = cl.category AND cl.deleted = 0 ORDER BY cl.id ASC`
+    `SELECT cl.id, cl.name, cl.school_id, cl.description, cl.category FROM classes cl 
+    JOIN class_categories c ON c.id = cl.category
+    WHERE cl.deleted=0 AND ${WHERE}
+    ORDER BY cl.id ASC`,
+    params
   );
+}
+
+export async function getClasses() {
+  return await selectClasses("cl.deleted = 0", null);
 }
 
 // school table in class
@@ -20,23 +27,9 @@ export async function getSchools() {
   return await sqlExe.executeCommand(`SELECT * FROM schools`);
 }
 
-export async function getClassesBySchoolId(schoolId) {
-  // written by AI todo test
-  const params = { schoolId };
-  return await sqlExe.executeCommand(
-    `SELECT cl.id, cl.name, cl.school_id, cl.description, cl.category FROM classes 
-    cl WHERE cl.school_id = :schoolId AND cl.deleted = 0 ORDER BY cl.id ASC`,
-    params
-  );
-}
-
 export async function getClassesByUserId(user_id) {
   const params = { user_id };
-  return await sqlExe.executeCommand(
-    `SELECT cl.id, cl.name, cl.school_id, cl.description, cl.category FROM classes 
-    cl WHERE cl.created_by = :user_id AND cl.deleted = 0 ORDER BY cl.id ASC`,
-    params
-  );
+  return await selectClasses("cl.created_by = :user_id", params);
 }
 
 export async function upsertClass(

@@ -33,27 +33,6 @@ export function parseUrlIntoPages(url) {
 
 /**
  *
- * @param {Object} fetchHistory
- * @param {String} curUrl
- */
-export function hasCurPageBeenFetched(fetchHistory, curUrl) {
-  if (!curUrl || !fetchHistory) {
-    return false;
-  }
-  let urlArr = curUrl.split('/');
-  // len 6 includes question
-  if (urlArr.length >= 6) {
-    urlArr = urlArr.slice(0, 6 + 1);
-  }
-  curUrl = urlArr.join('/');
-  if (fetchHistory[curUrl] !== undefined) {
-    return true;
-  }
-  return false;
-}
-
-/**
- *
  * @param {String} word
  * @returns {Boolean}
  */

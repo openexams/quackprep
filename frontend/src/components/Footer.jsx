@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Link } from 'react-router-dom';
-import { Container, Grid, Header, List, Segment, Icon } from 'semantic-ui-react';
+import { Container, Grid, Header, List, Segment, Icon, Image } from 'semantic-ui-react';
+import ttIcon from '/img/tiktok-icon.webp';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -51,7 +52,7 @@ export default function Footer() {
                     <Icon name='twitter' /> Twitter
                   </List.Item>
                   <List.Item as='a' href='https://www.youtube.com/watch?v=dQw4w9WgXcQ'>
-                    <Icon name='facebook' /> Facebook
+                    Tiktok
                   </List.Item>
                   <List.Item as='a' href='https://www.youtube.com/watch?v=dQw4w9WgXcQ'>
                     <Icon name='linkedin' /> LinkedIn

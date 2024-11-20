@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Grid, Header, Segment } from 'semantic-ui-react';
+import { Grid, Header, Segment, Popup, Modal } from 'semantic-ui-react';
 import QuestionList from './QuestionList';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectArrayOfStateByGroupId, selectArrayOfStateById } from '@utils/functions';
+import { selectArrayOfStateByGroupId } from '@utils/functions';
 import { changeNavbarPage, selectNavbarState } from '@components/navbar/navbarSlice';
 import { selectLoadingState } from '@src/app/store/loadingSlice';
 import ChoiceRouter from './choices/ChoiceRouter';
+import QuestionReport from './QuestionReport';
 
 /**
  *

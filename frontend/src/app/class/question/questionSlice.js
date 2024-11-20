@@ -6,6 +6,21 @@ const GET_CRUD_QUESTIONS = 'app/class/question/GET_CRUD_QUESTIONS';
 const UPSERT_CRUD_QUESTION = 'app/class/question/UPSERT_CRUD_QUESTION';
 const DELETE_CRUD_QUESTION = 'app/class/question/DELETE_CRUD_QUESTION';
 
+const POST_QUESTION_REPORT = 'app/class/question/POST_QUESTION_REPORT';
+
+export function postQuestionReport(question_id, text) {
+  return standardApiCall(
+    'post',
+    `/api/question/report/${question_id}`,
+    { text: text },
+    POST_QUESTION_REPORT,
+    'QuestionPage',
+    null,
+    null,
+    'report sent!',
+  );
+}
+
 export function getQuestionsByGroupId(group_id) {
   return standardApiCall('get', `/api/question/${group_id}`, null, GET_CRUD_QUESTIONS, 'QuestionPage');
 }
