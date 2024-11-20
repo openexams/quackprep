@@ -25,7 +25,7 @@ export default function loginReducer(state = DEFAULT_STATE, action) {
   switch (action.type) {
     case LOGIN:
       const { id, username, email, first_name, last_name, icon, is_creator } = action.payload;
-      if (!id || !username || !email || !first_name || !last_name || !icon || !is_creator) {
+      if (!id || !username || !email) {
         return state;
       }
       return { ...state, id, username, email, firstName: first_name, lastName: last_name, icon, is_creator };

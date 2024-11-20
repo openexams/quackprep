@@ -56,7 +56,7 @@ async function selectChoices(WHERE, params) {
      JOIN cgroups g on g.id = gq.group_id 
      JOIN classes cl ON cl.id = g.class_id
     WHERE c.deleted=0 AND ${WHERE}
-     ORDER BY id ASC`,
+     ORDER BY c.question_id ASC`,
     params
   );
   return mergeKeys(result, "group_id");

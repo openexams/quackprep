@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Header, Segment, Card, Button, Container, Icon } from 'semantic-ui-react';
-import { selectArrayOfStateById } from '@utils/functions';
+import { selectArrayOfStateById, selectBINARYArrayOfStateById } from '@utils/functions';
 import { changeNavbarPage, selectNavbarState, updateCurrentGroupData } from '@components/navbar/navbarSlice';
 import { selectLoadingState } from '@src/app/store/loadingSlice';
 
@@ -9,7 +9,7 @@ export default function ExamList() {
   const { navbar } = useSelector(selectNavbarState);
   const { className, classId } = navbar;
   const loadingObject = useSelector(selectLoadingState).loadingComps;
-  const exams = useSelector(selectArrayOfStateById('app.exam.exams', 'class_id', classId));
+  const exams = useSelector(selectBINARYArrayOfStateById('app.exam.exams', 'class_id', classId));
   const dispatch = useDispatch();
 
   return (

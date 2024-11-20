@@ -3,13 +3,13 @@ import React, { useState } from 'react';
 import { Button, Accordion, Container, Grid, Header, Icon, Segment } from 'semantic-ui-react';
 import { useSelector, useDispatch } from 'react-redux';
 import SchoolsList from './school/SchoolsList.jsx';
-import { selectArrayOfStateById } from '@utils/functions';
+import { selectArrayOfStateById, selectBINARYArrayOfStateById } from '@utils/functions';
 import { changeNavbarPage, selectNavbarState } from '@components/navbar/navbarSlice';
 import ClassList from './ClassList';
 
 export default function ClassPage() {
   const curSchool = useSelector(selectNavbarState).navbar?.schoolId;
-  const classes = useSelector(selectArrayOfStateById('app.class.classes.classes', 'school_id', curSchool));
+  const classes = useSelector(selectBINARYArrayOfStateById('app.class.classes.classes', 'school_id', curSchool));
   const dispatch = useDispatch();
   const [isActive, setIsActive] = useState(false);
 

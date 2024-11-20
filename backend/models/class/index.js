@@ -13,12 +13,13 @@ async function selectClasses(WHERE, params) {
     `SELECT cl.id, cl.name, cl.school_id, cl.description, cl.category FROM classes cl 
     JOIN class_categories c ON c.id = cl.category
     WHERE cl.deleted=0 AND ${WHERE}
-    ORDER BY cl.id ASC`,
+    ORDER BY cl.school_id ASC`,
     params
   );
 }
 
 export async function getClasses() {
+  // where in this is alr done jst past smth in so it does not errs
   return await selectClasses("cl.deleted = 0", null);
 }
 
