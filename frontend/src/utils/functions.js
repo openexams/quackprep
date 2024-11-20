@@ -74,6 +74,7 @@ export function turnUnderscoreIntoSpace(input) {
 }
 
 import { createSelector } from 'reselect';
+import { selectMutlipleBinarySearch } from '../../../shared/globalFuncs';
 
 /**
  *
@@ -105,6 +106,34 @@ export function selectArrayOfStateById(path, idName, id) {
         }
       }
       return tmp;
+    },
+  );
+}
+
+/**
+ *
+ * @param {String} path ex app.home.userCount
+ * @param {String} idName ex class_id
+ * @param {int} id
+ * @returns array at that position only with the matching id objects
+ */
+export function selectBINARYArrayOfStateById(path, idName, id) {
+  // make a function that takes in the state and the path and finds the state at that path or returns null.
+  return createSelector(
+    (state) => state,
+    function (state) {
+      const stateArr = sendObjToPath(state, path);
+      if (!stateArr) {
+        //console.count('no state found');
+        return null;
+      }
+      if (!path || !idName || !id) {
+        return null;
+      }
+      if (!isNaN(id)) {
+        parseInt(id);
+      }
+      return selectMutlipleBinarySearch(stateArr, idName, id);
     },
   );
 }

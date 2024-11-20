@@ -12,7 +12,7 @@ async function selectGroups(WHERE, params) {
     JOIN classes cl ON g.class_id = cl.id
     
     WHERE g.deleted = 0 AND ${WHERE} 
-    ORDER BY g.id ASC`,
+    ORDER BY g.class_id ASC`,
     params
   );
 }

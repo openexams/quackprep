@@ -2,9 +2,10 @@
 import { defineConfig } from "playwright/test";
 
 export default defineConfig({
-  name: "quackprep-e2e",
-  testDir: "./tests/e2e/",
+  name: "quackprep-tests",
+  testDir: "./tests/",
   webServer: {
+    reuseExistingServer: true,
     command: "npm run dev",
     url: "http://localhost:3001/",
     timeout: 120000,

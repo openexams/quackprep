@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Header, Segment, Card, Button, Container, Icon } from 'semantic-ui-react';
-import { selectArrayOfIncludingItem, selectArrayOfStateById, turnUnderscoreIntoSpace } from '@utils/functions';
+import {
+  selectArrayOfIncludingItem,
+  selectArrayOfStateById,
+  selectBINARYArrayOfStateById,
+  turnUnderscoreIntoSpace,
+} from '@utils/functions';
 import { changeNavbarPage, selectNavbarState, updateCurrentGroupData } from '@components/navbar/navbarSlice';
 import { selectLoadingState } from '@src/app/store/loadingSlice';
 import Searchbar from '@components/Searchbar';
@@ -14,7 +19,7 @@ export default function TopicsShow() {
   const { className, classId, schoolName } = navbar;
   const loadingObject = useSelector(selectLoadingState).loadingComps;
   const topics = selectArrayOfIncludingItem(
-    useSelector(selectArrayOfStateById('app.topic.topics', 'class_id', classId)),
+    useSelector(selectBINARYArrayOfStateById('app.topic.topics', 'class_id', classId)),
     'name',
     filter || '',
   );

@@ -1,4 +1,5 @@
-import { findNeedlesInArrayOfObjectsLINEAR } from "@frontend/src/utils/functions.js"; // switch to module import
+import { findNeedlesInArrayOfObjectsLINEAR } from "../../frontend/src/utils/functions.js"; // switch to module import
+import { test, expect } from "playwright/test";
 
 test("given a array and 2 values in a object to check findNeedlesInArrayOfObjectsLINEAR returns correct return key when all givens keys to check are in the array object", () => {
   const array = [

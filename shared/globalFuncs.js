@@ -123,3 +123,71 @@ export function mergeKeys(data, keyName) {
   }
   return updated_arr;
 }
+
+/**
+ * Find item, then accumulate. Item MUST be sorted by the needleName key.
+ *
+ * @param {Array<Object>} haystack your haystack must an arr of objects where the needleName holds a value which is compareable.
+ * @param {String} needleName
+ * @param {*} needle must be compareable
+ */
+export function selectMutlipleBinarySearch(haystack, needleName, needle) {
+  if (
+    !Array.isArray(haystack) ||
+    !needleName ||
+    !needle ||
+    !haystack.length >= 1
+  ) {
+    console.log("passed in bad values");
+    return [];
+  }
+  let left = 0;
+  let right = haystack.length - 1;
+  let middle;
+  let found_index = -1;
+  // trying to find a item that has the correct needle and the item before it does NOT have the correct needle.
+  while (true) {
+    middle = Math.floor((right + left) / 2);
+    if (haystack[middle][needleName] === needle) {
+      found_index = middle;
+      break;
+    }
+    if (right <= left) {
+      return []; // not found
+    }
+
+    if (haystack[middle][needleName] === needle) {
+      found_index = middle;
+      break; //watta we wanna
+    } else if (needle > haystack[middle][needleName]) {
+      left = middle + 1; // go right
+    } else if (needle < haystack[middle][needleName]) {
+      right = middle - 1; // go left
+    } else {
+      console.error(
+        "i did not account for this case fatal error selectMutlipleBinarySearch"
+      );
+    }
+  }
+
+  // we found a index we want, now backtrack to first item (backtracks to 0 or first item)
+  let start = 0;
+  for (let i = found_index; i > 0; i--) {
+    if (
+      haystack[i][needleName] === needle &&
+      haystack[i - 1][needleName] !== needle
+    ) {
+      start = i;
+      break;
+    }
+  }
+  // now accumulate correct items
+  let ret = [];
+  for (let i = start; i < haystack.length; i++) {
+    if (haystack[i][needleName] !== needle) {
+      break;
+    }
+    ret.push(haystack[i]);
+  }
+  return ret;
+}
