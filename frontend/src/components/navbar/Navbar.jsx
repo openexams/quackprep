@@ -183,7 +183,6 @@ export default function Navbar() {
     // handle back or foward button TODO fix
     const handlePopState = (event) => {
       const pathAfterDomain = window.location.pathname + window.location.search + window.location.hash;
-
       dispatch(changeNavbarPage(pathAfterDomain));
     };
 
