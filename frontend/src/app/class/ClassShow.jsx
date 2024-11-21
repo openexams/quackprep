@@ -65,7 +65,7 @@ export default function ClassShow() {
               }}
             >
               <Icon name='list' />
-              Study by Exam(PDF)
+              {'Study by Exam(PDF)'}
             </Button>
           </Grid.Column>
           <Grid.Column textAlign='center'>
