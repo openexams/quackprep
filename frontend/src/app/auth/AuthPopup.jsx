@@ -23,7 +23,6 @@ export default function Auth() {
   const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
-    //if (user?.id && searchParams.has('next')) dispatch(changeNavbarPage(searchParams.get('next'))); // if forced to auth page
     if (user?.id && lastPage) dispatch(changeNavbarPage(navigate, lastPage));
     else if (user?.id) dispatch(changeNavbarPage(navigate, '/home'));
   }, [user]);
