@@ -58,6 +58,17 @@ export default function ClassShow() {
             </Button>
           </Grid.Column>
           <Grid.Column textAlign='center'>
+            <Button
+              size='large'
+              onClick={() => {
+                dispatch(changeNavbarPage(navigate, 'exam'));
+              }}
+            >
+              <Icon name='list' />
+              Study by Exam(PDF)
+            </Button>
+          </Grid.Column>
+          <Grid.Column textAlign='center'>
             <Popup // does not work while button disabled
               position='top center'
               content='help'
