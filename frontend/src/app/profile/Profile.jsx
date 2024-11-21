@@ -2,8 +2,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Card, Image, Icon, Button } from 'semantic-ui-react';
 import { selectUser } from '../auth/authSlice';
 import { changeNavbarPage } from '@components/navbar/navbarSlice';
+import { useNavigate } from 'react-router-dom';
 
 export default function Profile() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { user } = useSelector(selectUser);
 
@@ -65,7 +67,7 @@ export default function Profile() {
               color: '#fff',
               fontWeight: '500',
             }}
-            onClick={() => dispatch(changeNavbarPage('/account'))}
+            onClick={() => dispatch(changeNavbarPage(navigate, '/account'))}
           >
             Edit Profile (Coming Soon, contact support for changes)
           </Button>

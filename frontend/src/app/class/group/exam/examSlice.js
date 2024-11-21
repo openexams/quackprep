@@ -29,7 +29,10 @@ const DEFAULT_STATE = {
 export default function examSliceReducer(state = DEFAULT_STATE, action) {
   switch (action.type) {
     case GET_CRUD_EXAMS:
-      return { ...state, exams: updateArrObjectsWithNewVals(state.exams, action.payload) };
+      return {
+        ...state,
+        exams: updateArrObjectsWithNewVals(state.exams, action.payload).sort((a, b) => a.class_id - b.class_id),
+      };
     case DELETE_CRUD_EXAM:
       return { ...state, exams: filterArr(state.exams, action.payload) };
     case UPSERT_CRUD_EXAM:

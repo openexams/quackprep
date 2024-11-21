@@ -4,10 +4,12 @@ import duckBlissImage from '/img/home/duck_bliss.webp';
 import libraryComputerDucks from '/img/home/library_computer_ducks.webp';
 import extensiveDucks from '/img/home/extensive_ducks.webp';
 import kiteDuck from '/img/home/duck_kite.webp';
+import { useNavigate } from 'react-router-dom';
 
 import { changeNavbarPage } from '@components/navbar/navbarSlice';
 
 export default function Home() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const features = [
@@ -77,7 +79,7 @@ export default function Home() {
           <Button
             primary
             size='huge'
-            onClick={() => dispatch(changeNavbarPage('/class'))}
+            onClick={() => dispatch(changeNavbarPage(navigate, '/class'))}
             style={{
               backgroundColor: '#fbbd08',
               color: 'rgba(0, 0, 0, 0.8)',

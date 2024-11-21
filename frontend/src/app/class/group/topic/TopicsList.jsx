@@ -1,20 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Header, Segment, Card, Button, Container, Icon } from 'semantic-ui-react';
-import {
-  selectArrayOfIncludingItem,
-  selectArrayOfStateById,
-  selectBINARYArrayOfStateById,
-  turnUnderscoreIntoSpace,
-} from '@utils/functions';
+import { selectArrayOfIncludingItem, selectBINARYArrayOfStateById, turnUnderscoreIntoSpace } from '@utils/functions';
 import { changeNavbarPage, selectNavbarState, updateCurrentGroupData } from '@components/navbar/navbarSlice';
 import { selectLoadingState } from '@src/app/store/loadingSlice';
 import Searchbar from '@components/Searchbar';
 import { useSearchParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export default function TopicsShow() {
+  const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
-  const filter = searchParams.get('filter');
+  const filter = searchParams.get('filter') || '';
   const { navbar } = useSelector(selectNavbarState);
   const { className, classId, schoolName } = navbar;
   const loadingObject = useSelector(selectLoadingState).loadingComps;
@@ -55,7 +52,7 @@ export default function TopicsShow() {
                     color='blue'
                     onClick={() => {
                       dispatch(updateCurrentGroupData(topic.id, topic.name));
-                      dispatch(changeNavbarPage(`/class/${schoolName}/${className}/topic/${topic.name}/question`));
+                      dispatch(changeNavbarPage(navigate, `/class/${schoolName}/${className}/topic/${topic.name}/question`));
                     }}
                   >
                     <Icon name='fork' />

@@ -3,8 +3,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Container, Segment, Header, Button, Icon, Grid, Divider, Popup } from 'semantic-ui-react';
 import { changeNavbarPage, selectNavbarState } from '@components/navbar/navbarSlice';
 import { selectArrayOfStateById } from '@utils/functions';
+import { useNavigate } from 'react-router-dom';
 
 export default function ClassShow() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { classId } = useSelector(selectNavbarState).navbar;
   const curClass = useSelector(selectArrayOfStateById('app.class.classes.classes', 'id', classId))?.[0];
@@ -42,7 +44,7 @@ export default function ClassShow() {
             <Button
               size='large'
               onClick={() => {
-                dispatch(changeNavbarPage('exam'));
+                dispatch(changeNavbarPage(navigate, 'exam'));
               }}
             >
               <Icon name='list' />
@@ -50,7 +52,7 @@ export default function ClassShow() {
             </Button>
           </Grid.Column>
           <Grid.Column textAlign='center'>
-            <Button size='large' onClick={() => dispatch(changeNavbarPage('topic'))}>
+            <Button size='large' onClick={() => dispatch(changeNavbarPage(navigate, 'topic'))}>
               <Icon name='list' />
               Study by Topic
             </Button>

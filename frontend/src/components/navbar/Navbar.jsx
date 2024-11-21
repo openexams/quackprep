@@ -60,7 +60,8 @@ export default function Navbar() {
 
   function handlePageChange(e, data) {
     e.preventDefault();
-    dispatch(changeNavbarPage(data.name));
+
+    dispatch(changeNavbarPage(navigate, data.name));
     setSidebarOpened(false); // Close sidebar on item click
   }
 
@@ -169,25 +170,22 @@ export default function Navbar() {
 
   ///  ************************************* ///
 
-  useEffect(() => {
-    // when my navbar state changes change the active page
-    navigate(activePage);
-  }, [activePage]);
+  // useEffect(() => {
+  //   // when my navbar state changes change the active page
+  //   navigate(activePage);
+  // }, [activePage]);
 
   useEffect(() => {
     const curPage = location.pathname + location.search + location.hash;
-    dispatch(changeNavbarPage(curPage));
+    dispatch(changeNavbarPage(navigate, curPage));
   }, []);
 
   useEffect(() => {
-    // handle back or foward button TODO fix
     const handlePopState = (event) => {
       const pathAfterDomain = window.location.pathname + window.location.search + window.location.hash;
-      dispatch(changeNavbarPage(pathAfterDomain));
+      dispatch(changeNavbarPage(() => {}, pathAfterDomain));
     };
-
     window.addEventListener('popstate', handlePopState);
-
     return () => {
       window.removeEventListener('popstate', handlePopState);
     };

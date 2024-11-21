@@ -3,8 +3,10 @@ import { changeNavbarPage, selectNavbarState } from '../navbar/navbarSlice';
 import { hide401Msg, select401CompState } from './401Slice';
 import { Button, Modal, TransitionablePortal, Icon } from 'semantic-ui-react';
 import './Comp401.css';
+import { useNavigate } from 'react-router-dom';
 
 export default function Comp401() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const curPage = useSelector(selectNavbarState).navbar?.page;
   const show = useSelector(select401CompState).show;
@@ -13,12 +15,12 @@ export default function Comp401() {
 
   const handleClose = () => {
     dispatch(hide401Msg());
-    dispatch(changeNavbarPage('/home'));
+    dispatch(changeNavbarPage(navigate, '/home'));
   };
 
   const handleSignIn = () => {
     dispatch(hide401Msg());
-    dispatch(changeNavbarPage(`/auth`));
+    dispatch(changeNavbarPage(navigate, `/auth`));
   };
 
   return (

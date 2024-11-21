@@ -30,7 +30,10 @@ const DEFAULT_STATE = {
 export default function topicReducer(state = DEFAULT_STATE, action) {
   switch (action.type) {
     case GET_TOPICS:
-      return { ...state, topics: updateArrObjectsWithNewVals(state.topics, action.payload) };
+      return {
+        ...state,
+        topics: updateArrObjectsWithNewVals(state.topics, action.payload).sort((a, b) => a.class_id - b.class_id),
+      };
     case DELETE_TOPIC:
       return { ...state, topics: filterArr(state.topics, action.payload) };
     case UPSERT_TOPIC:

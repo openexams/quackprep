@@ -22,12 +22,14 @@ export function upsertTimeSpent() {
 }
 
 /**
- *
+ * navigates to given page using rrd navigate() and keeps my navbar state up to date! (middleware)
  * @param {String} name
  * @returns
  */
-export function changeNavbarPage(name) {
-  const dupName = name + '';
+export function changeNavbarPage(navigate, page) {
+  const dupName = page + '';
+
+  navigate(dupName);
   return { type: CHANGE_NAVBAR_PAGE, payload: dupName };
 }
 
@@ -107,7 +109,7 @@ export default function navbarReducer(state = DEFAULT_STATE, action) {
         };
       }
       // after base cases
-
+      // same logic that navigate() has
       if (action.payload?.[0] === '/') {
         curUrl = action.payload;
       } else {
@@ -146,7 +148,6 @@ export default function navbarReducer(state = DEFAULT_STATE, action) {
       return {
         ...state,
         questionId: parseInt(action.payload),
-        page: `/class/${state.schoolName}/${state.className}/${state.groupType}/${state.groupName}/question/${action.payload}`,
       };
     case GET_CLASS_ID_BY_NAME:
       if (!action.payload) return state;

@@ -4,8 +4,10 @@ import { Header, Segment, Card, Button, Container, Icon } from 'semantic-ui-reac
 import { selectArrayOfStateById, selectBINARYArrayOfStateById } from '@utils/functions';
 import { changeNavbarPage, selectNavbarState, updateCurrentGroupData } from '@components/navbar/navbarSlice';
 import { selectLoadingState } from '@src/app/store/loadingSlice';
+import { useNavigate } from 'react-router-dom';
 
 export default function ExamList() {
+  const navigate = useNavigate();
   const { navbar } = useSelector(selectNavbarState);
   const { className, classId } = navbar;
   const loadingObject = useSelector(selectLoadingState).loadingComps;
@@ -36,7 +38,7 @@ export default function ExamList() {
                     color='blue'
                     onClick={() => {
                       dispatch(updateCurrentGroupData(exam.id, exam.name));
-                      dispatch(changeNavbarPage(`${exam.name}/question`));
+                      dispatch(changeNavbarPage(navigate, `${exam.name}/question`));
                     }}
                   >
                     <Icon name='fork' />

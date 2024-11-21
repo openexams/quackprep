@@ -5,8 +5,10 @@ import { selectSchoolState } from './schoolSlice';
 import './school.css';
 import { selectLoadingState } from '@src/app/store/loadingSlice';
 import { changeNavbarPage } from '@components/navbar/navbarSlice';
+import { useNavigate } from 'react-router-dom';
 
 export default function SchoolsList({ selectedSchool, onCreator = false }) {
+  const navigate = useNavigate();
   const schools = useSelector(selectSchoolState).schools;
   const loading = useSelector(selectLoadingState).loadingComps?.SchoolsList;
   const dispatch = useDispatch();
@@ -26,7 +28,7 @@ export default function SchoolsList({ selectedSchool, onCreator = false }) {
               basic={selectedSchool !== school.id}
               onClick={() => {
                 if (!onCreator) {
-                  dispatch(changeNavbarPage(`/class/${school.school_name}`));
+                  dispatch(changeNavbarPage(navigate, `/class/${school.school_name}`));
                 } // bad pratice assuming class before it but works
               }}
               style={{

@@ -6,8 +6,10 @@ import SchoolsList from './school/SchoolsList.jsx';
 import { selectArrayOfStateById, selectBINARYArrayOfStateById } from '@utils/functions';
 import { changeNavbarPage, selectNavbarState } from '@components/navbar/navbarSlice';
 import ClassList from './ClassList';
+import { useNavigate } from 'react-router-dom';
 
 export default function ClassPage() {
+  const navigate = useNavigate();
   const curSchool = useSelector(selectNavbarState).navbar?.schoolId;
   const classes = useSelector(selectBINARYArrayOfStateById('app.class.classes.classes', 'school_id', curSchool));
   const dispatch = useDispatch();
@@ -52,7 +54,7 @@ export default function ClassPage() {
                 size='massive'
                 color='blue'
                 className='pointer'
-                onClick={() => dispatch(changeNavbarPage('/creatordashboard'))}
+                onClick={() => dispatch(changeNavbarPage(navigate, '/creatordashboard'))}
                 style={{
                   cursor: 'pointer',
                   transition: 'transform 0.2s ease',

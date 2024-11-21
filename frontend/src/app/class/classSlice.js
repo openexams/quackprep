@@ -48,7 +48,10 @@ const DEFAULT_STATE = {
 export default function classReducer(state = DEFAULT_STATE, action) {
   switch (action.type) {
     case GET_CRUD_CLASSES:
-      return { ...state, classes: updateArrObjectsWithNewVals(state.classes, action.payload) };
+      return {
+        ...state,
+        classes: updateArrObjectsWithNewVals(state.classes, action.payload).sort((a, b) => a.school_id - b.school_id),
+      };
     case DELETE_CRUD_CLASS:
       return { ...state, classes: filterArr(state.classes, action.payload) };
     case UPSERT_CRUD_CLASSES:

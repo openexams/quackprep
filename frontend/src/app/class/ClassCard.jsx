@@ -2,6 +2,7 @@ import { changeNavbarPage, updateCurrentClassData } from '@components/navbar/nav
 import { useMemo, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Card, Icon } from 'semantic-ui-react';
+import { useNavigate } from 'react-router-dom';
 
 /**
  * @param {String} nameOfClass
@@ -50,6 +51,7 @@ function getIconByCategory(category) {
 }
 
 export default function ClassCard({ id, name, category, desc }) {
+  const navigate = useNavigate();
   const [hovered, setHovered] = useState(false);
   const dispatch = useDispatch();
 
@@ -74,7 +76,7 @@ export default function ClassCard({ id, name, category, desc }) {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       onClick={() => {
-        dispatch(changeNavbarPage(`${name}`)); // go to certain class
+        dispatch(changeNavbarPage(navigate, `${name}`)); // go to certain class
         dispatch(updateCurrentClassData(id, name));
       }}
     >

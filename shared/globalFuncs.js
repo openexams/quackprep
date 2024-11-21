@@ -191,3 +191,25 @@ export function selectMutlipleBinarySearch(haystack, needleName, needle) {
   }
   return ret;
 }
+
+export function findMaxValue(arr, keyToCheck) {
+  let max = Number.MIN_SAFE_INTEGER;
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i]?.[keyToCheck] > max) max = arr[i]?.[keyToCheck];
+  }
+  return max;
+}
+// i think im retarded
+export function countingSort(arr, sortBy) {
+  const count = new Array(findMaxValue(arr, sortBy));
+  for (let i = 0; i < arr.length; i++) {
+    count[arr[i][sortBy]]++;
+  }
+  const ret = [];
+  for (let i = 0; i < count.length; i++) {
+    for (let j = 0; j < count[i]; j++) {
+      ret.push(i);
+    }
+  }
+  return ret;
+}
