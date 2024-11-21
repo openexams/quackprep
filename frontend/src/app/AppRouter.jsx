@@ -14,6 +14,8 @@ import ExamList from './class/group/exam/ExamList.jsx';
 import CreatorDashboard from './creator/CreatorDashboard.jsx';
 import Create from './creator/Create.jsx';
 import ClassPage from './class/ClassPage.jsx';
+import Comp401 from '@components/401/Comp401.jsx';
+import HistoryNav from '@components/Breadcrumb.jsx';
 
 {
   /* topic could be a actual topic or a group of question such as a exam */
@@ -22,7 +24,10 @@ import ClassPage from './class/ClassPage.jsx';
 export default function AppRouter() {
   return (
     <Router>
+      <HistoryNav />
       <Navbar />
+      <Comp401 />
+
       <Routes style={{ flex: 1 }}>
         <Route path='/' element={<Home />} />
         <Route path='/home' element={<Home />} />

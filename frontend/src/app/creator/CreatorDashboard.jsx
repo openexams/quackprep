@@ -4,8 +4,10 @@ import { Container, Grid, Header, Icon, Segment, Button, Card, List, Image, Feed
 import { getUserCount, selectUserCount } from '../home/homeSlice';
 import { changeNavbarPage } from '@components/navbar/navbarSlice';
 import { selectUser } from '../auth/authSlice';
+import { useNavigate } from 'react-router-dom';
 
 export default function CreatorDashboard() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const userCount = useSelector(selectUserCount).userCount;
   const user = useSelector(selectUser).user;
@@ -31,7 +33,7 @@ export default function CreatorDashboard() {
             size='huge'
             style={{ marginTop: '2rem' }}
             onClick={() => {
-              dispatch(changeNavbarPage('/create'));
+              dispatch(changeNavbarPage(navigate, '/create'));
             }}
           >
             <Icon name='plus' />
@@ -128,7 +130,7 @@ export default function CreatorDashboard() {
           inverted
           style={{ marginTop: '2rem' }}
           onClick={() => {
-            dispatch(changeNavbarPage('/create'));
+            dispatch(changeNavbarPage(navigate, '/create'));
           }}
         >
           Begin Your Journey

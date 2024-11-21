@@ -6,8 +6,10 @@ import { changeNavbarPage, selectNavbarState, updateCurrentGroupData } from '@co
 import { selectLoadingState } from '@src/app/store/loadingSlice';
 import Searchbar from '@components/Searchbar';
 import { useSearchParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export default function TopicsShow() {
+  const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   const filter = searchParams.get('filter') || '';
   const { navbar } = useSelector(selectNavbarState);
@@ -50,7 +52,7 @@ export default function TopicsShow() {
                     color='blue'
                     onClick={() => {
                       dispatch(updateCurrentGroupData(topic.id, topic.name));
-                      dispatch(changeNavbarPage(`/class/${schoolName}/${className}/topic/${topic.name}/question`));
+                      dispatch(changeNavbarPage(navigate, `/class/${schoolName}/${className}/topic/${topic.name}/question`));
                     }}
                   >
                     <Icon name='fork' />

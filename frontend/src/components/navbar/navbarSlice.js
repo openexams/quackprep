@@ -26,8 +26,10 @@ export function upsertTimeSpent() {
  * @param {String} name
  * @returns
  */
-export function changeNavbarPage(name) {
-  const dupName = name + '';
+export function changeNavbarPage(navigate, page) {
+  const dupName = page + '';
+
+  navigate(dupName);
   return { type: CHANGE_NAVBAR_PAGE, payload: dupName };
 }
 
@@ -107,7 +109,7 @@ export default function navbarReducer(state = DEFAULT_STATE, action) {
         };
       }
       // after base cases
-
+      // same logic that navigate() has
       if (action.payload?.[0] === '/') {
         curUrl = action.payload;
       } else {

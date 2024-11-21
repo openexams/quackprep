@@ -6,9 +6,12 @@ import Register from './register/register';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectUser } from './authSlice';
 import google_icon from '/img/google_icon.webp';
+import { useNavigate } from 'react-router-dom';
+
 import { useSearchParams } from 'react-router-dom';
 
 export default function Auth() {
+  const navigate = useNavigate();
   const loading = useSelector((state) => state.loading.loadingComps.AuthPopup);
   const dispatch = useDispatch();
   const { user } = useSelector(selectUser);
@@ -21,8 +24,8 @@ export default function Auth() {
 
   useEffect(() => {
     //if (user?.id && searchParams.has('next')) dispatch(changeNavbarPage(searchParams.get('next'))); // if forced to auth page
-    if (user?.id && lastPage) dispatch(changeNavbarPage(lastPage));
-    else if (user?.id) dispatch(changeNavbarPage('/home'));
+    if (user?.id && lastPage) dispatch(changeNavbarPage(navigate, lastPage));
+    else if (user?.id) dispatch(changeNavbarPage(navigate, '/home'));
   }, [user]);
 
   if (!user.id) {
@@ -32,7 +35,7 @@ export default function Auth() {
         open={open}
         onClose={() => {
           setOpen(false);
-          dispatch(changeNavbarPage('/home'));
+          dispatch(changeNavbarPage(navigate, '/home'));
         }}
         size='tiny'
         style={{ backgroundColor: '#f7f7ff', zIndex: 2 }}

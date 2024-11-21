@@ -7,6 +7,7 @@ import { changeNavbarPage, selectNavbarState } from '@components/navbar/navbarSl
 import { selectLoadingState } from '@src/app/store/loadingSlice';
 import ChoiceRouter from './choices/ChoiceRouter';
 import QuestionReport from './QuestionReport';
+import { useNavigate } from 'react-router-dom';
 
 /**
  *
@@ -26,6 +27,7 @@ function findQuestionById(questions, id) {
 }
 
 export default function QuestionPage() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { groupId, groupName, questionId, groupType } = useSelector(selectNavbarState).navbar;
 
@@ -38,7 +40,7 @@ export default function QuestionPage() {
   useEffect(() => {
     // if the user didnt start w a question id
     if (questions != null && questions?.length !== 0 && !questionId) {
-      dispatch(changeNavbarPage(parseInt(questions?.[0]?.id)));
+      dispatch(changeNavbarPage(navigate, parseInt(questions?.[0]?.id)));
     }
   }, [questions?.[0]]); // could lead to issues
 

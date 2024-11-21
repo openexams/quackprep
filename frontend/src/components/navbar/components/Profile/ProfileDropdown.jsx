@@ -6,7 +6,6 @@ import { useState } from 'react';
 import ConfirmSignoutModal from './ConfirmSignoutModal';
 import fireGif from '/img/fire_flame.gif';
 
-import { changeNavbarPage } from '@components/navbar/navbarSlice';
 import { useNavigate } from 'react-router-dom';
 
 export default function ProfileDropdown({ activePage, handlePageChange, hasStreak }) {

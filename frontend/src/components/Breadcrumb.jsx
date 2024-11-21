@@ -3,8 +3,10 @@ import { Breadcrumb, Segment, Transition } from 'semantic-ui-react';
 import { changeNavbarPage, selectNavbarState } from './navbar/navbarSlice';
 import { useDispatch } from 'react-redux';
 import { useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export default function HistoryNav() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const urlArr = useSelector(selectNavbarState).navbar.page?.split('/');
 
@@ -20,7 +22,7 @@ export default function HistoryNav() {
         sections.push({
           key: urlArr[i],
           content: urlArr[i]?.[0].toUpperCase() + urlArr[i].slice(1),
-          onClick: () => dispatch(changeNavbarPage(curItemUrl)),
+          onClick: () => dispatch(changeNavbarPage(navigate, curItemUrl)),
           active: urlArr[urlArr.length - 1] == urlArr[i] ? true : false,
         });
       }
