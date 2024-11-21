@@ -62,7 +62,10 @@ const DEFAULT_STATE = {
 export default function choicesReducer(state = DEFAULT_STATE, action) {
   switch (action.type) {
     case GET_CRUD_CHOICES:
-      return { ...state, choices: updateArrObjectsWithNewVals(state.choices, action.payload) };
+      return {
+        ...state,
+        choices: updateArrObjectsWithNewVals(state.choices, action.payload).sort((a, b) => a.question_id - b.question_id),
+      };
     case DELETE_CRUD_CHOICE:
       return { ...state, choices: filterArr(state.choices, action.payload) };
     case UPSERT_CRUD_CHOICE:
