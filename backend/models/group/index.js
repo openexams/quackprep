@@ -10,7 +10,7 @@ async function selectGroups(WHERE, params) {
     FROM cgroups g JOIN group_types gt on g.type = gt.id 
     JOIN classes cl ON g.class_id = cl.id
     
-    WHERE g.deleted = 0 AND ${WHERE} 
+    WHERE g.deleted = 0 AND cl.deleted=0 AND ${WHERE} 
     ORDER BY g.class_id ASC`,
     params
   );

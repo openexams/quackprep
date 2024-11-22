@@ -51,14 +51,14 @@ async function selectChoices(WHERE, params) {
     SELECT c.id,c.answer,c.is_correct,c.created_by,c.question_id,c.type, cl.id as class_id, g.id as group_id, 
     cl.school_id, cl.category as class_category
      FROM choices c 
-     JOIN group_question gq ON c.question_id = gq.question_id
+     LEFT JOIN group_question gq ON c.question_id = gq.question_id
      JOIN cgroups g on g.id = gq.group_id 
      JOIN classes cl ON cl.id = g.class_id
-    WHERE c.deleted=0 AND ${WHERE}
+    WHERE c.deleted=0 AND g.deleted=0 AND cl.deleted=0 AND ${WHERE}
      ORDER BY c.question_id ASC`,
     params
-  );
-  return mergeKeys(result, "group_id");
+  ); // if question is deleted then choice should be deleted
+  return result;
 }
 
 export async function getChoicesByQuestion(question_id) {
@@ -75,14 +75,15 @@ export async function getChoicesByGroupId(group_id) {
   const params = { group_id };
   return await sqlExe.executeCommand(
     `
-    SELECT c.id,c.answer,c.is_correct,c.created_by,c.question_id,c.type, cl.id as class_id, g.id as group_id, 
-    cl.school_id, cl.category as class_category
-     FROM choices c 
-     JOIN group_question gq ON c.question_id = gq.question_id
-     JOIN cgroups g on g.id = gq.group_id 
-     JOIN classes cl ON cl.id = g.class_id
-    WHERE c.deleted=0 AND g.id = :group_id
-     ORDER BY id ASC
+      SELECT c.id,c.answer,c.is_correct,c.created_by,c.question_id,c.type, cl.id as class_id, g.id as group_id, 
+      cl.school_id, cl.category as class_category
+      FROM choices c 
+      JOIN group_question gq ON c.question_id = gq.question_id
+      LEFT JOIN group_question new_gq ON c.question_id = new_gq.question_id
+      JOIN cgroups g on g.id = new_gq.group_id 
+      JOIN classes cl ON cl.id = g.class_id
+      WHERE c.deleted=0 AND g.deleted=0 AND cl.deleted=0 AND gq.group_id =30
+      ORDER BY c.id ASC
 
 `,
     params

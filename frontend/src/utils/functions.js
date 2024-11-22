@@ -330,7 +330,10 @@ export function filterArr(arr, id) {
 }
 
 /**
+ * Operates on .id
  * Handles Creation of new obj and editing of object BY ID
+ *
+ *  ADDS NEW ITEM TO THE END
  * @param {Array} arr
  * @param {*} obj
  * @returns {Array} updated arr

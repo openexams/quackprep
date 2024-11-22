@@ -1,7 +1,7 @@
 import { standardApiCall } from '@utils/api';
 import { updateArrObjectsWithNewVals, filterArr, upsertArray } from '@utils/functions';
 import { createSelector } from 'reselect';
-import { countingSort } from '../../../../../../shared/globalFuncs';
+import { countingSort, mergeKeys } from '../../../../../../shared/globalFuncs';
 
 const GET_CRUD_CHOICES = 'app/class/question/choices/GET_CRUD_CHOICES';
 
@@ -62,15 +62,17 @@ const DEFAULT_STATE = {
 
 export default function choicesReducer(state = DEFAULT_STATE, action) {
   switch (action.type) {
-    case GET_CRUD_CHOICES:
+    case GET_CRUD_CHOICES: {
+      // all choices only map to 1 question & the api will only call this route once so i can just append to the array and dont have to check for duplicates
       return {
         ...state,
-        choices: countingSort(updateArrObjectsWithNewVals(state.choices, action.payload), 'question_id'),
+        choices: countingSort([...(state.choices || []), ...mergeKeys(action.payload, 'group_id')], 'question_id'),
       };
+    }
     case DELETE_CRUD_CHOICE:
       return { ...state, choices: filterArr(state.choices, action.payload) };
     case UPSERT_CRUD_CHOICE:
-      return { ...state, choices: upsertArray(state.choices, action.payload?.[0]) };
+      return { ...state, choices: upsertArray(state.choices, mergeKeys(action.payload)) }; // becuz upsert arr adds new item to end i dont need to sort it again
     default:
       return state;
   }
