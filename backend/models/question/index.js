@@ -36,6 +36,8 @@ export async function selectQuestion(WHERE, params) {
     q.id,
     q.question,
     g.id AS group_id,
+    gt.type_name,
+    g.name,
     q.question_num_on_exam,
     cl.id AS class_id,
     cl.school_id,
@@ -46,12 +48,14 @@ LEFT JOIN
     group_question gq ON q.id = gq.question_id
 LEFT JOIN
     cgroups g ON g.id = gq.group_id
+JOIN 
+	group_types gt ON g.type = gt.id
 LEFT JOIN
     classes cl ON cl.id = g.class_id
 WHERE
     q.deleted = 0 AND g.deleted=0 AND cl.deleted=0 AND ${WHERE}
 ORDER BY
-    q.id ASC;`,
+    q.id ASC, gt.type_name DESC`,
     params
   );
 }
