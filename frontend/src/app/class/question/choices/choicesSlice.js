@@ -1,6 +1,7 @@
 import { standardApiCall } from '@utils/api';
 import { updateArrObjectsWithNewVals, filterArr, upsertArray } from '@utils/functions';
 import { createSelector } from 'reselect';
+import { countingSort } from '../../../../../../shared/globalFuncs';
 
 const GET_CRUD_CHOICES = 'app/class/question/choices/GET_CRUD_CHOICES';
 
@@ -64,7 +65,7 @@ export default function choicesReducer(state = DEFAULT_STATE, action) {
     case GET_CRUD_CHOICES:
       return {
         ...state,
-        choices: updateArrObjectsWithNewVals(state.choices, action.payload).sort((a, b) => a.question_id - b.question_id),
+        choices: countingSort(updateArrObjectsWithNewVals(state.choices, action.payload), 'question_id'),
       };
     case DELETE_CRUD_CHOICE:
       return { ...state, choices: filterArr(state.choices, action.payload) };

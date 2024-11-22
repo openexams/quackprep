@@ -2,6 +2,7 @@ import { standardApiCall } from '@utils/api';
 import { createSelector } from 'reselect';
 import { deleteGroupById, getGroupsByUserId, upsertGroup } from '../groupSlice';
 import { updateArrObjectsWithNewVals, filterArr, upsertArray } from '@utils/functions';
+import { countingSort } from '../../../../../../shared/globalFuncs';
 
 const GET_CRUD_EXAMS = 'app/class/exam/GET_CRUD_EXAMS';
 const DELETE_CRUD_EXAM = 'app/class/exam/DELETE_CRUD_EXAM';
@@ -31,7 +32,7 @@ export default function examSliceReducer(state = DEFAULT_STATE, action) {
     case GET_CRUD_EXAMS:
       return {
         ...state,
-        exams: updateArrObjectsWithNewVals(state.exams, action.payload).sort((a, b) => a.class_id - b.class_id),
+        exams: countingSort(updateArrObjectsWithNewVals(state.exams, action.payload), 'class_id'),
       };
     case DELETE_CRUD_EXAM:
       return { ...state, exams: filterArr(state.exams, action.payload) };

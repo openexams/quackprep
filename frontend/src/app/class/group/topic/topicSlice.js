@@ -2,6 +2,7 @@ import { standardApiCall } from '@utils/api';
 import { createSelector } from 'reselect';
 import { deleteGroupById, getGroupsByUserId, upsertGroup } from '../groupSlice';
 import { updateArrObjectsWithNewVals, filterArr, upsertArray } from '@utils/functions';
+import { countingSort } from '../../../../../../shared/globalFuncs';
 
 const GET_TOPICS = 'app/class/topic/GET_TOPICS';
 const DELETE_TOPIC = 'app/class/topic/DELETE_TOPIC';
@@ -32,7 +33,7 @@ export default function topicReducer(state = DEFAULT_STATE, action) {
     case GET_TOPICS:
       return {
         ...state,
-        topics: updateArrObjectsWithNewVals(state.topics, action.payload).sort((a, b) => a.class_id - b.class_id),
+        topics: countingSort(updateArrObjectsWithNewVals(state.topics, action.payload), 'class_id'),
       };
     case DELETE_TOPIC:
       return { ...state, topics: filterArr(state.topics, action.payload) };
