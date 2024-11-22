@@ -6,6 +6,7 @@ import { getQuestionsByGroupId } from '@src/app/class/question/questionSlice';
 import { getChoicesByGroup } from '@src/app/class/question/choices/choicesSlice';
 import { updateCurrentClassData, updateCurrentGroupData, updateQuestionId, updateSchoolId } from './navbarSlice';
 import { findNeedleInArrayOfObjectsLINEAR, findNeedlesInArrayOfObjectsLINEAR } from '@utils/functions';
+import { getPdfsByClassId } from '@src/app/class/group/pdf/pdfSlice';
 
 /**
  * Returns all possible page permuations with the given url
@@ -52,6 +53,12 @@ export function doesWordContainNavbarKeyword(word) {
   return false;
 }
 
+export function pdfsFetchLogic(dispatch, class_id) {
+  if (class_id) {
+    dispatch(getPdfsByClassId(class_id));
+  }
+}
+
 export function classFetchLogic(dispatch, classes) {
   if (!Array.isArray(classes)) {
     dispatch(getClasses());
@@ -69,6 +76,7 @@ export function schoolFetchLogic(dispatch, schools) {
     dispatch(getSchools());
   }
 }
+
 export function schoolUpdateLogic(dispatch, schools, school_name) {
   const schoolId = findNeedleInArrayOfObjectsLINEAR(schools, 'school_name', school_name, 'id');
   if (schoolId) {

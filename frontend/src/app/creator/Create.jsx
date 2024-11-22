@@ -26,6 +26,7 @@ import { getSchools } from '../class/school/schoolSlice';
 import { getClassCategories } from '../class/class_categories/classCategorySlice';
 import CategoryList from '../class/class_categories/CategoryList';
 import { hide401Msg, show401Msg } from '@components/401/401Slice';
+import { deletePdfById, getPdfsByUserId, selectPdfsState, upsertPdf } from '../class/group/pdf/pdfSlice';
 
 export default function Create() {
   const [filter, setFilter] = useState({
@@ -35,34 +36,40 @@ export default function Create() {
     group_id: '',
     question_id: '',
     choice_id: '',
+    pdf_id: '',
   });
   const dispatch = useDispatch();
 
   /**
    * Get the classes, topics, exams, questions, and choices that match the filter
    */
-  let classes = selectArrayOfIncludingItems(
+  const classes = selectArrayOfIncludingItems(
     useSelector(selectClassState).classes,
     ['school_id', 'category', 'id'],
     [filter.school_id, filter.class_type, filter.class_id],
   );
-  let topics = selectArrayOfIncludingItems(
+  const pdfs = selectArrayOfIncludingItems(
+    useSelector(selectPdfsState).pdfs,
+    ['school_id', 'class_category', 'class_id', 'id'],
+    [filter.school_id, filter.class_type, filter.class_id, filter.pdf_id],
+  );
+  const topics = selectArrayOfIncludingItems(
     useSelector(selectTopicState).topics,
     ['school_id', 'class_category', 'class_id', 'id'],
     [filter.school_id, filter.class_type, filter.class_id, filter.group_id],
   );
-  let exams = selectArrayOfIncludingItems(
+  const exams = selectArrayOfIncludingItems(
     useSelector(selectExamsState).exams,
     ['school_id', 'class_category', 'class_id', 'id'],
     [filter.school_id, filter.class_type, filter.class_id, filter.group_id],
   );
-  let questions = selectArrayOfIncludingItems(
+  const questions = selectArrayOfIncludingItems(
     useSelector(selectQuestionState).questions,
     ['school_id', 'class_category', 'class_id', 'group_id', 'id'],
     [filter.school_id, filter.class_type, filter.class_id, filter.group_id, filter.question_id],
   );
 
-  let choices = selectArrayOfIncludingItems(
+  const choices = selectArrayOfIncludingItems(
     useSelector(selectChoicesState).choices,
     ['school_id', 'class_category', 'class_id', 'group_id', 'question_id', 'id'],
     [filter.school_id, filter.class_type, filter.class_id, filter.group_id, filter.question_id, filter.choice_id],
@@ -142,6 +149,49 @@ export default function Create() {
         ]}
         onSubmit={({ name, description, category, school_id }) => {
           dispatch(upsertClass(null, school_id, name, description, category));
+        }}
+        onDelete={() => {
+          console.log('Cant delete a item thats not even created!');
+        }}
+      />,
+    );
+    return ret;
+  }
+  function mapPdfsToItems() {
+    let ret = pdfs.map((pdf) => {
+      return (
+        <ItemEdit
+          key={'pdf' + pdf.id}
+          id={pdf.id}
+          name={pdf.name}
+          desc={pdf.link}
+          formFields={[
+            { name: 'name', value: pdf.name, required: true },
+            { name: 'link', value: pdf.link, required: true },
+            { name: 'class_id', value: pdf.class_id, required: true },
+          ]}
+          onSubmit={({ link, class_id, name }) => {
+            dispatch(upsertPdf(name, class_id, link, pdf.id));
+          }}
+          onDelete={() => {
+            dispatch(deletePdfById(pdf.id));
+          }}
+        />
+      );
+    });
+    ret.push(
+      <ItemEdit
+        key='pdfplus'
+        id={null}
+        name=''
+        desc=''
+        formFields={[
+          { name: 'name', value: '', required: true },
+          { name: 'link', value: '', required: true },
+          { name: 'class_id', value: '', required: true },
+        ]}
+        onSubmit={({ link, class_id, name }) => {
+          dispatch(upsertPdf(name, class_id, link, null));
         }}
         onDelete={() => {
           console.log('Cant delete a item thats not even created!');
@@ -350,6 +400,7 @@ export default function Create() {
       dispatch(getSchools());
       dispatch(getClassCategories());
       dispatch(getClassesByUserId());
+      dispatch(getPdfsByUserId());
       dispatch(getTopicsByUserId());
       dispatch(getExamsByUserId());
       dispatch(getQuestionsByUserId());
@@ -381,8 +432,10 @@ export default function Create() {
             exams &&
             questions &&
             choices &&
+            pdfs &&
             loadAccords([
               { name: 'Classes', component: mapClassesToItems() },
+              { name: 'PDFs', component: mapPdfsToItems() },
               { name: 'Topics', component: mapTopicsToItems() },
               { name: 'Exams', component: mapExamsToItems() },
               { name: 'Questions', component: mapQuestionsToItems() },

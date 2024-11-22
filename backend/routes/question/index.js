@@ -52,7 +52,8 @@ router.delete(
         0,
         0,
         1,
-        1
+        1,
+        0
       );
       res.status(200).json(result);
     } catch (error) {

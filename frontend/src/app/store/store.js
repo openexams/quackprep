@@ -17,6 +17,7 @@ import examSliceReducer from '../class/group/exam/examSlice.js';
 import reducer401 from '@components/401/401Slice.js';
 import schoolsReducer from '../class/school/schoolSlice.js';
 import classCategoriesReducer from '../class/class_categories/classCategorySlice.js';
+import pdfsReducer from '../class/group/pdf/pdfSlice.js';
 
 const app = combineReducers({
   home: homeReducer,
@@ -30,6 +31,7 @@ const app = combineReducers({
   stats: statsReducer,
   exam: examSliceReducer,
   school: schoolsReducer,
+  pdf: pdfsReducer,
 });
 const auth = combineReducers({ user: loginReducer });
 

@@ -49,15 +49,14 @@ router.delete(
         0,
         1,
         1,
-        1
+        1,
+        0
       );
       res.status(200).json(result);
     } catch (error) {
-      res
-        .status(500)
-        .json({
-          message: `failed to delete group by id ${req.params.group_id}`,
-        });
+      res.status(500).json({
+        message: `failed to delete group by id ${req.params.group_id}`,
+      });
     }
   }
 );

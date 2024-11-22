@@ -59,6 +59,7 @@ export function standardApiCall(
         dispatch(showFlashMessage(noticeOfSuccess, null));
       }
       dispatch(stopLoading(componentName));
+      return result.data;
     } catch (error) {
       console.error(error);
       dispatch(stopLoading(componentName));

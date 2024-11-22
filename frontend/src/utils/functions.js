@@ -96,7 +96,7 @@ export function selectArrayOfStateById(path, idName, id) {
       if (!path || !idName || !id) {
         return null;
       }
-      if (!isNaN(id)) {
+      if (isNaN(id)) {
         parseInt(id);
       }
       let tmp = [];
@@ -123,16 +123,15 @@ export function selectBINARYArrayOfStateById(path, idName, id) {
     (state) => state,
     function (state) {
       const stateArr = sendObjToPath(state, path);
-      if (!stateArr) {
+      if (!Array.isArray(stateArr)) {
         //console.count('no state found');
         return null;
       }
       if (!path || !idName || !id) {
         return null;
       }
-      if (!isNaN(id)) {
-        parseInt(id);
-      }
+      id = parseInt(id);
+
       return selectMutlipleBinarySearch(stateArr, idName, id);
     },
   );

@@ -28,7 +28,8 @@ export async function cascadeSetDeleted( // todo learn more about how the join w
   delClass,
   delGroup,
   delQuestion,
-  delChoice
+  delChoice,
+  delPdf
 ) {
   if (isNaN(id)) {
     dlog("id must be #");
@@ -41,6 +42,8 @@ export async function cascadeSetDeleted( // todo learn more about how the join w
     where = `c.id = ${id}`;
   } else if (toDel === "group") {
     where = `g.id = ${id}`;
+  } else if (toDel === "pdf") {
+    where = `p.id = ${id}`;
   } else if (toDel === "question") {
     where = `q.id = ${id}`;
   } else if (toDel === "choice") {
@@ -51,19 +54,29 @@ export async function cascadeSetDeleted( // todo learn more about how the join w
     return;
   }
 
-  const params = { delChoice, delClass, delGroup, delQuestion, user_id };
+  const params = {
+    delChoice,
+    delClass,
+    delGroup,
+    delQuestion,
+    user_id,
+    delPdf,
+  };
   const affectedRows = (
     await sqlExe.executeCommand(
       // left join because we want all rows from the prev table and the matching from the new to be joined table, as inner join for example would not delete groups that didnt have questions
       ` 
     UPDATE classes c 
     LEFT JOIN cgroups g ON g.class_id = c.id --  join groups with that certain class id
+    LEFT JOIN pdfs p ON p.class_id = c.id
     LEFT JOIN group_question gq ON g.id = gq.group_id -- join qs in that certain groupid
     LEFT JOIN questions q ON q.id = gq.question_id   -- ^^
     LEFT JOIN choices ch ON ch.question_id = gq.question_id      -- ^
-    SET c.deleted=:delClass,g.deleted=:delGroup,q.deleted=:delQuestion,ch.deleted=:delChoice
-    WHERE c.created_by = :user_id AND ${where} 
-`, // if user created the class they have access to do anything they want inside that class.
+    SET c.deleted=:delClass,g.deleted=:delGroup,q.deleted=:delQuestion,ch.deleted=:delChoice,p.deleted=:delPdf
+    WHERE c.created_by = :user_id
+    AND c.deleted=0 AND g.deleted=0 AND q.deleted=0 AND ch.deleted=0 AND p.deleted=0
+    AND ${where} 
+`, // where will get rid of a ton of rows and only get rows u wanna
       params
     )
   ).affectedRows;
@@ -71,7 +84,7 @@ export async function cascadeSetDeleted( // todo learn more about how the join w
 }
 
 function verifyTableName(tableName) {
-  const allowed_tables = ["classes", "cgroups", "questions", "choices"];
+  const allowed_tables = ["classes", "cgroups", "questions", "choices", "pdfs"];
 
   for (let i = 0; i < allowed_tables.length; i++) {
     if (tableName === allowed_tables[i]) {

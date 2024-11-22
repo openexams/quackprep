@@ -51,6 +51,18 @@ export default function CreateFilter({ filter, setFilter }) {
             />
           </Form.Field>
           <Form.Field>
+            <label>Pdf Id</label>
+            <Input
+              onChange={(e, data) => {
+                onChange('pdf_id', data.value);
+              }}
+              icon={<Icon name='id badge' />}
+              iconPosition='left'
+              value={filter.pdf_id}
+              placeholder='Enter pdf ID'
+            />
+          </Form.Field>
+          <Form.Field>
             <label>Group ID</label>
             <Input
               onChange={(e, data) => {

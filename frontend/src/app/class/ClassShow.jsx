@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Container, Segment, Header, Button, Icon, Grid, Divider, Popup } from 'semantic-ui-react';
 import { changeNavbarPage, selectNavbarState } from '@components/navbar/navbarSlice';
@@ -12,7 +12,8 @@ export default function ClassShow() {
   const curClass = useSelector(selectArrayOfStateById('app.class.classes.classes', 'id', classId))?.[0];
 
   if (!curClass) return null;
-
+  const hasCgroups = curClass.group_id ? true : false;
+  const hasPdfs = curClass.pdf_id ? true : false;
   return (
     <Container>
       <Segment basic raised>
@@ -40,23 +41,40 @@ export default function ClassShow() {
         </Divider>
 
         <Grid centered stackable columns={2}>
-          <Grid.Column textAlign='center'>
-            <Button
-              size='large'
-              onClick={() => {
-                dispatch(changeNavbarPage(navigate, 'exam'));
-              }}
-            >
-              <Icon name='list' />
-              Study by Exam
-            </Button>
-          </Grid.Column>
-          <Grid.Column textAlign='center'>
-            <Button size='large' onClick={() => dispatch(changeNavbarPage(navigate, 'topic'))}>
-              <Icon name='list' />
-              Study by Topic
-            </Button>
-          </Grid.Column>
+          {hasCgroups && (
+            <>
+              <Grid.Column textAlign='center'>
+                <Button
+                  size='large'
+                  onClick={() => {
+                    dispatch(changeNavbarPage(navigate, 'exam'));
+                  }}
+                >
+                  <Icon name='list' />
+                  Study by Exam
+                </Button>
+              </Grid.Column>
+              <Grid.Column textAlign='center'>
+                <Button size='large' onClick={() => dispatch(changeNavbarPage(navigate, 'topic'))}>
+                  <Icon name='list' />
+                  Study by Topic
+                </Button>
+              </Grid.Column>
+            </>
+          )}
+          {hasPdfs && (
+            <Grid.Column textAlign='center'>
+              <Button
+                size='large'
+                onClick={() => {
+                  dispatch(changeNavbarPage(navigate, 'pdfs'));
+                }}
+              >
+                <Icon name='list' />
+                {'PDFs (Exams)'}
+              </Button>
+            </Grid.Column>
+          )}
           <Grid.Column textAlign='center'>
             <Popup // does not work while button disabled
               position='top center'
