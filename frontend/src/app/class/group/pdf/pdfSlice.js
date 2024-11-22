@@ -1,6 +1,7 @@
 import { standardApiCall } from '@utils/api';
 import { createSelector } from 'reselect';
 import { updateArrObjectsWithNewVals, filterArr, upsertArray } from '@utils/functions';
+import { countingSort } from '../../../../../../shared/globalFuncs';
 
 const GET_CRUD_PDFS = 'app/class/pdf/GET_CRUD_PDFS';
 const DELETE_CRUD_PDF = 'app/class/pdf/DELETE_CRUD_PDF';
@@ -48,7 +49,7 @@ export default function pdfsReducer(state = DEFAULT_STATE, action) {
     case GET_CRUD_PDFS:
       return {
         ...state,
-        pdfs: updateArrObjectsWithNewVals(state.pdfs, action.payload).sort((a, b) => a.class_id - b.class_id),
+        pdfs: countingSort(updateArrObjectsWithNewVals(state.pdfs, action.payload), 'class_id'),
       };
     case DELETE_CRUD_PDF:
       return { ...state, pdfs: filterArr(state.pdfs, parseInt(action.payload)) };
