@@ -3,7 +3,6 @@ import {
   verifyRowCreatedByUser,
   verifyUserOwnsRowId,
 } from "#utils/sqlFunctions.js";
-import { getLastRowManipulated } from "#utils/sqlFunctions.js";
 
 async function selectGroups(WHERE, params) {
   return await sqlExe.executeCommand(
@@ -71,7 +70,5 @@ export async function upsertGroupInClass(
       params
     )
   ).insertId;
-  return await sqlExe.executeCommand(
-    `${getLastRowManipulated("cgroups", result)}`
-  );
+  return await selectGroups(`g.id = :result`, { result });
 }

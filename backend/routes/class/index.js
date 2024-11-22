@@ -56,6 +56,7 @@ router.delete(
         1,
         1,
         1,
+        1,
         1
       );
       res.status(200).json(result);

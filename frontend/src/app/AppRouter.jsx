@@ -16,7 +16,7 @@ import Create from './creator/Create.jsx';
 import ClassPage from './class/ClassPage.jsx';
 import Comp401 from '@components/401/Comp401.jsx';
 import HistoryNav from '@components/Breadcrumb.jsx';
-import PDFView from './class/pdf/PDFView.jsx';
+import PDFView from './class/group/pdf/PDFShow.jsx';
 
 {
   /* topic could be a actual topic or a group of question such as a exam */

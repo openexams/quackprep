@@ -1,6 +1,5 @@
 import sqlExe from "#db/dbFunctions.js";
 import {
-  getLastRowManipulated,
   verifyRowCreatedByUser,
   verifyUserOwnsRowId,
 } from "#utils/sqlFunctions.js";
@@ -109,9 +108,7 @@ export async function upsertQuestion(
       params
     )
   ).insertId;
-  return await sqlExe.executeCommand(
-    `${getLastRowManipulated("questions", question_id)}`
-  );
+  return await selectQuestion(`q.id=:question_id`, { question_id });
 }
 
 /**

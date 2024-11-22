@@ -1,8 +1,5 @@
 import sqlExe from "#db/dbFunctions.js";
-import {
-  getLastRowManipulated,
-  verifyUserOwnsRowId,
-} from "#utils/sqlFunctions.js";
+import { verifyUserOwnsRowId } from "#utils/sqlFunctions.js";
 
 export async function getClassCategories() {
   return await sqlExe.executeCommand(`SELECT * FROM class_categories`);
@@ -78,7 +75,5 @@ export async function upsertClass(
       params
     )
   ).insertId;
-  return await sqlExe.executeCommand(
-    `${getLastRowManipulated("classes", class_id)}`
-  );
+  return await selectClasses("cl.id = :class_id", { class_id });
 }
