@@ -43,13 +43,34 @@ export default function Home() {
 
   return (
     <div className='home-page'>
-      <Segment
-        inverted
-        vertical
-        textAlign='center'
-        style={{ minHeight: 700, padding: '1em 0em', backgroundImage: `url(${duckBlissImage})`, backgroundSize: 'cover' }}
-      >
-        <Container text textAlign='center'>
+      <Segment inverted vertical textAlign='center' style={{ minHeight: 700, padding: '1em 0em', position: 'relative' }}>
+        <Image
+          loading='lazy'
+          src={duckBlissImage}
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            zIndex: 0,
+          }}
+        />
+        <Container
+          style={{
+            zIndex: 1,
+            position: 'relative', // Ensure it stays above the background
+            textAlign: 'center', // Center the text inside the container
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+            height: '100%', // Stretch container height to match the segment
+          }}
+          text
+          textAlign='center'
+        >
           <Header
             as='h1'
             inverted
@@ -100,7 +121,7 @@ export default function Home() {
             {features.map((feature, index) => (
               <Grid.Column key={index}>
                 <Card fluid>
-                  <Image src={feature.icon} wrapped ui={false} />
+                  <Image loading='lazy' src={feature.icon} wrapped ui={false} />
                   <Card.Content>
                     <Card.Header>{feature.title}</Card.Header>
                     <Card.Description>{feature.description}</Card.Description>

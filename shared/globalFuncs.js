@@ -200,7 +200,7 @@ export function findMaxValue(arr, keyToCheck) {
   return max;
 }
 
-// i made on in python that is intuitive and also stable and I think its faster.
+// i made on in python that is intuitive and is also stable and I think its faster.
 export function countingSort(arr, sortBy) {
   const count = new Array(findMaxValue(arr, sortBy) + 1).fill(0);
   for (let i = 0; i < arr.length; i++) {
@@ -217,15 +217,3 @@ export function countingSort(arr, sortBy) {
   }
   return ret;
 }
-
-console.log(
-  countingSort(
-    [
-      { key: 2, value: "b" },
-      { key: 3, value: "d" },
-      { key: 4, value: "a" },
-      { key: 4, value: "c" },
-    ],
-    "key"
-  )
-);
