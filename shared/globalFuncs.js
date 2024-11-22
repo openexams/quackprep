@@ -199,17 +199,33 @@ export function findMaxValue(arr, keyToCheck) {
   }
   return max;
 }
-// i think im retarded
+
+// i made on in python that is intuitive and also stable and I think its faster.
 export function countingSort(arr, sortBy) {
-  const count = new Array(findMaxValue(arr, sortBy));
+  const count = new Array(findMaxValue(arr, sortBy) + 1).fill(0);
   for (let i = 0; i < arr.length; i++) {
     count[arr[i][sortBy]]++;
   }
-  const ret = [];
-  for (let i = 0; i < count.length; i++) {
-    for (let j = 0; j < count[i]; j++) {
-      ret.push(i);
-    }
+
+  for (let i = 1; i < count.length; i++) {
+    count[i] = count[i] + count[i - 1]; //  transforms the count array into an array of positions
+  }
+  const ret = new Array(arr.length);
+  for (let i = arr.length - 1; i >= 0; i--) {
+    ret[count[arr[i][sortBy]] - 1] = arr[i];
+    count[arr[i][sortBy]]--;
   }
   return ret;
 }
+
+console.log(
+  countingSort(
+    [
+      { key: 2, value: "b" },
+      { key: 3, value: "d" },
+      { key: 4, value: "a" },
+      { key: 4, value: "c" },
+    ],
+    "key"
+  )
+);
