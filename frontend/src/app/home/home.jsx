@@ -49,7 +49,7 @@ export default function Home() {
           src={duckBlissImage}
           style={{
             position: 'absolute',
-            top: 0,
+            top: 6,
             left: 0,
             width: '100%',
             height: '100%',
@@ -88,7 +88,7 @@ export default function Home() {
             style={{
               fontSize: '1.7em',
               fontWeight: 'normal',
-              marginTop: '1.5em',
+              marginTop: '.3em',
               marginBottom: '1em',
               color: 'white',
               textShadow: '-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000, 0 0 8px rgba(0,0,0,0.5)',
