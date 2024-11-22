@@ -16,7 +16,8 @@ import Create from './creator/Create.jsx';
 import ClassPage from './class/ClassPage.jsx';
 import Comp401 from '@components/401/Comp401.jsx';
 import HistoryNav from '@components/Breadcrumb.jsx';
-import PDFView from './class/group/pdf/PDFShow.jsx';
+import PDFList from './class/group/pdf/PDFList.jsx';
+import PDFShow from './class/group/pdf/PDFShow.jsx';
 
 {
   /* topic could be a actual topic or a group of question such as a exam */
@@ -50,8 +51,8 @@ export default function AppRouter() {
         <Route path='/class/:school_name/:class_name/exam' element={<ExamList />} />
         <Route path='/class/:school_name/:class_name/exam/:group_name/question' element={<QuestionPage />} />
         <Route path='/class/:school_name/:class_name/exam/:group_name/question/:question_id' element={<QuestionPage />} />
-        <Route path='/class/:school_name/:class_name/pdf' element={<ExamList />} />
-        <Route path='/class/:school_name/:class_name/pdf/:pdf_id' element={<PDFView />} />
+        <Route path='/class/:school_name/:class_name/pdfs' element={<PDFList />} />
+        <Route path='/class/:school_name/:class_name/pdfs/:pdf_id' element={<PDFShow />} />
 
         <Route path='/leaderboard' element={<Leaderboard />} />
         <Route path='/stats' element={<Stats />} />

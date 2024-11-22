@@ -29,6 +29,7 @@ import {
   questionFetchLogic,
   questionUpdateLogic,
   choicesFetchLogic,
+  pdfsFetchLogic,
 } from './navbarFunctions';
 
 export default function Navbar() {
@@ -111,6 +112,9 @@ export default function Navbar() {
       if (!loading?.ClassList) {
         classFetchLogic(dispatch, classes);
         classUpdateLogic(dispatch, classes, className, schoolId);
+      }
+      if (!loading?.PDFlist && classId) {
+        pdfsFetchLogic(dispatch, classId);
       }
 
       if (activePage?.includes('exam') && !loading?.ExamList && className && classId) {

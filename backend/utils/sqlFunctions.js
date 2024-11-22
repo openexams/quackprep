@@ -29,7 +29,7 @@ export async function cascadeSetDeleted( // todo learn more about how the join w
   delGroup,
   delQuestion,
   delChoice,
-  delPdfs
+  delPdf
 ) {
   if (isNaN(id)) {
     dlog("id must be #");
@@ -60,7 +60,7 @@ export async function cascadeSetDeleted( // todo learn more about how the join w
     delGroup,
     delQuestion,
     user_id,
-    delPdfs,
+    delPdf,
   };
   const affectedRows = (
     await sqlExe.executeCommand(
@@ -72,9 +72,11 @@ export async function cascadeSetDeleted( // todo learn more about how the join w
     LEFT JOIN group_question gq ON g.id = gq.group_id -- join qs in that certain groupid
     LEFT JOIN questions q ON q.id = gq.question_id   -- ^^
     LEFT JOIN choices ch ON ch.question_id = gq.question_id      -- ^
-    SET c.deleted=:delClass,g.deleted=:delGroup,q.deleted=:delQuestion,ch.deleted=:delChoice
-    WHERE c.created_by = :user_id AND ${where} 
-`, // if user created the class they have access to do anything they want inside that class.
+    SET c.deleted=:delClass,g.deleted=:delGroup,q.deleted=:delQuestion,ch.deleted=:delChoice,p.deleted=:delPdf
+    WHERE c.created_by = :user_id
+    AND c.deleted=0 AND g.deleted=0 AND q.deleted=0 AND ch.deleted=0 AND p.deleted=0
+    AND ${where} 
+`, // where will get rid of a ton of rows and only get rows u wanna
       params
     )
   ).affectedRows;

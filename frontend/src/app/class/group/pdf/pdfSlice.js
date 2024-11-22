@@ -51,7 +51,7 @@ export default function pdfsReducer(state = DEFAULT_STATE, action) {
         pdfs: updateArrObjectsWithNewVals(state.pdfs, action.payload).sort((a, b) => a.class_id - b.class_id),
       };
     case DELETE_CRUD_PDF:
-      return { ...state, pdfs: filterArr(state.pdfs, action.payload) };
+      return { ...state, pdfs: filterArr(state.pdfs, parseInt(action.payload)) };
     case UPSERT_CRUD_PDF:
       return { ...state, pdfs: upsertArray(state.pdfs, action.payload?.[0]) };
     default:

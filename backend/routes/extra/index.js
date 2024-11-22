@@ -52,7 +52,7 @@ router.delete(
       res.status(200).json(result);
     } catch (error) {
       res.status(500).json({
-        message: `getting pdfs by class id ${req.params.class_id} failed`,
+        message: `failed to delete pdf by id ${req.params.pdf_id}`,
       });
     }
   }

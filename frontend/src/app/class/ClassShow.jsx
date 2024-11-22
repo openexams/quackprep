@@ -67,7 +67,7 @@ export default function ClassShow() {
               <Button
                 size='large'
                 onClick={() => {
-                  dispatch(changeNavbarPage(navigate, 'pdf'));
+                  dispatch(changeNavbarPage(navigate, 'pdfs'));
                 }}
               >
                 <Icon name='list' />
