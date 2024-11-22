@@ -101,7 +101,7 @@ export function randomizeArray(array, seed) {
  * @returns {Array} updated data
  */
 export function mergeKeys(data, keyName) {
-  if (!Array.isArray(data)) {
+  if (!Array.isArray(data) || !keyName || data.length <= 0) {
     return null;
   }
   data = structuredClone(data); // TODO OPTIMIZE
@@ -202,6 +202,9 @@ export function findMaxValue(arr, keyToCheck) {
 
 // i made on in python that is intuitive and is also stable and I think its faster.
 export function countingSort(arr, sortBy) {
+  if (!Array.isArray(arr) || !sortBy || arr.length <= 0) {
+    return [];
+  }
   const count = new Array(findMaxValue(arr, sortBy) + 1).fill(0);
   for (let i = 0; i < arr.length; i++) {
     count[arr[i][sortBy]]++;

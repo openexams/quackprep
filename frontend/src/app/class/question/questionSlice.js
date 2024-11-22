@@ -1,6 +1,7 @@
 import { standardApiCall } from '@utils/api';
 import { updateArrObjectsWithNewVals, upsertArray, filterArr } from '@utils/functions';
 import { createSelector } from 'reselect';
+import { mergeKeys } from '../../../../../shared/globalFuncs';
 
 const GET_CRUD_QUESTIONS = 'app/class/question/GET_CRUD_QUESTIONS';
 const UPSERT_CRUD_QUESTION = 'app/class/question/UPSERT_CRUD_QUESTION';
@@ -58,11 +59,11 @@ const DEFAULT_STATE = {
 export default function questionsReducer(state = DEFAULT_STATE, action) {
   switch (action.type) {
     case GET_CRUD_QUESTIONS:
-      return { ...state, questions: updateArrObjectsWithNewVals(state.questions, action.payload) };
+      return { ...state, questions: updateArrObjectsWithNewVals(state.questions, mergeKeys(action.payload, 'group_id')) };
     case DELETE_CRUD_QUESTION:
       return { ...state, questions: filterArr(state.questions, action.payload) };
     case UPSERT_CRUD_QUESTION:
-      return { ...state, questions: upsertArray(state.questions, action.payload?.[0]) };
+      return { ...state, questions: upsertArray(state.questions, mergeKeys(action.payload, 'group_id')) };
     default:
       return state;
   }
