@@ -69,7 +69,7 @@ export function standardApiCall(
         dispatch(hideFlashMessage());
         dispatch(show401Msg());
       } else {
-        dispatch(showFlashMessage('Error', error?.response?.data?.message || errorMsg || error.message));
+        dispatch(showFlashMessage('message:', error?.response?.data?.message || errorMsg || error.message));
       }
     }
   };

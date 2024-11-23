@@ -7,6 +7,7 @@ import {
 import { cascadeSetDeleted } from "#utils/sqlFunctions.js";
 import { isAuthenticated } from "#middleware/authMiddleware.js";
 import { isCreator } from "#middleware/creatorMiddleware.js";
+import { commonErrorMessage } from "#utils/utils.js";
 
 const router = express.Router();
 
@@ -15,9 +16,12 @@ router.get("/pdfs/user/", async function (req, res) {
     const result = await getPdfsByUserId(req.user);
     res.status(200).json(result);
   } catch (error) {
-    res.status(500).json({
-      message: `getting pdfs by user id ${req.user} failed`,
-    });
+    commonErrorMessage(
+      res,
+      500,
+      `failed to get pdfs by user id ${req.user}`,
+      error
+    );
   }
 });
 
@@ -26,9 +30,12 @@ router.get("/pdfs/:class_id", async function (req, res) {
     const result = await getPdfsByClassId(req.params.class_id);
     res.status(200).json(result);
   } catch (error) {
-    res.status(500).json({
-      message: `getting pdfs by class id ${req.params.class_id} failed`,
-    });
+    commonErrorMessage(
+      res,
+      500,
+      `failed to get pdfs by class id ${req.params.class_id}`,
+      error
+    );
   }
 });
 
@@ -51,9 +58,12 @@ router.delete(
       );
       res.status(200).json(result);
     } catch (error) {
-      res.status(500).json({
-        message: `failed to delete pdf by id ${req.params.pdf_id}`,
-      });
+      commonErrorMessage(
+        res,
+        500,
+        `failed to delete pdf by id ${req.params.pdf_id}`,
+        error
+      );
     }
   }
 );
@@ -61,9 +71,7 @@ router.delete(
 router.post("/pdfs", async function (req, res) {
   const data = req.body;
   if (!data.link || !data.class_id || !data.name) {
-    res.status(400).json({
-      message: `pls pass in all agrs`,
-    });
+    commonErrorMessage(res, 400, `link, class_id, and name are required`);
     return;
   }
   try {
@@ -76,9 +84,7 @@ router.post("/pdfs", async function (req, res) {
     );
     res.status(200).json(result);
   } catch (error) {
-    res.status(500).json({
-      message: `failed to upsert pdf`,
-    });
+    commonErrorMessage(res, 500, `failed to add pdf`, error);
   }
 });
 

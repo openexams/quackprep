@@ -52,7 +52,7 @@ export default function FlashMessage() {
     if (show) {
       const timer = setTimeout(() => {
         dispatch(hideFlashMessage());
-      }, 4000);
+      }, 6000);
       return () => clearTimeout(timer);
     }
   }, [show, dispatch]);

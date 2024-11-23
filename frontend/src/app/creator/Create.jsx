@@ -299,17 +299,17 @@ export default function Create() {
           desc={null}
           formFields={[
             { name: 'question', value: question.question, required: true },
-            { name: 'group_ids', value: question.group_ids, required: true },
+            { name: 'group_id', value: String(question.group_id), required: true },
             { name: 'question_num_on_exam', value: question.question_num_on_exam, required: false },
           ]}
-          onSubmit={({ question, question_num_on_exam, group_ids }) => {
-            if (group_ids.include(',')) group_ids = group_ids.split(',');
+          onSubmit={({ question, question_num_on_exam, group_id }) => {
+            if (group_id.includes(',')) group_id = group_id.split(',');
             else {
               let tmp = [];
-              tmp.push(group_ids);
-              group_ids = tmp;
+              tmp.push(group_id);
+              group_id = tmp;
             }
-            dispatch(upsertQuestionWithGroupIds(question.id, question, question_num_on_exam, group_ids));
+            dispatch(upsertQuestionWithGroupIds(question.id, question, question_num_on_exam, group_id));
           }}
           onDelete={() => {
             dispatch(deleteQuestionById(question.id));
@@ -325,17 +325,17 @@ export default function Create() {
         desc=''
         formFields={[
           { name: 'question', value: '', required: true },
-          { name: 'group_ids', value: '', required: true },
+          { name: 'group_id', value: '', required: true },
           { name: 'question_num_on_exam', value: null, required: false },
         ]}
-        onSubmit={({ question, question_num_on_exam, group_ids }) => {
-          if (group_ids.includes(',')) group_ids = group_ids.split(',');
+        onSubmit={({ question, question_num_on_exam, group_id }) => {
+          if (group_id.ss(',')) group_id = group_id.split(',');
           else {
             let tmp = [];
-            tmp.push(group_ids);
-            group_ids = tmp;
+            tmp.push(group_id);
+            group_id = tmp;
           }
-          dispatch(upsertQuestionWithGroupIds(null, question, question_num_on_exam, group_ids));
+          dispatch(upsertQuestionWithGroupIds(null, question, question_num_on_exam, group_id));
         }}
         onDelete={() => {
           console.log('Cant delete a item thats not even created!');

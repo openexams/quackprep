@@ -23,7 +23,10 @@ export async function getGroupsByClassId(class_id, type) {
 
 export async function getGroupsByUserId(user_id, type) {
   const params = { user_id, type };
-  return await selectGroups("g.created_by =:user_id", params);
+  return await selectGroups(
+    "g.created_by =:user_id AND gt.type_name = :type",
+    params
+  );
 }
 
 export async function upsertGroupInClass(
