@@ -183,6 +183,8 @@ export function checkEquivalenceOfObjects(obj1, obj2) {
 
 /**
  * if what you are trying to add (a arr of obj) id is the same as it was before then dont add it.
+ *
+ * only checks id not equivalence
  * @param {Array} old
  * @param {Array} newA
  * @returns {Array}
@@ -199,7 +201,6 @@ export function updateArrObjectsWithNewVals(old, newA) {
   let ret = [...old];
   for (let i = 0; i < newA.length; i++) {
     if (map && newA[i].id in map) {
-      //checkEquivalenceOfObjects(map[newA[i].id], newA[i])
     } else {
       ret.push(newA[i]);
     }
@@ -270,7 +271,7 @@ export function selectArrayOfIncludingItem(array, objectKeyToCheck, including) {
 }
 
 /**
- * TODO TEST
+ * casts everything to a string and calls includes
  * @param {Array} array
  * @param {Array} keysToCheck
  * @param {Array} valuesIncluded

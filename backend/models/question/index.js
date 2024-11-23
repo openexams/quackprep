@@ -16,16 +16,17 @@ export async function createQuestionReport(user_id, question_id, text) {
 export async function getQuestionsByGroupId(group_id) {
   const params = { group_id };
   return await sqlExe.executeCommand(
-    `SELECT q.id, q.question, g.id as group_id, q.question_num_on_exam,
+    `SELECT q.id, q.question, g.id as group_id, g.name as group_name, gt.type_name, q.question_num_on_exam,
     cl.id as class_id, cl.school_id,cl.category as class_category
     FROM questions q 
     JOIN group_question gq ON q.id = gq.question_id
     JOIN questions qq -- join questions back
     JOIN group_question new_gq ON qq.id = gq.question_id -- dont pull in same ids twice
     JOIN cgroups g ON g.id = new_gq.group_id AND new_gq.question_id = q.id -- join groups where pulled in questions map to a group (pulling in all groups now)
+    JOIN group_types gt ON gt.id = g.type
     JOIN classes cl ON g.class_id = cl.id 
     WHERE q.deleted = 0 AND q.deleted = 0 AND g.deleted=0 AND cl.deleted=0 AND gq.group_id = :group_id
-    ORDER BY q.id ASC`,
+    ORDER BY q.id ASC, gt.type_name DESC`,
     params
   );
 }
@@ -44,13 +45,13 @@ export async function selectQuestion(WHERE, params) {
     cl.category AS class_category
 FROM
     questions q
-LEFT JOIN
+JOIN
     group_question gq ON q.id = gq.question_id
-LEFT JOIN
+JOIN
     cgroups g ON g.id = gq.group_id
 JOIN 
 	group_types gt ON g.type = gt.id
-LEFT JOIN
+JOIN
     classes cl ON cl.id = g.class_id
 WHERE
     q.deleted = 0 AND g.deleted=0 AND cl.deleted=0 AND ${WHERE}

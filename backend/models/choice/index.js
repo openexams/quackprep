@@ -3,7 +3,6 @@ import {
   verifyRowCreatedByUser,
   verifyUserOwnsRowId,
 } from "#utils/sqlFunctions.js";
-import { mergeKeys } from "../../../shared/globalFuncs.js";
 
 export async function postChoice(user_id, choice_id) {
   const params = { choice_id, user_id };
