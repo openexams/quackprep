@@ -8,7 +8,7 @@ import FreeResponse from './types/FreeResponse';
 import QuestionReport from '../QuestionReport';
 
 export default function ChoiceRouter({ selectedQuestion }) {
-  const choices = useSelector(selectBINARYArrayOfStateById('app.choices.choices', 'question_id', selectedQuestion?.id));
+  const choices = useSelector(selectArrayOfStateById('app.choices.choices', 'question_id', selectedQuestion?.id));
   const loading = useSelector(selectLoadingState).loadingComps?.ChoiceRouter; // todo fix
 
   // maybe check if choices are all the same what if one choice was mcq and other was select (should not be possible)
