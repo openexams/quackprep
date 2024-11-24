@@ -10,6 +10,7 @@ import {
 } from "#models/question/index.js";
 import { cascadeSetDeleted } from "#utils/sqlFunctions.js";
 import { isCreator } from "#middleware/creatorMiddleware.js";
+import { commonErrorMessage } from "#utils/utils.js";
 
 const router = express.Router();
 
@@ -18,9 +19,12 @@ router.get("/user", isAuthenticated, async function (req, res) {
     const result = await getQuestionsByUserId(req.user);
     res.status(200).json(result);
   } catch (error) {
-    res.status(500).json({
-      message: `failed to get question by user id ${req.user}`,
-    });
+    commonErrorMessage(
+      res,
+      500,
+      `failed to get questions by user id ${req.user}`,
+      error
+    );
   }
 });
 
@@ -32,9 +36,12 @@ router.get("/:group_id", async function (req, res) {
     );
     res.status(200).json(result);
   } catch (error) {
-    res.status(500).json({
-      message: `failed to get question by group id ${req.params.group_id} and grouptype ${req.params.type}`,
-    });
+    commonErrorMessage(
+      res,
+      500,
+      `failed to get question by group id ${req.params.group_id} and grouptype ${req.params.type}`,
+      error
+    );
   }
 });
 
@@ -57,9 +64,12 @@ router.delete(
       );
       res.status(200).json(result);
     } catch (error) {
-      res.status(500).json({
-        message: `failed to delete question by id ${req.params.question_id}`,
-      });
+      commonErrorMessage(
+        res,
+        500,
+        `failed to delete question by id ${req.params.question_id}`,
+        error
+      );
     }
   }
 );
@@ -68,9 +78,11 @@ router.post("/", isAuthenticated, isCreator, async function (req, res) {
   const data = req.body;
   try {
     if (!data.question || !Array.isArray(data?.group_ids)) {
-      res.status(400).json({
-        message: `pass in all req args`,
-      });
+      commonErrorMessage(
+        res,
+        500,
+        `please send in a question (string) and group_ids (array<int>)`
+      );
       return;
     }
     const question_id = await upsertQuestion(
@@ -88,19 +100,18 @@ router.post("/", isAuthenticated, isCreator, async function (req, res) {
 
     res.status(201).json(affectedRows);
   } catch (error) {
-    console.log(error);
-    res.status(500).json({
-      message: `failed to add question to groups || group`,
-    });
+    commonErrorMessage(res, 500, `failed to create question`, error);
   }
 });
 
 router.post("/report/:question_id", isAuthenticated, async function (req, res) {
   const { text } = req.body;
   if (!text || !req.params.question_id) {
-    res.status(400).json({
-      message: `pass in all req args`,
-    });
+    commonErrorMessage(
+      res,
+      500,
+      `please send in a text (string) and question_id (int)`
+    );
     return;
   }
   try {
@@ -111,9 +122,12 @@ router.post("/report/:question_id", isAuthenticated, async function (req, res) {
     );
     res.status(200).json(result);
   } catch (error) {
-    res.status(500).json({
-      message: `failed to report question: ${req.params.question_id}`,
-    });
+    commonErrorMessage(
+      res,
+      500,
+      `failed to report question by id ${req.params.question_id}`,
+      error
+    );
   }
 });
 

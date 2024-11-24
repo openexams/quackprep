@@ -13,6 +13,7 @@ import {
   getChoicesByUserId,
 } from "#models/choice/index.js";
 import { cascadeSetDeleted } from "#utils/sqlFunctions.js";
+import { commonErrorMessage } from "#utils/utils.js";
 import express, { Router } from "express";
 const router = Router();
 
@@ -21,7 +22,7 @@ router.get("/top", async function (req, res) {
     const result = await getWhichUsersAnsweredMostQuestions();
     res.status(200).json(result);
   } catch (error) {
-    res.status(500).json({ message: "server error, retrieve top qs answered" });
+    commonErrorMessage(res, 500, "failed to get top users", error);
   }
 });
 
@@ -30,9 +31,12 @@ router.get("/qsansweredbymandy", async function (req, res) {
     const result = await getQuestionsAnsweredByMonthAndYear();
     res.status(200).json(result);
   } catch (error) {
-    res.status(500).json({
-      message: "server error, getting all qs answerd by month and year",
-    });
+    commonErrorMessage(
+      res,
+      500,
+      "failed to get questions answered by month and year",
+      error
+    );
   }
 });
 
@@ -44,9 +48,7 @@ router.get("/user", isAuthenticated, async function (req, res) {
     const result = await getChoicesByUserId(req.user);
     res.status(200).json(result);
   } catch (error) {
-    res.status(500).json({
-      message: `failed to get choices by user id ${req.user}`,
-    });
+    commonErrorMessage(res, 500, "failed to get choice by user", error);
   }
 });
 
@@ -55,9 +57,12 @@ router.get("/:question_id", async function (req, res) {
     const result = await getChoicesByQuestion(req.params.question_id);
     res.status(200).json(result);
   } catch (error) {
-    res.status(500).json({
-      message: `failed to get choice by question id ${req.params.question_id}`,
-    });
+    commonErrorMessage(
+      res,
+      500,
+      `failed to get choices by q.id ${req.params.question_id}`,
+      error
+    );
   }
 });
 
@@ -66,9 +71,12 @@ router.get("/group/:group_id", async function (req, res) {
     const result = await getChoicesByGroupId(req.params.group_id);
     res.status(200).json(result);
   } catch (error) {
-    res.status(500).json({
-      message: `failed to get question by group id ${req.params.group_id}`,
-    });
+    commonErrorMessage(
+      res,
+      500,
+      `failed to get choices by group id ${req.params.group_id}`,
+      error
+    );
   }
 });
 
@@ -93,9 +101,12 @@ router.post(
 
       res.status(201).json(result);
     } catch (error) {
-      res.status(500).json({
-        message: `failed to add ${data?.choices?.length} choices by q id ${req.params.question_id}`,
-      });
+      commonErrorMessage(
+        res,
+        500,
+        `failed to add many choices to q id ${req.params.question_id}`,
+        error
+      );
     }
   }
 );
@@ -108,7 +119,11 @@ router.post(
     const data = req.body;
     try {
       if (data?.text == null || data?.isCorrect == null || !data?.type) {
-        throw Error("pls send all json body");
+        commonErrorMessage(
+          res,
+          400,
+          "send body with text (string), isCorrect(bool), type"
+        );
       }
 
       const result = await upsertChoiceToQuestion(
@@ -122,10 +137,12 @@ router.post(
 
       res.status(201).json(result);
     } catch (error) {
-      console.log(error);
-      res.status(500).json({
-        message: `failed to add choice by q id ${req.params.question_id}`,
-      });
+      commonErrorMessage(
+        res,
+        500,
+        `failed to add choice to q id ${req.params.question_id}`,
+        error
+      );
     }
   }
 );
@@ -150,9 +167,12 @@ router.delete(
       );
       res.status(200).json(result);
     } catch (error) {
-      res.status(500).json({
-        message: `failed to delete choice by id ${req.params.choice_id}`,
-      });
+      commonErrorMessage(
+        res,
+        500,
+        `failed to delete choice ${req.params.choice_id}`,
+        error
+      );
     }
   }
 );
@@ -173,9 +193,12 @@ router.get(
 
       res.status(200).json(result);
     } catch (error) {
-      res.status(500).json({
-        message: `failed to get currently selected choices: ${req.params.choice_id}`,
-      });
+      commonErrorMessage(
+        res,
+        500,
+        `failed to get current choices for group id ${req.params.group_id} and type ${req.params.group_type}`,
+        error
+      );
     }
   }
 );
@@ -186,7 +209,7 @@ router.post("/answer/:choice_id", isAuthenticated, async function (req, res) {
     const result = await postChoice(req.user, req.params.choice_id);
     res.status(201).json(result);
   } catch (error) {
-    res.status(500).json({ message: "server error, could not upload answer" });
+    commonErrorMessage(res, 500, "failed to post answer", error);
   }
 });
 
@@ -203,9 +226,7 @@ router.post(
       );
       res.status(201).json(result);
     } catch (error) {
-      res
-        .status(500)
-        .json({ message: "server error, could not upsert current answer" });
+      commonErrorMessage(res, 500, "failed to post current answer", error);
     }
   }
 );

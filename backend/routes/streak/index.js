@@ -5,6 +5,7 @@ import {
   getTopStreaks,
   claimStreak,
 } from "#models/streak/index.js";
+import { commonErrorMessage } from "#utils/utils.js";
 import express from "express";
 
 const router = express.Router();
@@ -15,21 +16,25 @@ router.get("/has_streak", isAuthenticated, async function (req, res) {
     res.status(200).json(bool);
   } catch (error) {
     console.log(error);
-    res.status(500).json({ message: "server errored getting users streak" });
+    commonErrorMessage(
+      res,
+      500,
+      `failed to get if user ${req.user} has a current streak`,
+      error
+    );
   }
 });
 
 router.get("/top/:amt", async function (req, res) {
   try {
     if (parseInt(req.params.amt) != 5) {
-      throw Error("hacker");
+      commonErrorMessage(res, 400, "only 5 top streaks are allowed");
+      return;
     }
     const result = await getTopStreaks(req.params.amt);
     res.status(200).json(result);
   } catch (error) {
-    res.status(500).json({
-      message: `failed to get top streaks with amt ${req.params.amt}`,
-    });
+    commonErrorMessage(res, 500, "failed to get top streaks", error);
   }
 });
 
@@ -39,7 +44,7 @@ router.get("/", isAuthenticated, async function (req, res) {
     const data = await getStreakData(req.user);
     res.status(200).json(data);
   } catch (error) {
-    res.status(500).json({ message: "failed to get all streak data" });
+    commonErrorMessage(res, 500, "failed to get streak data", error);
   }
 });
 
@@ -48,12 +53,17 @@ router.post("/", isAuthenticated, async function (req, res) {
   try {
     const data = await claimStreak(req.user);
     if (!data?.current_streak) {
-      res.status(400).json({ message: "u alr have a streak" });
+      // data will be {} if no streak was claimed
+      commonErrorMessage(
+        res,
+        400,
+        "failed to claim streak, you probably alr have a streak"
+      );
       return;
     }
     res.status(201).json(data);
   } catch (error) {
-    res.status(500).json({ message: "failed to claim streak" });
+    commonErrorMessage(res, 500, "failed to claim streak", error);
   }
 });
 

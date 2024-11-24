@@ -10,6 +10,8 @@ import {
   englishDataset,
   englishRecommendedTransformers,
 } from "obscenity";
+import { commonErrorMessage } from "#utils/utils.js";
+
 const matcher = new RegExpMatcher({
   ...englishDataset.build(),
   ...englishRecommendedTransformers,
@@ -22,8 +24,7 @@ router.get("/users/count", async function (req, res) {
     const result = await getUserCount();
     res.status(200).json(result?.[0].COUNT);
   } catch (error) {
-    console.log(error);
-    res.status(500).json({ message: "failed to get user count" });
+    commonErrorMessage(res, 500, "failed to get user count", error);
   }
 });
 
@@ -32,16 +33,15 @@ router.post("/register", async function (req, res) {
   const { firstName, lastName, username, email, password } = req.body;
 
   if (!firstName || !lastName || !username || !email || !password) {
-    res.status(400).json({
-      message:
-        "please include a firstName, lastName, username, email, password",
-    });
+    commonErrorMessage(
+      res,
+      400,
+      "please send all required fields: first name, last name, username, email, password"
+    );
     return;
   }
   if (!validator.isEmail(email)) {
-    res.status(400).json({
-      message: "please input a valid email addr",
-    });
+    commonErrorMessage(res, 400, "invalid email");
     return;
   }
   if (
@@ -50,9 +50,11 @@ router.post("/register", async function (req, res) {
     matcher.getAllMatches(email) !== 0 ||
     matcher.getAllMatches(username) !== 0
   ) {
-    res.status(400).json({
-      message: "bad word detected, pls dont use bad word",
-    });
+    commonErrorMessage(
+      res,
+      400,
+      "no bad words allowed, if you believe this is a mistake please contact support"
+    );
     return;
   }
   if (
@@ -60,9 +62,11 @@ router.post("/register", async function (req, res) {
     lastName.includes(" ") ||
     username.includes(" ")
   ) {
-    res.status(400).json({
-      message: "no spaces allowed in first last or user name",
-    });
+    commonErrorMessage(
+      res,
+      400,
+      "no spaces allowed in first name, last name, or username"
+    );
     return;
   }
 
@@ -79,15 +83,11 @@ router.post("/register", async function (req, res) {
   if (result) {
     res.status(201).json({ message: "successfully created a account" });
   } else {
-    res.status(500).json({
-      message:
-        "failed to create account, server error. contact support for help.",
-    });
+    commonErrorMessage(res, 500, "failed to create account");
   }
 });
 
 router.post("/login", (req, res, next) => {
-  dlog("email login");
   passport.authenticate("local", (err, user, info, status) => {
     if (err) {
       dlog("/auth/login errored", status);

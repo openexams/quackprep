@@ -8,6 +8,7 @@ import {
   getClassCategories,
 } from "#models/class/index.js";
 import { cascadeSetDeleted } from "#utils/sqlFunctions.js";
+import { commonErrorMessage } from "#utils/utils.js";
 import express from "express";
 const router = express.Router();
 
@@ -16,7 +17,7 @@ router.get("/", async function (req, res) {
     const result = await getClasses();
     res.status(200).json(result);
   } catch (error) {
-    res.status(500).json({ message: "server error could not get classes" });
+    commonErrorMessage(res, 500, "failed to get all classes", error);
   }
 });
 
@@ -36,9 +37,7 @@ router.get("/categories", async function (req, res) {
     const result = await getClassCategories();
     res.status(200).json(result);
   } catch (error) {
-    res
-      .status(500)
-      .json({ message: "server error could not get class categories" });
+    commonErrorMessage(res, 500, "failed to get all class categories", error);
   }
 });
 
@@ -61,9 +60,12 @@ router.delete(
       );
       res.status(200).json(result);
     } catch (error) {
-      res.status(500).json({
-        message: `failed to delete class by id ${req.params.class_id}`,
-      });
+      commonErrorMessage(
+        res,
+        500,
+        `failed to delete class ${req.params.class_id}`,
+        error
+      );
     }
   }
 );
@@ -72,7 +74,11 @@ router.post("/", isAuthenticated, isCreator, async function (req, res) {
   const data = req.body;
   try {
     if (!data.school_id || !data.name || !data.description || !data.category) {
-      res.status(400).json({ message: `pls provide all needed values ` });
+      commonErrorMessage(
+        res,
+        400,
+        "missing required fields school_id, name, description, category"
+      );
       return;
     }
 
@@ -86,9 +92,7 @@ router.post("/", isAuthenticated, isCreator, async function (req, res) {
     );
     res.status(200).json(result);
   } catch (error) {
-    res.status(500).json({
-      message: `server error could not create class with user id ${req.user}`,
-    });
+    commonErrorMessage(res, 500, "failed to add class", error);
   }
 });
 
@@ -98,7 +102,7 @@ router.get("/school/all", async function (req, res) {
     const result = await getSchools();
     res.status(200).json(result);
   } catch (error) {
-    res.status(500).json({ message: "failed to get all schools" });
+    commonErrorMessage(res, 500, "failed to get all schools", error);
   }
 });
 

@@ -7,6 +7,7 @@ import {
 } from "#models/group/index.js";
 import { cascadeSetDeleted } from "#utils/sqlFunctions.js";
 import { isCreator } from "#middleware/creatorMiddleware.js";
+import { commonErrorMessage } from "#utils/utils.js";
 
 const router = express.Router();
 
@@ -15,9 +16,12 @@ router.get("/user/:type", isAuthenticated, async function (req, res) {
     const result = await getGroupsByUserId(req.user, req.params.type);
     res.status(200).json(result);
   } catch (error) {
-    res.status(500).json({
-      message: `getting groups by user id ${req.user} and type ${req.params.type} failed`,
-    });
+    commonErrorMessage(
+      res,
+      500,
+      `failed to get groups by user id ${req.user}`,
+      error
+    );
   }
 });
 
@@ -29,9 +33,12 @@ router.get("/:type/:classId", async function (req, res) {
     );
     res.status(200).json(result);
   } catch (error) {
-    res.status(500).json({
-      message: `getting groups by class id ${req.params.classId} and type ${req.params.type} failed`,
-    });
+    commonErrorMessage(
+      res,
+      500,
+      `failed to get groups by class id ${req.params.classId} and type ${req.params.type}`,
+      error
+    );
   }
 });
 
@@ -54,9 +61,12 @@ router.delete(
       );
       res.status(200).json(result);
     } catch (error) {
-      res.status(500).json({
-        message: `failed to delete group by id ${req.params.group_id}`,
-      });
+      commonErrorMessage(
+        res,
+        500,
+        `failed to delete group ${req.params.group_id}`,
+        error
+      );
     }
   }
 );
@@ -65,9 +75,11 @@ router.post("/:type", isAuthenticated, isCreator, async function (req, res) {
   const data = req.body;
   try {
     if (!req.params.type || !data.name || !data.desc || !data.class_id) {
-      res.status(400).json({
-        message: `pls pass in all agrs`,
-      });
+      commonErrorMessage(
+        res,
+        400,
+        `missing required fields need type, name, desc, class_id`
+      );
       return;
     }
     const result = await upsertGroupInClass(
@@ -80,10 +92,12 @@ router.post("/:type", isAuthenticated, isCreator, async function (req, res) {
     );
     res.status(201).json(result);
   } catch (error) {
-    console.log(error);
-    res.status(500).json({
-      message: `failed to create group by class id ${data.class_id}`,
-    });
+    commonErrorMessage(
+      res,
+      500,
+      `failed to create group in class ${req.body.class_id} and type ${req.params.type}`,
+      error
+    );
   }
 });
 
