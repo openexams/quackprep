@@ -277,6 +277,7 @@ export function selectArrayOfIncludingItem(array, objectKeyToCheck, including) {
  * @param {Array} valuesIncluded
  */
 export function selectArrayOfIncludingItems(array, keysToCheck, valuesIncluded) {
+  // todo if im trying to pull in question 430 it will pull in question 43, 30, and 430
   if (!Array.isArray(array) || keysToCheck == null) {
     return array;
   }
@@ -297,7 +298,10 @@ export function selectArrayOfIncludingItems(array, keysToCheck, valuesIncluded) 
     let canAdd = true;
     for (let j = 0; j < keysToCheck.length; j++) {
       // go through keys
-      if (String(array[i]?.[keysToCheck[j]])?.toLowerCase()?.includes(valuesIncluded[j]?.toLowerCase())) {
+      if (
+        valuesIncluded[j] === '' ||
+        String(array[i]?.[keysToCheck[j]])?.toLowerCase()?.includes(valuesIncluded[j]?.toLowerCase())
+      ) {
       } else {
         canAdd = false;
       }
