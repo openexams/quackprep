@@ -19,7 +19,7 @@ import ItemEdit from '@components/ItemEdit';
 import { upsertTopic, deleteTopicById } from '../class/group/topic/topicSlice';
 import { deleteExamById, upsertExam } from '../class/group/exam/examSlice';
 import { upsertChoice, deleteChoiceById } from '../class/question/choices/choicesSlice';
-import { deepCopyArrayOfObjects, selectArrayOfIncludingItems } from '@utils/functions';
+import { deepCopyArrayOfObjects, selectArrayOfIncludingItems, selectArrayOfIncludingItemsByNumber } from '@utils/functions';
 import CreateFilter from './CreateFilter';
 import SchoolsList from '../class/school/SchoolsList';
 import { getSchools } from '../class/school/schoolSlice';
@@ -43,33 +43,33 @@ export default function Create() {
   /**
    * Get the classes, topics, exams, questions, and choices that match the filter
    */
-  const classes = selectArrayOfIncludingItems(
+  const classes = selectArrayOfIncludingItemsByNumber(
     useSelector(selectClassState).classes,
     ['school_id', 'category', 'id'],
     [filter.school_id, filter.class_type, filter.class_id],
   );
-  const pdfs = selectArrayOfIncludingItems(
+  const pdfs = selectArrayOfIncludingItemsByNumber(
     useSelector(selectPdfsState).pdfs,
     ['school_id', 'class_category', 'class_id', 'id'],
     [filter.school_id, filter.class_type, filter.class_id, filter.pdf_id],
   );
-  const topics = selectArrayOfIncludingItems(
+  const topics = selectArrayOfIncludingItemsByNumber(
     useSelector(selectTopicState).topics,
     ['school_id', 'class_category', 'class_id', 'id'],
     [filter.school_id, filter.class_type, filter.class_id, filter.group_id],
   );
-  const exams = selectArrayOfIncludingItems(
+  const exams = selectArrayOfIncludingItemsByNumber(
     useSelector(selectExamsState).exams,
     ['school_id', 'class_category', 'class_id', 'id'],
     [filter.school_id, filter.class_type, filter.class_id, filter.group_id],
   );
-  const questions = selectArrayOfIncludingItems(
+  const questions = selectArrayOfIncludingItemsByNumber(
     useSelector(selectQuestionState).questions,
     ['school_id', 'class_category', 'class_id', 'group_id', 'id'],
     [filter.school_id, filter.class_type, filter.class_id, filter.group_id, filter.question_id],
   );
 
-  const choices = selectArrayOfIncludingItems(
+  const choices = selectArrayOfIncludingItemsByNumber(
     useSelector(selectChoicesState).choices,
     ['school_id', 'class_category', 'class_id', 'group_id', 'question_id', 'id'],
     [filter.school_id, filter.class_type, filter.class_id, filter.group_id, filter.question_id, filter.choice_id],
@@ -113,28 +113,31 @@ export default function Create() {
   // maps the classes into a array of itemedit components
   function mapClassesToItems() {
     // DO THIS SHIT TO MUCH IS THERE A WAY TO ABSTRACT?
-    let ret = classes.map((cl) => {
-      return (
-        <ItemEdit
-          key={'cc' + cl.id}
-          id={cl.id}
-          name={cl.name}
-          desc={cl.description}
-          formFields={[
-            { name: 'name', value: cl.name, required: true },
-            { name: 'description', value: cl.description, required: true },
-            { name: 'category', value: cl.category, required: true },
-            { name: 'school_id', value: cl.school_id, required: true },
-          ]}
-          onSubmit={({ name, description, category, school_id }) => {
-            dispatch(upsertClass(cl.id, school_id, name, description, category));
-          }}
-          onDelete={() => {
-            dispatch(deleteClassById(cl.id));
-          }}
-        />
-      );
-    });
+    let ret = [];
+    if (classes) {
+      ret = classes?.map((cl) => {
+        return (
+          <ItemEdit
+            key={'cc' + cl.id}
+            id={cl.id}
+            name={cl.name}
+            desc={cl.description}
+            formFields={[
+              { name: 'name', value: cl.name, required: true },
+              { name: 'description', value: cl.description, required: true },
+              { name: 'category', value: cl.category, required: true },
+              { name: 'school_id', value: cl.school_id, required: true },
+            ]}
+            onSubmit={({ name, description, category, school_id }) => {
+              dispatch(upsertClass(cl.id, school_id, name, description, category));
+            }}
+            onDelete={() => {
+              dispatch(deleteClassById(cl.id));
+            }}
+          />
+        );
+      });
+    }
     ret.push(
       <ItemEdit
         key='cplus'
@@ -158,27 +161,30 @@ export default function Create() {
     return ret;
   }
   function mapPdfsToItems() {
-    let ret = pdfs.map((pdf) => {
-      return (
-        <ItemEdit
-          key={'pdf' + pdf.id}
-          id={pdf.id}
-          name={pdf.name}
-          desc={pdf.link}
-          formFields={[
-            { name: 'name', value: pdf.name, required: true },
-            { name: 'link', value: pdf.link, required: true },
-            { name: 'class_id', value: pdf.class_id, required: true },
-          ]}
-          onSubmit={({ link, class_id, name }) => {
-            dispatch(upsertPdf(name, class_id, link, pdf.id));
-          }}
-          onDelete={() => {
-            dispatch(deletePdfById(pdf.id));
-          }}
-        />
-      );
-    });
+    let ret = [];
+    if (pdfs) {
+      ret = pdfs?.map((pdf) => {
+        return (
+          <ItemEdit
+            key={'pdf' + pdf.id}
+            id={pdf.id}
+            name={pdf.name}
+            desc={pdf.link}
+            formFields={[
+              { name: 'name', value: pdf.name, required: true },
+              { name: 'link', value: pdf.link, required: true },
+              { name: 'class_id', value: pdf.class_id, required: true },
+            ]}
+            onSubmit={({ link, class_id, name }) => {
+              dispatch(upsertPdf(name, class_id, link, pdf.id));
+            }}
+            onDelete={() => {
+              dispatch(deletePdfById(pdf.id));
+            }}
+          />
+        );
+      });
+    }
     ret.push(
       <ItemEdit
         key='pdfplus'
@@ -202,27 +208,30 @@ export default function Create() {
   }
 
   function mapTopicsToItems() {
-    let ret = topics.map((topic) => {
-      return (
-        <ItemEdit
-          key={'t' + topic.id}
-          id={topic.id}
-          name={topic.name}
-          desc={topic.desc}
-          formFields={[
-            { name: 'name', value: topic.name, required: true },
-            { name: 'description', value: topic.description, required: true },
-            { name: 'class_id', value: topic.class_id, required: true },
-          ]}
-          onSubmit={({ name, description, class_id }) => {
-            dispatch(upsertTopic(topic.id, name, class_id, description));
-          }}
-          onDelete={() => {
-            dispatch(deleteTopicById(topic.id));
-          }}
-        />
-      );
-    });
+    let ret = [];
+    if (topics) {
+      ret = topics?.map((topic) => {
+        return (
+          <ItemEdit
+            key={'t' + topic.id}
+            id={topic.id}
+            name={topic.name}
+            desc={topic.desc}
+            formFields={[
+              { name: 'name', value: topic.name, required: true },
+              { name: 'description', value: topic.description, required: true },
+              { name: 'class_id', value: topic.class_id, required: true },
+            ]}
+            onSubmit={({ name, description, class_id }) => {
+              dispatch(upsertTopic(topic.id, name, class_id, description));
+            }}
+            onDelete={() => {
+              dispatch(deleteTopicById(topic.id));
+            }}
+          />
+        );
+      });
+    }
     ret.push(
       <ItemEdit
         key='tplus'
@@ -246,27 +255,30 @@ export default function Create() {
   }
 
   function mapExamsToItems() {
-    let ret = exams.map((exam) => {
-      return (
-        <ItemEdit
-          key={'e' + exam.id}
-          id={exam.id}
-          name={exam.name}
-          desc={exam.desc}
-          formFields={[
-            { name: 'name', value: exam.name, required: true },
-            { name: 'description', value: exam.desc, required: true },
-            { name: 'class_id', value: exam.class_id, required: true },
-          ]}
-          onSubmit={({ name, description, class_id }) => {
-            dispatch(upsertExam(exam.id, name, class_id, description));
-          }}
-          onDelete={() => {
-            dispatch(deleteExamById(exam.id));
-          }}
-        />
-      );
-    });
+    let ret = [];
+    if (exams) {
+      ret = exams?.map((exam) => {
+        return (
+          <ItemEdit
+            key={'e' + exam.id}
+            id={exam.id}
+            name={exam.name}
+            desc={exam.desc}
+            formFields={[
+              { name: 'name', value: exam.name, required: true },
+              { name: 'description', value: exam.desc, required: true },
+              { name: 'class_id', value: exam.class_id, required: true },
+            ]}
+            onSubmit={({ name, description, class_id }) => {
+              dispatch(upsertExam(exam.id, name, class_id, description));
+            }}
+            onDelete={() => {
+              dispatch(deleteExamById(exam.id));
+            }}
+          />
+        );
+      });
+    }
     ret.push(
       <ItemEdit
         key='eplus'
@@ -290,33 +302,36 @@ export default function Create() {
   }
 
   function mapQuestionsToItems() {
-    let ret = questions.map((question, index) => {
-      return (
-        <ItemEdit
-          key={'q' + question.id + index}
-          id={question.id}
-          name={question.question}
-          desc={null}
-          formFields={[
-            { name: 'question', value: question.question, required: true },
-            { name: 'group_id', value: String(question.group_id), required: true },
-            { name: 'question_num_on_exam', value: question.question_num_on_exam, required: false },
-          ]}
-          onSubmit={({ question, question_num_on_exam, group_id }) => {
-            if (group_id.includes(',')) group_id = group_id.split(',');
-            else {
-              let tmp = [];
-              tmp.push(group_id);
-              group_id = tmp;
-            }
-            dispatch(upsertQuestionWithGroupIds(question.id, question, question_num_on_exam, group_id));
-          }}
-          onDelete={() => {
-            dispatch(deleteQuestionById(question.id));
-          }}
-        />
-      );
-    });
+    let ret = [];
+    if (questions) {
+      ret = questions?.map((question, index) => {
+        return (
+          <ItemEdit
+            key={'q' + question.id + index}
+            id={question.id}
+            name={question.question}
+            desc={null}
+            formFields={[
+              { name: 'question', value: question.question, required: true },
+              { name: 'group_id', value: String(question.group_id), required: true },
+              { name: 'question_num_on_exam', value: question.question_num_on_exam, required: false },
+            ]}
+            onSubmit={({ question, question_num_on_exam, group_id }) => {
+              if (group_id.includes(',')) group_id = group_id.split(',');
+              else {
+                let tmp = [];
+                tmp.push(group_id);
+                group_id = tmp;
+              }
+              dispatch(upsertQuestionWithGroupIds(question.id, question, question_num_on_exam, group_id));
+            }}
+            onDelete={() => {
+              dispatch(deleteQuestionById(question.id));
+            }}
+          />
+        );
+      });
+    }
     ret.push(
       <ItemEdit
         key='qplus'
@@ -347,28 +362,31 @@ export default function Create() {
 
   // need to do one of those above for choice now :(
   function mapChoicesToItems() {
-    let ret = choices?.map((choice, index) => {
-      return (
-        <ItemEdit
-          key={'choice' + choice.id}
-          id={choice.id}
-          name={choice.answer}
-          desc={choice.is_correct ? 'Correct' : 'Incorrect'}
-          formFields={[
-            { name: 'text', value: choice.answer, required: true },
-            { name: 'is_correct', value: choice.is_correct, required: true },
-            { name: 'question_id', value: choice.question_id, required: true },
-            { name: 'type', value: choice.type, required: true },
-          ]}
-          onSubmit={({ text, is_correct, question_id, type }) => {
-            dispatch(upsertChoice(text, question_id, is_correct, type, choice.id));
-          }}
-          onDelete={(id) => {
-            dispatch(deleteChoiceById(id));
-          }}
-        />
-      );
-    });
+    let ret = [];
+    if (choices) {
+      ret = choices?.map((choice, index) => {
+        return (
+          <ItemEdit
+            key={'choice' + choice.id}
+            id={choice.id}
+            name={choice.answer}
+            desc={choice.is_correct ? 'Correct' : 'Incorrect'}
+            formFields={[
+              { name: 'text', value: choice.answer, required: true },
+              { name: 'is_correct', value: choice.is_correct, required: true },
+              { name: 'question_id', value: choice.question_id, required: true },
+              { name: 'type', value: choice.type, required: true },
+            ]}
+            onSubmit={({ text, is_correct, question_id, type }) => {
+              dispatch(upsertChoice(text, question_id, is_correct, type, choice.id));
+            }}
+            onDelete={(id) => {
+              dispatch(deleteChoiceById(id));
+            }}
+          />
+        );
+      });
+    }
     ret.push(
       <ItemEdit
         key='chplus'
@@ -427,20 +445,14 @@ export default function Create() {
             <CategoryList />
           </Segment>
           <CreateFilter filter={filter} setFilter={setFilter} />
-          {classes &&
-            topics &&
-            exams &&
-            questions &&
-            choices &&
-            pdfs &&
-            loadAccords([
-              { name: 'Classes', component: mapClassesToItems() },
-              { name: 'PDFs', component: mapPdfsToItems() },
-              { name: 'Topics', component: mapTopicsToItems() },
-              { name: 'Exams', component: mapExamsToItems() },
-              { name: 'Questions', component: mapQuestionsToItems() },
-              { name: 'Choices', component: mapChoicesToItems() },
-            ])}
+          {loadAccords([
+            { name: 'Classes', component: mapClassesToItems() },
+            { name: 'PDFs', component: mapPdfsToItems() },
+            { name: 'Topics', component: mapTopicsToItems() },
+            { name: 'Exams', component: mapExamsToItems() },
+            { name: 'Questions', component: mapQuestionsToItems() },
+            { name: 'Choices', component: mapChoicesToItems() },
+          ])}
         </Segment>
       ) : (
         <Segment>You must be a creator! How did you get here? {';)'}</Segment>

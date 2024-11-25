@@ -31,6 +31,7 @@ import {
   choicesFetchLogic,
   pdfsFetchLogic,
 } from './navbarFunctions';
+import { getClassCategories } from '@src/app/class/class_categories/classCategorySlice';
 
 export default function Navbar() {
   const location = useLocation();
@@ -104,7 +105,9 @@ export default function Navbar() {
       if (activePage?.includes('topic') && className && classId) {
         dispatch(updateGroupType('topic'));
       }
-
+      if (!loading?.ClassList) {
+        dispatch(getClassCategories());
+      }
       if (!loading?.SchoolsList) {
         schoolFetchLogic(dispatch, schools);
         schoolUpdateLogic(dispatch, schools, schoolName);

@@ -4,7 +4,7 @@ import { createSelector } from 'reselect';
 const GET_CLASS_CATEGORIES = 'app/class/class_categories/GET_CLASS_CATEGORIES';
 
 export function getClassCategories() {
-  return standardApiCall('get', '/api/class/categories', null, GET_CLASS_CATEGORIES, 'Create');
+  return standardApiCall('get', '/api/class/categories', null, GET_CLASS_CATEGORIES, ['Create', 'ClassList']);
 }
 
 const DEFAULT_STATE = {

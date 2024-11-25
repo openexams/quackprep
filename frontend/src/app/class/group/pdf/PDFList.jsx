@@ -1,7 +1,7 @@
 import { changeNavbarPage, selectNavbarState } from '@components/navbar/navbarSlice.js';
 import { selectBINARYArrayOfStateById } from '@utils/functions';
 import { useDispatch, useSelector } from 'react-redux';
-import { Segment, Header, Icon, Grid, Button } from 'semantic-ui-react';
+import { Segment, Header, Icon, Grid, Button, Container, Dimmer } from 'semantic-ui-react';
 import { useNavigate } from 'react-router-dom';
 import { selectLoadingState } from '@src/app/store/loadingSlice.js';
 
@@ -24,9 +24,9 @@ export default function PDFList() {
         </Header.Content>
       </Header>
 
-      <Grid columns={3} stackable>
+      <Grid columns={5} stackable>
         {pdfs?.map((pdf, index) => (
-          <Grid.Column key={index} style={{ paddingBottom: '100%' }}>
+          <Grid.Column key={index}>
             <Segment>
               <Header as='h4' textAlign='center'>
                 {pdf.name}
