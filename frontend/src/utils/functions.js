@@ -314,6 +314,57 @@ export function selectArrayOfIncludingItems(array, keysToCheck, valuesIncluded) 
 }
 
 /**
+ * checks equivalances using == againt the array and filter u are using. if valuesIncluded[i] == '' it is skipped
+ * @param {Array} array
+ * @param {Array} keysToCheck
+ * @param {Array} valuesIncluded
+ */
+export function selectArrayOfIncludingItemsByNumber(array, keysToCheck, valuesIncluded) {
+  if (!Array.isArray(array) || !Array.isArray(keysToCheck)) {
+    return array;
+  }
+
+  let canRetEarly = true;
+  for (let i = 0; i < keysToCheck?.length; i++) {
+    if (valuesIncluded[i] == '' || valuesIncluded[i] == null) {
+    } else {
+      canRetEarly = false;
+    }
+  }
+  if (canRetEarly) {
+    return array;
+  }
+  const ret = [];
+  for (let i = 0; i < array.length; i++) {
+    let canAdd = true;
+    for (let j = 0; j < keysToCheck.length; j++) {
+      if (valuesIncluded[j] !== '') {
+        const curId = valuesIncluded[j];
+        if (Array.isArray(array[i][keysToCheck[j]])) {
+          let tmp = String(array[i][keysToCheck[j]]).split(',');
+          for (let k = 0; k < tmp.length; k++) {
+            if (tmp[k] == curId) {
+              break;
+            } else {
+              canAdd = false;
+            }
+          }
+        } else {
+          if (array[i][keysToCheck[j]] == curId) {
+          } else {
+            canAdd = false;
+          }
+        }
+      }
+    }
+    if (canAdd) {
+      ret.push(array[i]);
+    }
+  }
+  return ret;
+}
+
+/**
  * unoptimal because of how state works
  * You pass in the id of the object u want to remove from the array
  * @param {Array<Object>} arr

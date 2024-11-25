@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Button, Accordion, Container, Grid, Header, Icon, Segment } from 'semantic-ui-react';
 import { useSelector, useDispatch } from 'react-redux';
 import SchoolsList from './school/SchoolsList.jsx';
-import { selectArrayOfStateById, selectBINARYArrayOfStateById } from '@utils/functions';
+import { selectBINARYArrayOfStateById } from '@utils/functions';
 import { changeNavbarPage, selectNavbarState } from '@components/navbar/navbarSlice';
 import ClassList from './ClassList';
 import { useNavigate } from 'react-router-dom';
@@ -33,7 +33,7 @@ export default function ClassPage() {
         </Segment>
       ) : (
         <Segment placeholder textAlign='center'>
-          <Grid columns={3} stackable doubling centered style={{ marginTop: '.3rem' }}>
+          <Grid columns={3} stackable doubling centered>
             <ClassList classes={classes} />
           </Grid>
         </Segment>

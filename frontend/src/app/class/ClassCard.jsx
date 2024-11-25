@@ -45,6 +45,14 @@ function getIconByCategory(category) {
       return 'cube';
     case 3 || 'ECON':
       return 'cog';
+    case 4 || 'BIO':
+      return 'dna';
+    case 5 || 'CHEM':
+      return 'flask';
+    case 6 || 'PHY':
+      return 'rocket';
+    case 7 || 'PSY':
+      return 'puzzle';
     default:
       return 'beer';
   }
