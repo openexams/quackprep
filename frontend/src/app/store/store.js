@@ -7,7 +7,7 @@ import homeReducer from '../home/homeSlice.js';
 import loginReducer from '../auth/login/loginSlice.js';
 import navbarReducer from '@components/navbar/navbarSlice.js';
 import streakReducer from '../streak/streakSlice.js';
-import classReducer from '../class/classSlice.js';
+import classReducer from '@src/app/class/classSlice.js';
 import topicReducer from '../class/group/topic/topicSlice.js';
 import questionsReducer from '../class/question/questionSlice.js';
 import leadboardReducer from '../leaderboard/leaderboardSlice.js';

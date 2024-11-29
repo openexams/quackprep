@@ -20,7 +20,7 @@ export default function Main() {
         }}
       >
         <FlashMessage />
-        <div style={{ flex: 1, paddingTop: '5.6em' }}>
+        <div style={{ flex: 1, paddingTop: '5.7em' }}>
           <AppRouter />
         </div>
         <Footer />

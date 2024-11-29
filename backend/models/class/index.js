@@ -27,7 +27,7 @@ export async function getClasses() {
 
 // school table in class
 export async function getSchools() {
-  return await sqlExe.executeCommand(`SELECT * FROM schools`);
+  return await sqlExe.executeCommand(`SELECT * FROM schools WHERE deleted = 0`);
 }
 
 export async function getClassesByUserId(user_id) {
