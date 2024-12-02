@@ -42,6 +42,7 @@ h6 {
   --input-background: #e2e8f0; /* Soft Gray for input fields */
   --input-border: #94a3b8; /* Light Blue Gray for input borders */
   --dropdown-background: #60a5fa; /* Sky Blue for dropdowns */
+  --opposite: red;
 }
 
 h1.ui.header {

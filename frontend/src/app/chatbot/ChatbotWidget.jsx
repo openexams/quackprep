@@ -27,7 +27,7 @@ export default function ChatbotWidget() {
     right: '20px',
     width: '4.5rem',
     height: '4.5rem',
-    backgroundColor: '#ff4d4d',
+    backgroundColor: 'var(--accent-color) !important',
     borderRadius: '50%',
     boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
     display: 'flex',
