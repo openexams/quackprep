@@ -81,7 +81,7 @@ export async function getChoicesByGroupId(group_id) {
       LEFT JOIN group_question new_gq ON c.question_id = new_gq.question_id
       JOIN cgroups g on g.id = new_gq.group_id 
       JOIN classes cl ON cl.id = g.class_id
-      WHERE c.deleted=0 AND g.deleted=0 AND cl.deleted=0 AND gq.group_id =30
+      WHERE c.deleted=0 AND g.deleted=0 AND cl.deleted=0 AND gq.group_id =:group_id
       ORDER BY c.id ASC
 
 `,
