@@ -6,8 +6,8 @@ import { selectArrayOfStateByGroupId } from '@utils/functions';
 import { changeNavbarPage, selectNavbarState } from '@components/navbar/navbarSlice';
 import { selectLoadingState } from '@src/app/store/loadingSlice';
 import ChoiceRouter from './choices/ChoiceRouter';
-import QuestionReport from './QuestionReport';
 import { useNavigate } from 'react-router-dom';
+import ChatbotWidget from '@src/app/chatbot/ChatbotWidget';
 
 /**
  *
@@ -84,6 +84,7 @@ export default function QuestionPage() {
           </Grid.Column>
         </Grid.Row>
       </Grid>
+      <ChatbotWidget />
     </Segment>
   );
 }

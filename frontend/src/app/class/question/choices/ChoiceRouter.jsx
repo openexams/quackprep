@@ -6,6 +6,7 @@ import MarkdownRenderer from '@components/MarkdownRenderer';
 import { selectLoadingState } from '@src/app/store/loadingSlice';
 import FreeResponse from './types/FreeResponse';
 import QuestionReport from '../QuestionReport';
+import NoItemsFound from '@components/NoItemsFound';
 
 export default function ChoiceRouter({ selectedQuestion }) {
   const choices = useSelector(selectArrayOfStateById('app.choices.choices', 'question_id', selectedQuestion?.id));
@@ -21,7 +22,7 @@ export default function ChoiceRouter({ selectedQuestion }) {
     } else if (choices?.[0]?.type === 'select') {
       <div>not out yet how this possible</div>;
     } else {
-      return <Segment>No Choices Found, or bad choices inputted</Segment>;
+      return <NoItemsFound />;
     }
   }
   return (
