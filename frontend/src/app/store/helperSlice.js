@@ -1,4 +1,4 @@
-import { filterArr, updateArrObjectsWithNewVals, upsertArray } from '../../../../libs/maddox-js-funcs/functions';
+import { filterArr, updateArrObjectsWithNewVals, upsertArray } from 'maddox-js-funcs';
 
 /**
  * DO NOT USE UNDER ANY CIRCUMSTANCE, just for refernce, cannot be used to abstract because of how redux combine reducers works

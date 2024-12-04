@@ -1,12 +1,7 @@
 import { standardApiCall } from '@utils/api';
 import { createSelector } from 'reselect';
 import { deleteGroupById, getGroupsByUserId, upsertGroup } from '../groupSlice';
-import {
-  updateArrObjectsWithNewVals,
-  filterArr,
-  upsertArray,
-  countingSort,
-} from '../../../../../../libs/maddox-js-funcs/functions';
+import { updateArrObjectsWithNewVals, filterArr, upsertArray, countingSort } from 'maddox-js-funcs';
 
 const GET_TOPICS = 'app/class/topic/GET_TOPICS';
 const DELETE_TOPIC = 'app/class/topic/DELETE_TOPIC';

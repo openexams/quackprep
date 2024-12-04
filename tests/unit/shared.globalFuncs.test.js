@@ -2,7 +2,7 @@ import {
   countingSort,
   randomizeArray,
   selectMutlipleBinarySearch,
-} from "../../shared/globalFuncs.js";
+} from "maddox-js-funcs";
 import { test, expect } from "playwright/test";
 
 test("given an arr to randomize with 5 elements, call randomizeArr, assert its the same size as the og arr", () => {

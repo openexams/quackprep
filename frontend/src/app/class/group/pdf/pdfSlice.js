@@ -1,11 +1,6 @@
 import { standardApiCall } from '@utils/api';
 import { createSelector } from 'reselect';
-import {
-  updateArrObjectsWithNewVals,
-  filterArr,
-  upsertArray,
-  countingSort,
-} from '../../../../../../libs/maddox-js-funcs/functions';
+import { updateArrObjectsWithNewVals, filterArr, upsertArray, countingSort } from 'maddox-js-funcs';
 
 const GET_CRUD_PDFS = 'app/class/pdf/GET_CRUD_PDFS';
 const DELETE_CRUD_PDF = 'app/class/pdf/DELETE_CRUD_PDF';

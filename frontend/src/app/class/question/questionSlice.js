@@ -1,5 +1,5 @@
 import { standardApiCall } from '@utils/api';
-import { updateArrObjectsWithNewVals, upsertArray, filterArr, mergeData } from '../../../../../libs/maddox-js-funcs/functions';
+import { updateArrObjectsWithNewVals, upsertArray, filterArr, mergeData } from 'maddox-js-funcs';
 import { createSelector } from 'reselect';
 
 const GET_CRUD_QUESTIONS = 'app/class/question/GET_CRUD_QUESTIONS';

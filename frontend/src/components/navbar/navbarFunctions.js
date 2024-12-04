@@ -5,7 +5,7 @@ import { getExamsByClassId } from '@src/app/class/group/exam/examSlice';
 import { getQuestionsByGroupId } from '@src/app/class/question/questionSlice';
 import { getChoicesByGroup } from '@src/app/class/question/choices/choicesSlice';
 import { updateCurrentClassData, updateCurrentGroupData, updateQuestionId, updateSchoolId } from './navbarSlice';
-import { findNeedleInArrayOfObjectsLINEAR, findNeedlesInArrayOfObjectsLINEAR } from '../../../../libs/maddox-js-funcs/functions';
+import { findNeedleInArrayOfObjectsLINEAR, findNeedlesInArrayOfObjectsLINEAR } from 'maddox-js-funcs';
 import { getPdfsByClassId } from '@src/app/class/group/pdf/pdfSlice';
 
 /**

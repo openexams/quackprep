@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 import { standardApiCall } from '@utils/api';
-import { copyArray, updateObjectWithKey, replaceP20WithSpace } from '../../../../libs/maddox-js-funcs/functions';
+import { copyArray, updateObjectWithKey, replaceP20WithSpace } from 'maddox-js-funcs';
 
 const CHANGE_NAVBAR_PAGE = 'components/navbar/CHANGE_NAVBAR_PAGE';
 const GO_LAST_PAGE = 'components/navbar/GO_LAST_PAGE';

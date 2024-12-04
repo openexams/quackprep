@@ -1,6 +1,6 @@
 import { Header, Segment } from 'semantic-ui-react';
 import { useParams } from 'react-router-dom';
-import { selectBINARYArrayOfStateById } from '../../../../../../libs/maddox-js-funcs/functions';
+import { selectBINARYArrayOfStateById } from 'maddox-js-funcs';
 import { useSelector } from 'react-redux';
 
 export default function PDFView() {
