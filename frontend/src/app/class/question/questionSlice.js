@@ -45,11 +45,23 @@ export function upsertQuestionWithGroupIds(id, question, question_num_on_exam, g
     { id, question, question_num_on_exam, group_ids },
     UPSERT_CRUD_QUESTION,
     'Create',
+    null,
+    null,
+    'successfully upserted question',
   );
 }
 
 export function deleteQuestionById(id) {
-  return standardApiCall('delete', `/api/question/${id}`, null, DELETE_CRUD_QUESTION, 'Create');
+  return standardApiCall(
+    'delete',
+    `/api/question/${id}`,
+    null,
+    DELETE_CRUD_QUESTION,
+    'Create',
+    null,
+    null,
+    'successfully deleted question',
+  );
 }
 
 const DEFAULT_STATE = {

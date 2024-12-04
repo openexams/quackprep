@@ -1,5 +1,6 @@
 import sqlExe from "#db/dbFunctions.js";
 import {
+  getLastRowManipulated,
   verifyRowCreatedByUser,
   verifyUserOwnsRowId,
 } from "#utils/sqlFunctions.js";
@@ -111,19 +112,19 @@ export async function upsertChoiceToQuestion(
     return;
   }
 
-  const choice_id = (
-    await sqlExe.executeCommand(
-      `INSERT INTO choices (id,answer,is_correct,created_by,question_id,type) values (:id,:text,:isCorrect,:user_id,:question_id,:type)
+  const choice_id = await sqlExe.executeCommand(
+    `INSERT INTO choices (id,answer,is_correct,created_by,question_id,type) values (:id,:text,:isCorrect,:user_id,:question_id,:type)
       ON DUPLICATE KEY UPDATE
       answer=:text,
       is_correct=:isCorrect,
       question_id=:question_id,
       type=:type`,
-      params
-    )
+    params
   ).insertId;
-
-  return await selectChoices("c.id =:choice_id", { choice_id });
+  // return the id the user sent (user edited) or return the created row.
+  return await selectChoices("c.id =:choice_id", {
+    choice_id: id || choice_id,
+  });
 }
 
 /**

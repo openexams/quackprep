@@ -34,10 +34,10 @@ export default function Footer() {
               <Grid.Column width={3}>
                 <Header inverted as='h4' content='Feedback' />
                 <List link inverted>
-                  <List.Item as={Link} to='https://discord.gg/APy5379qT8'>
+                  <List.Item as={Link} to='https://maddox.boo/Z5GAS'>
                     Feature Request
                   </List.Item>
-                  <List.Item as={Link} to='https://discord.gg/APy5379qT8'>
+                  <List.Item as={Link} to='https://maddox.boo/Z5GAS'>
                     Bug Report
                   </List.Item>
                 </List>

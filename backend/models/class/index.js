@@ -75,5 +75,5 @@ export async function upsertClass(
       params
     )
   ).insertId;
-  return await selectClasses("cl.id = :class_id", { class_id });
+  return await selectClasses("cl.id = :class_id", { class_id: id || class_id });
 }

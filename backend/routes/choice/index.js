@@ -134,7 +134,6 @@ router.post(
         data.type,
         data?.id || null
       );
-
       res.status(201).json(result);
     } catch (error) {
       commonErrorMessage(

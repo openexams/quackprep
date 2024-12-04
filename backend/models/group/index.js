@@ -60,7 +60,7 @@ export async function upsertGroupInClass(
     );
     return;
   }
-  const result = (
+  const group_id = (
     await sqlExe.executeCommand(
       `INSERT INTO cgroups(id,name,type,\`desc\`,created_by,class_id) VALUES(:id,:name,(SELECT id FROM group_types where type_name = :type),:desc,:user_id,:class_id)
       ON DUPLICATE KEY UPDATE
@@ -73,5 +73,5 @@ export async function upsertGroupInClass(
       params
     )
   ).insertId;
-  return await selectGroups(`g.id = :result`, { result });
+  return await selectGroups(`g.id = :result`, { result: id || group_id });
 }

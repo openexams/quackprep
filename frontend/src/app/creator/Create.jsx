@@ -219,7 +219,7 @@ export default function Create() {
             desc={topic.desc}
             formFields={[
               { name: 'name', value: topic.name, required: true },
-              { name: 'description', value: topic.description, required: true },
+              { name: 'description', value: topic.desc, required: true },
               { name: 'class_id', value: topic.class_id, required: true },
             ]}
             onSubmit={({ name, description, class_id }) => {
@@ -304,17 +304,17 @@ export default function Create() {
   function mapQuestionsToItems() {
     let ret = [];
     if (questions) {
-      ret = questions?.map((question, index) => {
+      ret = questions?.map((curQuestion, index) => {
         return (
           <ItemEdit
-            key={'q' + question.id + index}
-            id={question.id}
-            name={question.question}
+            key={'q' + curQuestion.id + index}
+            id={curQuestion.id}
+            name={curQuestion.question}
             desc={null}
             formFields={[
-              { name: 'question', value: question.question, required: true },
-              { name: 'group_id', value: String(question.group_id), required: true },
-              { name: 'question_num_on_exam', value: question.question_num_on_exam, required: false },
+              { name: 'question', value: curQuestion.question, required: true },
+              { name: 'group_id', value: String(curQuestion.group_id), required: true },
+              { name: 'question_num_on_exam', value: curQuestion.question_num_on_exam, required: false },
             ]}
             onSubmit={({ question, question_num_on_exam, group_id }) => {
               if (group_id.includes(',')) group_id = group_id.split(',');
@@ -323,10 +323,10 @@ export default function Create() {
                 tmp.push(group_id);
                 group_id = tmp;
               }
-              dispatch(upsertQuestionWithGroupIds(question.id, question, question_num_on_exam, group_id));
+              dispatch(upsertQuestionWithGroupIds(curQuestion.id, question, question_num_on_exam, group_id));
             }}
             onDelete={() => {
-              dispatch(deleteQuestionById(question.id));
+              dispatch(deleteQuestionById(id));
             }}
           />
         );

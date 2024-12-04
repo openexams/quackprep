@@ -73,6 +73,7 @@ router.delete(
 // type must be for now topic || exam
 router.post("/:type", isAuthenticated, isCreator, async function (req, res) {
   const data = req.body;
+  console.log(data);
   try {
     if (!req.params.type || !data.name || !data.desc || !data.class_id) {
       commonErrorMessage(

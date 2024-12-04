@@ -96,6 +96,7 @@ export async function getQuestionsByUserId(user_id) {
  * @param {Int} question_num_on_exam
  * @param {Int} user_id
  * @param {Array} group_ids only needs group ids to verify the user owns the groups
+ * @returns {Array}
  */
 export async function upsertQuestion(
   id = null,
@@ -106,7 +107,7 @@ export async function upsertQuestion(
 ) {
   const params = { id, question, question_num_on_exam, user_id };
 
-  for (let i of group_ids) {
+  for (let i = 0; i < group_ids?.length; i++) {
     // verify user created all these groups this has way to many sql calls TODO FIX
     if (
       id != null &&
@@ -124,6 +125,7 @@ export async function upsertQuestion(
     );
     return;
   }
+
   const question_id = (
     await sqlExe.executeCommand(
       `INSERT INTO questions (id,question,created_by,question_num_on_exam) VALUES(:id,:question,:user_id,:question_num_on_exam)
@@ -132,8 +134,10 @@ export async function upsertQuestion(
       question_num_on_exam=:question_num_on_exam`,
       params
     )
-  ).insertId;
-  return await selectQuestion(`q.id=:question_id`, { question_id });
+  ).insertId; // only returns a insert if a question was created
+  return await selectQuestion(`q.id=:question_id`, {
+    question_id: id || question_id,
+  });
 }
 
 /**

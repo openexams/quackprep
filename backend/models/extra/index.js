@@ -45,6 +45,5 @@ export async function upsertPdf(user_id, id, link, class_id, name) {
       params
     )
   ).insertId;
-  params["pdf_id"] = pdf_id;
-  return await selectPdfs(`p.id=:pdf_id`, params);
+  return await selectPdfs(`p.id=:pdf_id`, { pdf_id: id, pdf_id });
 }

@@ -12,9 +12,18 @@ export function getGroupsByUserId(type, resultAction) {
 }
 
 export function deleteGroupById(id, resultAction) {
-  return standardApiCall('delete', `/api/group/${id}`, null, resultAction, 'Create');
+  return standardApiCall('delete', `/api/group/${id}`, null, resultAction, 'Create', null, null, 'successfully deleted group!');
 }
 
 export function upsertGroup(id, name, class_id, type, desc, resultAction) {
-  return standardApiCall('post', `/api/group/${type}`, { id, name, class_id, desc }, resultAction, 'Create');
+  return standardApiCall(
+    'post',
+    `/api/group/${type}`,
+    { id, name, class_id, desc },
+    resultAction,
+    'Create',
+    null,
+    null,
+    'successfully upserted group!',
+  );
 }

@@ -49,11 +49,29 @@ export function getChoicesByUserId() {
 }
 
 export function upsertChoice(text, question_id, isCorrect, type, id = null) {
-  return standardApiCall('post', `/api/choice/${question_id}`, { text, isCorrect, type, id }, UPSERT_CRUD_CHOICE, 'Create');
+  return standardApiCall(
+    'post',
+    `/api/choice/${question_id}`,
+    { text, isCorrect, type, id },
+    UPSERT_CRUD_CHOICE,
+    'Create',
+    null,
+    null,
+    'successfully upserted choice!',
+  );
 }
 
 export function deleteChoiceById(id) {
-  return standardApiCall('delete', `/api/choice/${id}`, null, DELETE_CRUD_CHOICE, 'Create');
+  return standardApiCall(
+    'delete',
+    `/api/choice/${id}`,
+    null,
+    DELETE_CRUD_CHOICE,
+    'Create',
+    null,
+    null,
+    'successfully deleted choice!',
+  );
 }
 
 const DEFAULT_STATE = {
