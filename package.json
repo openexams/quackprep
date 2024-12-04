@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "start": "git submodule update --init --recursive --remote; npm install; npm run build:frontend && npm run start:backend",
+    "start": "npm install; git submodule update --init --recursive --remote;  npm run build:frontend && npm run start:backend",
     "dev": "concurrently --kill-others-on-fail --success=first \"npm run start:backend\" \"npm run dev:frontend\"",
     "build:frontend": "cd frontend && npm i && npm run build",
     "start:backend": "cd backend && npm i && npm start",
