@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Container, Grid, Segment, Header, Icon, Statistic, Progress, Button } from 'semantic-ui-react';
 import { getStreak, selectStreakData, claimStreak } from './streakSlice';
-import { Streak } from '../../../../shared/globalFuncs.js';
+import { Streak } from '../../../../libs/maddox-js-funcs/functions';
 
 const MilestoneLabel = ({ days, color }) => (
   <Segment color={color} size='tiny' className='milestone-label'>

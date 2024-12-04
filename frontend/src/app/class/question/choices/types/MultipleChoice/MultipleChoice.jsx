@@ -2,7 +2,7 @@ import './buttonChoices.css';
 import React, { useEffect, useState } from 'react';
 import { Segment, Header, List, Button, Divider } from 'semantic-ui-react';
 
-import { randomizeArray } from '../../../../../../../../shared/globalFuncs';
+import { randomizeArray } from '../../../../../../../../libs/maddox-js-funcs/functions';
 import ChoiceShow from './ChoiceShow';
 
 export default function MultipleChoice({ choices, selectedQuestion }) {
