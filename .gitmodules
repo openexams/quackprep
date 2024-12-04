@@ -1,0 +1,4 @@
+[submodule "libs/maddox-js-funcs"]
+	path = libs/maddox-js-funcs
+	url = https://github.com/maddox05/maddox-js-funcs.git
+	branch = main
