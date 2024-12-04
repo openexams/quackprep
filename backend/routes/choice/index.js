@@ -206,7 +206,7 @@ router.get(
 // answers transactional
 router.post("/answer/:choice_id", isAuthenticated, async function (req, res) {
   try {
-    const result = await postChoice(req.user, req.params.choice_id);
+    const result = await postChoice(req.user || null, req.params.choice_id);
     res.status(201).json(result);
   } catch (error) {
     commonErrorMessage(res, 500, "failed to post answer", error);

@@ -34,9 +34,10 @@ export default function ChoiceShow({ id, answer, is_correct, showAnswers, setSho
               if (user?.id) {
                 // only do a request if a user is logged in
 
-                dispatch(postAnswer(id));
                 dispatch(upsertCurrentAnswer(id, selectedQuestionId));
               }
+              // answers_transactional does not need user_id
+              dispatch(postAnswer(id));
 
               if (is_correct) {
                 console.log('correct! yay!');
