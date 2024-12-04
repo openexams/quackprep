@@ -1,5 +1,5 @@
 import sqlExe from "#db/dbFunctions.js";
-import { Streak } from "../../../shared/globalFuncs.js";
+import { Streak } from "../../../libs/maddox-js-funcs/functions.js";
 // entire page is testable
 
 /**
