@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Container, Segment, Header, Button, Icon, Grid, Divider, Popup } from 'semantic-ui-react';
 import { changeNavbarPage, selectNavbarState } from '@components/navbar/navbarSlice';
-import { selectArrayOfStateById } from 'maddox-js-funcs.js';
+import { selectArrayOfStateById } from 'maddox-js-funcs';
 import { useNavigate } from 'react-router-dom';
 
 export default function ClassShow() {

@@ -1,7 +1,7 @@
 import { standardApiCall } from '@utils/api';
 import { createSelector } from 'reselect';
 import { deleteGroupById, getGroupsByUserId, upsertGroup } from '../groupSlice';
-import { updateArrObjectsWithNewVals, filterArr, upsertArray, countingSort } from 'maddox-js-funcs.js';
+import { updateArrObjectsWithNewVals, filterArr, upsertArray, countingSort } from 'maddox-js-funcs';
 
 const GET_CRUD_EXAMS = 'app/class/exam/GET_CRUD_EXAMS';
 const DELETE_CRUD_EXAM = 'app/class/exam/DELETE_CRUD_EXAM';
