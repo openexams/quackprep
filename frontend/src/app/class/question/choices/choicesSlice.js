@@ -1,7 +1,12 @@
 import { standardApiCall } from '@utils/api';
-import { updateArrObjectsWithNewVals, filterArr, upsertArray } from '@utils/functions';
+import {
+  updateArrObjectsWithNewVals,
+  filterArr,
+  upsertArray,
+  countingSort,
+  mergeData,
+} from '../../../../../../libs/maddox-js-funcs/functions';
 import { createSelector } from 'reselect';
-import { countingSort, mergeData } from '../../../../../../shared/globalFuncs';
 
 const GET_CRUD_CHOICES = 'app/class/question/choices/GET_CRUD_CHOICES';
 

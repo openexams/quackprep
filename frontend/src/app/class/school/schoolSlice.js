@@ -1,6 +1,6 @@
 import { standardApiCall } from '@utils/api';
 import { createSelector } from 'reselect';
-import { updateArrObjectsWithNewVals } from '@utils/functions';
+import { updateArrObjectsWithNewVals } from '../../../../../libs/maddox-js-funcs/functions';
 
 const GET_SCHOOLS = 'app/class/school/GET_SCHOOLS';
 

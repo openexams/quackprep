@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import { Segment, TextArea, Button } from 'semantic-ui-react';
-import { selectArrayOfStateById } from '@utils/functions';
+import { selectArrayOfStateById } from '../../../../libs/maddox-js-funcs/functions.js';
 import { selectNavbarState } from '@components/navbar/navbarSlice';
 
 export default function PopupChild() {

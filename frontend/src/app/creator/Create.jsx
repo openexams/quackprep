@@ -19,7 +19,11 @@ import ItemEdit from '@components/ItemEdit';
 import { upsertTopic, deleteTopicById } from '../class/group/topic/topicSlice';
 import { deleteExamById, upsertExam } from '../class/group/exam/examSlice';
 import { upsertChoice, deleteChoiceById } from '../class/question/choices/choicesSlice';
-import { deepCopyArrayOfObjects, selectArrayOfIncludingItems, selectArrayOfIncludingItemsByNumber } from '@utils/functions';
+import {
+  deepCopyArrayOfObjects,
+  selectArrayOfIncludingItems,
+  selectArrayOfIncludingItemsByNumber,
+} from '../../../../libs/maddox-js-funcs/functions';
 import CreateFilter from './CreateFilter';
 import SchoolsList from '../class/school/SchoolsList';
 import { getSchools } from '../class/school/schoolSlice';

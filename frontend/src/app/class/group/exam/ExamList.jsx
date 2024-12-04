@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Header, Segment, Card, Button, Container, Icon } from 'semantic-ui-react';
-import { selectArrayOfStateById, selectBINARYArrayOfStateById } from '@utils/functions';
+import { selectArrayOfStateById, selectBINARYArrayOfStateById } from '../../../../../../libs/maddox-js-funcs/functions';
 import { changeNavbarPage, selectNavbarState, updateCurrentGroupData } from '@components/navbar/navbarSlice';
 import { selectLoadingState } from '@src/app/store/loadingSlice';
 import { useNavigate } from 'react-router-dom';

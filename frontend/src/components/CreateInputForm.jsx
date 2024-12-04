@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Form, Button, Label, FormInput, Grid, Container, Header, Message } from 'semantic-ui-react';
-import { deepCopyArrayOfObjects } from '@utils/functions.js';
+import { deepCopyArrayOfObjects } from '../../../libs/maddox-js-funcs/functions';
 
 /**
  * @typedef {Object} FormField

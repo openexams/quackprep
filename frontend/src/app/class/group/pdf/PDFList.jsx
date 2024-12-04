@@ -1,5 +1,5 @@
 import { changeNavbarPage, selectNavbarState } from '@components/navbar/navbarSlice.js';
-import { selectBINARYArrayOfStateById } from '@utils/functions';
+import { selectBINARYArrayOfStateById } from '../../../../../../libs/maddox-js-funcs/functions';
 import { useDispatch, useSelector } from 'react-redux';
 import { Segment, Header, Icon, Grid, Button, Container, Dimmer } from 'semantic-ui-react';
 import { useNavigate } from 'react-router-dom';

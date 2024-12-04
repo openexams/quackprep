@@ -1,6 +1,6 @@
 import { standardApiCall } from '@utils/api';
 import { createSelector } from 'reselect';
-import { updateArrObjectsWithNewVals, filterArr, upsertArray } from '@utils/functions';
+import { updateArrObjectsWithNewVals, filterArr, upsertArray } from '../../../../libs/maddox-js-funcs/functions';
 import { countingSort } from '../../../../shared/globalFuncs';
 
 const GET_CRUD_CLASSES = 'app/class/GET_CRUD_CLASSES';

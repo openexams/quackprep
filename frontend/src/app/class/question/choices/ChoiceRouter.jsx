@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import MultipleChoice from './types/MultipleChoice/MultipleChoice';
-import { selectArrayOfStateById, selectBINARYArrayOfStateById } from '@utils/functions';
+import { selectArrayOfStateById, selectBINARYArrayOfStateById } from '../../../../../../libs/maddox-js-funcs/functions';
 import { Segment, Header, Divider } from 'semantic-ui-react';
 import MarkdownRenderer from '@components/MarkdownRenderer';
 import { selectLoadingState } from '@src/app/store/loadingSlice';
