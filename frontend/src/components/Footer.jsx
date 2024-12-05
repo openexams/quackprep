@@ -59,6 +59,11 @@ export default function Footer() {
                   </List.Item>
                 </List>
               </Grid.Column>
+              <Grid.Column width={3}>
+                <div>
+                  A <strong style={{ fontSize: '1.5rem' }}>Maddox Schmidlkofer</strong> Production
+                </div>
+              </Grid.Column>
             </Grid.Row>
           </Grid>
           <Segment inverted textAlign='center' style={{ margin: '2em 0em 0em', padding: '0em' }}>
