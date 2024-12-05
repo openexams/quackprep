@@ -26,7 +26,7 @@ export async function upsertCurrentChoice(user_id, choice_id, question_id) {
 
 export async function getWhichUsersAnsweredMostQuestions() {
   return await sqlExe.executeCommand(
-    `SELECT a.user_id, u.username, COUNT(*) as questions_answered, u.icon FROM answers_transactional
+    `SELECT a.user_id, u.username, u.is_creator, COUNT(*) as questions_answered, u.icon FROM answers_transactional
      a JOIN users u ON u.id = a.user_id JOIN choices c ON a.choice_id = c.id AND c.deleted = 0
        GROUP BY a.user_id ORDER BY questions_answered DESC LIMIT 5; 
     `

@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Container, Header, Icon, Grid, Card, List, Image, Segment } from 'semantic-ui-react';
 import { getTopStreaks, getWhichUsersAnsweredMostQuestions, selectLeaderboardState } from './leaderboardSlice';
 import { selectLoadingState } from '../store/loadingSlice';
+import CreatorBadge from '@components/CreatorBadge';
 
 const TOP_X_AMT = 5; // keep 5 lol
 
@@ -24,7 +25,10 @@ const LeaderboardCard = ({ title, icon, iconColor, data, dataKey }) => (
               </List.Content>
               <Image avatar src={item.icon || `https://api.dicebear.com/6.x/initials/svg?seed=${item.username}`} />
               <List.Content>
-                <List.Header>{item.username}</List.Header>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                  <List.Header>{item.username}</List.Header>
+                  {item?.is_creator && <CreatorBadge />}
+                </div>
                 <List.Description>Rank: {index + 1}</List.Description>
               </List.Content>
             </List.Item>
