@@ -25,7 +25,7 @@ const LeaderboardCard = ({ title, icon, iconColor, data, dataKey }) => (
               </List.Content>
               <Image avatar src={item.icon || `https://api.dicebear.com/6.x/initials/svg?seed=${item.username}`} />
               <List.Content>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                   <List.Header>{item.username}</List.Header>
                   {item?.is_creator && <CreatorBadge />}
                 </div>
