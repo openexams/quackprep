@@ -108,7 +108,7 @@ export default function Navbar() {
         schoolFetchLogic(dispatch, schools);
         schoolUpdateLogic(dispatch, schools, schoolName);
       }
-      if (!loading?.ClassList) {
+      if (!loading?.ClassList && schoolId) {
         classFetchLogic(dispatch, classes, schoolId);
         classUpdateLogic(dispatch, classes, className, schoolId);
       }

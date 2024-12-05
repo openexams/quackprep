@@ -30,9 +30,10 @@ export function standardApiCall(
   config = null,
   errorMsg = 'Server Error, servers may be down. Go to about and contact someone for help.',
   noticeOfSuccess = null,
+  options,
 ) {
   return async function (dispatch, getState) {
-    if (method === 'get') {
+    if ((options?.fetchHistory && options?.fetchHistory === true) || method === 'get') {
       const fetchHistory = getState().app.navbar.fetchHistory;
       if (fetchHistory[route] !== undefined) {
         // && doesWordContainNavbarKeyword(route)

@@ -1,8 +1,11 @@
 import { useEffect } from 'react';
 import { changeNavbarPage } from '@components/navbar/navbarSlice';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { selectUser } from './app/auth/authSlice';
+import { getFavoriteQuestions, removeStateFavoriteQuestions } from '@src/app/favorite/favoriteSlice';
 export default function Init() {
+  const user = useSelector(selectUser).user;
   const navigate = useNavigate();
   const dispatch = useDispatch();
   useEffect(() => {
@@ -20,6 +23,13 @@ export default function Init() {
       window.removeEventListener('popstate', handlePopState);
     };
   }, []);
+
+  useEffect(() => {
+    if (user?.id) dispatch(getFavoriteQuestions());
+    else {
+      dispatch(removeStateFavoriteQuestions());
+    }
+  }, [user?.id]);
 
   return null;
 }

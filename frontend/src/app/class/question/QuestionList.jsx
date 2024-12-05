@@ -1,38 +1,13 @@
-import MarkdownRenderer from '@components/MarkdownRenderer';
-import { changeNavbarPage, selectNavbarState, updateQuestionId } from '@components/navbar/navbarSlice';
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import { List, Segment, Header, Button, Checkbox, Icon, Label } from 'semantic-ui-react';
-
-/**
- *
- * @param {*} questionTypes
- * @param {*} questionGroupName
- * @returns {Array}
- */
-function getQuestionTopics(questionTypes, questionGroupName) {
-  if (!Array.isArray(questionTypes) && questionTypes === 'topic') {
-    return [questionGroupName];
-  }
-  //else they are arrays we must go through them.
-  const ret = [];
-  let added = false;
-  for (let i = 0; i < questionTypes.length; i++) {
-    if (questionTypes[i] === 'topic') {
-      ret.push(questionGroupName[i]);
-      added = true;
-    }
-  }
-  if (added === false) return null;
-  return ret;
-}
+import QuestionCard from './QuestionCard';
+import { isFavoriteQuestion, selectFavoriteQuestionsState } from '@src/app/favorite/favoriteSlice';
+import { useSelector } from 'react-redux';
 
 export default function QuestionList({ questions, selectedQuestion }) {
-  const { schoolName, className, groupType, groupName } = useSelector(selectNavbarState).navbar;
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const favoriteQuestions = useSelector(selectFavoriteQuestionsState);
   const [showTopics, setShowTopics] = useState(false); // TODO SHOW MULTIPLE TOPICS IF THE QUESTION HAS SUCH
+
   return (
     <Segment>
       <Header as='h3' style={{ marginBottom: '0.2rem' }}>
@@ -49,36 +24,16 @@ export default function QuestionList({ questions, selectedQuestion }) {
 
       <List selection divided relaxed>
         {questions.map((question, index) => (
-          <List.Item
-            key={question.id}
-            onClick={() => {
-              dispatch(
-                changeNavbarPage(
-                  navigate,
-                  `/class/${schoolName}/${className}/${groupType}/${groupName}/question/${parseInt(question.id)}`,
-                ),
-              );
-              dispatch(updateQuestionId(parseInt(question.id)));
-            }}
-            active={selectedQuestion && selectedQuestion.id === question.id}
-            style={{ padding: '0.8em' }}
-          >
-            <List.Content>
-              <List.Header as='h4' style={{ marginBottom: showTopics ? '0.5em' : '0' }}>
-                Question {index + 1}
-              </List.Header>
-              {showTopics &&
-                getQuestionTopics(question.type_name, question.group_name) &&
-                getQuestionTopics(question.type_name, question.group_name).map((g_name, index) => (
-                  <List.Description key={'tp' + index} style={{ marginBottom: '0.5em' }}>
-                    <Label circular color='grey' style={{ fontSize: '0.9em', fontWeight: 'bold', padding: '1em' }}>
-                      {/* <Icon name='tag' style={{ marginRight: '0.5em' }} /> */}
-                      {g_name}
-                    </Label>
-                  </List.Description>
-                ))}
-            </List.Content>
-          </List.Item>
+          <QuestionCard
+            key={index}
+            id={question?.id}
+            selectedQuestion={selectedQuestion}
+            type_name={question.type_name}
+            group_name={question.group_name}
+            showTopics={showTopics}
+            index={index}
+            favorited={isFavoriteQuestion(favoriteQuestions, question.id)}
+          />
         ))}
       </List>
     </Segment>

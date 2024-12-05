@@ -6,14 +6,16 @@ import {
   getQuestionsByGroupId,
   getQuestionsByUserId,
   linkQuestionToGroups,
-  selectQuestion,
   upsertQuestion,
 } from "#models/question/index.js";
 import { cascadeSetDeleted } from "#utils/sqlFunctions.js";
 import { isCreator } from "#middleware/creatorMiddleware.js";
 import { commonErrorMessage } from "#utils/utils.js";
+import favRouter from "./favorite/index.js";
 
 const router = express.Router();
+
+router.use("/favorite", favRouter);
 
 router.get("/user", isAuthenticated, async function (req, res) {
   try {

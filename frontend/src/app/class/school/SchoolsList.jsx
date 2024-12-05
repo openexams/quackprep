@@ -10,7 +10,7 @@ import { selectArrayOfIncludingItem } from 'maddox-js-funcs';
 
 export default function SchoolsList({ onCreator = false }) {
   let { schoolId: curSchoolId } = useSelector(selectNavbarState).navbar;
-  const selectedSchoolId = useSelector(selectNavbarState).navbar?.schoolId;
+  let selectedSchoolId = useSelector(selectNavbarState).navbar?.schoolId;
   const navigate = useNavigate();
   const schools = useSelector(selectSchoolState).schools;
   const loading = useSelector(selectLoadingState).loadingComps?.SchoolsList;
@@ -29,12 +29,13 @@ export default function SchoolsList({ onCreator = false }) {
   // get local school at start
   useEffect(() => {
     let tmp;
-    if ((tmp = localStorage.getItem('schoolId'))) {
+    if ((tmp = localStorage.getItem('schoolId')) && tmp != null) {
       const wanted_school = selectArrayOfIncludingItem(schools, 'id', tmp)?.[0];
-
-      dispatch(changeNavbarPage(navigate, `/class/${wanted_school?.school_name}`));
+      if (wanted_school) {
+        dispatch(changeNavbarPage(navigate, `/class/${wanted_school?.school_name}`));
+      }
     }
-  }, []);
+  }, [schools]); // could be risky idk
 
   return (
     <Segment loading={loading}>
