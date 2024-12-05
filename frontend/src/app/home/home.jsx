@@ -49,6 +49,7 @@ export default function Home() {
           src={duckBlissImage}
           width='1792' // replace with the actual width
           height='1024' // replace with the actual height
+          alt='quackprep background image'
           style={{
             position: 'absolute',
             top: 6,
@@ -123,7 +124,13 @@ export default function Home() {
             {features.map((feature, index) => (
               <Grid.Column key={index}>
                 <Card fluid>
-                  <img height={'215px'} width={'215px'} loading='lazy' src={feature.icon} />
+                  <img
+                    alt='quackprep informative image with description'
+                    height={'215px'}
+                    width={'215px'}
+                    loading='lazy'
+                    src={feature.icon}
+                  />
                   <Card.Content>
                     <Card.Header>{feature.title}</Card.Header>
                     <Card.Description>{feature.description}</Card.Description>
