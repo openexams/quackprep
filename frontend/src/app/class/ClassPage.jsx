@@ -1,17 +1,18 @@
 import './class.css';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Accordion, Container, Grid, Header, Icon, Segment } from 'semantic-ui-react';
 import { useSelector, useDispatch } from 'react-redux';
 import SchoolsList from './school/SchoolsList.jsx';
-import { selectBINARYArrayOfStateById } from 'maddox-js-funcs';
+import { selectArrayOfStateById, selectBINARYArrayOfStateById } from 'maddox-js-funcs';
 import { changeNavbarPage, selectNavbarState } from '@components/navbar/navbarSlice';
 import ClassList from './ClassList';
 import { useNavigate } from 'react-router-dom';
+import { selectSchoolState } from './school/schoolSlice';
 
 export default function ClassPage() {
+  let { schoolId: curSchoolId } = useSelector(selectNavbarState).navbar;
   const navigate = useNavigate();
-  const curSchool = useSelector(selectNavbarState).navbar?.schoolId;
-  const classes = useSelector(selectBINARYArrayOfStateById('app.class.classes.classes', 'school_id', curSchool));
+  const classes = useSelector(selectBINARYArrayOfStateById('app.class.classes.classes', 'school_id', curSchoolId));
   const dispatch = useDispatch();
   const [isActive, setIsActive] = useState(false);
 
@@ -22,8 +23,8 @@ export default function ClassPage() {
         Available Classes
         <Header.Subheader>Choose one to begin your learning journey</Header.Subheader>
       </Header>
-      <SchoolsList selectedSchool={curSchool} />
-      {curSchool == null ? (
+      <SchoolsList selectedSchoolId={curSchoolId} />
+      {curSchoolId == null ? (
         <Segment placeholder textAlign='center'>
           <Header icon>
             <Icon name='building' />

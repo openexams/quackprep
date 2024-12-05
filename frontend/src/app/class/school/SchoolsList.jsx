@@ -7,13 +7,13 @@ import { selectLoadingState } from '@src/app/store/loadingSlice';
 import { changeNavbarPage } from '@components/navbar/navbarSlice';
 import { useNavigate } from 'react-router-dom';
 
-export default function SchoolsList({ selectedSchool, onCreator = false }) {
+export default function SchoolsList({ selectedSchoolId, onCreator = false }) {
   const navigate = useNavigate();
   const schools = useSelector(selectSchoolState).schools;
   const loading = useSelector(selectLoadingState).loadingComps?.SchoolsList;
   const dispatch = useDispatch();
   if (onCreator) {
-    selectedSchool = schools?.[0];
+    selectedSchoolId = schools?.[0];
   }
 
   return (
@@ -22,10 +22,10 @@ export default function SchoolsList({ selectedSchool, onCreator = false }) {
         {schools?.map((school) => (
           <Grid.Column key={'s' + school.id}>
             <Button
-              className={`school-button ${selectedSchool === school.id ? 'selected' : ''}`}
+              className={`school-button ${selectedSchoolId === school.id ? 'selected' : ''}`}
               size='small'
               fluid
-              basic={selectedSchool !== school.id}
+              basic={selectedSchoolId !== school.id}
               onClick={() => {
                 if (!onCreator) {
                   dispatch(changeNavbarPage(navigate, `/class/${school.school_name}`));

@@ -121,7 +121,7 @@ export default function Home() {
             {features.map((feature, index) => (
               <Grid.Column key={index}>
                 <Card fluid>
-                  <img style={{ height: '15.35rem', width: '15.35rem' }} loading='lazy' src={feature.icon} wrapped ui={false} />
+                  <img style={{ height: '15.35rem', width: '15.35rem' }} loading='lazy' src={feature.icon} />
                   <Card.Content>
                     <Card.Header>{feature.title}</Card.Header>
                     <Card.Description>{feature.description}</Card.Description>
