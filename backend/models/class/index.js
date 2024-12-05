@@ -8,10 +8,11 @@ export async function getClassCategories() {
 async function selectClasses(WHERE, params) {
   // pulls in a random group from the class as to use on frotend to check if the class has any groups
   return await sqlExe.executeCommand(
-    `SELECT cl.id, cl.name, cl.school_id, cl.description, cl.category, MIN(g.id) as group_id, min(p.id) as pdf_id FROM classes cl 
+    `SELECT cl.id, cl.name, cl.school_id, cl.description, cl.category, MIN(g.id) as group_id, min(p.id) as pdf_id, u.username as created_by FROM classes cl 
     JOIN class_categories c ON c.id = cl.category
     LEFT JOIN cgroups g on g.class_id = cl.id
     LEFT JOIN pdfs p on p.class_id = cl.id
+    JOIN users u on u.id = cl.created_by
     WHERE cl.deleted=0 AND ${WHERE}
     GROUP BY cl.id
     ORDER BY cl.school_id ASC
@@ -20,9 +21,11 @@ async function selectClasses(WHERE, params) {
   );
 }
 
-export async function getClasses() {
+export async function getClassesBySchoolId(school_id) {
   // where in this is alr done jst past smth in so it does not errs
-  return await selectClasses("cl.deleted = 0", null);
+  return await selectClasses("cl.deleted = 0 AND school_id = :school_id", {
+    school_id,
+  });
 }
 
 // school table in class

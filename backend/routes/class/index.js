@@ -2,7 +2,7 @@ import { isAuthenticated } from "#middleware/authMiddleware.js";
 import { isCreator } from "#middleware/creatorMiddleware.js";
 import {
   upsertClass,
-  getClasses,
+  getClassesBySchoolId,
   getClassesByUserId,
   getSchools,
   getClassCategories,
@@ -11,15 +11,6 @@ import { cascadeSetDeleted } from "#utils/sqlFunctions.js";
 import { commonErrorMessage } from "#utils/utils.js";
 import express from "express";
 const router = express.Router();
-
-router.get("/", async function (req, res) {
-  try {
-    const result = await getClasses();
-    res.status(200).json(result);
-  } catch (error) {
-    commonErrorMessage(res, 500, "failed to get all classes", error);
-  }
-});
 
 router.get("/user", isAuthenticated, async function (req, res) {
   try {
@@ -38,6 +29,20 @@ router.get("/categories", async function (req, res) {
     res.status(200).json(result);
   } catch (error) {
     commonErrorMessage(res, 500, "failed to get all class categories", error);
+  }
+});
+
+router.get("/:school_id", async function (req, res) {
+  try {
+    const result = await getClassesBySchoolId(req.params.school_id);
+    res.status(200).json(result);
+  } catch (error) {
+    commonErrorMessage(
+      res,
+      500,
+      `failed to get all classes by school id ${req.params.school_id}`,
+      error
+    );
   }
 });
 

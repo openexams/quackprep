@@ -7,8 +7,8 @@ const GET_CRUD_CLASSES = 'app/class/GET_CRUD_CLASSES';
 const DELETE_CRUD_CLASS = 'app/class/DELETE_CRUD_CLASS';
 const UPSERT_CRUD_CLASSES = 'app/class/UPSERT_CRUD_CLASSES';
 
-export function getClasses() {
-  return standardApiCall('get', '/api/class/', null, GET_CRUD_CLASSES, 'ClassList');
+export function getClassesBySchoolId(school_id) {
+  return standardApiCall('get', `/api/class/${school_id}`, null, GET_CRUD_CLASSES, 'ClassList');
 }
 
 export function getClassesByUserId() {

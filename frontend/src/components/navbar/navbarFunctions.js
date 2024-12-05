@@ -1,4 +1,4 @@
-import { getClasses } from '@src/app/class/classSlice';
+import { getClassesBySchoolId } from '@src/app/class/classSlice';
 import { getSchools } from '@src/app/class/school/schoolSlice';
 import { getTopicsByClassId } from '@src/app/class/group/topic/topicSlice';
 import { getExamsByClassId } from '@src/app/class/group/exam/examSlice';
@@ -59,9 +59,9 @@ export function pdfsFetchLogic(dispatch, class_id) {
   }
 }
 
-export function classFetchLogic(dispatch, classes) {
+export function classFetchLogic(dispatch, classes, schoolId) {
   if (!Array.isArray(classes)) {
-    dispatch(getClasses());
+    dispatch(getClassesBySchoolId(schoolId));
   }
 }
 

@@ -109,7 +109,7 @@ export default function Navbar() {
         schoolUpdateLogic(dispatch, schools, schoolName);
       }
       if (!loading?.ClassList) {
-        classFetchLogic(dispatch, classes);
+        classFetchLogic(dispatch, classes, schoolId);
         classUpdateLogic(dispatch, classes, className, schoolId);
       }
       if (!loading?.PDFlist && classId) {

@@ -21,6 +21,9 @@ export default function ClassShow() {
           <Header.Content>
             {curClass.name}
             <Header.Subheader>Category: {curClass.category}</Header.Subheader>
+            <Header.Subheader as={'h6'}>
+              Created By <strong>{curClass.created_by}</strong>
+            </Header.Subheader>
           </Header.Content>
         </Header>
 
