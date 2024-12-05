@@ -47,6 +47,8 @@ export default function Home() {
         <img
           loading='lazy'
           src={duckBlissImage}
+          width='1792' // replace with the actual width
+          height='1024' // replace with the actual height
           style={{
             position: 'absolute',
             top: 6,
@@ -121,7 +123,7 @@ export default function Home() {
             {features.map((feature, index) => (
               <Grid.Column key={index}>
                 <Card fluid>
-                  <img style={{ height: '15.35rem', width: '15.35rem' }} loading='lazy' src={feature.icon} />
+                  <img height={'215px'} width={'215px'} loading='lazy' src={feature.icon} />
                   <Card.Content>
                     <Card.Header>{feature.title}</Card.Header>
                     <Card.Description>{feature.description}</Card.Description>
