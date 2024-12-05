@@ -7,7 +7,6 @@ import { selectArrayOfStateById, selectBINARYArrayOfStateById } from 'maddox-js-
 import { changeNavbarPage, selectNavbarState } from '@components/navbar/navbarSlice';
 import ClassList from './ClassList';
 import { useNavigate } from 'react-router-dom';
-import { selectSchoolState } from './school/schoolSlice';
 
 export default function ClassPage() {
   let { schoolId: curSchoolId } = useSelector(selectNavbarState).navbar;
@@ -17,9 +16,8 @@ export default function ClassPage() {
   const [isActive, setIsActive] = useState(false);
 
   return (
-    <Container style={{ marginTop: '-5rem' }}>
-      <Header as='h1' textAlign='center' icon>
-        <Icon name='graduation cap' />
+    <Container fluid style={{ marginTop: '-7rem', padding: '2rem' }}>
+      <Header as='h1' textAlign='left' icon>
         Available Classes
         <Header.Subheader>Choose one to begin your learning journey</Header.Subheader>
       </Header>
@@ -33,8 +31,8 @@ export default function ClassPage() {
           </Header>
         </Segment>
       ) : (
-        <Segment placeholder textAlign='center'>
-          <Grid columns={3} stackable doubling centered>
+        <Segment placeholder textAlign='center' style={{ padding: '2rem' }}>
+          <Grid style={{ width: '100%', margin: 0 }} stackable doubling centered columns='equal'>
             <ClassList classes={classes} />
           </Grid>
         </Segment>
