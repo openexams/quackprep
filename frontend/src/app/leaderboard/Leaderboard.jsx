@@ -27,7 +27,7 @@ const LeaderboardCard = ({ title, icon, iconColor, data, dataKey }) => (
               <List.Content>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                   <List.Header>{item.username}</List.Header>
-                  {item?.is_creator && <CreatorBadge />}
+                  {item?.is_creator == 1 && <CreatorBadge />}
                 </div>
                 <List.Description>Rank: {index + 1}</List.Description>
               </List.Content>
