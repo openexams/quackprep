@@ -44,8 +44,8 @@ export default function Home() {
   return (
     <div className='home-page'>
       <Segment inverted vertical textAlign='center' style={{ minHeight: 700, padding: '1em 0em', position: 'relative' }}>
-        <Image
-          loading='lazy'
+        <img
+          //loading='lazy'
           src={duckBlissImage}
           style={{
             position: 'absolute',
@@ -121,7 +121,7 @@ export default function Home() {
             {features.map((feature, index) => (
               <Grid.Column key={index}>
                 <Card fluid>
-                  <Image loading='lazy' src={feature.icon} wrapped ui={false} />
+                  <img style={{ height: '15.35rem', width: '15.35rem' }} loading='lazy' src={feature.icon} wrapped ui={false} />
                   <Card.Content>
                     <Card.Header>{feature.title}</Card.Header>
                     <Card.Description>{feature.description}</Card.Description>
