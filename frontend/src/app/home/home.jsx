@@ -45,7 +45,7 @@ export default function Home() {
     <div className='home-page'>
       <Segment inverted vertical textAlign='center' style={{ minHeight: 700, padding: '1em 0em', position: 'relative' }}>
         <img
-          //loading='lazy'
+          loading='lazy'
           src={duckBlissImage}
           style={{
             position: 'absolute',
