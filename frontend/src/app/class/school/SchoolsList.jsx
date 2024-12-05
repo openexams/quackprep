@@ -1,13 +1,16 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Segment, Button, Grid } from 'semantic-ui-react';
 import { selectSchoolState } from './schoolSlice';
 import './school.css';
 import { selectLoadingState } from '@src/app/store/loadingSlice';
-import { changeNavbarPage } from '@components/navbar/navbarSlice';
+import { changeNavbarPage, selectNavbarState } from '@components/navbar/navbarSlice';
 import { useNavigate } from 'react-router-dom';
+import { selectArrayOfIncludingItem } from 'maddox-js-funcs';
 
-export default function SchoolsList({ selectedSchoolId, onCreator = false }) {
+export default function SchoolsList({ onCreator = false }) {
+  let { schoolId: curSchoolId } = useSelector(selectNavbarState).navbar;
+  const selectedSchoolId = useSelector(selectNavbarState).navbar?.schoolId;
   const navigate = useNavigate();
   const schools = useSelector(selectSchoolState).schools;
   const loading = useSelector(selectLoadingState).loadingComps?.SchoolsList;
@@ -15,6 +18,23 @@ export default function SchoolsList({ selectedSchoolId, onCreator = false }) {
   if (onCreator) {
     selectedSchoolId = schools?.[0];
   }
+  // set local school on every change
+  useEffect(() => {
+    if (curSchoolId) {
+      localStorage.setItem('schoolId', curSchoolId);
+      curSchoolId = parseInt(curSchoolId);
+    }
+  }, [curSchoolId]);
+
+  // get local school at start
+  useEffect(() => {
+    let tmp;
+    if ((tmp = localStorage.getItem('schoolId'))) {
+      const wanted_school = selectArrayOfIncludingItem(schools, 'id', tmp)?.[0];
+
+      dispatch(changeNavbarPage(navigate, `/class/${wanted_school?.school_name}`));
+    }
+  }, []);
 
   return (
     <Segment loading={loading}>

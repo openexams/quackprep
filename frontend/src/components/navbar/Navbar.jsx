@@ -32,6 +32,7 @@ import {
   pdfsFetchLogic,
 } from './navbarFunctions';
 import { getClassCategories } from '@src/app/class/class_categories/classCategorySlice';
+import Init from '@src/Init';
 
 export default function Navbar() {
   const location = useLocation();
@@ -47,18 +48,13 @@ export default function Navbar() {
   const [sidebarOpened, setSidebarOpened] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const schools = useSelector(selectSchoolState).schools;
-  const choices = useSelector(selectChoicesState).choices;
   const loading = useSelector(selectLoadingState)?.loadingComps;
   const State401 = useSelector(select401CompState).show;
   const userIdRef = useRef(user.id);
 
   // spaces in stuff is a issue!!
-  const { className, classId, groupName, groupId, questionId, schoolName, groupType, schoolId, fetchHistory } =
+  const { className, classId, groupName, groupId, questionId, schoolName, groupType, schoolId } =
     useSelector(selectNavbarState).navbar;
-
-  const urlArr = useMemo(() => {
-    return activePage ? activePage.split('/') : '/';
-  }, [activePage]);
 
   function handlePageChange(e, data) {
     e.preventDefault();
@@ -175,30 +171,6 @@ export default function Navbar() {
     loading?.ChoiceRouter,
   ]);
 
-  ///  ************************************* ///
-
-  // useEffect(() => {
-  //   // when my navbar state changes change the active page
-  //   navigate(activePage);
-  // }, [activePage]);
-
-  useEffect(() => {
-    const curPage = location.pathname + location.search + location.hash;
-    dispatch(changeNavbarPage(navigate, curPage));
-  }, []);
-
-  useEffect(() => {
-    const handlePopState = (event) => {
-      const pathAfterDomain = window.location.pathname + window.location.search + window.location.hash;
-      dispatch(changeNavbarPage(() => {}, pathAfterDomain));
-    };
-    window.addEventListener('popstate', handlePopState);
-    return () => {
-      window.removeEventListener('popstate', handlePopState);
-    };
-  }, []);
-
-  // Detect if mobile view
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 767);
@@ -210,6 +182,7 @@ export default function Navbar() {
 
   return (
     <>
+      <Init />
       {isMobile ? (
         <>
           <Menu fixed='top' inverted size='large' className='custom-navbar'>
