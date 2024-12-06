@@ -4,12 +4,14 @@ import { useEffect } from 'react';
 
 export default function CreateFilter({ filter, setFilter }) {
   const [searchParams, setSearchParams] = useSearchParams();
-  const searchParamObject = Object.fromEntries(searchParams.entries());
-
+  const searchParamObject = {};
+  for (let [key, value] of searchParams.entries()) {
+    searchParamObject[key] = value;
+  }
   // take in search params and load actual state with it.
   useEffect(() => {
     // reacts mad idk why
-    setFilter(searchParamObject);
+    setFilter({ ...filter, ...searchParamObject });
   }, []);
   function onChange(key, value) {
     setFilter({ ...filter, [key]: value });

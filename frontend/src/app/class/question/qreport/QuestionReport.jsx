@@ -1,7 +1,7 @@
 import CreateInputForm from '@components/CreateInputForm';
 import { useState } from 'react';
 import { Modal, Icon, Button, Segment } from 'semantic-ui-react';
-import { postQuestionReport } from './questionSlice';
+import { postQuestionReport } from '../questionSlice';
 import { useDispatch } from 'react-redux';
 import './questionReport.css';
 

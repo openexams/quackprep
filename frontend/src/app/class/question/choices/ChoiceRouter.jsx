@@ -1,11 +1,11 @@
 import { useSelector } from 'react-redux';
 import MultipleChoice from './types/MultipleChoice/MultipleChoice';
-import { selectArrayOfStateById, selectBINARYArrayOfStateById } from 'maddox-js-funcs';
+import { selectArrayOfStateById } from 'maddox-js-funcs';
 import { Segment, Header, Divider } from 'semantic-ui-react';
 import MarkdownRenderer from '@components/MarkdownRenderer';
 import { selectLoadingState } from '@src/app/store/loadingSlice';
 import FreeResponse from './types/FreeResponse';
-import QuestionReport from '../QuestionReport';
+import QuestionReport from '../qreport/QuestionReport';
 import NoItemsFound from '@components/NoItemsFound';
 
 export default function ChoiceRouter({ selectedQuestion }) {

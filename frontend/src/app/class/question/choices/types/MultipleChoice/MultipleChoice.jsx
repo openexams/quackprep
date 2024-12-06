@@ -9,12 +9,12 @@ export default function MultipleChoice({ choices, selectedQuestion }) {
   const [showAnswers, setShowAnswers] = useState(false);
   const [resetClicked, setResetClicked] = useState(0);
 
-  // give choices a random order TODO LET THE USER DO THIS.
   choices = randomizeArray(choices, 1234);
 
-  // navbar does not do this
+  // on question change
   useEffect(() => {
     setShowAnswers(false);
+    setResetClicked(resetClicked + 1);
   }, [selectedQuestion]);
 
   return (
