@@ -1,10 +1,11 @@
 import React from 'react';
 import { Segment, Header, Icon, Button, Grid, Container } from 'semantic-ui-react';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { changeNavbarPage } from '@components/navbar/navbarSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { changeNavbarPage, selectNavbarState } from '@components/navbar/navbarSlice';
 
 export default function LoginRequired({ title }) {
+  const { page } = useSelector(selectNavbarState).navbar;
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -21,7 +22,7 @@ export default function LoginRequired({ title }) {
               Please log in or sign up to continue and enjoy all the features our platform has to offer.
             </p>
           </Segment>
-          <Button onClick={() => dispatch(changeNavbarPage(navigate, '/auth'))}>Login Now</Button>
+          <Button onClick={() => dispatch(changeNavbarPage(navigate, `/auth?next=${page}`))}>Login Now</Button>
         </Grid.Column>
       </Grid>
     </Segment>
