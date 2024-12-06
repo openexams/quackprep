@@ -1,23 +1,22 @@
 import { useEffect, useState } from 'react';
-import { Modal, Button, Segment, Header, Icon, Image, Form } from 'semantic-ui-react';
+import { Modal, Button, Segment, Header, Icon, Image, Form, Container, Grid } from 'semantic-ui-react';
 import Login from './login/Login';
 import { changeNavbarPage, selectLastPage, selectNavbarState } from '@components/navbar/navbarSlice';
 import Register from './register/register';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectUser } from './authSlice';
 import google_icon from '/img/google_icon.webp';
-import { useNavigate } from 'react-router-dom';
-
+import { useNavigate, Link } from 'react-router-dom';
 import { useSearchParams } from 'react-router-dom';
+import './auth.css';
 
 export default function Auth() {
   const navigate = useNavigate();
   const loading = useSelector((state) => state.loading.loadingComps.AuthPopup);
   const dispatch = useDispatch();
   const { user } = useSelector(selectUser);
-  const [open, setOpen] = useState(true);
   const [loggingIn, setLoggingIn] = useState(true);
-  const log_or_sin_txt = loggingIn ? 'Login' : 'Sign Up';
+  const logOrSignText = loggingIn ? 'Login' : 'Sign Up';
   const lastPage = useSelector(selectLastPage).lastPage;
 
   const [searchParams, setSearchParams] = useSearchParams();
@@ -29,62 +28,63 @@ export default function Auth() {
 
   if (!user.id) {
     return (
-      <Modal
-        closeIcon
-        open={open}
-        onClose={() => {
-          setOpen(false);
-          dispatch(changeNavbarPage(navigate, '/home'));
-        }}
-        size='tiny'
-        style={{ backgroundColor: '#f7f7ff', zIndex: 2 }}
-      >
-        <Segment style={{ minHeight: 650 }} basic loading={loading}>
-          <Modal.Header style={{ textAlign: 'center', backgroundColor: 'black', padding: '20px', marginBottom: '1em' }}>
-            <Header as='h2' inverted style={{ marginBottom: '.5em' }}>
-              <Icon name='user' />
+      <Segment basic>
+        <Grid textAlign='center' verticalAlign='middle' style={{ minHeight: '80vh' }}>
+          <Grid.Column style={{ maxWidth: 450 }}>
+            <Segment raised>
+              <Image size='small' src='/img/quackprep_logo.webp' alt='Site Logo' centered style={{ marginBottom: '1rem' }} />
+              <Header as='h2' textAlign='center' style={{ fontSize: '1.8rem' }}>
+                Welcome to <span style={{ color: 'var(--primary-color)' }}>QuackPrep</span>
+              </Header>
+              <div style={{ fontSize: '1rem', color: '#555' }}>
+                <strong style={{ marginBottom: '1rem', display: 'block' }}>Login or Sign Up to Continue. </strong>
 
-              <Header.Content>
-                {log_or_sin_txt} to Your Account
-                <Header.Subheader style={{ color: '#ddd' }}>Welcome to quackprep</Header.Subheader>
-                {lastPage && ( // error now that last page
-                  <Header.Subheader style={{ color: '#ddd' }}>You must be logged in to use **{lastPage}**</Header.Subheader>
-                )}
-              </Header.Content>
-            </Header>
-          </Modal.Header>
-          <Modal.Content style={{ textAlign: 'center' }}>
-            <Form onSubmit={() => window.open(`/api/auth/google`)}>
-              {/** may be why google no work , all work and no play makes maddox a dull boy*/}
-              <Button
-                style={{
-                  backgroundColor: 'white',
-                  color: 'black',
-                  border: '1px solid lightgrey',
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  gap: '5px',
-                }}
-              >
-                <strong>{log_or_sin_txt} with Google</strong>
-                <Image src={google_icon} style={{ maxWidth: '20px' }} /> <span style={{ fontSize: '.8rem' }}>(Recommended)</span>
-              </Button>
-            </Form>
-            <br></br>
-            <Button.Group>
-              <Button active={loggingIn} onClick={() => setLoggingIn(true)} color={loggingIn ? 'grey' : 'grey'} size='large'>
+                <section>
+                  <h4 style={{ marginBottom: '-.2rem', display: 'block' }}>Why Sign Up?</h4>
+                  Unlock the full potential of our platform with an extensive collection of practice questions and study materials
+                  tailored to your needs. Save your answers and favorite questions for easy access. Chat with our AI-powered
+                  assistant for instant help. Track your stats and achievements while competing with others.
+                  <p>Start your journey to success today!</p>
+                </section>
+              </div>
+              <Form onSubmit={() => window.open(`/api/auth/google`)}>
+                <Button size='large' fluid className='google-login-button'>
+                  <Icon name='google' className='google-login-icon' />
+                  {logOrSignText} with Google
+                </Button>
+              </Form>
+            </Segment>
+
+            <Button.Group size='large' style={{ marginTop: '1rem' }}>
+              <Button active={loggingIn} onClick={() => setLoggingIn(true)} color={loggingIn ? 'blue' : 'grey'}>
                 Login
               </Button>
               <Button.Or />
-              <Button active={!loggingIn} onClick={() => setLoggingIn(false)} color={!loggingIn ? 'purple' : 'grey'} size='large'>
-                Sign Up{/* change button class name depending on if active or not, since semantic ui / me ovverides the color. */}
+              <Button active={!loggingIn} onClick={() => setLoggingIn(false)} color={!loggingIn ? 'green' : 'grey'}>
+                Sign Up
               </Button>
             </Button.Group>
-            <Segment style={{ marginTop: '20px', padding: '20px' }}>{loggingIn ? <Login /> : <Register />}</Segment>
-          </Modal.Content>
-        </Segment>
-      </Modal>
+
+            <Segment basic style={{ marginTop: '2rem' }}>
+              {loggingIn ? <Login /> : <Register />}
+            </Segment>
+
+            <Segment basic textAlign='center' style={{ marginTop: '2rem', color: '#888' }}>
+              <p>
+                By signing in, you agree to our{' '}
+                <Link to='/terms' style={{ color: '#4285F4' }}>
+                  Terms of Service
+                </Link>{' '}
+                and{' '}
+                <Link to='/privacy' style={{ color: '#4285F4' }}>
+                  Privacy Policy
+                </Link>
+                .
+              </p>
+            </Segment>
+          </Grid.Column>
+        </Grid>
+      </Segment>
     );
   } else {
     return null;

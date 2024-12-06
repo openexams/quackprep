@@ -3,10 +3,12 @@ import { List, Segment, Header, Button, Checkbox, Icon, Label } from 'semantic-u
 import QuestionCard from './QuestionCard';
 import { isFavoriteQuestion, selectFavoriteQuestionsState } from '@src/app/favorite/favoriteSlice';
 import { useSelector } from 'react-redux';
+import { doesQuestionHaveCurrentChoice, selectCurrentChoicesState } from './choices/choicesSlice';
 
 export default function QuestionList({ questions, selectedQuestion }) {
   const favoriteQuestions = useSelector(selectFavoriteQuestionsState);
   const [showTopics, setShowTopics] = useState(false); // TODO SHOW MULTIPLE TOPICS IF THE QUESTION HAS SUCH
+  const currentChoices = useSelector(selectCurrentChoicesState);
 
   return (
     <Segment>
@@ -22,20 +24,24 @@ export default function QuestionList({ questions, selectedQuestion }) {
         />
       </div>
 
-      <List selection divided relaxed>
-        {questions.map((question, index) => (
-          <QuestionCard
-            key={index}
-            id={question?.id}
-            selectedQuestion={selectedQuestion}
-            type_name={question.type_name}
-            group_name={question.group_name}
-            showTopics={showTopics}
-            index={index}
-            favorited={isFavoriteQuestion(favoriteQuestions, question.id)}
-          />
-        ))}
-      </List>
+      {/* Wrapping List in a scrollable container */}
+      <div style={{ maxHeight: '33rem', overflowY: 'auto' }}>
+        <List selection divided relaxed>
+          {questions.map((question, index) => (
+            <QuestionCard
+              key={index}
+              id={question?.id}
+              selectedQuestion={selectedQuestion}
+              type_name={question.type_name}
+              group_name={question.group_name}
+              showTopics={showTopics}
+              index={index}
+              current={doesQuestionHaveCurrentChoice(currentChoices, question.id)}
+              favorited={isFavoriteQuestion(favoriteQuestions, question.id)}
+            />
+          ))}
+        </List>
+      </div>
     </Segment>
   );
 }

@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { selectUser } from './app/auth/authSlice';
 import { getFavoriteQuestions, removeStateFavoriteQuestions } from '@src/app/favorite/favoriteSlice';
+import { getCurrentChoices, removeStateCurrentChoices } from '@src/app/class/question/choices/choicesSlice';
 export default function Init() {
   const user = useSelector(selectUser).user;
   const navigate = useNavigate();
@@ -25,8 +26,11 @@ export default function Init() {
   }, []);
 
   useEffect(() => {
-    if (user?.id) dispatch(getFavoriteQuestions());
-    else {
+    if (user?.id) {
+      dispatch(getFavoriteQuestions());
+      dispatch(getCurrentChoices());
+    } else {
+      dispatch(removeStateCurrentChoices());
       dispatch(removeStateFavoriteQuestions());
     }
   }, [user?.id]);

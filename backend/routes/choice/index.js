@@ -6,16 +6,17 @@ import {
   getQuestionsAnsweredByMonthAndYear,
   getWhichUsersAnsweredMostQuestions,
   postChoice,
-  upsertCurrentChoice,
-  getCurrentChoicesByGroupIdAndType,
   getChoicesByGroupId,
   addManyChoicesToQuestion,
   getChoicesByUserId,
 } from "#models/choice/index.js";
 import { cascadeSetDeleted } from "#utils/sqlFunctions.js";
 import { commonErrorMessage } from "#utils/utils.js";
-import express, { Router } from "express";
+import { Router } from "express";
+import currentRouter from "./current/index.js";
 const router = Router();
+
+router.use("/current", currentRouter);
 
 router.get("/top", async function (req, res) {
   try {
@@ -176,32 +177,6 @@ router.delete(
   }
 );
 
-/**
- * pulls in the current choices that this user has,
- */
-router.get(
-  "/current/:group_id/:group_type",
-  isAuthenticated,
-  async function (req, res) {
-    try {
-      const result = await getCurrentChoicesByGroupIdAndType(
-        req.user,
-        req.params.group_id,
-        req.params.group_type
-      );
-
-      res.status(200).json(result);
-    } catch (error) {
-      commonErrorMessage(
-        res,
-        500,
-        `failed to get current choices for group id ${req.params.group_id} and type ${req.params.group_type}`,
-        error
-      );
-    }
-  }
-);
-
 // answers transactional
 router.post("/answer/:choice_id", async function (req, res) {
   try {
@@ -211,23 +186,5 @@ router.post("/answer/:choice_id", async function (req, res) {
     commonErrorMessage(res, 500, "failed to post answer", error);
   }
 });
-
-// answers current
-router.post(
-  "/:choice_id/:question_id",
-  isAuthenticated,
-  async function (req, res) {
-    try {
-      const result = await upsertCurrentChoice(
-        req.user,
-        req.params.choice_id,
-        req.params.question_id
-      );
-      res.status(201).json(result);
-    } catch (error) {
-      commonErrorMessage(res, 500, "failed to post current answer", error);
-    }
-  }
-);
 
 export default router;

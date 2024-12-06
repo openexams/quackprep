@@ -13,17 +13,6 @@ export async function postChoice(user_id, choice_id) {
   ); // maybe get last inserted id so i can see it worked? Naaaa....
 }
 
-export async function upsertCurrentChoice(user_id, choice_id, question_id) {
-  const params = { choice_id, user_id, question_id };
-  // if user already has row with this question update it, if not create a new one.
-  return await sqlExe.executeCommand(
-    `INSERT INTO answers_current (choice_id, user_id, question_id) VALUES(:choice_id,:user_id, :question_id)
-    ON DUPLICATE KEY
-    UPDATE choice_id = :choice_id`,
-    params
-  );
-}
-
 export async function getWhichUsersAnsweredMostQuestions() {
   return await sqlExe.executeCommand(
     `SELECT a.user_id, u.username, u.is_creator, COUNT(*) as questions_answered, u.icon FROM answers_transactional
@@ -176,13 +165,4 @@ export async function addManyChoicesToQuestion(question_id, user_id, choices) {
     );
   }
   return await sqlExe.queryCommand(sqlStatement, params);
-}
-
-export async function getCurrentChoicesByGroupIdAndType( // TODO answers_current
-  user_id,
-  group_id,
-  group_type
-) {
-  const params = { user_id, group_id, group_type };
-  return await sqlExe.executeCommand(` `, params);
 }

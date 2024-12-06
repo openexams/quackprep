@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { List, Button, Transition } from 'semantic-ui-react';
+import { List, Button, Transition, Icon } from 'semantic-ui-react';
 import './AnswerButton.css';
 import MarkdownRenderer from '@components/MarkdownRenderer';
 import { useDispatch, useSelector } from 'react-redux';
-import { postAnswer, upsertCurrentAnswer } from '../../choicesSlice';
+import { postAnswer, upsertCurrentChoice } from '../../choicesSlice';
 import { selectUser } from '@src/app/auth/authSlice';
 
 export default function ChoiceShow({ id, answer, is_correct, showAnswers, setShowAnswers, selectedQuestionId, resetClicked }) {
@@ -34,7 +34,7 @@ export default function ChoiceShow({ id, answer, is_correct, showAnswers, setSho
               if (user?.id) {
                 // only do a request if a user is logged in
 
-                dispatch(upsertCurrentAnswer(id, selectedQuestionId));
+                dispatch(upsertCurrentChoice(id, selectedQuestionId));
               }
               // answers_transactional does not need user_id
               dispatch(postAnswer(id));
@@ -61,7 +61,7 @@ export default function ChoiceShow({ id, answer, is_correct, showAnswers, setSho
         {/* Small button rendered outside the main button but positioned inside using CSS */}
         {!showAnswers && (
           <Button
-            icon='ban black'
+            icon={<Icon color='black' name='ban' />}
             size='large'
             className='disable-toggle extra'
             style={{

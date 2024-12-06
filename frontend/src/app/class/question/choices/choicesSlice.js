@@ -1,5 +1,5 @@
 import { standardApiCall } from '@utils/api';
-import { updateArrObjectsWithNewVals, filterArr, upsertArray, countingSort, mergeData } from 'maddox-js-funcs';
+import { filterArr, upsertArray, countingSort, mergeData, selectItemById } from 'maddox-js-funcs';
 import { createSelector } from 'reselect';
 
 const GET_CRUD_CHOICES = 'app/class/question/choices/GET_CRUD_CHOICES';
@@ -7,28 +7,26 @@ const GET_CRUD_CHOICES = 'app/class/question/choices/GET_CRUD_CHOICES';
 const POST_ANSWER = 'app/class/question/choices/POST_ANSWER';
 const POST_FAVORITE_ANSWER = 'app/class/question/choices/POST_ANSWER_CURRENT';
 
-const GET_CURRENT_CHOICES = 'app/class/question/choices/POST_ANSWER_CURRENT';
+const GET_CURRENT_CHOICES = 'app/class/question/choices/GET_CURRENT_CHOICES';
+const UPSERT_CURRENT_CHOICE = 'app/class/question/choices/UPSERT_CURRENT_CHOICE';
 
 const UPSERT_CRUD_CHOICE = 'app/class/question/choices/UPSERT_CRUD_CHOICE';
 
 const DELETE_CRUD_CHOICE = 'app/class/question/choices/DELETE_CRUD_CHOICE';
 
-//TODO
-export function getCurrentChoices(user_id) {
-  if (user_id === null) {
-    return;
-  }
-  return standardApiCall('get', '/api/choice/current', null, GET_CURRENT_CHOICES, 'ChoiceRouter');
+export function getCurrentChoices() {
+  return standardApiCall('get', '/api/choice/current/', null, GET_CURRENT_CHOICES, null);
+}
+export function removeStateCurrentChoices() {
+  return { type: GET_CURRENT_CHOICES, payload: null };
 }
 
-// not used right now needs to be used and setup. TODO
+export function upsertCurrentChoice(choice_id, question_id) {
+  return standardApiCall('post', `/api/choice/current/`, { choice_id, question_id }, UPSERT_CURRENT_CHOICE);
+}
+
 export function postFavoriteAnswer(choice_id) {
   return standardApiCall('post', `/api/choice/favorite/${choice_id}`, {}, POST_FAVORITE_ANSWER);
-}
-
-//TODO
-export function upsertCurrentAnswer(choice_id, question_id) {
-  return standardApiCall('post', `/api/choice/${choice_id}/${question_id}`, {}, null);
 }
 
 export function postAnswer(choice_id) {
@@ -75,6 +73,7 @@ export function deleteChoiceById(id) {
 
 const DEFAULT_STATE = {
   choices: null,
+  currentChoices: null,
 };
 
 export default function choicesReducer(state = DEFAULT_STATE, action) {
@@ -90,6 +89,11 @@ export default function choicesReducer(state = DEFAULT_STATE, action) {
       return { ...state, choices: filterArr(state.choices, action.payload) };
     case UPSERT_CRUD_CHOICE: // if inserteing new id will be higher than all others
       return { ...state, choices: upsertArray(state.choices, ...mergeData(action.payload)) }; // becuz upsert arr adds new item to end i dont need to sort it again
+
+    case GET_CURRENT_CHOICES:
+      return { ...state, currentChoices: action.payload };
+    case UPSERT_CURRENT_CHOICE:
+      return { ...state, currentChoices: upsertArray(state.currentChoices, action.payload) };
     default:
       return state;
   }
@@ -101,3 +105,20 @@ export const selectChoicesState = createSelector(
     return { choices: state.app.choices.choices };
   },
 );
+// only choice pulled in should be from cur user.
+export function doesQuestionHaveCurrentChoice(currentChoices, question_id) {
+  const choice = selectItemById(currentChoices, 'question_id', question_id);
+  if (!choice) {
+    return null;
+  }
+  if (choice.is_correct) {
+    return true;
+  } else if (choice.is_correct === 0) {
+    return false;
+  } else {
+    return null;
+  }
+}
+export function selectCurrentChoicesState(state) {
+  return state.app.choices.currentChoices;
+}
