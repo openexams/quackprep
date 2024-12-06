@@ -72,8 +72,8 @@ await sqlExe.test();
 
 app.use(
   rateLimit({
-    windowMs: 2 * 60 * 1000, // 2 minutes
-    limit: 500, // Limit each IP to 500 requests per `window` (here, per 2 minutes).
+    windowMs: 60 * 1000, // 1 min
+    limit: 150, // small but prob good
   })
 );
 app.use(cors(corsOrigin));

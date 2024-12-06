@@ -77,7 +77,7 @@ export default function questionsReducer(state = DEFAULT_STATE, action) {
     case DELETE_CRUD_QUESTION:
       return { ...state, questions: filterArr(state.questions, action.payload) };
     case UPSERT_CRUD_QUESTION:
-      return { ...state, questions: mergeData(upsertArray(state.questions, action.payload)) };
+      return { ...state, questions: upsertArray(state.questions, ...mergeData(action.payload)) };
     default:
       return state;
   }
