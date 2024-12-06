@@ -20,7 +20,7 @@ export default function SchoolsList({ onCreator = false }) {
   }
   // set local school on every change
   useEffect(() => {
-    if (curSchoolId) {
+    if (!onCreator && curSchoolId) {
       localStorage.setItem('schoolId', curSchoolId);
       curSchoolId = parseInt(curSchoolId);
     }
@@ -29,7 +29,7 @@ export default function SchoolsList({ onCreator = false }) {
   // get local school at start
   useEffect(() => {
     let tmp;
-    if ((tmp = localStorage.getItem('schoolId')) && tmp != null) {
+    if (!onCreator && (tmp = localStorage.getItem('schoolId')) && tmp != null) {
       const wanted_school = selectArrayOfIncludingItem(schools, 'id', tmp)?.[0];
       if (wanted_school) {
         dispatch(changeNavbarPage(navigate, `/class/${wanted_school?.school_name}`));
