@@ -11,10 +11,13 @@
     "dev:frontend": "cd frontend && npm i && npm run dev"
   },
   "devDependencies": {
+    "@eslint/js": "^9.16.0",
     "babel-plugin-module-resolver": "^5.0.2",
     "concurrently": "^9.0.1",
     "eslint": "^9.15.0",
-    "eslint-plugin-promise": "^7.1.0",
+    "eslint-plugin-react": "^7.37.2",
+    "eslint-plugin-react-hooks": "^5.1.0",
+    "eslint-plugin-react-refresh": "^0.4.16",
     "playwright": "^1.49.0"
   },
   "dependencies": {

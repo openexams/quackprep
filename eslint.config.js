@@ -1,35 +1,38 @@
-import eslintPluginPromise from "eslint-plugin-promise";
+import js from "@eslint/js";
+import globals from "globals";
+import react from "eslint-plugin-react";
+import reactHooks from "eslint-plugin-react-hooks";
+import reactRefresh from "eslint-plugin-react-refresh";
 
 export default [
+  { ignores: ["dist"] },
   {
-    files: ["**/*.js"], // Adjust the glob pattern as needed
+    files: ["**/*.{js,jsx}"],
     languageOptions: {
       ecmaVersion: 2024,
-      sourceType: "module",
-      globals: {
-        console: "readonly",
-        process: "readonly",
-        __dirname: "readonly",
-        module: "readonly",
-        require: "readonly",
+      globals: globals.browser,
+      parserOptions: {
+        ecmaVersion: "latest",
+        ecmaFeatures: { jsx: true },
+        sourceType: "module",
       },
     },
+    settings: { react: { version: "18.3" } },
     plugins: {
-      promise: eslintPluginPromise,
+      react,
+      "react-hooks": reactHooks,
+      "react-refresh": reactRefresh,
     },
     rules: {
-      "no-console": "off", // Allows console statements
-      "no-var": "warn", // Warns on using var instead of let/const
-      "no-undef": "error", // This rule ensures variables are declared
-      "prefer-const": "warn", // Suggests using const if a variable is not reassigned
-      "no-unused-vars": ["warn", { argsIgnorePattern: "^_" }], // Warns on unused variables but ignores those starting with _
-      "require-await": "error", // Ensures that async functions have an await expression
-      //"no-return-await": "warn", // Warns on returning await unnecessarily
-      "promise/always-return": "off", // Turns off strict promise handling rules
-      "promise/no-return-in-finally": "warn", // Warns about returning inside finally blocks
-      "promise/catch-or-return": "warn", // Warns if a promise does not have a catch or return
-      "promise/prefer-await-to-then": "warn", // Prefers async/await over .then
-      "promise/prefer-await-to-callbacks": "off", // Disables the rule for using async/await over callbacks
+      ...js.configs.recommended.rules,
+      ...react.configs.recommended.rules,
+      ...react.configs["jsx-runtime"].rules,
+      ...reactHooks.configs.recommended.rules,
+      "react/jsx-no-target-blank": "off",
+      "react-refresh/only-export-components": [
+        "warn",
+        { allowConstantExport: true },
+      ],
     },
   },
 ];

@@ -1,5 +1,5 @@
 import { standardApiCall } from '@utils/api';
-import { deepCopyArrayOfObjects, selectArrayOfIncludingItem, upsertArray } from 'maddox-js-funcs';
+import { upsertArray } from 'maddox-js-funcs';
 
 const GET_FAVORITE_QUESTIONS = 'app/favorite/GET_FAVORITE_QUESTIONS';
 const UPSERT_FAVORITE_QUESTION = 'app/favorite/UPSERT_FAVORITE_QUESTION';
@@ -16,13 +16,7 @@ export function getFavoriteQuestions() {
 }
 
 export function upsertFavoriteQuestion(id, question_id, is_favorite) {
-  return standardApiCall(
-    'post',
-    '/api/question/favorite/',
-    { id, question_id, is_favorite },
-    UPSERT_FAVORITE_QUESTION,
-    'QuestionPage',
-  );
+  return standardApiCall('post', '/api/question/favorite/', { id, question_id, is_favorite }, UPSERT_FAVORITE_QUESTION, null);
 }
 
 ////////////////////
