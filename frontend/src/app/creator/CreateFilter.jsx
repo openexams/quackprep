@@ -1,12 +1,19 @@
-// todo
-// have inputs that filter, ex. class id = 6 - pull in all rows that relate to that class id and as it goes down it gets narrower
-
 import { Segment, Input, Form, Icon } from 'semantic-ui-react';
+import { useSearchParams } from 'react-router-dom';
+import { useEffect } from 'react';
 
-// join like in sql to filter
 export default function CreateFilter({ filter, setFilter }) {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const searchParamObject = Object.fromEntries(searchParams.entries());
+
+  // take in search params and load actual state with it.
+  useEffect(() => {
+    // reacts mad idk why
+    setFilter(searchParamObject);
+  }, []);
   function onChange(key, value) {
     setFilter({ ...filter, [key]: value });
+    setSearchParams({ ...searchParamObject, [key]: value });
   }
   return (
     <Segment>
@@ -25,7 +32,7 @@ export default function CreateFilter({ filter, setFilter }) {
             />
           </Form.Field>
           <Form.Field>
-            <label>Class Category</label>
+            <label>Class Category ID</label>
             <Input
               onChange={(e, data) => {
                 onChange('class_type', data.value);
