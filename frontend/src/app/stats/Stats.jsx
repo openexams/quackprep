@@ -99,7 +99,7 @@ export default function StatsPage() {
   return (
     <Container>
       <Header as='h1' textAlign='center' icon>
-        <Icon name='chart line' />
+        <Icon name='chart line' color='teal' />
         User Statistics
         <Header.Subheader>Track our progress over time</Header.Subheader>
       </Header>

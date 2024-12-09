@@ -119,8 +119,3 @@ h1.ui.header {
   font-size: 1.5em;
   color: var(--input-background) !important; /* Ensure the header text color matches the menu items */
 }
-
-.ui.icon.header .icon {
-  margin-right: 0.5em;
-  color: var(--input-background) !important; /* Ensure the icon color matches the text */
-}
