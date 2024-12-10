@@ -124,8 +124,10 @@ router.post("/signout", function (req, res) {
 });
 
 /** GOOGLE */
+/** /api/auth/google */
 router.get(
   "/google",
+
   passport.authenticate("google", {
     display: "popup",
     scope: ["profile", "email"],

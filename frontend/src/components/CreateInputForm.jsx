@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Form, Button, Label, FormInput, Grid, Container, Header, Message } from 'semantic-ui-react';
 import { deepCopyArrayOfObjects } from 'maddox-js-funcs';
 
@@ -26,7 +26,7 @@ function InputWLabel({ state, setState, curStateIndex }) {
         <Grid.Row verticalAlign='middle' columns={2}>
           <Grid.Column width={4}>
             <Label basic pointing='right' size='large'>
-              {field.name}
+              {field?.label || field.name}
             </Label>
           </Grid.Column>
           <Grid.Column width={12}>

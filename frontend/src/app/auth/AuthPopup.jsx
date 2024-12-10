@@ -5,7 +5,6 @@ import { changeNavbarPage, selectLastPage, selectNavbarState } from '@components
 import Register from './register/register';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectUser } from './authSlice';
-import google_icon from '/img/google_icon.webp';
 import { useNavigate, Link } from 'react-router-dom';
 import { useSearchParams } from 'react-router-dom';
 import './auth.css';
@@ -87,6 +86,6 @@ export default function Auth() {
       </Segment>
     );
   } else {
-    return null;
+    dispatch(changeNavbarPage(navigate, lastPage || '/'));
   }
 }

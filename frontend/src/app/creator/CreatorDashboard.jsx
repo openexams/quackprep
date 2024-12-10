@@ -5,6 +5,8 @@ import { getUserCount, selectUserCount } from '../home/homeSlice';
 import { changeNavbarPage } from '@components/navbar/navbarSlice';
 import { selectUser } from '../auth/authSlice';
 import { useNavigate } from 'react-router-dom';
+import CreateInputForm from '@components/CreateInputForm';
+import submitCreatorForm from './creatorSlice';
 
 export default function CreatorDashboard() {
   const navigate = useNavigate();
@@ -41,15 +43,26 @@ export default function CreatorDashboard() {
           </Button>
         ) : (
           <Popup
+            hoverable
             position='bottom center'
-            content='email quackprep@gmail.com'
+            content='creator form'
             trigger={
-              <Button primary size='huge' as='a' href='mailto:quackprep@gmail.com' style={{ marginTop: '2rem' }}>
+              <Button primary size='huge' style={{ marginTop: '2rem' }}>
                 <Icon name='briefcase' />
                 Apply Now
               </Button>
             }
-          />
+          >
+            <CreateInputForm
+              formFields={[
+                { name: 'school', value: '', required: true, label: 'what school/group would you be uploading for?' },
+                { name: 'the_why', value: '', required: true, label: 'why do you want to become a creator?' },
+              ]}
+              onSubmit={({ school, the_why }) => {
+                dispatch(submitCreatorForm(school, the_why));
+              }}
+            />
+          </Popup>
         )}
       </Segment>
 
