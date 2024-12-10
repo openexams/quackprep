@@ -60,9 +60,7 @@ export function pdfsFetchLogic(dispatch, class_id) {
 }
 
 export function classFetchLogic(dispatch, classes, schoolId) {
-  if (!Array.isArray(classes)) {
-    dispatch(getClassesBySchoolId(schoolId));
-  }
+  dispatch(getClassesBySchoolId(schoolId));
 }
 
 export function classUpdateLogic(dispatch, classes, curClassName, school_id) {
@@ -71,10 +69,8 @@ export function classUpdateLogic(dispatch, classes, curClassName, school_id) {
 }
 
 // fetches all schools
-export function schoolFetchLogic(dispatch, schools) {
-  if (!Array.isArray(schools)) {
-    dispatch(getSchools());
-  }
+export function schoolFetchLogic(dispatch) {
+  dispatch(getSchools());
 }
 
 export function schoolUpdateLogic(dispatch, schools, school_name) {

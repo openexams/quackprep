@@ -101,11 +101,7 @@ export default function Navbar() {
       if (activePage?.includes('topic') && className && classId) {
         dispatch(updateGroupType('topic'));
       }
-      if (!loading?.ClassList) {
-        dispatch(getClassCategories());
-      }
       if (!loading?.SchoolsList) {
-        schoolFetchLogic(dispatch, schools);
         schoolUpdateLogic(dispatch, schools, schoolName);
       }
       if (!loading?.ClassList && schoolId) {

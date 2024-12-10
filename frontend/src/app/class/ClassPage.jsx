@@ -7,12 +7,9 @@ import { selectArrayOfIncludingItem, selectArrayOfStateById, selectBINARYArrayOf
 import { changeNavbarPage, selectNavbarState } from '@components/navbar/navbarSlice';
 import ClassList from './ClassList';
 import { useNavigate } from 'react-router-dom';
-import { selectSchoolState } from './school/schoolSlice';
 
 export default function ClassPage() {
   let { schoolId: curSchoolId } = useSelector(selectNavbarState).navbar;
-  const schools = useSelector(selectSchoolState).schools;
-
   const navigate = useNavigate();
   const classes = useSelector(selectBINARYArrayOfStateById('app.class.classes.classes', 'school_id', curSchoolId));
   const dispatch = useDispatch();
