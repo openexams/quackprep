@@ -132,14 +132,17 @@ router.get(
     display: "popup",
     scope: ["profile", "email"],
     failureFlash: true,
-  })
+  }),
+  function (req, res) {
+    req.session.redirectUrl = req.query.redirectUrl;
+  }
 );
 
 router.get(
   "/google/callback",
   passport.authenticate("google"),
   function (req, res) {
-    res.redirect(`/`);
+    res.redirect(`${req.session?.redirectUrl || "/"}`);
   }
 );
 /**   *    *    * */

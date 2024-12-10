@@ -6,28 +6,26 @@ import Register from './register/register';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectUser } from './authSlice';
 import { useNavigate, Link } from 'react-router-dom';
-import { useSearchParams } from 'react-router-dom';
 import './auth.css';
+import { selectLoadingState } from '../store/loadingSlice';
 
 export default function Auth() {
   const navigate = useNavigate();
-  const loading = useSelector((state) => state.loading.loadingComps.AuthPopup);
+  const loading = useSelector(selectLoadingState).loadingComps?.AuthPopup;
   const dispatch = useDispatch();
   const { user } = useSelector(selectUser);
   const [loggingIn, setLoggingIn] = useState(true);
   const logOrSignText = loggingIn ? 'Login' : 'Sign Up';
   const lastPage = useSelector(selectLastPage).lastPage;
 
-  const [searchParams, setSearchParams] = useSearchParams();
-
   useEffect(() => {
     if (user?.id && lastPage) dispatch(changeNavbarPage(navigate, lastPage));
-    else if (user?.id) dispatch(changeNavbarPage(navigate, '/home'));
+    else if (user?.id) dispatch(changeNavbarPage(navigate, '/'));
   }, [user]);
 
   if (!user.id) {
     return (
-      <Segment basic>
+      <Segment basic loading={loading}>
         <Grid textAlign='center' verticalAlign='middle' style={{ minHeight: '80vh' }}>
           <Grid.Column style={{ maxWidth: 450 }}>
             <Segment raised>
@@ -46,7 +44,7 @@ export default function Auth() {
                   <p>Start your journey to success today!</p>
                 </section>
               </div>
-              <Form onSubmit={() => window.open(`/api/auth/google`)}>
+              <Form onSubmit={() => window.open(`/api/auth/google${lastPage ? `?redirectUrl=${lastPage}` : ''}`, '_self')}>
                 <Button size='large' fluid className='google-login-button'>
                   <Icon name='google' className='google-login-icon' />
                   {logOrSignText} with Google
@@ -86,6 +84,6 @@ export default function Auth() {
       </Segment>
     );
   } else {
-    dispatch(changeNavbarPage(navigate, lastPage || '/'));
+    return null;
   }
 }
