@@ -11,6 +11,11 @@ export default function MultipleChoice({ choices, selectedQuestion }) {
 
   choices = randomizeArray(choices, 1234);
 
+  let total_submissions = 0;
+  for (let i = 0; i < choices?.length; i++) {
+    total_submissions += choices[i]?.num_submissions;
+  }
+
   // on question change
   useEffect(() => {
     setShowAnswers(false);
@@ -34,6 +39,8 @@ export default function MultipleChoice({ choices, selectedQuestion }) {
               setShowAnswers={setShowAnswers}
               showAnswers={showAnswers}
               resetClicked={resetClicked}
+              num_submission={choice?.num_submissions || 0}
+              total_submissions={total_submissions}
             />
           ),
         )}

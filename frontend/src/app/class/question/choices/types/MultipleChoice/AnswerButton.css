@@ -101,3 +101,16 @@
     padding-left: 0.5rem;
   }
 }
+
+/* Make the progress bar fill the entire height of its container */
+.full-height-progress {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.full-height-progress .bar {
+  opacity: 0.1;
+  height: 100% !important;
+  min-height: 100% !important;
+}

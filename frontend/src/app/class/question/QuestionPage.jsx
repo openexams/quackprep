@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Grid, Header, Segment, Popup, Modal } from 'semantic-ui-react';
+import { Grid, Header, Segment, Popup, Button, Icon } from 'semantic-ui-react';
 import QuestionList from './QuestionList';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectArrayOfStateByGroupId } from 'maddox-js-funcs';
@@ -8,6 +8,7 @@ import { selectLoadingState } from '@src/app/store/loadingSlice';
 import ChoiceRouter from './choices/ChoiceRouter';
 import { useNavigate } from 'react-router-dom';
 import ChatbotWidget from '@src/app/chatbot/ChatbotWidget';
+import QuestionReport from './qreport/QuestionReport';
 
 /**
  *
@@ -75,7 +76,16 @@ export default function QuestionPage() {
           </Grid.Column>
           <Grid.Column width={12}>
             {selectedQuestion ? (
-              <ChoiceRouter selectedQuestion={selectedQuestion} />
+              <Segment>
+                <ChoiceRouter selectedQuestion={selectedQuestion} />
+                {selectedQuestion?.id && <QuestionReport questionId={selectedQuestion?.id} />}
+                {selectedQuestion?.explanation_url && (
+                  <Button as={'a'} href={selectedQuestion?.explanation_url} target='_blank'>
+                    <Icon color='red' name='youtube' />
+                    Show Explanation
+                  </Button> // popup modal later
+                )}
+              </Segment>
             ) : (
               <Segment>
                 <Header as='h3'>Please select a question from the list.</Header>

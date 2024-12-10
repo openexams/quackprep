@@ -26,7 +26,7 @@ export default function ChoiceRouter({ selectedQuestion }) {
     }
   }
   return (
-    <Segment loading={loading}>
+    <Segment basic loading={loading}>
       {selectedQuestion && choices ? (
         <>
           <Header>
@@ -38,7 +38,6 @@ export default function ChoiceRouter({ selectedQuestion }) {
       ) : (
         <Header as='h3'>Please select a question from the list.</Header>
       )}
-      {selectedQuestion?.id && <QuestionReport questionId={selectedQuestion?.id} />}
     </Segment>
   );
 }

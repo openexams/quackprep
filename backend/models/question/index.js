@@ -16,7 +16,7 @@ export async function createQuestionReport(user_id, question_id, text) {
 export async function getQuestionsByGroupId(group_id) {
   const params = { group_id };
   return await sqlExe.executeCommand(
-    `SELECT q.id, q.question, g.id as group_id, g.name as group_name, gt.type_name, q.question_num_on_exam,
+    `SELECT q.id, q.question, g.id as group_id, q.explanation_url, g.name as group_name, gt.type_name, q.question_num_on_exam,
     cl.id as class_id, cl.school_id,cl.category as class_category
     FROM questions q 
     JOIN group_question gq ON q.id = gq.question_id
@@ -42,7 +42,7 @@ export async function selectQuestion(WHERE, params) {
     q.question_num_on_exam,
     cl.id AS class_id,
     cl.school_id,
-    cl.category AS class_category
+    cl.category AS class_category,q.explanation_url,
 FROM
     questions q
 JOIN

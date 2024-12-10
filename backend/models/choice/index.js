@@ -38,13 +38,18 @@ async function selectChoices(WHERE, params) {
   const result = await sqlExe.executeCommand(
     `
     SELECT c.id,c.answer,c.is_correct,c.created_by,c.question_id,c.type, cl.id as class_id, g.id as group_id, 
-    cl.school_id, cl.category as class_category
+    cl.school_id, cl.category as class_category, ans.num_submissions
      FROM choices c 
      LEFT JOIN group_question gq ON c.question_id = gq.question_id
      JOIN cgroups g on g.id = gq.group_id 
      JOIN classes cl ON cl.id = g.class_id
+     LEFT JOIN (SELECT ans.choice_id, COUNT(*) as num_submissions FROM answers_transactional ans
+			GROUP BY ans.choice_id) 
+            ans on c.id = ans.choice_id
+     
     WHERE c.deleted=0 AND g.deleted=0 AND cl.deleted=0 AND ${WHERE}
-     ORDER BY c.question_id ASC`,
+	ORDER BY c.question_id ASC
+     `,
     params
   ); // if question is deleted then choice should be deleted
   return result;
@@ -65,12 +70,15 @@ export async function getChoicesByGroupId(group_id) {
   return await sqlExe.executeCommand(
     `
       SELECT c.id,c.answer,c.is_correct,c.created_by,c.question_id,c.type, cl.id as class_id, g.id as group_id, 
-      cl.school_id, cl.category as class_category
+      cl.school_id, cl.category as class_category, ans.num_submissions
       FROM choices c 
       JOIN group_question gq ON c.question_id = gq.question_id
       LEFT JOIN group_question new_gq ON c.question_id = new_gq.question_id
       JOIN cgroups g on g.id = new_gq.group_id 
       JOIN classes cl ON cl.id = g.class_id
+      LEFT JOIN (SELECT ans.choice_id, COUNT(*) as num_submissions FROM answers_transactional ans
+			GROUP BY ans.choice_id) 
+            ans on c.id = ans.choice_id
       WHERE c.deleted=0 AND g.deleted=0 AND cl.deleted=0 AND gq.group_id =:group_id
       ORDER BY c.id ASC
 
