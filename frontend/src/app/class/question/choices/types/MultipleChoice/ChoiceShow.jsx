@@ -88,7 +88,7 @@ export default function ChoiceShow({
                   fontSize: '1rem',
                   fontWeight: 'bold',
                   color: 'black',
-                  opacity: 0.1,
+                  opacity: 0.4,
                   pointerEvents: 'none',
                   textAlign: 'right',
                   whiteSpace: 'nowrap',
