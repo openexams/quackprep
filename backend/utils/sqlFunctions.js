@@ -74,10 +74,9 @@ export async function cascadeSetDeleted( // todo learn more about how the join w
     LEFT JOIN choices ch ON ch.question_id = gq.question_id      -- ^
     SET c.deleted=:delClass,g.deleted=:delGroup,q.deleted=:delQuestion,ch.deleted=:delChoice,p.deleted=:delPdf
     WHERE c.created_by = :user_id
-    AND c.deleted=0 AND g.deleted=0 AND q.deleted=0 AND ch.deleted=0 AND p.deleted=0
     AND ${where} 
-`, // where will get rid of a ton of rows and only get rows u wanna
-      params
+`, // dont need to pull in where things arent deleted because of how the heigharchy works, the way we call this function wont let things get undeleted.
+      params // for example if you have the ability to delete a choice then the question MUST BE undeleted.
     )
   ).affectedRows;
   return id;
