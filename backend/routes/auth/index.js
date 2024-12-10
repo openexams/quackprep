@@ -142,7 +142,6 @@ router.get(
   "/google/callback",
   passport.authenticate("google"),
   function (req, res) {
-    console.log(req.session?.redirectUrl);
     res.redirect(`${req.session?.redirectUrl || "/"}`);
   }
 );
