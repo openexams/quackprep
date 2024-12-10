@@ -49,13 +49,14 @@ export default function Footer() {
                 <p>Follow us on social media for updates and news.</p>
                 <List horizontal inverted divided link size='small'>
                   <List.Item as='a' href='https://www.youtube.com/@quackprep'>
-                    <Icon name='youtube' /> Youtube
+                    <Icon color='red' name='youtube' /> Youtube
                   </List.Item>
                   <List.Item as='a' href='https://www.tiktok.com/@quackprep'>
+                    <Image style={{ width: '1.2rem' }} src='/img/tt_icon.webp' />
                     Tiktok
                   </List.Item>
                   <List.Item as='a' href='https://www.youtube.com/watch?v=dQw4w9WgXcQ'>
-                    <Icon name='linkedin' /> LinkedIn
+                    <Icon color='blue' name='linkedin' /> LinkedIn
                   </List.Item>
                 </List>
               </Grid.Column>
