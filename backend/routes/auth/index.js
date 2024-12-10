@@ -127,9 +127,6 @@ router.post("/signout", function (req, res) {
 /** /api/auth/google */
 router.get(
   "/google",
-  function (req, res) {
-    req.session.redirectUrl = req.query.redirectUrl;
-  },
 
   passport.authenticate("google", {
     display: "popup",
@@ -141,8 +138,8 @@ router.get(
 router.get(
   "/google/callback",
   passport.authenticate("google"),
-  function (req, res) {
-    res.redirect(`${req.session?.redirectUrl || "/"}`);
+  async function (req, res) {
+    res.redirect("/");
   }
 );
 /**   *    *    * */
