@@ -20,3 +20,22 @@ export async function checkIfCreator(user_id) {
   }
   return false;
 }
+
+export async function getMyStats(user_id) {
+  return (
+    await sqlExe.executeCommand(
+      `SELECT
+    (SELECT COUNT(*)
+     FROM answers_current ac
+     JOIN choices c ON c.id = ac.choice_id
+     WHERE ac.user_id = :user_id AND c.is_correct = 1) AS correct_answer_count,
+     
+    (SELECT COUNT(*)
+     FROM answers_transactional
+     WHERE user_id = :user_id) AS total_questions_answered,
+     
+     (select time_spent from time_spent where user_id = :user_id) as time_spent;`,
+      { user_id }
+    )
+  )?.[0];
+}

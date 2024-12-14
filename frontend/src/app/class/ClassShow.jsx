@@ -70,7 +70,7 @@ export default function ClassShow() {
               <Button
                 size='large'
                 onClick={() => {
-                  dispatch(changeNavbarPage(navigate, 'pdfs'));
+                  dispatch(changeNavbarPage(navigate, 'pdfexams'));
                 }}
               >
                 <Icon name='list' />

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { upsertTimeSpent } from "#models/account/index.js";
+import { getMyStats, upsertTimeSpent } from "#models/account/index.js";
 
 import { isAuthenticated } from "#middleware/authMiddleware.js";
 import { commonErrorMessage } from "#utils/utils.js";
@@ -22,23 +22,18 @@ router.post("/time_spent", async function (req, res) {
   }
 });
 
-router.patch("/icon", async function (req, res) {
-  // user could send malicious image TODO not going to work for now
+router.get("/stats", async function (req, res) {
   try {
-    const icon_url = req.body;
-    res.status(500).json();
+    const result = await getMyStats(req.user);
+    res.status(200).json(result);
   } catch (error) {
-    commonErrorMessage(res, 500, "failed to update your icon", error);
+    commonErrorMessage(
+      res,
+      500,
+      `failed to get stats by user_id ${req.user}`,
+      error
+    );
   }
 });
 
-// router.patch change username
-
-// change password
-
-// change email EHH MAYBE
-
-// change icon
-
-//TODO
 export default router;

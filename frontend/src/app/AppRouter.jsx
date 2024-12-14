@@ -51,8 +51,8 @@ export default function AppRouter() {
         <Route path='/class/:school_name/:class_name/exam' element={<ExamList />} />
         <Route path='/class/:school_name/:class_name/exam/:group_name/question' element={<QuestionPage />} />
         <Route path='/class/:school_name/:class_name/exam/:group_name/question/:question_id' element={<QuestionPage />} />
-        <Route path='/class/:school_name/:class_name/pdfs' element={<PDFList />} />
-        <Route path='/class/:school_name/:class_name/pdfs/:pdf_id' element={<PDFShow />} />
+        <Route path='/class/:school_name/:class_name/pdfexams' element={<PDFList />} />
+        <Route path='/class/:school_name/:class_name/pdfexams/:pdf_id' element={<PDFShow />} />
 
         <Route path='/leaderboard' element={<Leaderboard />} />
         <Route path='/stats' element={<Stats />} />

@@ -6,6 +6,7 @@ import { Line } from 'react-chartjs-2';
 import 'chart.js/auto';
 import { selectLoadingState } from '../store/loadingSlice';
 import { getQuestionsAnsweredByMonthAndYear, selectStatsState } from './statsSlice';
+import MyStats from './MyStats';
 
 const numberToNameMonthMapping = {
   1: 'Jan',
@@ -98,6 +99,7 @@ export default function StatsPage() {
 
   return (
     <Container>
+      <MyStats />
       <Header as='h1' textAlign='center' icon>
         <Icon name='chart line' color='teal' />
         User Statistics
