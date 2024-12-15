@@ -40,11 +40,13 @@ export default function ProfileDropdown({ activePage, handlePageChange, hasStrea
             open={confimOpen}
             onSubmit={() => {
               dispatch(signOut());
-              navigate('/home'); // was using my changeNavPage but it didnt run fast enough I Dont think
+              setTimeout(() => {
+                navigate('/home'); // was using my changeNavPage but it didnt run fast enough I Dont think
 
-              setConfirmOpen(false);
+                setConfirmOpen(false);
 
-              navigate(0); // reloads page so store is reset should null it all out to be more performant
+                navigate(0); // reloads page so store is reset should null it all out to be more performant
+              }, 500);
             }}
           />
         ) : null}
