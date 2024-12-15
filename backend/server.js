@@ -8,6 +8,7 @@ import router from "./routes/index.js";
 import passport from "./config/passportConfig.js";
 import RedisStore from "connect-redis";
 import redis from "redis";
+import dotenv from "dotenv";
 
 import bodyParser from "body-parser";
 import { REDIS_CONFIG, SESSION_CONFIG } from "./config/config.js";
@@ -95,7 +96,7 @@ app.use(express.static(path.join(__dirname, "./public/")));
 app.use("/api", router);
 
 app.get("/*", (req, res) => {
-  res.sendFile(path.join(__dirname, "./public/index.html"));
+  res.redirect(process.env.FRONTEND_URL);
 });
 
 app.listen(3000, () => {

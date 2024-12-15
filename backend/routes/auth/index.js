@@ -3,6 +3,7 @@ import bcrypt from "bcrypt";
 import { findUserById, getUserCount, register } from "#models/auth/index.js";
 import passport from "#config/passportConfig.js";
 import { isAuthenticated } from "#middleware/authMiddleware.js";
+import dotenv from "dotenv";
 
 import validator from "validator";
 import {
@@ -139,7 +140,7 @@ router.get(
   "/google/callback",
   passport.authenticate("google"),
   async function (req, res) {
-    res.redirect("/");
+    res.redirect(process.env.FRONTEND_URL);
   }
 );
 /**   *    *    * */
