@@ -6,23 +6,18 @@ import { Link } from 'react-router-dom';
 export default function BrandLogo({ handlePageChange }) {
   return (
     <Menu.Item
+      as={Link}
+      to='/home'
       header
       onClick={(e, data) => {
+        e.preventDefault();
         const fixedData = {
           name: '/home',
         };
         handlePageChange(e, fixedData);
       }}
     >
-      <Image
-        as={Link}
-        to='/home'
-        onClick={(e, d) => e.preventDefault()}
-        src={logo}
-        alt='Logo'
-        className='logo'
-        style={{ width: '45px', marginRight: '.7em' }}
-      />
+      <Image src={logo} alt='Logo' className='logo' style={{ width: '45px', marginRight: '.7em' }} />
       <span className='quackprep'>QuackPrep</span>
     </Menu.Item>
   );
