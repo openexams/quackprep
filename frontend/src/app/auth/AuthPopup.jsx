@@ -44,7 +44,14 @@ export default function Auth() {
                   <p>Start your journey to success today!</p>
                 </section>
               </div>
-              <Form onSubmit={() => window.open(`/api/auth/google`, '_self')}>
+              <Form
+                onSubmit={() =>
+                  window.open(
+                    import.meta.env.MODE === 'development' ? `/api/auth/google` : `https://api.quackprep.com/api/auth/google`,
+                    '_self',
+                  )
+                }
+              >
                 <Button size='large' fluid className='google-login-button'>
                   <Icon name='google' className='google-login-icon' />
                   {logOrSignText} with Google
