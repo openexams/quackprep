@@ -4,11 +4,10 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "start": "npm install; npm run build:frontend && npm run start:backend",
+    "start": "npm install; npm run start:backend",
     "dev": "concurrently --kill-others-on-fail --success=first \"npm run start:backend\" \"npm run dev:frontend\"",
     "build:frontend": "cd frontend && npm i && npm run build",
-    "start:backend": "cd backend && npm i && npm start",
-    "dev:frontend": "cd frontend && npm i && npm run dev"
+    "start:backend": "cd backend && npm i && npm start"
   },
   "devDependencies": {
     "@eslint/js": "^9.16.0",
