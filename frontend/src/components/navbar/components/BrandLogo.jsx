@@ -21,7 +21,7 @@ export default function BrandLogo({ handlePageChange }) {
         src={logo}
         alt='Logo'
         className='logo'
-        style={{ marginRight: '.7em' }}
+        style={{ width: '56px', marginRight: '.7em' }}
       />
       <span className='quackprep'>QuackPrep</span>
     </Menu.Item>
