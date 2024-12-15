@@ -42,7 +42,7 @@ export async function selectQuestion(WHERE, params) {
     q.question_num_on_exam,
     cl.id AS class_id,
     cl.school_id,
-    cl.category AS class_category,q.explanation_url,
+    cl.category AS class_category,q.explanation_url
 FROM
     questions q
 JOIN
