@@ -25,6 +25,8 @@ dist-ssr
 
 backend/public/
 
+frontend/*.env
+
 #Playwright
 /test-results/
 /playwright-report/

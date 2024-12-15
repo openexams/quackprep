@@ -4,7 +4,7 @@ import react from '@vitejs/plugin-react';
 export default defineConfig(({ command, mode }) => {
   const env = loadEnv(mode, process.cwd(), '');
   return {
-    build: { outDir: '../backend/public', emptyOutDir: true },
+    // build: { outDir: '../backend/public', emptyOutDir: true },
     // define: {
     //   BACKEND_URL: JSON.stringify(env.BACKEND_URL),
     // },
