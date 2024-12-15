@@ -1,10 +1,11 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { List, Label, Icon } from 'semantic-ui-react';
+import { List, Label, Icon, Button } from 'semantic-ui-react';
 import { changeNavbarPage } from '@components/navbar/navbarSlice';
 import { updateQuestionId } from '@components/navbar/navbarSlice';
 import { upsertFavoriteQuestion } from '@src/app/favorite/favoriteSlice';
 import { selectNavbarState } from '@components/navbar/navbarSlice';
+import FavoriteIcon from './FavoriteIcon/FavoriteIcon';
 
 /**
  *
@@ -79,14 +80,7 @@ export default function QuestionCard({ id, selectedQuestion, type_name, group_na
         </div>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '1em' }}>
-          <Icon
-            name={favorited ? 'star' : 'star outline'}
-            color={favorited ? 'yellow' : null}
-            onClick={(e) => {
-              e.stopPropagation(); // Prevent parent onClick from firing
-              dispatch(upsertFavoriteQuestion(null, id, !favorited));
-            }}
-          />
+          <FavoriteIcon onClick={() => dispatch(upsertFavoriteQuestion(null, id, !favorited))} favorited={favorited} />
         </div>
       </div>
 
