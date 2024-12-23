@@ -1,5 +1,4 @@
 import { standardApiCall } from '@utils/api';
-import { createSelector } from 'reselect';
 
 const GET_TOP_STREAKS = 'app/leaderboard/GET_TOP_STREAKS';
 const GET_TOP_QS_ANSWERED = 'app/leaderboard/GET_TOP_QS_ANSWERED';
@@ -27,9 +26,6 @@ export default function leadboardReducer(state = DEFAULT_STATE, action) {
   }
 }
 
-export const selectLeaderboardState = createSelector(
-  (state) => state,
-  function (state) {
-    return { leaderboard: state.app.leaderboard };
-  },
-);
+export const selectLeaderboardState = function (state) {
+  return { leaderboard: state.app.leaderboard };
+};

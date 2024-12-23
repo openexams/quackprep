@@ -1,5 +1,4 @@
 import { standardApiCall } from '@utils/api';
-import { createSelector } from 'reselect';
 
 const GET_CLASS_CATEGORIES = 'app/class/class_categories/GET_CLASS_CATEGORIES';
 
@@ -21,9 +20,6 @@ export default function classCategoriesReducer(state = DEFAULT_STATE, action) {
   }
 }
 
-export const selectClassCategories = createSelector(
-  (state) => state,
-  function (state) {
-    return { class_categories: state.app.class.classCategories.class_categories };
-  },
-);
+export const selectClassCategories = (state) => {
+  return { class_categories: state.app.class.classCategories.class_categories };
+};

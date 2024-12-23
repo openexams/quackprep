@@ -1,4 +1,3 @@
-import { createSelector } from 'reselect';
 const SHOW_401_MSG = '/components/401/SHOW_401_MSG';
 const HIDE_401_MSG = '/components/401/HIDE_401_MSG';
 
@@ -25,11 +24,8 @@ export default function reducer401(state = DEFAULT_STATE, action) {
   }
 }
 
-export const select401CompState = createSelector(
-  (state) => state,
-  function (state) {
-    return {
-      show: state.show401.show,
-    };
-  },
-);
+export const select401CompState = function (state) {
+  return {
+    show: state.show401.show,
+  };
+};

@@ -1,4 +1,3 @@
-import { createSelector } from 'reselect';
 import { standardApiCall } from '@utils/api';
 import { copyArray, updateObjectWithKey, replaceP20WithSpace } from 'maddox-js-funcs';
 
@@ -163,28 +162,19 @@ export default function navbarReducer(state = DEFAULT_STATE, action) {
   }
 }
 
-export const selectCurrentPage = createSelector(
-  (state) => state,
-  function (state) {
-    return { page: state.app.navbar.page };
-  },
-);
+export const selectCurrentPage = function (state) {
+  return { page: state.app.navbar.page };
+};
 
-export const selectNavbarState = createSelector(
-  (state) => state,
-  function (state) {
-    return { navbar: state.app.navbar };
-  },
-);
+export const selectNavbarState = function (state) {
+  return { navbar: state.app.navbar };
+};
 
-export const selectLastPage = createSelector(
-  (state) => state,
-  function (state) {
-    let lastPage = state.app.navbar.lastPage;
-    if (!Array.isArray(lastPage)) {
-      return null;
-    }
-    lastPage = lastPage[lastPage.length - 1];
-    return { lastPage: lastPage };
-  },
-);
+export const selectLastPage = function (state) {
+  let lastPage = state.app.navbar.lastPage;
+  if (!Array.isArray(lastPage)) {
+    return null;
+  }
+  lastPage = lastPage[lastPage.length - 1];
+  return { lastPage: lastPage };
+};

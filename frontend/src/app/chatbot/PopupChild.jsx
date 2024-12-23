@@ -7,6 +7,7 @@ import LoginRequired from '../auth/LoginRequired';
 
 export default function PopupChild() {
   const user = useSelector(selectUser).user;
+  // finds current question based on the id present in the navbar state ->
   const { questionId } = useSelector(selectNavbarState).navbar;
   const currentQuestion = useSelector(selectArrayOfStateById('app.question.questions', 'id', questionId))?.[0];
 

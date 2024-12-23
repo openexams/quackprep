@@ -1,5 +1,4 @@
 import { standardApiCall } from '@utils/api';
-import { createSelector } from 'reselect';
 import { updateArrObjectsWithNewVals, filterArr, upsertArray } from 'maddox-js-funcs';
 import { countingSort } from 'maddox-js-funcs';
 
@@ -50,21 +49,15 @@ export default function classReducer(state = DEFAULT_STATE, action) {
   }
 }
 
-export const selectClassState = createSelector(
-  (state) => state,
-  function (state) {
-    return { classes: state.app.class.classes.classes };
-  },
-);
+export const selectClassState = function (state) {
+  return { classes: state.app.class.classes.classes };
+};
 
 export function selectClassStateById(id) {
-  return createSelector(
-    (state) => state,
-    function (state) {
-      if (!state.app.class.classes.classes) return [];
-      return { classes: state.app.class.classes.classes[id - 1] };
-    },
-  );
+  return function (state) {
+    if (!state.app.class.classes.classes) return [];
+    return { classes: state.app.class.classes.classes[id - 1] };
+  };
 }
 
 function findClassIndexByName(classes, name) {
@@ -78,12 +71,9 @@ function findClassIndexByName(classes, name) {
 }
 
 export function selectClassStateByName(name) {
-  return createSelector(
-    (state) => state,
-    function (state) {
-      if (!state.app.class.classes.classes) return [];
+  return function (state) {
+    if (!state.app.class.classes.classes) return [];
 
-      return { classes: state.app.class.classes[findClassIndexByName(state.app.class.classes.classes, name)] };
-    },
-  );
+    return { classes: state.app.class.classes[findClassIndexByName(state.app.class.classes.classes, name)] };
+  };
 }

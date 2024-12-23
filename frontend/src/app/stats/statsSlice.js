@@ -1,5 +1,4 @@
 import { standardApiCall } from '@utils/api';
-import { createSelector } from 'reselect';
 
 const GET_QUESTIONS_ANSWERED_BY_MONTH_AND_YEAR = '/app/stats/GET_QUESTIONS_ANSWERED_BY_MONTH_AND_YEAR';
 const GET_MY_STATS = '/app/stats/GET_MY_STATS';
@@ -30,12 +29,9 @@ export default function statsReducer(state = DEFAULT_STATE, action) {
   }
 }
 
-export const selectStatsState = createSelector(
-  (state) => state,
-  function (state) {
-    return { stats: state.app.stats };
-  },
-);
+export const selectStatsState = function (state) {
+  return { stats: state.app.stats };
+};
 
 export const selectMYStatsState = (state) => {
   return state.app.stats.myStats;

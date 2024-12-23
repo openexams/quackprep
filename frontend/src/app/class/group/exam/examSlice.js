@@ -1,5 +1,4 @@
 import { standardApiCall } from '@utils/api';
-import { createSelector } from 'reselect';
 import { deleteGroupById, getGroupsByUserId, upsertGroup } from '../groupSlice';
 import { updateArrObjectsWithNewVals, filterArr, upsertArray, countingSort } from 'maddox-js-funcs';
 
@@ -42,9 +41,6 @@ export default function examSliceReducer(state = DEFAULT_STATE, action) {
   }
 }
 
-export const selectExamsState = createSelector(
-  (state) => state,
-  function (state) {
-    return { exams: state.app.exam.exams };
-  },
-);
+export const selectExamsState = (state) => {
+  return { exams: state.app.exam.exams };
+};

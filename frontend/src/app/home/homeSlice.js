@@ -1,5 +1,4 @@
 import { standardApiCall } from '@src/utils/api';
-import { createSelector } from 'reselect';
 
 const GET_USERS_COUNT = 'app/home/GET_USERS_COUNT';
 
@@ -18,9 +17,6 @@ export default function homeReducer(state = DEFAULT_STATE, action) {
   }
 }
 
-export const selectUserCount = createSelector(
-  (state) => state,
-  function (state) {
-    return { userCount: state.app.home.userCount };
-  },
-);
+export const selectUserCount = (state) => {
+  return { userCount: state.app.home.userCount };
+};

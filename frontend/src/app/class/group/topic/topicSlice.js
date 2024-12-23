@@ -1,5 +1,4 @@
 import { standardApiCall } from '@utils/api';
-import { createSelector } from 'reselect';
 import { deleteGroupById, getGroupsByUserId, upsertGroup } from '../groupSlice';
 import { updateArrObjectsWithNewVals, filterArr, upsertArray, countingSort } from 'maddox-js-funcs';
 
@@ -43,9 +42,6 @@ export default function topicReducer(state = DEFAULT_STATE, action) {
   }
 }
 
-export const selectTopicState = createSelector(
-  (state) => state,
-  function (state) {
-    return { topics: state.app.topic.topics };
-  },
-);
+export const selectTopicState = (state) => {
+  return { topics: state.app.topic.topics };
+};

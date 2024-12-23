@@ -1,5 +1,3 @@
-import { createSelector } from 'reselect';
-
 const HIDE_FLASH = 'components/FlashMessage/HIDE_FLASH';
 const SHOW_FLASH = 'components/FlashMessage/SHOW_FLASH';
 
@@ -34,13 +32,10 @@ export default function flashReducer(state = DEFAULT_STATE, action) {
   }
 }
 
-export const selectFlashMessageState = createSelector(
-  (state) => state,
-  function (state) {
-    return {
-      show: state.flashMessage.show,
-      msg: state.flashMessage.msg,
-      error: state.flashMessage.error,
-    };
-  },
-);
+export const selectFlashMessageState = function (state) {
+  return {
+    show: state.flashMessage.show,
+    msg: state.flashMessage.msg,
+    error: state.flashMessage.error,
+  };
+};

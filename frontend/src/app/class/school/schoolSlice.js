@@ -1,5 +1,4 @@
 import { standardApiCall } from '@utils/api';
-import { createSelector } from 'reselect';
 import { updateArrObjectsWithNewVals } from 'maddox-js-funcs';
 
 const GET_SCHOOLS = 'app/class/school/GET_SCHOOLS';
@@ -20,9 +19,6 @@ export default function schoolsReducer(state = DEFAULT_STATE, action) {
   }
 }
 
-export const selectSchoolState = createSelector(
-  (state) => state,
-  function (state) {
-    return { schools: state.app.school.schools };
-  },
-);
+export const selectSchoolState = (state) => {
+  return { schools: state.app.school.schools };
+};

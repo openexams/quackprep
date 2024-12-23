@@ -1,6 +1,5 @@
 import { standardApiCall } from '@utils/api';
 import { filterArr, upsertArray, countingSort, mergeData, selectItemById } from 'maddox-js-funcs';
-import { createSelector } from 'reselect';
 
 const GET_CRUD_CHOICES = 'app/class/question/choices/GET_CRUD_CHOICES';
 
@@ -86,12 +85,10 @@ export default function choicesReducer(state = DEFAULT_STATE, action) {
   }
 }
 
-export const selectChoicesState = createSelector(
-  (state) => state,
-  function (state) {
-    return { choices: state.app.choices.choices };
-  },
-);
+export const selectChoicesState = (state) => {
+  return { choices: state.app.choices.choices };
+};
+
 // only choice pulled in should be from cur user.
 export function doesQuestionHaveCurrentChoice(currentChoices, question_id) {
   const choice = selectItemById(currentChoices, 'question_id', question_id);

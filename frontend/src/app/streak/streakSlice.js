@@ -1,5 +1,4 @@
 import { standardApiCall } from '@utils/api.js';
-import { createSelector } from 'reselect';
 
 const GET_HAS_STREAK = 'app/streak/GET_HAS_STREAK';
 const GET_STREAK = 'app/streak/GET_STREAK';
@@ -44,16 +43,10 @@ export default function streakReducer(state = DEFAULT_STATE, action) {
   }
 }
 
-export const selectHasStreak = createSelector(
-  (state) => state,
-  function (state) {
-    return { hasStreak: state.app.streak.hasStreak };
-  },
-);
+export const selectHasStreak = function (state) {
+  return { hasStreak: state.app.streak.hasStreak };
+};
 
-export const selectStreakData = createSelector(
-  (state) => state,
-  function (state) {
-    return { streak: state.app.streak };
-  },
-);
+export const selectStreakData = function (state) {
+  return { streak: state.app.streak };
+};

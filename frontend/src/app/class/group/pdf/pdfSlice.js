@@ -1,5 +1,4 @@
 import { standardApiCall } from '@utils/api';
-import { createSelector } from 'reselect';
 import { updateArrObjectsWithNewVals, filterArr, upsertArray, countingSort } from 'maddox-js-funcs';
 
 const GET_CRUD_PDFS = 'app/class/pdf/GET_CRUD_PDFS';
@@ -47,9 +46,6 @@ export default function pdfsReducer(state = DEFAULT_STATE, action) {
   }
 }
 
-export const selectPdfsState = createSelector(
-  (state) => state,
-  function (state) {
-    return { pdfs: state.app.pdf.pdfs };
-  },
-);
+export const selectPdfsState = (state) => {
+  return { pdfs: state.app.pdf.pdfs };
+};

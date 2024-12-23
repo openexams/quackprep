@@ -1,6 +1,5 @@
 import { standardApiCall } from '@utils/api';
 import { updateArrObjectsWithNewVals, upsertArray, filterArr, mergeData } from 'maddox-js-funcs';
-import { createSelector } from 'reselect';
 
 const GET_CRUD_QUESTIONS = 'app/class/question/GET_CRUD_QUESTIONS';
 const UPSERT_CRUD_QUESTION = 'app/class/question/UPSERT_CRUD_QUESTION';
@@ -65,9 +64,6 @@ export default function questionsReducer(state = DEFAULT_STATE, action) {
   }
 }
 
-export const selectQuestionState = createSelector(
-  (state) => state,
-  function (state) {
-    return { questions: state.app.question.questions };
-  },
-);
+export const selectQuestionState = (state) => {
+  return { questions: state.app.question.questions };
+};
