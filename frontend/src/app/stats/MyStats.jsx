@@ -40,14 +40,14 @@ export default function MyStats() {
                 <Grid.Column>
                   <Statistic color='blue'>
                     <Statistic.Value>{total_questions_answered}</Statistic.Value>
-                    <Statistic.Label>Total Questions</Statistic.Label>
+                    <Statistic.Label>Total Questions Answered</Statistic.Label>
                   </Statistic>
                 </Grid.Column>
 
                 <Grid.Column>
                   <Statistic color='green'>
                     <Statistic.Value>{correct_answer_count}</Statistic.Value>
-                    <Statistic.Label>Correct Answers</Statistic.Label>
+                    <Statistic.Label>Current Correct Answers</Statistic.Label>
                   </Statistic>
                 </Grid.Column>
 

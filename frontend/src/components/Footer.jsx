@@ -52,7 +52,7 @@ export default function Footer() {
                     <Icon color='red' name='youtube' /> Youtube
                   </List.Item>
                   <List.Item as='a' href='https://www.tiktok.com/@quackprep'>
-                    <Image style={{ width: '1.2rem' }} src='/img/tt_icon.webp' />
+                    <Image alt='tiktok logo' style={{ width: '17px' }} src='/img/tt_icon.webp' />
                     Tiktok
                   </List.Item>
                   <List.Item as='a' href='https://www.youtube.com/watch?v=dQw4w9WgXcQ'>

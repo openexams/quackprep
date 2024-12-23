@@ -24,7 +24,7 @@ export default function CreatorDashboard() {
       <Segment basic textAlign='center' style={{ marginBottom: '3rem' }}>
         <Icon name='graduation cap' color='blue' style={{ textAlign: 'center', marginBottom: '-8rem' }} size='huge' />
         <Header as='h1' size='huge' textAlign='center'>
-          Become an QuackPrep Creator (COMING SOON!)
+          Become an QuackPrep Creator!
           <Header.Subheader style={{ marginTop: '1rem' }}>
             Share your knowledge and help students ace their exams
           </Header.Subheader>

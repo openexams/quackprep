@@ -14,7 +14,6 @@ import { selectTopicState } from '@src/app/class/group/topic/topicSlice';
 import { selectQuestionState } from '@src/app/class/question/questionSlice';
 import { selectExamsState } from '@src/app/class/group/exam/examSlice.js';
 import { selectSchoolState } from '@src/app/class/school/schoolSlice';
-import { selectChoicesState } from '@src/app/class/question/choices/choicesSlice';
 import { selectLoadingState } from '@src/app/store/loadingSlice';
 import { select401CompState } from '@components/401/401Slice';
 import {
@@ -24,19 +23,15 @@ import {
   topicUpdateLogic,
   examUpdateLogic,
   classUpdateLogic,
-  schoolFetchLogic,
   schoolUpdateLogic,
   questionFetchLogic,
   questionUpdateLogic,
   choicesFetchLogic,
   pdfsFetchLogic,
 } from './navbarFunctions';
-import { getClassCategories } from '@src/app/class/class_categories/classCategorySlice';
 import Init from '@src/Init';
 
 export default function Navbar() {
-  const location = useLocation();
-  const { questions } = useSelector(selectQuestionState);
   const { topics } = useSelector(selectTopicState);
   const { exams } = useSelector(selectExamsState);
   const { classes } = useSelector(selectClassState);
@@ -207,13 +202,13 @@ export default function Navbar() {
               <Menu.Item
                 onClick={handlePageChange}
                 as='a'
-                href='/home'
-                active={activePage === '/home'}
-                name='/home'
+                href='/class'
+                active={activePage === '/class'}
+                name='/class'
                 className='nav-item'
               >
-                <Icon name='home' />
-                Home
+                <Icon name='book' />
+                Classes
               </Menu.Item>
 
               <Menu.Item
@@ -268,13 +263,13 @@ export default function Navbar() {
             <Menu.Item
               onClick={handlePageChange}
               as='a'
-              href='/home'
-              active={activePage === '/home'}
-              name='/home'
+              href='/class'
+              active={activePage === '/class'}
+              name='/class'
               className='nav-item'
             >
-              <Icon name='home' />
-              Home
+              <Icon name='book' />
+              Classes
             </Menu.Item>
 
             <Menu.Item
