@@ -7,37 +7,25 @@ const DELETE_CRUD_PDF = 'app/class/pdf/DELETE_CRUD_PDF';
 const UPSERT_CRUD_PDF = 'app/class/pdf/UPSERT_CRUD_PDF';
 
 export function getPdfsByClassId(class_id) {
-  return standardApiCall('get', `/api/extra/pdfs/${class_id}`, null, GET_CRUD_PDFS, 'PDFList');
+  return standardApiCall('get', `/api/extra/pdfs/${class_id}`, null, GET_CRUD_PDFS, { loadingComponent: 'PDFList' });
 }
 
 export function getPdfsByUserId() {
-  return standardApiCall('get', `/api/extra/pdfs/user/`, null, GET_CRUD_PDFS, 'Create');
+  return standardApiCall('get', `/api/extra/pdfs/user/`, null, GET_CRUD_PDFS, { loadingComponent: 'Create' });
 }
 
 export function deletePdfById(pdf_id) {
-  return standardApiCall(
-    'delete',
-    `/api/extra/pdfs/${pdf_id}`,
-    null,
-    DELETE_CRUD_PDF,
-    'Create',
-    null,
-    null,
-    'successfully deleted pdf',
-  );
+  return standardApiCall('delete', `/api/extra/pdfs/${pdf_id}`, null, DELETE_CRUD_PDF, {
+    loadingComponent: 'PDFList',
+    noticeOfSuccess: 'successfully deleted pdf',
+  });
 }
 
 export function upsertPdf(name, class_id, link, id) {
-  return standardApiCall(
-    'post',
-    '/api/extra/pdfs',
-    { name, class_id, link, id },
-    UPSERT_CRUD_PDF,
-    'Create',
-    null,
-    null,
-    'successfully upserted pdf',
-  );
+  return standardApiCall('post', '/api/extra/pdfs', { name, class_id, link, id }, UPSERT_CRUD_PDF, {
+    loadingComponent: 'Create',
+    noticeOfSuccess: 'successfully upserted pdf',
+  });
 }
 
 const DEFAULT_STATE = {

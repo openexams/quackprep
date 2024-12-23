@@ -8,7 +8,7 @@ const DELETE_CRUD_EXAM = 'app/class/exam/DELETE_CRUD_EXAM';
 const UPSERT_CRUD_EXAM = 'app/class/exam/UPSERT_CRUD_EXAM';
 
 export function getExamsByClassId(classId) {
-  return standardApiCall('get', `/api/group/exam/${classId}`, null, GET_CRUD_EXAMS, 'ExamList');
+  return standardApiCall('get', `/api/group/exam/${classId}`, null, GET_CRUD_EXAMS, { loadingComponent: 'ExamList' });
 }
 
 export function getExamsByUserId() {

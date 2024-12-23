@@ -8,15 +8,13 @@ export function removeStateFavoriteQuestions() {
   return { type: GET_FAVORITE_QUESTIONS, payload: null };
 }
 
-// must be LOGGED IN
+// must be LOGGED IN TODO I REMOVED fetchHistory so may not work
 export function getFavoriteQuestions() {
-  return standardApiCall('get', '/api/question/favorite/', null, GET_FAVORITE_QUESTIONS, 'QuestionPage', null, null, null, {
-    fetchHistory: false,
-  });
+  return standardApiCall('get', '/api/question/favorite/', null, GET_FAVORITE_QUESTIONS, { loadingComponent: 'QuestionPage' });
 }
 
 export function upsertFavoriteQuestion(id, question_id, is_favorite) {
-  return standardApiCall('post', '/api/question/favorite/', { id, question_id, is_favorite }, UPSERT_FAVORITE_QUESTION, null);
+  return standardApiCall('post', '/api/question/favorite/', { id, question_id, is_favorite }, UPSERT_FAVORITE_QUESTION);
 }
 
 ////////////////////

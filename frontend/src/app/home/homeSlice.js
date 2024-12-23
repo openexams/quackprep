@@ -4,7 +4,7 @@ import { createSelector } from 'reselect';
 const GET_USERS_COUNT = 'app/home/GET_USERS_COUNT';
 
 export function getUserCount() {
-  return standardApiCall('get', '/api/auth/users/count', null, GET_USERS_COUNT, null, null, null);
+  return standardApiCall('get', '/api/auth/users/count', null, GET_USERS_COUNT);
 }
 const DEFAULT_STATE = {
   userCount: null,

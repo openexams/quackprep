@@ -9,7 +9,7 @@ const UPSERT_TOPIC = 'app/class/topic/UPSERT_TOPIC';
 
 export function getTopicsByClassId(classId) {
   //console.log('getting topics by clas id', classId);
-  return standardApiCall('get', `/api/group/topic/${classId}`, null, GET_TOPICS, 'TopicsShow');
+  return standardApiCall('get', `/api/group/topic/${classId}`, null, GET_TOPICS, { loadingComponent: 'TopicsShow' });
 }
 
 export function getTopicsByUserId() {

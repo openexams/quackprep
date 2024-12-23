@@ -3,7 +3,6 @@ import { standardApiCall } from '@utils/api';
 import { copyArray, updateObjectWithKey, replaceP20WithSpace } from 'maddox-js-funcs';
 
 const CHANGE_NAVBAR_PAGE = 'components/navbar/CHANGE_NAVBAR_PAGE';
-const GO_LAST_PAGE = 'components/navbar/GO_LAST_PAGE';
 
 const UPDATE_CUR_CLASS = 'components/navbar/UPDATE_CUR_CLASS';
 const UPDATE_CUR_GROUP = 'components/navbar/UPDATE_CUR_GROUP';
@@ -86,7 +85,7 @@ export default function navbarReducer(state = DEFAULT_STATE, action) {
   switch (action.type) {
     case UPDATE_FETCH_HISTORY:
       return { ...state, fetchHistory: updateObjectWithKey(state.fetchHistory, action.payload) };
-    case CHANGE_NAVBAR_PAGE:
+    case CHANGE_NAVBAR_PAGE: {
       let curUrl = state.page;
       const newLastPage = copyArray(state.lastPage);
       newLastPage.push(state.page);
@@ -139,6 +138,7 @@ export default function navbarReducer(state = DEFAULT_STATE, action) {
         lastPage: newLastPage,
         fetchHistory: state.fetchHistory,
       };
+    }
     case UPDATE_CUR_CLASS:
       return { ...state, classId: action.payload.id || state.classId, className: action.payload.name || state.className };
     case UPDATE_CUR_GROUP: // TODO FIX

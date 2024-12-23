@@ -5,11 +5,11 @@ const GET_TOP_STREAKS = 'app/leaderboard/GET_TOP_STREAKS';
 const GET_TOP_QS_ANSWERED = 'app/leaderboard/GET_TOP_QS_ANSWERED';
 
 export function getTopStreaks(x) {
-  return standardApiCall('get', `/api/streak/top/${x}`, null, GET_TOP_STREAKS, 'Leaderboard');
+  return standardApiCall('get', `/api/streak/top/${x}`, null, GET_TOP_STREAKS, { loadingComponent: 'Leaderboard' });
 }
 
 export function getWhichUsersAnsweredMostQuestions() {
-  return standardApiCall('get', `/api/choice/top`, null, GET_TOP_QS_ANSWERED, 'Leaderboard');
+  return standardApiCall('get', `/api/choice/top`, null, GET_TOP_QS_ANSWERED, { loadingComponent: 'Leaderboard' });
 }
 
 const DEFAULT_STATE = {

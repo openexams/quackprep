@@ -5,7 +5,7 @@ import { updateArrObjectsWithNewVals } from 'maddox-js-funcs';
 const GET_SCHOOLS = 'app/class/school/GET_SCHOOLS';
 
 export function getSchools() {
-  return standardApiCall('get', '/api/class/school/all', null, GET_SCHOOLS, 'SchoolsList');
+  return standardApiCall('get', '/api/class/school/all', null, GET_SCHOOLS, { loadingComponent: 'SchoolsList' });
 }
 
 const DEFAULT_STATE = {

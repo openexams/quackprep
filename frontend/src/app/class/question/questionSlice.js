@@ -9,24 +9,18 @@ const DELETE_CRUD_QUESTION = 'app/class/question/DELETE_CRUD_QUESTION';
 const POST_QUESTION_REPORT = 'app/class/question/POST_QUESTION_REPORT';
 
 export function postQuestionReport(question_id, text) {
-  return standardApiCall(
-    'post',
-    `/api/question/report/${question_id}`,
-    { text: text },
-    POST_QUESTION_REPORT,
-    'QuestionPage',
-    null,
-    null,
-    'report sent!',
-  );
+  return standardApiCall('post', `/api/question/report/${question_id}`, { text: text }, POST_QUESTION_REPORT, {
+    loadingComponent: 'QuestionPage',
+    noticeOfSuccess: 'report sent!',
+  });
 }
 
 export function getQuestionsByGroupId(group_id) {
-  return standardApiCall('get', `/api/question/${group_id}`, null, GET_CRUD_QUESTIONS, 'QuestionPage');
+  return standardApiCall('get', `/api/question/${group_id}`, null, GET_CRUD_QUESTIONS, { loadingComponent: 'QuestionPage' });
 }
 
 export function getQuestionsByUserId() {
-  return standardApiCall('get', `/api/question/user`, null, GET_CRUD_QUESTIONS, 'Create');
+  return standardApiCall('get', `/api/question/user`, null, GET_CRUD_QUESTIONS, { loadingComponent: 'Create' });
 }
 
 /**
@@ -38,29 +32,17 @@ export function getQuestionsByUserId() {
  * @returns
  */
 export function upsertQuestionWithGroupIds(id, question, question_num_on_exam, group_ids) {
-  return standardApiCall(
-    'post',
-    `/api/question/`,
-    { id, question, question_num_on_exam, group_ids },
-    UPSERT_CRUD_QUESTION,
-    'Create',
-    null,
-    null,
-    'successfully upserted question',
-  );
+  return standardApiCall('post', `/api/question/`, { id, question, question_num_on_exam, group_ids }, UPSERT_CRUD_QUESTION, {
+    loadingComponent: 'Create',
+    noticeOfSuccess: 'successfully created question',
+  });
 }
 
 export function deleteQuestionById(id) {
-  return standardApiCall(
-    'delete',
-    `/api/question/${id}`,
-    null,
-    DELETE_CRUD_QUESTION,
-    'Create',
-    null,
-    null,
-    'successfully deleted question',
-  );
+  return standardApiCall('delete', `/api/question/${id}`, null, DELETE_CRUD_QUESTION, {
+    loadingComponent: 'Create',
+    noticeOfSuccess: 'successfully deleted question',
+  });
 }
 
 const DEFAULT_STATE = {

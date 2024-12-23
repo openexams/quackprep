@@ -4,7 +4,6 @@ import { createSelector } from 'reselect';
 
 const GET_CRUD_CHOICES = 'app/class/question/choices/GET_CRUD_CHOICES';
 
-const POST_ANSWER = 'app/class/question/choices/POST_ANSWER';
 const POST_FAVORITE_ANSWER = 'app/class/question/choices/POST_ANSWER_CURRENT';
 
 const GET_CURRENT_CHOICES = 'app/class/question/choices/GET_CURRENT_CHOICES';
@@ -15,7 +14,7 @@ const UPSERT_CRUD_CHOICE = 'app/class/question/choices/UPSERT_CRUD_CHOICE';
 const DELETE_CRUD_CHOICE = 'app/class/question/choices/DELETE_CRUD_CHOICE';
 
 export function getCurrentChoices() {
-  return standardApiCall('get', '/api/choice/current/', null, GET_CURRENT_CHOICES, null);
+  return standardApiCall('get', '/api/choice/current/', null, GET_CURRENT_CHOICES);
 }
 export function removeStateCurrentChoices() {
   return { type: GET_CURRENT_CHOICES, payload: null };
@@ -34,41 +33,29 @@ export function postAnswer(choice_id) {
 }
 
 export function getChoicesByQuestion(question_id) {
-  return standardApiCall('get', `/api/choice/${question_id}`, null, GET_CRUD_CHOICES, 'ChoiceRouter');
+  return standardApiCall('get', `/api/choice/${question_id}`, null, GET_CRUD_CHOICES, { loadingComponent: 'ChoiceRouter' });
 }
 
 export function getChoicesByGroup(group_id) {
-  return standardApiCall('get', `/api/choice/group/${group_id}`, null, GET_CRUD_CHOICES, 'ChoiceRouter'); //yes I know its same does not matter
+  return standardApiCall('get', `/api/choice/group/${group_id}`, null, GET_CRUD_CHOICES, { loadingComponent: 'ChoiceRouter' }); //yes I know its same does not matter
 }
 
 export function getChoicesByUserId() {
-  return standardApiCall('get', `/api/choice/user`, null, GET_CRUD_CHOICES, 'Create'); //yes I know its same does not matter
+  return standardApiCall('get', `/api/choice/user`, null, GET_CRUD_CHOICES, { loadingComponent: 'Create' }); //yes I know its same does not matter
 }
 
 export function upsertChoice(text, question_id, isCorrect, type, id = null) {
-  return standardApiCall(
-    'post',
-    `/api/choice/${question_id}`,
-    { text, isCorrect, type, id },
-    UPSERT_CRUD_CHOICE,
-    'Create',
-    null,
-    null,
-    'successfully upserted choice!',
-  );
+  return standardApiCall('post', `/api/choice/${question_id}`, { text, isCorrect, type, id }, UPSERT_CRUD_CHOICE, {
+    loadingComponent: 'Create',
+    noticeOfSuccess: 'successfully created choice!',
+  });
 }
 
 export function deleteChoiceById(id) {
-  return standardApiCall(
-    'delete',
-    `/api/choice/${id}`,
-    null,
-    DELETE_CRUD_CHOICE,
-    'Create',
-    null,
-    null,
-    'successfully deleted choice!',
-  );
+  return standardApiCall('delete', `/api/choice/${id}`, null, DELETE_CRUD_CHOICE, {
+    loadingComponent: 'Create',
+    noticeOfSuccess: 'successfully deleted choice!',
+  });
 }
 
 const DEFAULT_STATE = {

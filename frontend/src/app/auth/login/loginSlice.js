@@ -9,7 +9,7 @@ export function signOut() {
 }
 
 export function login(email, password) {
-  return standardApiCall('post', '/api/auth/login', { email, password }, LOGIN, 'Login');
+  return standardApiCall('post', '/api/auth/login', { email, password }, LOGIN, { loadingComponent: 'Login' });
 }
 
 const DEFAULT_STATE = {
@@ -23,12 +23,13 @@ const DEFAULT_STATE = {
 };
 export default function loginReducer(state = DEFAULT_STATE, action) {
   switch (action.type) {
-    case LOGIN:
+    case LOGIN: {
       const { id, username, email, first_name, last_name, icon, is_creator } = action.payload;
       if (!id || !username || !email) {
         return state;
       }
       return { ...state, id, username, email, firstName: first_name, lastName: last_name, icon, is_creator };
+    }
     case SIGN_OUT:
       return {
         ...state,
