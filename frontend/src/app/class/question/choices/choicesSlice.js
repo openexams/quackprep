@@ -73,8 +73,8 @@ export default function choicesReducer(state = DEFAULT_STATE, action) {
     }
     case DELETE_CRUD_CHOICE:
       return { ...state, choices: filterArr(state.choices, action.payload) };
-    case UPSERT_CRUD_CHOICE: // if inserteing new id will be higher than all others
-      return { ...state, choices: upsertArray(state.choices, ...mergeData(action.payload)) }; // becuz upsert arr adds new item to end i dont need to sort it again
+    case UPSERT_CRUD_CHOICE: // if inserteing new id will be higher than all others, as such it will stay sorted
+      return { ...state, choices: upsertArray(state.choices, ...mergeData(action.payload)) };
 
     case GET_CURRENT_CHOICES:
       return { ...state, currentChoices: action.payload };
