@@ -24,11 +24,11 @@ export default class sqlExe {
     try {
       // this should only run if editing, not if creating
       if (
-        options.verifyUserOwnsRowId &&
-        params.id &&
+        options?.verifyUserOwnsRowId &&
+        params?.id &&
         !(await verifyUserOwnsRowId(
           params.id,
-          params.user_id,
+          params?.user_id,
           options.verifyUserOwnsRowId
         ))
       ) {
