@@ -1,8 +1,5 @@
 import sqlExe from "#db/dbFunctions.js";
-import {
-  verifyRowCreatedByUser,
-  verifyUserOwnsRowId,
-} from "#utils/sqlFunctions.js";
+import { verifyUserOwnsRowId } from "#utils/sqlFunctions.js";
 
 async function selectGroups(WHERE, params) {
   return await sqlExe.executeCommand(
@@ -40,7 +37,7 @@ export async function upsertGroupInClass(
   // this should only run if editing, not if creating
   const params = { user_id, class_id, type, name, desc, id };
 
-  if (!(await verifyRowCreatedByUser(class_id, user_id, "classes"))) {
+  if (!(await verifyUserOwnsRowId(class_id, user_id, "classes"))) {
     throw new Error(
       "user does not own the class they are trying to edit/create a group in"
     );

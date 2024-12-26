@@ -1,8 +1,5 @@
 import sqlExe from "#db/dbFunctions.js";
-import {
-  verifyRowCreatedByUser,
-  verifyUserOwnsRowId,
-} from "#utils/sqlFunctions.js";
+import { verifyUserOwnsRowId } from "#utils/sqlFunctions.js";
 
 export async function createQuestionReport(user_id, question_id, text) {
   const params = { user_id, question_id, text };
@@ -111,7 +108,7 @@ export async function upsertQuestion(
     // verify user created all these groups this has way to many sql calls TODO FIX
     if (
       id != null &&
-      !(await verifyRowCreatedByUser(group_ids[i], user_id, "cgroups"))
+      !(await verifyUserOwnsRowId(group_ids[i], user_id, "cgroups"))
     ) {
       throw new Error(
         "User does not own group they are trying to add questions too"

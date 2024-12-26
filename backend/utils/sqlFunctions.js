@@ -95,25 +95,6 @@ function verifyTableName(tableName) {
 }
 
 export async function verifyUserOwnsRowId(id, user_id, tableName) {
-  if (verifyTableName(tableName) === false) {
-    return false;
-  }
-  let owned = await sqlExe.executeCommand(
-    `SELECT * FROM ${tableName} x WHERE x.id = :id`,
-    { id }
-  );
-  owned = owned?.[0]?.created_by;
-  if (parseInt(owned) === user_id) {
-    return true;
-  }
-  return false;
-}
-/**
- *
- * @param {Int} user_id
- * @param {String} tableName tableName must have created_by column DO NOT LET USERS RUN THIS SQL INJECTION
- */
-export async function verifyRowCreatedByUser(id, user_id, tableName) {
   const result = await sqlExe.executeCommand(
     `SELECT * from ${tableName} WHERE id = :id AND created_by = :user_id`,
     { id, user_id }

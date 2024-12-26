@@ -1,4 +1,3 @@
-import React from 'react';
 import { Label, Icon } from 'semantic-ui-react';
 
 const CreatorBadge = () => {

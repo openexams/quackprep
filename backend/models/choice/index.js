@@ -1,7 +1,6 @@
 import sqlExe from "#db/dbFunctions.js";
 import {
   getLastRowManipulated,
-  verifyRowCreatedByUser,
   verifyUserOwnsRowId,
 } from "#utils/sqlFunctions.js";
 
@@ -97,7 +96,7 @@ export async function upsertChoiceToQuestion(
 ) {
   const params = { user_id, question_id, isCorrect, text, type, id };
 
-  if (!(await verifyRowCreatedByUser(question_id, user_id, "questions"))) {
+  if (!(await verifyUserOwnsRowId(question_id, user_id, "questions"))) {
     throw new Error(
       "user does not own the question they are trying to create/edit a choice in"
     );
