@@ -30,6 +30,7 @@ import {
   pdfsFetchLogic,
 } from './navbarFunctions';
 import Init from '@src/Init';
+import Sentinel from '@src/Sentinel';
 
 export default function Navbar() {
   const { topics } = useSelector(selectTopicState);
@@ -58,11 +59,6 @@ export default function Navbar() {
     setSidebarOpened(false); // Close sidebar on item click
   }
 
-  // Toggle sidebar
-  const handleSidebarToggle = () => {
-    setSidebarOpened(!sidebarOpened);
-  };
-
   useEffect(() => {
     userIdRef.current = user.id;
   }, [user.id]); // keep userIdRef.current up to date with user.id
@@ -77,15 +73,6 @@ export default function Navbar() {
 
     return () => clearInterval(interval);
   }, []);
-
-  // get user at start of app
-  useEffect(() => {
-    if (!user?.id) {
-      dispatch(getCurUser());
-    } else if (user.id) {
-      dispatch(getHasStreak());
-    }
-  }, [user.id]);
 
   ///  USE EFFECTS FOR KEEPING STORE SAME AS URL ///
   useEffect(() => {
@@ -174,11 +161,12 @@ export default function Navbar() {
   return (
     <>
       <Init />
+      <Sentinel />
       {isMobile ? (
         <>
           <Menu fixed='top' inverted size='large' className='custom-navbar'>
             <Container>
-              <Menu.Item onClick={handleSidebarToggle} className='sidebar-toggle'>
+              <Menu.Item onClick={() => setSidebarOpened(!sidebarOpened)} className='sidebar-toggle'>
                 <Icon name='sidebar' size='large' />
               </Menu.Item>
               <BrandLogo handlePageChange={handlePageChange} />

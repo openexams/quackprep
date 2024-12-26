@@ -2,15 +2,17 @@ import { useEffect } from 'react';
 import { changeNavbarPage } from '@components/navbar/navbarSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { selectUser } from './app/auth/authSlice';
+import { selectUser, getCurUser } from './app/auth/authSlice';
 import { getClassCategories } from './app/class/class_categories/classCategorySlice';
 import { getFavoriteQuestions, removeStateFavoriteQuestions } from '@src/app/favorite/favoriteSlice';
 import { getCurrentChoices, removeStateCurrentChoices } from '@src/app/class/question/choices/choicesSlice';
 import { getSchools } from './app/class/school/schoolSlice';
+import { getHasStreak } from './app/streak/streakSlice';
 export default function Init() {
   const user = useSelector(selectUser).user;
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   useEffect(() => {
     const curPage = location.pathname + location.search + location.hash;
     dispatch(changeNavbarPage(navigate, curPage));
@@ -31,9 +33,13 @@ export default function Init() {
 
   useEffect(() => {
     if (user?.id) {
+      dispatch(getHasStreak());
+
       dispatch(getFavoriteQuestions());
       dispatch(getCurrentChoices());
     } else {
+      dispatch(getCurUser());
+
       dispatch(removeStateCurrentChoices());
       dispatch(removeStateFavoriteQuestions());
     }
