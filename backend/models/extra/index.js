@@ -27,11 +27,7 @@ export async function getPdfsByUserId(user_id) {
 export async function upsertPdf(user_id, id, link, class_id, name) {
   const params = { user_id, id, link, class_id, name };
 
-  // this should only run if editing, not if creating
-  if (id && (await verifyUserOwnsRowId(id, user_id, "pdfs")) === false) {
-    throw new Error("user does not own the row they are trying to edit");
-    return;
-  }
+  // TODO MAKES SURE USER OWNS CLASS THEY ARE INSERTING PDF INTO
 
   const pdf_id = (
     await sqlExe.executeCommand(
@@ -42,7 +38,8 @@ export async function upsertPdf(user_id, id, link, class_id, name) {
       class_id = :class_id,
       name=:name
 `,
-      params
+      params,
+      { verifyUserOwnsRowId: "pdfs" }
     )
   ).insertId;
   return await selectPdfs(`p.id=:pdf_id`, { pdf_id: id, pdf_id });

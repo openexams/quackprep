@@ -43,10 +43,7 @@ export async function upsertGroupInClass(
     );
     return; // all work end no play makea maddox a dull boy
   }
-  if (id && (await verifyUserOwnsRowId(id, user_id, "cgroups")) === false) {
-    throw new Error("user does not own the row they are trying to edit");
-    return;
-  }
+  // uniqueness check?
   const unique = await sqlExe.executeCommand(
     `SELECT * from cgroups WHERE class_id = :class_id AND name =:name AND created_by != :user_id`,
     params
@@ -67,7 +64,8 @@ export async function upsertGroupInClass(
       class_id=:class_id
       
       `,
-      params
+      params,
+      { verifyUserOwnsRowId: "cgroups" }
     )
   ).insertId;
   return await selectGroups(`g.id = :result`, { result: id || group_id });

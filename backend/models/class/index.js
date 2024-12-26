@@ -47,13 +47,6 @@ export async function upsertClass(
   user_id
 ) {
   const params = { id, school_id, name, description, category, user_id }; // TODO CAN THIS USER CREATE A CLASS IN THIS SCHOOL?
-
-  // this should only run if editing, not if creating
-  if (id && (await verifyUserOwnsRowId(id, user_id, "classes")) === false) {
-    throw new Error("user does not own the row they are trying to edit");
-    return;
-  }
-
   const unique = await sqlExe.executeCommand(
     `SELECT * from classes WHERE school_id = :school_id AND name =:name AND created_by != :user_id`, // dont actually need (created_by != :user_id) but its the safe play "im conservative in my programming but liberal in eveything else" - Hubert Dunesmore
     params
@@ -75,7 +68,8 @@ export async function upsertClass(
       description = :description,
       category = :category,
       school_id = :school_id`,
-      params
+      params,
+      { verifyUserOwnsRowId: "classes" }
     )
   ).insertId;
   return await selectClasses("cl.id = :class_id", { class_id: id || class_id });

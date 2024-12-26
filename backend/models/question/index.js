@@ -116,12 +116,6 @@ export async function upsertQuestion(
       return;
     }
   }
-  if (id && !(await verifyUserOwnsRowId(id, user_id, "questions"))) {
-    throw new Error(
-      "User does not own question they are trying to create/edit"
-    );
-    return;
-  }
 
   const question_id = (
     await sqlExe.executeCommand(
@@ -129,7 +123,8 @@ export async function upsertQuestion(
     ON DUPLICATE KEY UPDATE
       question=:question,
       question_num_on_exam=:question_num_on_exam`,
-      params
+      params,
+      { verifyUserOwnsRowId: "questions" }
     )
   ).insertId; // only returns a insert if a question was created
   return await selectQuestion(`q.id=:question_id`, {

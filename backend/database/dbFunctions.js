@@ -22,10 +22,10 @@ export default class sqlExe {
    */
   static async executeCommand(sqlCommand, params, options) {
     try {
+      // this should only run if editing, not if creating
       if (
         options.verifyUserOwnsRowId &&
         params.id &&
-        params.user_id && // what if somehow this isnt passed in but user still trying to edit row??
         !(await verifyUserOwnsRowId(
           params.id,
           params.user_id,

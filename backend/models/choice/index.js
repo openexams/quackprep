@@ -1,8 +1,5 @@
 import sqlExe from "#db/dbFunctions.js";
-import {
-  getLastRowManipulated,
-  verifyUserOwnsRowId,
-} from "#utils/sqlFunctions.js";
+import { verifyUserOwnsRowId } from "#utils/sqlFunctions.js";
 
 export async function postChoice(user_id, choice_id) {
   const params = { choice_id, user_id };
@@ -103,11 +100,6 @@ export async function upsertChoiceToQuestion(
     return;
   }
 
-  if (id && (await verifyUserOwnsRowId(id, user_id, "choices")) === false) {
-    throw new Error("user does not own the row they are trying to edit");
-    return;
-  }
-
   const choice_id = await sqlExe.executeCommand(
     `INSERT INTO choices (id,answer,is_correct,created_by,question_id,type) values (:id,:text,:isCorrect,:user_id,:question_id,:type)
       ON DUPLICATE KEY UPDATE
@@ -115,7 +107,8 @@ export async function upsertChoiceToQuestion(
       is_correct=:isCorrect,
       question_id=:question_id,
       type=:type`,
-    params
+    params,
+    { verifyUserOwnsRowId: "choices" }
   ).insertId;
   // return the id the user sent (user edited) or return the created row.
   return await selectChoices("c.id =:choice_id", {
