@@ -28,6 +28,10 @@ export async function upsertPdf(user_id, id, link, class_id, name) {
   const params = { user_id, id, link, class_id, name };
 
   // TODO MAKES SURE USER OWNS CLASS THEY ARE INSERTING PDF INTO
+  if (!id && !(await verifyUserOwnsRowId(class_id, user_id, "classes"))) {
+    throw new Error("user is adding a pdf to a class which they do NOT own");
+    return;
+  }
 
   const pdf_id = (
     await sqlExe.executeCommand(
@@ -42,5 +46,5 @@ export async function upsertPdf(user_id, id, link, class_id, name) {
       { verifyUserOwnsRowId: "pdfs" }
     )
   ).insertId;
-  return await selectPdfs(`p.id=:pdf_id`, { pdf_id: id, pdf_id });
+  return await selectPdfs(`p.id=:pdf_id`, { pdf_id: id || pdf_id });
 }

@@ -8,14 +8,13 @@ import { useNavigate } from 'react-router-dom';
 export default function Comp401() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const curPage = useSelector(selectNavbarState).navbar?.page;
   const show = useSelector(select401CompState).show;
 
   if (!show) return null;
 
   const handleClose = () => {
     dispatch(hide401Msg());
-    dispatch(changeNavbarPage(navigate, '/home'));
+    //dispatch(changeNavbarPage(navigate, '/home'));
   };
 
   const handleSignIn = () => {
@@ -30,7 +29,21 @@ export default function Comp401() {
         onClose={handleClose}
         size='tiny'
         className='modern-modal'
-        closeIcon
+        // Instead of closeIcon boolean, provide a custom icon component:
+        closeIcon={
+          <Icon
+            color='black'
+            name='close'
+            size='massive'
+            style={{
+              position: 'absolute',
+              top: '10px',
+              right: '10px',
+              cursor: 'pointer',
+            }}
+            onClick={handleClose}
+          />
+        }
         style={{
           borderRadius: '12px',
           overflow: 'hidden',

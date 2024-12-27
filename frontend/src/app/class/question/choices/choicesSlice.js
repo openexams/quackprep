@@ -1,5 +1,6 @@
 import { standardApiCall } from '@utils/api';
-import { filterArr, upsertArray, countingSort, mergeData, selectItemById } from 'maddox-js-funcs';
+import { filterArr, upsertArray, countingSort, selectItemById } from 'maddox-js-funcs';
+import { mergeData } from 'maddox-js-funcs';
 
 const GET_CRUD_CHOICES = 'app/class/question/choices/GET_CRUD_CHOICES';
 
@@ -74,7 +75,7 @@ export default function choicesReducer(state = DEFAULT_STATE, action) {
     case DELETE_CRUD_CHOICE:
       return { ...state, choices: filterArr(state.choices, action.payload) };
     case UPSERT_CRUD_CHOICE: // if inserteing new id will be higher than all others, as such it will stay sorted
-      return { ...state, choices: upsertArray(state.choices, ...mergeData(action.payload)) };
+      return { ...state, choices: upsertArray(state.choices, ...mergeData(action.payload)) }; // merge data only on incoming data, as if done will all data, for example I changed a choice to correct, it would have 3 choices needing to be merged, 1 already merged and 2 new ones, which both have a difference in the is_correct feild maning the is correct field would be an arr [0,1]
 
     case GET_CURRENT_CHOICES:
       return { ...state, currentChoices: action.payload };

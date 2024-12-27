@@ -1,5 +1,6 @@
 import { standardApiCall } from '@utils/api';
-import { updateArrObjectsWithNewVals, upsertArray, filterArr, mergeData } from 'maddox-js-funcs';
+import { updateArrObjectsWithNewVals, upsertArray, filterArr } from 'maddox-js-funcs';
+import { mergeData } from '@utils/helperFuncs';
 
 const GET_CRUD_QUESTIONS = 'app/class/question/GET_CRUD_QUESTIONS';
 const UPSERT_CRUD_QUESTION = 'app/class/question/UPSERT_CRUD_QUESTION';

@@ -1,5 +1,5 @@
 import './streak.css';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Container, Grid, Segment, Header, Icon, Statistic, Progress, Button } from 'semantic-ui-react';
 import { getStreak, selectStreakData, claimStreak } from './streakSlice';
@@ -46,7 +46,6 @@ export default function StreakPage() {
     for (let i = 1; i < milestones.length; i++) {
       if (streak.currentStreak >= milestones[i - 1].days && streak.currentStreak < milestones[i].days) {
         const percent = (100 * (streak.currentStreak - milestones[i - 1].days)) / (milestones[i].days - milestones[i - 1].days);
-        console.log(percent);
         return percent;
       }
     }
@@ -83,6 +82,8 @@ export default function StreakPage() {
               >
                 {streakClass.canClaimStreak() ? 'Check In for Today' : 'Already Claimed Today'}
               </Button>
+              <Header as='h4'>Last Claim:</Header>
+              <Segment basic>{streak?.lastClaim ? new Date(streak.lastClaim).toLocaleString() : 'Not claimed yet'}</Segment>
             </Segment>
           </Grid.Column>
           <Grid.Column width={8}>
