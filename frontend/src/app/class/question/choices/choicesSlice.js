@@ -1,6 +1,6 @@
 import { standardApiCall } from '@utils/api';
 import { filterArr, upsertArray, countingSort, selectItemById } from 'maddox-js-funcs';
-import { mergeData } from 'maddox-js-funcs';
+import { mergeData } from '@utils/helperFuncs';
 
 const GET_CRUD_CHOICES = 'app/class/question/choices/GET_CRUD_CHOICES';
 

@@ -1,9 +1,9 @@
 import './class.css';
-import React, { useEffect, useState } from 'react';
-import { Button, Accordion, Container, Grid, Header, Icon, Segment } from 'semantic-ui-react';
+import { useState } from 'react';
+import { Accordion, Container, Grid, Header, Icon, Segment } from 'semantic-ui-react';
 import { useSelector, useDispatch } from 'react-redux';
 import SchoolsList from './school/SchoolsList.jsx';
-import { selectArrayOfIncludingItem, selectArrayOfStateById, selectBINARYArrayOfStateById } from 'maddox-js-funcs';
+import { selectBINARYArrayOfStateById } from 'maddox-js-funcs';
 import { changeNavbarPage, selectNavbarState } from '@components/navbar/navbarSlice';
 import ClassList from './ClassList';
 import { useNavigate } from 'react-router-dom';
