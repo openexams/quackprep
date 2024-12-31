@@ -13,7 +13,7 @@ export async function createQuestionReport(user_id, question_id, text) {
 export async function getQuestionsByGroupId(group_id) {
   const params = { group_id };
   return await sqlExe.executeCommand(
-    `SELECT q.id, q.question, g.id as group_id, q.explanation_url, g.name as group_name, gt.type_name, q.question_num_on_exam,
+    `SELECT q.id, q.question, g.id as group_id, q.explanation_url, g.name as group_name, gt.type_name,
     cl.id as class_id, cl.school_id,cl.category as class_category
     FROM questions q 
     JOIN group_question gq ON q.id = gq.question_id
@@ -36,7 +36,6 @@ export async function selectQuestion(WHERE, params) {
     g.id AS group_id,
     gt.type_name,
     g.name,
-    q.question_num_on_exam,
     cl.id AS class_id,
     cl.school_id,
     cl.category AS class_category,q.explanation_url
@@ -63,46 +62,16 @@ export async function getQuestionsByUserId(user_id) {
   return await selectQuestion(`q.created_by = :user_id`, params);
 }
 
-// export async function createQuestionInGroups(
-//   user_id,
-//   question,
-//   question_num_on_exam = null,
-//   ...group_ids
-// ) {
-//   if (!group_ids.length) {
-//     console.log("created question w NO group id??");
-//     return null;
-//   }
-//   const params = { user_id, question, question_num_on_exam };
-//   const question_id = (
-//     await sqlExe.executeCommand(
-//       `INSERT INTO questions (question,created_by,question_num_on_exam)
-//     VALUES(:question,:user_id,:question_num_on_exam);`,
-//       params
-//     )
-//   ).insertId;
-//   await linkQuestionToGroups(question_id, group_ids);
-
-//   return question_id;
-// }
-
 /**
  *
  * @param {int} id
  * @param {String} question
- * @param {Int} question_num_on_exam
  * @param {Int} user_id
  * @param {Array} group_ids only needs group ids to verify the user owns the groups
  * @returns {Array}
  */
-export async function upsertQuestion(
-  id = null,
-  question,
-  question_num_on_exam = null,
-  user_id,
-  group_ids
-) {
-  const params = { id, question, question_num_on_exam, user_id };
+export async function upsertQuestion(id = null, question, user_id, group_ids) {
+  const params = { id, question, user_id };
 
   for (let i = 0; i < group_ids?.length; i++) {
     // verify user created all these groups this has way to many sql calls TODO FIX
@@ -119,10 +88,9 @@ export async function upsertQuestion(
 
   const question_id = (
     await sqlExe.executeCommand(
-      `INSERT INTO questions (id,question,created_by,question_num_on_exam) VALUES(:id,:question,:user_id,:question_num_on_exam)
+      `INSERT INTO questions (id,question,created_by) VALUES(:id,:question,:user_id)
     ON DUPLICATE KEY UPDATE
-      question=:question,
-      question_num_on_exam=:question_num_on_exam`,
+      question=:question`,
       params,
       { verifyUserOwnsRowId: "questions" }
     )

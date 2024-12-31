@@ -27,12 +27,11 @@ export function getQuestionsByUserId() {
  *
  * @param {Int} id
  * @param {String} question
- * @param {Int} question_num_on_exam
  * @param {Array} group_ids
  * @returns
  */
-export function upsertQuestionWithGroupIds(id, question, question_num_on_exam, group_ids) {
-  return standardApiCall('post', `/api/question/`, { id, question, question_num_on_exam, group_ids }, UPSERT_CRUD_QUESTION, {
+export function upsertQuestionWithGroupIds(id, question, group_ids) {
+  return standardApiCall('post', `/api/question/`, { id, question, group_ids }, UPSERT_CRUD_QUESTION, {
     loadingComponent: 'Create',
     noticeOfSuccess: 'successfully created question',
   });

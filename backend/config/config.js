@@ -1,4 +1,5 @@
 import dotenv from "dotenv";
+import OpenAI from "openai";
 
 global.NODE_ENV = process.env.NODE_ENV;
 if (NODE_ENV === undefined) {
@@ -12,6 +13,10 @@ global.NODE_ENV = process.env.NODE_ENV;
 if (NODE_ENV == undefined) {
   throw Error("fatal error ENV VARS NOT LOADED");
 }
+
+export const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+});
 
 export const MYSQL_CONFIG = {
   host: process.env.MADDOX_MYSQL_SERVER,

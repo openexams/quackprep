@@ -5,6 +5,7 @@ import { Container, Grid, Header, Segment, Divider, Icon } from 'semantic-ui-rea
 import ClassCard from './ClassCard';
 import { useSelector } from 'react-redux';
 import { selectClassCategories } from './class_categories/classCategorySlice';
+import { selectLoadingState } from '../store/loadingSlice';
 
 function selectClassesWithCategory(classes, selectedCategory) {
   if (!Array.isArray(classes) || !selectedCategory) {
@@ -48,7 +49,14 @@ function mapClassesToCategories(classes, classCategories) {
 }
 
 export default function ClassList({ classes }) {
+  const loading = useSelector(selectLoadingState).loadingComps?.ClassList;
   const classCategories = useSelector(selectClassCategories).class_categories;
 
-  return <Container>{classes && mapClassesToCategories(classes, classCategories)}</Container>;
+  return (
+    <Container>
+      <Segment loading={loading} basic>
+        {classes && mapClassesToCategories(classes, classCategories)}
+      </Segment>
+    </Container>
+  );
 }

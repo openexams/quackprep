@@ -91,7 +91,6 @@ router.post("/", isAuthenticated, isCreator, async function (req, res) {
     const questions = await upsertQuestion(
       data?.id,
       data.question,
-      data?.question_num_on_exam,
       req.user,
       data.group_ids // destructure group ids into last arg
     ); // will be the id of the question, however question_id will be an array of 2 as duplicate groups occur
