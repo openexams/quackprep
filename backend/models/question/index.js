@@ -14,7 +14,7 @@ export async function getQuestionsByGroupId(group_id) {
   const params = { group_id };
   return await sqlExe.executeCommand(
     `SELECT q.id, q.question, g.id as group_id, q.explanation_url, g.name as group_name, gt.type_name,
-    cl.id as class_id, cl.school_id,cl.category as class_category
+    cl.id as class_id, cl.school_id,cl.category as class_category, q.ai
     FROM questions q 
     JOIN group_question gq ON q.id = gq.question_id
     JOIN questions qq -- join questions back
@@ -33,6 +33,7 @@ export async function selectQuestion(WHERE, params) {
     `SELECT
     q.id,
     q.question,
+    q.ai,
     g.id AS group_id,
     gt.type_name,
     g.name,
