@@ -69,7 +69,7 @@ export async function getQuestionsByUserId(user_id) {
  * @param {String} question
  * @param {Int} user_id
  * @param {Array} group_ids only needs group ids to verify the user owns the groups
- * @returns {Array}
+ * @returns {Array} returns upserted Question
  */
 export async function upsertQuestion(id = null, question, user_id, group_ids) {
   const params = { id, question, user_id };

@@ -4,7 +4,7 @@ import OpenAI from "openai";
 global.NODE_ENV = process.env.NODE_ENV;
 if (NODE_ENV === undefined) {
   dotenv.config({
-    path: "../../secrets.env",
+    path: "../secrets.env",
     debug: true,
   });
 }
