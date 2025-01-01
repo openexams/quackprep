@@ -2,20 +2,26 @@ import { standardApiCall } from '@utils/api';
 
 const GET_QUESTIONS_ANSWERED_BY_MONTH_AND_YEAR = '/app/stats/GET_QUESTIONS_ANSWERED_BY_MONTH_AND_YEAR';
 const GET_MY_STATS = '/app/stats/GET_MY_STATS';
+const GET_TTS = '/app/stats/GET_TTS';
 
 export function getQuestionsAnsweredByMonthAndYear() {
   return standardApiCall('get', '/api/choice/qsansweredbymandy', null, GET_QUESTIONS_ANSWERED_BY_MONTH_AND_YEAR, {
     loadingComponent: 'Stats',
   });
-} // maybe make more generic api routes where user can just give a time [0, x] and you give back the data.
+}
 
 export function getMyStats() {
   return standardApiCall('get', '/api/account/stats', null, GET_MY_STATS, { loadingComponent: 'Stats' });
-} // maybe make more generic api routes where user can just give a time [0, x] and you give back the data.
+}
+
+export function getTotalTimeSpent() {
+  return standardApiCall('get', '/api/account/time_spent/total', null, GET_TTS, { loadingComponent: 'Stats' });
+}
 
 const DEFAULT_STATE = {
   myStats: null,
   questionsAnsweredByMonthAndYear: null,
+  tts: null,
 };
 
 export default function statsReducer(state = DEFAULT_STATE, action) {
@@ -24,6 +30,8 @@ export default function statsReducer(state = DEFAULT_STATE, action) {
       return { ...state, questionsAnsweredByMonthAndYear: action.payload };
     case GET_MY_STATS:
       return { ...state, myStats: action.payload };
+    case GET_TTS:
+      return { ...state, tts: action.payload };
     default:
       return state;
   }

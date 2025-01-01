@@ -39,3 +39,9 @@ export async function getMyStats(user_id) {
     )
   )?.[0];
 }
+
+export async function getTotalTimeSpent() {
+  return (
+    await sqlExe.executeCommand(`SELECT SUM(time_spent) as tts FROM time_spent`)
+  )?.[0]?.tts;
+}
