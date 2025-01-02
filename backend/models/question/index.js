@@ -64,38 +64,50 @@ export async function getQuestionsByUserId(user_id) {
 }
 
 /**
- *
+ * Users must own the group they are inserting to unless it an ai gen question
  * @param {int} id
  * @param {String} question
  * @param {Int} user_id
- * @param {Array} group_ids only needs group ids to verify the user owns the groups
+ * @param {Array<Number>} group_ids only needs group ids to verify the user owns the groups
+ * @param {Boolean} aiGenerated 
+
  * @returns {Array} returns upserted Question
  */
-export async function upsertQuestion(id = null, question, user_id, group_ids) {
-  const params = { id, question, user_id };
-
-  for (let i = 0; i < group_ids?.length; i++) {
-    // verify user created all these groups this has way to many sql calls TODO FIX
-    if (
-      id != null &&
-      !(await verifyUserOwnsRowId(group_ids[i], user_id, "cgroups"))
-    ) {
-      throw new Error(
-        "User does not own group they are trying to add questions too"
-      );
-      return;
+export async function upsertQuestion(
+  id = null,
+  question,
+  user_id,
+  group_ids,
+  aiGenerated = false
+) {
+  const params = { id, question, user_id, aiGenerated };
+  if (!aiGenerated) {
+    // if its ai then anyone can create ai questions
+    for (let i = 0; i < group_ids?.length; i++) {
+      // verify user created all these groups this has way to many sql calls TODO FIX
+      if (
+        id != null &&
+        !(await verifyUserOwnsRowId(group_ids[i], user_id, "cgroups"))
+      ) {
+        throw new Error(
+          "User does not own group they are trying to add questions too"
+        );
+        return;
+      }
     }
   }
 
   const question_id = (
     await sqlExe.executeCommand(
-      `INSERT INTO questions (id,question,created_by) VALUES(:id,:question,:user_id)
+      `INSERT INTO questions (id,question,created_by, ai) VALUES(:id,:question,:user_id, :aiGenerated)
     ON DUPLICATE KEY UPDATE
       question=:question`,
       params,
       { verifyUserOwnsRowId: "questions" }
     )
   ).insertId; // only returns a insert if a question was created
+  if (id) await deleteAllQuestionLinks(id); // deletes all of them only when its edited, if its being created it will have no links
+  await linkQuestionToGroups(id || question_id, group_ids);
   return await selectQuestion(`q.id=:question_id`, {
     question_id: id || question_id,
   });
@@ -113,7 +125,7 @@ export async function linkQuestionToGroups(question_id, group_ids) {
     await sqlExe.executeCommand(
       `INSERT INTO group_question (question_id,group_id) 
     VALUES(:question_id, :cur_group_id);`,
-      params // TODO USE SAME LOGIC AS ADDMANYCHOICES() INSTEAD OF A LOOP SQL EXECUTE
+      params // TODO USE SAME LOGIC AS addManyChoices() INSTEAD OF A LOOP SQL EXECUTE
     );
   }
 }
@@ -129,4 +141,20 @@ export async function deleteAllQuestionLinks(question_id = null) {
     )
   ).affectedRows;
   return result;
+}
+
+export async function setDeletedQuestionAndCascadeChoices(question_id) {
+  await sqlExe.executeCommand(
+    `UPDATE questions q 
+LEFT JOIN choices c on c.question_id = q.id
+SET q.deleted=1, c.deleted=1 WHERE q.id = :question_id`,
+    { question_id }
+  );
+}
+
+export async function getWhatGroupsQuestionisIn(question_id) {
+  return await sqlExe.executeCommand(
+    `select * from group_question gq where gq.question_id = :question_id`,
+    { question_id }
+  );
 }

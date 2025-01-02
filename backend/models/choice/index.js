@@ -118,11 +118,11 @@ export async function upsertChoiceToQuestion(
 }
 
 /**
- * adds x amt of choices to a question
+ * adds x amt of choices to a question, does not check if the user is allowed to do this, use it carefully
  * @param {Int} question_id
  * @param {Int} user_id
  * @param {Array} choices array of choices all having text and is_correct keys
- * @returns {Object}
+ * @returns {Void}
  * @example
  * "choices": [
     {

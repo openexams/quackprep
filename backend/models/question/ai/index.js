@@ -1,8 +1,13 @@
 import sqlExe from "#db/dbFunctions.js";
 import { openai } from "#config/config.js";
 import "#utils/utils.js";
-import { upsertQuestion } from "..";
-import { addManyChoicesToQuestion } from "#models/choice";
+import {
+  getWhatGroupsQuestionisIn,
+  setDeletedQuestionAndCascadeChoices,
+  upsertQuestion,
+} from "../index.js";
+import { addManyChoicesToQuestion } from "#models/choice/index.js";
+import { cascadeSetDeleted } from "#utils/sqlFunctions.js";
 
 /**
  * Represents a question with multiple-choice options.
@@ -30,62 +35,98 @@ export async function generateQuestionLike(
   likeQuestionText,
   likeQuestionId
 ) {
+  let question_added_id = null;
   // find the assistant I created
-  const quackAssist = await openai.beta.assistants.retrieve(
-    "asst_a168JvA9PlzK2WaKZ6oukDe4"
-  );
+  try {
+    const quackAssist = await openai.beta.assistants.retrieve(
+      "asst_a168JvA9PlzK2WaKZ6oukDe4"
+    );
 
-  // create the thread which to send messages and send a starter msg
-  const quackThread = await openai.beta.threads.create({
-    messages: [
-      {
-        role: "user",
-        content: `create a question like: "${likeQuestionText}"\nin json format`,
-      },
-    ],
-  });
+    // create the thread which to send messages and send a starter msg
+    const quackThread = await openai.beta.threads.create({
+      messages: [
+        {
+          role: "user",
+          content: `create a question like: "${likeQuestionText}"\nin json format`,
+        },
+      ],
+    });
 
-  // run the message
-  const quackRun = await openai.beta.threads.runs.create(quackThread.id, {
-    assistant_id: quackAssist.id,
-  });
-  let runRes = await openai.beta.threads.runs.retrieve(
-    quackThread.id,
-    quackRun.id
-  );
-  // keep checking till its completed.
-  while (runRes.status === "queued" || runRes.status === "in_progress") {
-    dlog("run not finished retrying in 2s");
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-    runRes = await openai.beta.threads.runs.retrieve(
+    // run the message
+    const quackRun = await openai.beta.threads.runs.create(quackThread.id, {
+      assistant_id: quackAssist.id,
+    });
+    let runRes = await openai.beta.threads.runs.retrieve(
       quackThread.id,
       quackRun.id
     );
+    // keep checking till its completed.
+    while (runRes.status === "queued" || runRes.status === "in_progress") {
+      dlog("run not finished retrying in 2s");
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+      runRes = await openai.beta.threads.runs.retrieve(
+        quackThread.id,
+        quackRun.id
+      );
+    }
+    if (runRes.status !== "completed") {
+      throw new Error("failed to generate AI question & choices.");
+      return;
+    }
+    // get message from AI when completed.
+    const allMessages = await openai.beta.threads.messages.list(quackThread.id);
+    const quackAssistResponse = allMessages?.data[0]?.content;
+    /**@type {GenQuestion} */
+    let quackAssistResponseJSON = JSON.parse(
+      quackAssistResponse?.[0]?.text?.value
+    );
+    // needed for sql db
+    for (let i = 0; i < quackAssistResponseJSON.options.length; i++) {
+      quackAssistResponseJSON.options[i] = {
+        ...quackAssistResponseJSON.options[i],
+        type: "mcq",
+      };
+    }
+
+    // get what groups curQuestion has
+    const object_w_groups = await getWhatGroupsQuestionisIn(likeQuestionId);
+    const groups_question_is_in = [];
+    for (let i = 0; i < object_w_groups.length; i++) {
+      groups_question_is_in.push(object_w_groups[i].group_id);
+    }
+
+    question_added_id = (
+      await upsertQuestion(
+        null,
+        quackAssistResponseJSON.question,
+        user_id,
+        groups_question_is_in,
+        true
+      )
+    )?.[0]?.id;
+
+    if (!question_added_id) {
+      throw new Error("failed to add AI question, question not created");
+      return;
+    }
+
+    await addManyChoicesToQuestion(
+      question_added_id,
+      user_id,
+      quackAssistResponseJSON.options
+    );
+    return; // this needs to return the question & the choices, unless the user just has to refresh
+  } catch (error) {
+    if (question_added_id) {
+      // if we added a question & errored then->
+      await setDeletedQuestionAndCascadeChoices(question_added_id);
+    }
+    throw error;
   }
-  if (runRes.status !== "completed") {
-    throw new Error("failed to generate AI question & choices.");
-    return;
-  }
-  // get message from AI when completed.
-  const allMessages = await openai.beta.threads.messages.list(quackThread.id);
-  const quackAssistResponse = allMessages?.data[0]?.content;
-  /**@type {GenQuestion} */
-  let quackAssistResponseJSON = JSON.parse(
-    quackAssistResponse?.[0]?.text?.value
-  );
-  // needed for sql db
-  for (let i = 0; i < quackAssistResponseJSON.options.length; i++) {
-    quackAssistResponseJSON.options[i] = {
-      ...quackAssistResponseJSON.options[i],
-      type: "mcq",
-    };
-  }
-  upsertQuestion(); // add ai flag to upsert
-  addManyChoicesToQuestion();
 }
 
 generateQuestionLike(
-  1,
+  13,
   "Consider the surface: 2x^3 - 4xy + 3z^2 + 7 = 0. Find the points on the surface at which the tangent plane is parallel to the xy-plane.",
-  1
+  64
 );

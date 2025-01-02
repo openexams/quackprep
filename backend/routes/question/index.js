@@ -94,9 +94,6 @@ router.post("/", isAuthenticated, isCreator, async function (req, res) {
       req.user,
       data.group_ids // destructure group ids into last arg
     ); // will be the id of the question, however question_id will be an array of 2 as duplicate groups occur
-    const question_id = questions?.[0]?.id;
-    if (data?.id) await deleteAllQuestionLinks(question_id); // deletes all of them only when its edited, if its being created it will have no links
-    await linkQuestionToGroups(question_id, data.group_ids); // links question to the groups
 
     res.status(201).json(questions);
   } catch (error) {
