@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { List, Label, Icon, Button } from 'semantic-ui-react';
+import { List, Label, Icon, Button, Popup } from 'semantic-ui-react';
 import { changeNavbarPage } from '@components/navbar/navbarSlice';
 import { updateQuestionId } from '@components/navbar/navbarSlice';
 import { upsertFavoriteQuestion } from '@src/app/favorite/favoriteSlice';
@@ -30,7 +30,7 @@ function getQuestionTopics(questionTypes, questionGroupName) {
   return ret;
 }
 // takes in everything i need to be a question
-export default function QuestionCard({ id, selectedQuestion, type_name, group_name, showTopics, index, favorited, current }) {
+export default function QuestionCard({ id, selectedQuestion, type_name, group_name, showTopics, index, favorited, current, ai }) {
   const { schoolName, className, groupType, groupName } = useSelector(selectNavbarState).navbar;
 
   const dispatch = useDispatch();
@@ -66,6 +66,7 @@ export default function QuestionCard({ id, selectedQuestion, type_name, group_na
           <List.Header as='h4' style={{ margin: 0 }}>
             Question {index + 1}
           </List.Header>
+
           {current !== null && (
             <Icon
               size='tiny'
@@ -77,6 +78,7 @@ export default function QuestionCard({ id, selectedQuestion, type_name, group_na
               style={{ marginRight: '0.5em' }}
             />
           )}
+          {ai ? <Popup trigger={<Label size='mini' color='blue' content={'AI'} />}>AI generated question</Popup> : null}
         </div>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '1em' }}>

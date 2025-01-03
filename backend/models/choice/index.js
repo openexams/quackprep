@@ -165,5 +165,10 @@ export async function addManyChoicesToQuestion(question_id, user_id, choices) {
       choices[i]?.type
     );
   }
-  return await sqlExe.queryCommand(sqlStatement, params);
+  const result = await sqlExe.queryCommand(sqlStatement, params);
+  return await selectChoices(
+    `c.id between ${result.insertId} AND ${
+      result.insertId + result.affectedRows - 1
+    }`
+  );
 }

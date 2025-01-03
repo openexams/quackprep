@@ -1,4 +1,3 @@
-import sqlExe from "#db/dbFunctions.js";
 import { openai } from "#config/config.js";
 import "#utils/utils.js";
 import {
@@ -7,7 +6,6 @@ import {
   upsertQuestion,
 } from "../index.js";
 import { addManyChoicesToQuestion } from "#models/choice/index.js";
-import { cascadeSetDeleted } from "#utils/sqlFunctions.js";
 
 /**
  * Represents a question with multiple-choice options.
@@ -35,7 +33,7 @@ export async function generateQuestionLike(
   likeQuestionText,
   likeQuestionId
 ) {
-  let question_added_id = null;
+  let question_added = null;
   // find the assistant I created
   try {
     const quackAssist = await openai.beta.assistants.retrieve(
@@ -95,38 +93,31 @@ export async function generateQuestionLike(
       groups_question_is_in.push(object_w_groups[i].group_id);
     }
 
-    question_added_id = (
-      await upsertQuestion(
-        null,
-        quackAssistResponseJSON.question,
-        user_id,
-        groups_question_is_in,
-        true
-      )
-    )?.[0]?.id;
+    const question_with_2 = await upsertQuestion(
+      null,
+      quackAssistResponseJSON.question,
+      user_id,
+      groups_question_is_in,
+      true
+    );
+    question_added = question_with_2?.[0];
 
-    if (!question_added_id) {
+    if (!question_added?.id) {
       throw new Error("failed to add AI question, question not created");
       return;
     }
 
-    await addManyChoicesToQuestion(
-      question_added_id,
+    const choices_added = await addManyChoicesToQuestion(
+      question_added?.id,
       user_id,
       quackAssistResponseJSON.options
     );
-    return; // this needs to return the question & the choices, unless the user just has to refresh
+    return { question: question_with_2, choices: choices_added };
   } catch (error) {
-    if (question_added_id) {
+    if (question_added?.id) {
       // if we added a question & errored then->
-      await setDeletedQuestionAndCascadeChoices(question_added_id);
+      await setDeletedQuestionAndCascadeChoices(question_added?.id);
     }
     throw error;
   }
 }
-
-generateQuestionLike(
-  13,
-  "Consider the surface: 2x^3 - 4xy + 3z^2 + 7 = 0. Find the points on the surface at which the tangent plane is parallel to the xy-plane.",
-  64
-);

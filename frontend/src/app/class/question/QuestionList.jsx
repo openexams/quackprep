@@ -1,10 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { List, Segment, Header, Button, Checkbox, Icon, Label } from 'semantic-ui-react';
 import QuestionCard from './QuestionCard';
 import { isFavoriteQuestion, selectFavoriteQuestionsState } from '@src/app/favorite/favoriteSlice';
 import { useSelector } from 'react-redux';
 import { doesQuestionHaveCurrentChoice, selectCurrentChoicesState } from './choices/choicesSlice';
 
+/**
+ * @param {Object} props
+ * @param {Array} props.questions
+ * @param {Object} props.selectedQuestion
+ */
 export default function QuestionList({ questions, selectedQuestion }) {
   const favoriteQuestions = useSelector(selectFavoriteQuestionsState);
   const [showTopics, setShowTopics] = useState(false); // TODO SHOW MULTIPLE TOPICS IF THE QUESTION HAS SUCH
@@ -29,6 +34,7 @@ export default function QuestionList({ questions, selectedQuestion }) {
         <List selection divided relaxed>
           {questions.map((question, index) => (
             <QuestionCard
+              ai={question.ai}
               key={index}
               id={question?.id}
               selectedQuestion={selectedQuestion}
