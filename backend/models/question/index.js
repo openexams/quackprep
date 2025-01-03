@@ -13,17 +13,27 @@ export async function createQuestionReport(user_id, question_id, text) {
 export async function getQuestionsByGroupId(group_id) {
   const params = { group_id };
   return await sqlExe.executeCommand(
-    `SELECT q.id, q.question, g.id as group_id, q.explanation_url, g.name as group_name, gt.type_name,
+    `SELECT q.id,
+       q.question,
+        group_concat(g.id SEPARATOR ',') AS group_id,
+       q.explanation_url,
+        group_concat(g.name SEPARATOR ',') as group_name,
+       group_concat(gt.type_name SEPARATOR ',') as type_name,
     cl.id as class_id, cl.school_id,cl.category as class_category, q.ai
-    FROM questions q 
-    JOIN group_question gq ON q.id = gq.question_id
-    JOIN questions qq -- join questions back
-    JOIN group_question new_gq ON qq.id = gq.question_id -- dont pull in same ids twice
-    JOIN cgroups g ON g.id = new_gq.group_id AND new_gq.question_id = q.id -- join groups where pulled in questions map to a group (pulling in all groups now)
+    FROM questions q
+
+    JOIN group_question gq ON q.id = gq.question_id AND gq.group_id = :group_id -- all groups relating to this question
+    JOIN questions qq ON gq.question_id = qq.id -- all questions which relate to group id :group_id
+    JOIN group_question new_gq ON qq.id = new_gq.question_id -- use all questions that are in all groups now this shit has all groups needed
+    JOIN cgroups g ON g.id = new_gq.group_id
+
+
+
     JOIN group_types gt ON gt.id = g.type
-    JOIN classes cl ON g.class_id = cl.id 
-    WHERE q.deleted = 0 AND q.deleted = 0 AND g.deleted=0 AND cl.deleted=0 AND gq.group_id = :group_id
-    ORDER BY q.id ASC, gt.type_name DESC`,
+    JOIN classes cl ON g.class_id = cl.id
+    WHERE q.deleted = 0 AND g.deleted=0 AND cl.deleted=0
+    GROUP BY q.id, q.question, q.explanation_url, cl.id, cl.school_id, cl.category, q.ai
+    ORDER BY q.id ASC`,
     params
   );
 }
@@ -34,9 +44,9 @@ export async function selectQuestion(WHERE, params) {
     q.id,
     q.question,
     q.ai,
-    g.id AS group_id,
-    gt.type_name,
-    g.name,
+    group_concat(g.id SEPARATOR ',') AS group_id,
+    group_concat(gt.type_name SEPARATOR ',') as type_name,
+    group_concat(g.name SEPARATOR ',') as name,
     cl.id AS class_id,
     cl.school_id,
     cl.category AS class_category,q.explanation_url
@@ -46,14 +56,16 @@ JOIN
     group_question gq ON q.id = gq.question_id
 JOIN
     cgroups g ON g.id = gq.group_id
-JOIN 
+JOIN
 	group_types gt ON g.type = gt.id
 JOIN
     classes cl ON cl.id = g.class_id
 WHERE
     q.deleted = 0 AND g.deleted=0 AND cl.deleted=0 AND ${WHERE}
+GROUP BY
+    q.id, cl.id, cl.school_id, cl.category
 ORDER BY
-    q.id ASC, gt.type_name DESC`,
+    q.id ASC`,
     params
   );
 }
