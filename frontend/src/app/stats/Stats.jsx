@@ -112,7 +112,7 @@ export default function StatsPage() {
       </Header>
 
       <Segment basic loading={loading}>
-        <Statistic color='blue' value={`${tts / 60} H`} label={'Total Time Spent Studying'} />
+        <Statistic color='blue' value={`${Math.round(tts / 60)} H`} label={'Total Time Spent Studying'} />
         <Grid columns={1} stackable>
           <Grid.Row>
             <Grid.Column>
