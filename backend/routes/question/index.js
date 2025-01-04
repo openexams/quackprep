@@ -2,20 +2,21 @@ import express from "express";
 import { isAuthenticated } from "#middleware/authMiddleware.js";
 import {
   createQuestionReport,
-  deleteAllQuestionLinks,
   getQuestionsByGroupId,
   getQuestionsByUserId,
-  linkQuestionToGroups,
   upsertQuestion,
 } from "#models/question/index.js";
 import { cascadeSetDeleted } from "#utils/sqlFunctions.js";
 import { isCreator } from "#middleware/creatorMiddleware.js";
 import { commonErrorMessage } from "#utils/utils.js";
 import favRouter from "./favorite/index.js";
+import aiRouter from "./ai/index.js";
 
 const router = express.Router();
 
 router.use("/favorite", favRouter);
+
+router.use("/ai", aiRouter);
 
 router.get("/user", isAuthenticated, async function (req, res) {
   try {
@@ -33,16 +34,13 @@ router.get("/user", isAuthenticated, async function (req, res) {
 
 router.get("/:group_id", async function (req, res) {
   try {
-    const result = await getQuestionsByGroupId(
-      req.params.group_id,
-      req.params.type
-    );
+    const result = await getQuestionsByGroupId(req.params.group_id);
     res.status(200).json(result);
   } catch (error) {
     commonErrorMessage(
       res,
       500,
-      `failed to get question by group id ${req.params.group_id} and grouptype ${req.params.type}`,
+      `failed to get question by group id ${req.params.group_id}`,
       error
     );
   }
@@ -94,9 +92,6 @@ router.post("/", isAuthenticated, isCreator, async function (req, res) {
       req.user,
       data.group_ids // destructure group ids into last arg
     ); // will be the id of the question, however question_id will be an array of 2 as duplicate groups occur
-    const question_id = questions?.[0]?.id;
-    if (data?.id) await deleteAllQuestionLinks(question_id); // deletes all of them only when its edited, if its being created it will have no links
-    await linkQuestionToGroups(question_id, data.group_ids); // links question to the groups
 
     res.status(201).json(questions);
   } catch (error) {

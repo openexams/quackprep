@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { Grid, Header, Segment, Popup, Button, Icon } from 'semantic-ui-react';
+import { useEffect, useState } from 'react';
+import { Grid, Header, Segment, Button, Icon } from 'semantic-ui-react';
 import QuestionList from './QuestionList';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectArrayOfStateByGroupId } from 'maddox-js-funcs';
 import { changeNavbarPage, selectNavbarState } from '@components/navbar/navbarSlice';
 import { selectLoadingState } from '@src/app/store/loadingSlice';
 import ChoiceRouter from './choices/ChoiceRouter';
 import { useNavigate } from 'react-router-dom';
 import ChatbotWidget from '@src/app/chatbot/ChatbotWidget';
 import QuestionReport from './qreport/QuestionReport';
+import { selectArrayOfStateByGroupId } from '@utils/helperFuncs';
 
 /**
  *
@@ -30,7 +30,7 @@ function findQuestionById(questions, id) {
 export default function QuestionPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { groupId, groupName, questionId, groupType } = useSelector(selectNavbarState).navbar;
+  const { groupId, groupName, questionId } = useSelector(selectNavbarState).navbar;
 
   const questions = useSelector(selectArrayOfStateByGroupId('app.question.questions', groupId));
 

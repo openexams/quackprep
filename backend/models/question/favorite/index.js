@@ -2,7 +2,9 @@ import sqlExe from "#db/dbFunctions.js";
 
 export async function getFavoriteQuestionsByUserId(user_id) {
   return await sqlExe.executeCommand(
-    `SELECT * FROM favorite_questions WHERE user_id =:user_id`,
+    `SELECT fq.id, fq.user_id, fq.is_favorite, fq.question_id FROM favorite_questions fq
+    JOIN questions q on q.id = fq.question_id AND q.deleted = 0
+     WHERE fq.user_id =:user_id`,
     { user_id }
   );
 }
@@ -12,7 +14,9 @@ export async function getFavoriteQuestionsByQuestionIdAndUserId(
   user_id
 ) {
   return await sqlExe.executeCommand(
-    `SELECT * FROM favorite_questions WHERE user_id =:user_id AND question_id=:question_id`,
+    `SELECT fq.id, fq.user_id, fq.is_favorite, fq.question_id FROM favorite_questions fq
+    JOIN questions q on q.id = fq.question_id AND q.deleted = 0
+     WHERE fq.user_id =:user_id AND fq.question_id =:question_id`,
     { question_id, user_id }
   );
 }

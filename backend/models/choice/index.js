@@ -33,17 +33,26 @@ export async function getQuestionsAnsweredByMonthAndYear() {
 async function selectChoices(WHERE, params) {
   const result = await sqlExe.executeCommand(
     `
-    SELECT c.id,c.answer,c.is_correct,c.created_by,c.question_id,c.type, cl.id as class_id, g.id as group_id, 
+    SELECT c.id,
+       c.answer
+       ,c.is_correct
+       ,c.created_by
+     ,c.question_id
+     ,c.type
+     , cl.id as class_id,
+    group_concat(g.id SEPARATOR ',') as group_id,
+
     cl.school_id, cl.category as class_category, ans.num_submissions
-     FROM choices c 
-     LEFT JOIN group_question gq ON c.question_id = gq.question_id
-     JOIN cgroups g on g.id = gq.group_id 
+     FROM choices c
+     JOIN group_question gq ON c.question_id = gq.question_id
+     JOIN cgroups g on g.id = gq.group_id
      JOIN classes cl ON cl.id = g.class_id
      LEFT JOIN (SELECT ans.choice_id, COUNT(*) as num_submissions FROM answers_transactional ans
-			GROUP BY ans.choice_id) 
+			GROUP BY ans.choice_id)
             ans on c.id = ans.choice_id
-     
+
     WHERE c.deleted=0 AND g.deleted=0 AND cl.deleted=0 AND ${WHERE}
+    GROUP BY c.id, c.answer, c.is_correct, c.created_by, c.question_id, c.type, cl.id, cl.school_id, cl.category
 	ORDER BY c.question_id ASC
      `,
     params
@@ -65,8 +74,17 @@ export async function getChoicesByGroupId(group_id) {
   const params = { group_id };
   return await sqlExe.executeCommand(
     `
-      SELECT c.id,c.answer,c.is_correct,c.created_by,c.question_id,c.type, cl.id as class_id, g.id as group_id, 
-      cl.school_id, cl.category as class_category, ans.num_submissions
+      SELECT 
+     c.id,
+     c.answer,
+     c.is_correct,
+     c.created_by,
+     c.question_id,
+     c.type, 
+     cl.id as class_id,
+     GROUP_CONCAT(g.id SEPARATOR ',') as group_id, 
+      cl.school_id, 
+      cl.category as class_category, ans.num_submissions
       FROM choices c 
       JOIN group_question gq ON c.question_id = gq.question_id
       LEFT JOIN group_question new_gq ON c.question_id = new_gq.question_id
@@ -76,6 +94,7 @@ export async function getChoicesByGroupId(group_id) {
 			GROUP BY ans.choice_id) 
             ans on c.id = ans.choice_id
       WHERE c.deleted=0 AND g.deleted=0 AND cl.deleted=0 AND gq.group_id =:group_id
+      GROUP BY c.id, c.answer, c.is_correct, c.created_by, c.question_id, c.type, cl.id, cl.school_id, cl.category 
       ORDER BY c.id ASC
 
 `,
@@ -118,11 +137,11 @@ export async function upsertChoiceToQuestion(
 }
 
 /**
- * adds x amt of choices to a question
+ * adds x amt of choices to a question, does not check if the user is allowed to do this, use it carefully
  * @param {Int} question_id
  * @param {Int} user_id
  * @param {Array} choices array of choices all having text and is_correct keys
- * @returns {Object}
+ * @returns {Void}
  * @example
  * "choices": [
     {
@@ -165,5 +184,10 @@ export async function addManyChoicesToQuestion(question_id, user_id, choices) {
       choices[i]?.type
     );
   }
-  return await sqlExe.queryCommand(sqlStatement, params);
+  const result = await sqlExe.queryCommand(sqlStatement, params);
+  return await selectChoices(
+    `c.id between ${result.insertId} AND ${
+      result.insertId + result.affectedRows - 1
+    }`
+  );
 }

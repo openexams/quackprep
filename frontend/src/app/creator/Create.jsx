@@ -342,7 +342,7 @@ export default function Create() {
           { name: 'group_id', value: '', required: true },
         ]}
         onSubmit={({ question, group_id }) => {
-          if (group_id.ss(',')) group_id = group_id.split(',');
+          if (group_id.includes(',')) group_id = group_id.split(','); // SPECIAL LOGIC TODO TELL USER OR FIX WETARD
           else {
             let tmp = [];
             tmp.push(group_id);

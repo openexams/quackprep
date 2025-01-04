@@ -1,6 +1,6 @@
 import { standardApiCall } from '@utils/api';
 import { updateArrObjectsWithNewVals, upsertArray, filterArr } from 'maddox-js-funcs';
-import { mergeData } from '@utils/helperFuncs';
+import { GEN_AI_QUESTION_RES } from './ai/aiQuestionSlice';
 
 const GET_CRUD_QUESTIONS = 'app/class/question/GET_CRUD_QUESTIONS';
 const UPSERT_CRUD_QUESTION = 'app/class/question/UPSERT_CRUD_QUESTION';
@@ -54,11 +54,17 @@ const DEFAULT_STATE = {
 export default function questionsReducer(state = DEFAULT_STATE, action) {
   switch (action.type) {
     case GET_CRUD_QUESTIONS: // questions are pulled in with also two different groupNames which match the 2 diff ids. the first name that will show up is the topic, and since mergeKeys saves the first key it finds, it will just show the first TOPIC name it finds for that question
-      return { ...state, questions: mergeData(updateArrObjectsWithNewVals(state.questions, action.payload)) };
+      return { ...state, questions: updateArrObjectsWithNewVals(state.questions, action.payload) };
     case DELETE_CRUD_QUESTION:
       return { ...state, questions: filterArr(state.questions, action.payload) };
     case UPSERT_CRUD_QUESTION:
-      return { ...state, questions: upsertArray(state.questions, ...mergeData(action.payload)) };
+      return { ...state, questions: upsertArray(state.questions, action.payload) };
+    case GEN_AI_QUESTION_RES: {
+      /**@type {import("../../../../../types.ts").GenQuestion} */
+      const generatedQuestionObj = action.payload;
+      console.log(generatedQuestionObj);
+      return { ...state, questions: updateArrObjectsWithNewVals(state.questions, generatedQuestionObj.question) };
+    }
     default:
       return state;
   }

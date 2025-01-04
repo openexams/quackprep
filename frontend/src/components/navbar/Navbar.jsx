@@ -46,7 +46,6 @@ export default function Navbar() {
   const schools = useSelector(selectSchoolState).schools;
   const loading = useSelector(selectLoadingState)?.loadingComps;
   const State401 = useSelector(select401CompState).show;
-  const userIdRef = useRef(user.id);
 
   // spaces in stuff is a issue!!
   const { className, classId, groupName, groupId, questionId, schoolName, groupType, schoolId } =
@@ -58,21 +57,6 @@ export default function Navbar() {
     dispatch(changeNavbarPage(navigate, data.name));
     setSidebarOpened(false); // Close sidebar on item click
   }
-
-  useEffect(() => {
-    userIdRef.current = user.id;
-  }, [user.id]); // keep userIdRef.current up to date with user.id
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (userIdRef.current) {
-        // cant use user.id here as it takes the user.id value and saves it for every callm, while useRef.current is a pointer to the value ( thats how I like to think ab it )
-        dispatch(upsertTimeSpent()); // TODO TEST
-      }
-    }, 300000); // runs every 5 minute
-
-    return () => clearInterval(interval);
-  }, []);
 
   ///  USE EFFECTS FOR KEEPING STORE SAME AS URL ///
   useEffect(() => {

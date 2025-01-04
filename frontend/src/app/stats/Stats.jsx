@@ -1,11 +1,11 @@
 import './stats.css';
 import React, { useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Container, Header, Grid, Segment, Icon, Card } from 'semantic-ui-react';
+import { Container, Header, Grid, Segment, Icon, Card, Statistic } from 'semantic-ui-react';
 import { Line } from 'react-chartjs-2';
 import 'chart.js/auto';
 import { selectLoadingState } from '../store/loadingSlice';
-import { getQuestionsAnsweredByMonthAndYear, selectStatsState } from './statsSlice';
+import { getQuestionsAnsweredByMonthAndYear, getTotalTimeSpent, selectStatsState } from './statsSlice';
 import MyStats from './MyStats';
 
 const numberToNameMonthMapping = {
@@ -34,7 +34,7 @@ const mapQuestionsByMAndY = (data) => {
     labels: questionOverTimeCombineMandY.map((x) => x.mY),
     datasets: [
       {
-        label: 'Questions Answered',
+        label: 'Submissions',
         data: questionOverTimeCombineMandY.map((x) => x.questions_answered),
         backgroundColor: 'rgba(75, 192, 192, 0.2)',
         borderColor: 'rgba(75, 192, 192, 1)',
@@ -59,12 +59,17 @@ const ChartCard = ({ title, children }) => (
 
 export default function StatsPage() {
   const loading = useSelector(selectLoadingState).loadingComps.Stats;
-  const { questionsAnsweredByMonthAndYear } = useSelector(selectStatsState).stats;
+  const { questionsAnsweredByMonthAndYear, tts } = useSelector(selectStatsState).stats;
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (!questionsAnsweredByMonthAndYear && !loading) dispatch(getQuestionsAnsweredByMonthAndYear());
-  }, [dispatch, questionsAnsweredByMonthAndYear]);
+    if (!questionsAnsweredByMonthAndYear) {
+      dispatch(getQuestionsAnsweredByMonthAndYear());
+    }
+    if (!tts) {
+      dispatch(getTotalTimeSpent());
+    }
+  }, []);
 
   const mappedQuestions = useMemo(() => mapQuestionsByMAndY(questionsAnsweredByMonthAndYear), [questionsAnsweredByMonthAndYear]);
 
@@ -77,7 +82,7 @@ export default function StatsPage() {
       },
       title: {
         display: true,
-        text: 'Questions Answered Over Time',
+        text: 'Question Submissions Over Time',
       },
     },
     scales: {
@@ -107,10 +112,11 @@ export default function StatsPage() {
       </Header>
 
       <Segment basic loading={loading}>
+        <Statistic color='blue' value={`${Math.round(tts / 60)} H`} label={'Total Time Spent Studying'} />
         <Grid columns={1} stackable>
           <Grid.Row>
             <Grid.Column>
-              <ChartCard title='Questions Answered Over Time'>
+              <ChartCard title='Question Submissions Over Time'>
                 <div style={{ height: '400px' }}>{mappedQuestions && <Line data={mappedQuestions} options={chartOptions} />}</div>
               </ChartCard>
             </Grid.Column>

@@ -1,3 +1,4 @@
+import { sendObjToPath } from 'maddox-js-funcs';
 /**
  * Text len must be >=2
  * @param {String} text
@@ -72,4 +73,92 @@ export function mergeData(data) {
     updated_arr.push(accumulated_object);
   }
   return updated_arr;
+}
+
+export function selectArrayOfStateByGroupId(path, id) {
+  // make a function that takes in the state and the path and finds the state at that path or returns null.
+  return function (state) {
+    const stateArr = sendObjToPath(state, path);
+    if (!stateArr) {
+      //console.count('no state found');
+      return null;
+    }
+    if (!path || !id) {
+      return null;
+    }
+    if (!isNaN(id)) {
+      parseInt(id);
+    }
+    let tmp = [];
+    for (let i = 0; i < stateArr.length; i++) {
+      // group id can be csv array or not array
+      if (!stateArr[i]?.group_id?.includes(',') && parseInt(stateArr[i]?.group_id) === id) {
+        tmp.push(stateArr[i]);
+      } else {
+        // its an arr and go through it.
+        for (let j = 0; j < stateArr[i]?.group_id?.split(',')?.length; j++) {
+          if (parseInt(stateArr[i]?.group_id?.split(',')[j]) === id) {
+            tmp.push(stateArr[i]);
+            break; // we can add this so go next WHAT IF A QUESTION IS ONLY IN 1 GROUP TODO FIX REATRD
+          }
+        }
+      }
+    }
+    return tmp;
+  };
+}
+
+/**
+ * checks equivalances using == againt the array and filter u are using. if valuesIncluded[i] == '' it is skipped
+ * checks exact equivalence (the number u are using in the filter will be checked with == to the key)
+ * @param {Array} array
+ * @param {Array} keysToCheck
+ * @param {Array} valuesIncluded
+ */
+export function selectArrayOfIncludingItemsByNumber(array, keysToCheck, valuesIncluded) {
+  if (!Array.isArray(array) || !Array.isArray(keysToCheck)) {
+    return array;
+  }
+
+  let canRetEarly = true;
+  for (let i = 0; i < keysToCheck?.length; i++) {
+    if (valuesIncluded[i] == '' || valuesIncluded[i] == null) {
+      continue;
+    } else {
+      canRetEarly = false;
+    }
+  }
+  if (canRetEarly) {
+    return array;
+  }
+  const ret = [];
+  for (let i = 0; i < array.length; i++) {
+    let canAdd = true;
+    for (let j = 0; j < keysToCheck.length; j++) {
+      if (valuesIncluded[j] !== '') {
+        const curId = valuesIncluded[j];
+        console.log(array[i][keysToCheck[j]]);
+        if (Array.isArray(array[i][keysToCheck[j]]) || String(array[i][keysToCheck[j]]).includes(',')) {
+          let tmp = String(array[i][keysToCheck[j]]).split(',');
+          for (let k = 0; k < tmp.length; k++) {
+            if (tmp[k] == curId) {
+              break;
+            } else {
+              canAdd = false;
+            }
+          }
+        } else {
+          if (array[i][keysToCheck[j]] == curId) {
+            continue;
+          } else {
+            canAdd = false;
+          }
+        }
+      }
+    }
+    if (canAdd) {
+      ret.push(array[i]);
+    }
+  }
+  return ret;
 }

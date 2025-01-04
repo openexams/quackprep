@@ -1,6 +1,6 @@
 import { standardApiCall } from '@utils/api';
-import { filterArr, upsertArray, countingSort, selectItemById } from 'maddox-js-funcs';
-import { mergeData } from '@utils/helperFuncs';
+import { filterArr, upsertArray, countingSort, selectItemById, updateArrObjectsWithNewVals } from 'maddox-js-funcs';
+import { GEN_AI_Q_AND_C_RES } from '../ai/aiQuestionSlice.js';
 
 const GET_CRUD_CHOICES = 'app/class/question/choices/GET_CRUD_CHOICES';
 
@@ -69,18 +69,23 @@ export default function choicesReducer(state = DEFAULT_STATE, action) {
       // all choices only map to 1 question & the api will only call this route once so i can just append to the array and dont have to check for duplicates
       return {
         ...state,
-        choices: mergeData(countingSort([...(state.choices || []), ...action.payload], 'id')),
+        choices: countingSort([...(state.choices || []), ...action.payload], 'id'),
       };
     }
     case DELETE_CRUD_CHOICE:
       return { ...state, choices: filterArr(state.choices, action.payload) };
     case UPSERT_CRUD_CHOICE: // if inserteing new id will be higher than all others, as such it will stay sorted
-      return { ...state, choices: upsertArray(state.choices, ...mergeData(action.payload)) }; // merge data only on incoming data, as if done will all data, for example I changed a choice to correct, it would have 3 choices needing to be merged, 1 already merged and 2 new ones, which both have a difference in the is_correct feild maning the is correct field would be an arr [0,1]
+      return { ...state, choices: upsertArray(state.choices, action.payload) }; // merge data only on incoming data, as if done will all data, for example I changed a choice to correct, it would have 3 choices needing to be merged, 1 already merged and 2 new ones, which both have a difference in the is_correct feild maning the is correct field would be an arr [0,1]
 
     case GET_CURRENT_CHOICES:
       return { ...state, currentChoices: action.payload };
     case UPSERT_CURRENT_CHOICE:
       return { ...state, currentChoices: upsertArray(state.currentChoices, action.payload) };
+    case GEN_AI_Q_AND_C_RES: {
+      /**@type {import("../../../../../../types.ts").GenQuestion} */
+      const generatedQuestionObj = action.payload;
+      return { ...state, choices: updateArrObjectsWithNewVals(state.choices, generatedQuestionObj.choices) }; // shouldnt have to counting sort them because they are new
+    }
     default:
       return state;
   }

@@ -1,11 +1,10 @@
 import { useSelector } from 'react-redux';
 import MultipleChoice from './types/MultipleChoice/MultipleChoice';
 import { selectArrayOfStateById } from 'maddox-js-funcs';
-import { Segment, Header, Divider } from 'semantic-ui-react';
+import { Segment, Header, Divider, Label, Popup } from 'semantic-ui-react';
 import MarkdownRenderer from '@components/MarkdownRenderer';
 import { selectLoadingState } from '@src/app/store/loadingSlice';
 import FreeResponse from './types/FreeResponse';
-import QuestionReport from '../qreport/QuestionReport';
 import NoItemsFound from '@components/NoItemsFound';
 
 export default function ChoiceRouter({ selectedQuestion }) {
@@ -31,6 +30,16 @@ export default function ChoiceRouter({ selectedQuestion }) {
         <>
           <Header>
             <MarkdownRenderer render={selectedQuestion.question} />
+            {selectedQuestion.ai && (
+              <Popup
+                content='These questions are AI-generated and may contain inaccuracies. Please verify their correctness.'
+                trigger={
+                  <Label color='blue' size='small' style={{ marginLeft: '10px', cursor: 'pointer' }}>
+                    AI-Generated
+                  </Label>
+                }
+              />
+            )}
           </Header>
           <Divider />
           {component}
