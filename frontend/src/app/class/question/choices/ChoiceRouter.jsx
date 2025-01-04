@@ -30,16 +30,16 @@ export default function ChoiceRouter({ selectedQuestion }) {
         <>
           <Header>
             <MarkdownRenderer render={selectedQuestion.question} />
-            {selectedQuestion.ai && (
+            {selectedQuestion.ai ? (
               <Popup
                 content='These questions are AI-generated and may contain inaccuracies. Please verify their correctness.'
                 trigger={
-                  <Label color='blue' size='small' style={{ marginLeft: '10px', cursor: 'pointer' }}>
+                  <Label color='blue' style={{ marginLeft: '10px', cursor: 'pointer' }}>
                     AI-Generated
                   </Label>
                 }
               />
-            )}
+            ) : null}
           </Header>
           <Divider />
           {component}

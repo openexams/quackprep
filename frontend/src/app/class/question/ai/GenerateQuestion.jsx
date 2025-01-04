@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { List, Icon, Modal, Button, Label, Segment, Dropdown } from 'semantic-ui-react';
 import { generateQuestionLike } from './aiQuestionSlice';
 import { useDispatch, useSelector } from 'react-redux';
@@ -39,6 +39,7 @@ export default function GenerateQuestion() {
             <Modal.Header>Generate a Similar Question</Modal.Header>
             <Modal.Content>
               <Dropdown
+                loading={loading}
                 onChange={(e, d) => setDropdownQuestion(d.value)}
                 value={dropdownQuestion}
                 clearable
@@ -63,6 +64,7 @@ export default function GenerateQuestion() {
                   onClick={() => {
                     if (dropdownQuestion && dropdownQuestion.id && dropdownQuestion.question) {
                       dispatch(generateQuestionLike(dropdownQuestion.id, dropdownQuestion.question));
+                      setIsOpen(false);
                     } else {
                       window.alert('please select a question for use of generation');
                     }
