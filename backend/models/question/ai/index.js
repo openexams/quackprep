@@ -6,21 +6,6 @@ import {
   upsertQuestion,
 } from "../index.js";
 import { addManyChoicesToQuestion } from "#models/choice/index.js";
-
-/**
- * Represents a question with multiple-choice options.
- * @typedef {Object} GenQuestion
- * @property {string} question - The text of the question.
- * @property {Option[]} options - An array of options for the question.
- */
-
-/**
- * Represents an option for a multiple-choice question.
- * @typedef {Object} Option
- * @property {string} text - The text of the option.
- * @property {boolean} is_correct - Indicates whether the option is correct.
- */
-
 /**
  *
  * @param {Integer} user_id add which user ai generated the question (does not rlly matter)
@@ -74,7 +59,7 @@ export async function generateQuestionLike(
     // get message from AI when completed.
     const allMessages = await openai.beta.threads.messages.list(quackThread.id);
     const quackAssistResponse = allMessages?.data[0]?.content;
-    /**@type {GenQuestion} */
+    /**@type {import("../../../../types.ts").GenQuestion} */
     let quackAssistResponseJSON = JSON.parse(
       quackAssistResponse?.[0]?.text?.value
     );

@@ -15,7 +15,6 @@ import { REDIS_CONFIG, SESSION_CONFIG } from "./config/config.js";
 import sqlExe from "#db/dbFunctions.js";
 import path, { dirname } from "path";
 import { fileURLToPath } from "url";
-import { hasStreak } from "#models/streak/index.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
