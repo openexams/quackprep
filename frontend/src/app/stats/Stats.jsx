@@ -34,7 +34,7 @@ const mapQuestionsByMAndY = (data) => {
     labels: questionOverTimeCombineMandY.map((x) => x.mY),
     datasets: [
       {
-        label: 'Questions Answered',
+        label: 'Submissions',
         data: questionOverTimeCombineMandY.map((x) => x.questions_answered),
         backgroundColor: 'rgba(75, 192, 192, 0.2)',
         borderColor: 'rgba(75, 192, 192, 1)',
@@ -82,7 +82,7 @@ export default function StatsPage() {
       },
       title: {
         display: true,
-        text: 'Questions Answered Over Time',
+        text: 'Question Submissions Over Time',
       },
     },
     scales: {
@@ -116,7 +116,7 @@ export default function StatsPage() {
         <Grid columns={1} stackable>
           <Grid.Row>
             <Grid.Column>
-              <ChartCard title='Questions Answered Over Time'>
+              <ChartCard title='Question Submissions Over Time'>
                 <div style={{ height: '400px' }}>{mappedQuestions && <Line data={mappedQuestions} options={chartOptions} />}</div>
               </ChartCard>
             </Grid.Column>
