@@ -11,7 +11,6 @@ export async function createQuestionReport(user_id, question_id, text) {
 
 // this function has down syndrome
 export async function getQuestionsByGroupId(group_id) {
-  const params = { group_id };
   return await sqlExe.executeCommand(
     `SELECT q.id,
        q.question,
@@ -23,7 +22,7 @@ export async function getQuestionsByGroupId(group_id) {
     FROM questions q
 
     JOIN group_question gq ON q.id = gq.question_id AND gq.group_id = :group_id -- all groups relating to this question
-    JOIN questions qq ON gq.question_id = qq.id -- all questions which relate to group id :group_id
+    JOIN questions qq ON gq.question_id = qq.id -- all questions which relate to group id
     JOIN group_question new_gq ON qq.id = new_gq.question_id -- use all questions that are in all groups now this shit has all groups needed
     JOIN cgroups g ON g.id = new_gq.group_id
 
@@ -34,7 +33,7 @@ export async function getQuestionsByGroupId(group_id) {
     WHERE q.deleted = 0 AND g.deleted=0 AND cl.deleted=0
     GROUP BY q.id, q.question, q.explanation_url, cl.id, cl.school_id, cl.category, q.ai
     ORDER BY q.id ASC`,
-    params
+    { group_id }
   );
 }
 

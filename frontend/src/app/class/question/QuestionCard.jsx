@@ -14,6 +14,9 @@ import FavoriteIcon from './FavoriteIcon/FavoriteIcon';
  * @returns {Array}
  */
 function getQuestionTopics(questionTypes, questionGroupName) {
+  questionTypes = questionTypes.split(',');
+
+  questionGroupName = questionGroupName.split(',');
   if (!Array.isArray(questionTypes) && questionTypes === 'topic') {
     return [questionGroupName];
   }

@@ -34,16 +34,13 @@ router.get("/user", isAuthenticated, async function (req, res) {
 
 router.get("/:group_id", async function (req, res) {
   try {
-    const result = await getQuestionsByGroupId(
-      req.params.group_id,
-      req.params.type
-    );
+    const result = await getQuestionsByGroupId(req.params.group_id);
     res.status(200).json(result);
   } catch (error) {
     commonErrorMessage(
       res,
       500,
-      `failed to get question by group id ${req.params.group_id} and grouptype ${req.params.type}`,
+      `failed to get question by group id ${req.params.group_id}`,
       error
     );
   }

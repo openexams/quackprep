@@ -1,3 +1,4 @@
+import { sendObjToPath } from 'maddox-js-funcs';
 /**
  * Text len must be >=2
  * @param {String} text
@@ -72,4 +73,37 @@ export function mergeData(data) {
     updated_arr.push(accumulated_object);
   }
   return updated_arr;
+}
+
+export function selectArrayOfStateByGroupId(path, id) {
+  // make a function that takes in the state and the path and finds the state at that path or returns null.
+  return function (state) {
+    const stateArr = sendObjToPath(state, path);
+    if (!stateArr) {
+      //console.count('no state found');
+      return null;
+    }
+    if (!path || !id) {
+      return null;
+    }
+    if (!isNaN(id)) {
+      parseInt(id);
+    }
+    let tmp = [];
+    for (let i = 0; i < stateArr.length; i++) {
+      // group id can be csv array or not array
+      if (!stateArr[i]?.group_id?.includes(',') && parseInt(stateArr[i]?.group_id) === id) {
+        tmp.push(stateArr[i]);
+      } else {
+        // its an arr and go through it.
+        for (let j = 0; j < stateArr[i]?.group_id?.split(',')?.length; j++) {
+          if (parseInt(stateArr[i]?.group_id?.split(',')[j]) === id) {
+            tmp.push(stateArr[i]);
+            break; // we can add this so go next WHAT IF A QUESTION IS ONLY IN 1 GROUP TODO FIX REATRD
+          }
+        }
+      }
+    }
+    return tmp;
+  };
 }
