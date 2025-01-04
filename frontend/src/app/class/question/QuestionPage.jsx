@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Grid, Header, Segment, Popup, Button, Icon } from 'semantic-ui-react';
+import { useEffect, useState } from 'react';
+import { Grid, Header, Segment, Button, Icon } from 'semantic-ui-react';
 import QuestionList from './QuestionList';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeNavbarPage, selectNavbarState } from '@components/navbar/navbarSlice';

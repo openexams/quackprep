@@ -107,3 +107,58 @@ export function selectArrayOfStateByGroupId(path, id) {
     return tmp;
   };
 }
+
+/**
+ * checks equivalances using == againt the array and filter u are using. if valuesIncluded[i] == '' it is skipped
+ * checks exact equivalence (the number u are using in the filter will be checked with == to the key)
+ * @param {Array} array
+ * @param {Array} keysToCheck
+ * @param {Array} valuesIncluded
+ */
+export function selectArrayOfIncludingItemsByNumber(array, keysToCheck, valuesIncluded) {
+  if (!Array.isArray(array) || !Array.isArray(keysToCheck)) {
+    return array;
+  }
+
+  let canRetEarly = true;
+  for (let i = 0; i < keysToCheck?.length; i++) {
+    if (valuesIncluded[i] == '' || valuesIncluded[i] == null) {
+      continue;
+    } else {
+      canRetEarly = false;
+    }
+  }
+  if (canRetEarly) {
+    return array;
+  }
+  const ret = [];
+  for (let i = 0; i < array.length; i++) {
+    let canAdd = true;
+    for (let j = 0; j < keysToCheck.length; j++) {
+      if (valuesIncluded[j] !== '') {
+        const curId = valuesIncluded[j];
+        console.log(array[i][keysToCheck[j]]);
+        if (Array.isArray(array[i][keysToCheck[j]]) || String(array[i][keysToCheck[j]]).includes(',')) {
+          let tmp = String(array[i][keysToCheck[j]]).split(',');
+          for (let k = 0; k < tmp.length; k++) {
+            if (tmp[k] == curId) {
+              break;
+            } else {
+              canAdd = false;
+            }
+          }
+        } else {
+          if (array[i][keysToCheck[j]] == curId) {
+            continue;
+          } else {
+            canAdd = false;
+          }
+        }
+      }
+    }
+    if (canAdd) {
+      ret.push(array[i]);
+    }
+  }
+  return ret;
+}
