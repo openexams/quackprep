@@ -21,7 +21,8 @@ export default class sqlExe {
    * @throws {Error} throws a sql error, make sure to use try & catch
    */
   static async executeCommand(sqlCommand, params, options) {
-    dlog("params sent", params);
+    dlog("params sent:", params);
+    dlog("sql command:", sqlCommand.slice(0, 10) + "...");
     try {
       // this should only run if editing, not if creating
       if (

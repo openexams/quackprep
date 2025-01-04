@@ -4,6 +4,7 @@ import QuestionCard from './QuestionCard';
 import { isFavoriteQuestion, selectFavoriteQuestionsState } from '@src/app/favorite/favoriteSlice';
 import { useSelector } from 'react-redux';
 import { doesQuestionHaveCurrentChoice, selectCurrentChoicesState } from './choices/choicesSlice';
+import GenerateQuestion from './ai/GenerateQuestion';
 
 /**
  * @param {Object} props
@@ -46,6 +47,7 @@ export default function QuestionList({ questions, selectedQuestion }) {
               favorited={isFavoriteQuestion(favoriteQuestions, question.id)}
             />
           ))}
+          <GenerateQuestion />
         </List>
       </div>
     </Segment>

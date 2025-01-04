@@ -62,6 +62,7 @@ export default function questionsReducer(state = DEFAULT_STATE, action) {
     case GEN_AI_QUESTION_RES: {
       /**@type {import("../../../../../types.ts").GenQuestion} */
       const generatedQuestionObj = action.payload;
+      console.log(generatedQuestionObj);
       return { ...state, questions: updateArrObjectsWithNewVals(state.questions, generatedQuestionObj.question) };
     }
     default:

@@ -9,6 +9,6 @@ export function generateQuestionLike(question_id, question_text) {
     '/api/question/ai/question_like',
     { likeQuestionId: question_id, likeQuestionText: question_text },
     [GEN_AI_QUESTION_RES, GEN_AI_Q_AND_C_RES],
-    { loadingComponent: ['QuestionPage, GenerateQuestion'], noticeOfSuccess: 'successfully generated ai question' },
+    { loadingComponent: ['QuestionPage', 'GenerateQuestion'], noticeOfSuccess: 'successfully generated ai question' },
   );
 }

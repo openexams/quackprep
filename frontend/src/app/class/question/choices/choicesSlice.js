@@ -84,7 +84,7 @@ export default function choicesReducer(state = DEFAULT_STATE, action) {
     case GEN_AI_Q_AND_C_RES: {
       /**@type {import("../../../../../../types.ts").GenQuestion} */
       const generatedQuestionObj = action.payload;
-      return { ...state, choices: updateArrObjectsWithNewVals(state.questions, generatedQuestionObj.options) }; // shouldnt have to counting sort them because they are new
+      return { ...state, choices: updateArrObjectsWithNewVals(state.choices, generatedQuestionObj.choices) }; // shouldnt have to counting sort them because they are new
     }
     default:
       return state;

@@ -1,5 +1,4 @@
 import { openai } from "#config/config.js";
-import "#utils/utils.js";
 import {
   getWhatGroupsQuestionisIn,
   setDeletedQuestionAndCascadeChoices,
@@ -19,6 +18,7 @@ export async function generateQuestionLike(
   likeQuestionId
 ) {
   let question_added = null;
+  dlog(`ai generating like q_id: ${likeQuestionId}`);
   // find the assistant I created
   try {
     const quackAssist = await openai.beta.assistants.retrieve(

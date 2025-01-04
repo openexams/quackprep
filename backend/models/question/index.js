@@ -45,7 +45,7 @@ export async function selectQuestion(WHERE, params) {
     q.ai,
     group_concat(g.id SEPARATOR ',') AS group_id,
     group_concat(gt.type_name SEPARATOR ',') as type_name,
-    group_concat(g.name SEPARATOR ',') as name,
+    group_concat(g.name SEPARATOR ',') as group_name,
     cl.id AS class_id,
     cl.school_id,
     cl.category AS class_category,q.explanation_url

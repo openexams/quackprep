@@ -45,7 +45,7 @@ export function standardApiCall(method, route, data = null, resultAction, option
       }
       if (Array.isArray(resultAction)) {
         for (let i = 0; i < resultAction.length; i++) {
-          dispatch({ type: resultAction, payload: result.data });
+          dispatch({ type: resultAction[i], payload: result.data });
         }
       } else if (resultAction) dispatch({ type: resultAction, payload: result.data });
 
