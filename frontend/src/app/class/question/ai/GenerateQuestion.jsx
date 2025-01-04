@@ -52,7 +52,8 @@ export default function GenerateQuestion() {
               />
               <Segment basic loading={loading}>
                 Click "Generate" to create a new question similar to the one you just answered. This will help improve your
-                learning experience!
+                learning experience! (It takes about <strong>10 seconds</strong> to generate a question){' '}
+                {/*  could have it count down or smth would be cool or let user know somehow, would have to turn off auto close too though*/}
               </Segment>
             </Modal.Content>
             <Modal.Actions>
