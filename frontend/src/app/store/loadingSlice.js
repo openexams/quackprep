@@ -34,7 +34,6 @@ function loadComps(state, toLoad, bool) {
 export default function loadingReducer(state = DEFAULT_STATE, action) {
   switch (action.type) {
     case LOADING_START: {
-      console.log('loading', action.payload);
       return loadComps(state, action.payload, true);
     }
     case LOADING_STOP: {
