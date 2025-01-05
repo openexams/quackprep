@@ -9,6 +9,7 @@ import {
   getChoicesByGroupId,
   addManyChoicesToQuestion,
   getChoicesByUserId,
+  getTotalSubmissions,
 } from "#models/choice/index.js";
 import { cascadeSetDeleted } from "#utils/sqlFunctions.js";
 import { commonErrorMessage } from "#utils/utils.js";
@@ -184,6 +185,15 @@ router.post("/answer/:choice_id", async function (req, res) {
     res.status(201).json(result);
   } catch (error) {
     commonErrorMessage(res, 500, "failed to post answer", error);
+  }
+});
+
+router.get("/answer/total", async function (req, res) {
+  try {
+    const result = await getTotalSubmissions();
+    res.status(201).json(result);
+  } catch (error) {
+    commonErrorMessage(res, 500, "failed to getTotalSubmissions", error);
   }
 });
 

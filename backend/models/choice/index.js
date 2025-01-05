@@ -22,10 +22,10 @@ export async function getQuestionsAnsweredByMonthAndYear() {
   return await sqlExe.executeCommand(
     `SELECT YEAR(a.created_at) as year ,MONTH(a.created_at) as month ,COUNT(*) as 
     questions_answered FROM answers_transactional a
-     JOIN choices c ON a.choice_id = c.id AND c.deleted = 0
+     JOIN choices c ON a.choice_id = c.id
      GROUP BY YEAR(a.created_at),MONTH(a.created_at)
      ORDER BY YEAR ASC, MONTH ASC`
-  );
+  ); // gets choice submissions of choices that are deleted too
 }
 
 //CRUD
@@ -190,4 +190,11 @@ export async function addManyChoicesToQuestion(question_id, user_id, choices) {
       result.insertId + result.affectedRows - 1
     }`
   );
+}
+
+export async function getTotalSubmissions() {
+  return (
+    await sqlExe.executeCommand(`SELECT count(*) as count from answers_transactional at
+`)
+  )?.[0]?.count;
 }

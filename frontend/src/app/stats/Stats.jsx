@@ -1,5 +1,5 @@
 import './stats.css';
-import React, { useEffect, useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Container, Header, Grid, Segment, Icon, Card, Statistic } from 'semantic-ui-react';
 import { Line } from 'react-chartjs-2';
@@ -62,6 +62,14 @@ export default function StatsPage() {
   const { questionsAnsweredByMonthAndYear, tts } = useSelector(selectStatsState).stats;
   const dispatch = useDispatch();
 
+  function getTotalSubmissons() {
+    let total_subs = 0;
+    for (let i = 0; i < questionsAnsweredByMonthAndYear?.length; i++) {
+      total_subs += questionsAnsweredByMonthAndYear[i].questions_answered;
+    }
+    return total_subs;
+  }
+
   useEffect(() => {
     if (!questionsAnsweredByMonthAndYear) {
       dispatch(getQuestionsAnsweredByMonthAndYear());
@@ -69,6 +77,9 @@ export default function StatsPage() {
     if (!tts) {
       dispatch(getTotalTimeSpent());
     }
+    // if (!total_subs) {
+    //   dispatch(getTotalSubmissons());
+    // }
   }, []);
 
   const mappedQuestions = useMemo(() => mapQuestionsByMAndY(questionsAnsweredByMonthAndYear), [questionsAnsweredByMonthAndYear]);
@@ -113,6 +124,8 @@ export default function StatsPage() {
 
       <Segment basic loading={loading}>
         <Statistic color='blue' value={`${Math.round(tts / 60)} H`} label={'Total Time Spent Studying'} />
+        <Statistic color='yellow' value={getTotalSubmissons()} label={'Total Question Submissions'} />
+
         <Grid columns={1} stackable>
           <Grid.Row>
             <Grid.Column>

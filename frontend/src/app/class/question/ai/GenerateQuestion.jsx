@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { List, Icon, Modal, Button, Label, Segment, Dropdown } from 'semantic-ui-react';
 import { generateQuestionLike } from './aiQuestionSlice';
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,11 +10,12 @@ import { selectArrayOfStateByGroupId } from '@utils/helperFuncs';
 
 export default function GenerateQuestion() {
   const { groupId } = useSelector(selectNavbarState).navbar;
+  const questions = useSelector(selectArrayOfStateByGroupId('app.question.questions', groupId));
+  const loading = useSelector(selectLoadingState).loadingComps?.GenerateQuestion;
+  const user = useSelector(selectUser).user;
+
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
-  const user = useSelector(selectUser).user;
-  const loading = useSelector(selectLoadingState).loadingComps?.GenerateQuestion;
-  const questions = useSelector(selectArrayOfStateByGroupId('app.question.questions', groupId));
 
   const [dropdownQuestion, setDropdownQuestion] = useState(null);
 
