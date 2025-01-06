@@ -58,11 +58,10 @@ export default function questionsReducer(state = DEFAULT_STATE, action) {
     case DELETE_CRUD_QUESTION:
       return { ...state, questions: filterArr(state.questions, action.payload) };
     case UPSERT_CRUD_QUESTION:
-      return { ...state, questions: upsertArray(state.questions, action.payload) };
+      return { ...state, questions: upsertArray(state.questions, action.payload?.[0]) };
     case GEN_AI_QUESTION_RES: {
       /**@type {import("../../../../../types.ts").GenQuestion} */
       const generatedQuestionObj = action.payload;
-      console.log(generatedQuestionObj);
       return { ...state, questions: updateArrObjectsWithNewVals(state.questions, generatedQuestionObj.question) };
     }
     default:

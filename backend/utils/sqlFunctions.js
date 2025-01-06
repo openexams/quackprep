@@ -47,7 +47,7 @@ export async function cascadeSetDeleted( // todo learn more about how the join w
   } else if (toDel === "question") {
     where = `q.id = ${id}`;
   } else if (toDel === "choice") {
-    where = `c.id = ${id}`;
+    where = `ch.id = ${id}`;
   } else {
     dlog("toDel passed in must be valid");
     throw new Error("toDel passed in must be valid");

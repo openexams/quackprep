@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import MultipleChoice from './types/MultipleChoice/MultipleChoice';
-import { selectArrayOfStateById } from 'maddox-js-funcs';
+import { selectBINARYArrayOfStateById } from 'maddox-js-funcs';
 import { Segment, Header, Divider, Label, Popup } from 'semantic-ui-react';
 import MarkdownRenderer from '@components/MarkdownRenderer';
 import { selectLoadingState } from '@src/app/store/loadingSlice';
@@ -8,7 +8,7 @@ import FreeResponse from './types/FreeResponse';
 import NoItemsFound from '@components/NoItemsFound';
 
 export default function ChoiceRouter({ selectedQuestion }) {
-  const choices = useSelector(selectArrayOfStateById('app.choices.choices', 'question_id', selectedQuestion?.id));
+  const choices = useSelector(selectBINARYArrayOfStateById('app.choices.choices', 'question_id', selectedQuestion?.id));
   const loading = useSelector(selectLoadingState).loadingComps?.ChoiceRouter; // todo fix
 
   // maybe check if choices are all the same what if one choice was mcq and other was select (should not be possible)
