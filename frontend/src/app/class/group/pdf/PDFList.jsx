@@ -36,7 +36,11 @@ export default function PDFList() {
                 fluid
                 compact
                 onClick={() => {
-                  dispatch(changeNavbarPage(navigate, pdf.id));
+                  if (pdf?.id) {
+                    dispatch(changeNavbarPage(navigate, pdf.id));
+                  } else {
+                    console.log('fatal error');
+                  }
                 }}
                 icon
                 labelPosition='left'

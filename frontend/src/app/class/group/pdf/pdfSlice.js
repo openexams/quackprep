@@ -33,6 +33,7 @@ const DEFAULT_STATE = {
 export default function pdfsReducer(state = DEFAULT_STATE, action) {
   switch (action.type) {
     case GET_CRUD_PDFS:
+      console.log('got', action.payload);
       return {
         ...state,
         pdfs: countingSort(updateArrObjectsWithNewVals(state.pdfs, action.payload), 'class_id'),

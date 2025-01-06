@@ -9,7 +9,7 @@ export function signOut() {
 }
 
 export function login(email, password) {
-  return standardApiCall('post', '/api/auth/login', { email, password }, LOGIN, { loadingComponent: 'Login' });
+  return standardApiCall('post', '/api/auth/login', { email, password }, LOGIN, { loadingComponent: ['AuthPopup', 'Login'] });
 }
 
 const DEFAULT_STATE = {
