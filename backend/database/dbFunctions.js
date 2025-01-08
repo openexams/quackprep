@@ -20,9 +20,9 @@ export default class sqlExe {
    * @returns {Array<Object>} returns an array of objects from your sql query
    * @throws {Error} throws a sql error, make sure to use try & catch
    */
-  static async executeCommand(sqlCommand, params, options) {
+  static async executeCommand(sqlCommand, params = null, options = null) {
     dlog("params sent:", params);
-    dlog("sql command:", sqlCommand.slice(0, 10) + "...");
+    dlog("sql command:", sqlCommand.slice(0, 10));
     try {
       // this should only run if editing, not if creating
       if (

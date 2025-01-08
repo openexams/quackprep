@@ -60,7 +60,7 @@ export function standardApiCall(method, route, data = null, resultAction, option
       console.error(error);
       dispatch(stopLoading(options?.loadingComponent));
       console.error('Failed req to ', error?.request?.responseURL);
-      if (error?.response?.data?.message?.includes('401')) {
+      if (error?.response?.status === 401) {
         dispatch(signOut());
         dispatch(hideFlashMessage());
         dispatch(show401Msg());
