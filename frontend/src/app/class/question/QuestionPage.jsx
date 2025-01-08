@@ -9,6 +9,8 @@ import { useNavigate } from 'react-router-dom';
 import ChatbotWidget from '@src/app/chatbot/ChatbotWidget';
 import QuestionReport from './qreport/QuestionReport';
 import { selectArrayOfStateByGroupId } from '@utils/helperFuncs';
+import { selectItemById } from 'maddox-js-funcs';
+import NoItemsFound from '@components/NoItemsFound';
 
 /**
  *
@@ -64,6 +66,7 @@ export default function QuestionPage() {
         <Header>Loading</Header>
       </Segment>
     );
+
   return (
     <Segment basic loading={loadingComps.QuestionPage}>
       <Header style={{ fontSize: '2.5rem' }} textAlign='center'>
@@ -88,7 +91,11 @@ export default function QuestionPage() {
               </Segment>
             ) : (
               <Segment>
-                <Header as='h3'>Please select a question from the list.</Header>
+                {selectItemById(questions, 'id', questionId) ? ( // if question is selected and I cant find it then it dne
+                  <Header as='h3'>Please select a question from the list.</Header>
+                ) : (
+                  <NoItemsFound title={'Question'} />
+                )}
               </Segment>
             )}
           </Grid.Column>

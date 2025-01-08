@@ -46,6 +46,7 @@ export default function Navbar() {
   const schools = useSelector(selectSchoolState).schools;
   const loading = useSelector(selectLoadingState)?.loadingComps;
   const State401 = useSelector(select401CompState).show;
+  const pathArray = activePage?.split('/');
 
   // spaces in stuff is a issue!!
   const { className, classId, groupName, groupId, questionId, schoolName, groupType, schoolId } =
@@ -61,11 +62,8 @@ export default function Navbar() {
   ///  USE EFFECTS FOR KEEPING STORE SAME AS URL ///
   useEffect(() => {
     if (activePage?.includes('class') && !activePage?.includes('/auth?next') && !State401) {
-      if (activePage?.includes('exam') && className && classId) {
-        dispatch(updateGroupType('exam'));
-      }
-      if (activePage?.includes('topic') && className && classId) {
-        dispatch(updateGroupType('topic'));
+      if (pathArray?.[4] && className && classId) {
+        dispatch(updateGroupType(pathArray[4]));
       }
       if (!loading?.SchoolsList) {
         schoolUpdateLogic(dispatch, schools, schoolName);
@@ -74,40 +72,42 @@ export default function Navbar() {
         classFetchLogic(dispatch, classes, schoolId);
         classUpdateLogic(dispatch, classes, className, schoolId);
       }
-      if (!loading?.PDFlist && classId) {
+      if (pathArray?.[4] === 'pdfexams' && !loading?.PDFList && classId) {
         pdfsFetchLogic(dispatch, classId);
       }
 
-      if (activePage?.includes('exam') && !loading?.ExamList && className && classId) {
+      if (pathArray?.[4] === 'exam' && !loading?.ExamList && className && classId) {
         examUpdateLogic(dispatch, groupName, classId, exams);
         examFetchLogic(dispatch, classId);
       }
-      if (activePage?.includes('topic') && !loading?.TopicsShow && className && classId) {
+      if (pathArray?.[4] === 'topic' && !loading?.TopicsShow && className && classId) {
         topicUpdateLogic(dispatch, groupName, classId, topics);
         topicFetchLogic(dispatch, classId);
       }
       if (
-        (activePage?.includes('exam') || activePage?.includes('topic')) &&
-        activePage?.includes('question') &&
-        !loading?.QuestionPage &&
-        className &&
-        classId &&
-        groupId &&
-        groupName &&
-        groupType
+        pathArray?.[4] === 'exam' ||
+        (pathArray?.[4] === 'topic' &&
+          pathArray?.[6] === 'question' &&
+          !loading?.QuestionPage &&
+          className &&
+          classId &&
+          groupId &&
+          groupName &&
+          groupType)
       ) {
         questionUpdateLogic(dispatch, questionId);
         questionFetchLogic(dispatch, groupId);
       }
       if (
-        (activePage?.includes('exam') || activePage?.includes('topic')) &&
-        activePage?.includes('question') &&
-        !loading?.ChoiceRouter &&
-        className &&
-        classId &&
-        groupId &&
-        groupName &&
-        groupType
+        pathArray?.[4] === 'exam' ||
+        (pathArray?.[4] === 'topic' &&
+          pathArray?.[6] === 'question' &&
+          !loading?.ChoiceRouter &&
+          className &&
+          classId &&
+          groupId &&
+          groupName &&
+          groupType)
       ) {
         choicesFetchLogic(dispatch, groupId);
       }
@@ -131,6 +131,7 @@ export default function Navbar() {
     loading?.TopicsShow,
     loading?.QuestionPage,
     loading?.ChoiceRouter,
+    loading?.PdfList,
   ]);
 
   useEffect(() => {
