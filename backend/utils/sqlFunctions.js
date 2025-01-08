@@ -1,4 +1,4 @@
-import sqlExe from "#db/dbFunctions.js";
+import sqlExe from "#db/dbFunctions";
 
 export function getLastRowManipulated(tableName, rowId = null) {
   if (rowId) {

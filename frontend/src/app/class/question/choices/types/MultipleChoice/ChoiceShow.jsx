@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { List, Button, Transition, Icon, Progress } from 'semantic-ui-react';
+import { useEffect, useState } from 'react';
+import { List, Button, Icon, Progress } from 'semantic-ui-react';
 import './AnswerButton.css';
 import MarkdownRenderer from '@components/MarkdownRenderer';
 import { useDispatch, useSelector } from 'react-redux';
-import { postAnswer, upsertCurrentChoice } from '../../choicesSlice';
+import { upsertCurrentChoiceAndPostAnswer } from '../../choicesSlice';
 import { selectUser } from '@src/app/auth/authSlice';
 
 export default function ChoiceShow({
@@ -37,10 +37,7 @@ export default function ChoiceShow({
   const handleAnswerClick = () => {
     if (!showAnswers) {
       setShowAnswers(true);
-      if (user?.id) {
-        dispatch(upsertCurrentChoice(id, selectedQuestionId));
-      }
-      dispatch(postAnswer(id));
+      dispatch(upsertCurrentChoiceAndPostAnswer(id, selectedQuestionId, null));
     }
   };
 

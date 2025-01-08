@@ -1,12 +1,25 @@
-import sqlExe from "#db/dbFunctions.js";
+import sqlExe from "#db/dbFunctions";
 import { verifyUserOwnsRowId } from "#utils/sqlFunctions.js";
+import { upsertCurrentChoice } from "./current/index";
+import { ResultSetHeader } from "mysql2";
 
-export async function postChoice(user_id, choice_id) {
-  const params = { choice_id, user_id };
-  return await sqlExe.executeCommand(
-    `INSERT INTO answers_transactional (choice_id, user_id) VALUES(:choice_id,:user_id)`,
+export async function postChoice(
+  user_id: number,
+  choice_id: number,
+  question_id: number,
+  text: string
+) {
+  const params = { choice_id, user_id, text };
+  const result = (await sqlExe.executeCommand(
+    `INSERT INTO answers_transactional (choice_id, user_id, text) VALUES(:choice_id,:user_id, :text)`,
     params
-  ); // maybe get last inserted id so i can see it worked? Naaaa....
+  )) as ResultSetHeader;
+  const insertId = result.insertId;
+  if (user_id) {
+    return await upsertCurrentChoice(user_id, choice_id, question_id, insertId);
+  } else {
+    return { message: "Success" };
+  }
 }
 
 export async function getWhichUsersAnsweredMostQuestions() {

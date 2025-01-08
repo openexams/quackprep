@@ -21,23 +21,20 @@ export function removeStateCurrentChoices() {
   return { type: GET_CURRENT_CHOICES, payload: null };
 }
 
-export function upsertCurrentChoice(choice_id, question_id) {
-  return standardApiCall('post', `/api/choice/current/`, { choice_id, question_id }, UPSERT_CURRENT_CHOICE);
+// adds to answers_transactional and current
+export function upsertCurrentChoiceAndPostAnswer(choice_id: number, question_id: number, text = null) {
+  return standardApiCall('post', `/api/choice/answer/`, { choice_id, question_id, text }, UPSERT_CURRENT_CHOICE);
 }
 
-export function postFavoriteAnswer(choice_id) {
+export function postFavoriteAnswer(choice_id: number) {
   return standardApiCall('post', `/api/choice/favorite/${choice_id}`, {}, POST_FAVORITE_ANSWER);
 }
 
-export function postAnswer(choice_id) {
-  return standardApiCall('post', `/api/choice/answer/${choice_id}`, {}, null);
-}
-
-export function getChoicesByQuestion(question_id) {
+export function getChoicesByQuestion(question_id: number) {
   return standardApiCall('get', `/api/choice/${question_id}`, null, GET_CRUD_CHOICES, { loadingComponent: 'ChoiceRouter' });
 }
 
-export function getChoicesByGroup(group_id) {
+export function getChoicesByGroup(group_id: number) {
   return standardApiCall('get', `/api/choice/group/${group_id}`, null, GET_CRUD_CHOICES, { loadingComponent: 'ChoiceRouter' }); //yes I know its same does not matter
 }
 
@@ -45,14 +42,14 @@ export function getChoicesByUserId() {
   return standardApiCall('get', `/api/choice/user`, null, GET_CRUD_CHOICES, { loadingComponent: 'Create' }); //yes I know its same does not matter
 }
 
-export function upsertChoice(text, question_id, isCorrect, type, id = null) {
+export function upsertChoice(text: string, question_id: number, isCorrect: number, type: string, id = null) {
   return standardApiCall('post', `/api/choice/${question_id}`, { text, isCorrect, type, id }, UPSERT_CRUD_CHOICE, {
     loadingComponent: 'Create',
     noticeOfSuccess: 'successfully created choice!',
   });
 }
 
-export function deleteChoiceById(id) {
+export function deleteChoiceById(id: number) {
   return standardApiCall('delete', `/api/choice/${id}`, null, DELETE_CRUD_CHOICE, {
     loadingComponent: 'Create',
     noticeOfSuccess: 'successfully deleted choice!',

@@ -37,7 +37,7 @@ export default function GenerateQuestion() {
           <LoginRequired title={'Generative AI'} />
         ) : (
           <>
-            <Modal.Header>Generate a Similar Question</Modal.Header>
+            <Modal.Header>Generate a Similar MC Question</Modal.Header>
             <Modal.Content>
               <Dropdown
                 loading={loading}

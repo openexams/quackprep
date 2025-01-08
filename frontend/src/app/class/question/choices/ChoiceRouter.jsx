@@ -17,7 +17,7 @@ export default function ChoiceRouter({ selectedQuestion }) {
     if (choices?.[0]?.type === 'mcq') {
       component = <MultipleChoice choices={choices} selectedQuestion={selectedQuestion} />;
     } else if (choices?.[0]?.type === 'free') {
-      component = <FreeResponse choice={choices?.[0]} />;
+      component = <FreeResponse choice={choices?.[0]} selectedQuestion={selectedQuestion} />; // if there are multiple then we are fucked chat THERE CANNOT BE MULTIPLE
     } else if (choices?.[0]?.type === 'select') {
       <div>not out yet how this possible</div>;
     } else {

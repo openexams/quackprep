@@ -12,7 +12,7 @@ import dotenv from "dotenv";
 
 import bodyParser from "body-parser";
 import { REDIS_CONFIG, SESSION_CONFIG } from "./config/config.js";
-import sqlExe from "#db/dbFunctions.js";
+import sqlExe from "#db/dbFunctions";
 import path, { dirname } from "path";
 import { fileURLToPath } from "url";
 
