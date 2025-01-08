@@ -1,4 +1,4 @@
-import sqlExe from "#db/dbFunctions.js";
+import sqlExe from "#db/dbFunctions";
 import { verifyUserOwnsRowId } from "#utils/sqlFunctions.js";
 
 export async function getClassCategories() {

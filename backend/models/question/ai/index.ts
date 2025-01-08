@@ -5,7 +5,7 @@ import {
   upsertQuestion,
 } from "../index.js";
 import { addManyChoicesToQuestion } from "#models/choice/index.js";
-import sqlExe from "#db/dbFunctions.js";
+import sqlExe from "#db/dbFunctions";
 import { GenQuestion } from "../../../../shared-types/question-types";
 /**
  *

@@ -19,6 +19,26 @@ const router = Router();
 
 router.use("/current", currentRouter);
 
+// answers transactional
+router.post("/answer/", async function (req, res) {
+  const data = req.body;
+  if (!data.question_id || !data.choice_id) {
+    commonErrorMessage(res, 400, "please include a choice & question");
+    return;
+  }
+  try {
+    const result = await postChoice(
+      req.user || null,
+      data.choice_id,
+      data.question_id,
+      data?.text
+    );
+    res.status(201).json(result);
+  } catch (error) {
+    commonErrorMessage(res, 500, "failed to post answer", error);
+  }
+});
+
 router.get("/top", async function (req, res) {
   try {
     const result = await getWhichUsersAnsweredMostQuestions();
@@ -177,16 +197,6 @@ router.delete(
     }
   }
 );
-
-// answers transactional
-router.post("/answer/:choice_id", async function (req, res) {
-  try {
-    const result = await postChoice(req.user || null, req.params.choice_id);
-    res.status(201).json(result);
-  } catch (error) {
-    commonErrorMessage(res, 500, "failed to post answer", error);
-  }
-});
 
 router.get("/answer/total", async function (req, res) {
   try {
