@@ -1,6 +1,7 @@
 import { standardApiCall } from '@utils/api';
 import { filterArr, upsertArray, countingSort, selectItemById, updateArrObjectsWithNewVals } from 'maddox-js-funcs';
 import { GEN_AI_Q_AND_C_RES } from '../ai/aiQuestionSlice.js';
+import { Choice } from '../../../../../../shared-types/choice.types';
 
 const GET_CRUD_CHOICES = 'app/class/question/choices/GET_CRUD_CHOICES';
 
@@ -82,9 +83,8 @@ export default function choicesReducer(state = DEFAULT_STATE, action) {
     case UPSERT_CURRENT_CHOICE:
       return { ...state, currentChoices: upsertArray(state.currentChoices, action.payload) };
     case GEN_AI_Q_AND_C_RES: {
-      /**@type {import("../../../../../../types.ts").GenQuestion} */
-      const generatedQuestionObj = action.payload;
-      return { ...state, choices: updateArrObjectsWithNewVals(state.choices, generatedQuestionObj.choices) }; // shouldnt have to counting sort them because they are new
+      const generatedChoices: Choice[] = action.payload?.choices;
+      return { ...state, choices: updateArrObjectsWithNewVals(state.choices, generatedChoices) }; // shouldnt have to counting sort them because they are new
     }
     default:
       return state;

@@ -1,24 +1,24 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 
-import loadingReducer from './loadingSlice.js';
+import loadingReducer from './loadingSlice';
 
-import flashReducer from '@components/flashmessage/flashMessageSlice.js';
-import homeReducer from '../home/homeSlice.js';
-import loginReducer from '../auth/login/loginSlice.js';
-import navbarReducer from '@components/navbar/navbarSlice.js';
-import streakReducer from '../streak/streakSlice.js';
-import classReducer from '@src/app/class/classSlice.js';
-import topicReducer from '../class/group/topic/topicSlice.js';
-import questionsReducer from '../class/question/questionSlice.js';
-import leadboardReducer from '../leaderboard/leaderboardSlice.js';
-import choicesReducer from '../class/question/choices/choicesSlice.js';
-import statsReducer from '../stats/statsSlice.js';
-import examSliceReducer from '../class/group/exam/examSlice.js';
-import reducer401 from '@components/401/401Slice.js';
-import schoolsReducer from '../class/school/schoolSlice.js';
-import classCategoriesReducer from '../class/class_categories/classCategorySlice.js';
-import pdfsReducer from '../class/group/pdf/pdfSlice.js';
-import favoriteReducer from '../favorite/favoriteSlice.js';
+import flashReducer from '@components/flashmessage/flashMessageSlice';
+import homeReducer from '../home/homeSlice';
+import loginReducer from '../auth/login/loginSlice';
+import navbarReducer from '@components/navbar/navbarSlice';
+import streakReducer from '../streak/streakSlice';
+import classReducer from '@src/app/class/classSlice';
+import topicReducer from '../class/group/topic/topicSlice';
+import questionsReducer from '../class/question/questionSlice';
+import leadboardReducer from '../leaderboard/leaderboardSlice';
+import choicesReducer from '../class/question/choices/choicesSlice';
+import statsReducer from '../stats/statsSlice';
+import examSliceReducer from '../class/group/exam/examSlice';
+import reducer401 from '@components/401/401Slice';
+import schoolsReducer from '../class/school/schoolSlice';
+import classCategoriesReducer from '../class/class_categories/classCategorySlice';
+import pdfsReducer from '../class/group/pdf/pdfSlice';
+import favoriteReducer from '../favorite/favoriteSlice';
 
 const app = combineReducers({
   home: homeReducer,

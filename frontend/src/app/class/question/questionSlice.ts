@@ -1,6 +1,7 @@
 import { standardApiCall } from '@utils/api';
 import { updateArrObjectsWithNewVals, upsertArray, filterArr } from 'maddox-js-funcs';
 import { GEN_AI_QUESTION_RES } from './ai/aiQuestionSlice';
+import { GenQuestion } from '../../../../../shared-types/question.types';
 
 const GET_CRUD_QUESTIONS = 'app/class/question/GET_CRUD_QUESTIONS';
 const UPSERT_CRUD_QUESTION = 'app/class/question/UPSERT_CRUD_QUESTION';
@@ -61,7 +62,7 @@ export default function questionsReducer(state = DEFAULT_STATE, action) {
       return { ...state, questions: upsertArray(state.questions, action.payload?.[0]) };
     case GEN_AI_QUESTION_RES: {
       /**@type {import("../../../../../types.ts").GenQuestion} */
-      const generatedQuestionObj = action.payload;
+      const generatedQuestionObj: GenQuestion = action.payload;
       return { ...state, questions: updateArrObjectsWithNewVals(state.questions, generatedQuestionObj.question) };
     }
     default:

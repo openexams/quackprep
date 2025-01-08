@@ -6,6 +6,7 @@ import {
 } from "../index.js";
 import { addManyChoicesToQuestion } from "#models/choice/index.js";
 import sqlExe from "#db/dbFunctions.js";
+import { GenQuestion } from "../../../../shared-types/question-types";
 /**
  *
  * @param {Integer} user_id add which user ai generated the question (does not rlly matter)
@@ -14,9 +15,9 @@ import sqlExe from "#db/dbFunctions.js";
  * @returns {Object} question object back to the user who generated it
  */
 export async function generateQuestionLike(
-  user_id,
-  likeQuestionText,
-  likeQuestionId
+  user_id: number,
+  likeQuestionText: string,
+  likeQuestionId: number
 ) {
   let question_added = null;
   dlog(`ai generating like q_id: ${likeQuestionId}`);
@@ -60,8 +61,7 @@ export async function generateQuestionLike(
     // get message from AI when completed.
     const allMessages = await openai.beta.threads.messages.list(quackThread.id);
     const quackAssistResponse = allMessages?.data[0]?.content;
-    /**@type {import("../../../../types.ts").GenQuestion} */
-    let quackAssistResponseJSON = JSON.parse(
+    let quackAssistResponseJSON: GenQuestion = JSON.parse(
       quackAssistResponse?.[0]?.text?.value
     );
     // needed for sql db

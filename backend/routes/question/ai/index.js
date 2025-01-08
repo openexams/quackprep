@@ -1,7 +1,7 @@
 import express from "express";
 import { isAuthenticated } from "#middleware/authMiddleware.js";
 import { commonErrorMessage } from "#utils/utils.js";
-import { generateQuestionLike } from "#models/question/ai/index.js";
+import { generateQuestionLike } from "#models/question/ai/index.ts";
 
 const router = express.Router();
 
