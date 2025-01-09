@@ -88,7 +88,7 @@ export default function choicesReducer(state = DEFAULT_STATE, action) {
   }
 }
 
-export const selectChoicesState = (state) => {
+export const selectChoicesState = (state: any) => {
   return { choices: state.app.choices.choices };
 };
 
