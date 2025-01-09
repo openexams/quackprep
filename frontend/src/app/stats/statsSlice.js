@@ -12,7 +12,7 @@ export function getQuestionsAnsweredByMonthAndYear() {
 }
 
 export function getMyStats() {
-  return standardApiCall('get', '/api/account/stats', null, GET_MY_STATS, { loadingComponent: 'Stats' });
+  return standardApiCall('get', '/api/account/stats', null, GET_MY_STATS, { loadingComponent: 'MyStats' });
 }
 
 export function getTotalTimeSpent() {

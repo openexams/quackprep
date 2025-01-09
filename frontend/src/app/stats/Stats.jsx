@@ -58,7 +58,7 @@ const ChartCard = ({ title, children }) => (
 );
 
 export default function StatsPage() {
-  const loading = useSelector(selectLoadingState).loadingComps.Stats;
+  const loading = useSelector(selectLoadingState).loadingComps?.Stats;
   const { questionsAnsweredByMonthAndYear, tts } = useSelector(selectStatsState).stats;
   const dispatch = useDispatch();
 
