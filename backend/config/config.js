@@ -39,7 +39,7 @@ export const SESSION_CONFIG = {
     domain: process.env.NODE_ENV === "prod" ? "quackprep.com" : "",
     httpOnly: process.env.NODE_ENV === "prod" ? true : false,
     secure: process.env.NODE_ENV !== "local",
-    sameSite: true, // add redis here later
+    sameSite: true,
   },
 };
 
