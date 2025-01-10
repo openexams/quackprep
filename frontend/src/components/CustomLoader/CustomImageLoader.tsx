@@ -4,7 +4,7 @@ import './CustomImageLoader.css';
 
 export function CustomImageLoader({ active, content, imageUrl, children }) {
   return (
-    <Segment style={{ height: '100vh', backgroundColor: '#f4f4f4', position: 'relative' }}>
+    <div style={{ height: '100vh', position: 'relative' }}>
       {children}
       {active && (
         <Dimmer active inverted>
@@ -29,6 +29,6 @@ export function CustomImageLoader({ active, content, imageUrl, children }) {
           </div>
         </Dimmer>
       )}
-    </Segment>
+    </div>
   );
 }
