@@ -6,12 +6,15 @@
     // },
     "target": "ES2021",
     "module": "ESNext",
-    "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "noEmit": true,
     "moduleResolution": "Node",
     "allowJs": true,
-    "checkJs": true
+    "checkJs": true,
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true
   }
 }
