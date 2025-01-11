@@ -8,7 +8,7 @@ import GenerateQuestion from './ai/GenerateQuestion';
 
 /**
  * @param {Object} props
- * @param {Array} props.questions
+ * @param {any[]} props.questions
  * @param {Object} props.selectedQuestion
  */
 export default function QuestionList({ questions, selectedQuestion }) {

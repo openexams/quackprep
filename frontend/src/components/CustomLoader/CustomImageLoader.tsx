@@ -4,7 +4,7 @@ import './CustomImageLoader.css';
 
 export function CustomImageLoader({ active, content, imageUrl, children }) {
   return (
-    <div style={{ height: '100vh', position: 'relative' }}>
+    <div style={{ position: 'relative' }}>
       {children}
       {active && (
         <Dimmer active inverted>
@@ -16,16 +16,10 @@ export function CustomImageLoader({ active, content, imageUrl, children }) {
               style={{
                 width: '150px',
                 height: '150px',
-                animation: 'spin 2  s linear infinite',
+                animation: 'spin 2s linear infinite',
               }}
             />
-            <Loader
-              size='small'
-              content={content || 'Loading...'}
-              style={{
-                marginTop: '20px',
-              }}
-            />
+            <Loader size='small' content={content || 'Loading...'} />
           </div>
         </Dimmer>
       )}

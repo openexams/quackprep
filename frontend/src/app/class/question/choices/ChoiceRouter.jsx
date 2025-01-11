@@ -4,7 +4,7 @@ import { selectBINARYArrayOfStateById } from 'maddox-js-funcs';
 import { Segment, Header, Divider, Label, Popup } from 'semantic-ui-react';
 import MarkdownRenderer from '@components/MarkdownRenderer';
 import { selectLoadingState } from '@src/app/store/loadingSlice';
-import FreeResponse from './types/FreeResponse';
+import FreeResponse from './types/frq/FreeResponse';
 import NoItemsFound from '@components/NoItemsFound';
 
 export default function ChoiceRouter({ selectedQuestion }) {

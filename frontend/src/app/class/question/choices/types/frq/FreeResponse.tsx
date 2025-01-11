@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Button, TextArea, Segment, Form, Message, Header, Icon } from 'semantic-ui-react';
-import { upsertCurrentChoiceAndPostAnswer } from '../choicesSlice';
+import { Button, TextArea, Segment, Form, Header, Icon } from 'semantic-ui-react';
+import { upsertCurrentChoiceAndPostAnswer } from '../../choicesSlice';
+import FRQAnswer from './FRQAnswer';
 
 export default function FreeResponse({ choice, selectedQuestion }) {
   const dispatch = useDispatch();
@@ -49,21 +50,7 @@ export default function FreeResponse({ choice, selectedQuestion }) {
         </Button>
       </Form>
 
-      {submitted && (
-        <Message positive style={{ marginTop: '2rem', textAlign: 'center', borderRadius: '10px' }}>
-          <Message.Header>Your Answer:</Message.Header>
-          <p
-            style={{
-              wordWrap: 'break-word',
-              overflowWrap: 'break-word',
-            }}
-          >
-            {text || '(No answer provided)'}
-          </p>
-          <Message.Header style={{ marginTop: '1rem' }}>Correct Answer:</Message.Header>
-          <p style={{ color: '#21ba45', fontWeight: 'bold' }}>{choice.answer}</p>
-        </Message>
-      )}
+      {submitted && <FRQAnswer text={text} selectedQuestion={selectedQuestion} choice={choice} />}
     </Segment>
   );
 }

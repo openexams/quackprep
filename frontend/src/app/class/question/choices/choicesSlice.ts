@@ -23,7 +23,9 @@ export function removeStateCurrentChoices() {
 
 // adds to answers_transactional and current
 export function upsertCurrentChoiceAndPostAnswer(choice_id: number, question_id: number, text = null) {
-  return standardApiCall('post', `/api/choice/answer/`, { choice_id, question_id, text }, UPSERT_CURRENT_CHOICE);
+  return standardApiCall('post', `/api/choice/answer/`, { choice_id, question_id, text }, UPSERT_CURRENT_CHOICE, {
+    loadingComponent: ['AiGrade'],
+  });
 }
 
 export function postFavoriteAnswer(choice_id: number) {
@@ -54,6 +56,26 @@ export function deleteChoiceById(id: number) {
     loadingComponent: 'Create',
     noticeOfSuccess: 'successfully deleted choice!',
   });
+}
+
+export function checkStudentFRQAnswer(
+  trans_id: number,
+  question_text: string,
+  student_answer_text: string,
+  correct_answer_text: string | null,
+) {
+  return standardApiCall(
+    'post',
+    '/api/choice/ai/gradeai/',
+    {
+      trans_id,
+      question_text,
+      student_answer_text,
+      correct_answer_text,
+    },
+    UPSERT_CURRENT_CHOICE, // it upserts a current choice so use same thing!
+    { loadingComponent: ['AiGrade'], noticeOfSuccess: 'successfully ai graded answer' },
+  );
 }
 
 const DEFAULT_STATE = {

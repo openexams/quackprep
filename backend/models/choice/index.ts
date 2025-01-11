@@ -11,22 +11,22 @@ export async function postChoice(
 ) {
   const params = { choice_id, user_id, text };
   const result = (await sqlExe.executeCommand(
-    `INSERT INTO answers_transactional (choice_id, user_id, text) VALUES(:choice_id,:user_id, :text)`,
+    `INSERT INTO answers_transactional (choice_id, created_by, text) VALUES(:choice_id,:user_id, :text)`,
     params
   )) as ResultSetHeader;
   const insertId = result.insertId;
   if (user_id) {
     return await upsertCurrentChoice(user_id, choice_id, question_id, insertId);
   } else {
-    return { message: "Success" };
+    return { message: "Success, however user is NOT signed in" };
   }
 }
 
 export async function getWhichUsersAnsweredMostQuestions() {
   return await sqlExe.executeCommand(
-    `SELECT a.user_id, u.username, u.is_creator, COUNT(*) as questions_answered, u.icon FROM answers_transactional
-     a JOIN users u ON u.id = a.user_id JOIN choices c ON a.choice_id = c.id AND c.deleted = 0
-       GROUP BY a.user_id ORDER BY questions_answered DESC LIMIT 5; 
+    `SELECT u.id, u.username, u.is_creator, COUNT(*) as questions_answered, u.icon FROM answers_transactional
+     a JOIN users u ON u.id = a.created_by JOIN choices c ON a.choice_id = c.id AND c.deleted = 0
+       GROUP BY a.created_by ORDER BY questions_answered DESC LIMIT 5; 
     `
   ); //pull in top 5
 }

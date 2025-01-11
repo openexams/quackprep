@@ -15,9 +15,12 @@ import { cascadeSetDeleted } from "#utils/sqlFunctions.js";
 import { commonErrorMessage } from "#utils/utils.js";
 import { Router } from "express";
 import currentRouter from "./current/index.js";
+import aiRouter from "./ai/index";
+
 const router = Router();
 
 router.use("/current", currentRouter);
+router.use("/ai", aiRouter);
 
 // answers transactional
 router.post("/answer/", async function (req, res) {

@@ -1,7 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Link } from 'react-router-dom';
 import { Container, Grid, Header, List, Segment, Icon, Image } from 'semantic-ui-react';
-import ttIcon from '/img/tiktok-icon.webp';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
