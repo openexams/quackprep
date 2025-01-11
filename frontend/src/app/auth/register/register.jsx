@@ -8,15 +8,13 @@ export default function Register() {
   return (
     <CreateInputForm
       formFields={[
-        { name: 'firstName', value: '', required: true },
-        { name: 'lastName', value: '', required: true },
+        // { name: 'firstName', value: '', required: false },
+        // { name: 'lastName', value: '', required: false },
         { name: 'username', value: '', required: true },
         { name: 'email', value: '', required: true },
         { name: 'password', value: '', required: true, type: 'password' },
       ]}
-      onSubmit={({ firstName, lastName, username, email, password }) =>
-        dispatch(register(firstName, lastName, username, email, password))
-      }
+      onSubmit={({ username, email, password }) => dispatch(register(username, email, password))}
     />
   );
 }

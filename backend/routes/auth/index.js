@@ -31,9 +31,9 @@ router.get("/users/count", async function (req, res) {
 
 router.post("/register", async function (req, res) {
   // make sure to check if that emails not alr taken lol TODO FIX AND ITS TURNED OFF RN
-  const { firstName, lastName, username, email, password } = req.body;
+  const { username, email, password } = req.body;
 
-  if (!firstName || !lastName || !username || !email || !password) {
+  if (!username || !email || !password) {
     commonErrorMessage(
       res,
       400,
@@ -42,14 +42,12 @@ router.post("/register", async function (req, res) {
     return;
   }
   if (!validator.isEmail(email)) {
-    commonErrorMessage(res, 400, "invalid email");
+    commonErrorMessage(res, 400, "Invalid Email, try again with a valid email");
     return;
   }
   if (
-    matcher.getAllMatches(firstName).length !== 0 ||
-    matcher.getAllMatches(lastName) !== 0 ||
-    matcher.getAllMatches(email) !== 0 ||
-    matcher.getAllMatches(username) !== 0
+    matcher.getAllMatches(email).length !== 0 ||
+    matcher.getAllMatches(username).length !== 0
   ) {
     commonErrorMessage(
       res,
@@ -58,11 +56,7 @@ router.post("/register", async function (req, res) {
     );
     return;
   }
-  if (
-    firstName.includes(" ") ||
-    lastName.includes(" ") ||
-    username.includes(" ")
-  ) {
+  if (username.includes(" ")) {
     commonErrorMessage(
       res,
       400,
@@ -73,13 +67,7 @@ router.post("/register", async function (req, res) {
 
   // check if email alr exists TODO will currently just not work
   const hashedPass = await bcrypt.hash(password, 10);
-  const result = await register(
-    firstName,
-    lastName,
-    username,
-    email,
-    hashedPass
-  );
+  const result = await register(username, email, hashedPass);
 
   if (result) {
     res.status(201).json({ message: "successfully created a account" });

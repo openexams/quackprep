@@ -15,23 +15,15 @@ export async function getUserCount() {
   return await sqlExe.executeCommand("SELECT COUNT(*) AS COUNT FROM users");
 }
 
-export async function register(
-  firstName,
-  lastName,
-  username,
-  email,
-  hashedPass
-) {
+export async function register(username, email, hashedPass) {
   const params = {
-    firstName,
-    lastName,
     username,
     email,
     hashedPass,
   };
   const result = await sqlExe.executeCommand(
-    `INSERT INTO users (username,password_hash,email,first_name,last_name, provider,provider_id)
-    VALUES(:username,:hashedPass,:email,:firstName,:lastName,"local",0);`,
+    `INSERT INTO users (username,password_hash,email, provider,provider_id)
+    VALUES(:username,:hashedPass,:email,"local",0);`,
     params
   );
   return result.insertId;
