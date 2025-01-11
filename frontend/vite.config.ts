@@ -13,7 +13,7 @@ export default defineConfig(({ command, mode }) => {
     server: {
       hmr: true,
       port: 3001,
-      host: true,
+      //host: true,
       proxy: {
         '/api': {
           target: 'http://localhost:3000',
