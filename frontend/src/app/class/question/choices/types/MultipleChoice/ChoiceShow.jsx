@@ -2,9 +2,8 @@ import { useEffect, useState } from 'react';
 import { List, Button, Icon, Progress } from 'semantic-ui-react';
 import './AnswerButton.css';
 import MarkdownRenderer from '@components/MarkdownRenderer';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { upsertCurrentChoiceAndPostAnswer } from '../../choicesSlice';
-import { selectUser } from '@src/app/auth/authSlice';
 
 export default function ChoiceShow({
   id,
@@ -18,7 +17,6 @@ export default function ChoiceShow({
   total_submissions,
 }) {
   const [disabled, setDisabled] = useState(false);
-  const user = useSelector(selectUser).user;
   const dispatch = useDispatch();
 
   const getButtonClass = () => {
