@@ -7,12 +7,12 @@ export default function BrandLogo({ handlePageChange }) {
   return (
     <Menu.Item
       as={Link}
-      to='/home'
+      to='/'
       header
       onClick={(e, data) => {
         e.preventDefault();
         const fixedData = {
-          name: '/home',
+          name: '/',
         };
         handlePageChange(e, fixedData);
       }}

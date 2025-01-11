@@ -42,7 +42,7 @@ export default function ProfileDropdown({ activePage, handlePageChange, hasStrea
               // timeout is because if no timeout dispatch(signOut()); would not get ran
               dispatch(signOut());
               setTimeout(() => {
-                navigate('/home'); // was using my changeNavPage but it didnt run fast enough I Dont think
+                navigate('/'); // was using my changeNavPage but it didnt run fast enough I Dont think
 
                 setConfirmOpen(false);
 

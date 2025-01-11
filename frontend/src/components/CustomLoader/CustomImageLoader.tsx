@@ -1,5 +1,5 @@
 import React from 'react';
-import { Loader, Segment, Dimmer, Image } from 'semantic-ui-react';
+import { Loader, Dimmer, Image } from 'semantic-ui-react';
 import './CustomImageLoader.css';
 
 export function CustomImageLoader({ active, content, imageUrl, children }) {
@@ -10,7 +10,7 @@ export function CustomImageLoader({ active, content, imageUrl, children }) {
         <Dimmer active inverted>
           <div style={{ textAlign: 'center', position: 'relative' }}>
             <Image
-              src={imageUrl || '/public/img/quackprep_logo.webp'}
+              src={imageUrl || '/img/quackprep_logo.webp'}
               circular
               className='spinning-image'
               style={{

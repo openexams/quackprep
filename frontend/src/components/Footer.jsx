@@ -48,14 +48,18 @@ export default function Footer() {
                 </Header>
                 <p>Follow us on social media for updates and news.</p>
                 <List horizontal inverted divided link size='small'>
-                  <List.Item as='a' href='https://www.youtube.com/playlist?list=PLDLOmQLH1ppwvW7tcnB1uiJrwUGPeUbzJ'>
+                  <List.Item
+                    target='_blank'
+                    as='a'
+                    href='https://www.youtube.com/playlist?list=PLDLOmQLH1ppwvW7tcnB1uiJrwUGPeUbzJ'
+                  >
                     <Icon color='red' name='youtube' /> Youtube
                   </List.Item>
-                  <List.Item as='a' href='https://www.tiktok.com/@quackprep'>
+                  <List.Item target='_blank' as='a' href='https://www.tiktok.com/@quackprep'>
                     <Image alt='tiktok logo' style={{ width: '17px' }} src='/img/tt_icon.webp' />
                     Tiktok
                   </List.Item>
-                  <List.Item as='a' href='https://www.youtube.com/watch?v=dQw4w9WgXcQ'>
+                  <List.Item target='_blank' as='a' href='https://www.linkedin.com/in/maddox-schmidlkofer/'>
                     <Icon color='blue' name='linkedin' /> LinkedIn
                   </List.Item>
                 </List>

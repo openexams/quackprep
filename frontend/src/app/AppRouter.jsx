@@ -32,7 +32,6 @@ export default function AppRouter() {
 
       <Routes style={{ flex: 1 }}>
         <Route path='/' element={<Home />} />
-        <Route path='/home' element={<Home />} />
         <Route path='/auth' element={<AuthPopup />} />
         <Route path='/account' element={<Profile />} />
         <Route path='/streak' element={<Streak />} />

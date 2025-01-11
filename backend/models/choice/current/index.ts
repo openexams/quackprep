@@ -2,9 +2,10 @@ import sqlExe from "#db/dbFunctions";
 
 export async function selectCurrentChoice(WHERE: string, params: any) {
   return await sqlExe.executeCommand(
-    ` SELECT ac.id, ac.choice_id, ac.question_id, ac.user_id, c.is_correct 
+    ` SELECT ac.id, ac.choice_id, ac.question_id, ac.user_id, c.is_correct, ac.trans_id, at.text
         FROM answers_current ac 
         JOIN choices c ON c.id = ac.choice_id
+        JOIN answers_transactional at on at.id = ac.trans_id 
         WHERE ${WHERE}`,
     params
   );

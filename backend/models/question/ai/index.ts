@@ -1,4 +1,3 @@
-import { openai } from "#config/config.js";
 import {
   getWhatGroupsQuestionisIn,
   setDeletedQuestionAndCascadeChoices,
@@ -6,7 +5,8 @@ import {
 } from "../index.js";
 import { addManyChoicesToQuestion } from "#models/choice/index.js";
 import sqlExe from "#db/dbFunctions";
-import { GenQuestion } from "../../../../shared-types/question-types";
+import { GenQuestion } from "../../../../shared-types/question.types";
+import { sendOpenAiAssistantPromptAndRecieveResult } from "#utils/openAi.js";
 /**
  *
  * @param {Integer} user_id add which user ai generated the question (does not rlly matter)
@@ -23,47 +23,11 @@ export async function generateQuestionLike(
   dlog(`ai generating like q_id: ${likeQuestionId}`);
   // find the assistant I created
   try {
-    const quackAssist = await openai.beta.assistants.retrieve(
-      "asst_a168JvA9PlzK2WaKZ6oukDe4"
-    );
-
-    // create the thread which to send messages and send a starter msg
-    const quackThread = await openai.beta.threads.create({
-      messages: [
-        {
-          role: "user",
-          content: `create a question like: "${likeQuestionText}"\nin json format`,
-        },
-      ],
-    });
-
-    // run the message
-    const quackRun = await openai.beta.threads.runs.create(quackThread.id, {
-      assistant_id: quackAssist.id,
-    });
-    let runRes = await openai.beta.threads.runs.retrieve(
-      quackThread.id,
-      quackRun.id
-    );
-    // keep checking till its completed.
-    while (runRes.status === "queued" || runRes.status === "in_progress") {
-      dlog("run not finished retrying in 2s");
-      await new Promise((resolve) => setTimeout(resolve, 2000));
-      runRes = await openai.beta.threads.runs.retrieve(
-        quackThread.id,
-        quackRun.id
+    const quackAssistResponseJSON: GenQuestion =
+      await sendOpenAiAssistantPromptAndRecieveResult(
+        "asst_a168JvA9PlzK2WaKZ6oukDe4",
+        `create a question like: "${likeQuestionText}"\nin json format`
       );
-    }
-    if (runRes.status !== "completed") {
-      throw new Error("failed to generate AI question & choices.");
-      return;
-    }
-    // get message from AI when completed.
-    const allMessages = await openai.beta.threads.messages.list(quackThread.id);
-    const quackAssistResponse = allMessages?.data[0]?.content;
-    let quackAssistResponseJSON: GenQuestion = JSON.parse(
-      quackAssistResponse?.[0]?.text?.value
-    );
     // needed for sql db
     for (let i = 0; i < quackAssistResponseJSON.options.length; i++) {
       quackAssistResponseJSON.options[i] = {
@@ -112,4 +76,37 @@ export async function deleteAllAIGeneratedQuestion() {
   await sqlExe.executeCommand(`UPDATE questions q
 LEFT JOIN choices c on c.question_id = q.id
 SET q.deleted=1, c.deleted=1 WHERE q.ai = 1`);
+}
+
+export async function checkStudentFRQAnswer(
+  trans_id: number,
+  question_text: string,
+  student_answer_text: string,
+  correct_answer_text: string | null
+) {
+  const responseJSON = await sendOpenAiAssistantPromptAndRecieveResult(
+    "asst_m0Af7T1ZzVNKZqJ4QvFp7a2p",
+    `question is: ${question_text}\n grade this answer: "${student_answer_text.slice(
+      0,
+      500
+    )}"\ncorrect answer is: ${correct_answer_text || `no correct answer given`}`
+  );
+  const grade: number = responseJSON.grade;
+  const explanation: string = responseJSON.explanation;
+
+  const insertId = (
+    await sqlExe.executeCommand(
+      `INSERT INTO frq_ai_response (trans_id,grade,response) VALUES(:trans_id,:grade,:explanation)`,
+      { trans_id, grade, explanation }
+    )
+  ).insertId;
+  const frq_ai_response_row = (
+    await sqlExe.executeCommand(
+      `SELECT * 
+FROM frq_ai_response 
+WHERE id = :insertId`,
+      { insertId }
+    )
+  )[0];
+  return frq_ai_response_row;
 }
