@@ -24,7 +24,7 @@ export function removeStateCurrentChoices() {
 // adds to answers_transactional and current
 export function upsertCurrentChoiceAndPostAnswer(choice_id: number, question_id: number, text = null) {
   return standardApiCall('post', `/api/choice/answer/`, { choice_id, question_id, text }, UPSERT_CURRENT_CHOICE, {
-    loadingComponent: ['AiGrade'],
+    loadingComponent: ['FRQAnswer'],
   });
 }
 

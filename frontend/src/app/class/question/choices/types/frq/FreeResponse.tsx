@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Button, TextArea, Segment, Form, Header, Icon } from 'semantic-ui-react';
 import { upsertCurrentChoiceAndPostAnswer } from '../../choicesSlice';
