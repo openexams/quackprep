@@ -2,7 +2,7 @@ import { test, expect } from "playwright/test";
 
 export async function login(page) {
   await page.goto("http://localhost:5173/"); // TODO WTF ARE U DOING
-  await page.getByText("Login/Signup").click();
+  await page.getByText("Login / Signup").click();
   await page.getByPlaceholder("email").click();
   await page.getByPlaceholder("email").fill("Admin");
   await page.getByPlaceholder("email").press("Tab");

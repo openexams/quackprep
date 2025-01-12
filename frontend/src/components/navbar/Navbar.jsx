@@ -222,7 +222,7 @@ export default function Navbar() {
                   className='nav-item'
                 >
                   <Icon name='user' />
-                  Login/Signup
+                  Login / Signup
                 </Menu.Item>
               )}
             </Sidebar>
@@ -284,7 +284,7 @@ export default function Navbar() {
                 className='nav-item auth-button'
               >
                 <Icon name='user' />
-                Login/Signup
+                Login / Signup
               </Menu.Item>
             )}
           </Container>
