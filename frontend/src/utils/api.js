@@ -12,10 +12,10 @@ import { updateFetchHistory } from '@components/navbar/navbarSlice.js';
  * @param {String} method get post put patch delete
  * @param {String} route where you wanna send data
  * @param {Object} [data] data you wanna send
- * @param {String || Array} resultAction the constant you have in your reducer to set the data afer its returned
+ * @param {string | string[]} resultAction the constant you have in your reducer to set the data afer its returned
  * @param {Object} [options] - Additional options for the request.
- * @param {Array} [options.loadingComponent] - The name of the component to show while the request is in progress.
- * @param {String} [options.fetchHistory] - Do you want to add fetch history to state
+ * @param {string[]} [options.loadingComponent] - The name of the component to show while the request is in progress.
+ * @param {Boolean} [options.fetchHistory] - Do you want to add fetch history to state
  * @param {import('axios').AxiosRequestConfig} [options.axiosConfig] - Axios Config
  * @param {String} [options.errorMsg] - error message to be seen by user
  * @param {String} [options.noticeOfSuccess] - if given, will show a flash message with this message
