@@ -2,7 +2,7 @@ import { defineConfig, loadEnv } from 'vite';
 import react from '@vitejs/plugin-react';
 
 // https://vitejs.dev/config/
-export default defineConfig(({ command, mode }) => {
+export default defineConfig(() => {
   return {
     // Uncomment if you need the build directory customization
     // build: { outDir: '../backend/public', emptyOutDir: true },
