@@ -15,7 +15,10 @@ async function selectGroups(WHERE, params) {
 
 export async function getGroupsByClassId(class_id, type) {
   const params = { class_id, type };
-  return await selectGroups(`gt.type_name = :type`, params);
+  return await selectGroups(
+    `gt.type_name = :type AND g.class_id = :class_id`,
+    params
+  );
 }
 
 export async function getGroupsByUserId(user_id, type) {
