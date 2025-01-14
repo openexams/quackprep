@@ -50,17 +50,11 @@ export default function ClassShow() {
                 <Button
                   size='large'
                   onClick={() => {
-                    dispatch(changeNavbarPage(navigate, 'exam'));
+                    dispatch(changeNavbarPage(navigate, 'group'));
                   }}
                 >
                   <Icon name='list' />
-                  Study by Exam
-                </Button>
-              </Grid.Column>
-              <Grid.Column textAlign='center'>
-                <Button size='large' onClick={() => dispatch(changeNavbarPage(navigate, 'topic'))}>
-                  <Icon name='list' />
-                  Study by Topic
+                  Study by Group
                 </Button>
               </Grid.Column>
             </>

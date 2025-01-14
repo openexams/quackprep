@@ -11,7 +11,7 @@ import { commonErrorMessage } from "#utils/utils.js";
 
 const router = express.Router();
 
-router.get("/user/:type", isAuthenticated, async function (req, res) {
+router.get("/user/", isAuthenticated, async function (req, res) {
   try {
     const result = await getGroupsByUserId(req.user, req.params.type);
     res.status(200).json(result);
@@ -25,18 +25,15 @@ router.get("/user/:type", isAuthenticated, async function (req, res) {
   }
 });
 
-router.get("/:type/:classId", async function (req, res) {
+router.get("/:class_id", async function (req, res) {
   try {
-    const result = await getGroupsByClassId(
-      req.params.classId,
-      req.params.type
-    );
+    const result = await getGroupsByClassId(req.params.class_id);
     res.status(200).json(result);
   } catch (error) {
     commonErrorMessage(
       res,
       500,
-      `failed to get groups by class id ${req.params.classId} and type ${req.params.type}`,
+      `failed to get groups by class id ${req.params.classId} `,
       error
     );
   }
@@ -70,10 +67,9 @@ router.delete(
     }
   }
 );
-// type must be for now topic || exam
+// type must be for now topic || exam changing now gay
 router.post("/:type", isAuthenticated, isCreator, async function (req, res) {
   const data = req.body;
-  console.log(data);
   try {
     if (!req.params.type || !data.name || !data.desc || !data.class_id) {
       commonErrorMessage(

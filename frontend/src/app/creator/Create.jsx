@@ -2,8 +2,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import EditorRouter from './editor/EditorRouter';
 import { getClassesByUserId, selectClassState } from '../class/classSlice';
-import { getTopicsByUserId, selectTopicState } from '../class/group/topic/topicSlice';
-import { getExamsByUserId, selectExamsState } from '../class/group/exam/examSlice';
 import { getQuestionsByUserId, selectQuestionState } from '../class/question/questionSlice';
 import { getChoicesByUserId, selectChoicesState } from '../class/question/choices/choicesSlice';
 import { getClassCategories, selectClassCategories } from '../class/class_categories/classCategorySlice';
@@ -17,8 +15,6 @@ export default function Create() {
   const schools = useSelector(selectSchoolState).schools;
   const classes = useSelector(selectClassState).classes;
   const class_categories = useSelector(selectClassCategories).class_categories;
-  const topics = useSelector(selectTopicState).topics;
-  const exams = useSelector(selectExamsState).exams;
   const questions = useSelector(selectQuestionState).questions;
   const choices = useSelector(selectChoicesState).choices;
 
@@ -30,15 +26,16 @@ export default function Create() {
       dispatch(getClassCategories());
       dispatch(getClassesByUserId());
       // dispatch(getPdfsByUserId());
-      dispatch(getTopicsByUserId());
-      dispatch(getExamsByUserId());
+      // dispatch(getTopicsByUserId());
+      // dispatch(getExamsByUserId());
       dispatch(getQuestionsByUserId());
       dispatch(getChoicesByUserId());
     } else {
       dispatch(show401Msg());
     }
   }, [user?.is_creator]);
-  if (!schools || !classes || !class_categories || !topics || !exams || !questions || !choices) {
+  if (!schools || !classes || !class_categories || !questions || !choices) {
+    // FIX
     return <div>content not loaded</div>;
   }
   return (
@@ -46,8 +43,6 @@ export default function Create() {
       schools={schools}
       classes={classes}
       class_categories={class_categories}
-      topics={topics}
-      exams={exams}
       questions={questions}
       choices={choices}
     />

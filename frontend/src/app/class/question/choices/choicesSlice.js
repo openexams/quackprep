@@ -1,7 +1,6 @@
 import { standardApiCall } from '@utils/api';
 import { filterArr, upsertArray, countingSort, selectItemById, updateArrObjectsWithNewVals } from 'maddox-js-funcs';
 import { GEN_AI_Q_AND_C_RES } from '../ai/aiQuestionSlice.js';
-import { Choice } from '../../../../../../shared-types/choice.types.js';
 
 const GET_CRUD_CHOICES = 'app/class/question/choices/GET_CRUD_CHOICES';
 

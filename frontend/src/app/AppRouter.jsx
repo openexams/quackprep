@@ -8,17 +8,15 @@ import Leaderboard from './leaderboard/Leaderboard.jsx';
 import Stats from './stats/Stats.jsx';
 import ClassShow from './class/ClassShow.jsx';
 import QuestionPage from './class/question/QuestionPage.jsx';
-import TopicsShow from './class/group/topic/TopicsList.jsx';
 import NotFoundPage from '@components/NotFound.jsx';
-import ExamList from './class/group/exam/ExamList.jsx';
 import CreatorDashboard from './creator/CreatorDashboard.jsx';
 import ClassPage from './class/ClassPage.jsx';
 import Comp401 from '@components/401/Comp401.jsx';
 import HistoryNav from '@components/Breadcrumb.jsx';
 import PDFList from './class/group/pdf/PDFList.jsx';
 import PDFShow from './class/group/pdf/PDFShow.jsx';
-import OldCreate from './creator/OldCreate.jsx';
 import Create from './creator/Create.jsx';
+import GroupsList from './class/group/GroupsList.jsx';
 
 {
   /* topic could be a actual topic or a group of question such as a exam */
@@ -42,13 +40,10 @@ export default function AppRouter() {
 
         <Route path='/class/:school_name/:class_name/' element={<ClassShow />} />
 
-        <Route path='/class/:school_name/:class_name/topic' element={<TopicsShow />} />
-        <Route path='/class/:school_name/:class_name/topic/:group_name/question' element={<QuestionPage />} />
-        <Route path='/class/:school_name/:class_name/topic/:group_name/question/:question_id' element={<QuestionPage />} />
+        <Route path='/class/:school_name/:class_name/group' element={<GroupsList />} />
+        <Route path='/class/:school_name/:class_name/group/:group_name/question' element={<QuestionPage />} />
+        <Route path='/class/:school_name/:class_name/group/:group_name/question/:question_id' element={<QuestionPage />} />
 
-        <Route path='/class/:school_name/:class_name/exam' element={<ExamList />} />
-        <Route path='/class/:school_name/:class_name/exam/:group_name/question' element={<QuestionPage />} />
-        <Route path='/class/:school_name/:class_name/exam/:group_name/question/:question_id' element={<QuestionPage />} />
         <Route path='/class/:school_name/:class_name/pdfexams' element={<PDFList />} />
         <Route path='/class/:school_name/:class_name/pdfexams/:pdf_id' element={<PDFShow />} />
 
@@ -61,7 +56,6 @@ export default function AppRouter() {
         <Route path='/create/:school_id/:class_id/:group_id' element={<Create />} />
         <Route path='/create/:school_id/:class_id/:group_id/:question_id' element={<Create />} />
         <Route path='/create/:school_id/:class_id/:group_id/:question_id/:choice_id' element={<Create />} />
-        <Route path='/old_create' element={<OldCreate />} />
 
         <Route path='*' element={<NotFoundPage />} />
       </Routes>
