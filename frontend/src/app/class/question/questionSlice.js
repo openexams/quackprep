@@ -1,7 +1,6 @@
 import { standardApiCall } from '@utils/api';
 import { updateArrObjectsWithNewVals, upsertArray, filterArr } from 'maddox-js-funcs';
 import { GEN_AI_QUESTION_RES } from './ai/aiQuestionSlice';
-import { GenQuestion } from '../../../../../shared-types/question.types';
 
 const GET_CRUD_QUESTIONS = 'app/class/question/GET_CRUD_QUESTIONS';
 const UPSERT_CRUD_QUESTION = 'app/class/question/UPSERT_CRUD_QUESTION';
@@ -28,19 +27,19 @@ export function getQuestionsByUserId() {
  *
  * @param {Int} id
  * @param {String} question
- * @param {Array} group_ids
+ * @param {number[]} group_ids
  * @returns
  */
 export function upsertQuestionWithGroupIds(id, question, group_ids) {
   return standardApiCall('post', `/api/question/`, { id, question, group_ids }, UPSERT_CRUD_QUESTION, {
-    loadingComponent: 'Create',
+    loadingComponent: ['Create'],
     noticeOfSuccess: 'successfully created question',
   });
 }
 
 export function deleteQuestionById(id) {
   return standardApiCall('delete', `/api/question/${id}`, null, DELETE_CRUD_QUESTION, {
-    loadingComponent: 'Create',
+    loadingComponent: ['Create'],
     noticeOfSuccess: 'successfully deleted question',
   });
 }
@@ -61,8 +60,8 @@ export default function questionsReducer(state = DEFAULT_STATE, action) {
     case UPSERT_CRUD_QUESTION:
       return { ...state, questions: upsertArray(state.questions, action.payload?.[0]) };
     case GEN_AI_QUESTION_RES: {
-      /**@type {import("../../../../../types.ts").GenQuestion} */
-      const generatedQuestionObj: GenQuestion = action.payload;
+      /**@type {import("../../../../../shared-types/question.types").GenQuestion} */
+      const generatedQuestionObj = action.payload;
       return { ...state, questions: updateArrObjectsWithNewVals(state.questions, generatedQuestionObj.question) };
     }
     default:

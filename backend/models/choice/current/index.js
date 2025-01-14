@@ -1,6 +1,6 @@
-import sqlExe from "#db/dbFunctions";
+import sqlExe from "#db/dbFunctions.js";
 
-export async function selectCurrentChoice(WHERE: string, params: any) {
+export async function selectCurrentChoice(WHERE, params) {
   return await sqlExe.executeCommand(
     ` SELECT ac.id, ac.choice_id, ac.question_id, ac.created_by, c.is_correct, ac.trans_id, at.text, fart.response as ai_response, fart.grade
         FROM answers_current ac 
@@ -12,15 +12,15 @@ export async function selectCurrentChoice(WHERE: string, params: any) {
   );
 }
 
-export async function getCurrentChoicesByUserId(user_id: number) {
+export async function getCurrentChoicesByUserId(user_id) {
   return await selectCurrentChoice("ac.created_by = :user_id", { user_id });
 }
 
 export async function upsertCurrentChoice(
-  user_id: number,
-  choice_id: number,
-  question_id: number,
-  answers_transactional_id: number
+  user_id,
+  choice_id,
+  question_id,
+  answers_transactional_id
 ) {
   const params = {
     choice_id,

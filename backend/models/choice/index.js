@@ -1,19 +1,13 @@
-import sqlExe from "#db/dbFunctions";
+import sqlExe from "#db/dbFunctions.js";
 import { verifyUserOwnsRowId } from "#utils/sqlFunctions.js";
-import { upsertCurrentChoice } from "./current/index";
-import { ResultSetHeader } from "mysql2";
+import { upsertCurrentChoice } from "./current/index.js";
 
-export async function postChoice(
-  user_id: number,
-  choice_id: number,
-  question_id: number,
-  text: string
-) {
+export async function postChoice(user_id, choice_id, question_id, text) {
   const params = { choice_id, user_id, text };
-  const result = (await sqlExe.executeCommand(
+  const result = await sqlExe.executeCommand(
     `INSERT INTO answers_transactional (choice_id, created_by, text) VALUES(:choice_id,:user_id, :text)`,
     params
-  )) as ResultSetHeader;
+  );
   const insertId = result.insertId;
   if (user_id) {
     return await upsertCurrentChoice(user_id, choice_id, question_id, insertId);

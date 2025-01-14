@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { Message, Segment, Button, TextArea, SemanticCOLORS, Loader, Dimmer } from 'semantic-ui-react';
+import { Message, Segment, Button } from 'semantic-ui-react';
 import { selectItemById } from 'maddox-js-funcs';
 import { selectCurrentChoicesState, checkStudentFRQAnswer } from '../../choicesSlice';
 import { selectLoadingState } from '@src/app/store/loadingSlice';
@@ -10,7 +10,12 @@ import AIResponseComponent from './ai/AiResponse';
 import { CustomImageLoader } from '@components/CustomLoader/CustomImageLoader';
 
 // Helper function to determine the label color based on grade
-export function getGradeColor(grade: number): SemanticCOLORS {
+/**
+ *
+ * @param {Number} grade
+ * @returns {SemanticCOLORS}
+ */
+export function getGradeColor(grade) {
   if (grade == null) return 'grey';
   if (grade >= 90) return 'green';
   if (grade >= 70) return 'yellow';
@@ -22,7 +27,7 @@ export default function FRQAnswer({ text, choice, selectedQuestion }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const loading = useSelector(selectLoadingState).loadingComps;
-  const currentChoice: any = selectItemById(useSelector(selectCurrentChoicesState), 'choice_id', choice?.id);
+  const currentChoice = selectItemById(useSelector(selectCurrentChoicesState), 'choice_id', choice?.id);
   const user_id = useSelector(selectUser).user?.id;
 
   return (

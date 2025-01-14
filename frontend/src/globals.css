@@ -74,16 +74,6 @@ h1.ui.header {
   border-color: #d1d5db !important; /* Matching border for disabled state */
 }
 
-/* Dropdown styles */
-.ui.dropdown {
-  background-color: var(--dropdown-background) !important;
-  border-color: var(--input-border) !important;
-}
-
-.ui.dropdown .menu > .item {
-  color: var(--header-color) !important; /* Dropdown item text color */
-}
-
 /* Table styles */
 .ui.table {
   background-color: var(--segment-background) !important;

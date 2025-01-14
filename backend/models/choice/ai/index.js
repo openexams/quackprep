@@ -1,12 +1,12 @@
-import { sendOpenAiAssistantPromptAndRecieveResult } from "#utils/openAi";
-import sqlExe from "#db/dbFunctions";
-import { selectCurrentChoice } from "../current/index";
+import { sendOpenAiAssistantPromptAndRecieveResult } from "#utils/openAi.js";
+import sqlExe from "#db/dbFunctions.js";
+import { selectCurrentChoice } from "../current/index.js";
 
 export async function checkStudentFRQAnswer(
-  trans_id: number,
-  question_text: string,
-  student_answer_text: string,
-  correct_answer_text: string | null
+  trans_id,
+  question_text,
+  student_answer_text,
+  correct_answer_text
 ) {
   const responseJSON = await sendOpenAiAssistantPromptAndRecieveResult(
     "asst_m0Af7T1ZzVNKZqJ4QvFp7a2p",
@@ -15,8 +15,8 @@ export async function checkStudentFRQAnswer(
       500
     )}"\ncorrect answer is: ${correct_answer_text || `no correct answer given`}`
   );
-  const grade: number = responseJSON.grade;
-  const explanation: string = responseJSON.explanation;
+  const grade = responseJSON.grade;
+  const explanation = responseJSON.explanation;
 
   const insertId = (
     await sqlExe.executeCommand(

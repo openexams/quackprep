@@ -1,4 +1,4 @@
-import sqlExe from "#db/dbFunctions";
+import sqlExe from "#db/dbFunctions.js";
 import { verifyUserOwnsRowId } from "#utils/sqlFunctions.js";
 
 async function selectGroups(WHERE, params) {

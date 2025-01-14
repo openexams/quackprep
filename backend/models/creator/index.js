@@ -1,4 +1,4 @@
-import sqlExe from "#db/dbFunctions";
+import sqlExe from "#db/dbFunctions.js";
 
 export async function submitCreatorForm(user_id, the_why, school) {
   return await sqlExe.executeCommand(

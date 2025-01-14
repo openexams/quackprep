@@ -18,6 +18,7 @@ import HistoryNav from '@components/Breadcrumb.jsx';
 import PDFList from './class/group/pdf/PDFList.jsx';
 import PDFShow from './class/group/pdf/PDFShow.jsx';
 import OldCreate from './creator/OldCreate.jsx';
+import Create from './creator/Create.jsx';
 
 {
   /* topic could be a actual topic or a group of question such as a exam */
