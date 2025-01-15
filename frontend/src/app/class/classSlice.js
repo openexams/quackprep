@@ -7,24 +7,24 @@ const DELETE_CRUD_CLASS = 'app/class/DELETE_CRUD_CLASS';
 const UPSERT_CRUD_CLASSES = 'app/class/UPSERT_CRUD_CLASSES';
 
 export function getClassesBySchoolId(school_id) {
-  return standardApiCall('get', `/api/class/${school_id}`, null, GET_CRUD_CLASSES, { loadingComponent: 'ClassList' });
+  return standardApiCall('get', `/api/class/${school_id}`, null, GET_CRUD_CLASSES, { loadingComponent: ['ClassList'] });
 }
 
-export function getClassesByUserId() {
-  return standardApiCall('get', `/api/class/user`, null, GET_CRUD_CLASSES, { loadingComponent: ['ClassList', 'Create'] });
-}
+// export function getClassesByUserId() {
+//   return standardApiCall('get', `/api/class/user`, null, GET_CRUD_CLASSES, { loadingComponent: ['ClassList', 'Create'] });
+// }
 
 // returns the created class
 export function upsertClass(id, school_id, name, description, category) {
   return standardApiCall('post', `/api/class/`, { id, school_id, name, description, category }, UPSERT_CRUD_CLASSES, {
-    loadingComponent: ['Create'],
+    loadingComponent: ['ClassList'],
     noticeOfSuccess: 'successfully upserted class!',
   }); // have a action that puts this created class into the classlist
 }
 
 export function deleteClassById(id) {
   return standardApiCall('delete', `/api/class/${id}`, null, DELETE_CRUD_CLASS, {
-    loadingComponent: 'ClassList',
+    loadingComponent: ['ClassList'],
     noticeOfSuccess: 'successfully deleted class!',
   }); // have a action that puts this created class into the classlist
 }

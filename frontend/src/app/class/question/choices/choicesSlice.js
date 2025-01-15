@@ -39,20 +39,20 @@ export function getChoicesByGroup(group_id) {
   return standardApiCall('get', `/api/choice/group/${group_id}`, null, GET_CRUD_CHOICES, { loadingComponent: 'ChoiceRouter' }); //yes I know its same does not matter
 }
 
-export function getChoicesByUserId() {
-  return standardApiCall('get', `/api/choice/user`, null, GET_CRUD_CHOICES, { loadingComponent: 'Create' }); //yes I know its same does not matter
-}
+// export function getChoicesByUserId() {
+//   return standardApiCall('get', `/api/choice/user`, null, GET_CRUD_CHOICES, { loadingComponent: 'Create' }); //yes I know its same does not matter
+// }
 
 export function upsertChoice(text, question_id, isCorrect, type, id = null) {
   return standardApiCall('post', `/api/choice/${question_id}`, { text, isCorrect, type, id }, UPSERT_CRUD_CHOICE, {
-    loadingComponent: 'Create',
+    loadingComponent: 'ChoiceRouter',
     noticeOfSuccess: 'successfully created choice!',
   });
 }
 
 export function deleteChoiceById(id) {
   return standardApiCall('delete', `/api/choice/${id}`, null, DELETE_CRUD_CHOICE, {
-    loadingComponent: 'Create',
+    loadingComponent: 'ChoiceRouter',
     noticeOfSuccess: 'successfully deleted choice!',
   });
 }

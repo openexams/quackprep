@@ -19,9 +19,9 @@ export function getQuestionsByGroupId(group_id) {
   return standardApiCall('get', `/api/question/${group_id}`, null, GET_CRUD_QUESTIONS, { loadingComponent: 'QuestionPage' });
 }
 
-export function getQuestionsByUserId() {
-  return standardApiCall('get', `/api/question/user`, null, GET_CRUD_QUESTIONS, { loadingComponent: 'Create' });
-}
+// export function getQuestionsByUserId() {
+//   return standardApiCall('get', `/api/question/user`, null, GET_CRUD_QUESTIONS, { loadingComponent: 'QuestionPage' });
+// }
 
 /**
  *
@@ -32,14 +32,14 @@ export function getQuestionsByUserId() {
  */
 export function upsertQuestionWithGroupIds(id, question, group_ids) {
   return standardApiCall('post', `/api/question/`, { id, question, group_ids }, UPSERT_CRUD_QUESTION, {
-    loadingComponent: ['Create'],
+    loadingComponent: ['QuestionPage'],
     noticeOfSuccess: 'successfully created question',
   });
 }
 
 export function deleteQuestionById(id) {
   return standardApiCall('delete', `/api/question/${id}`, null, DELETE_CRUD_QUESTION, {
-    loadingComponent: ['Create'],
+    loadingComponent: ['QuestionPage'],
     noticeOfSuccess: 'successfully deleted question',
   });
 }

@@ -10,26 +10,26 @@ export function getGroupsByClassId(classId) {
   return standardApiCall('get', `/api/group/${classId}/`, null, GET_GROUPS, { loadingComponent: 'GroupsList' });
 }
 
-/**
- *
- * @param {*} user_id
- * @param {*} type
- * @returns
- */
-export function getGroupsByUserId() {
-  return standardApiCall('get', `/api/group/user/`, null, GET_GROUPS, { loadingComponent: 'Create' });
-}
+// /**
+//  *
+//  * @param {*} user_id
+//  * @param {*} type
+//  * @returns
+//  */
+// export function getGroupsByUserId() {
+//   return standardApiCall('get', `/api/group/user/`, null, GET_GROUPS, { loadingComponent: 'GroupsList' });
+// }
 
 export function deleteGroupById(id) {
   return standardApiCall('delete', `/api/group/${id}`, null, DELETE_GROUP, {
-    loadingComponent: 'Create',
+    loadingComponent: 'GroupsList',
     noticeOfSuccess: 'successfully deleted group!',
   });
 }
 
 export function upsertGroup(id, name, class_id, type, desc) {
   return standardApiCall('post', `/api/group/${type}`, { id, name, class_id, desc }, UPSERT_GROUP, {
-    loadingComponent: 'Create',
+    loadingComponent: 'GroupsList',
     noticeOfSuccess: 'successfully created group!',
   });
 }
