@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Form, Dropdown, Button, Segment } from 'semantic-ui-react';
+import { Form, Dropdown, Button, Segment, Header } from 'semantic-ui-react';
 
 import ConfirmButton from '@components/ConfirmButton';
 
@@ -52,6 +52,8 @@ export default function GroupEditor({ id, name, type, description, class_id }) {
   return (
     <Segment>
       <Form onSubmit={handleSubmit}>
+        <Header as={'h3'}>Group:{id}</Header>
+
         <Form.Field
           control='input'
           label='Group Name'

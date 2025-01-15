@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useState } from 'react';
-import { Form, Dropdown, Button, Segment } from 'semantic-ui-react';
+import { Form, Dropdown, Button, Segment, Header } from 'semantic-ui-react';
 import { selectGroupsState } from '@src/app/class/group/groupSlice';
 import { mapGroupsToDropdown } from './dropdownMappings';
 import { deleteQuestionById, upsertQuestionWithGroupIds } from '@src/app/class/question/questionSlice';
@@ -28,6 +28,7 @@ export default function QuestionEditor({ id, group_id: groups, explanation_url, 
   return (
     <Segment>
       <Form onSubmit={handleSubmit}>
+        <Header as={'h3'}>Question:{id}</Header>
         <MarkdownEditor
           label='Question'
           required

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Form, Checkbox, Dropdown, Button, Segment } from 'semantic-ui-react';
+import { Form, Checkbox, Dropdown, Button, Segment, Header } from 'semantic-ui-react';
 import { upsertChoice, deleteChoiceById } from '@src/app/class/question/choices/choicesSlice';
 import ConfirmButton from '@components/ConfirmButton';
 
@@ -29,6 +29,7 @@ export default function ChoiceEditor({ id, answer, is_correct, question_id, type
   return (
     <Segment>
       <Form onSubmit={handleSubmit}>
+        <Header as={'h3'}>Choice:{id}</Header>
         <Form.Field
           width={'8'}
           control='textarea'
