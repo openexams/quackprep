@@ -1,6 +1,6 @@
 import { checkApiKey } from "#models/auth/index.js";
 
-export async function hasApiKey(token) {
+export async function hasApiKeyAndInsert(req, token) {
   if (token) {
     const user_id = await checkApiKey(token);
     if (user_id) {
@@ -48,7 +48,7 @@ export async function isAuthenticated(req, res, next) {
     next();
   } else if (req.headers?.token) {
     dlog("token detected");
-    const valid = await hasApiKey(req.headers.token);
+    const valid = await hasApiKeyAndInsert(req, req.headers.token);
     if (valid) {
       next();
     } else {
