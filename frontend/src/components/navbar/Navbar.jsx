@@ -26,6 +26,7 @@ import {
 import Init from '@src/Init';
 import Sentinel from '@src/Sentinel';
 import { selectGroupsState } from '@src/app/class/group/groupSlice';
+import ToggleEditComponent from './components/ToggleEdit';
 
 export default function Navbar() {
   const groups = useSelector(selectGroupsState);
@@ -194,6 +195,7 @@ export default function Navbar() {
                 <Icon name='chart bar' />
                 Stats
               </Menu.Item>
+              <ToggleEditComponent />
 
               {user.id ? (
                 <Menu.Item className='nav-item'>
@@ -255,7 +257,7 @@ export default function Navbar() {
               <Icon name='chart bar' />
               Stats
             </Menu.Item>
-
+            <ToggleEditComponent />
             {user.id ? (
               <Menu.Menu position='right'>
                 <ProfileDropdown hasStreak={hasStreak} activePage={activePage} handlePageChange={handlePageChange} />

@@ -13,6 +13,7 @@ const UPDATE_GROUP_TYPE = 'components/navbar/UPDATE_GROUP_TYPE';
 
 const UPDATE_SCHOOL_ID = 'components/navbar/UPDATE_SCHOOL_ID';
 const UPDATE_FETCH_HISTORY = 'components/navbar/UPDATE_FETCH_HISTORY';
+const TOGGLE_EDIT = 'components/navbar/TOGGLE_EDIT';
 
 export function upsertTimeSpent() {
   return standardApiCall('post', '/api/account/time_spent', {});
@@ -62,7 +63,12 @@ export function updateFetchHistory(fetechedPage) {
   return { type: UPDATE_FETCH_HISTORY, payload: fetechedPage };
 }
 
+export function toggleEdit() {
+  return { type: TOGGLE_EDIT };
+}
+
 const DEFAULT_STATE = {
+  editing: false,
   page: null,
   classId: null,
   className: null,
@@ -157,6 +163,8 @@ export default function navbarReducer(state = DEFAULT_STATE, action) {
       return { ...state, groupType: action.payload };
     case UPDATE_SCHOOL_ID:
       return { ...state, schoolId: action.payload };
+    case TOGGLE_EDIT:
+      return { ...state, editing: !state.editing };
     default:
       return state;
   }

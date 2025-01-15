@@ -13,3 +13,14 @@ export function mapClassCategoriesToDropdown(class_categories) {
     text: class_category.name,
   }));
 }
+
+export function mapClassesToDropdown(classes) {
+  return classes.map((cass) => ({ key: cass.id, value: cass.id, text: cass.name }));
+}
+export function mapGroupsToDropdown(groupList) {
+  return groupList.map((g) => ({
+    key: g.id,
+    value: g.id,
+    text: g.name,
+  }));
+}

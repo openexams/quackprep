@@ -15,7 +15,6 @@ import Comp401 from '@components/401/Comp401.jsx';
 import HistoryNav from '@components/Breadcrumb.jsx';
 import PDFList from './class/group/pdf/PDFList.jsx';
 import PDFShow from './class/group/pdf/PDFShow.jsx';
-import Create from './creator/Create.jsx';
 import GroupsList from './class/group/GroupsList.jsx';
 
 {
@@ -49,13 +48,6 @@ export default function AppRouter() {
 
         <Route path='/leaderboard' element={<Leaderboard />} />
         <Route path='/stats' element={<Stats />} />
-
-        <Route path='/create' element={<Create />} />
-        <Route path='/create/:school_id' element={<Create />} />
-        <Route path='/create/:school_id/:class_id' element={<Create />} />
-        <Route path='/create/:school_id/:class_id/:group_id' element={<Create />} />
-        <Route path='/create/:school_id/:class_id/:group_id/:question_id' element={<Create />} />
-        <Route path='/create/:school_id/:class_id/:group_id/:question_id/:choice_id' element={<Create />} />
 
         <Route path='*' element={<NotFoundPage />} />
       </Routes>

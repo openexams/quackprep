@@ -85,7 +85,6 @@ export function schoolUpdateLogic(dispatch, schools, school_name) {
 
 export function groupUpdateLogic(dispatch, groupId, class_id, groups) {
   const currentGroup = findNeedlesInArrayOfObjectsLINEAR(groups, ['class_id', 'id'], [class_id, groupId]);
-  console.log('update group', currentGroup);
 
   if (currentGroup) {
     dispatch(updateCurrentGroupData({ id: currentGroup?.id, name: currentGroup?.name }));

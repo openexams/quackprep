@@ -1,11 +1,12 @@
 import './class.css';
-import React, { useState } from 'react';
 import { Container, Grid, Header, Segment, Divider, Icon } from 'semantic-ui-react';
 
 import ClassCard from './ClassCard';
 import { useSelector } from 'react-redux';
 import { selectClassCategories } from './class_categories/classCategorySlice';
 import { selectLoadingState } from '../store/loadingSlice';
+import ClassEditor from '../creator/editor/ClassEditor';
+import { selectCanAndIsEdit } from '../auth/authSlice';
 
 function selectClassesWithCategory(classes, selectedCategory) {
   if (!Array.isArray(classes) || !selectedCategory) {
@@ -36,7 +37,14 @@ function mapClassesToCategories(classes, classCategories) {
           {curClasses.map((cl) => (
             <Grid.Column key={cl.id}>
               <Segment basic>
-                <ClassCard name={cl.name} desc={cl.description} category={cl.category} id={cl.id} />
+                <ClassCard
+                  name={cl.name}
+                  desc={cl.description}
+                  category={cl.category}
+                  id={cl.id}
+                  school_id={cl.school_id}
+                  user_id={cl.created_by}
+                />
               </Segment>
             </Grid.Column>
           ))}

@@ -6,16 +6,21 @@ import MarkdownRenderer from '@components/MarkdownRenderer';
 import { selectLoadingState } from '@src/app/store/loadingSlice';
 import FreeResponse from './types/frq/FreeResponse';
 import NoItemsFound from '@components/NoItemsFound';
-import { selectChoicesState } from './choicesSlice';
+import { selectEditState } from '@src/app/auth/authSlice';
+import ChoiceEditor from '@src/app/creator/editor/ChoiceEditor';
+import QuestionEditor from '@src/app/creator/editor/QuestionEditor';
 
 export default function ChoiceRouter({ selectedQuestion }) {
+  const edit = useSelector(selectEditState); // TODO CHECK IF USER IS ALLOWED TO EDIT!!!
   const choices = useSelector(selectBINARYArrayOfStateById('app.choices.choices', 'question_id', parseInt(selectedQuestion?.id)));
   const loading = useSelector(selectLoadingState).loadingComps?.ChoiceRouter; // todo fix
 
   // maybe check if choices are all the same what if one choice was mcq and other was select (should not be possible)
   let component = null;
   if (!loading) {
-    if (choices?.[0]?.type === 'mcq') {
+    if (edit) {
+      component = choices.map((choice) => <ChoiceEditor key={choice.id} {...choice} />);
+    } else if (choices?.[0]?.type === 'mcq') {
       component = <MultipleChoice choices={choices} selectedQuestion={selectedQuestion} />;
     } else if (choices?.[0]?.type === 'frq') {
       component = <FreeResponse choice={choices?.[0]} selectedQuestion={selectedQuestion} />; // if there are multiple then we are fucked chat THERE CANNOT BE MULTIPLE
@@ -30,7 +35,7 @@ export default function ChoiceRouter({ selectedQuestion }) {
       {selectedQuestion && choices ? (
         <>
           <Header>
-            <MarkdownRenderer render={selectedQuestion.question} />
+            {edit ? <QuestionEditor {...selectedQuestion} /> : <MarkdownRenderer render={selectedQuestion.question} />}
             {selectedQuestion.ai ? (
               <Popup
                 content='These questions are AI-generated and may contain inaccuracies. Please verify their correctness.'

@@ -41,7 +41,6 @@ const DEFAULT_STATE = {
 export default function groupReducer(state = DEFAULT_STATE, action) {
   switch (action.type) {
     case GET_GROUPS:
-      console.log(action.payload);
       return {
         ...state,
         groups: countingSort(updateArrObjectsWithNewVals(state.groups, action.payload), 'class_id'),

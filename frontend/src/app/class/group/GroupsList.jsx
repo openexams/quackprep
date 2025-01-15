@@ -6,8 +6,13 @@ import { selectLoadingState } from '@src/app/store/loadingSlice';
 import Searchbar from '@components/Searchbar';
 import { useSearchParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import GroupEditor from '@src/app/creator/editor/GroupEdit';
+import { selectEditState, selectUser } from '@src/app/auth/authSlice';
+import GroupCard from './GroupCard';
 
 export default function GroupsList() {
+  const user_id = useSelector(selectUser).user?.id;
+  const editModeOn = useSelector(selectEditState);
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   const filter = searchParams.get('filter') || '';
@@ -38,27 +43,19 @@ export default function GroupsList() {
         <Searchbar setValue={setFilter} value={filter} placeholder={'Search groups'} />
         <Card.Group itemsPerRow={3} stackable>
           {groups &&
-            groups.map((group) => (
-              <Card key={group.id} raised>
-                <Card.Content>
-                  <Card.Header>{turnUnderscoreIntoSpace(group.name)}</Card.Header>
-                  <Card.Description>{group.description}</Card.Description>
-                </Card.Content>
-                <Card.Content extra>
-                  <Button
-                    fluid
-                    color='blue'
-                    onClick={() => {
-                      dispatch(updateCurrentGroupData(group.id, group.name));
-                      dispatch(changeNavbarPage(navigate, `/class/${schoolName}/${classId}/group/${group.id}/question`)); // /group may cause issues
-                    }}
-                  >
-                    <Icon name='fork' />
-                    Study Group
-                  </Button>
-                </Card.Content>
-              </Card>
-            ))}
+            groups.map((group) => {
+              return (
+                <GroupCard
+                  key={group.id}
+                  id={group.id}
+                  name={group.name}
+                  description={group.desc}
+                  class_id={group.class_id}
+                  created_by={group.created_by}
+                  type={group.type}
+                />
+              );
+            })}
         </Card.Group>
       </Segment>
     </Container>

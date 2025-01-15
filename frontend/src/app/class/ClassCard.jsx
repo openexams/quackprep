@@ -1,8 +1,10 @@
 import { changeNavbarPage, updateCurrentClassData } from '@components/navbar/navbarSlice';
 import { useMemo, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Card, Icon } from 'semantic-ui-react';
 import { useNavigate } from 'react-router-dom';
+import ClassEditor from '../creator/editor/ClassEditor';
+import { selectCanAndIsEdit } from '../auth/authSlice';
 
 /**
  * @param {String} nameOfClass
@@ -58,10 +60,11 @@ function getIconByCategory(category) {
   }
 }
 
-export default function ClassCard({ id, name, category, desc }) {
+export default function ClassCard({ id, name, category, desc, school_id, user_id }) {
   const navigate = useNavigate();
   const [hovered, setHovered] = useState(false);
   const dispatch = useDispatch();
+  const edit = useSelector(selectCanAndIsEdit(user_id));
 
   const level = useMemo(() => {
     return findClassNumber(name)?.[0];
@@ -74,6 +77,10 @@ export default function ClassCard({ id, name, category, desc }) {
   const cardColor = useMemo(() => {
     return getColorByLevel(level);
   }, [level]);
+
+  if (edit) {
+    return <ClassEditor id={id} name={name} category={category} desc={desc} school_id={school_id} />;
+  }
 
   return (
     <div
@@ -102,28 +109,6 @@ export default function ClassCard({ id, name, category, desc }) {
           <Card.Description>{desc}</Card.Description>
         </Card.Content>
       </Card>
-
-      {/* {hovered && (
-        <div
-          style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            backgroundColor: 'rgba(0, 0, 0, 0.5)',
-            color: 'white',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            borderRadius: '5px',
-            fontSize: '1.2rem',
-            fontWeight: 'bold',
-          }}
-        >
-          Study Now!
-        </div>
-      )} */}
     </div>
   );
 }

@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { List, Icon } from 'semantic-ui-react';
+import { List, Icon, Button } from 'semantic-ui-react';
+import ConfirmButton from './ConfirmButton';
 
 const EditableListItem = ({ text, onEdit, onDelete, onSelect }) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -8,7 +9,6 @@ const EditableListItem = ({ text, onEdit, onDelete, onSelect }) => {
   const handleMouseLeave = () => setIsHovered(false);
 
   const handleEditClick = (e) => {
-    // Prevent the List.Item onClick or onSelect from firing
     e.stopPropagation();
     onEdit?.();
   };
@@ -19,20 +19,28 @@ const EditableListItem = ({ text, onEdit, onDelete, onSelect }) => {
   };
 
   return (
-    <List.Item onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+    <List.Item
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      style={{ padding: '1rem', borderBottom: '1px solid #ddd' }}
+    >
       {/* Hover actions on the right side */}
       <List.Content floated='right'>
         {isHovered && (
-          <>
-            <Icon name='edit' link onClick={handleEditClick} style={{ marginRight: '0.5rem' }} />
-            <Icon name='delete' link onClick={handleDeleteClick} />
-          </>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <Button icon size='mini' color='blue' onClick={handleEditClick} aria-label='Edit'>
+              <Icon name='edit' />
+            </Button>
+            <ConfirmButton buttonName='❌' onClick={handleDeleteClick} />
+          </div>
         )}
       </List.Content>
 
       {/* Clicking on the text should select the item */}
-      <List.Content onClick={onSelect}>
-        <List.Header as='a'>{text}</List.Header>
+      <List.Content onClick={onSelect} style={{ cursor: 'pointer' }}>
+        <List.Header as='a' style={{ fontSize: '1.2rem', fontWeight: 'bold' }}>
+          {text}
+        </List.Header>
       </List.Content>
     </List.Item>
   );

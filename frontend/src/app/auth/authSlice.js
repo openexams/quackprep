@@ -8,3 +8,18 @@ export function getCurUser() {
 export const selectUser = (state) => {
   return { user: state.auth.user };
 };
+
+export function selectCanAndIsEdit(user_id) {
+  return (state) => {
+    if (state.app.navbar.editing === true) {
+      if (state.auth.user?.id === parseInt(user_id)) {
+        return true;
+      }
+    }
+    return false;
+  };
+}
+
+export function selectEditState(state) {
+  return state.app.navbar.editing;
+}

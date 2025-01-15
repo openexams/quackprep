@@ -1,14 +1,19 @@
 import { useSelector } from 'react-redux';
-import { Breadcrumb, Segment, Transition } from 'semantic-ui-react';
+import { Breadcrumb, Transition } from 'semantic-ui-react';
 import { changeNavbarPage, selectNavbarState } from './navbar/navbarSlice';
 import { useDispatch } from 'react-redux';
 import { useMemo } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 export default function HistoryNav() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const urlArr = useSelector(selectNavbarState).navbar.page?.split('/');
+  const location = useLocation();
+  const urlArr = location.pathname?.split('/');
+  const sections = useMemo(() => {
+    return mapCurrentNavbarStateToSectionsOfBreadcrumb(urlArr);
+  }, [urlArr]);
+  // if (urlArr?.[1] === 'create') return null;
 
   function mapCurrentNavbarStateToSectionsOfBreadcrumb(urlArr) {
     if (!urlArr) return null;
@@ -16,7 +21,8 @@ export default function HistoryNav() {
     for (let i = 0; i < urlArr.length; i++) {
       if (urlArr[i] == '' || urlArr[i] == ' ') {
         // do nothing
-      } else if (i !== 5) {
+      } else if (i !== 69) {
+        // if i!==5 old version
         let curItemUrl = urlArr.slice(0, i + 1).join('/');
 
         sections.push({
@@ -29,10 +35,6 @@ export default function HistoryNav() {
     }
     return sections;
   }
-
-  const sections = useMemo(() => {
-    return mapCurrentNavbarStateToSectionsOfBreadcrumb(urlArr);
-  }, [urlArr]);
 
   const breadcrumbStyle = {
     position: 'fixed', // Changed to fixed instead of absolute

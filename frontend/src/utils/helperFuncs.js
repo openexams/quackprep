@@ -108,6 +108,25 @@ export function selectArrayOfStateByGroupId(path, id) {
   };
 }
 
+export function selectQuestionsByGroupId(questions, id) {
+  let tmp = [];
+  for (let i = 0; i < questions.length; i++) {
+    // group id can be csv array or not array
+    if (!questions[i]?.group_id?.includes(',') && parseInt(questions[i]?.group_id) === id) {
+      tmp.push(questions[i]);
+    } else {
+      // its an arr and go through it.
+      for (let j = 0; j < questions[i]?.group_id?.split(',')?.length; j++) {
+        if (parseInt(questions[i]?.group_id?.split(',')[j]) === id) {
+          tmp.push(questions[i]);
+          break; // we can add this so go next WHAT IF A QUESTION IS ONLY IN 1 GROUP TODO FIX REATRD
+        }
+      }
+    }
+  }
+  return tmp;
+}
+
 /**
  * checks equivalances using == againt the array and filter u are using. if valuesIncluded[i] == '' it is skipped
  * checks exact equivalence (the number u are using in the filter will be checked with == to the key)
