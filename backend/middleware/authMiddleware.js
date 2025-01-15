@@ -1,12 +1,10 @@
 import { checkApiKey } from "#models/auth/index.js";
 
-export async function hasApiKey(req) {
-  if (req.headers?.token) {
-    const user = await checkApiKey(req.headers.token);
-    console.log(user);
-    if (user) {
-      dlog("api token detected");
-      req.user = user;
+export async function hasApiKey(token) {
+  if (token) {
+    const user_id = await checkApiKey(token);
+    if (user_id) {
+      req.user = user_id;
       return true;
     } else {
       return false;
@@ -43,19 +41,13 @@ function checkUserAgentIsBot(useragent) {
   }
   return false;
 }
-/**
- *
- * @param {} req
- * @param {*} res
- * @param {*} next
- * @returns
- */
+
 export async function isAuthenticated(req, res, next) {
   if (req.user && req.isAuthenticated()) {
     //dlog("user is logged in");
     next();
   } else if (req.headers?.token) {
-    console.log("token detected");
+    dlog("token detected");
     const valid = await hasApiKey(req.headers.token);
     if (valid) {
       next();
