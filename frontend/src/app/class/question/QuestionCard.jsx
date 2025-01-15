@@ -34,7 +34,7 @@ function getQuestionTopics(questionTypes, questionGroupName) {
 }
 // takes in everything i need to be a question
 export default function QuestionCard({ id, selectedQuestion, type_name, group_name, showTopics, index, favorited, current, ai }) {
-  const { schoolName, className, groupType, groupName } = useSelector(selectNavbarState).navbar;
+  const { schoolName, classId, groupType, groupId } = useSelector(selectNavbarState).navbar;
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -42,9 +42,7 @@ export default function QuestionCard({ id, selectedQuestion, type_name, group_na
     <List.Item
       key={id}
       onClick={() => {
-        dispatch(
-          changeNavbarPage(navigate, `/class/${schoolName}/${className}/${groupType}/${groupName}/question/${parseInt(id)}`),
-        );
+        dispatch(changeNavbarPage(navigate, `/class/${schoolName}/${classId}/group/${groupId}/question/${parseInt(id)}`)); // why dude
         dispatch(updateQuestionId(parseInt(id)));
       }}
       active={selectedQuestion && selectedQuestion.id === id}

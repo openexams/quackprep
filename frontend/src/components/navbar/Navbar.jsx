@@ -55,34 +55,35 @@ export default function Navbar() {
 
   ///  USE EFFECTS FOR KEEPING STORE SAME AS URL ///
   useEffect(() => {
-    if (activePage?.includes('class') && !activePage?.includes('/auth?next') && !State401) {
+    if (pathArray?.[1]?.includes('class') && !activePage?.includes('/auth?next') && !State401) {
       if (pathArray?.[4] && className && classId) {
         dispatch(updateGroupType(pathArray[4]));
       }
       if (!loading?.SchoolsList) {
         schoolUpdateLogic(dispatch, schools, schoolName);
       }
-      if (!loading?.ClassList && schoolId) {
+      if (!loading?.ClassList && schoolId && schoolName) {
         classFetchLogic(dispatch, classes, schoolId);
-        classUpdateLogic(dispatch, classes, className, schoolId);
+        classUpdateLogic(dispatch, classes, classId, schoolId);
       }
-      if (pathArray?.[4] === 'pdfexams' && !loading?.PDFList && classId) {
+      if (pathArray?.[4] === 'pdfexams' && !loading?.PDFList && classId && schoolId && schoolName && className) {
         pdfsFetchLogic(dispatch, classId);
       }
 
-      if (pathArray?.[4] === 'group' && !loading?.GroupsList && className && classId) {
-        groupUpdateLogic(dispatch, groupName, classId, groups);
+      if (pathArray?.[4] === 'group' && !loading?.GroupsList && classId && className && schoolId && schoolName) {
+        groupUpdateLogic(dispatch, groupId, classId, groups);
         groupFetchLogic(dispatch, classId);
       }
       if (
         pathArray?.[4] === 'group' &&
         pathArray?.[6] === 'question' &&
         !loading?.QuestionPage &&
-        className &&
         classId &&
         groupId &&
         groupName &&
-        groupType
+        groupType &&
+        schoolId &&
+        schoolName
       ) {
         questionUpdateLogic(dispatch, questionId);
         questionFetchLogic(dispatch, groupId);

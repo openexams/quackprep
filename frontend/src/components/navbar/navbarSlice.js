@@ -120,19 +120,19 @@ export default function navbarReducer(state = DEFAULT_STATE, action) {
       // when I change the navbar set everything back to null so navbar has to dispatch to get id values;
       const urlArr = curUrl.split('/');
       const newSchoolName = urlArr[2] || null;
-      const newClassName = urlArr[3] || null;
-      const newGroupName = replaceP20WithSpace(urlArr[5]) || null;
+      const newClassId = urlArr[3] || null;
+      const newGroupId = urlArr[5] || null;
 
       return {
         ...state,
         page: curUrl,
-        groupName: newGroupName,
-        className: newClassName,
+        groupName: null,
+        className: null,
         schoolName: newSchoolName,
         schoolId: null,
         questionId: parseInt(urlArr[7]) || null,
-        classId: urlArr[3] ? state.classId : null, // these 2 null should be brought in again, only if we changed topic or class, may cause issues when inputting new link directly into window.location TODO TEST
-        groupId: urlArr[4] ? state.groupId : null,
+        classId: parseInt(newClassId), // these 2 null should be brought in again, only if we changed topic or class, may cause issues when inputting new link directly into window.location TODO TEST
+        groupId: parseInt(newGroupId),
         groupType: null,
         lastPage: newLastPage,
         fetchHistory: state.fetchHistory,

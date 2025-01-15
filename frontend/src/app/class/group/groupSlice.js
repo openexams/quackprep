@@ -7,7 +7,7 @@ const DELETE_GROUP = 'app/class/group/DELETE_GROUP';
 const UPSERT_GROUP = 'app/class/group/UPSERT_GROUP';
 
 export function getGroupsByClassId(classId) {
-  return standardApiCall('get', `/api/group/${classId}`, null, GET_GROUPS, { loadingComponent: 'GroupsList' });
+  return standardApiCall('get', `/api/group/${classId}/`, null, GET_GROUPS, { loadingComponent: 'GroupsList' });
 }
 
 /**
@@ -41,6 +41,7 @@ const DEFAULT_STATE = {
 export default function groupReducer(state = DEFAULT_STATE, action) {
   switch (action.type) {
     case GET_GROUPS:
+      console.log(action.payload);
       return {
         ...state,
         groups: countingSort(updateArrObjectsWithNewVals(state.groups, action.payload), 'class_id'),

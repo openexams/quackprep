@@ -62,9 +62,13 @@ export function classFetchLogic(dispatch, classes, schoolId) {
   dispatch(getClassesBySchoolId(schoolId));
 }
 
-export function classUpdateLogic(dispatch, classes, curClassName, school_id) {
-  const tmp_c_id = findNeedlesInArrayOfObjectsLINEAR(classes, ['name', 'school_id'], [curClassName, school_id], 'id');
-  dispatch(updateCurrentClassData({ name: curClassName, id: tmp_c_id }));
+export function classUpdateLogic(dispatch, classes, class_id, school_id) {
+  const curClass = findNeedlesInArrayOfObjectsLINEAR(classes, ['id', 'school_id'], [class_id, school_id]);
+  if (curClass) {
+    dispatch(updateCurrentClassData({ name: curClass?.name, id: curClass?.id }));
+  } else {
+    console.log('class not found');
+  }
 }
 
 // fetches all schools
@@ -73,16 +77,18 @@ export function schoolFetchLogic(dispatch) {
 }
 
 export function schoolUpdateLogic(dispatch, schools, school_name) {
-  const schoolId = findNeedleInArrayOfObjectsLINEAR(schools, 'school_name', school_name, 'id');
-  if (schoolId) {
-    dispatch(updateSchoolId(schoolId));
+  const school = findNeedleInArrayOfObjectsLINEAR(schools, 'school_name', school_name);
+  if (school?.id) {
+    dispatch(updateSchoolId(school?.id));
   }
 }
 
-export function groupUpdateLogic(dispatch, groupName, class_id, groups) {
-  const current_group_id = findNeedlesInArrayOfObjectsLINEAR(groups, ['class_id', 'name'], [class_id, groupName], 'id');
-  if (groupName && current_group_id) {
-    dispatch(updateCurrentGroupData({ id: current_group_id, name: groupName }));
+export function groupUpdateLogic(dispatch, groupId, class_id, groups) {
+  const currentGroup = findNeedlesInArrayOfObjectsLINEAR(groups, ['class_id', 'id'], [class_id, groupId]);
+  console.log('update group', currentGroup);
+
+  if (currentGroup) {
+    dispatch(updateCurrentGroupData({ id: currentGroup?.id, name: currentGroup?.name }));
   }
 }
 

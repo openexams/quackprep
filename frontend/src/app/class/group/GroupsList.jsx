@@ -25,14 +25,13 @@ export default function GroupsList() {
     searchParams.set('filter', newStr);
     setSearchParams(searchParams);
   }
-
   return (
     <Container>
       <Segment loading={loading} basic>
         <Header as='h2' color='blue' dividing>
           <Icon name='book' />
           <Header.Content>
-            {className}: Study by groups
+            {className}: Study by Groups
             <Header.Subheader>Select a topic to start studying</Header.Subheader>
           </Header.Content>
         </Header>
@@ -51,7 +50,7 @@ export default function GroupsList() {
                     color='blue'
                     onClick={() => {
                       dispatch(updateCurrentGroupData(group.id, group.name));
-                      dispatch(changeNavbarPage(navigate, `/class/${schoolName}/${className}/group/${group.name}/question`)); // /group may cause issues
+                      dispatch(changeNavbarPage(navigate, `/class/${schoolName}/${classId}/group/${group.id}/question`)); // /group may cause issues
                     }}
                   >
                     <Icon name='fork' />

@@ -38,14 +38,14 @@ export default function AppRouter() {
         <Route path='/creatordashboard' element={<CreatorDashboard />} />
         <Route path='/class/:school_name/' element={<ClassPage />} />
 
-        <Route path='/class/:school_name/:class_name/' element={<ClassShow />} />
+        <Route path='/class/:school_name/:class_id/' element={<ClassShow />} />
 
-        <Route path='/class/:school_name/:class_name/group' element={<GroupsList />} />
-        <Route path='/class/:school_name/:class_name/group/:group_name/question' element={<QuestionPage />} />
-        <Route path='/class/:school_name/:class_name/group/:group_name/question/:question_id' element={<QuestionPage />} />
+        <Route path='/class/:school_name/:class_id/group' element={<GroupsList />} />
+        <Route path='/class/:school_name/:class_id/group/:group_id/question' element={<QuestionPage />} />
+        <Route path='/class/:school_name/:class_id/group/:group_id/question/:question_id' element={<QuestionPage />} />
 
-        <Route path='/class/:school_name/:class_name/pdfexams' element={<PDFList />} />
-        <Route path='/class/:school_name/:class_name/pdfexams/:pdf_id' element={<PDFShow />} />
+        <Route path='/class/:school_name/:class_id/pdfexams' element={<PDFList />} />
+        <Route path='/class/:school_name/:class_id/pdfexams/:pdf_id' element={<PDFShow />} />
 
         <Route path='/leaderboard' element={<Leaderboard />} />
         <Route path='/stats' element={<Stats />} />

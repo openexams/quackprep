@@ -84,7 +84,7 @@ export default function ClassCard({ id, name, category, desc }) {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       onClick={() => {
-        dispatch(changeNavbarPage(navigate, `${name}`)); // go to certain class
+        dispatch(changeNavbarPage(navigate, `${id}`)); // go to certain class
         dispatch(updateCurrentClassData(id, name));
       }}
     >
