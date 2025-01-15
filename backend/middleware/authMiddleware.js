@@ -1,5 +1,20 @@
 import { checkApiKey } from "#models/auth/index.js";
 
+export async function hasApiKey(req, res) {
+  if (req.headers?.token) {
+    const user = await checkApiKey(req.headers.token);
+    if (user) {
+      dlog("api token detected");
+      req.user = user;
+      return true;
+    } else {
+      return false;
+    }
+  } else {
+    return false;
+  }
+}
+
 /**
  *
  * @param {String} useragent
@@ -32,15 +47,15 @@ export async function isAuthenticated(req, res, next) {
   if (req.user && req.isAuthenticated()) {
     //dlog("user is logged in");
     next();
-  } else if (req.headers?.token && (await checkApiKey(req.headers.token))) {
-    dlog("api token detected");
-    req.user = await checkApiKey(req.headers.token); // inject into req.user temporaryily
-    if (req.user === null) {
-      res.status(401).json({
-        message: "api key is incorrect",
-      });
-    } else {
+  } else if (req.params.token) {
+    const hasApiKey = await hasApiKey(req.params.token);
+    if (hasApiKey) {
       next();
+    } else {
+      res.status(401).json({
+        message: "401 you do not have access to this page, please login",
+      });
+      return;
     }
   } else if (checkUserAgentIsBot(req.get("User-Agent"))) {
     dlog("bot detected");
