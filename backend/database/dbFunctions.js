@@ -25,6 +25,7 @@ export default class sqlExe {
     dlog("sql command:", sqlCommand.slice(0, 10));
     try {
       // this should only run if editing, not if creating
+
       if (
         options?.verifyUserOwnsRowId &&
         params?.id &&
