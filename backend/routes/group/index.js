@@ -36,7 +36,7 @@ router.get("/:class_id/:type", async function (req, res) {
     commonErrorMessage(
       res,
       500,
-      `failed to get groups by class id ${req.params.classId} `,
+      `failed to get groups by class id ${req.params.classId} & type ${req.params.type} `,
       error
     );
   }

@@ -42,7 +42,7 @@ export default function QuestionCard({ id, selectedQuestion, type_name, group_na
     <List.Item
       key={id}
       onClick={() => {
-        dispatch(changeNavbarPage(navigate, `/class/${schoolName}/${classId}/group/${groupId}/question/${parseInt(id)}`)); // why dude
+        dispatch(changeNavbarPage(navigate, `/class/${schoolName}/${classId}/group/${groupId}/question/${parseInt(id)}`)); // why dude TODO FIX
         dispatch(updateQuestionId(parseInt(id)));
       }}
       active={selectedQuestion && selectedQuestion.id === id}
