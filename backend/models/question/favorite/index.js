@@ -1,4 +1,4 @@
-import sqlExe from "#db/dbFunctions";
+import sqlExe from "#db/dbFunctions.js";
 
 export async function getFavoriteQuestionsByUserId(user_id) {
   return await sqlExe.executeCommand(

@@ -8,12 +8,11 @@ import router from "./routes/index.js";
 import passport from "./config/passportConfig.js";
 import RedisStore from "connect-redis";
 import redis from "redis";
-import dotenv from "dotenv";
 
 import bodyParser from "body-parser";
 import { REDIS_CONFIG, SESSION_CONFIG } from "./config/config.js";
-import sqlExe from "#db/dbFunctions";
-import path, { dirname } from "path";
+import sqlExe from "#db/dbFunctions.js";
+import path from "path";
 import { fileURLToPath } from "url";
 
 const __filename = fileURLToPath(import.meta.url);

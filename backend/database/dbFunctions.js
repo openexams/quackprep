@@ -20,11 +20,7 @@ export default class sqlExe {
    * @returns {any} returns an array of objects from your sql query
    * @throws {Error} throws a sql error, make sure to use try & catch
    */
-  static async executeCommand(
-    sqlCommand: string,
-    params: any = null,
-    options: any = null
-  ) {
+  static async executeCommand(sqlCommand, params = null, options = null) {
     dlog("params sent:", params);
     dlog("sql command:", sqlCommand.slice(0, 10));
     try {
@@ -43,7 +39,7 @@ export default class sqlExe {
       }
 
       const response = await sqlExe.pool.execute(sqlCommand, params);
-      return response[0] as any;
+      return response[0];
     } catch (error) {
       console.log("Failed @executeCommand\n", error);
       throw error;
@@ -58,7 +54,7 @@ export default class sqlExe {
    * @returns {Array<Object>} returns an array of objects from your sql query
    * @throws {Error} throws a sql error, make sure to use try & catch
    */
-  static async queryCommand(sqlCommand: string, params: any = null) {
+  static async queryCommand(sqlCommand, params = null) {
     try {
       const response = await sqlExe.pool.query(sqlCommand, params);
       return response?.[0];

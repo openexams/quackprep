@@ -32,12 +32,6 @@
     "#middleware/*": "./middleware/*"
   },
   "scripts": {
-    "start": "tsx watch server.js"
-  },
-  "devDependencies": {
-    "@types/express": "^5.0.0",
-    "@types/node": "^22.10.5",
-    "tsx": "^4.19.2",
-    "typescript": "^5.7.2"
+    "start": "nodemon server.js"
   }
 }

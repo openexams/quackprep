@@ -1,4 +1,4 @@
-import sqlExe from "#db/dbFunctions";
+import sqlExe from "#db/dbFunctions.js";
 import { verifyUserOwnsRowId } from "#utils/sqlFunctions.js";
 
 async function selectGroups(WHERE, params) {
@@ -13,20 +13,14 @@ async function selectGroups(WHERE, params) {
   );
 }
 
-export async function getGroupsByClassId(class_id, type) {
-  const params = { class_id, type };
-  return await selectGroups(
-    `gt.type_name = :type AND g.class_id = :class_id`,
-    params
-  );
+export async function getGroupsByClassId(class_id) {
+  const params = { class_id };
+  return await selectGroups(`g.class_id = :class_id`, params);
 }
 
-export async function getGroupsByUserId(user_id, type) {
-  const params = { user_id, type };
-  return await selectGroups(
-    "g.created_by =:user_id AND gt.type_name = :type",
-    params
-  );
+export async function getGroupsByUserId(user_id) {
+  const params = { user_id };
+  return await selectGroups("g.created_by =:user_id", params);
 }
 
 export async function upsertGroupInClass(

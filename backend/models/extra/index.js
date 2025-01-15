@@ -1,4 +1,4 @@
-import sqlExe from "#db/dbFunctions";
+import sqlExe from "#db/dbFunctions.js";
 import {
   getLastRowManipulated,
   verifyUserOwnsRowId,

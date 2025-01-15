@@ -1,5 +1,4 @@
 import { getCurTimeUTCFormatted } from "./dateFunctions.js";
-import { Response } from "express";
 
 export function errLogging(err, errMsg) {
   console.log(`[${getCurTimeUTCFormatted()}] ${errMsg}\n${err}`);
@@ -23,7 +22,7 @@ export function sleep(ms) {
  * @param {Error | string | null | any} error
  */
 export function commonErrorMessage(
-  res: Response,
+  res,
   status = 500,
   message = "rip bruh error",
   error = "an error has occurred"

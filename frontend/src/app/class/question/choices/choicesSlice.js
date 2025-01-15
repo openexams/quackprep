@@ -1,7 +1,6 @@
 import { standardApiCall } from '@utils/api';
 import { filterArr, upsertArray, countingSort, selectItemById, updateArrObjectsWithNewVals } from 'maddox-js-funcs';
 import { GEN_AI_Q_AND_C_RES } from '../ai/aiQuestionSlice.js';
-import { Choice } from '../../../../../../shared-types/choice.types';
 
 const GET_CRUD_CHOICES = 'app/class/question/choices/GET_CRUD_CHOICES';
 
@@ -22,21 +21,21 @@ export function removeStateCurrentChoices() {
 }
 
 // adds to answers_transactional and current
-export function upsertCurrentChoiceAndPostAnswer(choice_id: number, question_id: number, text = null) {
+export function upsertCurrentChoiceAndPostAnswer(choice_id, question_id, text = null) {
   return standardApiCall('post', `/api/choice/answer/`, { choice_id, question_id, text }, UPSERT_CURRENT_CHOICE, {
     loadingComponent: ['FRQAnswer'],
   });
 }
 
-export function postFavoriteAnswer(choice_id: number) {
+export function postFavoriteAnswer(choice_id) {
   return standardApiCall('post', `/api/choice/favorite/${choice_id}`, {}, POST_FAVORITE_ANSWER);
 }
 
-export function getChoicesByQuestion(question_id: number) {
+export function getChoicesByQuestion(question_id) {
   return standardApiCall('get', `/api/choice/${question_id}`, null, GET_CRUD_CHOICES, { loadingComponent: 'ChoiceRouter' });
 }
 
-export function getChoicesByGroup(group_id: number) {
+export function getChoicesByGroup(group_id) {
   return standardApiCall('get', `/api/choice/group/${group_id}`, null, GET_CRUD_CHOICES, { loadingComponent: 'ChoiceRouter' }); //yes I know its same does not matter
 }
 
@@ -44,26 +43,21 @@ export function getChoicesByUserId() {
   return standardApiCall('get', `/api/choice/user`, null, GET_CRUD_CHOICES, { loadingComponent: 'Create' }); //yes I know its same does not matter
 }
 
-export function upsertChoice(text: string, question_id: number, isCorrect: number, type: string, id = null) {
+export function upsertChoice(text, question_id, isCorrect, type, id = null) {
   return standardApiCall('post', `/api/choice/${question_id}`, { text, isCorrect, type, id }, UPSERT_CRUD_CHOICE, {
     loadingComponent: 'Create',
     noticeOfSuccess: 'successfully created choice!',
   });
 }
 
-export function deleteChoiceById(id: number) {
+export function deleteChoiceById(id) {
   return standardApiCall('delete', `/api/choice/${id}`, null, DELETE_CRUD_CHOICE, {
     loadingComponent: 'Create',
     noticeOfSuccess: 'successfully deleted choice!',
   });
 }
 
-export function checkStudentFRQAnswer(
-  trans_id: number,
-  question_text: string,
-  student_answer_text: string,
-  correct_answer_text: string | null,
-) {
+export function checkStudentFRQAnswer(trans_id, question_text, student_answer_text, correct_answer_text) {
   return standardApiCall(
     'post',
     '/api/choice/ai/gradeai/',
@@ -102,7 +96,8 @@ export default function choicesReducer(state = DEFAULT_STATE, action) {
     case UPSERT_CURRENT_CHOICE:
       return { ...state, currentChoices: upsertArray(state.currentChoices, action.payload) };
     case GEN_AI_Q_AND_C_RES: {
-      const generatedChoices: Choice[] = action.payload?.choices;
+      /**@type {import("../../../../../../shared-types/choice.types").GenQuestion} */
+      const generatedChoices = action.payload?.choices;
       return { ...state, choices: updateArrObjectsWithNewVals(state.choices, generatedChoices) }; // shouldnt have to counting sort them because they are new
     }
     default:
@@ -110,7 +105,7 @@ export default function choicesReducer(state = DEFAULT_STATE, action) {
   }
 }
 
-export const selectChoicesState = (state: any) => {
+export const selectChoicesState = (state) => {
   return { choices: state.app.choices.choices };
 };
 

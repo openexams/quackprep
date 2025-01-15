@@ -1,12 +1,11 @@
 import { getClassesBySchoolId } from '@src/app/class/classSlice';
 import { getSchools } from '@src/app/class/school/schoolSlice';
-import { getTopicsByClassId } from '@src/app/class/group/topic/topicSlice';
-import { getExamsByClassId } from '@src/app/class/group/exam/examSlice';
 import { getQuestionsByGroupId } from '@src/app/class/question/questionSlice';
 import { getChoicesByGroup } from '@src/app/class/question/choices/choicesSlice';
 import { updateCurrentClassData, updateCurrentGroupData, updateQuestionId, updateSchoolId } from './navbarSlice';
 import { findNeedleInArrayOfObjectsLINEAR, findNeedlesInArrayOfObjectsLINEAR } from 'maddox-js-funcs';
 import { getPdfsByClassId } from '@src/app/class/group/pdf/pdfSlice';
+import { getGroupsByClassId } from '@src/app/class/group/groupSlice';
 
 /**
  * Returns all possible page permuations with the given url
@@ -80,29 +79,16 @@ export function schoolUpdateLogic(dispatch, schools, school_name) {
   }
 }
 
-export function topicUpdateLogic(dispatch, groupName, class_id, topics) {
-  const tmp_topic_id = findNeedlesInArrayOfObjectsLINEAR(topics, ['name', 'class_id'], [groupName, class_id], 'id');
-  if ((tmp_topic_id, groupName)) {
-    dispatch(updateCurrentGroupData({ name: groupName, id: tmp_topic_id }));
+export function groupUpdateLogic(dispatch, groupName, class_id, groups) {
+  const current_group_id = findNeedlesInArrayOfObjectsLINEAR(groups, ['class_id', 'name'], [class_id, groupName], 'id');
+  if (groupName && current_group_id) {
+    dispatch(updateCurrentGroupData({ id: current_group_id, name: groupName }));
   }
 }
 
-export function topicFetchLogic(dispatch, classId) {
+export function groupFetchLogic(dispatch, classId) {
   if (classId) {
-    dispatch(getTopicsByClassId(classId));
-  }
-}
-
-export function examUpdateLogic(dispatch, groupName, class_id, exams) {
-  const current_exam_id = findNeedlesInArrayOfObjectsLINEAR(exams, ['class_id', 'name'], [class_id, groupName], 'id');
-  if (groupName && current_exam_id) {
-    dispatch(updateCurrentGroupData({ id: current_exam_id, name: groupName }));
-  }
-}
-
-export function examFetchLogic(dispatch, classId) {
-  if (classId) {
-    dispatch(getExamsByClassId(classId));
+    dispatch(getGroupsByClassId(classId));
   }
 }
 

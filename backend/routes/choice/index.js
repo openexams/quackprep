@@ -15,7 +15,7 @@ import { cascadeSetDeleted } from "#utils/sqlFunctions.js";
 import { commonErrorMessage } from "#utils/utils.js";
 import { Router } from "express";
 import currentRouter from "./current/index.js";
-import aiRouter from "./ai/index";
+import aiRouter from "./ai/index.js";
 
 const router = Router();
 

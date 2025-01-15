@@ -4,10 +4,8 @@ import {
   upsertQuestion,
 } from "../index.js";
 import { addManyChoicesToQuestion } from "#models/choice/index.js";
-import sqlExe from "#db/dbFunctions";
-import { GenQuestion } from "../../../../shared-types/question.types";
+import sqlExe from "#db/dbFunctions.js";
 import { sendOpenAiAssistantPromptAndRecieveResult } from "#utils/openAi.js";
-import { selectCurrentChoice } from "#models/choice/current/index.js";
 /**
  *
  * @param {Integer} user_id add which user ai generated the question (does not rlly matter)
@@ -16,15 +14,16 @@ import { selectCurrentChoice } from "#models/choice/current/index.js";
  * @returns {Object} question object back to the user who generated it
  */
 export async function generateQuestionLike(
-  user_id: number,
-  likeQuestionText: string,
-  likeQuestionId: number
+  user_id,
+  likeQuestionText,
+  likeQuestionId
 ) {
   let question_added = null;
   dlog(`ai generating like q_id: ${likeQuestionId}`);
   // find the assistant I created
   try {
-    const quackAssistResponseJSON: GenQuestion =
+    /**@type {import("../../../../shared-types/question.types.js").GenQuestion} */
+    const quackAssistResponseJSON =
       await sendOpenAiAssistantPromptAndRecieveResult(
         "asst_a168JvA9PlzK2WaKZ6oukDe4",
         `create a question like: "${likeQuestionText}"\nin json format`

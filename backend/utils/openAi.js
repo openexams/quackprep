@@ -1,9 +1,9 @@
 import { openai } from "#config/config.js";
 
 export async function sendOpenAiAssistantPromptAndRecieveResult(
-  assistant_id: string,
-  prompt: string
-): Promise<any> {
+  assistant_id,
+  prompt
+) {
   try {
     const quackAssist = await openai.beta.assistants.retrieve(assistant_id);
 

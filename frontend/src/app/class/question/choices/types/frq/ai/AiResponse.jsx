@@ -1,4 +1,3 @@
-import React from 'react';
 import { Card, Segment, Label } from 'semantic-ui-react';
 import { getGradeColor } from '../FRQAnswer';
 

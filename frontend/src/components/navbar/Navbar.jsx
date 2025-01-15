@@ -3,25 +3,19 @@ import { Menu, Container, Icon, Sidebar, Button, Transition } from 'semantic-ui-
 import { useState, useEffect, useMemo, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectUser } from '@src/app/auth/authSlice';
-import { changeNavbarPage, selectCurrentPage, selectNavbarState, updateGroupType, upsertTimeSpent } from './navbarSlice';
-import { getCurUser } from '@src/app/auth/authSlice';
+import { changeNavbarPage, selectCurrentPage, selectNavbarState, updateGroupType } from './navbarSlice';
 import ProfileDropdown from './components/Profile/ProfileDropdown';
 import { useLocation, useNavigate } from 'react-router-dom';
 import BrandLogo from './components/BrandLogo';
-import { getHasStreak, selectHasStreak } from '@src/app/streak/streakSlice.js';
+import { selectHasStreak } from '@src/app/streak/streakSlice.js';
 import { selectClassState } from '@src/app/class/classSlice';
-import { selectTopicState } from '@src/app/class/group/topic/topicSlice';
-import { selectQuestionState } from '@src/app/class/question/questionSlice';
-import { selectExamsState } from '@src/app/class/group/exam/examSlice.js';
 import { selectSchoolState } from '@src/app/class/school/schoolSlice';
 import { selectLoadingState } from '@src/app/store/loadingSlice';
 import { select401CompState } from '@components/401/401Slice';
 import {
   classFetchLogic,
-  examFetchLogic,
-  topicFetchLogic,
-  topicUpdateLogic,
-  examUpdateLogic,
+  groupFetchLogic,
+  groupUpdateLogic,
   classUpdateLogic,
   schoolUpdateLogic,
   questionFetchLogic,
@@ -31,10 +25,10 @@ import {
 } from './navbarFunctions';
 import Init from '@src/Init';
 import Sentinel from '@src/Sentinel';
+import { selectGroupsState } from '@src/app/class/group/groupSlice';
 
 export default function Navbar() {
-  const { topics } = useSelector(selectTopicState);
-  const { exams } = useSelector(selectExamsState);
+  const groups = useSelector(selectGroupsState);
   const { classes } = useSelector(selectClassState);
   const dispatch = useDispatch();
   const { user } = useSelector(selectUser);
@@ -76,38 +70,32 @@ export default function Navbar() {
         pdfsFetchLogic(dispatch, classId);
       }
 
-      if (pathArray?.[4] === 'exam' && !loading?.ExamList && className && classId) {
-        examUpdateLogic(dispatch, groupName, classId, exams);
-        examFetchLogic(dispatch, classId);
-      }
-      if (pathArray?.[4] === 'topic' && !loading?.TopicsShow && className && classId) {
-        topicUpdateLogic(dispatch, groupName, classId, topics);
-        topicFetchLogic(dispatch, classId);
+      if (pathArray?.[4] === 'group' && !loading?.GroupsList && className && classId) {
+        groupUpdateLogic(dispatch, groupName, classId, groups);
+        groupFetchLogic(dispatch, classId);
       }
       if (
-        pathArray?.[4] === 'exam' ||
-        (pathArray?.[4] === 'topic' &&
-          pathArray?.[6] === 'question' &&
-          !loading?.QuestionPage &&
-          className &&
-          classId &&
-          groupId &&
-          groupName &&
-          groupType)
+        pathArray?.[4] === 'group' &&
+        pathArray?.[6] === 'question' &&
+        !loading?.QuestionPage &&
+        className &&
+        classId &&
+        groupId &&
+        groupName &&
+        groupType
       ) {
         questionUpdateLogic(dispatch, questionId);
         questionFetchLogic(dispatch, groupId);
       }
       if (
-        pathArray?.[4] === 'exam' ||
-        (pathArray?.[4] === 'topic' &&
-          pathArray?.[6] === 'question' &&
-          !loading?.ChoiceRouter &&
-          className &&
-          classId &&
-          groupId &&
-          groupName &&
-          groupType)
+        pathArray?.[4] === 'group' &&
+        pathArray?.[6] === 'question' &&
+        !loading?.ChoiceRouter &&
+        className &&
+        classId &&
+        groupId &&
+        groupName &&
+        groupType
       ) {
         choicesFetchLogic(dispatch, groupId);
       }
@@ -116,8 +104,7 @@ export default function Navbar() {
     activePage,
     classId,
     className,
-    exams,
-    topics,
+    groups,
     groupId,
     groupType,
     groupName,
@@ -126,9 +113,8 @@ export default function Navbar() {
     schools,
     schoolId,
     questionId,
+    loading?.GroupsList,
     loading?.ClassList,
-    loading?.ExamList,
-    loading?.TopicsShow,
     loading?.QuestionPage,
     loading?.ChoiceRouter,
     loading?.PdfList,
