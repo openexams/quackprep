@@ -1,3 +1,5 @@
+// maps array of objects to what react semantic ui likes to see in dropdowns
+
 export function mapSchoolsToDropdown(schools) {
   return schools.map((school) => ({
     key: school.id,

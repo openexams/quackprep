@@ -20,7 +20,7 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 
-console.log(path.join(__dirname, "./public/"));
+console.log(path.join(__dirname, "../."));
 
 app.use(express.json());
 
@@ -31,12 +31,11 @@ let corsOrigins = [
   "https://api.quackprep.com",
   "https://quackprep.com",
   "https://www.quackprep.com",
-  "https://quackprep-production.up.railway.app",
 ];
 if (NODE_ENV === "local") corsOrigins.push("http://localhost:3001"); // maybe bad pratice
 
 const corsOrigin = {
-  origin: corsOrigins,
+  origin: corsOrigins, // allow only these to hit
   credentials: true,
   optionSuccessStatus: 200,
 };
@@ -66,9 +65,6 @@ if (NODE_ENV === "prod") {
 } else {
   app.use(session(SESSION_CONFIG));
 }
-
-await sqlExe.test();
-
 app.use(
   rateLimit({
     windowMs: 60 * 1000, // 1 min
@@ -94,11 +90,12 @@ app.use(express.static(path.join(__dirname, "./public/")));
 app.use("/api", router);
 
 app.get("/*", (req, res) => {
+  // never hits this with way I have frotend setup (its on cloudflare)
   res.redirect(process.env.FRONTEND_URL);
 });
+
+await sqlExe.testConnection();
 
 app.listen(3000, () => {
   console.log("Listening on port 3000");
 });
-
-//test db connections

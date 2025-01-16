@@ -25,7 +25,7 @@ router.get("/user/", isAuthenticated, async function (req, res) {
   }
 });
 
-router.get("/:class_id/:type", async function (req, res) {
+router.get("/:class_id/:type?", async function (req, res) {
   try {
     const result = await getGroupsByClassId(
       req.params.class_id,
@@ -36,21 +36,7 @@ router.get("/:class_id/:type", async function (req, res) {
     commonErrorMessage(
       res,
       500,
-      `failed to get groups by class id ${req.params.classId} & type ${req.params.type} `,
-      error
-    );
-  }
-});
-// DUPLICATED
-router.get("/:class_id", async function (req, res) {
-  try {
-    const result = await getGroupsByClassId(req.params.class_id, null);
-    res.status(200).json(result);
-  } catch (error) {
-    commonErrorMessage(
-      res,
-      500,
-      `failed to get groups by class id ${req.params.classId} `,
+      `failed to get groups by class id ${req.params.classId} & type ${req.params.type} (if type passed in) `,
       error
     );
   }

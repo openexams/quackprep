@@ -65,7 +65,7 @@ export default class sqlExe {
     }
   }
 
-  static async test() {
+  static async testConnection() {
     try {
       await sqlExe.pool.query("SELECT * FROM answers_current LIMIT 1");
       console.log("Connected to quackprep");

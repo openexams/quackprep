@@ -1,5 +1,11 @@
 import { checkApiKey } from "#models/auth/index.js";
 
+/**
+ * Checks if the user is using an api key. if so attach to user obj (saved by redis I think idk)
+ * @param {*} req
+ * @param {*} token
+ * @returns {Boolean}
+ */
 export async function hasApiKeyAndInsert(req, token) {
   if (token) {
     const user_id = await checkApiKey(token);
@@ -12,34 +18,6 @@ export async function hasApiKeyAndInsert(req, token) {
   } else {
     return false;
   }
-}
-
-/**
- *
- * @param {String} useragent
- * @returns {boolean}
- */
-function checkUserAgentIsBot(useragent) {
-  if (useragent == null) {
-    return false;
-  }
-  const agents = {
-    googlebot: "googlebot",
-    bingbot: "bingbot",
-    slurp: "slurp", // Yahoo bot
-    duckduckbot: "duckduckbot",
-    baiduspider: "baiduspider",
-    yandex: "yandex",
-    sogou: "sogou",
-    exabot: "exabot",
-    facebot: "facebot", // Facebook
-    ia_archiver: "ia_archiver", // Wayback Machine
-  };
-
-  if (useragent.toLowerCase() in agents) {
-    return true;
-  }
-  return false;
 }
 
 export async function isAuthenticated(req, res, next) {
@@ -57,10 +35,6 @@ export async function isAuthenticated(req, res, next) {
       });
       return;
     }
-  } else if (checkUserAgentIsBot(req.get("User-Agent"))) {
-    dlog("bot detected");
-    req.user = 23; // web crawler id
-    next();
   } else {
     dlog("User not authed");
     res.status(401).json({

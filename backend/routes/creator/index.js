@@ -13,8 +13,8 @@ router.post("/", isAuthenticated, async function (req, res) {
     return;
   }
   try {
-    const result = await submitCreatorForm(req.user, data.the_why, data.school);
-    res.status(200).json({ hello: "joe" });
+    await submitCreatorForm(req.user, data.the_why, data.school);
+    res.status(200).json({ message: "recieved successfully" });
   } catch (error) {
     commonErrorMessage(res, 500, "failed to submit creator form", error);
     return;

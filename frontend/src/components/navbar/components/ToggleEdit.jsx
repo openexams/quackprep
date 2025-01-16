@@ -12,10 +12,10 @@ const ToggleEditComponent = () => {
     return null;
   }
   return (
-    <div style={{ padding: '20px', maxWidth: '300px', margin: 'auto' }}>
+    <div style={{ color: editing ? 'green' : 'red', padding: '20px', maxWidth: '300px', margin: 'auto' }}>
       <h3>Toggle Edit: {editing ? 'True' : 'False'}</h3>
 
-      <Checkbox toggle checked={editing} onChange={() => dispatch(toggleEdit())} label={editing ? 'Editing' : 'Not Editing'} />
+      <Checkbox toggle checked={editing} onChange={() => dispatch(toggleEdit())} />
     </div>
   );
 };

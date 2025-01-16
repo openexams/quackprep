@@ -5,7 +5,7 @@ export async function isCreator(req, res, next) {
   if ((await checkIfCreator(req.user)) === true) {
     next();
   } else {
-    res.status(400).json({ message: "you are are not a creator" });
+    res.status(401).json({ message: "you are are not a creator" });
     return;
   }
 }

@@ -4,6 +4,9 @@ export function errLogging(err, errMsg) {
   console.log(`[${getCurTimeUTCFormatted()}] ${errMsg}\n${err}`);
 }
 
+/**
+ * Logs only if on dev mode
+ */
 global.dlog = function (message, ...params) {
   if (NODE_ENV === "local") {
     console.log(message, ...params);

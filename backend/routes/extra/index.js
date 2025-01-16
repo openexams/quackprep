@@ -1,3 +1,4 @@
+// currently only used for pdfs, hopefully gone soon
 import express from "express";
 import {
   getPdfsByClassId,
