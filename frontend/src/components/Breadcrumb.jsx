@@ -4,12 +4,19 @@ import { changeNavbarPage, selectNavbarState } from './navbar/navbarSlice';
 import { useDispatch } from 'react-redux';
 import { useMemo } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { selectArrayOfStateById } from 'maddox-js-funcs';
 
 export default function HistoryNav() {
+  const { classId, groupId } = useSelector(selectNavbarState).navbar;
+  const curGroupName = useSelector(selectArrayOfStateById('app.group.groups', 'id', groupId))?.[0]?.name;
+  const curClassName = useSelector(selectArrayOfStateById('app.class.classes.classes', 'id', classId))?.[0]?.name;
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();
   const urlArr = location.pathname?.split('/');
+  const CLASS_NAME_LOCATION = 3;
+  const GROUP_NAME_LOCATION = 5;
   const sections = useMemo(() => {
     return mapCurrentNavbarStateToSectionsOfBreadcrumb(urlArr);
   }, [urlArr]);
@@ -21,13 +28,19 @@ export default function HistoryNav() {
     for (let i = 0; i < urlArr.length; i++) {
       if (urlArr[i] == '' || urlArr[i] == ' ') {
         // do nothing
-      } else if (i !== 69) {
-        // if i!==5 old version
+      } else if (i !== 5) {
         let curItemUrl = urlArr.slice(0, i + 1).join('/');
+        let content = null;
+        if (i === CLASS_NAME_LOCATION) {
+          content = curClassName;
+        } else if (i === GROUP_NAME_LOCATION) {
+          // never can be this lol
+          content = curGroupName;
+        }
 
         sections.push({
           key: urlArr[i],
-          content: urlArr[i]?.[0].toUpperCase() + urlArr[i].slice(1),
+          content: content || urlArr[i]?.[0].toUpperCase() + urlArr[i].slice(1),
           onClick: () => dispatch(changeNavbarPage(navigate, curItemUrl)),
           active: urlArr[urlArr.length - 1] == urlArr[i] ? true : false,
         });
