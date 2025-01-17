@@ -2,6 +2,8 @@ import { standardApiCall } from '@utils/api';
 
 import { updateArrObjectsWithNewVals, filterArr, upsertArray, countingSort } from 'maddox-js-funcs';
 
+export const GROUP_TYPES = ['exam', 'topic'];
+
 const GET_GROUPS = 'app/class/group/GET_GROUPS';
 const DELETE_GROUP = 'app/class/group/DELETE_GROUP';
 const UPSERT_GROUP = 'app/class/group/UPSERT_GROUP';

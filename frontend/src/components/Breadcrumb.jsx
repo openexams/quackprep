@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import { Breadcrumb, Transition } from 'semantic-ui-react';
-import { changeNavbarPage, selectNavbarState } from './navbar/navbarSlice';
+import { changeNavbarPage, getFixedUrlArr, selectNavbarState } from './navbar/navbarSlice';
 import { useDispatch } from 'react-redux';
 import { useMemo } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -14,7 +14,7 @@ export default function HistoryNav() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();
-  const urlArr = location.pathname?.split('/');
+  const urlArr = getFixedUrlArr(location.pathname);
   const CLASS_NAME_LOCATION = 3;
   const GROUP_NAME_LOCATION = 5;
   const sections = useMemo(() => {

@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { firstLetterUppercase } from '@utils/helperFuncs';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectUser } from './app/auth/authSlice';
-import { selectNavbarState, upsertTimeSpent } from '@components/navbar/navbarSlice';
+import { getFixedUrlArr, selectNavbarState, upsertTimeSpent } from '@components/navbar/navbarSlice';
 
 export default function Sentinel() {
   const dispatch = useDispatch();
@@ -14,7 +14,7 @@ export default function Sentinel() {
   const location = useLocation();
 
   useEffect(() => {
-    const urlArr = location.pathname?.split('/');
+    const urlArr = getFixedUrlArr(location.pathname);
     if (schoolName) {
       document.title = schoolName + ' - ' + 'Quackprep';
     } else if (urlArr[1]) {

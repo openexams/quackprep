@@ -2,7 +2,7 @@ import { getClassesBySchoolId } from '@src/app/class/classSlice';
 import { getSchools } from '@src/app/class/school/schoolSlice';
 import { getQuestionsByGroupId } from '@src/app/class/question/questionSlice';
 import { getChoicesByGroup } from '@src/app/class/question/choices/choicesSlice';
-import { updateCurrentClassData, updateCurrentGroupData, updateQuestionId, updateSchoolId } from './navbarSlice';
+import { getFixedUrlArr, updateCurrentClassData, updateCurrentGroupData, updateQuestionId, updateSchoolId } from './navbarSlice';
 import { findNeedleInArrayOfObjectsLINEAR, findNeedlesInArrayOfObjectsLINEAR } from 'maddox-js-funcs';
 import { getPdfsByClassId } from '@src/app/class/group/pdf/pdfSlice';
 import { getGroupsByClassId } from '@src/app/class/group/groupSlice';
@@ -17,7 +17,7 @@ export function parseUrlIntoPages(url) {
     return null;
   }
   // [0] is always "" (blank)
-  const urlArr = url.split('/');
+  const urlArr = getFixedUrlArr(url);
   let total = [];
   // i is off by one so i can be used by slice
   for (let i = 2; i < urlArr.length + 1; i++) {

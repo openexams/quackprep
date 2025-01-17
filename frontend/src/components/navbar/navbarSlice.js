@@ -124,7 +124,7 @@ export default function navbarReducer(state = DEFAULT_STATE, action) {
       }
 
       // when I change the navbar set everything back to null so navbar has to dispatch to get id values;
-      const urlArr = curUrl.split('/');
+      const urlArr = getFixedUrlArr(curUrl);
       const newSchoolName = urlArr[2] || null;
       const newClassId = urlArr[3] || null;
       const newGroupId = urlArr[5] || null;
@@ -186,3 +186,18 @@ export const selectLastPage = function (state) {
   lastPage = lastPage[lastPage.length - 1];
   return { lastPage: lastPage };
 };
+
+/**
+ * pass in location.pathname
+ * @param {String} curUrl
+ */
+export function getFixedUrlArr(curUrl) {
+  if (!curUrl) {
+    return null;
+  }
+  if (curUrl.includes('?')) {
+    curUrl = curUrl.split('?').shift();
+  }
+  console.log(curUrl);
+  return curUrl?.split('/');
+}

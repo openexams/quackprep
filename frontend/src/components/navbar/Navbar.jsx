@@ -3,7 +3,7 @@ import { Menu, Container, Icon, Sidebar, Button, Transition } from 'semantic-ui-
 import { useState, useEffect, useMemo, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectUser } from '@src/app/auth/authSlice';
-import { changeNavbarPage, selectCurrentPage, selectNavbarState, updateGroupType } from './navbarSlice';
+import { changeNavbarPage, getFixedUrlArr, selectCurrentPage, selectNavbarState, updateGroupType } from './navbarSlice';
 import ProfileDropdown from './components/Profile/ProfileDropdown';
 import { useLocation, useNavigate } from 'react-router-dom';
 import BrandLogo from './components/BrandLogo';
@@ -41,7 +41,7 @@ export default function Navbar() {
   const schools = useSelector(selectSchoolState).schools;
   const loading = useSelector(selectLoadingState)?.loadingComps;
   const State401 = useSelector(select401CompState).show;
-  const pathArray = activePage?.split('/');
+  const pathArray = getFixedUrlArr(activePage);
 
   // spaces in stuff is a issue!!
   const { className, classId, groupName, groupId, questionId, schoolName, groupType, schoolId } =
