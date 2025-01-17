@@ -5,6 +5,10 @@ import { isFavoriteQuestion, selectFavoriteQuestionsState } from '@src/app/favor
 import { useSelector } from 'react-redux';
 import { doesQuestionHaveCurrentChoice, selectCurrentChoicesState } from './choices/choicesSlice';
 import GenerateQuestion from './ai/GenerateQuestion';
+import { selectCanAndIsEdit } from '@src/app/auth/authSlice';
+import { selectNavbarState } from '@components/navbar/navbarSlice';
+import { selectArrayOfStateById } from 'maddox-js-funcs';
+import QuestionEditor from '@src/app/creator/editor/QuestionEditor';
 
 /**
  * @param {Object} props
@@ -12,6 +16,12 @@ import GenerateQuestion from './ai/GenerateQuestion';
  * @param {Object} props.selectedQuestion
  */
 export default function QuestionList({ questions, selectedQuestion }) {
+  // for edit
+  const { groupId } = useSelector(selectNavbarState).navbar;
+  const group = useSelector(selectArrayOfStateById('app.group.groups', 'id', groupId))?.[0];
+  const edit = useSelector(selectCanAndIsEdit(parseInt(group?.created_by)));
+  //
+  console.log(edit);
   const favoriteQuestions = useSelector(selectFavoriteQuestionsState);
   const [showTopics, setShowTopics] = useState(false); // TODO SHOW MULTIPLE TOPICS IF THE QUESTION HAS SUCH
   const currentChoices = useSelector(selectCurrentChoicesState);
@@ -33,6 +43,7 @@ export default function QuestionList({ questions, selectedQuestion }) {
       {/* Wrapping List in a scrollable container */}
       <div style={{ maxHeight: '33rem', overflowY: 'auto' }}>
         <List selection divided relaxed>
+          {edit ? <QuestionEditor group_ids={groupId} /> : null}
           {questions.map((question, index) => (
             <QuestionCard
               ai={question.ai}

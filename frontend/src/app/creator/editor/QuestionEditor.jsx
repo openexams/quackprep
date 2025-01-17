@@ -7,10 +7,13 @@ import { deleteQuestionById, upsertQuestionWithGroupIds } from '@src/app/class/q
 import ConfirmButton from '@components/ConfirmButton';
 import MarkdownEditor from './MarkdownEditor';
 
-export default function QuestionEditor({ id, group_id: groups, explanation_url, question }) {
+export default function QuestionEditor({ id, group_ids, explanation_url, question }) {
   const dispatch = useDispatch();
   const allGroups = useSelector(selectGroupsState);
-  const initialGroupIds = groups?.split(',').map((group) => parseInt(group));
+  group_ids = String(group_ids);
+  const initialGroupIds = group_ids?.includes(',')
+    ? group_ids?.split(',').map((group) => parseInt(group))
+    : [parseInt(group_ids)];
 
   const [selectedGroups, setSelectedGroups] = useState(initialGroupIds);
   const [questionText, setQuestionText] = useState(question || '');
@@ -26,7 +29,7 @@ export default function QuestionEditor({ id, group_id: groups, explanation_url, 
   };
 
   return (
-    <Segment id={id ? `question-${id}` : `question-new-${initialGroupIds}`}>
+    <Segment id={id ? `question-${id}-${initialGroupIds}` : `question-new-${initialGroupIds}`}>
       <Form onSubmit={handleSubmit}>
         <Header as={'h3'}> {id ? `Question:${id}` : 'Create New Question'} </Header>
         <MarkdownEditor
@@ -62,7 +65,7 @@ export default function QuestionEditor({ id, group_id: groups, explanation_url, 
           Submit
         </Button>
       </Form>
-      {id && <ConfirmButton color='red' content='Delete' onConfirm={() => dispatch(deleteQuestionById(id))} />}
+      {id && <ConfirmButton color='red' content='Delete' onClick={() => dispatch(deleteQuestionById(id))} />}
     </Segment>
   );
 }

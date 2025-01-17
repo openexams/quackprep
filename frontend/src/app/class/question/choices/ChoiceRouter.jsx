@@ -36,7 +36,16 @@ export default function ChoiceRouter({ selectedQuestion }) {
       {selectedQuestion && choices ? (
         <>
           <Header>
-            {edit ? <QuestionEditor {...selectedQuestion} /> : <MarkdownRenderer render={selectedQuestion.question} />}
+            {edit ? (
+              <QuestionEditor
+                id={selectedQuestion.id}
+                group_ids={selectedQuestion.group_id}
+                explanation_url={selectedQuestion.explanation_url}
+                question={selectedQuestion.question}
+              />
+            ) : (
+              <MarkdownRenderer render={selectedQuestion.question} />
+            )}
             {selectedQuestion.ai ? (
               <Popup
                 content='These questions are AI-generated and may contain inaccuracies. Please verify their correctness.'

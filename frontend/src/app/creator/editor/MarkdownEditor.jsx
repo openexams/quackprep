@@ -20,32 +20,34 @@ export default function MarkdownEditor({ label, onChange, value, placeholder, re
   }, []);
 
   return (
-    <Popup
-      content={editingMD ? 'Click outside to render md' : 'Click to edit'}
-      trigger={
-        <Segment
-          ref={editorRef}
-          onClick={() => {
-            setEditingMD(true);
-          }}
-        >
-          {`${label}:`}
-          {!editingMD ? (
-            <div>
-              <MarkdownRenderer render={value} />
-            </div>
-          ) : (
-            <Form.TextArea
-              label={label}
-              required={required}
-              value={value}
-              onChange={onChange}
-              placeholder={placeholder}
-              autoFocus
-            />
-          )}
-        </Segment>
-      }
-    />
+    <Form.Field>
+      <Popup
+        content={editingMD ? 'Click outside to render md' : 'Click to edit'}
+        trigger={
+          <Segment
+            ref={editorRef}
+            onClick={() => {
+              setEditingMD(true);
+            }}
+          >
+            {`${label}:`}
+            {!editingMD ? (
+              <div>
+                <MarkdownRenderer render={value} />
+              </div>
+            ) : (
+              <Form.TextArea
+                label={label}
+                required={required}
+                value={value}
+                onChange={onChange}
+                placeholder={placeholder}
+                autoFocus
+              />
+            )}
+          </Segment>
+        }
+      />
+    </Form.Field>
   );
 }
