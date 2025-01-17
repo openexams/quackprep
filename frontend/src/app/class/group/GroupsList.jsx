@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { Header, Segment, Card, Container, Icon } from 'semantic-ui-react';
+import { Header, Segment, Card, Container, Icon, Label } from 'semantic-ui-react';
 import { selectArrayOfIncludingItems, selectBINARYArrayOfStateById } from 'maddox-js-funcs';
 import { selectNavbarState } from '@components/navbar/navbarSlice';
 import { selectLoadingState } from '@src/app/store/loadingSlice';
@@ -9,25 +9,41 @@ import GroupEditor from '@src/app/creator/forms/GroupEdit';
 import { selectEditState } from '@src/app/auth/authSlice';
 import GroupCard from './GroupCard';
 import { useState } from 'react';
+import { GROUP_TYPES } from './groupSlice';
 
 export default function GroupsList() {
   const editModeOn = useSelector(selectEditState);
   const [searchParams, setSearchParams] = useSearchParams();
   const [filter, setStateFilter] = useState(searchParams.get('filter') || '');
+  const types = GROUP_TYPES;
+  const [typeFilter, setTypeFilter] = useState(searchParams.get('type') || '');
   const { navbar } = useSelector(selectNavbarState);
   const { className, classId } = navbar;
   const loading = useSelector(selectLoadingState).loadingComps.GroupsList;
   const groups = selectArrayOfIncludingItems(
     useSelector(selectBINARYArrayOfStateById('app.group.groups', 'class_id', classId)),
-    ['name'],
-    [filter || ''],
+    ['name', 'type'],
+    [filter || '', typeFilter],
   );
-  console.log(filter);
 
   function setFilter(newStr) {
     searchParams.set('filter', newStr);
     setSearchParams(searchParams);
     setStateFilter(newStr);
+  }
+
+  function handleTypeClick(type) {
+    if (typeFilter === type) {
+      // If clicking the active filter, clear it
+      searchParams.delete('type');
+      setSearchParams(searchParams);
+      setTypeFilter('');
+    } else {
+      // Set new filter
+      searchParams.set('type', type);
+      setSearchParams(searchParams);
+      setTypeFilter(type);
+    }
   }
 
   return (
@@ -40,7 +56,27 @@ export default function GroupsList() {
             <Header.Subheader>Select a topic to start studying</Header.Subheader>
           </Header.Content>
         </Header>
-        <Searchbar setValue={setFilter} value={filter} placeholder={'Search groups'} />
+
+        <div style={{ marginBottom: '1rem' }}>
+          <Searchbar setValue={setFilter} value={filter} placeholder={'Search groups'} />
+          {types.map((type) => (
+            <Label
+              key={type}
+              as='a'
+              color={typeFilter === type ? 'blue' : 'grey'}
+              onClick={() => handleTypeClick(type)}
+              style={{
+                cursor: 'pointer',
+                transition: 'all 0.2s ease',
+                opacity: typeFilter && typeFilter !== type ? 0.6 : 1,
+              }}
+            >
+              {type}
+              {typeFilter === type && <Icon name='close' style={{ marginLeft: '4px' }} />}
+            </Label>
+          ))}
+        </div>
+
         <Card.Group itemsPerRow={3} stackable>
           {groups &&
             groups.map((group) => {

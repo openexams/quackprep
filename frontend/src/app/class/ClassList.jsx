@@ -41,7 +41,7 @@ export default function ClassList() {
             : `Showing all ${classes?.length} available classes`}
         </Header.Subheader>
 
-        <Segment loading={loading} raised>
+        <Segment raised>
           <Menu pointing secondary fluid widths={classCategories.length + 1} stackable>
             <Menu.Item name='All Classes' active={curCategory === ''} onClick={() => handleCategoryChange('')} icon='list' />
             {classCategories.map((category, index) => (

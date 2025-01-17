@@ -10,15 +10,15 @@ import { selectClassState } from '@src/app/class/classSlice';
 
 // Example mapper (adjust path as needed)
 import { mapClassesToDropdown } from './dropdownMappings';
+import { GROUP_TYPES } from '@src/app/class/group/groupSlice';
 
 /**
  * Example "type" options as an enum-like dropdown.
  * Adjust as needed for your real enum values.
  */
-const GROUP_TYPES = [
-  { key: 'exam', value: 'exam', text: 'Exam' },
-  { key: 'topic', value: 'topic', text: 'Topic' },
-];
+const GROUP_TYPES_MAP = GROUP_TYPES.map((item) => {
+  return { key: item, value: item, text: item };
+});
 
 export default function GroupEditor({ id, name, type, description, class_id }) {
   const dispatch = useDispatch();
@@ -71,7 +71,7 @@ export default function GroupEditor({ id, name, type, description, class_id }) {
           clearable
           value={groupType}
           onChange={(_, data) => setGroupType(data.value)}
-          options={GROUP_TYPES}
+          options={GROUP_TYPES_MAP}
           placeholder='Select a Group Type'
         />
 

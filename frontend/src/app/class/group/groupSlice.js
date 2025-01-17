@@ -2,7 +2,7 @@ import { standardApiCall } from '@utils/api';
 
 import { updateArrObjectsWithNewVals, filterArr, upsertArray, countingSort } from 'maddox-js-funcs';
 
-export const GROUP_TYPES = ['exam', 'topic'];
+export const GROUP_TYPES = ['exam', 'topic']; // will need to switch on backend, i think the table group_types
 
 const GET_GROUPS = 'app/class/group/GET_GROUPS';
 const DELETE_GROUP = 'app/class/group/DELETE_GROUP';

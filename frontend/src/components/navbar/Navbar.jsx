@@ -1,11 +1,11 @@
 // not using navbar css file
-import { Menu, Container, Icon, Sidebar, Button, Transition } from 'semantic-ui-react';
-import { useState, useEffect, useMemo, useRef } from 'react';
+import { Menu, Container, Icon, Sidebar, Transition } from 'semantic-ui-react';
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectUser } from '@src/app/auth/authSlice';
 import { changeNavbarPage, getFixedUrlArr, selectCurrentPage, selectNavbarState, updateGroupType } from './navbarSlice';
 import ProfileDropdown from './components/Profile/ProfileDropdown';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import BrandLogo from './components/BrandLogo';
 import { selectHasStreak } from '@src/app/streak/streakSlice.js';
 import { selectClassState } from '@src/app/class/classSlice';
