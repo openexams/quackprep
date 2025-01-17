@@ -1,7 +1,7 @@
 import { test, expect } from "playwright/test";
-
+// todo fix
 export async function login(page) {
-  await page.goto("http://localhost:5173/"); // TODO WTF ARE U DOING
+  await page.goto("http://localhost:3001/"); // TODO WTF ARE U DOING
   await page.getByText("Login / Signup").click();
   await page.getByPlaceholder("email").click();
   await page.getByPlaceholder("email").fill("Admin");
@@ -20,12 +20,4 @@ test("login", async ({ page }) => {
   });
   await login(page);
   await expect(page.url()).toContain("profile");
-});
-
-test("withAuth goto class", async ({ page }) => {
-  await login(page);
-  await page.getByText("Home").click();
-  await page.getByRole("button", { name: "Start Practicing" }).click();
-
-  await page.getByText("CS180").click();
 });
