@@ -7,6 +7,7 @@ import { selectUser } from '../auth/authSlice';
 import { useNavigate } from 'react-router-dom';
 import CreateInputForm from '@components/CreateInputForm';
 import submitCreatorForm from './creatorSlice';
+import LoginRequired from '../auth/LoginRequired';
 
 export default function CreatorDashboard() {
   const navigate = useNavigate();
@@ -53,15 +54,21 @@ export default function CreatorDashboard() {
               </Button>
             }
           >
-            <CreateInputForm
-              formFields={[
-                { name: 'school', value: '', required: true, label: 'what school/group would you be uploading for?' },
-                { name: 'the_why', value: '', required: true, label: 'why do you want to become a creator?' },
-              ]}
-              onSubmit={({ school, the_why }) => {
-                dispatch(submitCreatorForm(school, the_why));
-              }}
-            />
+            <Segment style={{ minWidth: '55rem' }}>
+              {user?.id ? (
+                <CreateInputForm
+                  formFields={[
+                    { name: 'school', value: '', required: true, label: 'what school/group would you be uploading for?' },
+                    { name: 'the_why', value: '', required: true, label: 'why do you want to become a creator?' },
+                  ]}
+                  onSubmit={({ school, the_why }) => {
+                    dispatch(submitCreatorForm(school, the_why));
+                  }}
+                />
+              ) : (
+                <LoginRequired title={'Apply for Creator'} />
+              )}
+            </Segment>
           </Popup>
         )}
       </Segment>
