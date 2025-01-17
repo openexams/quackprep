@@ -9,7 +9,7 @@ import CreatorBadge from '@components/CreatorBadge';
 const TOP_X_AMT = 5; // keep 5 lol
 
 const LeaderboardCard = ({ title, icon, iconColor, data, dataKey }) => (
-  <Card fluid>
+  <Card fluid key={title}>
     <Card.Content>
       <Card.Header>
         <Icon name={icon} color={iconColor} /> {title}
@@ -19,7 +19,7 @@ const LeaderboardCard = ({ title, icon, iconColor, data, dataKey }) => (
       <List size='large' divided relaxed>
         {data &&
           data.map((item, index) => (
-            <List.Item key={item.user_id}>
+            <List.Item key={`${index} + ${item.username}`}>
               <List.Content floated='right'>
                 <strong>{item[dataKey]}</strong>
               </List.Content>
@@ -44,12 +44,13 @@ export default function Leaderboard() {
   const loading = useSelector(selectLoadingState).loadingComps?.Leaderboard;
 
   useEffect(() => {
-    if (!streaks && !loading) {
+    if (!streaks) {
       dispatch(getTopStreaks(TOP_X_AMT));
-    } else if (!questionsAnswered && !loading) {
+    }
+    if (!questionsAnswered) {
       dispatch(getWhichUsersAnsweredMostQuestions());
     }
-  }, [loading]);
+  }, []);
 
   return (
     <Container>

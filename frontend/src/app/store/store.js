@@ -16,7 +16,7 @@ import reducer401 from '@components/401/401Slice';
 import schoolsReducer from '../class/school/schoolSlice';
 import classCategoriesReducer from '../class/class_categories/classCategorySlice';
 import pdfsReducer from '../class/group/pdf/pdfSlice';
-import favoriteReducer from '../favorite/favoriteSlice';
+import favoriteReducer from '../class/question/favorite/favoriteSlice';
 import groupReducer from '../class/group/groupSlice';
 
 const app = combineReducers({

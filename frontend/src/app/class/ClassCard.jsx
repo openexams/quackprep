@@ -3,7 +3,7 @@ import { useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Card, Icon } from 'semantic-ui-react';
 import { useNavigate } from 'react-router-dom';
-import ClassEditor from '../creator/editor/ClassEditor';
+import ClassEditor from '../creator/forms/ClassEditor';
 import { selectCanAndIsEdit } from '../auth/authSlice';
 
 /**
@@ -37,7 +37,7 @@ function getColorByLevel(level) {
   }
 }
 
-function getIconByCategory(category) {
+export function getIconByCategory(category) {
   switch (
     category // should pull in master table w this but im to lazy
   ) {

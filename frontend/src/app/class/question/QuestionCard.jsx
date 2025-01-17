@@ -1,11 +1,11 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { List, Label, Icon, Button, Popup } from 'semantic-ui-react';
+import { List, Label, Icon, Popup } from 'semantic-ui-react';
 import { changeNavbarPage } from '@components/navbar/navbarSlice';
 import { updateQuestionId } from '@components/navbar/navbarSlice';
-import { upsertFavoriteQuestion } from '@src/app/favorite/favoriteSlice';
+import { upsertFavoriteQuestion } from './favorite/favoriteSlice';
 import { selectNavbarState } from '@components/navbar/navbarSlice';
-import FavoriteIcon from './FavoriteIcon/FavoriteIcon';
+import FavoriteIcon from './favorite/FavoriteIcon';
 
 /**
  *

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { selectUser, getCurUser } from './app/auth/authSlice';
 import { getClassCategories } from './app/class/class_categories/classCategorySlice';
-import { getFavoriteQuestions, removeStateFavoriteQuestions } from '@src/app/favorite/favoriteSlice';
+import { getFavoriteQuestions, removeStateFavoriteQuestions } from '@src/app/class/question/favorite/favoriteSlice';
 import { getCurrentChoices, removeStateCurrentChoices } from '@src/app/class/question/choices/choicesSlice';
 import { getSchools } from './app/class/school/schoolSlice';
 import { getHasStreak } from './app/streak/streakSlice';

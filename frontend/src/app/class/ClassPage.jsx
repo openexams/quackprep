@@ -3,7 +3,6 @@ import { useState } from 'react';
 import { Accordion, Container, Grid, Header, Icon, Segment } from 'semantic-ui-react';
 import { useSelector, useDispatch } from 'react-redux';
 import SchoolsList from './school/SchoolsList.jsx';
-import { selectBINARYArrayOfStateById } from 'maddox-js-funcs';
 import { changeNavbarPage, selectNavbarState } from '@components/navbar/navbarSlice';
 import ClassList from './ClassList';
 import { useNavigate } from 'react-router-dom';
@@ -11,7 +10,6 @@ import { useNavigate } from 'react-router-dom';
 export default function ClassPage() {
   let { schoolId: curSchoolId } = useSelector(selectNavbarState).navbar;
   const navigate = useNavigate();
-  const classes = useSelector(selectBINARYArrayOfStateById('app.class.classes.classes', 'school_id', curSchoolId));
   const dispatch = useDispatch();
   const [isActive, setIsActive] = useState(false);
 
@@ -31,10 +29,8 @@ export default function ClassPage() {
           </Header>
         </Segment>
       ) : (
-        <Segment placeholder textAlign='center' style={{ padding: '2rem' }}>
-          <Grid style={{ width: '100%', margin: 0 }} stackable doubling centered columns='equal'>
-            <ClassList classes={classes} />
-          </Grid>
+        <Segment placeholder textAlign='center'>
+          <ClassList />
         </Segment>
       )}
       <Segment padded='very' textAlign='center' raised secondary={isActive} basic={!isActive}>

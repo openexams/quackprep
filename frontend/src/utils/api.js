@@ -35,7 +35,6 @@ export function standardApiCall(method, route, data = null, resultAction, option
     dispatch(startLoading(options?.loadingComponent));
     try {
       let result = null;
-      console.log(method);
       if (method === 'post' || method === 'put' || method === 'patch') {
         result = await axios[method.toLowerCase()](route, data, options?.axiosConfig);
       } else if (method === 'get' || method === 'delete') {

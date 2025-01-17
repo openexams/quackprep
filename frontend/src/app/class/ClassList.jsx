@@ -1,15 +1,19 @@
 import './class.css';
 import { Container, Grid, Header, Segment, Divider, Icon, Menu, Message, Transition } from 'semantic-ui-react';
 import { useState } from 'react';
-import ClassCard from './ClassCard';
+import ClassCard, { getIconByCategory } from './ClassCard';
 import { useSelector } from 'react-redux';
 import { selectClassCategories } from './class_categories/classCategorySlice';
 import { selectLoadingState } from '../store/loadingSlice';
-import ClassEditor from '../creator/editor/ClassEditor';
+import ClassEditor from '../creator/forms/ClassEditor';
 import { selectEditState } from '../auth/authSlice';
-import { selectArrayOfIncludingItemsByNumber } from 'maddox-js-funcs';
+import { selectArrayOfIncludingItemsByNumber, selectBINARYArrayOfStateById } from 'maddox-js-funcs';
+import { selectNavbarState } from '@components/navbar/navbarSlice';
 
-export default function ClassList({ classes }) {
+export default function ClassList() {
+  let { schoolId: curSchoolId } = useSelector(selectNavbarState).navbar;
+  const classes = useSelector(selectBINARYArrayOfStateById('app.class.classes.classes', 'school_id', curSchoolId));
+
   const loading = useSelector(selectLoadingState).loadingComps?.ClassList;
   const classCategories = useSelector(selectClassCategories).class_categories;
   const edit = useSelector(selectEditState);
@@ -30,15 +34,15 @@ export default function ClassList({ classes }) {
 
   return (
     <Container>
-      <Segment padded basic>
+      <Segment padded basic loading={loading}>
         <Header.Subheader>
           {curCategory
-            ? `Showing ${filteredClasses.length} classes in ${classCategories.find((c) => c.id === curCategory)?.name}`
-            : `Showing all ${classes.length} available classes`}
+            ? `Showing ${filteredClasses?.length} classes in ${classCategories.find((c) => c.id === curCategory)?.name}`
+            : `Showing all ${classes?.length} available classes`}
         </Header.Subheader>
 
         <Segment loading={loading} raised>
-          <Menu pointing secondary fluid widths={classCategories.length + 1}>
+          <Menu pointing secondary fluid widths={classCategories.length + 1} stackable>
             <Menu.Item name='All Classes' active={curCategory === ''} onClick={() => handleCategoryChange('')} icon='list' />
             {classCategories.map((category, index) => (
               <Menu.Item
@@ -46,13 +50,13 @@ export default function ClassList({ classes }) {
                 name={category.name}
                 active={curCategory === category.id}
                 onClick={() => handleCategoryChange(category.id)}
-                icon={category.icon || 'book'} // Assuming you might want to add icons for categories
+                icon={getIconByCategory(category.id)}
               />
             ))}
           </Menu>
 
           <Transition.Group as={Grid} duration={300} animation='fade' stackable columns={4} padded>
-            {visible && filteredClasses.length > 0
+            {visible && filteredClasses?.length > 0
               ? filteredClasses.map((c, index) => (
                   <Grid.Column key={index}>
                     <ClassCard

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { List, Segment, Header, Button, Checkbox, Icon, Label } from 'semantic-ui-react';
 import QuestionCard from './QuestionCard';
-import { isFavoriteQuestion, selectFavoriteQuestionsState } from '@src/app/favorite/favoriteSlice';
+import { isFavoriteQuestion, selectFavoriteQuestionsState } from './favorite/favoriteSlice';
 import { useSelector } from 'react-redux';
 import { doesQuestionHaveCurrentChoice, selectCurrentChoicesState } from './choices/choicesSlice';
 import GenerateQuestion from './ai/GenerateQuestion';
