@@ -3,14 +3,16 @@ import { isCreator } from "#middleware/creatorMiddleware.js";
 import {
   upsertChoiceToQuestion,
   getChoicesByQuestion,
-  getQuestionsAnsweredByMonthAndYear,
-  getWhichUsersAnsweredMostQuestions,
   postChoice,
   getChoicesByGroupId,
   addManyChoicesToQuestion,
   getChoicesByUserId,
-  getTotalSubmissions,
 } from "#models/choice/index.js";
+import {
+  getTotalSubmissions,
+  getQuestionsAnsweredByMonthAndYear,
+  getWhichUsersAnsweredMostQuestions,
+} from "#models/stats/index.js";
 import { cascadeSetDeleted } from "#utils/sqlFunctions.js";
 import { commonErrorMessage } from "#utils/utils.js";
 import { Router } from "express";
@@ -39,29 +41,6 @@ router.post("/answer/", async function (req, res) {
     res.status(201).json(result);
   } catch (error) {
     commonErrorMessage(res, 500, "failed to post answer", error);
-  }
-});
-
-router.get("/top", async function (req, res) {
-  try {
-    const result = await getWhichUsersAnsweredMostQuestions();
-    res.status(200).json(result);
-  } catch (error) {
-    commonErrorMessage(res, 500, "failed to get top users", error);
-  }
-});
-
-router.get("/qsansweredbymandy", async function (req, res) {
-  try {
-    const result = await getQuestionsAnsweredByMonthAndYear();
-    res.status(200).json(result);
-  } catch (error) {
-    commonErrorMessage(
-      res,
-      500,
-      "failed to get questions answered by month and year",
-      error
-    );
   }
 });
 
@@ -200,14 +179,5 @@ router.delete(
     }
   }
 );
-
-router.get("/answer/total", async function (req, res) {
-  try {
-    const result = await getTotalSubmissions();
-    res.status(201).json(result);
-  } catch (error) {
-    commonErrorMessage(res, 500, "failed to getTotalSubmissions", error);
-  }
-});
 
 export default router;

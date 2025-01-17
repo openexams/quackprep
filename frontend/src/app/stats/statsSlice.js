@@ -6,7 +6,7 @@ const GET_TTS = '/app/stats/GET_TTS';
 const GET_TOTAL_SUBMISSIONS = '/app/stats/GET_TOTAL_SUBMISSIONS';
 
 export function getQuestionsAnsweredByMonthAndYear() {
-  return standardApiCall('get', '/api/choice/qsansweredbymandy', null, GET_QUESTIONS_ANSWERED_BY_MONTH_AND_YEAR, {
+  return standardApiCall('get', '/api/stats/qsansweredbymandy', null, GET_QUESTIONS_ANSWERED_BY_MONTH_AND_YEAR, {
     loadingComponent: 'Stats',
   });
 }
@@ -20,7 +20,7 @@ export function getTotalTimeSpent() {
 }
 
 export function getTotalSubmissons() {
-  return standardApiCall('get', '/api/choice/answer/total', null, GET_TOTAL_SUBMISSIONS, { loadingComponent: 'Stats' });
+  return standardApiCall('get', '/api/stats/answer/total', null, GET_TOTAL_SUBMISSIONS, { loadingComponent: 'Stats' });
 }
 
 const DEFAULT_STATE = {

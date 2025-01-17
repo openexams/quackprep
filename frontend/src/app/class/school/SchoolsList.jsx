@@ -74,6 +74,9 @@ export default function SchoolsList({ onCreator = false }) {
 
 // Helper function to determine if text should be dark or light based on background
 const isLightColor = (color) => {
+  if (!color) {
+    return 0;
+  }
   const hex = color.replace('#', '');
   const r = parseInt(hex.substr(0, 2), 16);
   const g = parseInt(hex.substr(2, 2), 16);

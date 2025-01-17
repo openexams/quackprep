@@ -8,7 +8,7 @@ export function getTopStreaks(x) {
 }
 
 export function getWhichUsersAnsweredMostQuestions() {
-  return standardApiCall('get', `/api/choice/top`, null, GET_TOP_QS_ANSWERED, { loadingComponent: 'Leaderboard' });
+  return standardApiCall('get', `/api/stats/answer/top`, null, GET_TOP_QS_ANSWERED, { loadingComponent: 'Leaderboard' });
 }
 
 const DEFAULT_STATE = {
