@@ -5,7 +5,7 @@ import { selectNavbarState } from '@components/navbar/navbarSlice';
 import { selectLoadingState } from '@src/app/store/loadingSlice';
 import Searchbar from '@components/Searchbar';
 import { useSearchParams } from 'react-router-dom';
-import GroupEditor from '@src/app/creator/editor/GroupEdit';
+import GroupEditor from '@src/app/creator/forms/GroupEdit';
 import { selectEditState } from '@src/app/auth/authSlice';
 import GroupCard from './GroupCard';
 

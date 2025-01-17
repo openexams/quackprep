@@ -8,7 +8,7 @@ import GenerateQuestion from './ai/GenerateQuestion';
 import { selectCanAndIsEdit } from '@src/app/auth/authSlice';
 import { selectNavbarState } from '@components/navbar/navbarSlice';
 import { selectArrayOfStateById } from 'maddox-js-funcs';
-import QuestionEditor from '@src/app/creator/editor/QuestionEditor';
+import QuestionEditor from '@src/app/creator/forms/QuestionEditor';
 
 /**
  * List of questions that can be selected
