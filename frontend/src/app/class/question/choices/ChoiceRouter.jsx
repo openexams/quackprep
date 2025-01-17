@@ -20,6 +20,7 @@ export default function ChoiceRouter({ selectedQuestion }) {
   if (!loading) {
     if (edit) {
       component = choices.map((choice) => <ChoiceEditor key={choice.id} {...choice} />);
+      component.push(<ChoiceEditor question_id={selectedQuestion.id} />);
     } else if (choices?.[0]?.type === 'mcq') {
       component = <MultipleChoice choices={choices} selectedQuestion={selectedQuestion} />;
     } else if (choices?.[0]?.type === 'frq') {
@@ -35,7 +36,16 @@ export default function ChoiceRouter({ selectedQuestion }) {
       {selectedQuestion && choices ? (
         <>
           <Header>
-            {edit ? <QuestionEditor {...selectedQuestion} /> : <MarkdownRenderer render={selectedQuestion.question} />}
+            {edit ? (
+              <QuestionEditor
+                id={selectedQuestion.id}
+                group_ids={selectedQuestion.group_id}
+                explanation_url={selectedQuestion.explanation_url}
+                question={selectedQuestion.question}
+              />
+            ) : (
+              <MarkdownRenderer render={selectedQuestion.question} />
+            )}
             {selectedQuestion.ai ? (
               <Popup
                 content='These questions are AI-generated and may contain inaccuracies. Please verify their correctness.'

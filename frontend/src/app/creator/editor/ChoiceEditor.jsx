@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { Form, Checkbox, Dropdown, Button, Segment, Header } from 'semantic-ui-react';
 import { upsertChoice, deleteChoiceById } from '@src/app/class/question/choices/choicesSlice';
 import ConfirmButton from '@components/ConfirmButton';
+import MarkdownEditor from './MarkdownEditor';
 
 const TYPE_OPTIONS = [
   { key: 'frq', value: 'frq', text: 'FRQ' },
@@ -29,8 +30,8 @@ export default function ChoiceEditor({ id, answer, is_correct, question_id, type
   return (
     <Segment>
       <Form onSubmit={handleSubmit}>
-        <Header as={'h3'}>Choice:{id}</Header>
-        <Form.Field
+        <Header as={'h3'}>{id ? `Choice:${id}` : 'Create New Choice'}</Header>
+        <MarkdownEditor
           width={'8'}
           control='textarea'
           label='Answer'
@@ -59,12 +60,17 @@ export default function ChoiceEditor({ id, answer, is_correct, question_id, type
         <Button type='submit' primary>
           Submit
         </Button>
-        {id && (
-          <ConfirmButton onClick={() => deleteChoiceById(id)} negative>
-            Delete
-          </ConfirmButton>
-        )}
       </Form>
+      {id && (
+        <ConfirmButton
+          onClick={() => {
+            dispatch(deleteChoiceById(id));
+          }}
+          negative
+        >
+          Delete
+        </ConfirmButton>
+      )}
     </Segment>
   );
 }

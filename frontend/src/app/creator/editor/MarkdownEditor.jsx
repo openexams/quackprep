@@ -1,6 +1,6 @@
 import MarkdownRenderer from '@components/MarkdownRenderer';
 import { useState, useRef, useEffect } from 'react';
-import { Form, Segment } from 'semantic-ui-react';
+import { Form, Segment, Popup } from 'semantic-ui-react';
 
 export default function MarkdownEditor({ label, onChange, value, placeholder, required }) {
   const [editingMD, setEditingMD] = useState(false);
@@ -20,17 +20,34 @@ export default function MarkdownEditor({ label, onChange, value, placeholder, re
   }, []);
 
   return (
-    <Segment
-      ref={editorRef}
-      onClick={() => {
-        setEditingMD(true);
-      }}
-    >
-      {!editingMD ? (
-        <MarkdownRenderer render={value} />
-      ) : (
-        <Form.TextArea label={label} required={required} value={value} onChange={onChange} placeholder={placeholder} autoFocus />
-      )}
-    </Segment>
+    <Form.Field>
+      <Popup
+        content={editingMD ? 'Click outside to render md' : 'Click to edit'}
+        trigger={
+          <Segment
+            ref={editorRef}
+            onClick={() => {
+              setEditingMD(true);
+            }}
+          >
+            {`${label}:`}
+            {!editingMD ? (
+              <div>
+                <MarkdownRenderer render={value} />
+              </div>
+            ) : (
+              <Form.TextArea
+                label={label}
+                required={required}
+                value={value}
+                onChange={onChange}
+                placeholder={placeholder}
+                autoFocus
+              />
+            )}
+          </Segment>
+        }
+      />
+    </Form.Field>
   );
 }

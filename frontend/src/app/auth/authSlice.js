@@ -11,6 +11,10 @@ export const selectUser = (state) => {
 
 export function selectCanAndIsEdit(user_id) {
   return (state) => {
+    if (!user_id) {
+      console.error('didnt pass in user_id');
+      return false;
+    }
     if (state.app.navbar.editing === true) {
       if (state.auth.user?.id === parseInt(user_id)) {
         return true;
