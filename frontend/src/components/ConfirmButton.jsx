@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Button, Confirm } from 'semantic-ui-react';
 
 /**
@@ -11,7 +11,7 @@ import { Button, Confirm } from 'semantic-ui-react';
  *
  * @returns {JSX.Element} The rendered ConfirmButton component.
  */
-export default function ConfirmButton({ confirmText = 'Are you sure?', buttonName = 'Delete', onClick }) {
+export default function ConfirmButton({ confirmText = 'Are you sure about that.', buttonName = 'Delete', onClick }) {
   const [open, setOpen] = useState(false);
   return (
     <>

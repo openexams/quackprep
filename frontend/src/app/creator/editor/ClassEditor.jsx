@@ -31,19 +31,10 @@ export default function ClassEditor({ id, name, category, desc, school_id }) {
     dispatch(upsertClass(id || null, selectedSchool, className, classDesc, selectedCategory));
   };
 
-  /**
-   * Delete handler
-   */
-  const handleDelete = () => {
-    if (id) {
-      dispatch(deleteClassById(id));
-    }
-  };
-
   return (
-    <Segment>
+    <Segment id={id ? `class-${id}-${school_id}` : `class-new-${school_id}`}>
       <Form onSubmit={handleSubmit}>
-        <Header as={'h3'}>Class:{id}</Header>
+        <Header as={'h3'}>{id ? `Class:${id}` : 'Create New Class'}</Header>
 
         <Form.Field
           control='input'
@@ -79,6 +70,7 @@ export default function ClassEditor({ id, name, category, desc, school_id }) {
           control={Dropdown}
           label='Class Category'
           required
+          search
           selection
           clearable
           value={selectedCategory}
@@ -90,13 +82,12 @@ export default function ClassEditor({ id, name, category, desc, school_id }) {
         <Button type='submit' primary>
           Submit
         </Button>
-
-        {id && (
-          <ConfirmButton onClick={handleDelete} negative>
-            Delete
-          </ConfirmButton>
-        )}
       </Form>
+      {id && (
+        <ConfirmButton onClick={() => dispatch(deleteClassById(id))} negative>
+          Delete
+        </ConfirmButton>
+      )}
     </Segment>
   );
 }

@@ -6,8 +6,7 @@ import { useSelector } from 'react-redux';
 import { selectClassCategories } from './class_categories/classCategorySlice';
 import { selectLoadingState } from '../store/loadingSlice';
 import ClassEditor from '../creator/editor/ClassEditor';
-import { selectCanAndIsEdit } from '../auth/authSlice';
-
+import { selectEditState } from '../auth/authSlice';
 function selectClassesWithCategory(classes, selectedCategory) {
   if (!Array.isArray(classes) || !selectedCategory) {
     return classes;
@@ -59,11 +58,13 @@ function mapClassesToCategories(classes, classCategories) {
 export default function ClassList({ classes }) {
   const loading = useSelector(selectLoadingState).loadingComps?.ClassList;
   const classCategories = useSelector(selectClassCategories).class_categories;
+  const edit = useSelector(selectEditState);
 
   return (
     <Container>
       <Segment loading={loading} basic>
         {classes && mapClassesToCategories(classes, classCategories)}
+        {edit && <ClassEditor />}
       </Segment>
     </Container>
   );

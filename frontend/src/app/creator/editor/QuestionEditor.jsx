@@ -26,9 +26,9 @@ export default function QuestionEditor({ id, group_id: groups, explanation_url, 
   };
 
   return (
-    <Segment>
+    <Segment id={id ? `question-${id}` : `question-new-${initialGroupIds}`}>
       <Form onSubmit={handleSubmit}>
-        <Header as={'h3'}>Question:{id}</Header>
+        <Header as={'h3'}> {id ? `Question:${id}` : 'Create New Question'} </Header>
         <MarkdownEditor
           label='Question'
           required
@@ -47,6 +47,7 @@ export default function QuestionEditor({ id, group_id: groups, explanation_url, 
 
         <Form.Field
           required
+          search
           control={Dropdown}
           label='Related Groups'
           placeholder='Select one or more groups'
@@ -60,12 +61,8 @@ export default function QuestionEditor({ id, group_id: groups, explanation_url, 
         <Button type='submit' primary>
           Submit
         </Button>
-        {id && (
-          <ConfirmButton onClick={() => dispatch(deleteQuestionById(id))} negative>
-            Delete
-          </ConfirmButton>
-        )}
       </Form>
+      {id && <ConfirmButton color='red' content='Delete' onConfirm={() => dispatch(deleteQuestionById(id))} />}
     </Segment>
   );
 }

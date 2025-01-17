@@ -20,6 +20,7 @@ export default function ChoiceRouter({ selectedQuestion }) {
   if (!loading) {
     if (edit) {
       component = choices.map((choice) => <ChoiceEditor key={choice.id} {...choice} />);
+      component.push(<ChoiceEditor question_id={selectedQuestion.id} />);
     } else if (choices?.[0]?.type === 'mcq') {
       component = <MultipleChoice choices={choices} selectedQuestion={selectedQuestion} />;
     } else if (choices?.[0]?.type === 'frq') {

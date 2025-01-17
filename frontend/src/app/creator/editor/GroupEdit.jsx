@@ -40,19 +40,10 @@ export default function GroupEditor({ id, name, type, description, class_id }) {
     dispatch(upsertGroup(id || null, groupName, selectedClass, groupType, groupDesc));
   };
 
-  /**
-   * Delete handler
-   */
-  const handleDelete = () => {
-    if (id) {
-      dispatch(deleteGroupById(id));
-    }
-  };
-
   return (
-    <Segment>
+    <Segment id={id ? `group-${id}-${class_id}` : `group-new-${class_id}`}>
       <Form onSubmit={handleSubmit}>
-        <Header as={'h3'}>Group:{id}</Header>
+        <Header as={'h3'}>{id ? `Group:${id}` : 'Create New Group'}</Header>
 
         <Form.Field
           control='input'
@@ -85,6 +76,8 @@ export default function GroupEditor({ id, name, type, description, class_id }) {
         />
 
         <Form.Field
+          disabled
+          search
           control={Dropdown}
           label='Associated Class'
           required
@@ -99,13 +92,12 @@ export default function GroupEditor({ id, name, type, description, class_id }) {
         <Button type='submit' primary>
           Submit
         </Button>
-
-        {id && (
-          <ConfirmButton onClick={handleDelete} negative>
-            Delete
-          </ConfirmButton>
-        )}
       </Form>
+      {id && (
+        <ConfirmButton onClick={() => dispatch(deleteGroupById(id))} negative>
+          Delete
+        </ConfirmButton>
+      )}
     </Segment>
   );
 }

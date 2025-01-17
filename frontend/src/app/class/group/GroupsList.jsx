@@ -1,30 +1,26 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { Header, Segment, Card, Button, Container, Icon } from 'semantic-ui-react';
-import { selectArrayOfIncludingItem, selectBINARYArrayOfStateById, turnUnderscoreIntoSpace } from 'maddox-js-funcs';
-import { changeNavbarPage, selectNavbarState, updateCurrentGroupData } from '@components/navbar/navbarSlice';
+import { useSelector } from 'react-redux';
+import { Header, Segment, Card, Container, Icon } from 'semantic-ui-react';
+import { selectArrayOfIncludingItem, selectBINARYArrayOfStateById } from 'maddox-js-funcs';
+import { selectNavbarState } from '@components/navbar/navbarSlice';
 import { selectLoadingState } from '@src/app/store/loadingSlice';
 import Searchbar from '@components/Searchbar';
 import { useSearchParams } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
 import GroupEditor from '@src/app/creator/editor/GroupEdit';
-import { selectEditState, selectUser } from '@src/app/auth/authSlice';
+import { selectEditState } from '@src/app/auth/authSlice';
 import GroupCard from './GroupCard';
 
 export default function GroupsList() {
-  const user_id = useSelector(selectUser).user?.id;
   const editModeOn = useSelector(selectEditState);
-  const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   const filter = searchParams.get('filter') || '';
   const { navbar } = useSelector(selectNavbarState);
-  const { className, classId, schoolName } = navbar;
+  const { className, classId } = navbar;
   const loading = useSelector(selectLoadingState).loadingComps.GroupsList;
   const groups = selectArrayOfIncludingItem(
     useSelector(selectBINARYArrayOfStateById('app.group.groups', 'class_id', classId)),
     'name',
     filter || '',
   );
-  const dispatch = useDispatch();
 
   function setFilter(newStr) {
     searchParams.set('filter', newStr);
@@ -56,6 +52,7 @@ export default function GroupsList() {
                 />
               );
             })}
+          {editModeOn && <GroupEditor class_id={classId} />}
         </Card.Group>
       </Segment>
     </Container>
