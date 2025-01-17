@@ -11,13 +11,14 @@ import { selectArrayOfStateById } from 'maddox-js-funcs';
 import QuestionEditor from '@src/app/creator/editor/QuestionEditor';
 
 /**
+ * List of questions that can be selected
  * @param {Object} props
  * @param {any[]} props.questions
  * @param {Object} props.selectedQuestion
  */
 export default function QuestionList({ questions, selectedQuestion }) {
   // for edit
-  const { groupId } = useSelector(selectNavbarState).navbar;
+  const { groupId } = useSelector(selectNavbarState).navbar; // used for autofill
   const group = useSelector(selectArrayOfStateById('app.group.groups', 'id', groupId))?.[0];
   const edit = useSelector(selectCanAndIsEdit(parseInt(group?.created_by)));
   //

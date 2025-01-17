@@ -17,7 +17,7 @@ export default function ClassPage() {
 
   return (
     <Container fluid style={{ marginTop: '-7rem', padding: '2rem' }}>
-      <Header as='h1' textAlign='left' icon>
+      <Header as='h1' textAlign='left' icon={'graduation cap'}>
         Available Classes
         <Header.Subheader>Choose one to begin your learning journey</Header.Subheader>
       </Header>
