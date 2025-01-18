@@ -1,0 +1,50 @@
+name: Run Playwright Tests
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    env:
+      NODE_ENV: local
+      # Provide environment variables from GitHub Secrets (adjust names as needed)
+      MADDOX_MYSQL_SERVER: ${{ secrets.MADDOX_MYSQL_SERVER }}
+      MADDOX_MYSQL_USERNAME: ${{ secrets.MADDOX_MYSQL_USERNAME }}
+      MADDOX_MYSQL_PASSWORD: ${{ secrets.MADDOX_MYSQL_PASSWORD }}
+      MADDOX_MYSQL_DB: ${{ secrets.MADDOX_MYSQL_DB }}
+      MADDOX_MYSQL_PORT: ${{ secrets.MADDOX_MYSQL_PORT }}
+      SESSION_SECRET: ${{ secrets.SESSION_SECRET }}
+      REDIS_URL: ${{ secrets.REDIS_URL }}
+      GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+      GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+      BACKEND_URL: ${{ secrets.BACKEND_URL }}
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      FRONTEND_URL: ${{ secrets.FRONTEND_URL }}
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+
+      - name: Use Node.js 20.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Start application
+        run: |
+          # Start the dev server in the background on port 3001
+          npm run dev &
+
+      - name: Wait for app to be ready
+        run: npx wait-on http://localhost:3001
+
+      - name: Run Playwright tests
+        run: npx playwright test

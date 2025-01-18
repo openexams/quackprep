@@ -9,6 +9,14 @@ if (NODE_ENV === undefined) {
   });
 }
 global.NODE_ENV = process.env.NODE_ENV;
+if (NODE_ENV === undefined) {
+  dotenv.config({
+    path: "../secrets.env",
+    debug: true,
+  });
+}
+
+global.NODE_ENV = process.env.NODE_ENV;
 
 if (NODE_ENV == undefined) {
   throw Error("fatal error ENV VARS NOT LOADED");
