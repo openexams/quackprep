@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { Modal, Button, Segment, Header, Icon, Image, Form, Container, Grid } from 'semantic-ui-react';
+import { useEffect, useState } from 'react';
+import { Header, Button, Segment, Icon, Image, Form, Grid } from 'semantic-ui-react';
 import Login from './login/Login';
-import { changeNavbarPage, selectLastPage, selectNavbarState } from '@components/navbar/navbarSlice';
+import { changeNavbarPage, selectLastPage } from '@components/navbar/navbarSlice';
 import Register from './register/register';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectUser } from './authSlice';
@@ -70,6 +70,7 @@ export default function Auth() {
             </Button.Group>
 
             <Segment basic style={{ marginTop: '2rem' }}>
+              <Header>{logOrSignText}</Header>
               {loggingIn ? <Login /> : <Register />}
             </Segment>
 

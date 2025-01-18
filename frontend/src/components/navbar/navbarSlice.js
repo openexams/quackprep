@@ -198,6 +198,5 @@ export function getFixedUrlArr(curUrl) {
   if (curUrl.includes('?')) {
     curUrl = curUrl.split('?').shift();
   }
-  console.log(curUrl);
   return curUrl?.split('/');
 }

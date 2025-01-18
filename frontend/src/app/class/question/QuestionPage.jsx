@@ -12,6 +12,7 @@ import { selectArrayOfStateByGroupId } from '@utils/helperFuncs';
 import { selectItemById } from 'maddox-js-funcs';
 import NoItemsFound from '@components/NoItemsFound';
 import { CustomImageLoader } from '@components/CustomLoader/CustomImageLoader';
+import QuestionVote from './vote/QuestionVote';
 
 /**
  *
@@ -83,6 +84,8 @@ export default function QuestionPage() {
               {selectedQuestion ? (
                 <Segment>
                   <ChoiceRouter selectedQuestion={selectedQuestion} />
+                  {selectedQuestion?.id && <QuestionVote questionId={selectedQuestion?.id} />}
+
                   {selectedQuestion?.id && <QuestionReport questionId={selectedQuestion?.id} />}
                   {selectedQuestion?.explanation_url && (
                     <Button as={'a'} href={selectedQuestion?.explanation_url} target='_blank'>
