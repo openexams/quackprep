@@ -14,6 +14,7 @@ import { REDIS_CONFIG, SESSION_CONFIG } from "./config/config.js";
 import sqlExe from "#db/dbFunctions.js";
 import path from "path";
 import { fileURLToPath } from "url";
+import { corsOrigins } from "./config/config.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -25,14 +26,6 @@ console.log(path.join(__dirname, "../."));
 app.use(express.json());
 
 app.set("trust proxy", 1);
-
-let corsOrigins = [
-  "https://accounts.google.com/o/oauth2",
-  "https://api.quackprep.com",
-  "https://quackprep.com",
-  "https://www.quackprep.com",
-];
-if (NODE_ENV === "local") corsOrigins.push("http://localhost:3001"); // maybe bad pratice
 
 const corsOrigin = {
   origin: corsOrigins, // allow only these to hit

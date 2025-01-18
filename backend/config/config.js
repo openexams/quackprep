@@ -22,6 +22,16 @@ if (NODE_ENV == undefined) {
   throw Error("fatal error ENV VARS NOT LOADED");
 }
 
+export const corsOrigins = [
+  "https://accounts.google.com/o/oauth2",
+  "https://api.quackprep.com",
+  "https://quackprep.com",
+  "https://www.quackprep.com",
+  "https://*.quackprep.pages.dev",
+  "https://quackprep.pages.dev",
+];
+if (NODE_ENV === "local") corsOrigins.push("http://localhost:3001"); // maybe bad pratice
+
 export const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
