@@ -1,4 +1,5 @@
 import { openai } from "#config/config.js";
+import { sleep } from "./utils.js";
 
 export async function sendOpenAiAssistantPromptAndRecieveResult(
   assistant_id,
@@ -28,7 +29,7 @@ export async function sendOpenAiAssistantPromptAndRecieveResult(
     // keep checking till its completed.
     while (runRes.status === "queued" || runRes.status === "in_progress") {
       dlog("openAi run not finished retrying in 2s");
-      await new Promise((resolve) => setTimeout(resolve, 1500));
+      await sleep(1500);
       runRes = await openai.beta.threads.runs.retrieve(
         quackThread.id,
         quackRun.id
