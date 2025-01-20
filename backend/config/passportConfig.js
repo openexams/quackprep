@@ -1,6 +1,6 @@
 import {
   checkApiKey,
-  checkIfProviderIdExistsInUsers,
+  findUserIdByProviderId,
   findLocalUserByEmailPassword,
   findUserById,
   OAuthRegister,
@@ -12,6 +12,7 @@ import { Strategy as GoogleStrategy } from "passport-google-oauth20";
 import { Strategy as BearerStrategy } from "passport-http-bearer";
 
 passport.use(
+  // TODO LOOK INTO MORE checkIfProviderIdExistsInUsers()
   new GoogleStrategy(GOOGLE_OAUTH_CONFIG, async function (
     accessToken,
     refreshToken,
@@ -27,37 +28,41 @@ passport.use(
     const last_name = profile.name.familyName ?? null;
 
     let curId;
-    if (
-      // user exists alr
-      (curId = await checkIfProviderIdExistsInUsers("google", google_id)) !==
-      false
-    ) {
-      const user = await findUserById(curId);
-      dlog("LoggedIn user:", user); //dlog cannot take params yet
-      return done(null, user);
-    } else {
-      // user not registered create a user.
-      const rowId = await OAuthRegister(
-        first_name,
-        last_name,
-        username,
-        email,
-        pfp_url,
-        "google",
-        google_id
-      );
+    try {
       if (
-        (curId = await checkIfProviderIdExistsInUsers("google", google_id)) !==
-        false
+        // user exists alr
+        (curId = await findUserIdByProviderId("google", google_id)) !== false
       ) {
         const user = await findUserById(curId);
-        //dlog("Registered user:", user);
+        dlog("LoggedIn user:", user); //dlog cannot take params yet
         return done(null, user);
+      } else {
+        // user not registered create a user.
+        await OAuthRegister(
+          first_name,
+          last_name,
+          username,
+          email,
+          pfp_url,
+          "google",
+          google_id
+        );
+        if (
+          (curId = await findUserIdByProviderId("google", google_id)) !== false
+        ) {
+          const user = await findUserById(curId);
+          //dlog("Registered user:", user);
+          return done(null, user);
+        }
       }
+      return done("Failed to google login/register", false, {
+        message: "Failed to google login/register",
+      });
+    } catch (err) {
+      return done(err, false, {
+        message: "Failed to google login/register",
+      });
     }
-    return done("Failed to google login/register", false, {
-      message: "Failed to google login/register",
-    });
   })
 );
 

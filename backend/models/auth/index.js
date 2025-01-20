@@ -1,7 +1,7 @@
 import sqlExe from "#db/dbFunctions.js";
 import bcrypt from "bcrypt";
 
-export async function checkIfProviderIdExistsInUsers(provider, provider_id) {
+export async function findUserIdByProviderId(provider, provider_id) {
   const params = { provider: provider, provider_id: provider_id };
   const result = await sqlExe.executeCommand(
     "SELECT u.provider_id, u.id FROM users u WHERE u.provider = :provider AND u.provider_id = :provider_id",
