@@ -70,3 +70,8 @@ export const GOOGLE_OAUTH_CONFIG = {
   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
   callbackURL: `${process.env.BACKEND_URL}/api/auth/google/callback`, // local or prod
 };
+
+export const MATHPIX_API_INFO = {
+  MATHPIX_API_KEY: process.env.MATHPIX_API_KEY,
+  MATHPIX_APP_ID: process.env.MATHPIX_APP_ID,
+};

@@ -126,7 +126,7 @@ export async function upsertChoiceToQuestion(
  * adds x amt of choices to a question, does not check if the user is allowed to do this, use it carefully
  * @param {Int} question_id
  * @param {Int} user_id
- * @param {Array} choices array of choices all having text and is_correct keys
+ * @param {import("../../../shared-types/choice.types.js").Choice[]} choices array of choices all having text and is_correct keys
  * @returns {Void}
  * @example
  * "choices": [
@@ -145,7 +145,20 @@ export async function upsertChoiceToQuestion(
 export async function addManyChoicesToQuestion(question_id, user_id, choices) {
   // todo test
   if (!choices?.length && !(choices.length <= 5) && !(choices.length >= 1)) {
-    throw new Error("choices array incorrect len");
+    throw new Error(
+      "choices array incorrect len check addManyChoicesToQuestion for more info"
+    );
+    return;
+  }
+  if (!question_id || !user_id) {
+    throw new Error("missing required fields user_id, question_id");
+    return;
+  }
+  if (choices[0].is_correct == null || !choices[0].text || !choices[0].type) {
+    console.log(choices?.[0]);
+    throw new Error(
+      "must include at least 1 choice with is_correct, text, and type"
+    );
     return;
   }
   // TODO

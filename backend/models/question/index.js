@@ -92,6 +92,9 @@ export async function upsertQuestion(
   aiGenerated = false
 ) {
   const params = { id, question, user_id, aiGenerated };
+  if (!Array.isArray(group_ids)) {
+    throw new Error("group_ids must be an array");
+  }
   if (!aiGenerated) {
     // if its ai then anyone can create ai questions
     for (let i = 0; i < group_ids?.length; i++) {

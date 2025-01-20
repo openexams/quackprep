@@ -1,4 +1,5 @@
 // maps array of objects to what react semantic ui likes to see in dropdowns
+import { GROUP_TYPES } from '@src/app/class/group/groupSlice';
 
 export function mapSchoolsToDropdown(schools) {
   return schools.map((school) => ({
@@ -26,3 +27,11 @@ export function mapGroupsToDropdown(groupList) {
     text: g.name,
   }));
 }
+
+/**
+ * Example "type" options as an enum-like dropdown.
+ * Adjust as needed for your real enum values.
+ */
+export const mapGrouptypesDropdown = GROUP_TYPES.map((item) => {
+  return { key: item, value: item, text: item };
+});

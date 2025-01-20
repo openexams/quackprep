@@ -1,5 +1,6 @@
 import sqlExe from "#db/dbFunctions.js";
 import { verifyUserOwnsRowId } from "#utils/sqlFunctions.js";
+import { cascadeSetDeleted } from "#utils/sqlFunctions.js";
 
 async function selectGroups(WHERE, params) {
   return await sqlExe.executeCommand(
@@ -47,17 +48,6 @@ export async function upsertGroupInClass(
     );
     return; // all work end no play makea maddox a dull boy
   }
-  // uniqueness check?
-  const unique = await sqlExe.executeCommand(
-    `SELECT * from cgroups WHERE class_id = :class_id AND name =:name AND created_by != :user_id`,
-    params
-  );
-  if (!id && unique?.[0]?.class_id) {
-    throw new Error(
-      "verifys issue where you create a group with same name and same class as other person."
-    );
-    return;
-  }
   const group_id = (
     await sqlExe.executeCommand(
       `INSERT INTO cgroups(id,name,type,\`desc\`,created_by,class_id) VALUES(:id,:name,(SELECT id FROM group_types where type_name = :type),:desc,:user_id,:class_id)
@@ -73,4 +63,7 @@ export async function upsertGroupInClass(
     )
   ).insertId;
   return await selectGroups(`g.id = :result`, { result: id || group_id });
+}
+export async function deleteGroupById(user_id, group_id) {
+  return await cascadeSetDeleted(user_id, "group", group_id, 0, 1, 1, 1, 0);
 }

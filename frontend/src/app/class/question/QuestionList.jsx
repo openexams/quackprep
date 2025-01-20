@@ -22,7 +22,6 @@ export default function QuestionList({ questions, selectedQuestion }) {
   const group = useSelector(selectArrayOfStateById('app.group.groups', 'id', groupId))?.[0];
   const edit = useSelector(selectCanAndIsEdit(parseInt(group?.created_by)));
   //
-  console.log(edit);
   const favoriteQuestions = useSelector(selectFavoriteQuestionsState);
   const [showTopics, setShowTopics] = useState(false); // TODO SHOW MULTIPLE TOPICS IF THE QUESTION HAS SUCH
   const currentChoices = useSelector(selectCurrentChoicesState);

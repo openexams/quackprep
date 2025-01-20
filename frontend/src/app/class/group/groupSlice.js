@@ -12,6 +12,25 @@ export function getGroupsByClassId(classId) {
   return standardApiCall('get', `/api/group/${classId}/`, null, GET_GROUPS, { loadingComponent: 'GroupsList' });
 }
 
+/**
+ *
+ * @param {FormData} Formdata - contains the files to upload
+ * @param {number} class_id - The ID of the class
+ * @param {string} prompt - The AI prompt to send
+ * @returns
+ */
+export function createGroupGivenPDF(formData, class_id, prompt) {
+  formData.append('prompt', prompt); // Add the prompt
+  formData.append('class_id', class_id); // Add the class_id
+
+  return standardApiCall('post', `/api/group/ai/`, formData, null, {
+    // this will not update state to much work just have user refresh or smth
+    loadingComponent: ['GroupsList'],
+    noticeOfSuccess: 'successfully generate group by AI!',
+    axiosConfig: { headers: { 'Content-Type': 'multipart/form-data' } },
+  });
+}
+
 // /**
 //  *
 //  * @param {*} user_id

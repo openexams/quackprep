@@ -8,6 +8,7 @@ import { changeNavbarPage } from '@components/navbar/navbarSlice';
 import { selectUser } from '@src/app/auth/authSlice';
 import AIResponseComponent from './ai/AiResponse';
 import { CustomImageLoader } from '@components/CustomLoader/CustomImageLoader';
+import MarkdownRenderer from '@components/MarkdownRenderer';
 
 // Helper function to determine the label color based on grade
 /**
@@ -47,7 +48,9 @@ export default function FRQAnswer({ text, choice, selectedQuestion }) {
             {text || '(No answer provided)'}
           </p>
           <Message.Header style={{ marginTop: '1rem' }}>Correct Answer:</Message.Header>
-          <p style={{ color: '#21ba45', fontWeight: 'bold' }}>{choice.answer}</p>
+          <p style={{ color: '#21ba45', fontWeight: 'bold' }}>
+            <MarkdownRenderer render={choice.answer} />
+          </p>
         </Message>
         {!currentChoice?.ai_response && (
           <Button

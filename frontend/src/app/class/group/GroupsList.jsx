@@ -6,19 +6,24 @@ import { selectLoadingState } from '@src/app/store/loadingSlice';
 import Searchbar from '@components/Searchbar';
 import { useSearchParams } from 'react-router-dom';
 import GroupEditor from '@src/app/creator/forms/GroupEdit';
-import { selectEditState } from '@src/app/auth/authSlice';
+import { selectItemById } from 'maddox-js-funcs';
+import { selectClassState } from '../classSlice';
+import { selectCanAndIsEdit } from '@src/app/auth/authSlice';
 import GroupCard from './GroupCard';
 import { useState } from 'react';
 import { GROUP_TYPES } from './groupSlice';
+import CreateGroupByPDF from './CreateGroupByPDF';
 
 export default function GroupsList() {
-  const editModeOn = useSelector(selectEditState);
+  const { className, classId } = useSelector(selectNavbarState).navbar;
+
+  const curClass = selectItemById(useSelector(selectClassState).classes, 'id', classId);
+  const editModeOn = useSelector(selectCanAndIsEdit(curClass?.created_by));
+
   const [searchParams, setSearchParams] = useSearchParams();
   const [filter, setStateFilter] = useState(searchParams.get('filter') || '');
   const types = GROUP_TYPES;
   const [typeFilter, setTypeFilter] = useState(searchParams.get('type') || '');
-  const { navbar } = useSelector(selectNavbarState);
-  const { className, classId } = navbar;
   const loading = useSelector(selectLoadingState).loadingComps.GroupsList;
   const groups = selectArrayOfIncludingItems(
     useSelector(selectBINARYArrayOfStateById('app.group.groups', 'class_id', classId)),
@@ -94,6 +99,7 @@ export default function GroupsList() {
             })}
           {editModeOn && <GroupEditor class_id={classId} />}
         </Card.Group>
+        {editModeOn && <CreateGroupByPDF classId={classId} />}
       </Segment>
     </Container>
   );

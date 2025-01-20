@@ -15,7 +15,7 @@ function findClassNumber(nameOfClass) {
       return nameOfClass.slice(i);
     }
   }
-  console.log('fatal error class has no number?? classname must include number MA"26100"');
+  console.log('fatal error class has no number?? classname must include number MA"26100"'); // i dont check this on backend lol
   return null;
 }
 
@@ -41,7 +41,7 @@ export function getIconByCategory(category) {
   switch (
     category // should pull in master table w this but im to lazy
   ) {
-    case 1:
+    case 1 || 'CS':
       return 'code';
     case 2 || 'MAT':
       return 'cube';
