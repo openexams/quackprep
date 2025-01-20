@@ -10,8 +10,10 @@
     "express": "^4.21.2",
     "express-rate-limit": "^7.3.1",
     "express-session": "^1.18.0",
+    "form-data": "^4.0.1",
     "maddox-js-funcs": "^1.1.7",
     "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
     "mysql2": "^3.11.0",
     "nodemon": "^3.1.4",
     "obscenity": "^0.4.0",
@@ -34,9 +36,5 @@
   },
   "scripts": {
     "start": "nodemon server.js"
-  },
-  "devDependencies": {
-    "form-data": "^4.0.1",
-    "fs": "^0.0.1-security"
   }
 }

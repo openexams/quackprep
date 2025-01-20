@@ -4,12 +4,16 @@ import {
   upsertGroupInClass,
   getGroupsByClassId,
   getGroupsByUserId,
+  deleteGroupById,
 } from "#models/group/index.js";
 import { cascadeSetDeleted } from "#utils/sqlFunctions.js";
 import { isCreator } from "#middleware/creatorMiddleware.js";
 import { commonErrorMessage } from "#utils/utils.js";
+import groupAI from "./ai/index.js";
 
 const router = express.Router();
+
+router.use("/ai", groupAI);
 
 router.get("/user/", isAuthenticated, async function (req, res) {
   try {
@@ -49,16 +53,7 @@ router.delete(
   async function (req, res) {
     try {
       const group_id = parseInt(req.params.group_id);
-      const result = await cascadeSetDeleted(
-        req.user,
-        "group",
-        group_id,
-        0,
-        1,
-        1,
-        1,
-        0
-      );
+      const result = await deleteGroupById(req.user, group_id);
       res.status(200).json(result);
     } catch (error) {
       commonErrorMessage(
@@ -70,6 +65,7 @@ router.delete(
     }
   }
 );
+
 // type must be for now topic || exam changing now gay
 router.post("/:type", isAuthenticated, isCreator, async function (req, res) {
   const data = req.body;

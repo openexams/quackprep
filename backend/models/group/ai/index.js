@@ -1,99 +1,79 @@
-import { MATHPIX_API_INFO } from "#config/config.js";
-import axios from "axios";
-import fs from "fs";
+import { addManyChoicesToQuestion } from "#models/choice/index.js";
+import { upsertQuestion } from "#models/question/index.js";
+import { postPdfAndRetriveParsedPdf } from "#utils/mathpix.js";
+import { sendOpenAiAssistantPromptAndRecieveResult } from "#utils/openAi.js";
+import { upsertGroupInClass } from "../index.js";
 import FormData from "form-data";
-import { sleep } from "#utils/utils.js";
-
-/**
- * Keeps retrying until conversion is completed. if it retries more than 5 times, it will throw an error
- * @param {String} pdf_id id of pdf
- * @param {void} retries do not put in here pal
- * @param {String} format .md | .mmd | .html | .docx
- * @returns {String} formatted pdf in given format
- */
-export async function getFormattedPdfByPdfIdMathpix(
-  pdf_id,
-  format = ".md",
-  retries = 0
-) {
-  if (retries > 5) {
-    throw new Error("failed to get pdf by pdf_id. retries exceeded");
-  }
-  const result = await axios.get(
-    `https://api.mathpix.com/v3/converter/${pdf_id}`,
-    {
-      headers: {
-        app_id: MATHPIX_API_INFO.MATHPIX_APP_ID,
-        app_key: MATHPIX_API_INFO.MATHPIX_API_KEY,
-        "Content-type": "multipart/form-data",
-      },
-    }
-  );
-  if (result.data?.status === "completed") {
-    const mmd = await axios.get(
-      `https://api.mathpix.com/v3/pdf/${pdf_id}${format}`,
-      {
-        headers: {
-          app_id: MATHPIX_API_INFO.MATHPIX_APP_ID,
-          app_key: MATHPIX_API_INFO.MATHPIX_API_KEY,
-        },
-      }
-    );
-    return mmd.data;
-  } else if (result.data?.status === "error") {
-    throw new Error("failed to get pdf by pdf_id. status is error");
-  } else {
-    dlog("status not completed. retrying in 10 seconds");
-    await sleep(10000); // wait 10 second
-    return getFormattedPdfByPdfIdMathpix(pdf_id, format, retries + 1);
-  }
-}
-
+import { deleteGroupById } from "../index.js";
 /**
  *
- * @param {FormData} formData
- * @param {Number} class_id
- * @param {Number} user_id
- * @returns {String} pdf_id
+ * @param {Express.Multer.File} file
+ * @param {*} class_id
+ * @param {*} user_id
+ * @param {*} prompt
  */
-export async function postPDFToMathpix(formData) {
-  const result = await axios.post(
-    "https://api.mathpix.com/v3/pdf",
-    formData,
-
-    {
-      headers: {
-        ...formData.getHeaders(),
-        app_id: MATHPIX_API_INFO.MATHPIX_APP_ID,
-        app_key: MATHPIX_API_INFO.MATHPIX_API_KEY,
-        "Content-type": "multipart/form-data",
-      },
-    }
-  );
-  if (!result.data.pdf_id) {
-    throw new Error("failed to parse pdf");
-  }
-  return result.data.pdf_id;
-}
-
-export async function parsePdfIntoGroup(formData, class_id, user_id) {
+export async function parsePdfIntoGroup(
+  file,
+  class_id,
+  user_id,
+  prompt = "parse through and only respond with whats needed based on the json schema"
+) {
+  let group = null;
   try {
-    const pdf_id = await postPDFToMathpix(formData);
-    dlog(pdf_id);
-    const mmd = await getFormattedPdfByPdfIdMathpix(pdf_id);
-    dlog(mmd);
+    const formData = new FormData();
+    formData.append("file", file.buffer, file.originalname);
+    const mmd = await postPdfAndRetriveParsedPdf(formData);
+    /**@type {import("../../../../shared-types/group.type.ts").GenGroup} */
+    const GenGroupResponseJSON =
+      await sendOpenAiAssistantPromptAndRecieveResult(
+        "asst_UXDbP8qIkOJw50jN9OLp36oA",
+        `${mmd}\n${prompt}`,
+        { retire_time: 10000 }
+      );
+    group = (
+      await upsertGroupInClass(
+        user_id,
+        class_id,
+        GenGroupResponseJSON.group_type,
+        GenGroupResponseJSON.group_name,
+        GenGroupResponseJSON.group_description,
+        null
+      )
+    )[0];
+    for (let i = 0; i < GenGroupResponseJSON.questions.length; i++) {
+      // this is server intensive can i fix this?
+      const curQuestion = GenGroupResponseJSON.questions[i];
+      const question = (
+        await upsertQuestion(
+          // how can i give topics to these questions?
+          null,
+          curQuestion.question,
+          user_id,
+          [group.id],
+          true
+        )
+      )[0];
+      await addManyChoicesToQuestion(question.id, user_id, curQuestion.options);
+    }
   } catch (error) {
+    if (group && group.id) {
+      dlog("group detected and function failed, attempting to delete group");
+      // cascade delete group if it was created
+      await deleteGroupById(user_id, group.id);
+      dlog(`successfully cascade deleted group_id: ${group.id}`);
+    }
     console.error(error);
     throw error; // throw to route to handle it
   }
 }
+// add assitant ids to constant FILE
 
 // testing
-const formData = new FormData();
-formData.append(
-  "file",
-  fs.createReadStream("./backend/models/group/ai/pd.pdf")
-);
+// const formData = new FormData();
+// formData.append(
+//   "file",
+//   fs.createReadStream("./backend/models/group/ai/pd.pdf")
+// );
 
-// await parsePdfIntoGroup(formData, null, null);
-await getFormattedPdfByPdfIdMathpix("2025_01_19_8b28c5b960393964aa50g");
+// // await parsePdfIntoGroup(formData, null, null);
+// await getFormattedPdfByPdfIdMathpix("2025_01_19_8b28c5b960393964aa50g");

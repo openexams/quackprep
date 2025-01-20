@@ -11,7 +11,6 @@ export function getLastRowManipulated(tableName, rowId = null) {
 }
 
 /**
- * DO NOT LET USER ADD TO @where variable you do that yourself!!
  * @param {Inetger} user_id id of the user trying to del stuff used to verify if user can delete this stuff
  * @param {String} toDel what item u wanna delete class,group,question,choice
  * @param {Integer} id id of item u wanna del

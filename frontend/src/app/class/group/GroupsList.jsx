@@ -10,6 +10,7 @@ import { selectEditState } from '@src/app/auth/authSlice';
 import GroupCard from './GroupCard';
 import { useState } from 'react';
 import { GROUP_TYPES } from './groupSlice';
+import CreateGroupByPDF from './CreateGroupByPDF';
 
 export default function GroupsList() {
   const editModeOn = useSelector(selectEditState);
@@ -94,6 +95,7 @@ export default function GroupsList() {
             })}
           {editModeOn && <GroupEditor class_id={classId} />}
         </Card.Group>
+        <CreateGroupByPDF classId={classId} />
       </Segment>
     </Container>
   );

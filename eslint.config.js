@@ -10,7 +10,10 @@ export default [
     files: ["**/*.{js,jsx}"],
     languageOptions: {
       ecmaVersion: 2024,
-      globals: globals.browser,
+      globals: {
+        ...globals.browser,
+        dlog: "readonly", // only in backend
+      },
       parserOptions: {
         ecmaVersion: "latest",
         ecmaFeatures: { jsx: true },

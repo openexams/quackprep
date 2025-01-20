@@ -1,9 +1,18 @@
 import { openai } from "#config/config.js";
 import { sleep } from "./utils.js";
 
+/**
+ * If you need to hold a convo etc, do not use this.
+ * @param {String} assistant_id
+ * @param {String} prompt
+ * @param {Object} [options={}]
+ * @param {Number} options.retire_time
+ * @returns {String} result the ais result;
+ */
 export async function sendOpenAiAssistantPromptAndRecieveResult(
   assistant_id,
-  prompt
+  prompt,
+  options = {}
 ) {
   try {
     const quackAssist = await openai.beta.assistants.retrieve(assistant_id);
@@ -20,6 +29,7 @@ export async function sendOpenAiAssistantPromptAndRecieveResult(
 
     // run the message
     const quackRun = await openai.beta.threads.runs.create(quackThread.id, {
+      // can change max tokens used here
       assistant_id: quackAssist.id,
     });
     let runRes = await openai.beta.threads.runs.retrieve(
@@ -28,8 +38,10 @@ export async function sendOpenAiAssistantPromptAndRecieveResult(
     );
     // keep checking till its completed.
     while (runRes.status === "queued" || runRes.status === "in_progress") {
-      dlog("openAi run not finished retrying in 2s");
-      await sleep(1500);
+      dlog(
+        `openAi run not finished retrying in ${options.retire_time || 5000}ms`
+      );
+      await sleep(options.retire_time || 5000);
       runRes = await openai.beta.threads.runs.retrieve(
         quackThread.id,
         quackRun.id
