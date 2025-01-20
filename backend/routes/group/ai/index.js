@@ -3,6 +3,7 @@ import { isAuthenticated } from "#middleware/authMiddleware.js";
 import { commonErrorMessage } from "#utils/utils.js";
 import { parsePdfIntoGroup } from "#models/group/ai/index.js";
 import multer from "multer";
+import { MAX_FILES_UPLOAD } from "#config/constants.js";
 
 const router = express.Router();
 
@@ -12,14 +13,14 @@ const upload = multer({ storage: storage }); // Store files in memory
 router.post(
   "/",
   isAuthenticated,
-  upload.single("file"),
+  upload.array("files", MAX_FILES_UPLOAD),
   async function (req, res) {
     try {
-      const file = req.file;
+      const files = req.files;
       const class_id = req.body.class_id;
       const prompt = req.body.prompt;
 
-      if (!file || !class_id) {
+      if (!files[0] || !class_id) {
         commonErrorMessage(
           res,
           400,
@@ -29,7 +30,7 @@ router.post(
       }
 
       // Process file (stored in memory or temporary location)
-      const result = await parsePdfIntoGroup(file, class_id, req.user, prompt);
+      const result = await parsePdfIntoGroup(files, class_id, req.user, prompt);
       res.status(201).json(result);
     } catch (error) {
       commonErrorMessage(

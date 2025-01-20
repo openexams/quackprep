@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Button, TextArea, Segment, Form, Header, Icon } from 'semantic-ui-react';
 import { upsertCurrentChoiceAndPostAnswer } from '../../choicesSlice';
@@ -8,6 +8,11 @@ export default function FreeResponse({ choice, selectedQuestion }) {
   const dispatch = useDispatch();
   const [text, setText] = useState('');
   const [submitted, setSubmitted] = useState(false);
+
+  useEffect(() => {
+    setText('');
+    setSubmitted(false);
+  }, [selectedQuestion, choice]); // refresh when new question is selected
 
   return (
     <Segment basic style={{ background: '#f7f9fc', borderRadius: '10px' }}>

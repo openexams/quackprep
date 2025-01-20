@@ -7,27 +7,37 @@ import FormData from "form-data";
 import { deleteGroupById } from "../index.js";
 /**
  *
- * @param {Express.Multer.File} file
+ * @param {Express.Multer.File[]} files
  * @param {*} class_id
  * @param {*} user_id
  * @param {*} prompt
  */
 export async function parsePdfIntoGroup(
-  file,
+  files,
   class_id,
   user_id,
   prompt = "parse through and only respond with whats needed based on the json schema"
 ) {
   let group = null;
   try {
-    const formData = new FormData();
-    formData.append("file", file.buffer, file.originalname);
-    const mmd = await postPdfAndRetriveParsedPdf(formData);
+    dlog(`${files.length} files detected`);
+    let mdd_res = "";
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+      if (!file) {
+        throw new Error("no file when it says there is a file");
+      } else {
+        const formData = new FormData();
+        formData.append("file", file.buffer, file.originalname);
+        mdd_res += await postPdfAndRetriveParsedPdf(formData);
+      }
+    }
+
     /**@type {import("../../../../shared-types/group.type.ts").GenGroup} */
     const GenGroupResponseJSON =
       await sendOpenAiAssistantPromptAndRecieveResult(
         "asst_UXDbP8qIkOJw50jN9OLp36oA",
-        `${mmd}\n${prompt}`,
+        `${mdd_res}\n${prompt}`,
         { retire_time: 10000 }
       );
     group = (

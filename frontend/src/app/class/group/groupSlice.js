@@ -14,14 +14,12 @@ export function getGroupsByClassId(classId) {
 
 /**
  *
- * @param {File} file - The file to upload
+ * @param {FormData} Formdata - contains the files to upload
  * @param {number} class_id - The ID of the class
  * @param {string} prompt - The AI prompt to send
  * @returns
  */
-export function createGroupGivenPDF(file, class_id, prompt) {
-  const formData = new FormData();
-  formData.append('file', file); // Add the file
+export function createGroupGivenPDF(formData, class_id, prompt) {
   formData.append('prompt', prompt); // Add the prompt
   formData.append('class_id', class_id); // Add the class_id
 

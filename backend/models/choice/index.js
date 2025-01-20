@@ -154,7 +154,8 @@ export async function addManyChoicesToQuestion(question_id, user_id, choices) {
     throw new Error("missing required fields user_id, question_id");
     return;
   }
-  if (!choices[0].is_correct || !choices[0].text || !choices[0].type) {
+  if (choices[0].is_correct == null || !choices[0].text || !choices[0].type) {
+    console.log(choices?.[0]);
     throw new Error(
       "must include at least 1 choice with is_correct, text, and type"
     );

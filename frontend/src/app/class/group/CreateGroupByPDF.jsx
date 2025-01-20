@@ -1,26 +1,24 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { createGroupGivenPDF } from './groupSlice';
 import { Button, Input, Header, Popup, Icon, Modal } from 'semantic-ui-react';
 import PdfUploadForm from '@components/PDFUploadForm';
 
+// will only render if user has edit permissions
 export default function CreateGroupByPDF({ classId }) {
   const dispatch = useDispatch();
   const [customPrompt, setCustomPrompt] = useState('');
-  const [file, setFile] = useState(null);
   const [showErrorModal, setShowErrorModal] = useState(false);
+  const [reset, setReset] = useState(false);
 
   function handlePdfSubmit(formData) {
-    setFile(formData.get('file'));
-  }
-
-  const handleFormSubmit = () => {
-    if (!file) {
+    if (!formData.get('files')) {
       setShowErrorModal(true);
       return;
     }
-    dispatch(createGroupGivenPDF(file, classId, customPrompt || null));
-  };
+    setReset(!reset);
+    dispatch(createGroupGivenPDF(formData, classId, customPrompt || null));
+  }
 
   return (
     <div style={{ padding: '2rem', maxWidth: '600px', margin: '0 auto' }}>
@@ -42,10 +40,7 @@ export default function CreateGroupByPDF({ classId }) {
           fluid
         />
       </div>
-      <PdfUploadForm onSubmit={handlePdfSubmit} />
-      <Button color='teal' fluid size='large' onClick={handleFormSubmit}>
-        Generate Content
-      </Button>
+      <PdfUploadForm reset={reset} onSubmit={handlePdfSubmit} />
 
       <Modal open={showErrorModal} onClose={() => setShowErrorModal(false)} size='small'>
         <Header icon='exclamation circle' content='File Missing' />
