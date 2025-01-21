@@ -6,7 +6,6 @@ import store from '@src/app/store/store.js';
 
 import FlashMessage from '@components/flashmessage/FlashMessage.jsx';
 import AppRouter from './app/AppRouter';
-import Footer from '@components/Footer';
 
 export default function Main() {
   return (
@@ -23,7 +22,6 @@ export default function Main() {
         <div style={{ flex: 1, paddingTop: '5.7em' }}>
           <AppRouter />
         </div>
-        <Footer />
       </div>
     </Provider>
   );

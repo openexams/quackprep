@@ -3,6 +3,7 @@ import {
   getWhichUsersAnsweredMostQuestions,
   getQuestionsAnsweredByMonthAndYear,
   getTotalSubmissions,
+  getTotalAiQuestions,
 } from "#models/stats/index.js";
 import { commonErrorMessage } from "#utils/utils.js";
 
@@ -42,6 +43,15 @@ router.get("/answer/total", async function (req, res) {
     res.status(201).json(result);
   } catch (error) {
     commonErrorMessage(res, 500, "failed to getTotalSubmissions", error);
+  }
+});
+
+router.get("/ai/total", async function (req, res) {
+  try {
+    const result = await getTotalAiQuestions();
+    res.status(200).json(result);
+  } catch (error) {
+    commonErrorMessage(res, 500, "failed to getTotalAiQuestions", error);
   }
 });
 

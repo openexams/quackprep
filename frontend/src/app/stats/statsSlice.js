@@ -4,6 +4,7 @@ const GET_QUESTIONS_ANSWERED_BY_MONTH_AND_YEAR = '/app/stats/GET_QUESTIONS_ANSWE
 const GET_MY_STATS = '/app/stats/GET_MY_STATS';
 const GET_TTS = '/app/stats/GET_TTS';
 const GET_TOTAL_SUBMISSIONS = '/app/stats/GET_TOTAL_SUBMISSIONS';
+const GET_TOTAL_AI_QUESTIONS = '/app/stats/GET_TOTAL_AI_QUESTIONS';
 
 export function getQuestionsAnsweredByMonthAndYear() {
   return standardApiCall('get', '/api/stats/qsansweredbymandy', null, GET_QUESTIONS_ANSWERED_BY_MONTH_AND_YEAR, {
@@ -23,11 +24,16 @@ export function getTotalSubmissons() {
   return standardApiCall('get', '/api/stats/answer/total', null, GET_TOTAL_SUBMISSIONS, { loadingComponent: 'Stats' });
 }
 
+export function getTotalAiQuestions() {
+  return standardApiCall('get', '/api/stats/ai/total', null, GET_TOTAL_AI_QUESTIONS, { loadingComponent: 'Stats' });
+}
+
 const DEFAULT_STATE = {
   myStats: null,
   questionsAnsweredByMonthAndYear: null,
   tts: null,
   total_subs: null,
+  total_ai_questions: null,
 };
 
 export default function statsReducer(state = DEFAULT_STATE, action) {
@@ -41,6 +47,8 @@ export default function statsReducer(state = DEFAULT_STATE, action) {
 
     case GET_TOTAL_SUBMISSIONS:
       return { ...state, total_subs: action.payload };
+    case GET_TOTAL_AI_QUESTIONS:
+      return { ...state, total_ai_questions: action.payload };
     default:
       return state;
   }

@@ -7,7 +7,7 @@ import {
 import { addManyChoicesToQuestion } from "#models/choice/index.js";
 import sqlExe from "#db/dbFunctions.js";
 import { sendOpenAiAssistantPromptAndRecieveResult } from "#utils/openAi.js";
-import { MAX_QUESTIONS_CONTEXT } from "#config/constants.js"
+import { MAX_QUESTIONS_CONTEXT } from "#config/constants.js";
 /**
  *
  * @param {Integer} user_id add which user ai generated the question (does not rlly matter)
@@ -80,10 +80,7 @@ export async function generateQuestionLike(
  * @param {Integer} group_id to find relevant questions
  * @returns {Object} question object back to the user who generated it
  */
-export async function generateQuestionFromGroup(
-  user_id,
-  group_id,
-) {
+export async function generateQuestionFromGroup(user_id, group_id) {
   // TO-DO: Generate context
   let questions = null;
   let question_added = null;
@@ -93,19 +90,20 @@ export async function generateQuestionFromGroup(
     questions = await getQuestionsByGroupId(group_id);
 
     // Shuffle the questions array
-    questions.sort( () => Math.random()-0.5 );
+    questions.sort(() => Math.random() - 0.5);
 
     // Build context string
     for (let i = 0; i < questions.length && i < MAX_QUESTIONS_CONTEXT; i++) {
-      context += ("Question " + i + questions[i].question + "\n\n");
+      context += "Question " + i + questions[i].question + "\n\n";
     }
 
-    const prompt = "Generate a question in JSON format that covers the same topic as the questions above"
+    const prompt =
+      "Generate a question in JSON format that covers the same topic as the questions above";
 
     const quackAssistResponseJSON =
       await sendOpenAiAssistantPromptAndRecieveResult(
         "asst_a168JvA9PlzK2WaKZ6oukDe4",
-        context + prompt,
+        context + prompt
       );
 
     for (let i = 0; i < quackAssistResponseJSON.options.length; i++) {
@@ -135,8 +133,7 @@ export async function generateQuestionFromGroup(
       quackAssistResponseJSON.options
     );
     return { question: question_with_2, choices: choices_added };
-  }
-  catch (error) {
+  } catch (error) {
     if (question_added?.id) {
       // if we added a question & errored then->
       await setDeletedQuestionAndCascadeChoices(question_added?.id);

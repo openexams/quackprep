@@ -16,6 +16,8 @@ import HistoryNav from '@components/Breadcrumb.jsx';
 import PDFList from './class/group/pdf/PDFList.jsx';
 import PDFShow from './class/group/pdf/PDFShow.jsx';
 import GroupsList from './class/group/GroupsList.jsx';
+import AboutPage from './about/About.jsx';
+import Footer from '@components/Footer.jsx';
 
 {
   /* topic could be a actual topic or a group of question such as a exam */
@@ -30,6 +32,8 @@ export default function AppRouter() {
 
       <Routes style={{ flex: 1 }}>
         <Route path='/' element={<Home />} />
+        <Route path='/about' element={<AboutPage />} />
+
         <Route path='/auth' element={<AuthPopup />} />
         <Route path='/account' element={<Profile />} />
         <Route path='/streak' element={<Streak />} />
@@ -48,9 +52,9 @@ export default function AppRouter() {
 
         <Route path='/leaderboard' element={<Leaderboard />} />
         <Route path='/stats' element={<Stats />} />
-
         <Route path='*' element={<NotFoundPage />} />
       </Routes>
+      <Footer />
     </Router>
   );
 }

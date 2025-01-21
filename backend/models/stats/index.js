@@ -25,3 +25,10 @@ export async function getTotalSubmissions() {
   `)
   )?.[0]?.count;
 }
+
+export async function getTotalAiQuestions() {
+  return (
+    await sqlExe.executeCommand(`SELECT count(*) as count from questions where ai = 1 and deleted = 0
+  `)
+  )?.[0]?.count;
+}

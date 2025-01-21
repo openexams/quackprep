@@ -5,7 +5,7 @@ import { Container, Header, Grid, Segment, Icon, Card, Statistic } from 'semanti
 import { Line } from 'react-chartjs-2';
 import 'chart.js/auto';
 import { selectLoadingState } from '../store/loadingSlice';
-import { getQuestionsAnsweredByMonthAndYear, getTotalTimeSpent, selectStatsState } from './statsSlice';
+import { getQuestionsAnsweredByMonthAndYear, getTotalTimeSpent, selectStatsState, getTotalAiQuestions } from './statsSlice';
 import MyStats from './MyStats';
 
 const numberToNameMonthMapping = {
@@ -59,7 +59,7 @@ const ChartCard = ({ title, children }) => (
 
 export default function StatsPage() {
   const loading = useSelector(selectLoadingState).loadingComps?.Stats;
-  const { questionsAnsweredByMonthAndYear, tts } = useSelector(selectStatsState).stats;
+  const { questionsAnsweredByMonthAndYear, tts, total_ai_questions } = useSelector(selectStatsState).stats;
   const dispatch = useDispatch();
 
   function getTotalSubmissons() {
@@ -80,6 +80,9 @@ export default function StatsPage() {
     // if (!total_subs) {
     //   dispatch(getTotalSubmissons());
     // }
+    if (!total_ai_questions) {
+      dispatch(getTotalAiQuestions());
+    }
   }, []);
 
   const mappedQuestions = useMemo(() => mapQuestionsByMAndY(questionsAnsweredByMonthAndYear), [questionsAnsweredByMonthAndYear]);
@@ -123,8 +126,9 @@ export default function StatsPage() {
       </Header>
 
       <Segment basic loading={loading}>
-        <Statistic color='blue' value={`${Math.round(tts / 60)} H`} label={'Total Time Spent Studying'} />
+        <Statistic color='green' value={`${Math.round(tts / 60)} H`} label={'Total Time Spent Studying'} />
         <Statistic color='yellow' value={getTotalSubmissons()} label={'Total Question Submissions'} />
+        <Statistic color='blue' value={total_ai_questions} label={'Total AI Generated Questions'} />
 
         <Grid columns={1} stackable>
           <Grid.Row>
