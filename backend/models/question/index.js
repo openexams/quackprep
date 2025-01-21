@@ -18,7 +18,8 @@ export async function getQuestionsByGroupId(group_id) {
        q.explanation_url,
         group_concat(g.name SEPARATOR ',') as group_name,
        group_concat(gt.type_name SEPARATOR ',') as type_name,
-    cl.id as class_id, cl.school_id,cl.category as class_category, q.ai
+    cl.id as class_id, cl.school_id,cl.category as class_category, q.ai,CONVERT(COALESCE(qv.upvotes, 0), SIGNED) AS upvotes
+
     FROM questions q
 
     JOIN group_question gq ON q.id = gq.question_id AND gq.group_id = :group_id -- all groups relating to this question
@@ -26,7 +27,13 @@ export async function getQuestionsByGroupId(group_id) {
     JOIN group_question new_gq ON qq.id = new_gq.question_id -- use all questions that are in all groups now this shit has all groups needed
     JOIN cgroups g ON g.id = new_gq.group_id
 
-
+    LEFT JOIN
+    (select COALESCE(SUM(
+       CASE
+         WHEN qv.vote = 1 THEN 1  -- upvote adds +1
+         WHEN qv.vote = 0 THEN -1 -- down vote subtracts 1
+       END
+    ), 0) AS upvotes, question_id from question_votes qv GROUP BY question_id) as qv ON qv.question_id = qq.id
 
     JOIN group_types gt ON gt.id = g.type
     JOIN classes cl ON g.class_id = cl.id
@@ -43,6 +50,7 @@ export async function selectQuestion(WHERE, params) {
     q.id,
     q.question,
     q.ai,
+    CONVERT(COALESCE(qv.upvotes, 0), SIGNED) AS upvotes,
     group_concat(g.id SEPARATOR ',') AS group_id,
     group_concat(gt.type_name SEPARATOR ',') as type_name,
     group_concat(g.name SEPARATOR ',') as group_name,
@@ -51,10 +59,18 @@ export async function selectQuestion(WHERE, params) {
     cl.category AS class_category,q.explanation_url
 FROM
     questions q
+LEFT JOIN
+    (select COALESCE(SUM(
+       CASE
+         WHEN qv.vote = 1 THEN 1  -- upvote adds +1
+         WHEN qv.vote = 0 THEN -1 -- down vote subtracts 1
+       END
+    ), 0) AS upvotes, question_id from question_votes qv GROUP BY question_id) as qv ON qv.question_id = q.id
 JOIN
     group_question gq ON q.id = gq.question_id
 JOIN
     cgroups g ON g.id = gq.group_id
+
 JOIN
 	group_types gt ON g.type = gt.id
 JOIN
@@ -62,7 +78,7 @@ JOIN
 WHERE
     q.deleted = 0 AND g.deleted=0 AND cl.deleted=0 AND ${WHERE}
 GROUP BY
-    q.id, cl.id, cl.school_id, cl.category
+    q.id, cl.id
 ORDER BY
     q.id ASC`,
     params
@@ -92,9 +108,6 @@ export async function upsertQuestion(
   aiGenerated = false
 ) {
   const params = { id, question, user_id, aiGenerated };
-  if (!Array.isArray(group_ids)) {
-    throw new Error("group_ids must be an array");
-  }
   if (!aiGenerated) {
     // if its ai then anyone can create ai questions
     for (let i = 0; i < group_ids?.length; i++) {
