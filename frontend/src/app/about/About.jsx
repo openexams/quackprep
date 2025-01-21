@@ -3,16 +3,24 @@ import CreatorInfo from './CreatorInfo.jsx';
 
 const About = () => {
   const creators = [
-    // {
-    //   imgSrc:
-    //     'https://media.licdn.com/dms/image/v2/D5603AQFo1LTbAVeJ-A/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1707747042254?e=1743033600&v=beta&t=uK7HaDc40bz3Vi7bJFUsr32Bdsab3aOy-8DSGmmFA9U',
-    //   name: 'Maddox Schmidlkofer',
-    //   description: 'All work and no play makes maddox a dull boy.', //Founder and Lead Developer of QuackPrep. Passionate about creating innovative solutions to make learning fun and engaging for college students.
-    //   links: [
-    //     { label: 'GitHub', url: 'https://github.com/maddox05', icon: 'github', color: 'black' },
-    //     { label: 'LinkedIn', url: 'https://www.linkedin.com/in/maddox-schmidlkofer/', icon: 'linkedin', color: 'blue' },
-    //   ],
-    // },
+    {
+      imgSrc: '/img/team/madgoof.jpeg',
+      name: 'Maddox Schmidlkofer',
+      description: 'All work and no play makes maddox a dull boy.', //Founder and Lead Developer of QuackPrep. Passionate about creating innovative solutions to make learning fun and engaging for college students.
+      links: [
+        { label: 'GitHub', url: 'https://github.com/maddox05', icon: 'github', color: 'black' },
+        { label: 'LinkedIn', url: 'https://www.linkedin.com/in/maddox-schmidlkofer/', icon: 'linkedin', color: 'blue' },
+      ],
+    },
+    {
+      imgSrc: '/img/team/haygoof.jpeg',
+      name: 'Hayes Bounds',
+      description: '🌾', //Founder and Lead Developer of QuackPrep. Passionate about creating innovative solutions to make learning fun and engaging for college students.
+      links: [
+        { label: 'GitHub', url: 'https://github.com/hebounds', icon: 'github', color: 'black' },
+        { label: 'LinkedIn', url: 'https://www.linkedin.com/in/hayes-bounds-441a7b210/', icon: 'linkedin', color: 'blue' },
+      ],
+    },
   ];
 
   return (
