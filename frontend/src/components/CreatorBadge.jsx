@@ -2,7 +2,7 @@ import { Label, Icon } from 'semantic-ui-react';
 
 const CreatorBadge = () => {
   return (
-    <Label color='teal' basic>
+    <Label color='blue' basic>
       <Icon name='star' />
       Creator
     </Label>

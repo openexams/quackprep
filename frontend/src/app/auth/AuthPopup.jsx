@@ -78,7 +78,7 @@ export default function Auth() {
             <Segment basic textAlign='center' style={{ marginTop: '2rem', color: '#888' }}>
               <p>
                 By signing in, you agree to our{' '}
-                <Link to='/terms' style={{ color: '#4285F4' }}>
+                <Link to='/tos' style={{ color: '#4285F4' }}>
                   Terms of Service
                 </Link>{' '}
                 and{' '}

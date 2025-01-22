@@ -18,6 +18,8 @@ import GroupsList from './class/group/GroupsList.jsx';
 import AboutPage from './about/About.jsx';
 import Footer from '@components/Footer.jsx';
 import ComingSoon from '@components/ComingSoon.jsx';
+import TOS from './extra/TOS.jsx';
+import PrivacyPolicy from './extra/Privacy.jsx';
 
 {
   /* topic could be a actual topic or a group of question such as a exam */
@@ -33,6 +35,8 @@ export default function AppRouter() {
       <Routes style={{ flex: 1 }}>
         <Route path='/' element={<Home />} />
         <Route path='/about' element={<AboutPage />} />
+        <Route path='/tos' element={<TOS />} />
+        <Route path='/privacy' element={<PrivacyPolicy />} />
 
         <Route path='/auth' element={<AuthPopup />} />
         <Route path='/account' element={<Profile />} />

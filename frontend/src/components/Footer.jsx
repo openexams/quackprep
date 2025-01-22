@@ -78,10 +78,10 @@ export default function Footer() {
         <Segment inverted textAlign='center' style={{ margin: '2em 0em 0em', padding: '0em' }}>
           <Container textAlign='center'>
             <List horizontal inverted divided link size='small'>
-              <List.Item as='a' href='https://www.youtube.com/watch?v=dQw4w9WgXcQ' target='_blank' rel='noopener noreferrer'>
+              <List.Item as={Link} to='/tos' rel='noopener noreferrer'>
                 Terms of Service
               </List.Item>
-              <List.Item as='a' href='https://www.youtube.com/watch?v=dQw4w9WgXcQ' target='_blank' rel='noopener noreferrer'>
+              <List.Item as={Link} to='/privacy' rel='noopener noreferrer'>
                 Privacy Policy
               </List.Item>
               <List.Item as='a' href='mailto:quackprep@gmail.com'>

@@ -1,7 +1,7 @@
 import { standardApiCall } from '@src/utils/api';
 import { LOGIN } from './login/loginSlice';
 import { selectItemById } from 'maddox-js-funcs';
-import { ADMIN_ACCOUNT_ID } from '../../../../constants.js';
+import { ADMIN_ACCOUNT_ID } from '../../../../global_constants.js';
 
 export function getCurUser() {
   return standardApiCall('get', '/api/auth/verify', null, LOGIN, { loadingComponent: 'AuthPopup' });
