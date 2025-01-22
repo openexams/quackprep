@@ -78,28 +78,9 @@ export default function ClassCard({ id, name, category, desc, school_id, created
   const icon = useMemo(() => getIconByCategory(category), [category]);
   const cardColor = useMemo(() => getColorByLevel(level), [level]);
 
-  // If in edit mode, show the editor instead
   if (edit) {
     return <ClassEditor id={id} name={name} category={category} desc={desc} school_id={school_id} />;
   }
-
-  // Example quadrant click handlers
-  const handleStudyGroup = (e) => {
-    e.stopPropagation();
-    alert('Study by Group clicked!');
-  };
-  const handleEdit = (e) => {
-    e.stopPropagation();
-    alert('Edit clicked!');
-  };
-  const handleBookmark = (e) => {
-    e.stopPropagation();
-    alert('Bookmark clicked!');
-  };
-  const handleShare = (e) => {
-    e.stopPropagation();
-    alert('Share clicked!');
-  };
 
   // Common styling for quadrants
   const quadrantStyle = {
@@ -108,8 +89,17 @@ export default function ClassCard({ id, name, category, desc, school_id, created
     alignItems: 'center',
     justifyContent: 'center',
     transition: 'transform 0.3s ease',
-    // Slight "pop" on hover for each quadrant (optional)
     cursor: 'pointer',
+  };
+
+  // Text style to improve readability
+  const quadrantTextStyle = {
+    marginTop: '0.3em',
+    pointerEvents: 'none',
+    color: '#fff',
+    fontSize: '1.1rem', // Larger font
+    fontWeight: 600, // Slightly bold
+    textShadow: '0 0 5px #000', // A soft shadow around the text
   };
 
   return (
@@ -120,14 +110,11 @@ export default function ClassCard({ id, name, category, desc, school_id, created
       }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      // onClick={() => {
-      //   dispatch(updateCurrentClassData(id, name));
-      // }}
     >
-      {/* Card Container */}
       <Card
         color={cardColor}
         style={{
+          minWidth: '10rem',
           position: 'relative',
           overflow: 'hidden',
           transform: hovered ? 'scale(1.03)' : 'scale(1)',
@@ -141,11 +128,7 @@ export default function ClassCard({ id, name, category, desc, school_id, created
           <Card.Description>{desc}</Card.Description>
         </Card.Content>
 
-        {/* 
-          2×2 Overlay with Title
-          - Only visible on hover
-          - Using CSS Grid for quadrants
-        */}
+        {/* Hover Overlay */}
         <div
           style={{
             position: 'absolute',
@@ -153,7 +136,6 @@ export default function ClassCard({ id, name, category, desc, school_id, created
             left: 0,
             width: '100%',
             height: '100%',
-            // Fade in/out
             opacity: hovered ? 1 : 0,
             pointerEvents: hovered ? 'auto' : 'none',
             transition: 'opacity 0.3s ease',
@@ -161,17 +143,24 @@ export default function ClassCard({ id, name, category, desc, school_id, created
             flexDirection: 'column',
           }}
         >
-          {/* Quadrants Container */}
+          {/*
+            We use a 2×1 grid on top, and 1×1 (spanning 2 columns) on bottom:
+            
+              [ Q1 ] [ Q2 ]
+              [    Q3    ]
+          */}
           <div
             style={{
               display: 'grid',
               flex: 1,
               gridTemplateColumns: '1fr 1fr',
-              gridTemplateRows: '1fr 1fr',
-              background: 'rgba(0, 0, 0, 0.2)',
+              // Make both rows the same height
+              gridTemplateRows: '1fr .8fr',
+              // Darken the overlay to add more contrast:
+              background: 'rgba(0, 0, 0, 0.4)',
             }}
           >
-            {/* Quadrant 1: Study Group */}
+            {/* Quadrant 1: Study By Topic */}
             <div
               onClick={() => dispatch(changeNavbarPage(navigate, `${id}/group?type=topic`))}
               style={{
@@ -181,39 +170,33 @@ export default function ClassCard({ id, name, category, desc, school_id, created
               }}
             >
               <Icon name='users' size='large' color='blue' style={{ pointerEvents: 'none' }} />
-              <div style={{ marginTop: '0.3em', pointerEvents: 'none', color: '#fff' }}>Study By Topic</div>
+              <div style={quadrantTextStyle}>Study By Topic</div>
             </div>
 
-            {/* Quadrant 2: Edit */}
+            {/* Quadrant 2: Study By Exam */}
             <div
-              onClick={() => dispatch(changeNavbarPage(navigate, `${id}/group?type=topic`))}
+              onClick={() => dispatch(changeNavbarPage(navigate, `${id}/group?type=exam`))}
               style={{
                 ...quadrantStyle,
                 borderBottom: '1px solid #fff',
               }}
             >
               <Icon name='book' size='large' color='green' style={{ pointerEvents: 'none' }} />
-              <div style={{ marginTop: '0.3em', pointerEvents: 'none', color: '#fff' }}>Study By Exam</div>
+              <div style={quadrantTextStyle}>Study By Exam</div>
             </div>
 
-            {/* Quadrant 3: Bookmark*/}
+            {/* Bottom Row (spanning both columns): Ai Learn */}
             <div
-              onClick={() => dispatch(changeNavbarPage(navigate, `/learn`))}
+              onClick={() => dispatch(changeNavbarPage(navigate, `${id}/learn`))}
               style={{
                 ...quadrantStyle,
-                borderRight: '1px solid #fff',
+                gridColumn: '1 / span 2',
+                borderTop: '1px solid #fff',
               }}
             >
-              <Icon name='bookmark' size='large' color='orange' style={{ pointerEvents: 'none' }} />
-              <div style={{ marginTop: '0.3em', pointerEvents: 'none', color: '#fff' }}>Ai Learn</div>
+              <Icon name='plug' size='large' color='orange' style={{ pointerEvents: 'none' }} />
+              <div style={quadrantTextStyle}>Ai Learn</div>
             </div>
-            {/*
-
-            Quadrant 4: Share 
-            <div onClick={handleShare} style={quadrantStyle}>
-              <Icon name='share alternate' size='large' color='red' style={{ pointerEvents: 'none' }} />
-              <div style={{ marginTop: '0.3em', pointerEvents: 'none', color: '#fff' }}>Share</div>
-            </div>*/}
           </div>
         </div>
       </Card>
