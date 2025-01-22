@@ -1,7 +1,7 @@
 import './leaderboard.css';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Container, Header, Icon, Grid, Card, List, Image, Segment, Label, Progress } from 'semantic-ui-react';
+import { Container, Header, Icon, Grid, Card, List, Image, Segment, Label, Progress, Statistic } from 'semantic-ui-react';
 import { getTopStreaks, getWhichUsersAnsweredMostQuestions, selectLeaderboardState } from './leaderboardSlice';
 import { selectLoadingState } from '../store/loadingSlice';
 import CreatorBadge from '@components/CreatorBadge';
@@ -29,15 +29,15 @@ const LeaderboardCard = ({ title, icon, iconColor, data, dataKey }) => (
           data.map((item, index) => (
             <List.Item key={`${index} + ${item.username}`} className='leaderboard-card-item'>
               {/* Rank + Medal */}
-              <div className='player-rank'>
+              {/* <div className='player-rank'>
                 {getMedalIcon(index)}
                 <Label circular color={index === 0 ? 'yellow' : 'grey'}>
                   {index + 1}
                 </Label>
-              </div>
+              </div> */}
 
               {/* User Avatar */}
-              <Image avatar src={item.icon || `https://api.dicebear.com/6.x/initials/svg?seed=${item.username}`} />
+              <Image size='large' avatar src={item.icon || `https://api.dicebear.com/6.x/initials/svg?seed=${item.username}`} />
 
               {/* User Info */}
               <List.Content>
@@ -46,18 +46,18 @@ const LeaderboardCard = ({ title, icon, iconColor, data, dataKey }) => (
                   {item?.is_creator == 1 && <CreatorBadge />}
                 </div>
                 <List.Description>
-                  <strong>{item[dataKey]} </strong>
+                  <Statistic value={item[dataKey]} />
                   {dataKey === 'current_streak' ? 'day streak' : 'questions answered'}
                 </List.Description>
 
                 {/* Progress bar to show relative achievement vs. top user */}
-                <Progress
+                {/* <Progress
                   percent={Math.round(Math.min((item[dataKey] / data[0][dataKey]) * 100, 100))}
                   size='small'
                   color={index === 0 ? 'yellow' : 'grey'}
                   className='player-progress'
                   progress
-                />
+                /> */}
               </List.Content>
             </List.Item>
           ))}
@@ -88,7 +88,7 @@ export default function Leaderboard() {
         <Header.Subheader>Celebrate our top performers!</Header.Subheader>
       </Header>
 
-      <Segment basic raised loading={loading} className='leaderboard-segment'>
+      <Segment raised loading={loading} className='leaderboard-segment'>
         <Grid columns={2} stackable centered>
           <Grid.Column>
             <LeaderboardCard title='Highest Streak Holders' icon='fire' iconColor='red' data={streaks} dataKey='current_streak' />
