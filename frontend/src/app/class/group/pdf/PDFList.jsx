@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Segment, Header, Icon, Grid, Button, Container, Dimmer } from 'semantic-ui-react';
 import { useNavigate } from 'react-router-dom';
 import { selectLoadingState } from '@src/app/store/loadingSlice.js';
+import NoItemsFound from '@components/NoItemsFound';
 
 // have pdfs do its own dispatches unlike the rest of my shitty app
 // no one needs to access pdfs stuff so it wont be in redux like all my other stuff
@@ -21,6 +22,7 @@ export default function PDFList() {
         <Header.Content>
           PDF Exams
           <Header.Subheader>{pdfs?.length} available</Header.Subheader>
+          <strong>We are moving away from pdfs soon, but all the content will stay.</strong>
         </Header.Content>
       </Header>
 
@@ -52,6 +54,7 @@ export default function PDFList() {
             </Segment>
           </Grid.Column>
         ))}
+        {pdfs.length === 0 && <NoItemsFound />}
       </Grid>
     </Segment>
   );

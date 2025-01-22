@@ -1,4 +1,4 @@
-import { changeNavbarPage, updateCurrentClassData } from '@components/navbar/navbarSlice';
+import { changeNavbarPage } from '@components/navbar/navbarSlice';
 import { useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Card, Icon } from 'semantic-ui-react';
@@ -190,7 +190,7 @@ export default function ClassCard({ id, name, category, desc, school_id, created
 
             {/* Bottom Row (spanning both columns): Ai Learn */}
             <div
-              onClick={() => dispatch(changeNavbarPage(navigate, `${id}/learn`))}
+              onClick={() => dispatch(changeNavbarPage(navigate, `${id}/pdfexams`))}
               style={{
                 ...quadrantStyle,
                 gridColumn: '1 / span 2',
@@ -198,7 +198,7 @@ export default function ClassCard({ id, name, category, desc, school_id, created
               }}
             >
               <Icon name='plug' size='large' color='orange' style={{ pointerEvents: 'none' }} />
-              <div style={quadrantTextStyle}>Ai Learn</div>
+              <div style={quadrantTextStyle}>Study By PDF</div>
             </div>
           </div>
         </div>
