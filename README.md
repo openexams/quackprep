@@ -11,5 +11,5 @@
   npm run dev
 
 ## kanban 
-  https://github.com/orgs/quackprep/projects/1
-  
+[  https://github.com/orgs/quackprep/projects/1
+](https://quackprep.youtrack.cloud/agiles)  
