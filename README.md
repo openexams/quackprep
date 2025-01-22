@@ -11,4 +11,4 @@
   npm run dev
 
 ## kanban 
-https://quackprep.youtrack.cloud/agiles) 
+https://quackprep.youtrack.cloud/agiles
