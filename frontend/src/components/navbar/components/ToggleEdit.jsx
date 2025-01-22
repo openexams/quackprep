@@ -1,4 +1,3 @@
-import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Checkbox, Segment, Header, Icon } from 'semantic-ui-react';
 import { selectEditState } from '@src/app/auth/authSlice';

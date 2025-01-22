@@ -5,10 +5,18 @@ import { generateQuestionLike } from "#models/ai/question.js";
 import { MAX_FILES_UPLOAD } from "#config/constants.js";
 import { parsePdfIntoGroup } from "#models/ai/group.js";
 import { checkStudentFRQAnswer } from "#models/ai/choice.js";
+import rateLimit from "express-rate-limit";
 import { Router } from "express";
 import multer from "multer";
 
 const router = Router();
+
+router.use(
+  rateLimit({
+    windowMs: 60 * 1000, // 1 min
+    limit: 2, // limit each IP to 2 requests per windowMs
+  })
+);
 
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage }); // Store files in memory

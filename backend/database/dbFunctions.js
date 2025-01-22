@@ -11,13 +11,14 @@ export default class sqlExe {
   /**
    * This is a good function for executing querys, just send it the sql command you want to run and
    * the inputs (variables) you want it to have.
-   * Must send it params and they must
+   * send params they must
    *
    * @param {String} sqlCommand sql command that simple, uses params as input vars
    * @param {Object} params
    * @param {Object} options extra options
    * @param {String} options.verifyUserOwnsRowId (table name to check) will make sure the user owns the row id they are trying to edit, if not it wont run.
-   * @returns {any} returns an array of objects from your sql query
+   * @param {Boolean} options.verifyText will make sure the text is clean does not have bad words. Will reject if sqlQuery is not clean.
+   * @returns {Object[] | Object} returns an array of objects from your sql query
    * @throws {Error} throws a sql error, make sure to use try & catch
    */
   static async executeCommand(sqlCommand, params = null, options = null) {
