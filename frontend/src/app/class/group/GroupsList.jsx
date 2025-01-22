@@ -28,18 +28,19 @@ export default function GroupsList() {
     [filter || '', typeFilter],
   );
 
-  useEffect(() => {
-    if (groups?.length === 0 && typeFilter) {
-      window.alert(`no ${typeFilter}s found`);
-      handleTypeClick('');
-    }
-  }, [groups]);
-
   function setFilter(newStr) {
     searchParams.set('filter', newStr);
     setSearchParams(searchParams);
     setStateFilter(newStr);
   }
+
+  // handles if type selected has no groups
+  useEffect(() => {
+    if (groups?.length === 0 && typeFilter) {
+      window.alert(`no ${typeFilter}s found`);
+      handleTypeClick('');
+    }
+  }, [groups, typeFilter]);
 
   function handleTypeClick(type) {
     if (typeFilter === type) {
