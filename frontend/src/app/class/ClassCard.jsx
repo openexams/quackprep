@@ -71,6 +71,9 @@ export default function ClassCard({ id, name, category, desc, school_id, created
   const isOwner = currentUserId === parseInt(created_by);
   const edit = isOwner && editMode;
 
+  // Simple mobile check
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+
   // Extract level from class name
   const level = useMemo(() => findClassNumber(name)?.[0], [name]);
 
@@ -97,19 +100,21 @@ export default function ClassCard({ id, name, category, desc, school_id, created
     marginTop: '0.3em',
     pointerEvents: 'none',
     color: '#fff',
-    fontSize: '1.1rem', // Larger font
-    fontWeight: 600, // Slightly bold
-    textShadow: '0 0 5px #000', // A soft shadow around the text
+    fontSize: '1.1rem',
+    fontWeight: 600,
+    textShadow: '0 0 5px #000',
   };
 
   return (
     <div
+      // Desktop: Hover triggers overlay. Mobile: Click toggles overlay.
+      onMouseEnter={!isMobile ? () => setHovered(true) : undefined}
+      onMouseLeave={!isMobile ? () => setHovered(false) : undefined}
+      onClick={isMobile ? () => setHovered((prev) => !prev) : undefined}
       style={{
         position: 'relative',
         cursor: 'pointer',
       }}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
     >
       <Card
         color={cardColor}
@@ -128,7 +133,7 @@ export default function ClassCard({ id, name, category, desc, school_id, created
           <Card.Description>{desc}</Card.Description>
         </Card.Content>
 
-        {/* Hover Overlay */}
+        {/* Hover / Tap Overlay */}
         <div
           style={{
             position: 'absolute',
@@ -144,7 +149,7 @@ export default function ClassCard({ id, name, category, desc, school_id, created
           }}
         >
           {/*
-            We use a 2×1 grid on top, and 1×1 (spanning 2 columns) on bottom:
+            2×1 grid on top, 1×1 (spanning 2 columns) on bottom:
             
               [ Q1 ] [ Q2 ]
               [    Q3    ]
@@ -154,9 +159,7 @@ export default function ClassCard({ id, name, category, desc, school_id, created
               display: 'grid',
               flex: 1,
               gridTemplateColumns: '1fr 1fr',
-              // Make both rows the same height
               gridTemplateRows: '1fr .8fr',
-              // Darken the overlay to add more contrast:
               background: 'rgba(0, 0, 0, 0.4)',
             }}
           >

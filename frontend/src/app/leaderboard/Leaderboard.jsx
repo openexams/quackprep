@@ -1,35 +1,63 @@
 import './leaderboard.css';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Container, Header, Icon, Grid, Card, List, Image, Segment } from 'semantic-ui-react';
+import { Container, Header, Icon, Grid, Card, List, Image, Segment, Label, Progress } from 'semantic-ui-react';
 import { getTopStreaks, getWhichUsersAnsweredMostQuestions, selectLeaderboardState } from './leaderboardSlice';
 import { selectLoadingState } from '../store/loadingSlice';
 import CreatorBadge from '@components/CreatorBadge';
 
-const TOP_X_AMT = 5; // keep 5 lol
+const TOP_X_AMT = 5; // Keep 5
+
+// Utility function: Return a medal trophy for top 3 ranks
+const getMedalIcon = (index) => {
+  if (index === 0) return <Icon size='large' name='trophy' color='yellow' />;
+  if (index === 1) return <Icon size='large' name='trophy' color='grey' />;
+  if (index === 2) return <Icon size='large' name='trophy' color='brown' />;
+  return null;
+};
 
 const LeaderboardCard = ({ title, icon, iconColor, data, dataKey }) => (
-  <Card fluid key={title}>
-    <Card.Content>
+  <Card fluid className='leaderboard-card' key={title}>
+    <Card.Content className='leaderboard-card-header'>
       <Card.Header>
         <Icon name={icon} color={iconColor} /> {title}
       </Card.Header>
     </Card.Content>
-    <Card.Content>
-      <List size='large' divided relaxed>
+    <Card.Content className='leaderboard-card-content'>
+      <List divided relaxed>
         {data &&
           data.map((item, index) => (
-            <List.Item key={`${index} + ${item.username}`}>
-              <List.Content floated='right'>
-                <strong>{item[dataKey]}</strong>
-              </List.Content>
+            <List.Item key={`${index} + ${item.username}`} className='leaderboard-card-item'>
+              {/* Rank + Medal */}
+              <div className='player-rank'>
+                {getMedalIcon(index)}
+                <Label circular color={index === 0 ? 'yellow' : 'grey'}>
+                  {index + 1}
+                </Label>
+              </div>
+
+              {/* User Avatar */}
               <Image avatar src={item.icon || `https://api.dicebear.com/6.x/initials/svg?seed=${item.username}`} />
+
+              {/* User Info */}
               <List.Content>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                  <List.Header>{item.username}</List.Header>
+                  <List.Header as='h3'>{item.username}</List.Header>
                   {item?.is_creator == 1 && <CreatorBadge />}
                 </div>
-                <List.Description>Rank: {index + 1}</List.Description>
+                <List.Description>
+                  <strong>{item[dataKey]} </strong>
+                  {dataKey === 'current_streak' ? 'day streak' : 'questions answered'}
+                </List.Description>
+
+                {/* Progress bar to show relative achievement vs. top user */}
+                <Progress
+                  percent={Math.round(Math.min((item[dataKey] / data[0][dataKey]) * 100, 100))}
+                  size='small'
+                  color={index === 0 ? 'yellow' : 'grey'}
+                  className='player-progress'
+                  progress
+                />
               </List.Content>
             </List.Item>
           ))}
@@ -50,20 +78,22 @@ export default function Leaderboard() {
     if (!questionsAnswered) {
       dispatch(getWhichUsersAnsweredMostQuestions());
     }
-  }, []);
+  }, [dispatch, streaks, questionsAnswered]);
 
   return (
-    <Container>
-      <Header as='h1' textAlign='center' icon>
+    <Container style={{ marginTop: '-8rem' }} className='leaderboard-container'>
+      <Header as='h1' textAlign='center' icon className='leaderboard-main-header'>
         <Icon name='trophy' color='yellow' className='cool-hover cool-click' />
         Leaderboard
-        <Header.Subheader>Top performers in streaks and questions answered</Header.Subheader>
+        <Header.Subheader>Celebrate our top performers!</Header.Subheader>
       </Header>
-      <Segment basic loading={loading}>
-        <Grid columns={2} stackable centered style={{ marginTop: '2rem' }}>
+
+      <Segment basic raised loading={loading} className='leaderboard-segment'>
+        <Grid columns={2} stackable centered>
           <Grid.Column>
             <LeaderboardCard title='Highest Streak Holders' icon='fire' iconColor='red' data={streaks} dataKey='current_streak' />
           </Grid.Column>
+
           <Grid.Column>
             <LeaderboardCard
               title='Most Questions Answered'

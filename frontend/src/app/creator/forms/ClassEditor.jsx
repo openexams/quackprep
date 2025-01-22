@@ -51,7 +51,7 @@ export default function ClassEditor({ id, name, category, desc, school_id }) {
           required
           value={classDesc}
           onChange={(e) => setClassDesc(e.target.value)}
-          placeholder='Description'
+          placeholder={'Provide a meaningful general description of the class.\nex: "Purdue Calculus 2"'}
         />
 
         <Form.Field

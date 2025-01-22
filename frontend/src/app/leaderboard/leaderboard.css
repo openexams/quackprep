@@ -43,3 +43,64 @@
 .ui.list > .item > .image + .content {
   padding-left: 1rem;
 }
+
+.leaderboard-container {
+  padding: 2rem;
+  border-radius: 8px;
+}
+
+.leaderboard-main-header {
+  margin-bottom: 1.5rem;
+  font-family: 'Poppins', sans-serif;
+}
+
+.leaderboard-segment {
+  background-color: #fff8e6 !important; /* Light, gamified background */
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.leaderboard-card {
+  border-radius: 8px !important;
+  box-shadow: none !important;
+  margin: 1rem 0 !important;
+}
+
+/* Card header styling */
+.leaderboard-card-header {
+  background-color: #f9f9f9;
+  border-radius: 8px 8px 0 0 !important;
+  font-weight: 600;
+}
+
+/* Card content styling */
+.leaderboard-card-content {
+  background-color: #ffffff;
+  border-radius: 0 0 8px 8px !important;
+}
+
+/* Player list item styling */
+.leaderboard-card-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.8rem 0;
+  transition: background-color 0.2s ease;
+}
+
+.leaderboard-card-item:hover {
+  background-color: #fdf9f2;
+}
+
+/* Rank + medal area */
+.player-rank {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Progress bar spacing */
+.player-progress {
+  margin-top: 0.4rem !important;
+  width: 80%;
+}
