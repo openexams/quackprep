@@ -59,3 +59,38 @@ export async function sendOpenAiAssistantPromptAndRecieveResult(
     throw error;
   }
 }
+
+/**
+ * Choose any model this is not a assistant.
+ * @param {String} prompt
+ * @param {Object} json_schema
+ * @param {String} model use openai model naming pls.
+ * @param {String} context initial message to send to chat
+ * @returns {Object} the result of the chat
+ */
+export async function sendPromptAndRecieveJSONResult(
+  prompt,
+  json_schema,
+  model = "o1-preview",
+  context = "Answer questions with accuracy"
+) {
+  const completion = await openai.chat.completions.create({
+    model: model,
+    messages: [
+      {
+        role: "developer",
+        content: context,
+      },
+      {
+        role: "user",
+        content: prompt,
+      },
+    ],
+    response_format: {
+      type: "json_schema",
+      json_schema: json_schema,
+    },
+    store: true,
+  });
+  return completion.choices[0].message.content;
+}

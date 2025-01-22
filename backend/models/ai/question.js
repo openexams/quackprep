@@ -6,10 +6,13 @@ import {
 } from "#models/question/index.js";
 import { addManyChoicesToQuestion } from "#models/choice/index.js";
 import sqlExe from "#db/dbFunctions.js";
-import { sendOpenAiAssistantPromptAndRecieveResult } from "#utils/openAi.js";
+import {
+  sendOpenAiAssistantPromptAndRecieveResult,
+  sendPromptAndRecieveJSONResult,
+} from "#utils/openAi.js";
 import { MAX_QUESTIONS_CONTEXT } from "#config/constants.js";
 /**
- *
+ * Always mcq questions
  * @param {Integer} user_id add which user ai generated the question (does not rlly matter)
  * @param {String} likeQuestionText to feed to AI
  * @param {Number} likeQuestionId so that we can attach the AI question to the same groups as likeQuestion
@@ -24,19 +27,50 @@ export async function generateQuestionLike(
   dlog(`ai generating like q_id: ${likeQuestionId}`);
   // find the assistant I created
   try {
-    /**@type {import("../../../../shared-types/question.types.js").GenQuestion} */
+    /**@type {import("../../../shared-types/question.types.ts").GenQuestion} */
     const quackAssistResponseJSON =
       await sendOpenAiAssistantPromptAndRecieveResult(
         "asst_a168JvA9PlzK2WaKZ6oukDe4",
         `create a question like: "${likeQuestionText}"\nin json format`
       );
-    // needed for sql db
+
+    const response = await sendPromptAndRecieveJSONResult(
+      `answer this: ${quackAssistResponseJSON.question}`,
+      {
+        type: "object",
+        properties: {
+          option: {
+            type: "string",
+            description:
+              "answer to the question in latex, MUST wrap latex in $$",
+            minLength: 1,
+            maxLength: 500,
+          },
+        },
+        required: ["option"],
+        additionalProperties: false,
+        example: {
+          option: "$$3^{x}$$",
+        },
+        strict: true,
+      },
+      "o1-preview",
+      "Answer questions with accuracy"
+    );
+    // needed for sql db WHAT IF THEY BOTH GENERATE THE CORRECT RESPONSE?
     for (let i = 0; i < quackAssistResponseJSON.options.length; i++) {
       quackAssistResponseJSON.options[i] = {
         ...quackAssistResponseJSON.options[i],
         type: "mcq",
+        is_correct: false,
       };
     }
+
+    quackAssistResponseJSON.options.push({
+      text: response.option,
+      is_correct: true,
+      type: "mcq",
+    });
 
     // get what groups curQuestion has
     const object_w_groups = await getWhatGroupsQuestionisIn(likeQuestionId);
@@ -100,6 +134,7 @@ export async function generateQuestionFromGroup(user_id, group_id) {
     const prompt =
       "Generate a question in JSON format that covers the same topic as the questions above";
 
+    /**@type {import("../../../shared-types/question.types.ts").GenQuestion} */
     const quackAssistResponseJSON =
       await sendOpenAiAssistantPromptAndRecieveResult(
         "asst_a168JvA9PlzK2WaKZ6oukDe4",
