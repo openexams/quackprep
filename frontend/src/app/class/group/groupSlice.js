@@ -9,11 +9,13 @@ const DELETE_GROUP = 'app/class/group/DELETE_GROUP';
 const UPSERT_GROUP = 'app/class/group/UPSERT_GROUP';
 
 export function getGroupsByClassId(classId) {
-  return standardApiCall('get', `/api/group/${classId}/`, null, GET_GROUPS, { loadingComponent: 'GroupsList' });
+  return standardApiCall('get', `/api/group/${classId}/`, null, GET_GROUPS, {
+    loadingComponent: 'GroupsList',
+  });
 }
 
 /**
- *
+ * AI SHIT
  * @param {FormData} Formdata - contains the files to upload
  * @param {number} class_id - The ID of the class
  * @param {string} prompt - The AI prompt to send
@@ -28,6 +30,7 @@ export function createGroupGivenPDF(formData, class_id, prompt) {
     loadingComponent: ['GroupsList'],
     noticeOfSuccess: 'successfully generate group by AI!',
     axiosConfig: { headers: { 'Content-Type': 'multipart/form-data' } },
+    refreshOnCompletion: true, // creates group question choices I aint adding allat back just refresh
   });
 }
 

@@ -6,7 +6,7 @@ import { updateCurrentGroupData, changeNavbarPage, selectNavbarState } from '@co
 import { selectCanAndIsEdit } from '@src/app/auth/authSlice';
 import GroupEditor from '@src/app/creator/forms/GroupEdit';
 export default function GroupCard({ id, name, class_id, description, created_by, type }) {
-  const edit = useSelector(selectCanAndIsEdit(created_by));
+  const edit = useSelector(selectCanAndIsEdit());
   const { schoolName } = useSelector(selectNavbarState).navbar;
   const navigate = useNavigate();
   const dispatch = useDispatch();

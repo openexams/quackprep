@@ -1,5 +1,6 @@
 import { standardApiCall } from '@src/utils/api';
 import { LOGIN } from './login/loginSlice';
+import { selectItemById } from 'maddox-js-funcs';
 
 export function getCurUser() {
   return standardApiCall('get', '/api/auth/verify', null, LOGIN, { loadingComponent: 'AuthPopup' });
@@ -9,19 +10,19 @@ export const selectUser = (state) => {
   return { user: state.auth.user };
 };
 
-export function selectCanAndIsEdit(user_id) {
+/**
+ * if ur in a current class use this.
+ * @returns
+ */
+export function selectCanAndIsEdit() {
+  // wont work for class view as this needs a class id
   return (state) => {
-    if (!user_id) {
-      console.error('didnt pass in user_id');
-      return false;
-    }
-
     if (state.app.navbar.editing === true) {
-      if (state.auth.user?.id === 13) {
-        // skip for user 13
-        return true;
+      const curClass = selectItemById(state.app.class.classes.classes, 'id', state.app.navbar.classId);
+      if (!curClass) {
+        return false;
       }
-      if (state.auth.user?.id === parseInt(user_id)) {
+      if (curClass.created_by === parseInt(state.auth.user?.id)) {
         return true;
       }
     }

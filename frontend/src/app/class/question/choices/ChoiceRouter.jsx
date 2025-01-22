@@ -6,12 +6,12 @@ import MarkdownRenderer from '@components/MarkdownRenderer';
 import { selectLoadingState } from '@src/app/store/loadingSlice';
 import FreeResponse from './types/frq/FreeResponse';
 import NoItemsFound from '@components/NoItemsFound';
-import { selectEditState } from '@src/app/auth/authSlice';
 import ChoiceEditor from '@src/app/creator/forms/ChoiceEditor';
 import QuestionEditor from '@src/app/creator/forms/QuestionEditor';
+import { selectCanAndIsEdit } from '@src/app/auth/authSlice';
 
 export default function ChoiceRouter({ selectedQuestion }) {
-  const edit = useSelector(selectEditState); // TODO CHECK IF USER IS ALLOWED TO EDIT!!!
+  const edit = useSelector(selectCanAndIsEdit()); // TODO CHECK IF USER IS ALLOWED TO EDIT!!!
   const choices = useSelector(selectBINARYArrayOfStateById('app.choices.choices', 'question_id', parseInt(selectedQuestion?.id)));
   const loading = useSelector(selectLoadingState).loadingComps?.ChoiceRouter; // todo fix
 

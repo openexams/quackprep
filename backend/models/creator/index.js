@@ -6,3 +6,10 @@ export async function submitCreatorForm(user_id, the_why, school) {
     { user_id, school, the_why }
   );
 }
+
+export async function makeUserACreator(user_id) {
+  return await sqlExe.executeCommand(
+    `UPDATE users SET is_creator = 1 WHERE id = :user_id`,
+    { user_id }
+  );
+}

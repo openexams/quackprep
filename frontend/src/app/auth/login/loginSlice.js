@@ -1,6 +1,7 @@
 import { standardApiCall } from '@src/utils/api';
 
 export const LOGIN = 'app/auth/login/LOGIN';
+export const MAKE_USER_A_CREATOR = 'app/auth/login/MAKE_USER_A_CREATOR';
 
 const SIGN_OUT = 'app/auth/login/SIGN_OUT';
 
@@ -44,6 +45,8 @@ export default function loginReducer(state = DEFAULT_STATE, action) {
         icon: DEFAULT_STATE.icon,
         is_creator: DEFAULT_STATE.is_creator,
       };
+    case MAKE_USER_A_CREATOR:
+      return { ...state, is_creator: 1 };
     default:
       return state;
   }

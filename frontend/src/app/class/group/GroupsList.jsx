@@ -17,8 +17,7 @@ import CreateGroupByPDF from './CreateGroupByPDF';
 export default function GroupsList() {
   const { className, classId } = useSelector(selectNavbarState).navbar;
 
-  const curClass = selectItemById(useSelector(selectClassState).classes, 'id', classId);
-  const editModeOn = useSelector(selectCanAndIsEdit(curClass?.created_by));
+  const editModeOn = useSelector(selectCanAndIsEdit());
 
   const [searchParams, setSearchParams] = useSearchParams();
   const [filter, setStateFilter] = useState(searchParams.get('filter') || '');

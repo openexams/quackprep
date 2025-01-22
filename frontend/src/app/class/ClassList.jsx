@@ -6,9 +6,9 @@ import { useSelector } from 'react-redux';
 import { selectClassCategories } from './class_categories/classCategorySlice';
 import { selectLoadingState } from '../store/loadingSlice';
 import ClassEditor from '../creator/forms/ClassEditor';
-import { selectEditState } from '../auth/authSlice';
 import { selectArrayOfIncludingItemsByNumber, selectBINARYArrayOfStateById } from 'maddox-js-funcs';
 import { selectNavbarState } from '@components/navbar/navbarSlice';
+import { selectCanAndIsEdit, selectEditState } from '../auth/authSlice';
 
 export default function ClassList() {
   let { schoolId: curSchoolId } = useSelector(selectNavbarState).navbar;
@@ -16,9 +16,9 @@ export default function ClassList() {
 
   const loading = useSelector(selectLoadingState).loadingComps?.ClassList;
   const classCategories = useSelector(selectClassCategories).class_categories;
-  const edit = useSelector(selectEditState);
   const [curCategory, setCurCategory] = useState('');
   const [visible, setVisible] = useState(true);
+  const edit = useSelector(selectEditState);
 
   let filteredClasses = curCategory
     ? selectArrayOfIncludingItemsByNumber(classes, ['category'], [parseInt(curCategory)])
@@ -65,7 +65,7 @@ export default function ClassList() {
                       category={c.category}
                       desc={c.description}
                       school_id={c.school_id}
-                      user_id={c.created_by}
+                      created_by={c.created_by}
                     />
                   </Grid.Column>
                 ))

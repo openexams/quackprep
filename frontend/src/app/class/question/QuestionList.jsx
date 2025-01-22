@@ -7,7 +7,6 @@ import { doesQuestionHaveCurrentChoice, selectCurrentChoicesState } from './choi
 import GenerateQuestion from './ai/GenerateQuestion';
 import { selectCanAndIsEdit } from '@src/app/auth/authSlice';
 import { selectNavbarState } from '@components/navbar/navbarSlice';
-import { selectArrayOfStateById } from 'maddox-js-funcs';
 import QuestionEditor from '@src/app/creator/forms/QuestionEditor';
 
 /**
@@ -19,8 +18,7 @@ import QuestionEditor from '@src/app/creator/forms/QuestionEditor';
 export default function QuestionList({ questions, selectedQuestion }) {
   // for edit
   const { groupId } = useSelector(selectNavbarState).navbar; // used for autofill
-  const group = useSelector(selectArrayOfStateById('app.group.groups', 'id', groupId))?.[0];
-  const edit = useSelector(selectCanAndIsEdit(parseInt(group?.created_by)));
+  const edit = useSelector(selectCanAndIsEdit());
   //
   const favoriteQuestions = useSelector(selectFavoriteQuestionsState);
   const [showTopics, setShowTopics] = useState(false); // TODO SHOW MULTIPLE TOPICS IF THE QUESTION HAS SUCH

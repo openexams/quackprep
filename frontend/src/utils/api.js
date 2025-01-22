@@ -19,6 +19,7 @@ import { updateFetchHistory } from '@components/navbar/navbarSlice.js';
  * @param {import('axios').AxiosRequestConfig} [options.axiosConfig] - Axios Config
  * @param {String} [options.errorMsg] - error message to be seen by user
  * @param {String} [options.noticeOfSuccess] - if given, will show a flash message with this message
+ * @param {String} [options.refreshOnCompletion] - if given, will have the client refresh the page on completion
  * @returns {Function} dispatches an action to the reducer with a action.payload of the data
  */
 export function standardApiCall(method, route, data = null, resultAction, options) {
@@ -42,6 +43,9 @@ export function standardApiCall(method, route, data = null, resultAction, option
       } else {
         dispatch(showFlashMessage('axios method not found, this is a developer error. email support for help', 'err'));
         return;
+      }
+      if (options?.refreshOnCompletion) {
+        window.location.reload();
       }
       if (Array.isArray(resultAction)) {
         for (let i = 0; i < resultAction.length; i++) {

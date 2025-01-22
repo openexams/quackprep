@@ -1,13 +1,10 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Container, Grid, Header, Icon, Segment, Button, Card, List, Image, Feed, Popup } from 'semantic-ui-react';
+import { Container, Grid, Header, Icon, Segment, Button, Card } from 'semantic-ui-react';
 import { getUserCount, selectUserCount } from '../home/homeSlice';
-import { changeNavbarPage } from '@components/navbar/navbarSlice';
 import { selectUser } from '../auth/authSlice';
 import { useNavigate } from 'react-router-dom';
-import CreateInputForm from '@components/CreateInputForm';
-import submitCreatorForm from './creatorSlice';
-import LoginRequired from '../auth/LoginRequired';
+import { makeUserACreator } from './creatorSlice';
 
 export default function CreatorDashboard() {
   const navigate = useNavigate();
@@ -18,68 +15,53 @@ export default function CreatorDashboard() {
   useEffect(() => {
     if (!userCount) dispatch(getUserCount());
   }, []);
+
   return (
-    // ADD STATS AS WELL TODO
     <Container style={{ padding: '3rem 0' }}>
       {/* Hero Section */}
       <Segment basic textAlign='center' style={{ marginBottom: '3rem' }}>
-        <Icon name='graduation cap' color='blue' style={{ textAlign: 'center', marginBottom: '-8rem' }} size='huge' />
+        <Icon name='graduation cap' style={{ marginBottom: '-8rem' }} size='huge' />
         <Header as='h1' size='huge' textAlign='center'>
-          Become an QuackPrep Creator!
+          Become a QuackPrep Creator!
           <Header.Subheader style={{ marginTop: '1rem' }}>
-            Share your knowledge and help students ace their exams
+            Help students study smarter by sharing your knowledge.
           </Header.Subheader>
         </Header>
-        {user?.is_creator ? (
-          <Button
-            primary
-            size='huge'
-            style={{ marginTop: '2rem' }}
-            onClick={() => {
-              dispatch(changeNavbarPage(navigate, '/create'));
-            }}
-          >
-            <Icon name='plus' />
-            Start Creating
-          </Button>
-        ) : (
-          <Popup
-            hoverable
-            position='bottom center'
-            content='creator form'
-            trigger={
-              <Button primary size='huge' style={{ marginTop: '2rem' }}>
-                <Icon name='briefcase' />
-                Apply Now
-              </Button>
-            }
-          >
-            <Segment style={{ minWidth: '55rem' }}>
-              {user?.id ? (
-                <CreateInputForm
-                  formFields={[
-                    { name: 'school', value: '', required: true, label: 'what school/group would you be uploading for?' },
-                    { name: 'the_why', value: '', required: true, label: 'why do you want to become a creator?' },
-                  ]}
-                  onSubmit={({ school, the_why }) => {
-                    dispatch(submitCreatorForm(school, the_why));
-                  }}
-                />
-              ) : (
-                <LoginRequired title={'Apply for Creator'} />
-              )}
-            </Segment>
-          </Popup>
-        )}
+        <Button onClick={() => dispatch(makeUserACreator())} primary size='huge' style={{ marginTop: '2rem' }}>
+          <Icon name='lightbulb' />
+          Get Started Now
+        </Button>
       </Segment>
 
-      {/* Benefits Section */}
-      <Grid columns={1} stackable divided style={{ marginBottom: '3rem' }}>
+      <Grid columns={3} stackable divided style={{ marginBottom: '3rem' }}>
         <Grid.Column textAlign='center'>
-          <Icon name='users' size='huge' color='blue' />
+          <Icon name='users' size='huge' />
           <Header as='h3'>
-            Reach Students
-            <Header.Subheader>Connect with students looking for quality exam prep</Header.Subheader>
+            Reach Thousands of Students
+            <Header.Subheader>
+              Make an impact by helping students succeed in their exams. By sharing your knowledge, you're not only empowering
+              students but also solidifying your own understanding of the material.
+            </Header.Subheader>
+          </Header>
+        </Grid.Column>
+        <Grid.Column textAlign='center'>
+          <Icon name='magic' size='huge' />
+          <Header as='h3'>
+            Experience AI Magic
+            <Header.Subheader>
+              QuackPrep's innovative AI transforms simple notes into interactive and engaging resources, making studying easier
+              and more efficient for students.
+            </Header.Subheader>
+          </Header>
+        </Grid.Column>
+        <Grid.Column textAlign='center'>
+          <Icon name='lightbulb' size='huge' />
+          <Header as='h3'>
+            Revolutionize Learning
+            <Header.Subheader>
+              With QuackPrep, you’re not just teaching—you’re contributing to a smarter, tech-driven way of learning. Join us to
+              revolutionize how students prepare for exams!
+            </Header.Subheader>
           </Header>
         </Grid.Column>
       </Grid>
@@ -93,86 +75,69 @@ export default function CreatorDashboard() {
           <Grid.Column>
             <Card fluid>
               <Card.Content textAlign='center'>
-                <Icon name='clipboard check' size='big' color='blue' />
-                <Card.Header style={{ marginTop: '1rem' }}>1. Sign Up</Card.Header>
-                <Card.Description>Create your creator account in minutes</Card.Description>
+                <Icon name='signup' size='big' />
+                <Card.Header
+                  style={{ marginTop: '1rem', cursor: 'pointer', textDecoration: 'underline', color: 'blue' }}
+                  onClick={() => navigate('/creatordashboard')}
+                >
+                  1. Join
+                </Card.Header>
+                <Card.Description>Sign up and become part of the QuackPrep creator community.</Card.Description>
               </Card.Content>
             </Card>
           </Grid.Column>
           <Grid.Column>
             <Card fluid>
               <Card.Content textAlign='center'>
-                <Icon name='check circle' size='big' color='blue' />
-                <Card.Header style={{ marginTop: '1rem' }}>2. Get Approved</Card.Header>
-                <Card.Description>Quick review process for quality</Card.Description>
+                <Icon name='folder' size='big' />
+                <Card.Header
+                  style={{ marginTop: '1rem', cursor: 'pointer', textDecoration: 'underline', color: 'blue' }}
+                  onClick={() => navigate('/class')}
+                >
+                  2. Create a Class
+                </Card.Header>
+                <Card.Description>Set up a class for your study material in just a few clicks.</Card.Description>
               </Card.Content>
             </Card>
           </Grid.Column>
           <Grid.Column>
             <Card fluid>
               <Card.Content textAlign='center'>
-                <Icon name='pencil' size='big' color='blue' />
-                <Card.Header style={{ marginTop: '1rem' }}>3. Create Content</Card.Header>
-                <Card.Description>Upload your exam prep materials</Card.Description>
+                <Icon name='camera' size='big' />
+                <Card.Header style={{ marginTop: '1rem' }}>3. Snap & Upload</Card.Header>
+                <Card.Description>Take a picture of your study material and upload it to our platform.</Card.Description>
               </Card.Content>
             </Card>
           </Grid.Column>
           <Grid.Column>
             <Card fluid>
               <Card.Content textAlign='center'>
-                <Icon name='rocket' size='big' color='blue' />
-                <Card.Header style={{ marginTop: '1rem' }}>4. Launch</Card.Header>
-                <Card.Description>Your content goes live to students</Card.Description>
+                <Icon name='plug' size='big' />
+                <Card.Header style={{ marginTop: '1rem' }}>4. AI Magic</Card.Header>
+                <Card.Description>Our AI processes your material, making it interactive and ready to study.</Card.Description>
               </Card.Content>
             </Card>
           </Grid.Column>
         </Grid>
       </Segment>
 
-      {/* Call to Action */}
-      <Segment
-        padded='very'
-        textAlign='center'
-        style={{
-          background: 'linear-gradient(to right, #2185d0, #21ba45)',
-          color: 'white',
-          borderRadius: '1rem',
-        }}
-      >
-        <Header as='h2' inverted>
-          Ready to Start?
-          <Header.Subheader style={{ color: 'white', marginTop: '1rem' }}>
-            Join our community of QuackPrep creators today
-          </Header.Subheader>
-        </Header>
-        <Button
-          size='huge'
-          inverted
-          style={{ marginTop: '2rem' }}
-          onClick={() => {
-            dispatch(changeNavbarPage(navigate, '/create'));
-          }}
-        >
-          Begin Your Journey
-        </Button>
-      </Segment>
-
       {/* Quick Stats */}
       <Grid columns={3} divided stackable style={{ marginTop: '3rem' }}>
         <Grid.Column textAlign='center'>
-          <Header as='h2' color='blue'>
+          <Header as='h2'>
             {userCount}
             <Header.Subheader>Active Students</Header.Subheader>
           </Header>
         </Grid.Column>
         <Grid.Column textAlign='center'>
-          <Header as='h2' color='blue'>
-            At Least 1<Header.Subheader>Expert Creators</Header.Subheader>
+          <Header as='h2'>
+            Growing Daily
+            <Header.Subheader>Expert Creators</Header.Subheader>
           </Header>
         </Grid.Column>
         <Grid.Column textAlign='center'>
-          <Header as='h2' color='blue'>
-            1 Billion%
+          <Header as='h2'>
+            Unmatched
             <Header.Subheader>Student Satisfaction</Header.Subheader>
           </Header>
         </Grid.Column>

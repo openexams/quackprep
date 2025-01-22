@@ -6,7 +6,6 @@ import Profile from './profile/Profile.jsx';
 import Streak from './streak/Streak.jsx';
 import Leaderboard from './leaderboard/Leaderboard.jsx';
 import Stats from './stats/Stats.jsx';
-import ClassShow from './class/ClassShow.jsx';
 import QuestionPage from './class/question/QuestionPage.jsx';
 import NotFoundPage from '@components/NotFound.jsx';
 import CreatorDashboard from './creator/CreatorDashboard.jsx';
@@ -18,6 +17,7 @@ import PDFShow from './class/group/pdf/PDFShow.jsx';
 import GroupsList from './class/group/GroupsList.jsx';
 import AboutPage from './about/About.jsx';
 import Footer from '@components/Footer.jsx';
+import ComingSoon from '@components/ComingSoon.jsx';
 
 {
   /* topic could be a actual topic or a group of question such as a exam */
@@ -40,8 +40,7 @@ export default function AppRouter() {
         <Route path='/class' element={<ClassPage />} />
         <Route path='/creatordashboard' element={<CreatorDashboard />} />
         <Route path='/class/:school_name/' element={<ClassPage />} />
-
-        <Route path='/class/:school_name/:class_id/' element={<ClassShow />} />
+        <Route path='/class/:school_name/:class_id/learn' element={<ComingSoon />} />
 
         <Route path='/class/:school_name/:class_id/group' element={<GroupsList />} />
         <Route path='/class/:school_name/:class_id/group/:group_id/question' element={<QuestionPage />} />

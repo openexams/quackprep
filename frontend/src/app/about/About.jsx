@@ -1,4 +1,4 @@
-import { Container, Header, Grid } from 'semantic-ui-react';
+import { Container, Header, Grid, Image } from 'semantic-ui-react';
 import CreatorInfo from './CreatorInfo.jsx';
 
 const About = () => {
@@ -27,6 +27,7 @@ const About = () => {
 
   return (
     <Container style={{ marginTop: '2em', marginBottom: '2em' }}>
+      <Image src={'/img/quackprep_logo.webp'} centered size='small' style={{ marginBottom: '-11rem', zIndex: -1 }} />
       <Header as='h1' textAlign='center' style={{ fontSize: '2.5rem', marginBottom: '1.5rem' }}>
         About QuackPrep
       </Header>
