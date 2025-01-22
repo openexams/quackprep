@@ -2,9 +2,6 @@ import { Router } from "express";
 import bcrypt from "bcrypt";
 import { findUserById, getUserCount, register } from "#models/auth/index.js";
 import passport from "#config/passportConfig.js";
-import { isAuthenticated } from "#middleware/authMiddleware.js";
-import dotenv from "dotenv";
-
 import validator from "validator";
 import {
   RegExpMatcher,

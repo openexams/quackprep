@@ -15,6 +15,7 @@ import sqlExe from "#db/dbFunctions.js";
 import path from "path";
 import { fileURLToPath } from "url";
 import { corsOrigins } from "./config/config.js";
+import { checkForBadWords } from "#middleware/badwordsMiddleware.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -79,6 +80,8 @@ app.use(passport.session());
 /** *        *          *     */
 
 app.use(express.static(path.join(__dirname, "./public/")));
+
+app.use(checkForBadWords);
 
 app.use("/api", router);
 
