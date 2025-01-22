@@ -4,23 +4,21 @@ import { Segment, Button, Grid } from 'semantic-ui-react';
 import { selectSchoolState } from './schoolSlice';
 import './school.css';
 import { selectLoadingState } from '@src/app/store/loadingSlice';
-import { changeNavbarPage, selectNavbarState } from '@components/navbar/navbarSlice';
+import { changeNavbarPage, selectNavbarState, updateSchoolId } from '@components/navbar/navbarSlice';
 import { useNavigate } from 'react-router-dom';
 import { selectArrayOfIncludingItem } from 'maddox-js-funcs';
 
-export default function SchoolsList({ onCreator = false }) {
+export default function SchoolsList() {
   let { schoolId: curSchoolId } = useSelector(selectNavbarState).navbar;
   let selectedSchoolId = useSelector(selectNavbarState).navbar?.schoolId;
   const navigate = useNavigate();
   const schools = useSelector(selectSchoolState).schools;
   const loading = useSelector(selectLoadingState).loadingComps?.SchoolsList;
   const dispatch = useDispatch();
-  if (onCreator) {
-    selectedSchoolId = schools?.[0];
-  }
+
   // set local school on every change
   useEffect(() => {
-    if (!onCreator && curSchoolId) {
+    if (curSchoolId) {
       localStorage.setItem('schoolId', curSchoolId);
       curSchoolId = parseInt(curSchoolId);
     }
@@ -29,13 +27,16 @@ export default function SchoolsList({ onCreator = false }) {
   // get local school at start
   useEffect(() => {
     let tmp;
-    if (!onCreator && (tmp = localStorage.getItem('schoolId')) && tmp != null) {
+    if (schools && (tmp = localStorage.getItem('schoolId')) && tmp != null) {
       const wanted_school = selectArrayOfIncludingItem(schools, 'id', tmp)?.[0];
       if (wanted_school) {
         dispatch(changeNavbarPage(navigate, `/class/${wanted_school?.school_name}`));
       }
+    } else if (schools) {
+      updateSchoolId(4);
+      dispatch(changeNavbarPage(navigate, '/class/General'));
     }
-  }, [schools]); // could be risky idk
+  }, [schools, dispatch, navigate]); // could be risky idk
 
   return (
     <Segment loading={loading}>
@@ -48,9 +49,8 @@ export default function SchoolsList({ onCreator = false }) {
               fluid
               basic={selectedSchoolId !== school.id}
               onClick={() => {
-                if (!onCreator) {
-                  dispatch(changeNavbarPage(navigate, `/class/${school.school_name}`));
-                } // bad pratice assuming class before it but works
+                dispatch(changeNavbarPage(navigate, `/class/${school.school_name}`));
+                // bad pratice assuming class before it but works
               }}
               style={{
                 marginBottom: '0.5em',
@@ -59,11 +59,6 @@ export default function SchoolsList({ onCreator = false }) {
               }}
             >
               {school.school_name}
-              {onCreator && (
-                <span style={{ fontSize: '1rem' }}>
-                  {'  id:'} {school.id}
-                </span>
-              )}
             </Button>
           </Grid.Column>
         ))}
