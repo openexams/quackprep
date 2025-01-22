@@ -29,7 +29,15 @@ export async function getClassesBySchoolId(school_id) {
 
 // school table in class
 export async function getSchools() {
-  return await sqlExe.executeCommand(`SELECT * FROM schools WHERE deleted = 0`);
+  return await sqlExe.executeCommand(`SELECT *
+FROM schools
+ORDER BY 
+  CASE 
+    WHEN school_name = 'General' THEN 0
+    ELSE 1
+  END,
+  school_name; -- Add secondary sorting if needed
+`);
 }
 
 export async function getClassesByUserId(user_id) {
