@@ -30,6 +30,7 @@ export function commonErrorMessage(
   message = "rip bruh error",
   error = "an error has occurred"
 ) {
+  dlog(`${error}\n${message}`);
   res
     .status(status)
     .json({ message: `${message}\n${NODE_ENV === "local" ? error : ""}` });

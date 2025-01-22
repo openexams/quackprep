@@ -1,6 +1,5 @@
 import Home from './home/home.jsx';
 import Navbar from '@components/navbar/Navbar';
-import AuthPopup from '@src/app/auth/AuthPopup';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Profile from './profile/Profile.jsx';
 import Streak from './streak/Streak.jsx';
@@ -20,6 +19,7 @@ import Footer from '@components/Footer.jsx';
 import ComingSoon from '@components/ComingSoon.jsx';
 import TOS from './extra/TOS.jsx';
 import PrivacyPolicy from './extra/Privacy.jsx';
+import Auth from './auth/Auth.jsx';
 
 {
   /* topic could be a actual topic or a group of question such as a exam */
@@ -38,7 +38,7 @@ export default function AppRouter() {
         <Route path='/tos' element={<TOS />} />
         <Route path='/privacy' element={<PrivacyPolicy />} />
 
-        <Route path='/auth' element={<AuthPopup />} />
+        <Route path='/auth' element={<Auth />} />
         <Route path='/account' element={<Profile />} />
         <Route path='/streak' element={<Streak />} />
         <Route path='/class' element={<ClassPage />} />

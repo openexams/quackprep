@@ -78,7 +78,7 @@ export async function sendPromptAndRecieveJSONResult(
     model: model,
     messages: [
       {
-        role: "developer",
+        role: "user", // o1 has to have it from user sadly. should be system
         content: context,
       },
       {

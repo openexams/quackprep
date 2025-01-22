@@ -34,29 +34,35 @@ export async function generateQuestionLike(
         `create a question like: "${likeQuestionText}"\nin json format`
       );
 
-    const response = await sendPromptAndRecieveJSONResult(
+    const correctAnswer = await sendPromptAndRecieveJSONResult(
       `answer this: ${quackAssistResponseJSON.question}`,
       {
-        type: "object",
-        properties: {
-          option: {
-            type: "string",
-            description:
-              "answer to the question in latex, MUST wrap latex in $$",
-            minLength: 1,
-            maxLength: 500,
+        name: "option_return",
+        schema: {
+          name: "option_return",
+          type: "object",
+          properties: {
+            option: {
+              type: "string",
+              description:
+                "answer to the question in latex, MUST wrap latex in $$",
+              minLength: 1,
+              maxLength: 500,
+            },
           },
+          required: ["option"],
+          additionalProperties: false,
+          example: {
+            option: "$$3^{x}$$",
+          },
+          strict: true,
         },
-        required: ["option"],
-        additionalProperties: false,
-        example: {
-          option: "$$3^{x}$$",
-        },
-        strict: true,
       },
-      "o1-preview",
-      "Answer questions with accuracy"
+      "o1-2024-12-17",
+      "Answer question with accuracy"
     );
+    console.log(correctAnswer);
+
     // needed for sql db WHAT IF THEY BOTH GENERATE THE CORRECT RESPONSE?
     for (let i = 0; i < quackAssistResponseJSON.options.length; i++) {
       quackAssistResponseJSON.options[i] = {

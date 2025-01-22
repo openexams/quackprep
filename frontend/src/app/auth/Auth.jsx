@@ -8,7 +8,6 @@ import { selectUser } from './authSlice';
 import { useNavigate, Link } from 'react-router-dom';
 import './auth.css';
 import { selectLoadingState } from '../store/loadingSlice';
-import ComingSoon from '@components/ComingSoon';
 
 export default function Auth() {
   const navigate = useNavigate();
@@ -22,7 +21,7 @@ export default function Auth() {
   useEffect(() => {
     if (user?.id && lastPage) dispatch(changeNavbarPage(navigate, lastPage));
     else if (user?.id) dispatch(changeNavbarPage(navigate, '/'));
-  }, [user]);
+  }, [user, navigate, dispatch]);
 
   if (!user.id) {
     return (

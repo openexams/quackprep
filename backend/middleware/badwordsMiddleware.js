@@ -29,8 +29,6 @@ function checkAllFieldsForBadWords(obj) {
  * @returns
  */
 export function checkForBadWords(req, res, next) {
-  console.log(req.method);
-  console.log(req.body);
   if (req.method === "POST" || req.method === "PUT" || req.method === "PATCH") {
     if (checkAllFieldsForBadWords(req.body)) {
       return commonErrorMessage(
