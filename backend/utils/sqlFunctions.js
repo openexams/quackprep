@@ -1,4 +1,5 @@
 import sqlExe from "#db/dbFunctions.js";
+import { ADMIN_ACCOUNT_ID } from "../../constants.js";
 
 export function getLastRowManipulated(tableName, rowId = null) {
   if (rowId) {
@@ -94,7 +95,7 @@ function verifyTableName(tableName) {
 }
 
 export async function verifyUserOwnsRowId(id, user_id, tableName) {
-  if (user_id === 13) {
+  if (user_id === ADMIN_ACCOUNT_ID) {
     return true;
   }
   const result = await sqlExe.executeCommand(

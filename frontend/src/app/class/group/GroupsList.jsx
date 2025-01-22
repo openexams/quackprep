@@ -11,6 +11,7 @@ import GroupCard from './GroupCard';
 import { useEffect, useState } from 'react';
 import { GROUP_TYPES } from './groupSlice';
 import CreateGroupByPDF from './CreateGroupByPDF';
+import NoItemsFound from '@components/NoItemsFound';
 
 export default function GroupsList() {
   const { className, classId } = useSelector(selectNavbarState).navbar;
@@ -33,14 +34,6 @@ export default function GroupsList() {
     setSearchParams(searchParams);
     setStateFilter(newStr);
   }
-
-  // handles if type selected has no groups
-  useEffect(() => {
-    if (groups?.length === 0 && typeFilter) {
-      window.alert(`no ${typeFilter}s found`);
-      handleTypeClick('');
-    }
-  }, [groups, typeFilter]);
 
   function handleTypeClick(type) {
     if (typeFilter === type) {
@@ -69,6 +62,20 @@ export default function GroupsList() {
 
         <div style={{ marginBottom: '1rem' }}>
           <Searchbar setValue={setFilter} value={filter} placeholder={'Search groups'} />
+          <Label
+            key={'All'}
+            as='a'
+            color={typeFilter === '' ? 'blue' : 'grey'}
+            onClick={() => handleTypeClick('')}
+            style={{
+              cursor: 'pointer',
+              transition: 'all 0.2s ease',
+              opacity: typeFilter && typeFilter !== '' ? 0.6 : 1,
+            }}
+          >
+            {'All'}
+            {typeFilter === '' && <Icon name='close' style={{ marginLeft: '4px' }} />}
+          </Label>
           {types.map((type) => (
             <Label
               key={type}
@@ -86,6 +93,7 @@ export default function GroupsList() {
             </Label>
           ))}
         </div>
+        {groups?.length === 0 && <NoItemsFound message={'sort by all groups to see more!'} />}
 
         <Card.Group itemsPerRow={3} stackable>
           {groups &&

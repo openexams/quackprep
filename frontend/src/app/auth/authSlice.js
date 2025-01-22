@@ -1,6 +1,7 @@
 import { standardApiCall } from '@src/utils/api';
 import { LOGIN } from './login/loginSlice';
 import { selectItemById } from 'maddox-js-funcs';
+import { ADMIN_ACCOUNT_ID } from '../../../../constants.js';
 
 export function getCurUser() {
   return standardApiCall('get', '/api/auth/verify', null, LOGIN, { loadingComponent: 'AuthPopup' });
@@ -22,7 +23,7 @@ export function selectCanAndIsEdit() {
       if (!curClass) {
         return false;
       }
-      if (curClass.created_by === parseInt(state.auth.user?.id)) {
+      if (parseInt(curClass.created_by) === parseInt(state.auth.user?.id) || parseInt(state.auth.user?.id) === ADMIN_ACCOUNT_ID) {
         return true;
       }
     }

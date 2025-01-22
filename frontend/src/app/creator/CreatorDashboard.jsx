@@ -107,7 +107,9 @@ export default function CreatorDashboard() {
                 >
                   2. Create a Class
                 </Card.Header>
-                <Card.Description>Set up a class for your study material in just a few clicks.</Card.Description>
+                <Card.Description>
+                  Toggle edit mode then set up a class for your study material in just a few clicks.
+                </Card.Description>
               </Card.Content>
             </Card>
           </Grid.Column>
@@ -116,7 +118,8 @@ export default function CreatorDashboard() {
               <Card.Content textAlign='center'>
                 <Icon name='camera' size='big' />
                 <Card.Header style={{ marginTop: '1rem' }}>3. Snap & Upload</Card.Header>
-                <Card.Description>Take a picture of your study material and upload it to our platform.</Card.Description>
+                <Card.Description>Take a picture of your study material and upload it to our platform.</Card.Description>{' '}
+                {/* add a how too for this part */}
               </Card.Content>
             </Card>
           </Grid.Column>
