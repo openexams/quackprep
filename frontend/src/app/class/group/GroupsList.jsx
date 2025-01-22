@@ -8,7 +8,7 @@ import { useSearchParams } from 'react-router-dom';
 import GroupEditor from '@src/app/creator/forms/GroupEdit';
 import { selectCanAndIsEdit } from '@src/app/auth/authSlice';
 import GroupCard from './GroupCard';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { GROUP_TYPES } from './groupSlice';
 import CreateGroupByPDF from './CreateGroupByPDF';
 
@@ -27,6 +27,13 @@ export default function GroupsList() {
     ['name', 'type'],
     [filter || '', typeFilter],
   );
+
+  useEffect(() => {
+    if (groups?.length === 0 && typeFilter) {
+      window.alert(`no ${typeFilter}s found`);
+      handleTypeClick('');
+    }
+  }, [groups]);
 
   function setFilter(newStr) {
     searchParams.set('filter', newStr);
@@ -55,7 +62,7 @@ export default function GroupsList() {
           <Icon name='book' />
           <Header.Content>
             {className}: Study by Groups
-            <Header.Subheader>Select a topic to start studying</Header.Subheader>
+            <Header.Subheader>Select content to start studying</Header.Subheader>
           </Header.Content>
         </Header>
 
