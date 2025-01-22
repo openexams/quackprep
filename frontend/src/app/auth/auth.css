@@ -9,9 +9,36 @@
   font-family: Roboto, Arial, sans-serif !important;
   font-size: 14px !important;
   font-weight: 500 !important;
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  animation: pulse 2s infinite;
+}
+
+.google-login-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 10px rgba(66, 133, 244, 0.3);
 }
 
 .form .button .google-login-icon {
-  color: #4285f4 !important;
+  color: var(--accent-color) !important;
   margin-right: 10px !important;
+  transition: transform 0.2s ease;
+}
+
+.google-login-button:hover .google-login-icon {
+  transform: rotate(20deg);
+}
+
+/* Keyframes for pulsing effect */
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 rgba(66, 133, 244, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(66, 133, 244, 0.6);
+  }
+  100% {
+    box-shadow: 0 0 0 rgba(66, 133, 244, 0.3);
+  }
 }

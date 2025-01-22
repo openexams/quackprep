@@ -62,7 +62,7 @@ export function getIconByCategory(category) {
   }
 }
 
-export default function ClassCard({ id, name, category, desc, school_id, created_by }) {
+export default function ClassCard({ id, name, category, desc, school_id, created_by, created_username }) {
   const navigate = useNavigate();
   const [hovered, setHovered] = useState(false);
   const dispatch = useDispatch();
@@ -124,7 +124,7 @@ export default function ClassCard({ id, name, category, desc, school_id, created
         <Card.Content>
           <Icon name={icon} size='large' />
           <Card.Header>{name}</Card.Header>
-          <Card.Meta>Level: {level}</Card.Meta>
+          <Card.Meta>Created By: {created_username}</Card.Meta>
           <Card.Description>{desc}</Card.Description>
         </Card.Content>
 

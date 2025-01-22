@@ -28,7 +28,7 @@ export default function HistoryNav() {
     for (let i = 0; i < urlArr.length; i++) {
       if (urlArr[i] == '' || urlArr[i] == ' ') {
         // do nothing
-      } else if (i !== 5) {
+      } else if (i !== 5 && i !== 3) {
         let curItemUrl = urlArr.slice(0, i + 1).join('/');
         let content = null;
         if (i === CLASS_NAME_LOCATION) {

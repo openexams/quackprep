@@ -8,7 +8,7 @@ import { selectLoadingState } from '../store/loadingSlice';
 import ClassEditor from '../creator/forms/ClassEditor';
 import { selectArrayOfIncludingItemsByNumber, selectBINARYArrayOfStateById } from 'maddox-js-funcs';
 import { selectNavbarState } from '@components/navbar/navbarSlice';
-import { selectCanAndIsEdit, selectEditState } from '../auth/authSlice';
+import { selectEditState } from '../auth/authSlice'; // cuz anyone can make classes
 
 export default function ClassList() {
   let { schoolId: curSchoolId } = useSelector(selectNavbarState).navbar;
@@ -42,6 +42,7 @@ export default function ClassList() {
         </Header.Subheader>
 
         <Segment raised>
+          {/* The category menu remains as is */}
           <Menu pointing secondary fluid widths={classCategories?.length + 1} stackable>
             <Menu.Item name='All Classes' active={curCategory === ''} onClick={() => handleCategoryChange('')} icon='list' />
             {classCategories?.map((category, index) => (
@@ -55,31 +56,35 @@ export default function ClassList() {
             ))}
           </Menu>
 
-          <Transition.Group as={Grid} duration={300} animation='fade' stackable columns={4} padded>
-            {visible && filteredClasses?.length > 0
-              ? filteredClasses.map((c, index) => (
-                  <Grid.Column key={index}>
-                    <ClassCard
-                      id={c.id}
-                      name={c.name}
-                      category={c.category}
-                      desc={c.description}
-                      school_id={c.school_id}
-                      created_by={c.created_by}
-                    />
-                  </Grid.Column>
-                ))
-              : visible && (
-                  <Grid.Column width={16}>
-                    <Message
-                      icon='search'
-                      header='No Classes Found'
-                      content='There are no classes available in this category yet.'
-                      info
-                    />
-                  </Grid.Column>
-                )}
-          </Transition.Group>
+          {/* Wrap Transition.Group with a scrollable container */}
+          <div style={{ maxHeight: '600px', overflowY: 'auto', padding: '1rem' }}>
+            <Transition.Group as={Grid} duration={300} animation='fade' stackable columns={4}>
+              {visible && filteredClasses?.length > 0
+                ? filteredClasses.map((c, index) => (
+                    <Grid.Column key={index}>
+                      <ClassCard
+                        id={c.id}
+                        name={c.name}
+                        category={c.category}
+                        desc={c.description}
+                        school_id={c.school_id}
+                        created_by={c.created_by}
+                        created_username={c.created_username}
+                      />
+                    </Grid.Column>
+                  ))
+                : visible && (
+                    <Grid.Column width={16}>
+                      <Message
+                        icon='search'
+                        header='No Classes Found'
+                        content='There are no classes available in this category yet.'
+                        info
+                      />
+                    </Grid.Column>
+                  )}
+            </Transition.Group>
+          </div>
         </Segment>
 
         {edit && (

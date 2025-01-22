@@ -6,14 +6,10 @@ import {
   getGroupsByUserId,
   deleteGroupById,
 } from "#models/group/index.js";
-import { cascadeSetDeleted } from "#utils/sqlFunctions.js";
 import { isCreator } from "#middleware/creatorMiddleware.js";
 import { commonErrorMessage } from "#utils/utils.js";
-import groupAI from "./ai/index.js";
 
 const router = express.Router();
-
-router.use("/ai", groupAI);
 
 router.get("/user/", isAuthenticated, async function (req, res) {
   try {

@@ -33,7 +33,7 @@ export default function FRQAnswer({ text, choice, selectedQuestion }) {
 
   return (
     <Segment basic loading={loading?.FRQAnswer}>
-      <CustomImageLoader active={loading?.AiGrade} content={'Generating AI Grade (~5s)'}>
+      <CustomImageLoader active={loading?.AiGrade} content={'Generating AI Grade (~8s)'}>
         <Message
           color={getGradeColor(currentChoice?.grade)}
           style={{ marginTop: '2rem', textAlign: 'center', borderRadius: '10px' }}

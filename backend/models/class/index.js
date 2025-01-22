@@ -7,7 +7,7 @@ export async function getClassCategories() {
 async function selectClasses(WHERE, params) {
   // pulls in a random group from the class as to use on frotend to check if the class has any groups
   return await sqlExe.executeCommand(
-    `SELECT cl.id, cl.name, cl.school_id, cl.description, cl.category, MIN(g.id) as group_id, min(p.id) as pdf_id, u.id as created_by FROM classes cl 
+    `SELECT cl.id, cl.name, cl.school_id, cl.description, cl.category, MIN(g.id) as group_id, min(p.id) as pdf_id, u.id as created_by, u.username as created_username FROM classes cl 
     JOIN class_categories c ON c.id = cl.category
     LEFT JOIN cgroups g on g.class_id = cl.id
     LEFT JOIN pdfs p on p.class_id = cl.id

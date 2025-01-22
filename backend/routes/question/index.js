@@ -10,7 +10,6 @@ import { cascadeSetDeleted } from "#utils/sqlFunctions.js";
 import { isCreator } from "#middleware/creatorMiddleware.js";
 import { commonErrorMessage } from "#utils/utils.js";
 import favRouter from "./favorite/index.js";
-import aiRouter from "./ai/index.js";
 import voteRouter from "./vote/index.js";
 
 const router = express.Router();
@@ -18,8 +17,6 @@ const router = express.Router();
 router.use("/vote", voteRouter);
 
 router.use("/favorite", favRouter);
-
-router.use("/ai", aiRouter);
 
 router.get("/user", isAuthenticated, async function (req, res) {
   try {

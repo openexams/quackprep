@@ -27,7 +27,18 @@ export default function CreatorDashboard() {
             Help students study smarter by sharing your knowledge.
           </Header.Subheader>
         </Header>
-        <Button onClick={() => dispatch(makeUserACreator())} primary size='huge' style={{ marginTop: '2rem' }}>
+        <Button
+          onClick={() => {
+            if (!user?.is_creator) {
+              dispatch(makeUserACreator());
+            } else {
+              window.alert('You are already a creator!');
+            }
+          }}
+          primary
+          size='huge'
+          style={{ marginTop: '2rem' }}
+        >
           <Icon name='lightbulb' />
           Get Started Now
         </Button>

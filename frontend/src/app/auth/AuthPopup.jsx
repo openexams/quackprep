@@ -8,6 +8,7 @@ import { selectUser } from './authSlice';
 import { useNavigate, Link } from 'react-router-dom';
 import './auth.css';
 import { selectLoadingState } from '../store/loadingSlice';
+import ComingSoon from '@components/ComingSoon';
 
 export default function Auth() {
   const navigate = useNavigate();
@@ -71,7 +72,7 @@ export default function Auth() {
 
             <Segment basic style={{ marginTop: '2rem' }}>
               <Header>{logOrSignText}</Header>
-              {loggingIn ? <Login /> : <Register />}
+              {loggingIn ? <Login /> : <p>email sign up temporarily disabled, please us google signUp/login</p>}
             </Segment>
 
             <Segment basic textAlign='center' style={{ marginTop: '2rem', color: '#888' }}>

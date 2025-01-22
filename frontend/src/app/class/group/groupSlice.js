@@ -25,9 +25,9 @@ export function createGroupGivenPDF(formData, class_id, prompt) {
   formData.append('prompt', prompt); // Add the prompt
   formData.append('class_id', class_id); // Add the class_id
 
-  return standardApiCall('post', `/api/group/ai/`, formData, null, {
+  return standardApiCall('post', `/api/ai/group/`, formData, null, {
     // this will not update state to much work just have user refresh or smth
-    loadingComponent: ['GroupsList'],
+    loadingComponent: ['CreateGroupByPDF'],
     noticeOfSuccess: 'successfully generate group by AI!',
     axiosConfig: { headers: { 'Content-Type': 'multipart/form-data' } },
     refreshOnCompletion: true, // creates group question choices I aint adding allat back just refresh

@@ -30,6 +30,12 @@ router.get("/users/count", async function (req, res) {
 });
 
 router.post("/register", async function (req, res) {
+  commonErrorMessage(
+    res,
+    500,
+    "register through email is currently turned off, please use google login"
+  );
+  return;
   // make sure to check if that emails not alr taken lol TODO FIX AND ITS TURNED OFF RN
   const { username, email, password } = req.body;
 

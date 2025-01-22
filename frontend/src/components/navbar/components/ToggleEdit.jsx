@@ -1,24 +1,38 @@
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Checkbox } from 'semantic-ui-react';
+import { Checkbox, Segment, Header, Icon } from 'semantic-ui-react';
 import { selectEditState } from '@src/app/auth/authSlice';
 import { selectNavbarState, toggleEdit } from '../navbarSlice';
 import { selectUser } from '@src/app/auth/authSlice';
 
 const ToggleEditComponent = () => {
-  const is_creator = useSelector(selectUser).user?.is_creator;
-  const page = useSelector(selectNavbarState).navbar?.page;
-  const editing = useSelector(selectEditState);
+  const isCreator = useSelector(selectUser).user?.is_creator;
+  const currentPage = useSelector(selectNavbarState).navbar?.page;
+  const isEditing = useSelector(selectEditState);
   const dispatch = useDispatch();
-  if (!is_creator || !page?.includes('class')) {
+
+  if (!isCreator || !currentPage?.includes('class')) {
     return null;
   }
+
   return (
-    <div id={'toggle_edit_comp'} style={{ color: editing ? 'green' : 'red', padding: '20px', maxWidth: '300px', margin: 'auto' }}>
-      <p>
-        Toggle Edit: {editing ? 'True' : 'False'}
-        <Checkbox style={{ backgroundColor: 'black' }} toggle checked={editing} onChange={() => dispatch(toggleEdit())} />
-      </p>
-    </div>
+    <Segment size='mini' basic id='toggle_edit_comp' textAlign='center' style={{ maxWidth: '250px', margin: 'auto' }}>
+      <Header as='h6' color={isEditing ? 'green' : 'red'} style={{ fontSize: '1rem', marginBottom: '-.2rem' }}>
+        <Icon size='small' name={isEditing ? 'edit' : 'ban'} />
+        {isEditing ? 'Editing Enabled' : 'Editing Disabled'}
+      </Header>
+      <Checkbox
+        style={{
+          backgroundColor: 'rgba(255, 255, 255, 0.9)',
+          borderRadius: '20px', // Add this line for rounded edges
+          padding: '5px', // Optional: Add some padding for better appearance
+        }}
+        toggle
+        checked={isEditing}
+        onChange={() => dispatch(toggleEdit())}
+        label='Toggle Edit Mode'
+      />
+    </Segment>
   );
 };
 

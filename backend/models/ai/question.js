@@ -1,9 +1,9 @@
 import {
   getQuestionsByGroupId,
+  upsertQuestion,
   getWhatGroupsQuestionisIn,
   setDeletedQuestionAndCascadeChoices,
-  upsertQuestion,
-} from "../index.js";
+} from "#models/question/index.js";
 import { addManyChoicesToQuestion } from "#models/choice/index.js";
 import sqlExe from "#db/dbFunctions.js";
 import { sendOpenAiAssistantPromptAndRecieveResult } from "#utils/openAi.js";
@@ -145,6 +145,6 @@ export async function generateQuestionFromGroup(user_id, group_id) {
 // DO NOT FUCKING RUN THIS!!
 export async function deleteAllAIGeneratedQuestion() {
   await sqlExe.executeCommand(`UPDATE questions q
-LEFT JOIN choices c on c.question_id = q.id
-SET q.deleted=1, c.deleted=1 WHERE q.ai = 1`);
+  LEFT JOIN choices c on c.question_id = q.id
+  SET q.deleted=1, c.deleted=1 WHERE q.ai = 1`);
 }

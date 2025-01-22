@@ -1,4 +1,3 @@
-import React from 'react';
 import { Loader, Dimmer, Image } from 'semantic-ui-react';
 import './CustomImageLoader.css';
 

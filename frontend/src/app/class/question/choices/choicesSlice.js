@@ -60,7 +60,7 @@ export function deleteChoiceById(id) {
 export function checkStudentFRQAnswer(trans_id, question_text, student_answer_text, correct_answer_text) {
   return standardApiCall(
     'post',
-    '/api/choice/ai/gradeai/',
+    '/api/ai/choice/grade/',
     {
       trans_id,
       question_text,

@@ -2,9 +2,8 @@ import { addManyChoicesToQuestion } from "#models/choice/index.js";
 import { upsertQuestion } from "#models/question/index.js";
 import { postPdfAndRetriveParsedPdf } from "#utils/mathpix.js";
 import { sendOpenAiAssistantPromptAndRecieveResult } from "#utils/openAi.js";
-import { upsertGroupInClass } from "../index.js";
 import FormData from "form-data";
-import { deleteGroupById } from "../index.js";
+import { upsertGroupInClass, deleteGroupById } from "#models/group/index.js";
 /**
  *
  * @param {Express.Multer.File[]} files
@@ -12,12 +11,11 @@ import { deleteGroupById } from "../index.js";
  * @param {*} user_id
  * @param {*} prompt
  */
-export async function parsePdfIntoGroup(
-  files,
-  class_id,
-  user_id,
-  prompt = "parse through and only respond with whats needed based on the json schema"
-) {
+export async function parsePdfIntoGroup(files, class_id, user_id, prompt) {
+  prompt =
+    prompt ??
+    "parse through and only respond with whats needed based on the json schema";
+  dlog(`prompt given: ${prompt}`);
   let group = null;
   try {
     dlog(`${files.length} files detected`);

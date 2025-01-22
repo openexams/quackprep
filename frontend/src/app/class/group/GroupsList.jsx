@@ -6,8 +6,6 @@ import { selectLoadingState } from '@src/app/store/loadingSlice';
 import Searchbar from '@components/Searchbar';
 import { useSearchParams } from 'react-router-dom';
 import GroupEditor from '@src/app/creator/forms/GroupEdit';
-import { selectItemById } from 'maddox-js-funcs';
-import { selectClassState } from '../classSlice';
 import { selectCanAndIsEdit } from '@src/app/auth/authSlice';
 import GroupCard from './GroupCard';
 import { useState } from 'react';
@@ -98,7 +96,7 @@ export default function GroupsList() {
             })}
           {editModeOn && <GroupEditor class_id={classId} />}
         </Card.Group>
-        {editModeOn && <CreateGroupByPDF classId={classId} />}
+        {editModeOn && <CreateGroupByPDF classId={classId} /> /* ai group */}
       </Segment>
     </Container>
   );

@@ -1,7 +1,6 @@
 import { sendOpenAiAssistantPromptAndRecieveResult } from "#utils/openAi.js";
 import sqlExe from "#db/dbFunctions.js";
-import { selectCurrentChoice } from "../current/index.js";
-
+import { selectCurrentChoice } from "#models/choice/current/index.js";
 export async function checkStudentFRQAnswer(
   trans_id,
   question_text,
