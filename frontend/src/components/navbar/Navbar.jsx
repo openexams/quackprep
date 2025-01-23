@@ -27,6 +27,7 @@ import Init from '@src/Init';
 import Sentinel from '@src/Sentinel';
 import { selectGroupsState } from '@src/app/class/group/groupSlice';
 import ToggleEditComponent from './components/ToggleEdit';
+import PlusButton from '@components/PlusButton/PlusButton';
 
 export default function Navbar() {
   const groups = useSelector(selectGroupsState);
@@ -196,6 +197,7 @@ export default function Navbar() {
                 Stats
               </Menu.Item>
               <ToggleEditComponent />
+              <PlusButton onClick={() => changeNavbarPage(navigate, '/new')} />
 
               {user.id ? (
                 <Menu.Item className='nav-item'>
@@ -257,11 +259,19 @@ export default function Navbar() {
               <Icon name='chart bar' />
               Stats
             </Menu.Item>
-            <ToggleEditComponent />
+            <Menu.Menu position='right'>
+              <ToggleEditComponent />
+            </Menu.Menu>
+            <Menu.Menu position='right'>
+              <PlusButton
+                style={{ marginTop: '.8rem', minWidth: 60, minHeight: 60, maxWidth: 60, maxHeight: 60 }}
+                onClick={() => changeNavbarPage(navigate, '/new')}
+                popupText={'Generate new Material'}
+              />
+            </Menu.Menu>
+
             {user.id ? (
-              <Menu.Menu position='right'>
-                <ProfileDropdown hasStreak={hasStreak} activePage={activePage} handlePageChange={handlePageChange} />
-              </Menu.Menu>
+              <ProfileDropdown hasStreak={hasStreak} activePage={activePage} handlePageChange={handlePageChange} />
             ) : (
               <Menu.Item
                 onClick={handlePageChange}
@@ -269,7 +279,6 @@ export default function Navbar() {
                 href='/auth'
                 active={activePage === '/auth'}
                 name='/auth'
-                position='right'
                 className='nav-item auth-button'
               >
                 <Icon name='user' />

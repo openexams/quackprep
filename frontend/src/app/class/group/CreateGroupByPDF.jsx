@@ -14,8 +14,12 @@ export default function CreateGroupByPDF({ classId }) {
   const loading = useSelector(selectLoadingState).loadingComps.CreateGroupByPDF;
 
   function handlePdfSubmit(formData) {
-    setReset(reset + 1);
-    dispatch(createGroupGivenPDF(formData, classId, customPrompt || null));
+    if (classId) {
+      setReset(reset + 1);
+      dispatch(createGroupGivenPDF(formData, classId, customPrompt || null));
+    } else {
+      window.alert('Please select a class first');
+    }
   }
 
   return (
