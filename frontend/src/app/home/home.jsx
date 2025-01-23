@@ -1,12 +1,13 @@
 import { useDispatch } from 'react-redux';
-import { Container, Header, Button, Icon, Grid, Segment, Card, Image } from 'semantic-ui-react';
+import { Container, Header, Button, Icon, Grid, Segment, Card } from 'semantic-ui-react';
+import { useNavigate } from 'react-router-dom';
+
+import { changeNavbarPage } from '@components/navbar/navbarSlice';
+
 import duckBlissImage from '/img/home/duck_bliss.webp';
 import libraryComputerDucks from '/img/home/library_computer_ducks.webp';
 import extensiveDucks from '/img/home/extensive_ducks.webp';
 import kiteDuck from '/img/home/duck_kite.webp';
-import { useNavigate } from 'react-router-dom';
-
-import { changeNavbarPage } from '@components/navbar/navbarSlice';
 
 export default function Home() {
   const navigate = useNavigate();
@@ -42,42 +43,45 @@ export default function Home() {
   ];
 
   return (
-    <div className='home-page'>
+    <div className='home-page' style={{ overflowX: 'hidden' }}>
+      {/* Hero Section */}
       <Segment
         inverted
         vertical
         textAlign='center'
-        style={{ marginTop: '-.1rem', minHeight: 700, padding: '1em 0em', position: 'relative' }}
+        style={{
+          marginTop: 0,
+          minHeight: 700,
+          padding: '1em 0em',
+          position: 'relative',
+          display: 'flex',
+          alignItems: 'center',
+        }}
       >
         <img
           loading='lazy'
           src={duckBlissImage}
-          width='1792' // replace with the actual width
-          height='1024' // replace with the actual height
+          width='1792'
+          height='1024'
           alt='quackprep background image'
           style={{
             position: 'absolute',
-            top: 6,
+            top: 0,
             left: 0,
             width: '100%',
             height: '100%',
             objectFit: 'cover',
             zIndex: 0,
+            filter: 'brightness(0.85)',
           }}
         />
         <Container
           style={{
             zIndex: 1,
-            position: 'relative', // Ensure it stays above the background
-            textAlign: 'center', // Center the text inside the container
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            alignItems: 'center',
-            height: '100%', // Stretch container height to match the segment
+            position: 'relative',
+            textAlign: 'center',
           }}
           text
-          textAlign='center'
         >
           <Header
             as='h1'
@@ -120,23 +124,29 @@ export default function Home() {
         </Container>
       </Segment>
 
-      <Segment style={{ padding: '8em 0em' }} vertical>
+      {/* Key Features Section */}
+      <Segment style={{ padding: '8em 1em', backgroundColor: '#f9f9f9' }} vertical>
         <Container text>
           <Header as='h3' style={{ fontSize: '2em', textAlign: 'center' }}>
             Key Features
           </Header>
-          <Grid stackable columns={3} style={{ marginTop: '3em' }}>
+          <Grid stackable columns={3} style={{ marginTop: '3em' }} divided='vertically'>
             {features.map((feature, index) => (
               <Grid.Column key={index}>
-                <Card fluid>
+                <Card fluid raised>
                   <img
-                    alt='quackprep informative image with description'
-                    height={'215px'}
-                    width={'215px'}
+                    alt='quackprep informative'
+                    height={215}
+                    width={215}
                     loading='lazy'
                     src={feature.icon}
+                    style={{
+                      width: '100%',
+                      maxHeight: '215px',
+                      objectFit: 'cover',
+                    }}
                   />
-                  <Card.Content>
+                  <Card.Content textAlign='center'>
                     <Card.Header>{feature.title}</Card.Header>
                     <Card.Description>{feature.description}</Card.Description>
                   </Card.Content>
@@ -147,17 +157,20 @@ export default function Home() {
         </Container>
       </Segment>
 
-      <Segment style={{ padding: '8em 0em' }} vertical>
+      {/* Testimonials Section */}
+      <Segment style={{ padding: '8em 1em', backgroundColor: '#ffffff' }} vertical>
         <Container text>
           <Header as='h3' style={{ fontSize: '2em', textAlign: 'center' }}>
             What Our Users Say
           </Header>
-          <Grid stackable columns={2} style={{ marginTop: '3em' }}>
+          <Grid stackable columns={2} style={{ marginTop: '3em' }} relaxed='very'>
             {testimonials.map((testimonial, index) => (
               <Grid.Column key={index}>
                 <Segment raised>
-                  <p style={{ fontSize: '1.33em' }}>"{testimonial.text}"</p>
-                  <Header as='h4'>{testimonial.author}</Header>
+                  <p style={{ fontSize: '1.33em', fontStyle: 'italic' }}>"{testimonial.text}"</p>
+                  <Header as='h4' textAlign='right'>
+                    {testimonial.author}
+                  </Header>
                 </Segment>
               </Grid.Column>
             ))}
