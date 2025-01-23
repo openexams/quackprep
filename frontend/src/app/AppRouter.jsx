@@ -21,6 +21,8 @@ import ComingSoon from '@components/ComingSoon.jsx';
 import TOS from './extra/TOS.jsx';
 import PrivacyPolicy from './extra/Privacy.jsx';
 import NewPageWrapper from './new/NewPageWrapper.jsx';
+import Init from './Init.jsx';
+import Sentinel from './Sentinel.jsx';
 
 {
   /* topic could be a actual topic or a group of question such as a exam */
@@ -29,6 +31,8 @@ import NewPageWrapper from './new/NewPageWrapper.jsx';
 export default function AppRouter() {
   return (
     <Router>
+      <Init />
+      <Sentinel />
       <HistoryNav />
       <Navbar />
       <Comp401 />
