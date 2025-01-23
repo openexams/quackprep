@@ -58,10 +58,9 @@ export async function generateQuestionLike(
           strict: true,
         },
       },
-      "o1-2024-12-17",
+      "gpt-4o",
       "Answer question with accuracy"
     );
-    console.log(correctAnswer);
 
     // needed for sql db WHAT IF THEY BOTH GENERATE THE CORRECT RESPONSE?
     for (let i = 0; i < quackAssistResponseJSON.options.length; i++) {
@@ -73,7 +72,7 @@ export async function generateQuestionLike(
     }
 
     quackAssistResponseJSON.options.push({
-      text: response.option,
+      text: correctAnswer.option,
       is_correct: true,
       type: "mcq",
     });

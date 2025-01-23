@@ -92,5 +92,5 @@ export async function sendPromptAndRecieveJSONResult(
     },
     store: true,
   });
-  return completion.choices[0].message.content;
+  return JSON.parse(completion.choices[0].message.content);
 }
