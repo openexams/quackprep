@@ -1,4 +1,4 @@
-import { changeNavbarPage } from '@src/app/layout/navbarSlice';
+import { changeNavbarPage } from '@app/layout/navbar/navbarSlice';
 import { useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Card, Icon } from 'semantic-ui-react';

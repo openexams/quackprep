@@ -1,4 +1,4 @@
-import { standardApiCall } from '@src/utils/api';
+import { standardApiCall } from '@utils/api';
 
 const REGISTER = 'app/auth/register/REGISTER'; // change to login to auto login?
 

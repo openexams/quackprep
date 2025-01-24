@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 import { firstLetterUppercase } from '@utils/helperFuncs';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectUser } from '@src/app/auth/authSlice';
+import { selectUser } from '@app/auth/authSlice';
 import {
   getFixedUrlArr,
   selectNavbarState,
@@ -13,14 +13,14 @@ import {
   updateFetchHistory,
   updateQuestionId,
   updateSchoolId,
-} from '@src/app/layout/navbarSlice';
+} from '@app/layout/navbar/navbarSlice';
 
-import { selectClassState } from '@src/app/class/classSlice';
-import { selectSchoolState } from '@src/app/class/school/schoolSlice';
-import { selectLoadingState } from '@src/app/store/loadingSlice';
+import { selectClassState } from '@app/class/classSlice';
+import { selectSchoolState } from '@app/class/school/schoolSlice';
+import { selectLoadingState } from '@app/store/loadingSlice';
 import { select401CompState } from '@components/401/401Slice';
 
-import { selectGroupsState } from '@src/app/class/group/groupSlice';
+import { selectGroupsState } from '@app/class/group/groupSlice';
 import {
   pdfsFetchLogic,
   schoolUpdateLogic,

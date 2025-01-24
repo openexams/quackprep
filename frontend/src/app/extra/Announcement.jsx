@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { selectNavbarState } from '../layout/navbarSlice';
+import { selectNavbarState } from '../layout/navbar/navbarSlice';
 import { Message, Button } from 'semantic-ui-react';
 import { useState } from 'react';
 import MarkdownRenderer from '@components/MarkdownRenderer';

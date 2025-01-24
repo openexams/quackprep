@@ -3,12 +3,12 @@ import MultipleChoice from './types/MultipleChoice/MultipleChoice';
 import { selectBINARYArrayOfStateById } from 'maddox-js-funcs';
 import { Segment, Header, Divider, Label, Popup } from 'semantic-ui-react';
 import MarkdownRenderer from '@components/MarkdownRenderer';
-import { selectLoadingState } from '@src/app/store/loadingSlice';
+import { selectLoadingState } from '@app/store/loadingSlice';
 import FreeResponse from './types/frq/FreeResponse';
 import NoItemsFound from '@components/NoItemsFound';
-import ChoiceEditor from '@src/app/creator/forms/ChoiceEditor';
-import QuestionEditor from '@src/app/creator/forms/QuestionEditor';
-import { selectCanAndIsEdit } from '@src/app/auth/authSlice';
+import ChoiceEditor from '@app/creator/forms/ChoiceEditor';
+import QuestionEditor from '@app/creator/forms/QuestionEditor';
+import { selectCanAndIsEdit } from '@app/auth/authSlice';
 
 export default function ChoiceRouter({ selectedQuestion }) {
   const edit = useSelector(selectCanAndIsEdit()); // TODO CHECK IF USER IS ALLOWED TO EDIT!!!

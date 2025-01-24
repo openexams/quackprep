@@ -1,4 +1,4 @@
-import { standardApiCall } from '@src/utils/api';
+import { standardApiCall } from '@utils/api';
 
 export const LOGIN = 'app/auth/login/LOGIN';
 export const MAKE_USER_A_CREATOR = 'app/auth/login/MAKE_USER_A_CREATOR';

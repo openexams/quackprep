@@ -1,5 +1,5 @@
 // maps array of objects to what react semantic ui likes to see in dropdowns
-import { GROUP_TYPES } from '@src/app/class/group/groupSlice';
+import { GROUP_TYPES } from '@app/class/group/groupSlice';
 
 export function mapSchoolsToDropdown(schools) {
   return schools.map((school) => ({

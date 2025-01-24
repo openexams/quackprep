@@ -1,14 +1,14 @@
 import { useEffect } from 'react';
-import { changeNavbarPage } from '@src/app/layout/navbarSlice';
+import { changeNavbarPage } from '@app/layout/navbar/navbarSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { selectUser, getCurUser } from '@src/app/auth/authSlice';
-import { getClassCategories } from '@src/app/class/class_categories/classCategorySlice';
-import { getFavoriteQuestions, removeStateFavoriteQuestions } from '@src/app/class/question/favorite/favoriteSlice';
-import { getCurrentChoices, removeStateCurrentChoices } from '@src/app/class/question/choices/choicesSlice';
-import { getSchools } from '@src/app/class/school/schoolSlice';
-import { getHasStreak } from '@src/app/streak/streakSlice';
-import { getAnnouncement } from './layout/navbarSlice';
+import { selectUser, getCurUser } from '@app/auth/authSlice';
+import { getClassCategories } from '@app/class/class_categories/classCategorySlice';
+import { getFavoriteQuestions, removeStateFavoriteQuestions } from '@app/class/question/favorite/favoriteSlice';
+import { getCurrentChoices, removeStateCurrentChoices } from '@app/class/question/choices/choicesSlice';
+import { getSchools } from '@app/class/school/schoolSlice';
+import { getHasStreak } from '@app/streak/streakSlice';
+import { getAnnouncement } from './layout/navbar/navbarSlice';
 export default function Init() {
   const user = useSelector(selectUser).user;
   const navigate = useNavigate();

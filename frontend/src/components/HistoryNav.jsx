@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import { Breadcrumb, Transition } from 'semantic-ui-react';
-import { changeNavbarPage, getFixedUrlArr, selectNavbarState } from '../app/layout/navbarSlice';
+import { changeNavbarPage, getFixedUrlArr, selectNavbarState } from '../app/layout/navbar/navbarSlice';
 import { useDispatch } from 'react-redux';
 import { useMemo } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';

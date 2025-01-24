@@ -1,18 +1,18 @@
 // some useful fetch functions that the sentinel uses to fetch data. most of the class heirarchy is gotten by the Sentinel.jsx not its own component.
-import { getClassesBySchoolId } from '@src/app/class/classSlice';
-import { getSchools } from '@src/app/class/school/schoolSlice';
-import { getQuestionsByGroupId } from '@src/app/class/question/questionSlice';
-import { getChoicesByGroup } from '@src/app/class/question/choices/choicesSlice';
+import { getClassesBySchoolId } from '@app/class/classSlice';
+import { getSchools } from '@app/class/school/schoolSlice';
+import { getQuestionsByGroupId } from '@app/class/question/questionSlice';
+import { getChoicesByGroup } from '@app/class/question/choices/choicesSlice';
 import {
   getFixedUrlArr,
   updateCurrentClassData,
   updateCurrentGroupData,
   updateQuestionId,
   updateSchoolId,
-} from './layout/navbarSlice.js';
+} from './layout/navbar/navbarSlice.js';
 import { findNeedleInArrayOfObjectsLINEAR, findNeedlesInArrayOfObjectsLINEAR } from 'maddox-js-funcs';
-import { getPdfsByClassId } from '@src/app/class/group/pdf/pdfSlice';
-import { getGroupsByClassId } from '@src/app/class/group/groupSlice';
+import { getPdfsByClassId } from '@app/class/group/pdf/pdfSlice';
+import { getGroupsByClassId } from '@app/class/group/groupSlice';
 
 /**
  * Returns all possible page permuations with the given url

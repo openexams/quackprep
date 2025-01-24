@@ -4,7 +4,7 @@ import { createGroupGivenPDF } from './groupSlice';
 import { Button, Input, Header, Popup, Icon, Modal } from 'semantic-ui-react';
 import PdfUploadForm from '@components/PDFUploadForm';
 import { CustomImageLoader } from '@components/CustomLoader/CustomImageLoader';
-import { selectLoadingState } from '@src/app/store/loadingSlice';
+import { selectLoadingState } from '@app/store/loadingSlice';
 
 // will only render if user has edit permissions
 export default function CreateGroupByPDF({ classId }) {

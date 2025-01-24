@@ -1,7 +1,7 @@
-import { selectUser } from '@src/app/auth/authSlice';
+import { selectUser } from '@app/auth/authSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { Dropdown, Image, Icon } from 'semantic-ui-react';
-import { signOut } from '@src/app/auth/login/loginSlice';
+import { signOut } from '@app/auth/login/loginSlice';
 import { useState } from 'react';
 import ConfirmSignoutModal from './ConfirmSignoutModal';
 import fireGif from '/img/fire_flame.gif';

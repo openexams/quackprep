@@ -2,13 +2,13 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Form, Dropdown, Button, Segment, Header } from 'semantic-ui-react';
 
-import { upsertClass, deleteClassById } from '@src/app/class/classSlice';
+import { upsertClass, deleteClassById } from '@app/class/classSlice';
 import { mapSchoolsToDropdown, mapClassCategoriesToDropdown } from './dropdownMappings';
 
 import ConfirmButton from '@components/ConfirmButton';
 
-import { selectSchoolState } from '@src/app/class/school/schoolSlice';
-import { selectClassCategories } from '@src/app/class/class_categories/classCategorySlice';
+import { selectSchoolState } from '@app/class/school/schoolSlice';
+import { selectClassCategories } from '@app/class/class_categories/classCategorySlice';
 
 export default function ClassEditor({ id, name, category, desc, school_id }) {
   const dispatch = useDispatch();

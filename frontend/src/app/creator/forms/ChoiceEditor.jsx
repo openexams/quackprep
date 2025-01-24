@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Form, Checkbox, Dropdown, Button, Segment, Header } from 'semantic-ui-react';
-import { upsertChoice, deleteChoiceById } from '@src/app/class/question/choices/choicesSlice';
+import { upsertChoice, deleteChoiceById } from '@app/class/question/choices/choicesSlice';
 import ConfirmButton from '@components/ConfirmButton';
 import MarkdownEditor from './MarkdownEditor';
 

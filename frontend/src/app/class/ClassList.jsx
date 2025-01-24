@@ -7,7 +7,7 @@ import { selectClassCategories } from './class_categories/classCategorySlice';
 import { selectLoadingState } from '../store/loadingSlice';
 import ClassEditor from '../creator/forms/ClassEditor';
 import { selectArrayOfIncludingItemsByNumber, selectBINARYArrayOfStateById } from 'maddox-js-funcs';
-import { selectNavbarState } from '@src/app/layout/navbarSlice';
+import { selectNavbarState } from '@app/layout/navbar/navbarSlice';
 import { selectEditState } from '../auth/authSlice'; // cuz anyone can make classes
 
 export default function ClassList() {

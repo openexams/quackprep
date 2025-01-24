@@ -1,6 +1,6 @@
 import { Image, Menu } from 'semantic-ui-react';
 import './BrandLogo.css';
-import { changeNavbarPage } from '@src/app/layout/navbarSlice';
+import { changeNavbarPage } from '@app/layout/navbar/navbarSlice';
 import { useNavigate } from 'react-router-dom';
 
 export default function BrandLogo({}) {

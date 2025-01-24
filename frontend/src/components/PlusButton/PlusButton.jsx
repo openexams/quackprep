@@ -1,8 +1,8 @@
 import { Button, Icon, Popup } from 'semantic-ui-react';
 import './PlusButton.css';
-import { selectUser } from '@src/app/auth/authSlice';
+import { selectUser } from '@app/auth/authSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeNavbarPage } from '@src/app/layout/navbarSlice';
+import { changeNavbarPage } from '@app/layout/navbar/navbarSlice';
 import { useNavigate } from 'react-router-dom';
 import { show401Msg } from '@components/401/401Slice';
 

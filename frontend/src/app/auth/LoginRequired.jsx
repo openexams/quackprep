@@ -1,7 +1,7 @@
 import { Segment, Header, Icon, Button, Grid } from 'semantic-ui-react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { changeNavbarPage } from '@src/app/layout/navbarSlice';
+import { changeNavbarPage } from '@app/layout/navbar/navbarSlice';
 
 /**
  * Show a component message that the user must be logged in to access a certain page.

@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { Card, Image, Icon, Button } from 'semantic-ui-react';
 import { selectUser } from '../auth/authSlice';
-import { changeNavbarPage } from '@src/app/layout/navbarSlice';
+import { changeNavbarPage } from '@app/layout/navbar/navbarSlice';
 import { useNavigate } from 'react-router-dom';
 
 export default function Profile() {

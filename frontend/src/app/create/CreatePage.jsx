@@ -6,7 +6,7 @@ import { getClassesByUserId } from '../class/classSlice';
 import { selectUser } from '../auth/authSlice';
 import { selectArrayOfStateById } from 'maddox-js-funcs';
 import { mapClassesToDropdown } from '../creator/forms/dropdownMappings';
-import { changeNavbarPage } from '@src/app/layout/navbarSlice';
+import { changeNavbarPage } from '@app/layout/navbar/navbarSlice';
 import CreateGroupByPDF from '../class/group/CreateGroupByPDF';
 
 export default function NewPageWrapper() {

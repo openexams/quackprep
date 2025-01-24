@@ -1,9 +1,9 @@
-import { changeNavbarPage, selectNavbarState } from '@src/app/layout/navbarSlice.js';
+import { changeNavbarPage, selectNavbarState } from '@app/layout/navbar/navbarSlice.js';
 import { selectBINARYArrayOfStateById } from 'maddox-js-funcs';
 import { useDispatch, useSelector } from 'react-redux';
 import { Segment, Header, Icon, Grid, Button, Container, Dimmer } from 'semantic-ui-react';
 import { useNavigate } from 'react-router-dom';
-import { selectLoadingState } from '@src/app/store/loadingSlice.js';
+import { selectLoadingState } from '@app/store/loadingSlice.js';
 import NoItemsFound from '@components/NoItemsFound';
 
 // have pdfs do its own dispatches unlike the rest of my shitty app

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Header, Button, Segment, Icon, Image, Form, Grid } from 'semantic-ui-react';
 import Login from './login/Login';
-import { changeNavbarPage, selectLastPage } from '@src/app/layout/navbarSlice';
+import { changeNavbarPage, selectLastPage } from '@app/layout/navbar/navbarSlice';
 import Register from './register/register';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectUser } from './authSlice';

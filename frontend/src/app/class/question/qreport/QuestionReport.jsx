@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import CreateInputForm from '@components/CreateInputForm';
 import { postQuestionReport } from '../questionSlice';
 import './questionReport.css';
-import { selectUser } from '@src/app/auth/authSlice';
-import LoginRequired from '@src/app/auth/LoginRequired';
+import { selectUser } from '@app/auth/authSlice';
+import LoginRequired from '@app/auth/LoginRequired';
 
 export default function QuestionReport({ questionId }) {
   const user_id = useSelector(selectUser).user?.id;

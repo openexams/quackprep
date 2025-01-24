@@ -1,9 +1,9 @@
 import { show401Msg } from '@components/401/401Slice.js';
 import axios from './axios.js';
 import { hideFlashMessage, showFlashMessage } from '@components/flashmessage/flashMessageSlice.js';
-import { startLoading, stopLoading } from '@src/app/store/loadingSlice.js';
-import { signOut } from '@src/app/auth/login/loginSlice.js';
-import { updateFetchHistory } from '@src/app/layout/navbarSlice.js';
+import { startLoading, stopLoading } from '@app/store/loadingSlice.js';
+import { signOut } from '@app/auth/login/loginSlice.js';
+import { updateFetchHistory } from '@app/layout/navbar/navbarSlice';
 
 /**
  * A redux thunk standard api call THIS IS BASICALLY A MIDDLEWARE (idk how to make a real one yet) IF YOU ARE TALKING TO THE API PLS USE THIS

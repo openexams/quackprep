@@ -2,9 +2,9 @@ import { Card, Button, Icon } from 'semantic-ui-react';
 import { turnUnderscoreIntoSpace } from 'maddox-js-funcs';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateCurrentGroupData, changeNavbarPage, selectNavbarState } from '@src/app/layout/navbarSlice';
-import { selectCanAndIsEdit } from '@src/app/auth/authSlice';
-import GroupEditor from '@src/app/creator/forms/GroupEdit';
+import { updateCurrentGroupData, changeNavbarPage, selectNavbarState } from '@app/layout/navbar/navbarSlice';
+import { selectCanAndIsEdit } from '@app/auth/authSlice';
+import GroupEditor from '@app/creator/forms/GroupEdit';
 export default function GroupCard({ id, name, class_id, description, created_by, type }) {
   const edit = useSelector(selectCanAndIsEdit());
   const { schoolName } = useSelector(selectNavbarState).navbar;

@@ -1,6 +1,6 @@
 import { Sidebar, Menu, Icon } from 'semantic-ui-react';
-import BrandLogo from '@components/navbar/components/BrandLogo';
-import ProfileDropdown from '@components/navbar/components/Profile/ProfileDropdown';
+import BrandLogo from '@app/layout/brandlogo/BrandLogo';
+import ProfileDropdown from '@app/layout/profile/ProfileDropdown';
 import ToggleEditComponent from '@components/ToggleEdit';
 import { Link } from 'react-router-dom';
 

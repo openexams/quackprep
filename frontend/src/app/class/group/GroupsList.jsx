@@ -1,12 +1,12 @@
 import { useSelector } from 'react-redux';
 import { Header, Segment, Card, Container, Icon, Label } from 'semantic-ui-react';
 import { selectArrayOfIncludingItems, selectBINARYArrayOfStateById } from 'maddox-js-funcs';
-import { selectNavbarState } from '@src/app/layout/navbarSlice';
-import { selectLoadingState } from '@src/app/store/loadingSlice';
+import { selectNavbarState } from '@app/layout/navbar/navbarSlice';
+import { selectLoadingState } from '@app/store/loadingSlice';
 import Searchbar from '@components/Searchbar';
 import { useSearchParams } from 'react-router-dom';
-import GroupEditor from '@src/app/creator/forms/GroupEdit';
-import { selectCanAndIsEdit } from '@src/app/auth/authSlice';
+import GroupEditor from '@app/creator/forms/GroupEdit';
+import { selectCanAndIsEdit } from '@app/auth/authSlice';
 import GroupCard from './GroupCard';
 import { useEffect, useState } from 'react';
 import { GROUP_TYPES } from './groupSlice';

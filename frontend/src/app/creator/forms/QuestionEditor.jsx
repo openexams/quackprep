@@ -1,9 +1,9 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useState } from 'react';
 import { Form, Dropdown, Button, Segment, Header } from 'semantic-ui-react';
-import { selectGroupsState } from '@src/app/class/group/groupSlice';
+import { selectGroupsState } from '@app/class/group/groupSlice';
 import { mapGroupsToDropdown } from './dropdownMappings';
-import { deleteQuestionById, upsertQuestionWithGroupIds } from '@src/app/class/question/questionSlice';
+import { deleteQuestionById, upsertQuestionWithGroupIds } from '@app/class/question/questionSlice';
 import ConfirmButton from '@components/ConfirmButton';
 import MarkdownEditor from './MarkdownEditor';
 

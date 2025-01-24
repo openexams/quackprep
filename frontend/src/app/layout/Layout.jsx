@@ -4,11 +4,11 @@ import { Sidebar, SidebarPushable, SidebarPusher, Menu, Icon, Container, Segment
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-import { changeNavbarPage, selectCurrentPage } from './navbarSlice';
-import { selectUser } from '@src/app/auth/authSlice';
-import { selectHasStreak } from '@src/app/streak/streakSlice.js';
-import Navbar from './Navbar.jsx';
-import BrandLogo from '@components/navbar/components/BrandLogo';
+import { changeNavbarPage, selectCurrentPage } from './navbar/navbarSlice';
+import { selectUser } from '@app/auth/authSlice';
+import { selectHasStreak } from '@app/streak/streakSlice.js';
+import Navbar from './navbar/Navbar.jsx';
+import BrandLogo from '@app/layout/brandlogo/BrandLogo';
 
 export default function Layout({ children }) {
   const [isMobile, setIsMobile] = useState(false);

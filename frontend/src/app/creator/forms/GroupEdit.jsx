@@ -5,8 +5,8 @@ import { Form, Dropdown, Button, Segment, Header } from 'semantic-ui-react';
 import ConfirmButton from '@components/ConfirmButton';
 
 // Example actions (adjust paths as needed)
-import { upsertGroup, deleteGroupById } from '@src/app/class/group/groupSlice';
-import { selectClassState } from '@src/app/class/classSlice';
+import { upsertGroup, deleteGroupById } from '@app/class/group/groupSlice';
+import { selectClassState } from '@app/class/classSlice';
 
 // Example mapper (adjust path as needed)
 import { mapClassesToDropdown, mapGrouptypesDropdown } from './dropdownMappings';

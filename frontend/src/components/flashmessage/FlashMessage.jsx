@@ -2,7 +2,7 @@ import { Button, Message, Transition } from 'semantic-ui-react';
 import { hideFlashMessage, selectFlashMessageState } from './flashMessageSlice.js';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { changeNavbarPage, selectNavbarState } from '@src/app/layout/navbarSlice.js';
+import { changeNavbarPage, selectNavbarState } from '@app/layout/navbar/navbarSlice';
 
 const messageStyles = {
   success: {

@@ -5,9 +5,9 @@ import { isFavoriteQuestion, selectFavoriteQuestionsState } from './favorite/fav
 import { useSelector } from 'react-redux';
 import { doesQuestionHaveCurrentChoice, selectCurrentChoicesState } from './choices/choicesSlice';
 import GenerateQuestion from './ai/GenerateQuestion';
-import { selectCanAndIsEdit } from '@src/app/auth/authSlice';
-import { selectNavbarState } from '@src/app/layout/navbarSlice';
-import QuestionEditor from '@src/app/creator/forms/QuestionEditor';
+import { selectCanAndIsEdit } from '@app/auth/authSlice';
+import { selectNavbarState } from '@app/layout/navbar/navbarSlice';
+import QuestionEditor from '@app/creator/forms/QuestionEditor';
 
 /**
  * List of questions that can be selected

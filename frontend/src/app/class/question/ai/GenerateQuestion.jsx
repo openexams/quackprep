@@ -2,10 +2,10 @@ import { useState } from 'react';
 import { List, Icon, Modal, Button, Label, Segment, Dropdown } from 'semantic-ui-react';
 import { generateQuestionLike } from './aiQuestionSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectUser } from '@src/app/auth/authSlice';
-import LoginRequired from '@src/app/auth/LoginRequired';
-import { selectLoadingState } from '@src/app/store/loadingSlice';
-import { selectNavbarState } from '@src/app/layout/navbarSlice';
+import { selectUser } from '@app/auth/authSlice';
+import LoginRequired from '@app/auth/LoginRequired';
+import { selectLoadingState } from '@app/store/loadingSlice';
+import { selectNavbarState } from '@app/layout/navbar/navbarSlice';
 import { selectArrayOfStateByGroupId } from '@utils/helperFuncs';
 
 export default function GenerateQuestion() {

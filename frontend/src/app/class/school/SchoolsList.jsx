@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Segment, Button, Grid, Popup } from 'semantic-ui-react';
 import { selectSchoolState } from './schoolSlice';
 import './school.css';
-import { selectLoadingState } from '@src/app/store/loadingSlice';
-import { changeNavbarPage, selectNavbarState, updateSchoolId } from '@src/app/layout/navbarSlice';
+import { selectLoadingState } from '@app/store/loadingSlice';
+import { changeNavbarPage, selectNavbarState, updateSchoolId } from '@app/layout/navbar/navbarSlice';
 import { useNavigate } from 'react-router-dom';
 import { selectArrayOfIncludingItem } from 'maddox-js-funcs';
 

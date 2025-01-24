@@ -1,4 +1,4 @@
-import { standardApiCall } from '@src/utils/api';
+import { standardApiCall } from '@utils/api';
 
 const GET_USERS_COUNT = 'app/home/GET_USERS_COUNT';
 
