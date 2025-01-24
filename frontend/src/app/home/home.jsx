@@ -8,6 +8,7 @@ import duckBlissImage from '/img/home/duck_bliss.webp';
 import libraryComputerDucks from '/img/home/library_computer_ducks.webp';
 import extensiveDucks from '/img/home/extensive_ducks.webp';
 import kiteDuck from '/img/home/duck_kite.webp';
+import './home.css';
 
 export default function Home() {
   const navigate = useNavigate();
@@ -109,6 +110,7 @@ export default function Home() {
             The First Study Tool that "Grows with You" as you Learn
           </Header>
           <Button
+            className='get-started-button pulsing'
             primary
             size='huge'
             onClick={() => dispatch(changeNavbarPage(navigate, '/class'))}

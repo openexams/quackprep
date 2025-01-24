@@ -1,4 +1,4 @@
-import Home from './home/home.jsx';
+import Home from './home/Home.jsx';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Profile from './profile/Profile.jsx';
 import Streak from './streak/Streak.jsx';

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Segment, Button, Grid } from 'semantic-ui-react';
+import { Segment, Button, Grid, Popup } from 'semantic-ui-react';
 import { selectSchoolState } from './schoolSlice';
 import './school.css';
 import { selectLoadingState } from '@src/app/store/loadingSlice';
@@ -43,23 +43,29 @@ export default function SchoolsList() {
       <Grid columns={8} doubling>
         {schools?.map((school) => (
           <Grid.Column key={'s' + school.id}>
-            <Button
-              className={`school-button ${selectedSchoolId === school.id ? 'selected' : ''}`}
-              size='small'
-              fluid
-              basic={selectedSchoolId !== school.id}
-              onClick={() => {
-                dispatch(changeNavbarPage(navigate, `/class/${school.school_name}`));
-                // bad pratice assuming class before it but works
-              }}
-              style={{
-                marginBottom: '0.5em',
-                '--school-bg-color': school.color, // good ex of ovveriding !important i think the class takes in vars from this
-                '--school-text-color': isLightColor(school.color) ? 'black' : 'white',
-              }}
+            <Popup
+              trigger={
+                <Button
+                  className={`school-button ${selectedSchoolId === school.id ? 'selected' : ''}`}
+                  size='small'
+                  fluid
+                  basic={selectedSchoolId !== school.id}
+                  onClick={() => {
+                    dispatch(changeNavbarPage(navigate, `/class/${school.school_name}`));
+                    // bad pratice assuming class before it but works
+                  }}
+                  style={{
+                    marginBottom: '0.5em',
+                    '--school-bg-color': school.color, // good ex of ovveriding !important i think the class takes in vars from this
+                    '--school-text-color': isLightColor(school.color) ? 'black' : 'white',
+                  }}
+                >
+                  {school.school_name}
+                </Button>
+              }
             >
-              {school.school_name}
-            </Button>
+              {school.description}
+            </Popup>
           </Grid.Column>
         ))}
       </Grid>
