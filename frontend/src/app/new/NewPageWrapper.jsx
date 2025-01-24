@@ -1,4 +1,4 @@
-import { Dropdown, Segment, Form, Button, Message, Dimmer } from 'semantic-ui-react';
+import { Dropdown, Segment, Form, Button, Message } from 'semantic-ui-react';
 import CreateGroupByPDF from '../class/group/CreateGroupByPDF';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -16,12 +16,11 @@ export default function NewPageWrapper() {
   const classes = useSelector(selectArrayOfStateById('app.class.classes.classes', 'created_by', parseInt(user_id)));
   const [classId, setClassId] = useState(null);
   const navigate = useNavigate();
-
   useEffect(() => {
     if (user_id) {
       dispatch(getClassesByUserId());
     }
-  }, [user_id]);
+  }, [user_id, dispatch]);
 
   const handleCreateClass = () => {
     dispatch(changeNavbarPage(navigate, '/creatordashboard'));
@@ -29,7 +28,7 @@ export default function NewPageWrapper() {
 
   return (
     <Segment style={{ minHeight: '60vh' }} basic>
-      {classes?.length === 0 && (
+      {(classes?.length === 0 || !classes) && (
         <Message warning>
           <Message.Header>No Classes Found</Message.Header>
           <p>

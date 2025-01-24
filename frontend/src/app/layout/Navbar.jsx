@@ -21,7 +21,7 @@ export default function Navbar({
       as={Menu}
       // 1) Use "push" on desktop so content slides over
       //    Use "overlay" on mobile so it appears on top
-      animation={isMobile ? 'overlay' : 'overlay '} // im killing myself
+      animation='overlay' // im killing myself
       // 2) If not mobile, it should always be visible.
       //    If mobile, it depends on sidebarOpened.
       visible={!isMobile || sidebarOpened}
@@ -30,11 +30,7 @@ export default function Navbar({
       // "thin" is a narrower sidebar. Change to "wide" or remove if you want a different width
     >
       {/* Logo (optional for mobile or desktop) */}
-      {!isMobile && (
-        <Menu.Item style={{ cursor: 'pointer' }}>
-          <BrandLogo handlePageChange={handlePageChange} />
-        </Menu.Item>
-      )}
+      {!isMobile && <BrandLogo handlePageChange={handlePageChange} />}
 
       <Menu.Item onClick={handlePageChange} as='a' href='/class' active={activePage === '/class'} name='/class'>
         <Icon name='book' />
@@ -51,12 +47,9 @@ export default function Navbar({
         Stats
       </Menu.Item>
 
-      <Menu.Item>
-        <ToggleEditComponent />
-      </Menu.Item>
-
-      <Menu.Item>
-        <PlusButton onClick={() => dispatch(changeNavbarPage(navigate, '/new'))} />
+      <Menu.Item onClick={handlePageChange} as='a' href='/create' active={activePage === '/create'} name='/create'>
+        <Icon name='plus' />
+        Create
       </Menu.Item>
 
       {user && user.id ? (
@@ -69,6 +62,7 @@ export default function Navbar({
           Login / Signup
         </Menu.Item>
       )}
+      <ToggleEditComponent />
     </Sidebar>
   );
 }

@@ -8,6 +8,7 @@ import { changeNavbarPage, selectCurrentPage } from './navbarSlice';
 import { selectUser } from '@src/app/auth/authSlice';
 import { selectHasStreak } from '@src/app/streak/streakSlice.js';
 import Navbar from './Navbar.jsx';
+import BrandLogo from '@components/navbar/components/BrandLogo';
 
 export default function Layout({ children }) {
   const [isMobile, setIsMobile] = useState(false);
@@ -53,10 +54,7 @@ export default function Layout({ children }) {
           <Menu.Item onClick={() => handleToggleSidebar()}>
             <Icon name='sidebar' />
           </Menu.Item>
-          <Menu.Item as={'a'} header onClick={() => changeNavbarPage(navigate, '/')}>
-            <Image size='mini' src='/img/quackprep_logo.webp' />
-            <span style={{ fontSize: '1.2rem' }}>QuackPrep.com</span>
-          </Menu.Item>
+          <BrandLogo />
         </Menu>
       )}
 

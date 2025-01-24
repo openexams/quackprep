@@ -41,7 +41,7 @@ export default function AppRouter() {
           <Route path='/about' element={<AboutPage />} />
           <Route path='/tos' element={<TOS />} />
           <Route path='/privacy' element={<PrivacyPolicy />} />
-          <Route path='/new' element={<NewPageWrapper />} />
+          <Route path='/create' element={<NewPageWrapper />} />
 
           <Route path='/auth' element={<AuthPopup />} />
           <Route path='/account' element={<Profile />} />
