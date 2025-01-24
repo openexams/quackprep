@@ -14,12 +14,19 @@ export async function sendOpenAiAssistantPromptAndRecieveResult(
   prompt,
   options = {}
 ) {
+  if (prompt.length > 1000) {
+    throw new Error("prompt is too long");
+  }
   try {
     const quackAssist = await openai.beta.assistants.retrieve(assistant_id);
 
     // create the thread which to send messages and send a starter msg
     const quackThread = await openai.beta.threads.create({
       messages: [
+        {
+          role: "assistant",
+          content: "Any response given MUST be in md with LaTeX wrapped in $$.",
+        },
         {
           role: "user",
           content: prompt,
@@ -74,23 +81,34 @@ export async function sendPromptAndRecieveJSONResult(
   model = "o1-preview",
   context = "Answer questions with accuracy"
 ) {
-  const completion = await openai.chat.completions.create({
-    model: model,
-    messages: [
-      {
-        role: "user", // o1 has to have it from user sadly. should be system
-        content: context,
+  if (prompt.length > 1000 || context.length > 1000) {
+    throw new Error("prompt or context is too long");
+  }
+  dlog("calling normal openAi with prompt:", prompt);
+  try {
+    const completion = await openai.chat.completions.create({
+      model: model,
+      messages: [
+        {
+          role: "user", // o1 has to have it from user sadly. should be system
+          content: context,
+        },
+        {
+          role: "user",
+          content: prompt,
+        },
+      ],
+      response_format: {
+        type: "json_schema",
+        json_schema: json_schema,
       },
-      {
-        role: "user",
-        content: prompt,
-      },
-    ],
-    response_format: {
-      type: "json_schema",
-      json_schema: json_schema,
-    },
-    store: true,
-  });
-  return JSON.parse(completion.choices[0].message.content);
+      store: true,
+    });
+    return JSON.parse(completion.choices[0].message.content);
+  } catch (error) {
+    console.error(
+      "failed to call openai api sendPromptAndRecieveJSONResult, rethrowing error"
+    );
+    throw error;
+  }
 }

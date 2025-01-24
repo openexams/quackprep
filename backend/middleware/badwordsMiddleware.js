@@ -14,7 +14,11 @@ function checkAllFieldsForBadWords(obj) {
   const paramsArray = Object.keys(obj);
   for (let i = 0; i < paramsArray.length; i++) {
     if (matcher.hasMatch(String(obj[paramsArray[i]]))) {
-      dlog("bad word found");
+      /**@type {import("obscenity").MatchPayload[]} */
+      const matchedWord = matcher.getAllMatches(String(obj[paramsArray[i]]));
+      dlog(
+        `Bad word found between: ${matchedWord[0].startIndex} - ${matchedWord[0].endIndex}`
+      );
       return true;
     }
   }
