@@ -1,6 +1,6 @@
 // Layout.jsx
 import React, { useState, useEffect } from 'react';
-import { Sidebar, SidebarPushable, SidebarPusher, Menu, Icon, Container, Segment } from 'semantic-ui-react';
+import { Sidebar, SidebarPushable, SidebarPusher, Menu, Icon, Container, Segment, Image } from 'semantic-ui-react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
@@ -53,7 +53,8 @@ export default function Layout({ children }) {
           <Menu.Item onClick={() => handleToggleSidebar()}>
             <Icon name='sidebar' />
           </Menu.Item>
-          <Menu.Item header>
+          <Menu.Item as={'a'} header onClick={() => changeNavbarPage(navigate, '/')}>
+            <Image size='mini' src='/img/quackprep_logo.webp' />
             <span style={{ fontSize: '1.2rem' }}>QuackPrep.com</span>
           </Menu.Item>
         </Menu>
