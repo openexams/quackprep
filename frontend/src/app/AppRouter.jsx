@@ -1,5 +1,4 @@
 import Home from './home/home.jsx';
-import AuthPopup from '@src/app/auth/AuthPopup';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Profile from './profile/Profile.jsx';
 import Streak from './streak/Streak.jsx';
@@ -23,6 +22,7 @@ import NewPageWrapper from './new/NewPageWrapper.jsx';
 import Init from './Init.jsx';
 import Sentinel from './Sentinel.jsx';
 import Layout from './layout/Layout.jsx';
+import Auth from './auth/Auth.jsx';
 
 {
   /* topic could be a actual topic or a group of question such as a exam */
@@ -43,7 +43,7 @@ export default function AppRouter() {
           <Route path='/privacy' element={<PrivacyPolicy />} />
           <Route path='/create' element={<NewPageWrapper />} />
 
-          <Route path='/auth' element={<AuthPopup />} />
+          <Route path='/auth' element={<Auth />} />
           <Route path='/account' element={<Profile />} />
           <Route path='/streak' element={<Streak />} />
           <Route path='/class' element={<ClassPage />} />
