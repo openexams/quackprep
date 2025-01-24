@@ -9,7 +9,7 @@ import NotFoundPage from '@components/NotFound.jsx';
 import CreatorDashboard from './creator/CreatorDashboard.jsx';
 import ClassPage from './class/ClassPage.jsx';
 import Comp401 from '@components/401/Comp401.jsx';
-import HistoryNav from '@components/Breadcrumb.jsx';
+import HistoryNav from '@components/HistoryNav.jsx';
 import PDFList from './class/group/pdf/PDFList.jsx';
 import PDFShow from './class/group/pdf/PDFShow.jsx';
 import GroupsList from './class/group/GroupsList.jsx';

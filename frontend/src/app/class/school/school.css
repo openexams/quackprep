@@ -20,3 +20,16 @@
   background-color: var(--primary-color) !important;
   animation: pulse 1.5s infinite;
 }
+
+.glow-effect {
+  animation: glowing 1.5s infinite alternate;
+}
+
+@keyframes glowing {
+  from {
+    box-shadow: 0 0 8px 2px rgba(255, 255, 0, 0.6);
+  }
+  to {
+    box-shadow: 0 0 16px 4px rgba(255, 255, 0, 0.9);
+  }
+}

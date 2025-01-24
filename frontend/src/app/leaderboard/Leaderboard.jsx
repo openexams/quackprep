@@ -81,7 +81,7 @@ export default function Leaderboard() {
   }, [dispatch, streaks, questionsAnswered]);
 
   return (
-    <Container style={{ marginTop: '-8rem' }} className='leaderboard-container'>
+    <Container className='leaderboard-container'>
       <Header as='h1' textAlign='center' icon className='leaderboard-main-header'>
         <Icon name='trophy' color='yellow' className='cool-hover cool-click' />
         Leaderboard

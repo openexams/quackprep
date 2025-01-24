@@ -46,6 +46,12 @@ export default function HistoryNav() {
         });
       }
     }
+    sections.unshift({
+      key: 'homePageKey',
+      content: 'Home',
+      onClick: () => dispatch(changeNavbarPage(navigate, '/')),
+      active: false, // never will show anyways
+    });
     return sections;
   }
 

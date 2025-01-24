@@ -1,5 +1,5 @@
 import { Container, Header, Grid, Image } from 'semantic-ui-react';
-import CreatorInfo from './CreatorInfo.jsx';
+import CreatorInfo from './TeamCard.jsx';
 
 const About = () => {
   const creators = [

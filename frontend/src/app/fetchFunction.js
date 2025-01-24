@@ -1,3 +1,4 @@
+// some useful fetch functions that the sentinel uses to fetch data. most of the class heirarchy is gotten by the Sentinel.jsx not its own component.
 import { getClassesBySchoolId } from '@src/app/class/classSlice';
 import { getSchools } from '@src/app/class/school/schoolSlice';
 import { getQuestionsByGroupId } from '@src/app/class/question/questionSlice';

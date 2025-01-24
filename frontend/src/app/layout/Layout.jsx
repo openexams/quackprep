@@ -43,7 +43,9 @@ export default function Layout({ children }) {
   function handlePageChange(e, data) {
     e.preventDefault();
     dispatch(changeNavbarPage(navigate, data.name));
-    setSidebarOpened(false);
+    if (isMobile) {
+      setSidebarOpened(false);
+    }
   }
 
   return (

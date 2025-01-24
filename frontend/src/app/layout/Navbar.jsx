@@ -2,20 +2,9 @@ import { Sidebar, Menu, Icon } from 'semantic-ui-react';
 import BrandLogo from '@components/navbar/components/BrandLogo';
 import ProfileDropdown from '@components/navbar/components/Profile/ProfileDropdown';
 import ToggleEditComponent from '@components/ToggleEdit';
-import PlusButton from '@components/PlusButton/PlusButton';
+import { Link } from 'react-router-dom';
 
-export default function Navbar({
-  isMobile,
-  sidebarOpened,
-  handleToggleSidebar,
-  handlePageChange,
-  activePage,
-  user,
-  hasStreak,
-  navigate,
-  dispatch,
-  changeNavbarPage,
-}) {
+export default function Navbar({ isMobile, sidebarOpened, handlePageChange, activePage, user, hasStreak }) {
   return (
     <Sidebar
       as={Menu}
@@ -27,29 +16,34 @@ export default function Navbar({
       visible={!isMobile || sidebarOpened}
       inverted
       vertical
-      // "thin" is a narrower sidebar. Change to "wide" or remove if you want a different width
     >
       {/* Logo (optional for mobile or desktop) */}
       {!isMobile && <BrandLogo handlePageChange={handlePageChange} />}
 
-      <Menu.Item onClick={handlePageChange} as='a' href='/class' active={activePage === '/class'} name='/class'>
+      <Menu.Item onClick={handlePageChange} as={Link} to='/class' active={activePage === '/class'} name='/class'>
         <Icon name='book' />
         Classes
       </Menu.Item>
 
-      <Menu.Item onClick={handlePageChange} as='a' href='/leaderboard' active={activePage === '/leaderboard'} name='/leaderboard'>
+      <Menu.Item
+        onClick={handlePageChange}
+        as={Link}
+        to='/leaderboard'
+        active={activePage === '/leaderboard'}
+        name='/leaderboard'
+      >
         <Icon name='trophy' />
         Leaderboard
       </Menu.Item>
 
-      <Menu.Item onClick={handlePageChange} as='a' href='/stats' active={activePage === '/stats'} name='/stats'>
+      <Menu.Item onClick={handlePageChange} as={Link} to='/stats' active={activePage === '/stats'} name='/stats'>
         <Icon name='chart bar' />
         Stats
       </Menu.Item>
 
-      <Menu.Item onClick={handlePageChange} as='a' href='/create' active={activePage === '/create'} name='/create'>
+      <Menu.Item onClick={handlePageChange} as={Link} to='/create' active={activePage === '/create'} name='/create'>
         <Icon name='plus' />
-        Create
+        AI Create
       </Menu.Item>
 
       {user && user.id ? (
@@ -57,7 +51,7 @@ export default function Navbar({
           <ProfileDropdown hasStreak={hasStreak} activePage={activePage} handlePageChange={handlePageChange} />
         </Menu.Item>
       ) : (
-        <Menu.Item onClick={handlePageChange} as='a' href='/auth' active={activePage === '/auth'} name='/auth'>
+        <Menu.Item onClick={handlePageChange} as={Link} to='/auth' active={activePage === '/auth'} name='/auth'>
           <Icon name='user' />
           Login / Signup
         </Menu.Item>

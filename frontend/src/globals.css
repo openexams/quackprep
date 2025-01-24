@@ -46,9 +46,6 @@ h6 {
   min-height: 100%;
 }
 
-h1.ui.header {
-  margin-top: 3.5em !important;
-}
 .ui.button {
   background-color: var(--primary-color) !important; /* Deep Blue for the button background */
   color: white !important; /* White text for contrast */

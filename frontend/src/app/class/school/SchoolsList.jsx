@@ -36,7 +36,7 @@ export default function SchoolsList() {
       updateSchoolId(4);
       dispatch(changeNavbarPage(navigate, '/class/General'));
     }
-  }, [schools, dispatch, navigate]); // could be risky idk
+  }, [schools]); // could be risky idk
 
   return (
     <Segment loading={loading}>
@@ -46,17 +46,19 @@ export default function SchoolsList() {
             <Popup
               trigger={
                 <Button
-                  className={`school-button ${selectedSchoolId === school.id ? 'selected' : ''}`}
+                  className={`school-button
+                  ${selectedSchoolId === school.id ? 'selected pulse' : ''}
+                  ${!selectedSchoolId ? 'glow-effect pulse' : ''}
+                `}
                   size='small'
                   fluid
                   basic={selectedSchoolId !== school.id}
                   onClick={() => {
                     dispatch(changeNavbarPage(navigate, `/class/${school.school_name}`));
-                    // bad pratice assuming class before it but works
                   }}
                   style={{
                     marginBottom: '0.5em',
-                    '--school-bg-color': school.color, // good ex of ovveriding !important i think the class takes in vars from this
+                    '--school-bg-color': school.color,
                     '--school-text-color': isLightColor(school.color) ? 'black' : 'white',
                   }}
                 >

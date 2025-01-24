@@ -14,7 +14,7 @@ export default function ClassPage() {
   const [isActive, setIsActive] = useState(false);
 
   return (
-    <Container fluid style={{ marginTop: '-7rem', padding: '2rem' }}>
+    <Container fluid style={{ padding: '2rem' }}>
       <Header as='h1' textAlign='left' icon={'graduation cap'}>
         {curSchoolId ? 'Available Classes' : 'Choose a School'}
         <Header.Subheader>Choose one to begin your learning journey</Header.Subheader>
