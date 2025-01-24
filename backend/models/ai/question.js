@@ -6,10 +6,16 @@ import {
 } from "#models/question/index.js";
 import { addManyChoicesToQuestion } from "#models/choice/index.js";
 import sqlExe from "#db/dbFunctions.js";
-import { sendOpenAiAssistantPromptAndRecieveResult } from "#utils/openAi.js";
-import { MAX_QUESTIONS_CONTEXT } from "#config/constants.js";
+import {
+  sendOpenAiAssistantPromptAndRecieveResult,
+  sendPromptAndRecieveJSONResult,
+} from "#utils/openAi.js";
+import {
+  MAX_QUESTIONS_CONTEXT,
+  QUACK_GEN_QUESTION_ASS_ID,
+} from "#config/constants.js";
 /**
- *
+ * Always mcq questions
  * @param {Integer} user_id add which user ai generated the question (does not rlly matter)
  * @param {String} likeQuestionText to feed to AI
  * @param {Number} likeQuestionId so that we can attach the AI question to the same groups as likeQuestion
@@ -24,19 +30,83 @@ export async function generateQuestionLike(
   dlog(`ai generating like q_id: ${likeQuestionId}`);
   // find the assistant I created
   try {
-    /**@type {import("../../../../shared-types/question.types.js").GenQuestion} */
+    /**@type {import("../../../shared-types/question.types.ts").GenQuestion} */
     const quackAssistResponseJSON =
       await sendOpenAiAssistantPromptAndRecieveResult(
-        "asst_a168JvA9PlzK2WaKZ6oukDe4",
+        QUACK_GEN_QUESTION_ASS_ID,
         `create a question like: "${likeQuestionText}"\nin json format`
       );
-    // needed for sql db
-    for (let i = 0; i < quackAssistResponseJSON.options.length; i++) {
-      quackAssistResponseJSON.options[i] = {
-        ...quackAssistResponseJSON.options[i],
-        type: "mcq",
-      };
+
+    const correctAnswer = (
+      await sendPromptAndRecieveJSONResult(
+        `answer this: ${quackAssistResponseJSON.question}`,
+        {
+          name: "option_return",
+          schema: {
+            name: "option_return",
+            type: "object",
+            properties: {
+              explanation: {
+                type: "string",
+                description:
+                  "Explanation, written in md with LaTeX wrapped in $$",
+                minLength: 1,
+                maxLength: 1000,
+              },
+              answer: {
+                type: "string",
+                description:
+                  "The correct answer to the question in LaTeX, MUST wrap LaTeX in $$",
+                minLength: 1,
+                maxLength: 500,
+              },
+            },
+            required: ["answer", "explanation"],
+            additionalProperties: false,
+            // example: {
+            //   answer: "$$9$$",
+            //   explanation:
+            //     "The answer is derived by solving the equation $$3^{x} = 9$$, which simplifies to $$x = 2$$.",
+            // },
+            strict: true,
+          },
+        },
+        "gpt-4o",
+        `answer question with accuracy. DONT FORGET output in md format with LaTeX wrapped in $$. Just include answer now context
+        example answers:
+        ${quackAssistResponseJSON.options.map((o) => o.text).join("\n")} 
+        ` // this makes sure they output same formatted answer
+      )
+    )?.answer;
+
+    if (!correctAnswer) {
+      throw new Error(
+        "Failed to get answer from sendPromptAndRecieveJSONResult"
+      );
     }
+    // console.log("before", quackAssistResponseJSON.options);
+    for (let i = 0; i < quackAssistResponseJSON.options.length; i++) {
+      const curOption = quackAssistResponseJSON.options[i];
+      if (
+        curOption.is_correct === true ||
+        curOption.is_correct === "true" ||
+        curOption.is_correct === 1
+      ) {
+        quackAssistResponseJSON.options.splice(i, 1);
+        i--; // if current answer is true delete it just in case its correct. since o1 will generate answer better
+      } else {
+        quackAssistResponseJSON.options[i] = {
+          ...curOption,
+          type: "mcq",
+          is_correct: false,
+        };
+      }
+    }
+    quackAssistResponseJSON.options.push({
+      text: correctAnswer,
+      is_correct: true,
+      type: "mcq",
+    });
 
     // get what groups curQuestion has
     const object_w_groups = await getWhatGroupsQuestionisIn(likeQuestionId);
@@ -45,14 +115,14 @@ export async function generateQuestionLike(
       groups_question_is_in.push(object_w_groups[i].group_id);
     }
 
-    const question_with_2 = await upsertQuestion(
+    const new_question = await upsertQuestion(
       null,
       quackAssistResponseJSON.question,
       user_id,
       groups_question_is_in,
       true
     );
-    question_added = question_with_2?.[0];
+    question_added = new_question?.[0];
 
     if (!question_added?.id) {
       throw new Error("failed to add AI question, question not created");
@@ -64,7 +134,7 @@ export async function generateQuestionLike(
       user_id,
       quackAssistResponseJSON.options
     );
-    return { question: question_with_2, choices: choices_added };
+    return { question: new_question, choices: choices_added };
   } catch (error) {
     if (question_added?.id) {
       // if we added a question & errored then->
@@ -75,7 +145,7 @@ export async function generateQuestionLike(
 }
 
 /**
- *
+ * Generates a question from a group (topic) of questions
  * @param {Integer} user_id add which user ai generated the question (does not rlly matter)
  * @param {Integer} group_id to find relevant questions
  * @returns {Object} question object back to the user who generated it
@@ -100,9 +170,10 @@ export async function generateQuestionFromGroup(user_id, group_id) {
     const prompt =
       "Generate a question in JSON format that covers the same topic as the questions above";
 
+    /**@type {import("../../../shared-types/question.types.ts").GenQuestion} */
     const quackAssistResponseJSON =
       await sendOpenAiAssistantPromptAndRecieveResult(
-        "asst_a168JvA9PlzK2WaKZ6oukDe4",
+        QUACK_GEN_QUESTION_ASS_ID,
         context + prompt
       );
 

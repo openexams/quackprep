@@ -56,12 +56,7 @@ export default function Footer() {
                   <Image alt='tiktok logo' style={{ width: '17px' }} src='/img/tt_icon.webp' />
                   Tiktok
                 </List.Item>
-                <List.Item
-                  as='a'
-                  href='https://www.linkedin.com/in/maddox-schmidlkofer/'
-                  target='_blank'
-                  rel='noopener noreferrer'
-                >
+                <List.Item as='a' href='https://www.linkedin.com/company/quackprep' target='_blank' rel='noopener noreferrer'>
                   <Icon color='blue' name='linkedin' /> LinkedIn
                 </List.Item>
               </List>
