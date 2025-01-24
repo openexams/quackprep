@@ -4,12 +4,19 @@ import {
   findLocalUserByEmailPassword,
   findUserById,
   OAuthRegister,
+  getUserByUsername,
 } from "#models/auth/index.js";
 import { GOOGLE_OAUTH_CONFIG } from "./config.js";
 import passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
 import { Strategy as BearerStrategy } from "passport-http-bearer";
+import {
+  MAX_EMAIL_LENGTH,
+  MAX_FIRST_NAME_LENGTH,
+  MAX_LAST_NAME_LENGTH,
+  MAX_USERNAME_LENGTH,
+} from "./constants.js";
 
 passport.use(
   // TODO LOOK INTO MORE checkIfProviderIdExistsInUsers()
@@ -21,11 +28,13 @@ passport.use(
   ) {
     // login and if cant login then register & login; // should wrap in try catch
     const google_id = profile.id;
-    const username = profile.displayName;
+    let username = profile.displayName.slice(0, MAX_USERNAME_LENGTH);
     const pfp_url = profile._json.picture ?? null;
-    const email = profile._json.email;
-    const first_name = profile.name.givenName ?? null;
-    const last_name = profile.name.familyName ?? null;
+    const email = profile._json.email.slice(0, MAX_EMAIL_LENGTH);
+    const first_name =
+      profile.name.givenName.slice(0, MAX_FIRST_NAME_LENGTH) ?? null;
+    const last_name =
+      profile.name.familyName.slice(0, MAX_LAST_NAME_LENGTH) ?? null;
 
     let curId;
     try {
@@ -37,6 +46,16 @@ passport.use(
         dlog("LoggedIn user:", user); //dlog cannot take params yet
         return done(null, user);
       } else {
+        // what if google username same as other user
+        const doesUserAlrExistWithThisUsername = await getUserByUsername(
+          username
+        );
+        if (doesUserAlrExistWithThisUsername) {
+          // if this somehow generates another user with the same username, then just have it fail bro so fair
+          username = `${username.slice(0, 20)}${Math.floor(
+            Math.random() * 10000
+          )}`;
+        }
         // user not registered create a user.
         await OAuthRegister(
           first_name,

@@ -84,6 +84,15 @@ export async function findLocalUserByEmailPassword(email, password) {
     is_creator: curUser.is_creator,
   };
 }
+export async function getUserByUsername(username) {
+  const user = (
+    await sqlExe.executeCommand(
+      `SELECT * FROM users u where username = :username`,
+      { username }
+    )
+  )?.[0];
+  return user;
+}
 
 export async function findUserById(id) {
   const exists = await sqlExe.executeCommand(

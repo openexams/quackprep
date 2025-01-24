@@ -5,3 +5,8 @@ export const MAX_PROMPT_LENGTH = 5000; // hopefully a pdf parse is no longer tha
 export const MAX_USER_PROMPT_LENGTH = 500;
 export const MATHPIX_API_PDF_GET_RESULT_RETRIES = 3;
 export const QUACK_CREAT_GROUP_ASS_ID = "asst_UXDbP8qIkOJw50jN9OLp36oA";
+
+export const MAX_USERNAME_LENGTH = 25;
+export const MAX_EMAIL_LENGTH = 100;
+export const MAX_FIRST_NAME_LENGTH = 50;
+export const MAX_LAST_NAME_LENGTH = 50;
