@@ -2,8 +2,8 @@ import { isAuthenticated } from "#middleware/authMiddleware.js";
 import { verifyUserOwnsRowId } from "#utils/sqlFunctions.js";
 import { commonErrorMessage } from "#utils/utils.js";
 import { generateQuestionLike } from "#models/ai/question.js";
-import { MAX_FILES_UPLOAD } from "#config/constants.js";
-import { parsePdfIntoGroup } from "#models/ai/group.js";
+import { MAX_FILES_UPLOAD, MAX_USER_PROMPT_LENGTH } from "#config/constants.js";
+import { etlFilesIntoGroup } from "#models/ai/group.js";
 import { checkStudentFRQAnswer } from "#models/ai/choice.js";
 import rateLimit from "express-rate-limit";
 import { Router } from "express";
@@ -31,6 +31,15 @@ router.post(
       const class_id = req.body.class_id;
       const prompt = req.body.prompt;
 
+      if (prompt?.length > MAX_USER_PROMPT_LENGTH) {
+        commonErrorMessage(
+          res,
+          400,
+          `prompt is too long, max length is ${MAX_USER_PROMPT_LENGTH}`
+        );
+        return;
+      }
+
       if (!files[0] || !class_id) {
         commonErrorMessage(
           res,
@@ -41,7 +50,7 @@ router.post(
       }
 
       // Process file (stored in memory or temporary location)
-      const result = await parsePdfIntoGroup(files, class_id, req.user, prompt);
+      const result = await etlFilesIntoGroup(files, class_id, req.user, prompt);
       res.status(201).json(result);
     } catch (error) {
       commonErrorMessage(

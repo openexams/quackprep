@@ -25,6 +25,7 @@
     "@babel/preset-env": "^7.25.7",
     "babel": "^5.8.38",
     "dotenv": "^16.4.7",
+    "form-data": "^4.0.1",
     "rand-seed": "^2.1.7"
   }
 }

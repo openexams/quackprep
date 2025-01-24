@@ -8,6 +8,7 @@ import {
   MAX_USER_PROMPT_LENGTH,
   QUACK_CREAT_GROUP_ASS_ID,
 } from "#config/constants.js";
+
 /**
  *
  * @param {Express.Multer.File[]} files
@@ -15,26 +16,22 @@ import {
  * @param {*} user_id
  * @param {*} user_prompt
  */
-export async function parsePdfIntoGroup(files, class_id, user_id, user_prompt) {
+export async function etlFilesIntoGroup(files, class_id, user_id, user_prompt) {
   user_prompt =
     user_prompt ??
     "parse through and only respond with whats needed based on the json schema";
   dlog(`prompt given: ${user_prompt}`);
-  if (user_prompt.length > MAX_USER_PROMPT_LENGTH) {
-    throw new Error("user prompt is too long");
-  }
   let group = null;
   try {
     dlog(`${files.length} files detected`);
     let mdd_res = "";
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
+      const fileType = file?.mimetype?.split("/")?.[1];
       dlog(file);
       if (!file) {
         throw new Error("no file when it says there is a file??");
-      }
-      const fileType = file.mimetype.split("/")[1];
-      if (fileType === "pdf") {
+      } else if (fileType === "pdf") {
         const formData = new FormData();
         formData.append("file", file.buffer, file.originalname);
         mdd_res += await postPdfAndRetriveParsedPdf(formData);

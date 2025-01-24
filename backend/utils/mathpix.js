@@ -90,3 +90,39 @@ export async function postPdfAndRetriveParsedPdf(formData) {
   const pdf_id = await postPDFToMathpix(formData);
   return await getFormattedPdfByPdfIdMathpix(pdf_id);
 }
+/**
+ * post image to mathpix and get text
+ * @param {FormData} formData
+ * @returns {String} text
+ */
+export async function postImageAndRecieveText(formData) {
+  try {
+    formData.append(
+      "options_json",
+      JSON.stringify({
+        math_inline_delimiters: ["$$", "$$"],
+        rm_spaces: true,
+      })
+    );
+    const result = await axios.post(
+      "https://api.mathpix.com/v3/text",
+      formData,
+      {
+        headers: {
+          ...formData.getHeaders(),
+          app_id: MATHPIX_API_INFO.MATHPIX_APP_ID,
+          app_key: MATHPIX_API_INFO.MATHPIX_API_KEY,
+          "Content-type": "multipart/form-data",
+        },
+      }
+    );
+    if (!result.data?.text) {
+      throw new Error("failed to get text from image, mathpix error");
+    }
+    dlog(`successfully got text from image with status ${result.status}`);
+    return result.data?.text;
+  } catch (e) {
+    console.error("error in postImageAndRecieveText", e);
+    throw e;
+  }
+}
