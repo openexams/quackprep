@@ -10,19 +10,8 @@ import AppRouter from './app/AppRouter';
 export default function Main() {
   return (
     <Provider store={store}>
-      <div
-        className='ui pusher'
-        style={{
-          minHeight: '100vh',
-          display: 'flex',
-          flexDirection: 'column',
-        }}
-      >
-        <FlashMessage />
-        <div style={{ flex: 1, paddingTop: '5.7em' }}>
-          <AppRouter />
-        </div>
-      </div>
+      <FlashMessage />
+      <AppRouter />
     </Provider>
   );
 }

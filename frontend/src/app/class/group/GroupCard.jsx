@@ -2,7 +2,7 @@ import { Card, Button, Icon } from 'semantic-ui-react';
 import { turnUnderscoreIntoSpace } from 'maddox-js-funcs';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateCurrentGroupData, changeNavbarPage, selectNavbarState } from '@components/navbar/navbarSlice';
+import { updateCurrentGroupData, changeNavbarPage, selectNavbarState } from '@src/app/layout/navbarSlice';
 import { selectCanAndIsEdit } from '@src/app/auth/authSlice';
 import GroupEditor from '@src/app/creator/forms/GroupEdit';
 export default function GroupCard({ id, name, class_id, description, created_by, type }) {

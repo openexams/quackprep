@@ -2,7 +2,7 @@ import { Button, Message, Transition } from 'semantic-ui-react';
 import { hideFlashMessage, selectFlashMessageState } from './flashMessageSlice.js';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { changeNavbarPage, selectNavbarState } from '@components/navbar/navbarSlice.js';
+import { changeNavbarPage, selectNavbarState } from '@src/app/layout/navbarSlice.js';
 
 const messageStyles = {
   success: {
@@ -19,7 +19,7 @@ const messageStyles = {
 
 const baseMessageStyle = {
   position: 'fixed',
-  top: '100px',
+  top: '60px',
   left: '50%',
   transform: 'translateX(-50%)',
   zIndex: 9999,

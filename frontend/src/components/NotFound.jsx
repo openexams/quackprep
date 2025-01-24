@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, Header, Icon, Segment, Button, Image } from 'semantic-ui-react';
 import quack from '/img/quackprep_logo.webp';
-import { changeNavbarPage } from './navbar/navbarSlice';
+import { changeNavbarPage } from '../app/layout/navbarSlice';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 

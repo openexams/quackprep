@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { changeNavbarPage, selectNavbarState } from '../navbar/navbarSlice';
+import { changeNavbarPage, selectNavbarState } from '../../app/layout/navbarSlice';
 import { hide401Msg, select401CompState } from './401Slice';
 import { Button, Modal, TransitionablePortal, Icon } from 'semantic-ui-react';
 import './Comp401.css';

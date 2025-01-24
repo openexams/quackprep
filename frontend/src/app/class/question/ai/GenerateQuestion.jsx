@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectUser } from '@src/app/auth/authSlice';
 import LoginRequired from '@src/app/auth/LoginRequired';
 import { selectLoadingState } from '@src/app/store/loadingSlice';
-import { selectNavbarState } from '@components/navbar/navbarSlice';
+import { selectNavbarState } from '@src/app/layout/navbarSlice';
 import { selectArrayOfStateByGroupId } from '@utils/helperFuncs';
 
 export default function GenerateQuestion() {

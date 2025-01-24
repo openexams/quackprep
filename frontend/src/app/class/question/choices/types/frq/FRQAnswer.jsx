@@ -4,7 +4,7 @@ import { Message, Segment, Button } from 'semantic-ui-react';
 import { selectItemById } from 'maddox-js-funcs';
 import { selectCurrentChoicesState, checkStudentFRQAnswer } from '../../choicesSlice';
 import { selectLoadingState } from '@src/app/store/loadingSlice';
-import { changeNavbarPage } from '@components/navbar/navbarSlice';
+import { changeNavbarPage } from '@src/app/layout/navbarSlice';
 import { selectUser } from '@src/app/auth/authSlice';
 import AIResponseComponent from './ai/AiResponse';
 import { CustomImageLoader } from '@components/CustomLoader/CustomImageLoader';

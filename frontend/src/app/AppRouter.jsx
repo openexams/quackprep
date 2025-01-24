@@ -1,5 +1,4 @@
 import Home from './home/home.jsx';
-import Navbar from '@components/navbar/Navbar';
 import AuthPopup from '@src/app/auth/AuthPopup';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Profile from './profile/Profile.jsx';
@@ -23,6 +22,7 @@ import PrivacyPolicy from './extra/Privacy.jsx';
 import NewPageWrapper from './new/NewPageWrapper.jsx';
 import Init from './Init.jsx';
 import Sentinel from './Sentinel.jsx';
+import Layout from './layout/Layout.jsx';
 
 {
   /* topic could be a actual topic or a group of question such as a exam */
@@ -33,36 +33,36 @@ export default function AppRouter() {
     <Router>
       <Init />
       <Sentinel />
-      <HistoryNav />
-      <Navbar />
+      {/* <HistoryNav /> */}
       <Comp401 />
+      <Layout>
+        <Routes style={{ flex: 1 }}>
+          <Route path='/' element={<Home />} />
+          <Route path='/about' element={<AboutPage />} />
+          <Route path='/tos' element={<TOS />} />
+          <Route path='/privacy' element={<PrivacyPolicy />} />
+          <Route path='/create' element={<NewPageWrapper />} />
 
-      <Routes style={{ flex: 1 }}>
-        <Route path='/' element={<Home />} />
-        <Route path='/about' element={<AboutPage />} />
-        <Route path='/tos' element={<TOS />} />
-        <Route path='/privacy' element={<PrivacyPolicy />} />
-        <Route path='/new' element={<NewPageWrapper />} />
+          <Route path='/auth' element={<AuthPopup />} />
+          <Route path='/account' element={<Profile />} />
+          <Route path='/streak' element={<Streak />} />
+          <Route path='/class' element={<ClassPage />} />
+          <Route path='/creatordashboard' element={<CreatorDashboard />} />
+          <Route path='/class/:school_name/' element={<ClassPage />} />
+          <Route path='/class/:school_name/:class_id/learn' element={<ComingSoon />} />
 
-        <Route path='/auth' element={<AuthPopup />} />
-        <Route path='/account' element={<Profile />} />
-        <Route path='/streak' element={<Streak />} />
-        <Route path='/class' element={<ClassPage />} />
-        <Route path='/creatordashboard' element={<CreatorDashboard />} />
-        <Route path='/class/:school_name/' element={<ClassPage />} />
-        <Route path='/class/:school_name/:class_id/learn' element={<ComingSoon />} />
+          <Route path='/class/:school_name/:class_id/group' element={<GroupsList />} />
+          <Route path='/class/:school_name/:class_id/group/:group_id/question' element={<QuestionPage />} />
+          <Route path='/class/:school_name/:class_id/group/:group_id/question/:question_id' element={<QuestionPage />} />
 
-        <Route path='/class/:school_name/:class_id/group' element={<GroupsList />} />
-        <Route path='/class/:school_name/:class_id/group/:group_id/question' element={<QuestionPage />} />
-        <Route path='/class/:school_name/:class_id/group/:group_id/question/:question_id' element={<QuestionPage />} />
+          <Route path='/class/:school_name/:class_id/pdfexams' element={<PDFList />} />
+          <Route path='/class/:school_name/:class_id/pdfexams/:pdf_id' element={<PDFShow />} />
 
-        <Route path='/class/:school_name/:class_id/pdfexams' element={<PDFList />} />
-        <Route path='/class/:school_name/:class_id/pdfexams/:pdf_id' element={<PDFShow />} />
-
-        <Route path='/leaderboard' element={<Leaderboard />} />
-        <Route path='/stats' element={<Stats />} />
-        <Route path='*' element={<NotFoundPage />} />
-      </Routes>
+          <Route path='/leaderboard' element={<Leaderboard />} />
+          <Route path='/stats' element={<Stats />} />
+          <Route path='*' element={<NotFoundPage />} />
+        </Routes>
+      </Layout>
       <Footer />
     </Router>
   );
