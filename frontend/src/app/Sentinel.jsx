@@ -3,17 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { firstLetterUppercase } from '@utils/helperFuncs';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectUser } from '@app/auth/authSlice';
-import {
-  getFixedUrlArr,
-  selectNavbarState,
-  upsertTimeSpent,
-  updateGroupType,
-  updateCurrentClassData,
-  updateCurrentGroupData,
-  updateFetchHistory,
-  updateQuestionId,
-  updateSchoolId,
-} from '@app/layout/navbar/navbarSlice';
+import { getFixedUrlArr, selectNavbarState, upsertTimeSpent, updateGroupType } from '@app/layout/navbar/navbarSlice';
 
 import { selectClassState } from '@app/class/classSlice';
 import { selectSchoolState } from '@app/class/school/schoolSlice';

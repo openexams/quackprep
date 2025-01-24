@@ -97,11 +97,8 @@ export default function navbarReducer(state = DEFAULT_STATE, action) {
     case UPDATE_FETCH_HISTORY:
       return { ...state, fetchHistory: updateObjectWithKey(state.fetchHistory, action.payload) };
     case CHANGE_NAVBAR_PAGE: {
-      let curUrl = state.page;
-      if (state.page === curUrl) {
-        // if it didnt change dont do anything.
-        return state;
-      }
+      let newPage = action.payload;
+
       const newLastPage = copyArray(state.lastPage);
       newLastPage.push(state.page);
       if (action.payload?.includes('/auth')) {
@@ -124,18 +121,21 @@ export default function navbarReducer(state = DEFAULT_STATE, action) {
       // after base cases
       // same logic that navigate() has
       if (action.payload?.[0] !== '/') {
-        curUrl = state.page + '/' + action.payload;
+        newPage = state.page + '/' + action.payload;
+      }
+      if (newPage === state.page) {
+        return state;
       }
 
       // when I change the navbar set everything back to null so navbar has to dispatch to get id values;
-      const urlArr = getFixedUrlArr(curUrl);
+      const urlArr = getFixedUrlArr(newPage);
       const newSchoolName = urlArr?.[2] || null;
       const newClassId = urlArr?.[3] || null;
       const newGroupId = urlArr?.[5] || null;
 
       return {
         ...state,
-        page: curUrl,
+        page: newPage,
         groupName: null,
         className: null,
         schoolName: newSchoolName,

@@ -73,8 +73,6 @@ export function classUpdateLogic(dispatch, classes, class_id, school_id) {
   const curClass = findNeedlesInArrayOfObjectsLINEAR(classes, ['id', 'school_id'], [class_id, school_id]);
   if (curClass) {
     dispatch(updateCurrentClassData({ name: curClass?.name, id: curClass?.id }));
-  } else {
-    console.log('class not found');
   }
 }
 
