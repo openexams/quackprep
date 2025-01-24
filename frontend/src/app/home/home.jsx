@@ -2,7 +2,7 @@ import { useDispatch } from 'react-redux';
 import { Container, Header, Button, Icon, Grid, Segment, Card } from 'semantic-ui-react';
 import { useNavigate } from 'react-router-dom';
 
-import { changeNavbarPage } from '@components/navbar/navbarSlice';
+import { changeNavbarPage } from '@src/app/layout/navbarSlice';
 
 import duckBlissImage from '/img/home/duck_bliss.webp';
 import libraryComputerDucks from '/img/home/library_computer_ducks.webp';

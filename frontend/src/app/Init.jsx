@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { changeNavbarPage } from '@components/navbar/navbarSlice';
+import { changeNavbarPage } from '@src/app/layout/navbarSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { selectUser, getCurUser } from '@src/app/auth/authSlice';

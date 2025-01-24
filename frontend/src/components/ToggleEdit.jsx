@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { Checkbox, Segment, Header, Icon } from 'semantic-ui-react';
 import { selectEditState } from '@src/app/auth/authSlice';
-import { selectNavbarState, toggleEdit } from '../navbarSlice';
+import { selectNavbarState, toggleEdit } from '@src/app/layout/navbarSlice';
 import { selectUser } from '@src/app/auth/authSlice';
 
 const ToggleEditComponent = () => {

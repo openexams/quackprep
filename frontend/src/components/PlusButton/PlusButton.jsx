@@ -2,7 +2,7 @@ import { Button, Popup } from 'semantic-ui-react';
 import './PlusButton.css';
 import { selectUser } from '@src/app/auth/authSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeNavbarPage } from '@components/navbar/navbarSlice';
+import { changeNavbarPage } from '@src/app/layout/navbarSlice';
 import { useNavigate } from 'react-router-dom';
 import { show401Msg } from '@components/401/401Slice';
 

@@ -8,7 +8,7 @@ import {
   updateCurrentGroupData,
   updateQuestionId,
   updateSchoolId,
-} from '../components/navbar/navbarSlice.js';
+} from './layout/navbarSlice.js';
 import { findNeedleInArrayOfObjectsLINEAR, findNeedlesInArrayOfObjectsLINEAR } from 'maddox-js-funcs';
 import { getPdfsByClassId } from '@src/app/class/group/pdf/pdfSlice';
 import { getGroupsByClassId } from '@src/app/class/group/groupSlice';

@@ -5,7 +5,7 @@ import loadingReducer from './loadingSlice';
 import flashReducer from '@components/flashmessage/flashMessageSlice';
 import homeReducer from '../home/homeSlice';
 import loginReducer from '../auth/login/loginSlice';
-import navbarReducer from '@components/navbar/navbarSlice';
+import navbarReducer from '@src/app/layout/navbarSlice';
 import streakReducer from '../streak/streakSlice';
 import classReducer from '@src/app/class/classSlice';
 import questionsReducer from '../class/question/questionSlice';

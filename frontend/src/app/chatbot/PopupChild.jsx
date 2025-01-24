@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import { Segment, TextArea, Button } from 'semantic-ui-react';
 import { selectArrayOfStateById } from 'maddox-js-funcs';
-import { selectNavbarState } from '@components/navbar/navbarSlice';
+import { selectNavbarState } from '@src/app/layout/navbarSlice';
 import { selectUser } from '../auth/authSlice';
 import LoginRequired from '../auth/LoginRequired';
 

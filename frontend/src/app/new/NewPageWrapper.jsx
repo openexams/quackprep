@@ -6,7 +6,7 @@ import { getClassesByUserId } from '../class/classSlice';
 import { selectUser } from '../auth/authSlice';
 import { selectArrayOfStateById } from 'maddox-js-funcs';
 import { mapClassesToDropdown } from '../creator/forms/dropdownMappings';
-import { changeNavbarPage } from '@components/navbar/navbarSlice';
+import { changeNavbarPage } from '@src/app/layout/navbarSlice';
 import { useNavigate } from 'react-router-dom';
 
 export default function NewPageWrapper() {

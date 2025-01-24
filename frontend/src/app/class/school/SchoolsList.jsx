@@ -4,7 +4,7 @@ import { Segment, Button, Grid } from 'semantic-ui-react';
 import { selectSchoolState } from './schoolSlice';
 import './school.css';
 import { selectLoadingState } from '@src/app/store/loadingSlice';
-import { changeNavbarPage, selectNavbarState, updateSchoolId } from '@components/navbar/navbarSlice';
+import { changeNavbarPage, selectNavbarState, updateSchoolId } from '@src/app/layout/navbarSlice';
 import { useNavigate } from 'react-router-dom';
 import { selectArrayOfIncludingItem } from 'maddox-js-funcs';
 
