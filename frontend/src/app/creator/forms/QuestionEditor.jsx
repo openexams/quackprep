@@ -29,7 +29,7 @@ export default function QuestionEditor({ id, group_ids, explanation_url, questio
   };
 
   return (
-    <Segment id={id ? `question-${id}-${initialGroupIds}` : `question-new-${initialGroupIds}`}>
+    <Segment key={id ? `question-${id}-${initialGroupIds}` : `question-new-${initialGroupIds}`}>
       <Form onSubmit={handleSubmit}>
         <Header as={'h3'}> {id ? `Question:${id}` : 'Create New Question'} </Header>
         <MarkdownEditor

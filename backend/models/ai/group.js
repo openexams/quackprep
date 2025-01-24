@@ -4,18 +4,22 @@ import { postPdfAndRetriveParsedPdf } from "#utils/mathpix.js";
 import { sendOpenAiAssistantPromptAndRecieveResult } from "#utils/openAi.js";
 import FormData from "form-data";
 import { upsertGroupInClass, deleteGroupById } from "#models/group/index.js";
+import { MAX_USER_PROMPT_LENGTH } from "#config/constants.js";
 /**
  *
  * @param {Express.Multer.File[]} files
  * @param {*} class_id
  * @param {*} user_id
- * @param {*} prompt
+ * @param {*} user_prompt
  */
-export async function parsePdfIntoGroup(files, class_id, user_id, prompt) {
-  prompt =
-    prompt ??
+export async function parsePdfIntoGroup(files, class_id, user_id, user_prompt) {
+  user_prompt =
+    user_prompt ??
     "parse through and only respond with whats needed based on the json schema";
-  dlog(`prompt given: ${prompt}`);
+  dlog(`prompt given: ${user_prompt}`);
+  if (user_prompt.length > MAX_USER_PROMPT_LENGTH) {
+    throw new Error("user prompt is too long");
+  }
   let group = null;
   try {
     dlog(`${files.length} files detected`);
@@ -35,7 +39,7 @@ export async function parsePdfIntoGroup(files, class_id, user_id, prompt) {
     const GenGroupResponseJSON =
       await sendOpenAiAssistantPromptAndRecieveResult(
         "asst_UXDbP8qIkOJw50jN9OLp36oA",
-        `${mdd_res}\n${prompt}`,
+        `${mdd_res}\n${user_prompt}`,
         { retire_time: 10000 }
       );
     group = (

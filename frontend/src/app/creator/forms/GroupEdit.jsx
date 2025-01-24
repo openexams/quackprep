@@ -32,7 +32,7 @@ export default function GroupEditor({ id, name, type, description, class_id }) {
   };
 
   return (
-    <Segment id={id ? `group-${id}-${class_id}` : `group-new-${class_id}`}>
+    <Segment key={id ? `group-${id}-${class_id}` : `group-new-${class_id}`}>
       <Form onSubmit={handleSubmit}>
         <Header as={'h3'}>{id ? `Group:${id}` : 'Create New Group'}</Header>
 

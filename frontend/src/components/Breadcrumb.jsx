@@ -50,14 +50,12 @@ export default function HistoryNav() {
   }
 
   const breadcrumbStyle = {
-    position: 'fixed', // Changed to fixed instead of absolute
-    top: '5rem',
-    left: 0,
-    right: 0,
+    // position: 'fixed', // Changed to fixed instead of absolute
+    marginTop: '-1rem',
     zIndex: 10,
     padding: '1.5rem 1rem',
     backgroundColor: 'transparent', // Removed background
-    margin: 0,
+    marginBottom: '-4rem',
   };
 
   const sectionStyle = {

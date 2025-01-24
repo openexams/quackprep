@@ -38,6 +38,7 @@ export default function ChoiceRouter({ selectedQuestion }) {
           <Header>
             {edit ? (
               <QuestionEditor
+                key={selectedQuestion.id}
                 id={selectedQuestion.id}
                 group_ids={selectedQuestion.group_id}
                 explanation_url={selectedQuestion.explanation_url}

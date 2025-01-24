@@ -32,7 +32,7 @@ export default function ClassEditor({ id, name, category, desc, school_id }) {
   };
 
   return (
-    <Segment id={id ? `class-${id}-${school_id}` : `class-new-${school_id}`}>
+    <Segment key={id ? `class-${id}-${school_id}` : `class-new-${school_id}`}>
       <Form onSubmit={handleSubmit}>
         <Header as={'h3'}>{id ? `Class:${id}` : 'Create New Class'}</Header>
 

@@ -1,4 +1,8 @@
 import { openai } from "#config/config.js";
+import {
+  MAX_PROMPT_LENGTH,
+  MAX_USER_PROMPT_LENGTH,
+} from "#config/constants.js";
 import { sleep } from "./utils.js";
 
 /**
@@ -14,7 +18,7 @@ export async function sendOpenAiAssistantPromptAndRecieveResult(
   prompt,
   options = {}
 ) {
-  if (prompt.length > 1000) {
+  if (prompt.length > MAX_PROMPT_LENGTH) {
     throw new Error("prompt is too long");
   }
   try {
@@ -81,7 +85,8 @@ export async function sendPromptAndRecieveJSONResult(
   model = "o1-preview",
   context = "Answer questions with accuracy"
 ) {
-  if (prompt.length > 1000 || context.length > 1000) {
+  if (context.length > MAX_USER_PROMPT_LENGTH) {
+    // prompt should be from dev, context is from user
     throw new Error("prompt or context is too long");
   }
   dlog("calling normal openAi with prompt:", prompt);

@@ -28,7 +28,7 @@ export default function ChoiceEditor({ id, answer, is_correct, question_id, type
   };
 
   return (
-    <Segment>
+    <Segment key={id ? `Choice:${id}` : 'Create New Choice'}>
       <Form onSubmit={handleSubmit}>
         <Header as={'h3'}>{id ? `Choice:${id}` : 'Create New Choice'}</Header>
         <MarkdownEditor

@@ -18,7 +18,7 @@ import Footer from '@components/Footer.jsx';
 import ComingSoon from '@components/ComingSoon.jsx';
 import TOS from './extra/TOS.jsx';
 import PrivacyPolicy from './extra/Privacy.jsx';
-import NewPageWrapper from './new/NewPageWrapper.jsx';
+import NewPageWrapper from './create/CreatePage.jsx';
 import Init from './Init.jsx';
 import Sentinel from './Sentinel.jsx';
 import Layout from './layout/Layout.jsx';
@@ -36,6 +36,7 @@ export default function AppRouter() {
       {/* <HistoryNav /> */}
       <Comp401 />
       <Layout>
+        <HistoryNav />
         <Routes style={{ flex: 1 }}>
           <Route path='/' element={<Home />} />
           <Route path='/about' element={<AboutPage />} />
