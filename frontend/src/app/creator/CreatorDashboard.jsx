@@ -5,7 +5,7 @@ import { getUserCount, selectUserCount } from '../home/homeSlice';
 import { selectUser } from '../auth/authSlice';
 import { useNavigate } from 'react-router-dom';
 import { makeUserACreator } from './creatorSlice';
-import { changeNavbarPage } from '@components/navbar/navbarSlice';
+import { changeNavbarPage } from '@src/app/layout/navbarSlice';
 
 export default function CreatorDashboard() {
   const navigate = useNavigate();

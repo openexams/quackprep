@@ -1,7 +1,7 @@
 import { Segment, Header, Icon, Button, Grid, Container } from 'semantic-ui-react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeNavbarPage, selectNavbarState } from '@components/navbar/navbarSlice';
+import { changeNavbarPage, selectNavbarState } from '@src/app/layout/navbarSlice';
 
 export default function LoginRequired({ title }) {
   const navigate = useNavigate();

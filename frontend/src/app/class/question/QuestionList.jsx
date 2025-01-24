@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import { doesQuestionHaveCurrentChoice, selectCurrentChoicesState } from './choices/choicesSlice';
 import GenerateQuestion from './ai/GenerateQuestion';
 import { selectCanAndIsEdit } from '@src/app/auth/authSlice';
-import { selectNavbarState } from '@components/navbar/navbarSlice';
+import { selectNavbarState } from '@src/app/layout/navbarSlice';
 import QuestionEditor from '@src/app/creator/forms/QuestionEditor';
 
 /**

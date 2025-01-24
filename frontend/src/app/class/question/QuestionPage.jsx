@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Grid, Header, Segment, Button, Icon } from 'semantic-ui-react';
 import QuestionList from './QuestionList';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeNavbarPage, selectNavbarState } from '@components/navbar/navbarSlice';
+import { changeNavbarPage, selectNavbarState } from '@src/app/layout/navbarSlice';
 import { selectLoadingState } from '@src/app/store/loadingSlice';
 import ChoiceRouter from './choices/ChoiceRouter';
 import { useNavigate } from 'react-router-dom';

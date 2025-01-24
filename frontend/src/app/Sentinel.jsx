@@ -13,7 +13,7 @@ import {
   updateFetchHistory,
   updateQuestionId,
   updateSchoolId,
-} from '@components/navbar/navbarSlice';
+} from '@src/app/layout/navbarSlice';
 
 import { selectClassState } from '@src/app/class/classSlice';
 import { selectSchoolState } from '@src/app/class/school/schoolSlice';

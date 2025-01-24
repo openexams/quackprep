@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import { Header, Segment, Card, Container, Icon, Label } from 'semantic-ui-react';
 import { selectArrayOfIncludingItems, selectBINARYArrayOfStateById } from 'maddox-js-funcs';
-import { selectNavbarState } from '@components/navbar/navbarSlice';
+import { selectNavbarState } from '@src/app/layout/navbarSlice';
 import { selectLoadingState } from '@src/app/store/loadingSlice';
 import Searchbar from '@components/Searchbar';
 import { useSearchParams } from 'react-router-dom';

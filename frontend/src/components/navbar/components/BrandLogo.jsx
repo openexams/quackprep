@@ -1,24 +1,16 @@
-import { Menu, Image } from 'semantic-ui-react';
-import logo from '/img/quackprep_logo.webp';
+import { Image, Menu } from 'semantic-ui-react';
 import './BrandLogo.css';
-import { Link } from 'react-router-dom';
+import { changeNavbarPage } from '@src/app/layout/navbarSlice';
+import { useNavigate } from 'react-router-dom';
 
-export default function BrandLogo({ handlePageChange }) {
+export default function BrandLogo({}) {
+  const navigate = useNavigate();
   return (
-    <Menu.Item
-      as={Link}
-      to='/'
-      header
-      onClick={(e, data) => {
-        e.preventDefault();
-        const fixedData = {
-          name: '/',
-        };
-        handlePageChange(e, fixedData);
-      }}
-    >
-      <Image src={logo} alt='Logo' className='logo' style={{ width: '45px', marginRight: '.7em' }} />
-      <span className='quackprep'>QuackPrep</span>
+    <Menu.Item as={'a'} header onClick={() => changeNavbarPage(navigate, '/')}>
+      <Image className='logo' size='mini' src='/img/quackprep_logo.webp' />
+      <span className='quackprep' style={{ fontSize: '1.2rem' }}>
+        QuackPrep
+      </span>
     </Menu.Item>
   );
 }

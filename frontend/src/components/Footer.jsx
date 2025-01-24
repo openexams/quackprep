@@ -8,8 +8,6 @@ export default function Footer() {
     flexShrink: 0,
     backgroundColor: '#1b1c1d',
     color: 'rgba(255,255,255,.9)',
-    padding: '3em 0em',
-    marginTop: '3em',
     minHeight: '35vh',
   };
 

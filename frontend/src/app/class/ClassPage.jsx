@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Accordion, Container, Grid, Header, Icon, Segment } from 'semantic-ui-react';
 import { useSelector, useDispatch } from 'react-redux';
 import SchoolsList from './school/SchoolsList.jsx';
-import { changeNavbarPage, selectNavbarState } from '@components/navbar/navbarSlice';
+import { changeNavbarPage, selectNavbarState } from '@src/app/layout/navbarSlice';
 import ClassList from './ClassList';
 import { useNavigate } from 'react-router-dom';
 
