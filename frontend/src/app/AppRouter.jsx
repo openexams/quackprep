@@ -23,6 +23,7 @@ import Init from './Init.jsx';
 import Sentinel from './Sentinel.jsx';
 import Layout from './layout/Layout.jsx';
 import Auth from './auth/Auth.jsx';
+import Announcement from './extra/Announcement.jsx';
 
 {
   /* topic could be a actual topic or a group of question such as a exam */
@@ -36,6 +37,7 @@ export default function AppRouter() {
       {/* <HistoryNav /> */}
       <Comp401 />
       <Layout>
+        <Announcement />
         <HistoryNav />
         <Routes style={{ flex: 1 }}>
           <Route path='/' element={<Home />} />

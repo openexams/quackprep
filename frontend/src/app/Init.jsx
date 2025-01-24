@@ -8,6 +8,7 @@ import { getFavoriteQuestions, removeStateFavoriteQuestions } from '@src/app/cla
 import { getCurrentChoices, removeStateCurrentChoices } from '@src/app/class/question/choices/choicesSlice';
 import { getSchools } from '@src/app/class/school/schoolSlice';
 import { getHasStreak } from '@src/app/streak/streakSlice';
+import { getAnnouncement } from './layout/navbarSlice';
 export default function Init() {
   const user = useSelector(selectUser).user;
   const navigate = useNavigate();
@@ -18,6 +19,7 @@ export default function Init() {
     dispatch(changeNavbarPage(navigate, curPage));
     dispatch(getClassCategories());
     dispatch(getSchools());
+    dispatch(getAnnouncement());
   }, []);
 
   useEffect(() => {
@@ -31,15 +33,14 @@ export default function Init() {
     };
   }, []);
 
+  // on login init
   useEffect(() => {
     if (user?.id) {
       dispatch(getHasStreak());
-
       dispatch(getFavoriteQuestions());
       dispatch(getCurrentChoices());
     } else {
       dispatch(getCurUser());
-
       dispatch(removeStateCurrentChoices());
       dispatch(removeStateFavoriteQuestions());
     }

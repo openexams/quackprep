@@ -8,20 +8,23 @@ import 'katex/dist/katex.min.css';
  * @param {Object} props
  * @param {String} props.render
  * @param {String} props.components
+ * @param {Boolean} props.allowLinks - Whether links are allowed to render
  * @returns
  */
-export default function MarkdownRenderer({ render, components }) {
-  if (!render.includes('$') && !render.includes('/') && !render.includes('#')) {
+export default function MarkdownRenderer({ render, components, allowLinks = false }) {
+  // Check if links are allowed
+  const linkComponents = allowLinks
+    ? components
+    : {
+        ...components,
+        a: ({ node, ...props }) => <span>{props.children}</span>, // Disable link rendering
+      };
+
+  if (!render?.includes('$') && !render?.includes('/') && !render?.includes('#')) {
     return <span>{render}</span>;
   } else {
     return (
-      <ReactMarkdown
-        components={{ ...components }}
-        //{...props}
-        children={render}
-        remarkPlugins={[remarkMath]}
-        rehypePlugins={[rehypeKatex]}
-      />
+      <ReactMarkdown components={linkComponents} children={render} remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatex]} />
     );
   }
 }

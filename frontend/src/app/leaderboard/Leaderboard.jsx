@@ -47,7 +47,7 @@ const LeaderboardCard = ({ title, icon, iconColor, data, dataKey }) => (
                 </div>
                 <List.Description>
                   <Statistic value={item[dataKey]} />
-                  {dataKey === 'current_streak' ? 'day streak' : 'questions answered'}
+                  {dataKey === 'current_streak' ? '🔥day streak' : 'questions answered'}
                 </List.Description>
 
                 {/* Progress bar to show relative achievement vs. top user */}

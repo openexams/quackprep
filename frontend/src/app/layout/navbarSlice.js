@@ -1,22 +1,27 @@
 import { standardApiCall } from '@utils/api';
 import { copyArray, updateObjectWithKey, replaceP20WithSpace } from 'maddox-js-funcs';
 
-const CHANGE_NAVBAR_PAGE = 'components/navbar/CHANGE_NAVBAR_PAGE';
+const CHANGE_NAVBAR_PAGE = 'app/layout/CHANGE_NAVBAR_PAGE';
 
-const UPDATE_CUR_CLASS = 'components/navbar/UPDATE_CUR_CLASS';
-const UPDATE_CUR_GROUP = 'components/navbar/UPDATE_CUR_GROUP';
-const UPDATE_CUR_QUESTION = 'components/navbar/UPDATE_CUR_QUESTION';
-const GET_CLASS_ID_BY_NAME = 'components/navbar/GET_CLASS_ID_BY_NAME';
-const UPDATE_GROUP_ID_NAME = 'components/navbar/UPDATE_GROUP_ID_NAME';
+const UPDATE_CUR_CLASS = 'app/layout/UPDATE_CUR_CLASS';
+const UPDATE_CUR_GROUP = 'app/layout/UPDATE_CUR_GROUP';
+const UPDATE_CUR_QUESTION = 'app/layout/UPDATE_CUR_QUESTION';
+const GET_CLASS_ID_BY_NAME = 'app/layout/GET_CLASS_ID_BY_NAME';
+const UPDATE_GROUP_ID_NAME = 'app/layout/UPDATE_GROUP_ID_NAME';
 
-const UPDATE_GROUP_TYPE = 'components/navbar/UPDATE_GROUP_TYPE';
+const UPDATE_GROUP_TYPE = 'app/layout/UPDATE_GROUP_TYPE';
 
-const UPDATE_SCHOOL_ID = 'components/navbar/UPDATE_SCHOOL_ID';
-const UPDATE_FETCH_HISTORY = 'components/navbar/UPDATE_FETCH_HISTORY';
-const TOGGLE_EDIT = 'components/navbar/TOGGLE_EDIT';
+const UPDATE_SCHOOL_ID = 'app/layout/UPDATE_SCHOOL_ID';
+const UPDATE_FETCH_HISTORY = 'app/layout/UPDATE_FETCH_HISTORY';
+const TOGGLE_EDIT = 'app/layout/TOGGLE_EDIT';
+const GET_ANNOUNCEMENT = 'app/layout/GET_ANNOUNCEMENT';
 
 export function upsertTimeSpent() {
   return standardApiCall('post', '/api/account/time_spent', {});
+}
+
+export function getAnnouncement() {
+  return standardApiCall('get', '/api/extra/announcement/', null, GET_ANNOUNCEMENT);
 }
 
 /**
@@ -80,6 +85,7 @@ const DEFAULT_STATE = {
   questionId: null,
   lastPage: [],
   fetchHistory: {},
+  announcement: null,
 };
 
 export default function navbarReducer(state = DEFAULT_STATE, action) {
@@ -165,6 +171,8 @@ export default function navbarReducer(state = DEFAULT_STATE, action) {
       return { ...state, schoolId: action.payload };
     case TOGGLE_EDIT:
       return { ...state, editing: !state.editing };
+    case GET_ANNOUNCEMENT:
+      return { ...state, announcement: action.payload };
     default:
       return state;
   }

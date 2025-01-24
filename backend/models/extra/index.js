@@ -4,6 +4,10 @@ import {
   verifyUserOwnsRowId,
 } from "#utils/sqlFunctions.js";
 
+export async function getAnnouncement() {
+  return (await sqlExe.executeCommand(`SELECT * FROM announcements`))[0]?.text;
+}
+
 export async function selectPdfs(WHERE, params) {
   return await sqlExe.executeCommand(
     `SELECT p.id, p.link, p.name, p.class_id, cl.category as class_category, cl.school_id FROM pdfs p

@@ -47,7 +47,7 @@ router.post(
       commonErrorMessage(
         res,
         500,
-        `failed to generate ai group in class ${req.fields?.class_id}`,
+        `failed to generate ai group in class ${req.body?.class_id}`,
         error
       );
     }

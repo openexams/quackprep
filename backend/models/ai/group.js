@@ -4,7 +4,10 @@ import { postPdfAndRetriveParsedPdf } from "#utils/mathpix.js";
 import { sendOpenAiAssistantPromptAndRecieveResult } from "#utils/openAi.js";
 import FormData from "form-data";
 import { upsertGroupInClass, deleteGroupById } from "#models/group/index.js";
-import { MAX_USER_PROMPT_LENGTH } from "#config/constants.js";
+import {
+  MAX_USER_PROMPT_LENGTH,
+  QUACK_CREAT_GROUP_ASS_ID,
+} from "#config/constants.js";
 /**
  *
  * @param {Express.Multer.File[]} files
@@ -26,19 +29,26 @@ export async function parsePdfIntoGroup(files, class_id, user_id, user_prompt) {
     let mdd_res = "";
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
+      dlog(file);
       if (!file) {
-        throw new Error("no file when it says there is a file");
-      } else {
+        throw new Error("no file when it says there is a file??");
+      }
+      const fileType = file.mimetype.split("/")[1];
+      if (fileType === "pdf") {
         const formData = new FormData();
         formData.append("file", file.buffer, file.originalname);
         mdd_res += await postPdfAndRetriveParsedPdf(formData);
+      } else {
+        throw new Error(
+          "file is not a pdf, support for all file types coming soon\nfor now convert to a pdf" // todo: support all file types
+        );
       }
     }
 
     /**@type {import("../../../../shared-types/group.type.ts").GenGroup} */
     const GenGroupResponseJSON =
       await sendOpenAiAssistantPromptAndRecieveResult(
-        "asst_UXDbP8qIkOJw50jN9OLp36oA",
+        QUACK_CREAT_GROUP_ASS_ID,
         `${mdd_res}\n${user_prompt}`,
         { retire_time: 10000 }
       );

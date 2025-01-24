@@ -4,6 +4,7 @@ import {
   getPdfsByClassId,
   upsertPdf,
   getPdfsByUserId,
+  getAnnouncement,
 } from "#models/extra/index.js";
 import { cascadeSetDeleted } from "#utils/sqlFunctions.js";
 import { isAuthenticated } from "#middleware/authMiddleware.js";
@@ -11,6 +12,15 @@ import { isCreator } from "#middleware/creatorMiddleware.js";
 import { commonErrorMessage } from "#utils/utils.js";
 
 const router = express.Router();
+
+router.get("/announcement/", async function (req, res) {
+  try {
+    const result = await getAnnouncement();
+    res.status(200).json(result);
+  } catch (error) {
+    commonErrorMessage(res, 500, `failed to get announcement`, error);
+  }
+});
 
 router.get("/pdfs/user/", async function (req, res) {
   try {
