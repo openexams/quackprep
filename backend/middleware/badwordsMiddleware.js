@@ -2,15 +2,27 @@ import { commonErrorMessage } from "#utils/utils.js";
 import {
   RegExpMatcher,
   englishDataset,
-  englishRecommendedTransformers,
+  resolveConfusablesTransformer,
+  skipNonAlphabeticTransformer,
+  collapseDuplicatesTransformer,
 } from "obscenity";
 
 const matcher = new RegExpMatcher({
   ...englishDataset.build(),
-  ...englishRecommendedTransformers,
+  // ...englishRecommendedTransformers,
+  blacklistMatcherTransformers: [
+    resolveConfusablesTransformer(), // '🅰' => 'a'
+    // resolveLeetSpeakTransformer(), // '$' => 's'
+    skipNonAlphabeticTransformer(), // 'f.u...c.k' => 'fuck'
+    collapseDuplicatesTransformer(), // 'aaaa' => 'a'
+  ],
 });
-
-function checkAllFieldsForBadWords(obj) {
+/**
+ * Checks all fields of this object (not deeply) for bad words
+ * @param {Object} obj
+ * @returns {Boolean} true if bad word false if not
+ */
+export function checkAllFieldsForBadWords(obj) {
   const paramsArray = Object.keys(obj);
   for (let i = 0; i < paramsArray.length; i++) {
     if (matcher.hasMatch(String(obj[paramsArray[i]]))) {
@@ -24,9 +36,8 @@ function checkAllFieldsForBadWords(obj) {
   }
   return false;
 }
-
 /**
- * Only Checks On POST PUT & PATCH requests
+ * Express Middleware. Only Checks On POST PUT & PATCH requests
  * @param {Express.Request} req
  * @param {Express.Response} res
  * @param {*} next

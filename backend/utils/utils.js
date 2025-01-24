@@ -1,4 +1,5 @@
 import { getCurTimeUTCFormatted } from "./dateFunctions.js";
+import "#config/config.js";
 
 export function errLogging(err, errMsg) {
   console.log(`[${getCurTimeUTCFormatted()}] ${errMsg}\n${err}`);
