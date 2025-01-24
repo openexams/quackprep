@@ -54,7 +54,7 @@ export default function PDFList() {
             </Segment>
           </Grid.Column>
         ))}
-        {pdfs.length === 0 && <NoItemsFound />}
+        {pdfs?.length === 0 && <NoItemsFound />}
       </Grid>
     </Segment>
   );

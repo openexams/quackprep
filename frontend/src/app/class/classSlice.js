@@ -10,9 +10,9 @@ export function getClassesBySchoolId(school_id) {
   return standardApiCall('get', `/api/class/${school_id}`, null, GET_CRUD_CLASSES, { loadingComponent: ['ClassList'] });
 }
 
-// export function getClassesByUserId() {
-//   return standardApiCall('get', `/api/class/user`, null, GET_CRUD_CLASSES, { loadingComponent: ['ClassList', 'Create'] });
-// }
+export function getClassesByUserId() {
+  return standardApiCall('get', `/api/class/user`, null, GET_CRUD_CLASSES, { loadingComponent: ['ClassList', 'Create'] });
+}
 
 // returns the created class
 export function upsertClass(id, school_id, name, description, category) {

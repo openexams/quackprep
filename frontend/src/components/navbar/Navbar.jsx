@@ -8,29 +8,11 @@ import ProfileDropdown from './components/Profile/ProfileDropdown';
 import { useNavigate } from 'react-router-dom';
 import BrandLogo from './components/BrandLogo';
 import { selectHasStreak } from '@src/app/streak/streakSlice.js';
-import { selectClassState } from '@src/app/class/classSlice';
-import { selectSchoolState } from '@src/app/class/school/schoolSlice';
-import { selectLoadingState } from '@src/app/store/loadingSlice';
-import { select401CompState } from '@components/401/401Slice';
-import {
-  classFetchLogic,
-  groupFetchLogic,
-  groupUpdateLogic,
-  classUpdateLogic,
-  schoolUpdateLogic,
-  questionFetchLogic,
-  questionUpdateLogic,
-  choicesFetchLogic,
-  pdfsFetchLogic,
-} from './navbarFunctions';
-import Init from '@src/Init';
-import Sentinel from '@src/Sentinel';
-import { selectGroupsState } from '@src/app/class/group/groupSlice';
+
 import ToggleEditComponent from './components/ToggleEdit';
+import PlusButton from '@components/PlusButton/PlusButton';
 
 export default function Navbar() {
-  const groups = useSelector(selectGroupsState);
-  const { classes } = useSelector(selectClassState);
   const dispatch = useDispatch();
   const { user } = useSelector(selectUser);
   const { hasStreak } = useSelector(selectHasStreak);
@@ -38,14 +20,6 @@ export default function Navbar() {
   const navigate = useNavigate();
   const [sidebarOpened, setSidebarOpened] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-  const schools = useSelector(selectSchoolState).schools;
-  const loading = useSelector(selectLoadingState)?.loadingComps;
-  const State401 = useSelector(select401CompState).show;
-  const pathArray = getFixedUrlArr(activePage);
-
-  // spaces in stuff is a issue!!
-  const { className, classId, groupName, groupId, questionId, schoolName, groupType, schoolId } =
-    useSelector(selectNavbarState).navbar;
 
   function handlePageChange(e, data) {
     e.preventDefault();
@@ -53,74 +27,6 @@ export default function Navbar() {
     dispatch(changeNavbarPage(navigate, data.name));
     setSidebarOpened(false); // Close sidebar on item click
   }
-
-  ///  USE EFFECTS FOR KEEPING STORE SAME AS URL ///
-  useEffect(() => {
-    if (pathArray?.[1]?.includes('class') && !activePage?.includes('/auth?next') && !State401) {
-      if (pathArray?.[4] && className && classId) {
-        dispatch(updateGroupType(pathArray[4]));
-      }
-      if (!loading?.SchoolsList) {
-        schoolUpdateLogic(dispatch, schools, schoolName);
-      }
-      if (!loading?.ClassList && schoolId && schoolName) {
-        classFetchLogic(dispatch, classes, schoolId);
-        classUpdateLogic(dispatch, classes, classId, schoolId);
-      }
-      if (pathArray?.[4] === 'pdfexams' && !loading?.PDFList && classId && schoolId && schoolName && className) {
-        pdfsFetchLogic(dispatch, classId);
-      }
-
-      if (pathArray?.[4] === 'group' && !loading?.GroupsList && classId && className && schoolId && schoolName) {
-        groupUpdateLogic(dispatch, groupId, classId, groups);
-        groupFetchLogic(dispatch, classId);
-      }
-      if (
-        pathArray?.[4] === 'group' &&
-        pathArray?.[6] === 'question' &&
-        !loading?.QuestionPage &&
-        classId &&
-        groupId &&
-        groupName &&
-        groupType &&
-        schoolId &&
-        schoolName
-      ) {
-        questionUpdateLogic(dispatch, questionId);
-        questionFetchLogic(dispatch, groupId);
-      }
-      if (
-        pathArray?.[4] === 'group' &&
-        pathArray?.[6] === 'question' &&
-        !loading?.ChoiceRouter &&
-        className &&
-        classId &&
-        groupId &&
-        groupName &&
-        groupType
-      ) {
-        choicesFetchLogic(dispatch, groupId);
-      }
-    }
-  }, [
-    activePage,
-    classId,
-    className,
-    groups,
-    groupId,
-    groupType,
-    groupName,
-    classes,
-    schoolName,
-    schools,
-    schoolId,
-    questionId,
-    loading?.GroupsList,
-    loading?.ClassList,
-    loading?.QuestionPage,
-    loading?.ChoiceRouter,
-    loading?.PdfList,
-  ]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -133,8 +39,6 @@ export default function Navbar() {
 
   return (
     <>
-      <Init />
-      <Sentinel />
       {isMobile ? (
         <>
           <Menu fixed='top' inverted size='large' className='custom-navbar'>
@@ -196,6 +100,7 @@ export default function Navbar() {
                 Stats
               </Menu.Item>
               <ToggleEditComponent />
+              <PlusButton onClick={() => changeNavbarPage(navigate, '/new')} />
 
               {user.id ? (
                 <Menu.Item className='nav-item'>
@@ -257,11 +162,19 @@ export default function Navbar() {
               <Icon name='chart bar' />
               Stats
             </Menu.Item>
-            <ToggleEditComponent />
+            <Menu.Menu position='right'>
+              <ToggleEditComponent />
+            </Menu.Menu>
+            <Menu.Menu position='right'>
+              <PlusButton
+                style={{ marginTop: '.8rem', minWidth: 60, minHeight: 60, maxWidth: 60, maxHeight: 60 }}
+                onClick={() => changeNavbarPage(navigate, '/new')}
+                popupText={'Generate new Material'}
+              />
+            </Menu.Menu>
+
             {user.id ? (
-              <Menu.Menu position='right'>
-                <ProfileDropdown hasStreak={hasStreak} activePage={activePage} handlePageChange={handlePageChange} />
-              </Menu.Menu>
+              <ProfileDropdown hasStreak={hasStreak} activePage={activePage} handlePageChange={handlePageChange} />
             ) : (
               <Menu.Item
                 onClick={handlePageChange}
@@ -269,7 +182,6 @@ export default function Navbar() {
                 href='/auth'
                 active={activePage === '/auth'}
                 name='/auth'
-                position='right'
                 className='nav-item auth-button'
               >
                 <Icon name='user' />
