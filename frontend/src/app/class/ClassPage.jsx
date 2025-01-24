@@ -16,7 +16,7 @@ export default function ClassPage() {
   return (
     <Container fluid style={{ marginTop: '-7rem', padding: '2rem' }}>
       <Header as='h1' textAlign='left' icon={'graduation cap'}>
-        Available Classes
+        {curSchoolId ? 'Available Classes' : 'Choose a School'}
         <Header.Subheader>Choose one to begin your learning journey</Header.Subheader>
       </Header>
       <SchoolsList />

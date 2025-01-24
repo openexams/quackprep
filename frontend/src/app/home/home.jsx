@@ -106,8 +106,7 @@ export default function Home() {
               textShadow: '-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000, 0 0 8px rgba(0,0,0,0.5)',
             }}
           >
-            Unlock your potential with our adaptive learning platform. Personalized practice, expert explanations, and real-time
-            feedback.
+            The First Study Tool that "Grows with You" as you Learn
           </Header>
           <Button
             primary
@@ -118,7 +117,7 @@ export default function Home() {
               color: 'rgba(0, 0, 0, 0.8)',
             }}
           >
-            Start Practicing
+            Get Started
             <Icon name='right arrow' style={{ marginLeft: '0.5em' }} />
           </Button>
         </Container>
