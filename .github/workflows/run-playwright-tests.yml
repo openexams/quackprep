@@ -25,6 +25,8 @@ jobs:
       BACKEND_URL: ${{ secrets.BACKEND_URL }}
       OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
       FRONTEND_URL: ${{ secrets.FRONTEND_URL }}
+      MATHPIX_API_KEY: ${{ secrets.MATHPIX_API_KEY }}
+      MATHPIX_APP_ID: ${{ secrets.MATHPIX_APP_ID }}
 
     steps:
       - name: Check out repository
