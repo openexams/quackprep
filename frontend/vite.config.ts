@@ -26,6 +26,7 @@ export default defineConfig(() => {
         '@components': '/src/components',
         '@src': '/src',
         '@utils': '/src/utils',
+        '@app': '/src/app',
       },
     },
   };
