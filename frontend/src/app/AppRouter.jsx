@@ -34,7 +34,6 @@ export default function AppRouter() {
     <Router>
       <Init />
       <Sentinel />
-      {/* <HistoryNav /> */}
       <Comp401 />
       <Layout>
         <Announcement />

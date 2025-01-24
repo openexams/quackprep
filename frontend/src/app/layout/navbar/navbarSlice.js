@@ -98,6 +98,10 @@ export default function navbarReducer(state = DEFAULT_STATE, action) {
       return { ...state, fetchHistory: updateObjectWithKey(state.fetchHistory, action.payload) };
     case CHANGE_NAVBAR_PAGE: {
       let curUrl = state.page;
+      if (state.page === curUrl) {
+        // if it didnt change dont do anything.
+        return state;
+      }
       const newLastPage = copyArray(state.lastPage);
       newLastPage.push(state.page);
       if (action.payload?.includes('/auth')) {
@@ -119,21 +123,15 @@ export default function navbarReducer(state = DEFAULT_STATE, action) {
       }
       // after base cases
       // same logic that navigate() has
-      if (action.payload?.[0] === '/') {
-        curUrl = action.payload;
-      } else {
+      if (action.payload?.[0] !== '/') {
         curUrl = state.page + '/' + action.payload;
-      }
-      if (state.page === curUrl) {
-        // if it didnt change dont do anything.
-        return state;
       }
 
       // when I change the navbar set everything back to null so navbar has to dispatch to get id values;
       const urlArr = getFixedUrlArr(curUrl);
-      const newSchoolName = urlArr[2] || null;
-      const newClassId = urlArr[3] || null;
-      const newGroupId = urlArr[5] || null;
+      const newSchoolName = urlArr?.[2] || null;
+      const newClassId = urlArr?.[3] || null;
+      const newGroupId = urlArr?.[5] || null;
 
       return {
         ...state,
@@ -142,7 +140,7 @@ export default function navbarReducer(state = DEFAULT_STATE, action) {
         className: null,
         schoolName: newSchoolName,
         schoolId: null,
-        questionId: parseInt(urlArr[7]) || null,
+        questionId: parseInt(urlArr?.[7]) || null,
         classId: parseInt(newClassId), // these 2 null should be brought in again, only if we changed topic or class, may cause issues when inputting new link directly into window.location TODO TEST
         groupId: parseInt(newGroupId),
         groupType: null,

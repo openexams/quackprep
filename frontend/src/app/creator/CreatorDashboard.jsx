@@ -18,10 +18,10 @@ export default function CreatorDashboard() {
   }, []);
 
   return (
-    <Container style={{ padding: '3rem 0' }}>
+    <Container>
       {/* Hero Section */}
-      <Segment basic textAlign='center' style={{ marginBottom: '3rem' }}>
-        <Icon name='graduation cap' style={{ marginBottom: '-8rem' }} size='huge' />
+      <Segment basic textAlign='center'>
+        <Icon name='graduation cap' size='huge' />
         <Header as='h1' size='huge' textAlign='center'>
           Become a QuackPrep Creator!
           <Header.Subheader style={{ marginTop: '1rem' }}>
