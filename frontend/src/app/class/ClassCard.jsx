@@ -7,6 +7,7 @@ import ClassEditor from '../creator/forms/ClassEditor';
 import { selectEditState, selectUser } from '../auth/authSlice';
 import { ADMIN_ACCOUNT_ID } from '../../../../global_constants';
 import './class_card.css';
+import useIsMobile from '@utils/hooks/useIsMobile';
 
 function findClassNumber(nameOfClass) {
   for (let i = 0; i < nameOfClass.length; i++) {
@@ -77,7 +78,7 @@ export default function ClassCard({ id, name, category, desc, school_id, created
 
   // Simple mobile check
   // could abstract this to a hook, pls do
-  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+  const isMobile = useIsMobile();
 
   // Extract level from class name
   const level = useMemo(() => findClassNumber(name)?.[0], [name]);

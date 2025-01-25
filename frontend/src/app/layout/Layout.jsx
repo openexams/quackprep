@@ -9,9 +9,10 @@ import { selectUser } from '@app/auth/authSlice';
 import { selectHasStreak } from '@app/streak/streakSlice.js';
 import Navbar from './navbar/Navbar.jsx';
 import BrandLogo from '@app/layout/brandlogo/BrandLogo';
+import useIsMobile from '@utils/hooks/useIsMobile';
 
 export default function Layout({ children }) {
-  const [isMobile, setIsMobile] = useState(false);
+  const isMobile = useIsMobile();
   const [sidebarOpened, setSidebarOpened] = useState(false);
 
   const dispatch = useDispatch();
@@ -21,16 +22,6 @@ export default function Layout({ children }) {
   const { page: activePage } = useSelector(selectCurrentPage);
   const { user } = useSelector(selectUser);
   const { hasStreak } = useSelector(selectHasStreak);
-
-  // Handle window resize for isMobile
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 767);
-    };
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
 
   const handleToggleSidebar = (bool) => {
     if (bool !== undefined) {
