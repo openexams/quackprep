@@ -81,9 +81,7 @@ export default function Layout({ children }) {
             if (isMobile && sidebarOpened) setSidebarOpened(false);
           }}
         >
-          <Container fluid>
-            <Segment basic>{children}</Segment>
-          </Container>
+          <Container fluid>{children}</Container>
         </Sidebar.Pusher>
       </Sidebar.Pushable>
     </div>

@@ -34,7 +34,7 @@ export default function AppRouter() {
       <Layout>
         <Announcement />
         <HistoryNav />
-        <Routes style={{ flex: 1 }}>
+        <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/about' element={<AboutPage />} />
           <Route path='/tos' element={<TOS />} />

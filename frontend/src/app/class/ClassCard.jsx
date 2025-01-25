@@ -1,5 +1,5 @@
 import { changeNavbarPage } from '@app/layout/navbar/navbarSlice';
-import { useMemo, useState } from 'react';
+import { useMemo, useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Card, Icon } from 'semantic-ui-react';
 import { useNavigate } from 'react-router-dom';
@@ -86,10 +86,7 @@ export default function ClassCard({ id, name, category, desc, school_id, created
   // Icons & color
   const icon = useMemo(() => getIconByCategory(category), [category]);
   const cardColor = useMemo(() => getColorByLevel(level), [level]);
-
-  if (edit) {
-    return <ClassEditor id={id} name={name} category={category} desc={desc} school_id={school_id} />;
-  }
+  const divRef = useRef(null);
 
   // Common styling for quadrants
   const quadrantStyle = {
@@ -111,8 +108,29 @@ export default function ClassCard({ id, name, category, desc, school_id, created
     textShadow: '0 0 5px #000',
   };
 
+  // if on mobile and clicked outside of the card, close the overlay
+  const handleClickOutside = (event) => {
+    if (divRef.current && !divRef.current.contains(event.target)) {
+      setHovered(false);
+    }
+  };
+
+  useEffect(() => {
+    // Bind the event listener
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      // Unbind the event listener on clean up
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
+  if (edit) {
+    return <ClassEditor id={id} name={name} category={category} desc={desc} school_id={school_id} />;
+  }
+
   return (
     <div
+      ref={divRef}
       // Desktop: Hover triggers overlay. Mobile: Click toggles overlay.
       onMouseEnter={!isMobile ? () => setHovered(true) : undefined}
       onMouseLeave={!isMobile ? () => setHovered(false) : undefined}

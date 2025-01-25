@@ -6,7 +6,7 @@ import { getClassesByUserId } from '../class/classSlice';
 import { selectUser } from '../auth/authSlice';
 import { selectArrayOfStateById } from 'maddox-js-funcs';
 import { mapClassesToDropdown } from '../creator/forms/dropdownMappings';
-import { changeNavbarPage } from '@app/layout/navbar/navbarSlice';
+import { changeNavbarPage, getStartedNow } from '@app/layout/navbar/navbarSlice';
 import CreateGroupByPDF from '../class/group/CreateGroupByPDF';
 
 export default function NewPageWrapper() {
@@ -27,11 +27,6 @@ export default function NewPageWrapper() {
       dispatch(getClassesByUserId());
     }
   }, [user_id, dispatch]);
-
-  const handleCreateClass = () => {
-    // Navigate to class creation page
-    dispatch(changeNavbarPage(navigate, '/creatordashboard'));
-  };
 
   return (
     <Segment raised padded>
@@ -59,7 +54,7 @@ export default function NewPageWrapper() {
                   You need to create a class before using the AI generation feature. This ensures you can properly organize the
                   content generated.
                 </p>
-                <Button primary onClick={handleCreateClass}>
+                <Button primary onClick={() => getStartedNow(navigate)}>
                   <Icon name='plus' />
                   Create Your First Class
                 </Button>

@@ -35,16 +35,16 @@ export default function ClassList() {
 
   return (
     <Container>
-      <Segment padded basic loading={loading}>
+      <Segment basic loading={loading}>
         <Header.Subheader>
           {curCategory
             ? `Showing ${filteredClasses?.length} classes in ${classCategories.find((c) => c.id === curCategory)?.name}`
             : `Showing all ${classes?.length} available classes`}
         </Header.Subheader>
 
-        <Segment raised>
+        <Container>
           {/* The category menu remains as is */}
-          <Menu pointing secondary fluid widths={classCategories?.length + 1} stackable>
+          <Menu pointing fluid widths={classCategories?.length + 1} stackable>
             <Menu.Item name='All Classes' active={curCategory === ''} onClick={() => handleCategoryChange('')} icon='list' />
             {classCategories?.map((category, index) => (
               <Menu.Item
@@ -89,7 +89,7 @@ export default function ClassList() {
                   )}
             </Transition.Group>
           </div>
-        </Segment>
+        </Container>
 
         {edit && (
           <>
