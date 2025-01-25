@@ -1,4 +1,3 @@
-import Home from './home/Home.jsx';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Profile from './profile/Profile.jsx';
 import Streak from './streak/Streak.jsx';
@@ -24,6 +23,7 @@ import Sentinel from './Sentinel.jsx';
 import Layout from './layout/Layout.jsx';
 import Auth from './auth/Auth.jsx';
 import Announcement from './extra/Announcement.jsx';
+import Home from './home/Home.jsx';
 
 export default function AppRouter() {
   return (
