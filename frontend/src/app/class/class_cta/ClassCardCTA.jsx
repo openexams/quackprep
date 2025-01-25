@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Card, Icon } from 'semantic-ui-react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeNavbarPage, toggleEdit } from '@app/layout/navbar/navbarSlice';
+import { changeNavbarPage, getStartedNow, toggleEdit } from '@app/layout/navbar/navbarSlice';
 import '../class_card.css';
 import useIsMobile from '@utils/hooks/useIsMobile';
 import { selectUser } from '@app/auth/authSlice';
@@ -35,11 +35,7 @@ export default function ClassCardCTA() {
           transition: 'transform 0.3s ease, boxShadow 0.3s ease',
         }}
         onClick={() => {
-          if (!isCreator) {
-            dispatch(changeNavbarPage(navigate, '/creatordashboard'));
-          } else {
-            dispatch(toggleEdit(true));
-          }
+          dispatch(getStartedNow(navigate));
         }}
       >
         <Card.Content>

@@ -90,33 +90,39 @@ export async function postPdfAndRetriveParsedPdf(formData) {
   const pdf_id = await postPDFToMathpix(formData);
   return await getFormattedPdfByPdfIdMathpix(pdf_id);
 }
+
 /**
  * post image to mathpix and get text
- * @param {FormData} formData
+ * @param {File} file file opened with fs.readFileSync
  * @returns {String} text
  */
-export async function postImageAndRecieveText(formData) {
+export async function postImageAndRecieveText(file) {
   try {
-    formData.append(
-      "options_json",
-      JSON.stringify({
-        math_inline_delimiters: ["$$", "$$"],
-        rm_spaces: true,
-      })
-    );
+    // formData.append(
+    //   "options_json",
+    //   JSON.stringify({
+    //     math_inline_delimiters: ["$$", "$$"],
+    //     rm_spaces: true,
+    //   })
+    // );
     const result = await axios.post(
       "https://api.mathpix.com/v3/text",
-      formData,
+      {
+        src: `data:image/${file.type};base64,` + file.toString("base64"),
+        options: { math_inline_delimiters: ["$$", "$$"], rm_spaces: true }, // this part does not wrap latex in $$, so no work
+      },
       {
         headers: {
-          ...formData.getHeaders(),
+          // ...formData.getHeaders(),
           app_id: MATHPIX_API_INFO.MATHPIX_APP_ID,
           app_key: MATHPIX_API_INFO.MATHPIX_API_KEY,
-          "Content-type": "multipart/form-data",
+          // "Content-type": "multipart/form-data",
         },
       }
     );
+
     if (!result.data?.text) {
+      dlog(result.data);
       throw new Error("failed to get text from image, mathpix error");
     }
     dlog(`successfully got text from image with status ${result.status}`);

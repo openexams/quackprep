@@ -1,6 +1,6 @@
 import { Segment, Icon, Header, Accordion } from 'semantic-ui-react';
 import { useDispatch } from 'react-redux';
-import { changeNavbarPage } from '@app/layout/navbar/navbarSlice';
+import { changeNavbarPage, getStartedNow } from '@app/layout/navbar/navbarSlice';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 export default function ClassAnchorCTA() {
@@ -24,7 +24,7 @@ export default function ClassAnchorCTA() {
               size='massive'
               color='blue'
               className='pointer'
-              onClick={() => dispatch(changeNavbarPage(navigate, '/creatordashboard'))}
+              onClick={() => dispatch(getStartedNow(navigate))}
               style={{
                 cursor: 'pointer',
                 transition: 'transform 0.2s ease',

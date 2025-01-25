@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { Header, Segment, Card, Container, Icon, Label } from 'semantic-ui-react';
+import { Header, Segment, Card, Container, Icon, Label, Divider } from 'semantic-ui-react';
 import { selectArrayOfIncludingItems, selectBINARYArrayOfStateById } from 'maddox-js-funcs';
 import { selectNavbarState } from '@app/layout/navbar/navbarSlice';
 import { selectLoadingState } from '@app/store/loadingSlice';
@@ -48,6 +48,12 @@ export default function GroupsList() {
       setTypeFilter(type);
     }
   }
+  // on component mount and they chose a selection which has no groups, show all groups.
+  useEffect(() => {
+    if (groups?.length === 0) {
+      handleTypeClick('');
+    }
+  }, []); // dont want to run this on every groups change but idk why this works ngl
 
   return (
     <Container>
@@ -112,6 +118,7 @@ export default function GroupsList() {
             })}
           {editModeOn && <GroupEditor class_id={classId} />}
         </Card.Group>
+        <Divider style={{ marginTop: '5rem' }} />
         {editModeOn && <CreateGroupByPDF classId={classId} /> /* ai group */}
       </Segment>
     </Container>

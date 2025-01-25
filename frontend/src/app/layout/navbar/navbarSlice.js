@@ -72,6 +72,23 @@ export function toggleEdit(bool) {
   return { type: TOGGLE_EDIT, payload: bool };
 }
 
+export function getStartedNow(navigate) {
+  return (dispatch, getState) => {
+    const is_creator = getState().auth.user.is_creator;
+    const curSchoolName = getState().app.navbar.schoolName;
+    if (is_creator) {
+      if (curSchoolName) {
+        dispatch(changeNavbarPage(navigate, `/class/${curSchoolName}`));
+      } else {
+        dispatch(changeNavbarPage(navigate, '/class'));
+      }
+      dispatch(toggleEdit(true));
+    } else {
+      dispatch(changeNavbarPage(navigate, '/creatordashboard'));
+    }
+  };
+}
+
 const DEFAULT_STATE = {
   editing: false,
   page: null,

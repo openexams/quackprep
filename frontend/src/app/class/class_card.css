@@ -1,6 +1,6 @@
 .class_card {
   cursor: pointer;
-  min-width: 15rem;
+  min-width: 10rem;
   position: relative;
   overflow: hidden;
   transform: scale(1);
