@@ -5,6 +5,8 @@ import { Card, Icon } from 'semantic-ui-react';
 import { useNavigate } from 'react-router-dom';
 import ClassEditor from '../creator/forms/ClassEditor';
 import { selectEditState, selectUser } from '../auth/authSlice';
+import { ADMIN_ACCOUNT_ID } from '../../../../global_constants';
+import './class_card.css';
 
 function findClassNumber(nameOfClass) {
   for (let i = 0; i < nameOfClass.length; i++) {
@@ -12,7 +14,7 @@ function findClassNumber(nameOfClass) {
       return nameOfClass.slice(i);
     }
   }
-  console.log('Fatal error: no number found in class name? Must include a number e.g. "MA26100"');
+  // console.log('Fatal error: no number found in class name? Must include a number e.g. "MA26100"');
   return null;
 }
 
@@ -66,12 +68,15 @@ export default function ClassCard({ id, name, category, desc, school_id, created
   const navigate = useNavigate();
   const [hovered, setHovered] = useState(false);
   const dispatch = useDispatch();
+  // this is because selectCanAndIsEdit is not available when there is no currently selected class
   const editMode = useSelector(selectEditState);
   const currentUserId = useSelector(selectUser).user?.id;
-  const isOwner = currentUserId === parseInt(created_by);
+  const isOwner = currentUserId === parseInt(created_by) || currentUserId === ADMIN_ACCOUNT_ID;
   const edit = isOwner && editMode;
+  ////
 
   // Simple mobile check
+  // could abstract this to a hook, pls do
   const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
 
   // Extract level from class name
@@ -111,21 +116,8 @@ export default function ClassCard({ id, name, category, desc, school_id, created
       onMouseEnter={!isMobile ? () => setHovered(true) : undefined}
       onMouseLeave={!isMobile ? () => setHovered(false) : undefined}
       onClick={isMobile ? () => setHovered((prev) => !prev) : undefined}
-      style={{
-        position: 'relative',
-        cursor: 'pointer',
-      }}
     >
-      <Card
-        color={cardColor}
-        style={{
-          minWidth: '10rem',
-          position: 'relative',
-          overflow: 'hidden',
-          transform: hovered ? 'scale(1.03)' : 'scale(1)',
-          transition: 'transform 0.3s ease, box-shadow 0.3s ease',
-        }}
-      >
+      <Card className='class_card' color={cardColor}>
         <Card.Content>
           <Icon name={icon} size='large' />
           <Card.Header>{name}</Card.Header>

@@ -1,0 +1,12 @@
+.class_card {
+  cursor: pointer;
+  min-width: 15rem;
+  position: relative;
+  overflow: hidden;
+  transform: scale(1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.class_card:hover {
+  transform: scale(1.03);
+}

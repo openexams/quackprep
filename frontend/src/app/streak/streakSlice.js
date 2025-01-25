@@ -8,11 +8,11 @@ export function getHasStreak() {
 }
 
 export function getStreak() {
-  return standardApiCall('get', '/api/streak/', null, GET_STREAK);
+  return standardApiCall('get', '/api/streak/', null, GET_STREAK, { loadingComponent: 'Streak' });
 }
 
 export function claimStreak() {
-  return standardApiCall('post', '/api/streak/', {}, GET_STREAK); // uses same dispatching const ik ik
+  return standardApiCall('post', '/api/streak/', {}, GET_STREAK, { loadingComponent: 'Streak' }); // uses same dispatching const ik ik
 }
 
 const DEFAULT_STATE = {

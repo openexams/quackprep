@@ -63,6 +63,9 @@ export default function FRQAnswer({ text, choice, selectedQuestion }) {
               } else if (user_id && currentChoice) {
                 dispatch(checkStudentFRQAnswer(currentChoice.trans_id, selectedQuestion.question, text, choice.answer));
               } else {
+                window.alert(
+                  'Error: Hey! Your choice was not submitted to the server. Click Reset to try again. Sorry about that!',
+                );
                 console.error('fatal error cur choice not found when trying to gen ai response');
               }
             }}

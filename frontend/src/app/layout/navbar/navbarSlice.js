@@ -68,8 +68,8 @@ export function updateFetchHistory(fetechedPage) {
   return { type: UPDATE_FETCH_HISTORY, payload: fetechedPage };
 }
 
-export function toggleEdit() {
-  return { type: TOGGLE_EDIT };
+export function toggleEdit(bool) {
+  return { type: TOGGLE_EDIT, payload: bool };
 }
 
 const DEFAULT_STATE = {
@@ -168,7 +168,7 @@ export default function navbarReducer(state = DEFAULT_STATE, action) {
     case UPDATE_SCHOOL_ID:
       return { ...state, schoolId: action.payload };
     case TOGGLE_EDIT:
-      return { ...state, editing: !state.editing };
+      return { ...state, editing: action.payload || !state.editing };
     case GET_ANNOUNCEMENT:
       return { ...state, announcement: action.payload };
     default:

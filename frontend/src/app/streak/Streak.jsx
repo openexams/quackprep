@@ -5,11 +5,13 @@ import { Container, Grid, Segment, Header, Icon, Statistic, Progress, Button, St
 import { getStreak, selectStreakData, claimStreak } from './streakSlice';
 import { Streak } from 'maddox-js-funcs';
 import Confetti from 'react-confetti'; // <-- Make sure to install react-confetti or remove if not used
+import { selectLoadingState } from '@app/store/loadingSlice';
 
 export default function StreakPage() {
   const { streak } = useSelector(selectStreakData);
   const dispatch = useDispatch();
   const streakClass = new Streak(streak.lastClaim);
+  const loading = useSelector(selectLoadingState).loadingComps?.Streak;
 
   // State to handle confetti celebration
   const [justClaimed, setJustClaimed] = useState(false);
@@ -77,7 +79,7 @@ export default function StreakPage() {
 
   return (
     <Container className='streak-page-container'>
-      <Segment raised basic>
+      <Segment raised basic loading={loading}>
         {/* Confetti effect (only show when user has just claimed) */}
         {justClaimed && <Confetti width={windowSize.width} height={windowSize.height} />}
 

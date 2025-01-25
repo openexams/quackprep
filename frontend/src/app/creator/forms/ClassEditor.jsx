@@ -9,8 +9,11 @@ import ConfirmButton from '@components/ConfirmButton';
 
 import { selectSchoolState } from '@app/class/school/schoolSlice';
 import { selectClassCategories } from '@app/class/class_categories/classCategorySlice';
+import { useNavigate } from 'react-router-dom';
+import { changeNavbarPage } from '@app/layout/navbar/navbarSlice';
 
 export default function ClassEditor({ id, name, category, desc, school_id }) {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   // Pull your Redux state
@@ -34,7 +37,7 @@ export default function ClassEditor({ id, name, category, desc, school_id }) {
   return (
     <Segment key={id ? `class-${id}-${school_id}` : `class-new-${school_id}`}>
       <Form onSubmit={handleSubmit}>
-        <Header as={'h3'}>{id ? `Class:${id}` : 'Create New Class'}</Header>
+        <Header as='h3'>{id ? `Class:${id}` : 'Create New Class'}</Header>
 
         <Form.Field
           control='input'
@@ -79,10 +82,24 @@ export default function ClassEditor({ id, name, category, desc, school_id }) {
           placeholder='Select Category'
         />
 
-        <Button type='submit' primary>
-          Submit
+        <Button style={{ marginTop: '-.3em' }} type='submit' primary>
+          {id ? 'Update' : 'Create'}
         </Button>
       </Form>
+
+      {id && (
+        <Button
+          style={{ marginTop: '1em' }}
+          onClick={(e) => {
+            e.stopPropagation();
+            dispatch(changeNavbarPage(navigate, `/create`));
+          }}
+          primary
+        >
+          Ai Generate Content -&gt;
+        </Button>
+      )}
+
       {id && (
         <ConfirmButton onClick={() => dispatch(deleteClassById(id))} negative>
           Delete

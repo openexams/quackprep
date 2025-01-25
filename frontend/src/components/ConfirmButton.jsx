@@ -14,7 +14,7 @@ import { Button, Confirm } from 'semantic-ui-react';
 export default function ConfirmButton({ confirmText = 'Are you sure about that.', buttonName = 'Delete', onClick }) {
   const [open, setOpen] = useState(false);
   return (
-    <>
+    <div style={{ marginTop: '1em' }}>
       <Button onClick={() => setOpen(true)}>{buttonName}</Button>
       <Confirm
         confirmButton={'Yes'}
@@ -31,6 +31,6 @@ export default function ConfirmButton({ confirmText = 'Are you sure about that.'
           setOpen(false);
         }}
       />
-    </>
+    </div>
   );
 }

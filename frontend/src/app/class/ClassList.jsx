@@ -9,6 +9,7 @@ import ClassEditor from '../creator/forms/ClassEditor';
 import { selectArrayOfIncludingItemsByNumber, selectBINARYArrayOfStateById } from 'maddox-js-funcs';
 import { selectNavbarState } from '@app/layout/navbar/navbarSlice';
 import { selectEditState } from '../auth/authSlice'; // cuz anyone can make classes
+import ClassCardCTA from './class_cta/ClassCardCTA';
 
 export default function ClassList() {
   let { schoolId: curSchoolId } = useSelector(selectNavbarState).navbar;
@@ -58,7 +59,10 @@ export default function ClassList() {
 
           {/* Wrap Transition.Group with a scrollable container */}
           <div style={{ maxHeight: '600px', overflowY: 'auto', padding: '1rem' }}>
-            <Transition.Group as={Grid} duration={300} animation='fade' stackable columns={4}>
+            <Transition.Group as={Grid} duration={300} animation='fade' stackable columns={3}>
+              <Grid.Column key={'cta_card'}>
+                <ClassCardCTA />
+              </Grid.Column>
               {visible && filteredClasses?.length > 0
                 ? filteredClasses.map((c, index) => (
                     <Grid.Column key={index}>
