@@ -1,3 +1,4 @@
+// https://mathpix.com/pricing
 import { MATHPIX_API_INFO } from "#config/config.js";
 import axios from "axios";
 import { sleep } from "#utils/utils.js";

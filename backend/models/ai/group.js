@@ -1,6 +1,9 @@
 import { addManyChoicesToQuestion } from "#models/choice/index.js";
 import { upsertQuestion } from "#models/question/index.js";
-import { postPdfAndRetriveParsedPdf } from "#utils/mathpix.js";
+import {
+  postImageAndRecieveText,
+  postPdfAndRetriveParsedPdf,
+} from "#utils/mathpix.js";
 import { sendOpenAiAssistantPromptAndRecieveResult } from "#utils/openAi.js";
 import FormData from "form-data";
 import { upsertGroupInClass, deleteGroupById } from "#models/group/index.js";
@@ -36,9 +39,7 @@ export async function etlFilesIntoGroup(files, class_id, user_id, user_prompt) {
         formData.append("file", file.buffer, file.originalname);
         mdd_res += await postPdfAndRetriveParsedPdf(formData);
       } else {
-        throw new Error(
-          "file is not a pdf, support for all file types coming soon\nfor now convert to a pdf" // todo: support all file types
-        );
+        mdd_res += await postImageAndRecieveText(file.buffer); // file .buffer is in base 64
       }
     }
 

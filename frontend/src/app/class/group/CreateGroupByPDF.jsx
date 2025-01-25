@@ -10,13 +10,12 @@ import { selectLoadingState } from '@app/store/loadingSlice';
 export default function CreateGroupByPDF({ classId }) {
   const dispatch = useDispatch();
   const [customPrompt, setCustomPrompt] = useState('');
-  const [reset, setReset] = useState(0);
   const loading = useSelector(selectLoadingState).loadingComps.CreateGroupByPDF;
 
   function handlePdfSubmit(formData) {
     if (classId) {
-      setReset(reset + 1);
       dispatch(createGroupGivenPDF(formData, classId, customPrompt || null));
+      setCustomPrompt('');
     } else {
       window.alert('Please select a class first');
     }
@@ -43,7 +42,7 @@ export default function CreateGroupByPDF({ classId }) {
             fluid
           />
         </div>
-        <PdfUploadForm reset={reset} onSubmit={handlePdfSubmit} />
+        <PdfUploadForm onSubmit={handlePdfSubmit} />
       </div>
     </CustomImageLoader>
   );

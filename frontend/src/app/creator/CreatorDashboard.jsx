@@ -5,7 +5,7 @@ import { getUserCount, selectUserCount } from '../home/homeSlice';
 import { selectUser } from '../auth/authSlice';
 import { useNavigate } from 'react-router-dom';
 import { makeUserACreator } from './creatorSlice';
-import { changeNavbarPage } from '@app/layout/navbar/navbarSlice';
+import { changeNavbarPage, getStartedNow } from '@app/layout/navbar/navbarSlice';
 
 export default function CreatorDashboard() {
   const navigate = useNavigate();
@@ -32,9 +32,11 @@ export default function CreatorDashboard() {
           onClick={() => {
             if (!user?.is_creator) {
               dispatch(makeUserACreator());
+              setTimeout(() => {
+                dispatch(getStartedNow(navigate));
+              }, 3000);
             } else {
-              dispatch(changeNavbarPage(navigate, '/class'));
-              // window.alert('You are already a creator!');
+              dispatch(getStartedNow(navigate));
             }
           }}
           primary

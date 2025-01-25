@@ -1,6 +1,7 @@
 import { standardApiCall } from '@utils/api';
 
 import { updateArrObjectsWithNewVals, filterArr, upsertArray, countingSort } from 'maddox-js-funcs';
+import { getSchoolByClassId } from '../school/schoolSlice';
 
 export const GROUP_TYPES = ['exam', 'topic']; // will need to switch on backend, i think the table group_types
 
@@ -24,14 +25,17 @@ export function getGroupsByClassId(classId) {
 export function createGroupGivenPDF(formData, class_id, prompt) {
   formData.append('prompt', prompt); // Add the prompt
   formData.append('class_id', class_id); // Add the class_id
-
-  return standardApiCall('post', `/api/ai/group/`, formData, null, {
-    // this will not update state to much work just have user refresh or smth
-    loadingComponent: ['CreateGroupByPDF'],
-    noticeOfSuccess: 'successfully generate group by AI!',
-    axiosConfig: { headers: { 'Content-Type': 'multipart/form-data' } },
-    refreshOnCompletion: true, // creates group question choices I aint adding allat back just refresh
-  });
+  return async function (dispatch) {
+    standardApiCall('post', `/api/ai/group/`, formData, null, {
+      // this will not update state to much work just have user refresh or smth
+      loadingComponent: ['CreateGroupByPDF'],
+      noticeOfSuccess: 'successfully generate group by AI!',
+      errorMsg:
+        'failed to generate group, make sure to send readable images!\nif you think this is a mistake please contact support',
+      axiosConfig: { headers: { 'Content-Type': 'multipart/form-data' } },
+      relocateOnCompletion: `/class/${dispatch(getSchoolByClassId(class_id))?.school_name}/${class_id}/group`,
+    })(dispatch);
+  };
 }
 
 // /**

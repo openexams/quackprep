@@ -26,16 +26,16 @@ passport.use(
     profile,
     done
   ) {
-    // login and if cant login then register & login; // should wrap in try catch
     const google_id = profile.id;
-    let username = profile.displayName.slice(0, MAX_USERNAME_LENGTH);
-    const pfp_url = profile._json.picture ?? null;
-    const email = profile._json.email.slice(0, MAX_EMAIL_LENGTH);
+    // THESE VALUES WILL ONLY BE USED IF THE USER IS NOT ALREADY REGISTERED
+    let username = profile?.displayName?.slice(0, MAX_USERNAME_LENGTH);
+    const pfp_url = profile?._json?.picture ?? null;
+    const email = profile?._json.email?.slice(0, MAX_EMAIL_LENGTH);
     const first_name =
-      profile.name.givenName.slice(0, MAX_FIRST_NAME_LENGTH) ?? null;
+      profile?.name?.givenName?.slice(0, MAX_FIRST_NAME_LENGTH) ?? null;
     const last_name =
-      profile.name.familyName.slice(0, MAX_LAST_NAME_LENGTH) ?? null;
-
+      profile?.name?.familyName?.slice(0, MAX_LAST_NAME_LENGTH) ?? null;
+    //
     let curId;
     try {
       if (

@@ -16,14 +16,11 @@ async function selectGroups(WHERE, params) {
 
 export async function getGroupsByClassId(class_id, type) {
   const params = { class_id, type };
-  if (type) {
-    return await selectGroups(
-      `g.class_id = :class_id AND gt.type_name = :type`,
-      params
-    );
-  } else {
-    return await selectGroups(`g.class_id = :class_id`, params);
-  }
+
+  return await selectGroups(
+    `g.class_id = :class_id ${type ? "AND gt.type_name = :type" : ""}`,
+    params
+  );
 }
 
 export async function getGroupsByUserId(user_id) {
