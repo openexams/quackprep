@@ -25,10 +25,6 @@ import Layout from './layout/Layout.jsx';
 import Auth from './auth/Auth.jsx';
 import Announcement from './extra/Announcement.jsx';
 
-{
-  /* topic could be a actual topic or a group of question such as a exam */
-}
-
 export default function AppRouter() {
   return (
     <Router>
