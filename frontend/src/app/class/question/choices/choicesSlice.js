@@ -80,7 +80,6 @@ const DEFAULT_STATE = {
 export default function choicesReducer(state = DEFAULT_STATE, action) {
   switch (action.type) {
     case GET_CRUD_CHOICES: {
-      // all choices only map to 1 question & the api will only call this route once so i can just append to the array and dont have to check for duplicates
       return {
         ...state,
         choices: countingSort([...(state.choices || []), ...action.payload], 'question_id'),
