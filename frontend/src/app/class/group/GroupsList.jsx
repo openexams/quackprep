@@ -50,10 +50,10 @@ export default function GroupsList() {
   }
   // on component mount and they chose a selection which has no groups, show all groups.
   useEffect(() => {
-    if (groups?.length === 0) {
+    if (!loading && groups?.length === 0) {
       handleTypeClick('');
     }
-  }, []); // dont want to run this on every groups change but idk why this works ngl
+  }, [loading]); // dont want to run this on every groups change but idk why this works ngl
 
   return (
     <Container>
