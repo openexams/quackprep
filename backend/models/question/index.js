@@ -135,9 +135,11 @@ export async function upsertQuestion(
   ).insertId; // only returns a insert if a question was created
   if (id) await deleteAllQuestionLinks(id); // deletes all of them only when its edited, if its being created it will have no links
   await linkQuestionToGroups(id || question_id, group_ids);
-  return await selectQuestion(`q.id=:question_id`, {
-    question_id: id || question_id,
-  });
+  return (
+    await selectQuestion(`q.id=:question_id`, {
+      question_id: id || question_id,
+    })
+  )[0];
 }
 
 /**

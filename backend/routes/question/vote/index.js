@@ -17,7 +17,7 @@ router.post("/", isAuthenticated, async function (req, res) {
       data.question_id,
       data.vote
     );
-    res.status(200).json(result); // user does not need this back
+    res.status(201).json(result); // user does not need this back
   } catch (error) {
     commonErrorMessage(
       res,

@@ -84,7 +84,7 @@ export default function QuestionPage() {
               {selectedQuestion ? (
                 <Segment>
                   <ChoiceRouter selectedQuestion={selectedQuestion} />
-                  {selectedQuestion?.id && <QuestionVote questionId={selectedQuestion?.id} />}
+                  {selectedQuestion?.id && <QuestionVote questionId={selectedQuestion?.id} upvotes={selectedQuestion?.upvotes} />}
 
                   {selectedQuestion?.id && <QuestionReport questionId={selectedQuestion?.id} />}
                   {selectedQuestion?.explanation_url && (

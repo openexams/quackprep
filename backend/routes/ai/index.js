@@ -118,7 +118,7 @@ router.post(
         data.likeQuestionText,
         data.likeQuestionId
       );
-      res.status(200).json(result);
+      res.status(201).json(result);
     } catch (error) {
       commonErrorMessage(
         res,

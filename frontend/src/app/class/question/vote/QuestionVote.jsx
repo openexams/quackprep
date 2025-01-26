@@ -2,9 +2,8 @@ import { useDispatch } from 'react-redux';
 import { Button, Icon } from 'semantic-ui-react';
 import { upsertVoteOnQuestion } from './questionVoteSlice';
 
-export default function QuestionVote({ questionId }) {
+export default function QuestionVote({ questionId, upvotes }) {
   const dispatch = useDispatch();
-  //   const votes = 1; could show x votes at somepoint
 
   const handleVote = (type) => {
     dispatch(upsertVoteOnQuestion(questionId, type));
@@ -13,13 +12,14 @@ export default function QuestionVote({ questionId }) {
 
   return (
     <div style={{ display: 'inline-flex', alignItems: 'center', padding: '.2rem' }}>
-      <Button.Group size='medium'>
+      <span style={{ marginRight: '0.5rem', fontWeight: 'bold' }}>{upvotes}</span>
+      <Button.Group size='medium' vertical>
         <Button icon compact color='teal' onClick={() => handleVote(1)}>
-          <Icon name='thumbs up outline' />
+          <Icon name='up arrow' />
         </Button>
 
         <Button icon compact color='pink' onClick={() => handleVote(0)}>
-          <Icon name='thumbs down outline' />
+          <Icon name='down arrow' />
         </Button>
       </Button.Group>
     </div>

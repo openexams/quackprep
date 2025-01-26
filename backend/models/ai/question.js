@@ -115,26 +115,23 @@ export async function generateQuestionLike(
       groups_question_is_in.push(object_w_groups[i].group_id);
     }
 
-    const new_question = await upsertQuestion(
+    question_added = await upsertQuestion(
       null,
       quackAssistResponseJSON.question,
       user_id,
       groups_question_is_in,
       true
     );
-    question_added = new_question?.[0];
 
     if (!question_added?.id) {
       throw new Error("failed to add AI question, question not created");
-      return;
     }
-
     const choices_added = await addManyChoicesToQuestion(
       question_added?.id,
       user_id,
       quackAssistResponseJSON.options
     );
-    return { question: new_question, choices: choices_added };
+    return { question: question_added, choices: choices_added };
   } catch (error) {
     if (question_added?.id) {
       // if we added a question & errored then->
@@ -184,15 +181,13 @@ export async function generateQuestionFromGroup(user_id, group_id) {
       };
     }
 
-    const question_with_2 = await upsertQuestion(
+    question_added = await upsertQuestion(
       null,
       quackAssistResponseJSON.question,
       user_id,
       [group_id],
       true
     );
-
-    question_added = question_with_2?.[0];
 
     if (!question_added?.id) {
       throw new Error("failed to add AI question, question not created");
@@ -203,7 +198,7 @@ export async function generateQuestionFromGroup(user_id, group_id) {
       user_id,
       quackAssistResponseJSON.options
     );
-    return { question: question_with_2, choices: choices_added };
+    return { question: question_added, choices: choices_added };
   } catch (error) {
     if (question_added?.id) {
       // if we added a question & errored then->

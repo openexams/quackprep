@@ -7,10 +7,7 @@ import {
 import { sendOpenAiAssistantPromptAndRecieveResult } from "#utils/openAi.js";
 import FormData from "form-data";
 import { upsertGroupInClass, deleteGroupById } from "#models/group/index.js";
-import {
-  MAX_USER_PROMPT_LENGTH,
-  QUACK_CREAT_GROUP_ASS_ID,
-} from "#config/constants.js";
+import { QUACK_CREAT_GROUP_ASS_ID } from "#config/constants.js";
 
 /**
  *
@@ -63,16 +60,14 @@ export async function etlFilesIntoGroup(files, class_id, user_id, user_prompt) {
     for (let i = 0; i < GenGroupResponseJSON.questions.length; i++) {
       // this is server intensive can i fix this?
       const curQuestion = GenGroupResponseJSON.questions[i];
-      const question = (
-        await upsertQuestion(
-          // how can i give topics to these questions?
-          null,
-          curQuestion.question,
-          user_id,
-          [group.id],
-          true
-        )
-      )[0];
+      const question = await upsertQuestion(
+        // how can i give topics to these questions?
+        null,
+        curQuestion.question,
+        user_id,
+        [group.id],
+        true
+      );
       await addManyChoicesToQuestion(question.id, user_id, curQuestion.options);
     }
   } catch (error) {
