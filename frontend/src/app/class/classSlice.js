@@ -1,10 +1,33 @@
 import { standardApiCall } from '@utils/api';
 import { updateArrObjectsWithNewVals, filterArr, upsertArray } from 'maddox-js-funcs';
 import { countingSort } from 'maddox-js-funcs';
+import { GENERAL_SCHOOL_ID, OTHER_CLASS_CATEGORY_ID } from '../../../../global_constants';
+import { selectUser } from '@app/auth/authSlice';
 
 const GET_CRUD_CLASSES = 'app/class/GET_CRUD_CLASSES';
 const DELETE_CRUD_CLASS = 'app/class/DELETE_CRUD_CLASS';
 const UPSERT_CRUD_CLASSES = 'app/class/UPSERT_CRUD_CLASSES';
+
+export function createDefaultUserClass() {
+  return async function (dispatch, getState) {
+    const { username } = selectUser(getState()).user;
+    await standardApiCall(
+      'post',
+      `/api/class/`,
+      {
+        school_id: GENERAL_SCHOOL_ID,
+        name: `${username}'s Study Content`,
+        description: `A temporary class to hold ${username}'s Study Content`,
+        category: OTHER_CLASS_CATEGORY_ID,
+      },
+      UPSERT_CRUD_CLASSES,
+      {
+        loadingComponent: ['ClassList', 'CreateGroupByPDF', 'CreatePage'],
+        noticeOfSuccess: 'successfully created default class',
+      },
+    )(dispatch); // have a action that puts this created class into the classlist
+  };
+}
 
 export function getClassesBySchoolId(school_id) {
   return standardApiCall('get', `/api/class/${school_id}`, null, GET_CRUD_CLASSES, { loadingComponent: ['ClassList'] });

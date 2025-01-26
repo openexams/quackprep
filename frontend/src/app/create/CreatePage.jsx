@@ -1,35 +1,51 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Grid, Segment, Form, Button, Message, Header, Divider, Dropdown, Icon } from 'semantic-ui-react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { getClassesByUserId } from '../class/classSlice';
+import { createDefaultUserClass, getClassesByUserId } from '../class/classSlice';
 import { selectUser } from '../auth/authSlice';
 import { selectArrayOfStateById } from 'maddox-js-funcs';
 import { mapClassesToDropdown } from '../creator/forms/dropdownMappings';
-import { changeNavbarPage, getStartedNow } from '@app/layout/navbar/navbarSlice';
+import { getStartedNow } from '@app/layout/navbar/navbarSlice';
 import CreateGroupByPDF from '../class/group/CreateGroupByPDF';
+import { makeUserACreator } from '@app/creator/creatorSlice';
+import { selectLoadingState } from '@app/store/loadingSlice';
 
 export default function NewPageWrapper() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const defaultClassCreated = useRef(false);
 
   // Get the user ID from Redux
-  const user_id = useSelector(selectUser).user?.id;
+  const user = useSelector(selectUser).user;
+  const user_id = user?.id;
 
   // Grab classes created by the user
-  const classes = useSelector(selectArrayOfStateById('app.class.classes.classes', 'created_by', parseInt(user_id)));
+  const userCreatedClasses = useSelector(selectArrayOfStateById('app.class.classes.classes', 'created_by', parseInt(user_id)));
+  const loading = useSelector(selectLoadingState).loadingComps.CreatePage;
 
   // Local state for the selected class
   const [classId, setClassId] = useState(null);
 
   useEffect(() => {
-    if (user_id) {
+    if (user_id && !user?.is_creator) {
+      dispatch(makeUserACreator());
+    } else if (user_id && !userCreatedClasses) {
       dispatch(getClassesByUserId());
+    } else if (
+      user?.is_creator &&
+      defaultClassCreated.current === false &&
+      user_id &&
+      Array.isArray(userCreatedClasses) &&
+      userCreatedClasses.length === 0
+    ) {
+      defaultClassCreated.current = true;
+      dispatch(createDefaultUserClass());
     }
-  }, [user_id, dispatch]);
+  }, [user_id, dispatch, userCreatedClasses, user?.is_creator]);
 
   return (
-    <Segment raised padded>
+    <Segment raised padded loading={loading}>
       <Grid stackable>
         <Grid.Row>
           <Grid.Column>
@@ -47,7 +63,7 @@ export default function NewPageWrapper() {
         <Grid.Row>
           <Grid.Column>
             {/* If user has no classes, show a warning message */}
-            {!classes || classes.length === 0 ? (
+            {!userCreatedClasses || userCreatedClasses.length === 0 ? (
               <Message warning>
                 <Message.Header>No Classes Found</Message.Header>
                 <p>
@@ -75,7 +91,7 @@ export default function NewPageWrapper() {
                     clearable
                     value={classId}
                     onChange={(_, data) => setClassId(data.value)}
-                    options={mapClassesToDropdown(classes)}
+                    options={mapClassesToDropdown(userCreatedClasses)}
                     placeholder='Select a Class'
                     fluid
                   />

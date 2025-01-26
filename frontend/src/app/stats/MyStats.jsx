@@ -56,7 +56,7 @@ export default function MyStats() {
 
                   <Grid.Column>
                     <Statistic color='purple'>
-                      <Statistic.Value>{time_spent} min</Statistic.Value>
+                      <Statistic.Value>{time_spent || 0} min</Statistic.Value>
                       <Statistic.Label>Time Spent</Statistic.Label>
                     </Statistic>
                   </Grid.Column>
