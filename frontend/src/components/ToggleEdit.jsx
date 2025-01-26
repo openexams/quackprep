@@ -3,6 +3,7 @@ import { Checkbox, Segment, Header, Icon } from 'semantic-ui-react';
 import { selectEditState } from '@app/auth/authSlice';
 import { selectNavbarState, toggleEdit } from '@app/layout/navbar/navbarSlice';
 import { selectUser } from '@app/auth/authSlice';
+import { highLightClassCreate } from '@app/creator/forms/ClassEditor';
 
 const ToggleEditComponent = () => {
   const isCreator = useSelector(selectUser).user?.is_creator;
@@ -12,23 +13,6 @@ const ToggleEditComponent = () => {
 
   if (!isCreator || !currentPage?.includes('class')) {
     return null;
-  }
-
-  // ClassEditor.jsx
-  function highLightClassEditCreate() {
-    const classCreate = document.getElementById('class_create');
-    if (classCreate) {
-      classCreate.scrollIntoView({ behavior: 'smooth', block: 'center' });
-
-      classCreate.classList.add('highlight');
-
-      // Remove the highlight class after 2 seconds
-      setTimeout(() => {
-        classCreate.classList.remove('highlight');
-      }, 2000);
-    } else {
-      console.error('No class create');
-    }
   }
 
   return (
@@ -45,9 +29,14 @@ const ToggleEditComponent = () => {
         }}
         toggle
         checked={isEditing}
-        onChange={() => {
+        onChange={(e, d) => {
           dispatch(toggleEdit());
-          setTimeout(() => highLightClassEditCreate(), 100);
+
+          if (d.checked === true) {
+            setTimeout(() => {
+              highLightClassCreate();
+            }, 300);
+          }
         }}
         label='Toggle Edit Mode'
       />

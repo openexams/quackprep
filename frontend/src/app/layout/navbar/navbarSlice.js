@@ -1,3 +1,4 @@
+import { highLightClassCreate } from '@app/creator/forms/ClassEditor';
 import { standardApiCall } from '@utils/api';
 import { copyArray, updateObjectWithKey, replaceP20WithSpace } from 'maddox-js-funcs';
 
@@ -83,6 +84,10 @@ export function getStartedNow(navigate) {
         dispatch(changeNavbarPage(navigate, '/class'));
       }
       dispatch(toggleEdit(true));
+      setTimeout(() => {
+        // ClassEditor.jsx
+        highLightClassCreate();
+      }, 300);
     } else {
       dispatch(changeNavbarPage(navigate, '/creatordashboard'));
     }

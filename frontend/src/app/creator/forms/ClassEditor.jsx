@@ -12,6 +12,22 @@ import { selectClassCategories } from '@app/class/class_categories/classCategory
 import { useNavigate } from 'react-router-dom';
 import { changeNavbarPage } from '@app/layout/navbar/navbarSlice';
 
+export function highLightClassCreate() {
+  const classCreate = document.getElementById('class_create');
+  if (classCreate) {
+    classCreate.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+    classCreate.classList.add('highlight');
+
+    // Remove the highlight class after 2 seconds
+    setTimeout(() => {
+      classCreate.classList.remove('highlight');
+    }, 2000);
+  } else {
+    console.error('No class create');
+  }
+}
+
 export default function ClassEditor({ id, name, category, desc, school_id }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();

@@ -60,8 +60,8 @@ export default function AppRouter() {
           <Route path='/stats' element={<Stats />} />
           <Route path='*' element={<NotFoundPage />} />
         </Routes>
+        <Footer /> {/* can move out of layout and changes how it looks */}
       </Layout>
-      <Footer />
     </Router>
   );
 }
