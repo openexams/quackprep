@@ -20,7 +20,7 @@ export default function Auth() {
   const lastPage = useSelector(selectLastPage).lastPage;
 
   useEffect(() => {
-\    if (user?.id && lastPage) dispatch(changeNavbarPage(navigate, lastPage));
+    if (user?.id && lastPage) dispatch(changeNavbarPage(navigate, lastPage));
     else if (user?.id) dispatch(changeNavbarPage(navigate, '/'));
   }, [user, navigate, dispatch]);
 
