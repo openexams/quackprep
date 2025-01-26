@@ -5,11 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { changeNavbarPage, getStartedNow, toggleEdit } from '@app/layout/navbar/navbarSlice';
 import '../class_card.css';
 import useIsMobile from '@utils/hooks/useIsMobile';
-import { selectUser } from '@app/auth/authSlice';
 
 export default function ClassCardCTA() {
-  const user = useSelector(selectUser).user;
-  const isCreator = user?.is_creator;
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [hovered, setHovered] = useState(false);

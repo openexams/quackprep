@@ -43,7 +43,7 @@ export default function classReducer(state = DEFAULT_STATE, action) {
     case DELETE_CRUD_CLASS:
       return { ...state, classes: filterArr(state.classes, action.payload) };
     case UPSERT_CRUD_CLASSES:
-      return { ...state, classes: upsertArray(state.classes, action.payload?.[0]) };
+      return { ...state, classes: countingSort(upsertArray(state.classes, action.payload?.[0]), 'school_id') };
     default:
       return state;
   }

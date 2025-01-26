@@ -60,9 +60,11 @@ export default function ClassList() {
           {/* Wrap Transition.Group with a scrollable container */}
           <div style={{ maxHeight: '600px', overflowY: 'auto', padding: '1rem' }}>
             <Transition.Group as={Grid} duration={300} animation='fade' stackable columns={3}>
-              <Grid.Column key={'cta_card'}>
-                <ClassCardCTA />
-              </Grid.Column>
+              {!edit && (
+                <Grid.Column key={'cta_card'}>
+                  <ClassCardCTA />
+                </Grid.Column>
+              )}
               {visible && filteredClasses?.length > 0
                 ? filteredClasses.map((c, index) => (
                     <Grid.Column key={index}>

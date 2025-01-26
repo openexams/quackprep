@@ -88,18 +88,19 @@ export default function choicesReducer(state = DEFAULT_STATE, action) {
     }
     case DELETE_CRUD_CHOICE:
       return { ...state, choices: filterArr(state.choices, action.payload) };
-    case UPSERT_CRUD_CHOICE: // if inserteing new id will be higher than all others, as such it will stay sorted
-      return { ...state, choices: upsertArray(state.choices, action.payload?.[0]) };
+    case UPSERT_CRUD_CHOICE:
+      return { ...state, choices: countingSort(upsertArray(state.choices, action.payload?.[0]), 'question_id') };
+    case GEN_AI_Q_AND_C_RES: {
+      /**@type {import("../../../../../../shared-types/choice.types").GenQuestion} */
+      const generatedChoices = action.payload?.choices;
+      return { ...state, choices: countingSort(updateArrObjectsWithNewVals(state.choices, generatedChoices), 'question_id') }; // shouldnt have to counting sort them because they are new
+    }
 
     case GET_CURRENT_CHOICES:
       return { ...state, currentChoices: action.payload };
     case UPSERT_CURRENT_CHOICE:
       return { ...state, currentChoices: upsertArray(state.currentChoices, action.payload) };
-    case GEN_AI_Q_AND_C_RES: {
-      /**@type {import("../../../../../../shared-types/choice.types").GenQuestion} */
-      const generatedChoices = action.payload?.choices;
-      return { ...state, choices: updateArrObjectsWithNewVals(state.choices, generatedChoices) }; // shouldnt have to counting sort them because they are new
-    }
+
     default:
       return state;
   }

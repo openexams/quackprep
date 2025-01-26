@@ -1,6 +1,6 @@
 // Layout.jsx
-import React, { useState, useEffect } from 'react';
-import { Sidebar, SidebarPushable, SidebarPusher, Menu, Icon, Container, Segment, Image } from 'semantic-ui-react';
+import { useState } from 'react';
+import { Sidebar, Menu, Icon, Container } from 'semantic-ui-react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
