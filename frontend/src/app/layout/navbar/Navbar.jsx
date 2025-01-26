@@ -1,4 +1,3 @@
-import React from 'react';
 import { Sidebar, Menu, Icon } from 'semantic-ui-react';
 import BrandLogo from '@app/layout/brandlogo/BrandLogo';
 import ProfileDropdown from '@app/layout/profile/ProfileDropdown';

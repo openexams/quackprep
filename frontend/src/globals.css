@@ -33,6 +33,7 @@ h6 {
   font-family: 'Roboto', sans-serif !important;
 }
 :root {
+  /* CSS Variables for color theming */
   --primary-color: #1e3a8a; /* Deep Blue for primary elements */
   --secondary-color: #f1f5f9; /* Soft White for secondary elements */
   --accent-color: #2761a3; /* Vibrant Green for accents and buttons */
@@ -51,11 +52,18 @@ h6 {
     transform: scale(1);
   }
   50% {
-    transform: scale(1.00001);
+    transform: scale(1.1);
   }
   100% {
     transform: scale(1);
   }
+}
+
+.highlight {
+  background-color: rgba(255, 255, 0, 0.4) !important; /* Soft yellow background */
+  box-shadow: 0 0 15px 5px rgba(255, 255, 0, 0.6) !important; /* Glow effect */
+  transition: background-color 0.5s ease, box-shadow 0.5s ease; /* Smooth transition */
+  animation: pulse 1.5s infinite; /* Pulsing glow effect */
 }
 
 .pulseAnimation {

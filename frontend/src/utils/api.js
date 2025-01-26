@@ -70,7 +70,12 @@ export function standardApiCall(method, route, data = null, resultAction, option
         dispatch(hideFlashMessage());
         dispatch(show401Msg());
       } else {
-        dispatch(showFlashMessage(`message: ${options?.errorMsg}`, error?.response?.data?.message || 'an error has occured'));
+        dispatch(
+          showFlashMessage(
+            `message: ${options?.errorMsg || 'Sever Error'}`,
+            error?.response?.data?.message || 'an error has occured',
+          ),
+        );
       }
     }
   };

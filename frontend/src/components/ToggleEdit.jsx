@@ -14,6 +14,23 @@ const ToggleEditComponent = () => {
     return null;
   }
 
+  // ClassEditor.jsx
+  function highLightClassEditCreate() {
+    const classCreate = document.getElementById('class_create');
+    if (classCreate) {
+      classCreate.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+      classCreate.classList.add('highlight');
+
+      // Remove the highlight class after 2 seconds
+      setTimeout(() => {
+        classCreate.classList.remove('highlight');
+      }, 2000);
+    } else {
+      console.error('No class create');
+    }
+  }
+
   return (
     <Segment size='mini' basic id='toggle_edit_comp' textAlign='center' style={{ maxWidth: '250px', margin: 'auto' }}>
       <Header as='h6' color={isEditing ? 'green' : 'red'} style={{ fontSize: '1rem', marginBottom: '-.2rem' }}>
@@ -28,7 +45,10 @@ const ToggleEditComponent = () => {
         }}
         toggle
         checked={isEditing}
-        onChange={() => dispatch(toggleEdit())}
+        onChange={() => {
+          dispatch(toggleEdit());
+          setTimeout(() => highLightClassEditCreate(), 100);
+        }}
         label='Toggle Edit Mode'
       />
     </Segment>
