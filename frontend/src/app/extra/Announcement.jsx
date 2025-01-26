@@ -3,10 +3,12 @@ import { selectNavbarState } from '../layout/navbar/navbarSlice';
 import { Message, Button } from 'semantic-ui-react';
 import { useState } from 'react';
 import MarkdownRenderer from '@components/MarkdownRenderer';
+import useIsMobile from '@utils/hooks/useIsMobile';
 
 export default function Announcement() {
   const announcement = useSelector(selectNavbarState).navbar?.announcement;
   const [isVisible, setIsVisible] = useState(true);
+  const isMobile = useIsMobile();
 
   if (!announcement || !isVisible) {
     return null;
@@ -27,6 +29,7 @@ export default function Announcement() {
         margin: 0,
         padding: '1em 2em',
         color: 'black', // ensure text is black
+        marginTop: isMobile ? '5rem' : null, // push down for mobile, or else topbar will cover
       }}
     >
       <Message.Content

@@ -3,6 +3,7 @@ import BrandLogo from '@app/layout/brandlogo/BrandLogo';
 import ProfileDropdown from '@app/layout/profile/ProfileDropdown';
 import ToggleEditComponent from '@components/ToggleEdit';
 import { Link } from 'react-router-dom';
+import './navbar.css'; // Import the CSS file
 
 // Define a style for all Menu.Items
 const menuItemStyle = {
@@ -29,7 +30,7 @@ export default function Navbar({ isMobile, sidebarOpened, handlePageChange, acti
       {!isMobile && <BrandLogo handlePageChange={handlePageChange} />}
 
       <Menu.Item
-        style={menuItemStyle}
+        style={{ ...menuItemStyle, marginTop: isMobile ? '5rem' : null }} // same as Layout height
         onClick={handlePageChange}
         as={Link}
         to='/class'
