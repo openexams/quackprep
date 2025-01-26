@@ -76,7 +76,7 @@ export default function groupReducer(state = DEFAULT_STATE, action) {
     case DELETE_GROUP:
       return { ...state, groups: filterArr(state.groups, action.payload) };
     case UPSERT_GROUP:
-      return { ...state, groups: upsertArray(state.groups, action.payload?.[0]) };
+      return { ...state, groups: upsertArray(state.groups, action.payload) };
     default:
       return state;
   }

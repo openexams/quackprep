@@ -10,11 +10,12 @@ const menuItemStyle = {
   display: 'flex',
   alignItems: 'center', // vertically centers icon + text
   fontSize: '1.2em', // increases text size
+  position: 'sticky !important',
 };
 
 export default function Navbar({ isMobile, sidebarOpened, handlePageChange, activePage, user, hasStreak }) {
   return (
-    <Sidebar
+    <Sidebar // I CANT MAKE A FUCKING SIDEBAR FIXED
       as={Menu}
       // 1) Use "push" on desktop so content slides over
       //    Use "overlay" on mobile so it appears on top

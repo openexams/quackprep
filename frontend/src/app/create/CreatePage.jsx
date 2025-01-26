@@ -54,7 +54,7 @@ export default function NewPageWrapper() {
                   You need to create a class before using the AI generation feature. This ensures you can properly organize the
                   content generated.
                 </p>
-                <Button primary onClick={() => getStartedNow(navigate)}>
+                <Button primary onClick={() => dispatch(getStartedNow(navigate))}>
                   <Icon name='plus' />
                   Create Your First Class
                 </Button>

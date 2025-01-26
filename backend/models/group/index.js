@@ -59,7 +59,7 @@ export async function upsertGroupInClass(
       { verifyUserOwnsRowId: "cgroups" }
     )
   ).insertId;
-  return await selectGroups(`g.id = :result`, { result: id || group_id });
+  return (await selectGroups(`g.id = :result`, { result: id || group_id }))[0];
 }
 export async function deleteGroupById(user_id, group_id) {
   return await cascadeSetDeleted(user_id, "group", group_id, 0, 1, 1, 1, 0);

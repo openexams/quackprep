@@ -24,6 +24,10 @@ export default function Layout({ children }) {
   const { hasStreak } = useSelector(selectHasStreak);
 
   const handleToggleSidebar = (bool) => {
+    if (bool === true || sidebarOpened === false) {
+      window.scrollTo(0, 0); // tmp fix rn for sidebar not being sticky
+    }
+
     if (bool !== undefined) {
       setSidebarOpened(bool);
     } else {

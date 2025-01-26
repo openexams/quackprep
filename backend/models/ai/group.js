@@ -47,26 +47,24 @@ export async function etlFilesIntoGroup(files, class_id, user_id, user_prompt) {
         `${mdd_res}\n${user_prompt}`,
         { retire_time: 10000 }
       );
-    group = (
-      await upsertGroupInClass(
-        user_id,
-        class_id,
-        GenGroupResponseJSON.group_type,
-        GenGroupResponseJSON.group_name,
-        GenGroupResponseJSON.group_description,
-        null
-      )
-    )[0];
+    group = await upsertGroupInClass(
+      user_id,
+      class_id,
+      GenGroupResponseJSON.group_type,
+      GenGroupResponseJSON.group_name,
+      GenGroupResponseJSON.group_description,
+      null
+    );
     for (let i = 0; i < GenGroupResponseJSON.questions.length; i++) {
       // this is server intensive can i fix this?
       const curQuestion = GenGroupResponseJSON.questions[i];
       const question = await upsertQuestion(
-        // how can i give topics to these questions?
+        // TODO how can i give topics to these questions?
         null,
         curQuestion.question,
         user_id,
         [group.id],
-        true
+        false // TODO DECIDE WETHER THESE QUESTIONS SHOULD BE LABELED AS AI QUESTIONS (I SAY NO AS THIS IS JUST PARSING NON AI CONTENT)
       );
       await addManyChoicesToQuestion(question.id, user_id, curQuestion.options);
     }
