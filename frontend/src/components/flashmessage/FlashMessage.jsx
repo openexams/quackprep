@@ -2,7 +2,6 @@ import { Button, Message, Transition } from 'semantic-ui-react';
 import { hideFlashMessage, selectFlashMessageState } from './flashMessageSlice.js';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { changeNavbarPage, selectNavbarState } from '@app/layout/navbar/navbarSlice';
 
 const messageStyles = {
   success: {
@@ -44,7 +43,6 @@ const closeButtonStyle = {
 
 export default function FlashMessage() {
   const dispatch = useDispatch();
-  const { page } = useSelector(selectNavbarState).navbar;
   const { show, error, msg } = useSelector(selectFlashMessageState);
 
   // Auto-hide message after 4 seconds
@@ -78,7 +76,7 @@ export default function FlashMessage() {
         />
         <Message.Header style={{ fontWeight: 'bold' }}>{error ? 'An Error Has Occurred' : 'Success!'}</Message.Header>
         <p style={{ position: 'relative', zIndex: 1, margin: 0 }}>
-          {msg} {error && `: ${error.toString()}`}
+          {msg} {error && `${error?.toString() || null}`}
         </p>
       </Message>
     </Transition>

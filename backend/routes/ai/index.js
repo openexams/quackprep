@@ -2,7 +2,11 @@ import { isAuthenticated } from "#middleware/authMiddleware.js";
 import { verifyUserOwnsRowId } from "#utils/sqlFunctions.js";
 import { commonErrorMessage } from "#utils/utils.js";
 import { generateQuestionLike } from "#models/ai/question.js";
-import { MAX_FILES_UPLOAD, MAX_USER_PROMPT_LENGTH } from "#config/constants.js";
+import {
+  AI_ROUTES_RATE_LIMIT_PER_MIN,
+  MAX_FILES_UPLOAD,
+  MAX_USER_PROMPT_LENGTH,
+} from "#config/constants.js";
 import { etlFilesIntoGroup } from "#models/ai/group.js";
 import { checkStudentFRQAnswer } from "#models/ai/choice.js";
 import rateLimit from "express-rate-limit";
@@ -14,7 +18,7 @@ const router = Router();
 router.use(
   rateLimit({
     windowMs: 60 * 1000, // 1 min
-    limit: 2, // limit each IP to 2 requests per windowMs
+    limit: AI_ROUTES_RATE_LIMIT_PER_MIN,
   })
 );
 

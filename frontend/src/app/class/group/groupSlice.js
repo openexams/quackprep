@@ -30,8 +30,7 @@ export function createGroupGivenPDF(formData, class_id, prompt) {
       // this will not update state to much work just have user refresh or smth
       loadingComponent: ['CreateGroupByPDF'],
       noticeOfSuccess: 'successfully generate group by AI!',
-      errorMsg:
-        'failed to generate group, make sure to send readable images!\nif you think this is a mistake please contact support',
+      errorMsg: 'failed to generate group, make sure to send readable images!',
       axiosConfig: { headers: { 'Content-Type': 'multipart/form-data' } },
       relocateOnCompletion: `/class/${dispatch(getSchoolByClassId(class_id))?.school_name}/${class_id}/group`,
     })(dispatch);

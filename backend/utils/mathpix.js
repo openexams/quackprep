@@ -124,7 +124,7 @@ export async function postImageAndRecieveText(file) {
 
     if (!result.data?.text) {
       dlog(result.data);
-      throw new Error("failed to get text from image, mathpix error");
+      throw new Error("failed to get text from image, mathpix error.");
     }
     dlog(`successfully got text from image with status ${result.status}`);
     return result.data?.text;

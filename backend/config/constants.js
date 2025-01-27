@@ -10,3 +10,5 @@ export const MAX_USERNAME_LENGTH = 25;
 export const MAX_EMAIL_LENGTH = 100;
 export const MAX_FIRST_NAME_LENGTH = 50;
 export const MAX_LAST_NAME_LENGTH = 50;
+
+export const AI_ROUTES_RATE_LIMIT_PER_MIN = 1;

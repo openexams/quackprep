@@ -69,12 +69,16 @@ export function standardApiCall(method, route, data = null, resultAction, option
         dispatch(signOut());
         dispatch(hideFlashMessage());
         dispatch(show401Msg());
-      } else {
+      } else if (error?.response?.status === 429) {
         dispatch(
           showFlashMessage(
-            `message: ${options?.errorMsg || 'Sever Error'}`,
-            error?.response?.data?.message || 'an error has occured',
+            `Your Rate Limit has been exceeded, please try again later.`,
+            `Retry After: ${error?.response?.headers?.['retry-after']}s`,
           ),
+        );
+      } else {
+        dispatch(
+          showFlashMessage(`${options?.errorMsg || 'Sever Error'}\n`, error?.response?.data?.message || 'an error has occured.'),
         );
       }
     }
