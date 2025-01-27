@@ -4,9 +4,10 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "start": "npm install; npm run start:backend",
+    "start-prod": "npm install; npm run start-prod:backend",
     "dev": "concurrently --kill-others-on-fail --success=first \"npm run start:backend\" \"npm run dev:frontend\"",
     "build:frontend": "cd frontend && npm i && npm run build",
+    "start-prod:backend": "cd backend && npm i && npm run start-prod",
     "start:backend": "cd backend && npm i && npm start",
     "dev:frontend": "cd frontend && npm i && npm run dev"
   },

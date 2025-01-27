@@ -23,6 +23,7 @@
     "passport-http-bearer": "^1.0.1",
     "passport-local": "^1.0.0",
     "path": "^0.12.7",
+    "pm2": "^5.4.3",
     "redis": "^4.7.0",
     "validator": "^13.12.0"
   },
@@ -35,6 +36,7 @@
     "#middleware/*": "./middleware/*"
   },
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "nodemon server.js",
+    "start-prod": "pm2 start server.js -i -1"
   }
 }
