@@ -1,6 +1,7 @@
 import { standardApiCall } from '@utils/api';
 import { filterArr, upsertArray, countingSort, selectItemById, updateArrObjectsWithNewVals } from 'maddox-js-funcs';
 import { GEN_AI_Q_AND_C_RES } from '../ai/aiQuestionSlice.js';
+import { createSelector } from '@reduxjs/toolkit';
 
 const GET_CRUD_CHOICES = 'app/class/question/choices/GET_CRUD_CHOICES';
 
@@ -88,7 +89,7 @@ export default function choicesReducer(state = DEFAULT_STATE, action) {
     case DELETE_CRUD_CHOICE:
       return { ...state, choices: filterArr(state.choices, action.payload) };
     case UPSERT_CRUD_CHOICE:
-      return { ...state, choices: countingSort(upsertArray(state.choices, action.payload?.[0]), 'question_id') };
+      return { ...state, choices: countingSort(upsertArray(state.choices, action.payload), 'question_id') };
     case GEN_AI_Q_AND_C_RES: {
       /**@type {import("../../../../../../shared-types/choice.types").GenQuestion} */
       const generatedChoices = action.payload?.choices;
@@ -105,9 +106,12 @@ export default function choicesReducer(state = DEFAULT_STATE, action) {
   }
 }
 
-export const selectChoicesState = (state) => {
-  return { choices: state.app.choices.choices };
-};
+export const selectChoicesState = createSelector(
+  (state) => state,
+  function (state) {
+    return { choices: state.app.choices.choices };
+  },
+);
 
 // only choice pulled in should be from cur user.
 export function doesQuestionHaveCurrentChoice(currentChoices, question_id) {
@@ -123,6 +127,8 @@ export function doesQuestionHaveCurrentChoice(currentChoices, question_id) {
     return null;
   }
 }
-export function selectCurrentChoicesState(state) {
-  return state.app.choices.currentChoices;
-}
+
+export const selectCurrentChoicesState = createSelector(
+  (state) => state,
+  (state) => state.app.choices.currentChoices,
+);

@@ -80,5 +80,7 @@ export async function upsertClass(
       { verifyUserOwnsRowId: "classes" }
     )
   ).insertId;
-  return await selectClasses("cl.id = :class_id", { class_id: id || class_id });
+  return (
+    await selectClasses("cl.id = :class_id", { class_id: id || class_id })
+  )[0];
 }

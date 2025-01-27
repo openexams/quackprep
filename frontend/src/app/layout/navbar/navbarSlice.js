@@ -1,4 +1,5 @@
 import { highLightClassCreate } from '@app/creator/forms/ClassEditor';
+import { createSelector } from '@reduxjs/toolkit';
 import { standardApiCall } from '@utils/api';
 import { copyArray, updateObjectWithKey, replaceP20WithSpace } from 'maddox-js-funcs';
 
@@ -202,9 +203,10 @@ export const selectCurrentPage = function (state) {
   return { page: state.app.navbar.page };
 };
 
-export const selectNavbarState = function (state) {
-  return { navbar: state.app.navbar };
-};
+export const selectNavbarState = createSelector(
+  (state) => state,
+  (state) => ({ navbar: state.app.navbar }),
+);
 
 export const selectLastPage = function (state) {
   let lastPage = state.app.navbar.lastPage;

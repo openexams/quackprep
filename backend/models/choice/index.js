@@ -117,9 +117,11 @@ export async function upsertChoiceToQuestion(
     )
   ).insertId;
   // return the id the user sent (user edited) or return the created row.
-  return await selectChoices("c.id =:choice_id", {
-    choice_id: id || choice_id,
-  });
+  return (
+    await selectChoices("c.id =:choice_id", {
+      choice_id: id || choice_id,
+    })
+  )[0];
 }
 
 /**

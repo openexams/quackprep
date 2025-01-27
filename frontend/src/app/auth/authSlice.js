@@ -2,14 +2,16 @@ import { standardApiCall } from '@utils/api';
 import { LOGIN } from './login/loginSlice';
 import { selectItemById } from 'maddox-js-funcs';
 import { ADMIN_ACCOUNT_ID } from '../../../../global_constants.js';
+import { createSelector } from '@reduxjs/toolkit';
 
 export function getCurUser() {
   return standardApiCall('get', '/api/auth/verify', null, LOGIN, { loadingComponent: 'AuthPopup' });
 }
 
-export const selectUser = (state) => {
-  return { user: state.auth.user };
-};
+export const selectUser = createSelector(
+  (state) => state,
+  (state) => ({ user: state.auth.user }),
+);
 
 /**
  * if ur in a current class use this.

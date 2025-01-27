@@ -1,3 +1,5 @@
+import { createSelector } from '@reduxjs/toolkit';
+
 const LOADING_START = 'app/store/LOADING_START';
 const LOADING_STOP = 'app/store/LOADING_STOP';
 
@@ -44,6 +46,7 @@ export default function loadingReducer(state = DEFAULT_STATE, action) {
   }
 }
 
-export const selectLoadingState = function (state) {
-  return { loadingComps: state.loading.loadingComps };
-};
+export const selectLoadingState = createSelector(
+  (state) => state,
+  (state) => ({ loadingComps: state.loading.loadingComps }),
+);
