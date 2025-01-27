@@ -8,6 +8,7 @@ import GenerateQuestion from './ai/GenerateQuestion';
 import { selectCanAndIsEdit } from '@app/auth/authSlice';
 import { selectNavbarState } from '@app/layout/navbar/navbarSlice';
 import QuestionEditor from '@app/creator/forms/QuestionEditor';
+import { selectItemsById } from 'maddox-js-funcs';
 
 /**
  * List of questions that can be selected
@@ -21,8 +22,10 @@ export default function QuestionList({ questions, selectedQuestion }) {
   const edit = useSelector(selectCanAndIsEdit());
   //
   const favoriteQuestions = useSelector(selectFavoriteQuestionsState);
-  const [showTopics, setShowTopics] = useState(false); // TODO SHOW MULTIPLE TOPICS IF THE QUESTION HAS SUCH
+  const [showTopics, setShowTopics] = useState(false);
+  const [showAIQuestions, setShowAIQuestions] = useState(true);
   const currentChoices = useSelector(selectCurrentChoicesState);
+  questions = showAIQuestions ? questions : selectItemsById(questions, 'ai', 0);
 
   return (
     <Segment>
@@ -30,6 +33,12 @@ export default function QuestionList({ questions, selectedQuestion }) {
         Choose a Question
       </Header>
       <div style={{ marginBottom: '1rem' }}>
+        <Checkbox
+          label={{ children: 'Show AI', style: { fontSize: '0.9em', color: 'rgba(0,0,0,0.6)' } }}
+          checked={showAIQuestions}
+          onChange={() => setShowAIQuestions(!showAIQuestions)}
+          style={{ fontSize: '0.9em', marginRight: '.5rem' }}
+        />
         <Checkbox
           label={{ children: 'Show topics', style: { fontSize: '0.9em', color: 'rgba(0,0,0,0.6)' } }}
           checked={showTopics}
@@ -42,7 +51,7 @@ export default function QuestionList({ questions, selectedQuestion }) {
       <div style={{ maxHeight: '33rem', overflowY: 'auto' }}>
         <List selection divided relaxed>
           {edit ? <QuestionEditor group_ids={groupId} /> : null}
-          {questions.map((question, index) => (
+          {questions?.map((question, index) => (
             <QuestionCard
               ai={question.ai}
               key={index}

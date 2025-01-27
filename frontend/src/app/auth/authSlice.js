@@ -22,9 +22,8 @@ export function selectCanAndIsEdit() {
   return (state) => {
     if (state.app.navbar.editing === true) {
       const curClass = selectItemById(state.app.class.classes.classes, 'id', state.app.navbar.classId);
-      console.log(curClass);
       if (!curClass) {
-        console.log('No class found');
+        // console.log('No class found');
         return false;
       }
       if (parseInt(curClass.created_by) === parseInt(state.auth.user?.id) || parseInt(state.auth.user?.id) === ADMIN_ACCOUNT_ID) {

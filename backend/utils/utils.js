@@ -32,7 +32,7 @@ export function commonErrorMessage(
   error = "an error has occurred"
 ) {
   dlog(`${error}\n${message}`);
-  res
-    .status(status)
-    .json({ message: `${message}\n${NODE_ENV === "local" ? error : ""}` });
+  res.status(status).json({
+    message: `${message}\n${NODE_ENV === "local" ? `\nFOR DEV:${error}` : ""}`,
+  });
 }

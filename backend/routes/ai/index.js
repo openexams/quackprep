@@ -12,6 +12,7 @@ import { checkStudentFRQAnswer } from "#models/ai/choice.js";
 import rateLimit from "express-rate-limit";
 import { Router } from "express";
 import multer from "multer";
+import { FILE_SIZE_EXCEEDED, AI_PROMPT_TOO_LONG } from "#config/error_codes.js";
 
 const router = Router();
 
@@ -33,13 +34,13 @@ router.post(
     try {
       const files = req.files;
       const class_id = req.body.class_id;
-      const prompt = req.body.prompt;
+      const user_given_context = req.body.prompt;
 
-      if (prompt?.length > MAX_USER_PROMPT_LENGTH) {
+      if (user_given_context?.length > MAX_USER_PROMPT_LENGTH) {
         commonErrorMessage(
           res,
           400,
-          `prompt is too long, max length is ${MAX_USER_PROMPT_LENGTH}`
+          `user_given_context is too long, max length is ${MAX_USER_PROMPT_LENGTH}`
         );
         return;
       }
@@ -54,15 +55,36 @@ router.post(
       }
 
       // Process file (stored in memory or temporary location)
-      const result = await etlFilesIntoGroup(files, class_id, req.user, prompt);
+      const result = await etlFilesIntoGroup(
+        files,
+        class_id,
+        req.user,
+        user_given_context
+      );
       res.status(201).json(result);
     } catch (error) {
-      commonErrorMessage(
-        res,
-        500,
-        `failed to generate ai group in class ${req.body?.class_id}`,
-        error
-      );
+      if (error.errorCode === FILE_SIZE_EXCEEDED) {
+        commonErrorMessage(
+          res,
+          400,
+          "one of your file's size is too large. use compression to reduce file size.",
+          error
+        );
+      } else if (error.errorCode === AI_PROMPT_TOO_LONG) {
+        commonErrorMessage(
+          res,
+          400,
+          "The prompt is too long, contact support for assistance, or try uploading different files",
+          error
+        );
+      } else {
+        commonErrorMessage(
+          res,
+          500,
+          `failed to generate ai group in class ${req.body?.class_id}`,
+          error
+        );
+      }
     }
   }
 );
@@ -93,7 +115,7 @@ router.post("/choice/grade/", isAuthenticated, async function (req, res) {
       commonErrorMessage(
         res,
         400,
-        "YOU DONT OWN THE ROW YOU ARE TRYING TO EDIT",
+        "YOU DONT OWN THE ROW YOU ARE TRYING TO MANIPULATE",
         null
       );
       return;

@@ -3,6 +3,8 @@ import {
   MAX_PROMPT_LENGTH,
   MAX_USER_PROMPT_LENGTH,
 } from "#config/constants.js";
+import { AI_PROMPT_TOO_LONG } from "#config/error_codes.js";
+import CustomError from "./CustomError.js";
 import { sleep } from "./utils.js";
 
 /**
@@ -11,6 +13,7 @@ import { sleep } from "./utils.js";
  * @param {String} prompt
  * @param {Object} [options={}]
  * @param {Number} options.retire_time
+ * @param {Number} options.max_retires
  * @returns {String} result the ais result;
  */
 export async function sendOpenAiAssistantPromptAndRecieveResult(
@@ -18,8 +21,17 @@ export async function sendOpenAiAssistantPromptAndRecieveResult(
   prompt,
   options = {}
 ) {
+  dlog(
+    `calling openAi with prompt:${prompt?.slice(0, 100)}...\nlen ${
+      prompt.length
+    }`
+  );
   if (prompt.length > MAX_PROMPT_LENGTH) {
-    throw new Error("prompt is too long");
+    throw new CustomError(
+      `prompt is too long, max len is ${MAX_PROMPT_LENGTH}, your len was ${prompt.length}`,
+      400,
+      AI_PROMPT_TOO_LONG
+    );
   }
   try {
     const quackAssist = await openai.beta.assistants.retrieve(assistant_id);
@@ -43,25 +55,11 @@ export async function sendOpenAiAssistantPromptAndRecieveResult(
       // can change max tokens used here
       assistant_id: quackAssist.id,
     });
-    let runRes = await openai.beta.threads.runs.retrieve(
-      quackThread.id,
-      quackRun.id
-    );
+
     // keep checking till its completed.
-    while (runRes.status === "queued" || runRes.status === "in_progress") {
-      dlog(
-        `openAi run not finished retrying in ${options.retire_time || 5000}ms`
-      );
-      await sleep(options.retire_time || 5000);
-      runRes = await openai.beta.threads.runs.retrieve(
-        quackThread.id,
-        quackRun.id
-      );
-    }
-    if (runRes.status !== "completed") {
-      throw new Error("failed to generate AI question & choices.");
-      return;
-    }
+
+    await checkThreadUntilCompleted(quackThread.id, quackRun.id, options);
+
     // get message from AI when completed.
     const allMessages = await openai.beta.threads.messages.list(quackThread.id);
     return JSON.parse(allMessages?.data[0]?.content?.[0]?.text?.value);
@@ -115,5 +113,32 @@ export async function sendPromptAndRecieveJSONResult(
       "failed to call openai api sendPromptAndRecieveJSONResult, rethrowing error"
     );
     throw error;
+  }
+}
+/**
+ *
+ * @param {*} threadId
+ * @param {*} runId
+ * @param {Object} options
+ * @param {Number} options.retire_time defaults to 10000ms
+ * @param {Number} options.max_retires defaults to 20 retriees
+ */
+export async function checkThreadUntilCompleted(threadId, runId, options) {
+  let retries = 0;
+  let runRes = await openai.beta.threads.runs.retrieve(threadId, runId);
+  while (
+    runRes.status === "queued" ||
+    runRes.status === "in_progress" ||
+    retries < (options.max_retires || 20)
+  ) {
+    dlog(
+      `openAi run not finished retrying in ${options.retire_time || 1000}ms`
+    );
+    await sleep(options.retire_time || 1000);
+    runRes = await openai.beta.threads.runs.retrieve(threadId, runId);
+    retries++;
+  }
+  if (runRes.status !== "completed") {
+    throw new Error("failed to generate AI question & choices.");
   }
 }

@@ -34,10 +34,12 @@ export async function generateQuestionLike(
     const quackAssistResponseJSON =
       await sendOpenAiAssistantPromptAndRecieveResult(
         QUACK_GEN_QUESTION_ASS_ID,
-        `create a question like: "${likeQuestionText}"\nin json format`
+        `create a question similar to: "${likeQuestionText}"\nin json format`
       );
+
+    // make sure it has neccessary props to be of type GenQuestion
     quackAssistResponseJSON.options = quackAssistResponseJSON.options.map(
-      (o, _) => ({ ...o, type: "mcq" })
+      (o) => ({ ...o, type: "mcq" })
     );
 
     // get what groups curQuestion has
@@ -64,11 +66,9 @@ export async function generateQuestionLike(
     //   type: "mcq",
     // });
 
-    const object_w_groups = await getWhatGroupsQuestionisIn(likeQuestionId);
-    const groups_question_is_in = [];
-    for (let i = 0; i < object_w_groups.length; i++) {
-      groups_question_is_in.push(object_w_groups[i].group_id);
-    }
+    const groups_question_is_in = await getWhatGroupsQuestionisIn(
+      likeQuestionId
+    );
 
     question_added = await upsertQuestion(
       null,
@@ -112,7 +112,7 @@ export async function generateQuestionFromGroup(user_id, group_id) {
     questions = await getQuestionsByGroupId(group_id);
 
     // Shuffle the questions array
-    questions.sort(() => Math.random() - 0.5);
+    // questions.sort(() => Math.random() - 0.5); no need to its shuffled on frontend. but thats a good way of shuffling
 
     // Build context string
     for (let i = 0; i < questions.length && i < MAX_QUESTIONS_CONTEXT; i++) {
@@ -129,12 +129,9 @@ export async function generateQuestionFromGroup(user_id, group_id) {
         context + prompt
       );
 
-    for (let i = 0; i < quackAssistResponseJSON.options.length; i++) {
-      quackAssistResponseJSON.options[i] = {
-        ...quackAssistResponseJSON.options[i],
-        type: "mcq",
-      };
-    }
+    quackAssistResponseJSON.options = quackAssistResponseJSON.options.map(
+      (o) => ({ ...o, type: "mcq" })
+    );
 
     question_added = await upsertQuestion(
       null,
@@ -145,7 +142,9 @@ export async function generateQuestionFromGroup(user_id, group_id) {
     );
 
     if (!question_added?.id) {
-      throw new Error("failed to add AI question, question not created");
+      throw new Error(
+        "failed to add AI question by multiple questions, question not created"
+      );
     }
 
     const choices_added = await addManyChoicesToQuestion(

@@ -7,7 +7,12 @@ import {
 import { sendOpenAiAssistantPromptAndRecieveResult } from "#utils/openAi.js";
 import FormData from "form-data";
 import { upsertGroupInClass, deleteGroupById } from "#models/group/index.js";
-import { QUACK_CREAT_GROUP_ASS_ID } from "#config/constants.js";
+import {
+  MAX_FILE_SIZE_IN_BYTES,
+  QUACK_CREAT_GROUP_ASS_ID,
+} from "#config/constants.js";
+import { FILE_SIZE_EXCEEDED } from "#config/error_codes.js";
+import CustomError from "#utils/CustomError.js";
 
 /**
  *
@@ -27,6 +32,9 @@ export async function etlFilesIntoGroup(files, class_id, user_id, user_prompt) {
     let mdd_res = "";
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
+      if (file.size > MAX_FILE_SIZE_IN_BYTES) {
+        throw new CustomError("File size exceeded", 400, FILE_SIZE_EXCEEDED);
+      }
       const fileType = file?.mimetype?.split("/")?.[1];
       dlog(file);
       if (!file) {

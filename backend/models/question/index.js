@@ -181,9 +181,19 @@ SET q.deleted=1, c.deleted=1 WHERE q.id = :question_id`,
   );
 }
 
+/**
+ *
+ * @param {Number} question_id
+ * @returns {Array<Number>} returns an array of group ids that the question is in
+ */
 export async function getWhatGroupsQuestionisIn(question_id) {
-  return await sqlExe.executeCommand(
+  const array_of_sql = await sqlExe.executeCommand(
     `select * from group_question gq where gq.question_id = :question_id`,
     { question_id }
   );
+  const groups_question_is_in = [];
+  for (let i = 0; i < array_of_sql.length; i++) {
+    groups_question_is_in.push(array_of_sql[i].group_id);
+  }
+  return groups_question_is_in;
 }

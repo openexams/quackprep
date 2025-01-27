@@ -5,7 +5,7 @@ import { Container, Header, Grid, Segment, Icon, Card, Statistic } from 'semanti
 import { Line } from 'react-chartjs-2';
 import 'chart.js/auto';
 import { selectLoadingState } from '../store/loadingSlice';
-import { getQuestionsAnsweredByMonthAndYear, getTotalTimeSpent, selectStatsState, getTotalAiQuestions } from './statsSlice';
+import { getAllBaseStats, selectStatsState } from './statsSlice';
 import MyStats from './MyStats';
 
 const numberToNameMonthMapping = {
@@ -59,29 +59,21 @@ const ChartCard = ({ title, children }) => (
 
 export default function StatsPage() {
   const loading = useSelector(selectLoadingState).loadingComps?.Stats;
-  const { questionsAnsweredByMonthAndYear, tts, total_ai_questions } = useSelector(selectStatsState).stats;
+  const stats = useSelector(selectStatsState);
+  const { questionsAnsweredByMonthAndYear, tts, total_ai_questions, total_classes_created } = stats;
   const dispatch = useDispatch();
 
   function getTotalSubmissons() {
-    let total_subs = 0;
+    let total_submissions = 0;
     for (let i = 0; i < questionsAnsweredByMonthAndYear?.length; i++) {
-      total_subs += questionsAnsweredByMonthAndYear[i].questions_answered;
+      total_submissions += questionsAnsweredByMonthAndYear[i].questions_answered;
     }
-    return total_subs;
+    return total_submissions;
   }
 
   useEffect(() => {
-    if (!questionsAnsweredByMonthAndYear) {
-      dispatch(getQuestionsAnsweredByMonthAndYear());
-    }
-    if (!tts) {
-      dispatch(getTotalTimeSpent());
-    }
-    // if (!total_subs) {
-    //   dispatch(getTotalSubmissons());
-    // }
-    if (!total_ai_questions) {
-      dispatch(getTotalAiQuestions());
+    if (!questionsAnsweredByMonthAndYear && !tts && !total_ai_questions) {
+      dispatch(getAllBaseStats());
     }
   }, []);
 
@@ -129,6 +121,7 @@ export default function StatsPage() {
         <Statistic color='green' value={`${Math.round(tts / 60)} H`} label={'Total Time Spent Studying'} />
         <Statistic color='yellow' value={getTotalSubmissons()} label={'Total Question Submissions'} />
         <Statistic color='blue' value={total_ai_questions} label={'Total AI Generated Questions'} />
+        <Statistic color='red' value={total_classes_created} label={'Total Classes Created'} />
 
         <Grid columns={1} stackable>
           <Grid.Row>

@@ -21,6 +21,12 @@ async function selectClasses(WHERE, params) {
   );
 }
 
+export async function getTotalClasses() {
+  return (
+    await sqlExe.executeCommand(`SELECT COUNT(*) as count FROM classes`)
+  )[0]?.count;
+}
+
 export async function getClassesBySchoolId(school_id) {
   // where in this is alr done jst past smth in so it does not errs
   return await selectClasses("cl.deleted = 0 AND school_id = :school_id", {
