@@ -74,9 +74,9 @@ export default function FlashMessage() {
             color: error ? messageStyles.error.color : messageStyles.success.color,
           }}
         />
-        <Message.Header style={{ fontWeight: 'bold' }}>{error ? 'An Error Has Occurred' : 'Success!'}</Message.Header>
+        <Message.Header style={{ fontWeight: 'bold' }}>{error ? 'An Error Has Occurred😔' : 'Success!'}</Message.Header>
         <p style={{ position: 'relative', zIndex: 1, margin: 0 }}>
-          {msg} {error && `${error?.toString() || null}`}
+          {msg} {error && `${String(error) || null}`}
         </p>
       </Message>
     </Transition>

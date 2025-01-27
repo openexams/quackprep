@@ -169,9 +169,11 @@ export async function deleteAllAIGeneratedQuestion() {
   LEFT JOIN choices c on c.question_id = q.id
   SET q.deleted=1, c.deleted=1 WHERE q.ai = 1`);
 }
+
 /**
- *
+ * Not used currently I would recommend checking correctness before using
  * @param {import("../../../shared-types/question.types.ts").GenQuestion} quackAssistResponseJSON
+ * @returns {String}
  */
 export async function generateCorrectAnswer(quackAssistResponseJSON) {
   const correctAnswer = (
@@ -208,9 +210,9 @@ export async function generateCorrectAnswer(quackAssistResponseJSON) {
           strict: true,
         },
       },
-      "gpt-4o",
-      `answer question with accuracy. DONT FORGET output in md format with LaTeX wrapped in $$. Just include answer now context
-      example answers:
+      "gpt-4o", // buy o1 and switch to o1
+      `answer question with accuracy in this format: md with LaTeX wrapped in $$.
+      follow example answers:
       ${quackAssistResponseJSON.options.map((o) => o.text).join("\n")} 
       ` // this makes sure they output same formatted answer
     )
