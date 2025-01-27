@@ -73,7 +73,7 @@ export function standardApiCall(method, route, data = null, resultAction, option
         dispatch(
           showFlashMessage(
             `Your Rate Limit has been exceeded, please try again later.`,
-            `Retry After: ${error?.response?.headers?.['retry-after']}s`,
+            `Retry After: ${error?.response?.headers?.['retry-after'] || `~60`}s`,
           ),
         );
       } else {
