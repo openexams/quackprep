@@ -36,79 +36,34 @@ export async function generateQuestionLike(
         QUACK_GEN_QUESTION_ASS_ID,
         `create a question like: "${likeQuestionText}"\nin json format`
       );
-
-    const correctAnswer = (
-      await sendPromptAndRecieveJSONResult(
-        `answer this: ${quackAssistResponseJSON.question}`,
-        {
-          name: "option_return",
-          schema: {
-            name: "option_return",
-            type: "object",
-            properties: {
-              explanation: {
-                type: "string",
-                description:
-                  "Explanation, written in md with LaTeX wrapped in $$",
-                minLength: 1,
-                maxLength: 1000,
-              },
-              answer: {
-                type: "string",
-                description:
-                  "The correct answer to the question in LaTeX, MUST wrap LaTeX in $$",
-                minLength: 1,
-                maxLength: 500,
-              },
-            },
-            required: ["answer", "explanation"],
-            additionalProperties: false,
-            // example: {
-            //   answer: "$$9$$",
-            //   explanation:
-            //     "The answer is derived by solving the equation $$3^{x} = 9$$, which simplifies to $$x = 2$$.",
-            // },
-            strict: true,
-          },
-        },
-        "gpt-4o",
-        `answer question with accuracy. DONT FORGET output in md format with LaTeX wrapped in $$. Just include answer now context
-        example answers:
-        ${quackAssistResponseJSON.options.map((o) => o.text).join("\n")} 
-        ` // this makes sure they output same formatted answer
-      )
-    )?.answer;
-
-    if (!correctAnswer) {
-      throw new Error(
-        "Failed to get answer from sendPromptAndRecieveJSONResult"
-      );
-    }
-    // console.log("before", quackAssistResponseJSON.options);
-    for (let i = 0; i < quackAssistResponseJSON.options.length; i++) {
-      const curOption = quackAssistResponseJSON.options[i];
-      if (
-        curOption.is_correct === true ||
-        curOption.is_correct === "true" ||
-        curOption.is_correct === 1
-      ) {
-        quackAssistResponseJSON.options.splice(i, 1);
-        i--; // if current answer is true delete it just in case its correct. since o1 will generate answer better
-      } else {
-        quackAssistResponseJSON.options[i] = {
-          ...curOption,
-          type: "mcq",
-          is_correct: false,
-        };
-      }
-    }
-    quackAssistResponseJSON.options.push({
-      text: correctAnswer,
-      is_correct: true,
-      type: "mcq",
-    });
+    quackAssistResponseJSON.options = quackAssistResponseJSON.options.map(
+      (o, _) => ({ ...o, type: "mcq" })
+    );
 
     // get what groups curQuestion has
+    // for (let i = 0; i < quackAssistResponseJSON.options.length; i++) {
+    //   const curOption = quackAssistResponseJSON.options[i];
+    //   if (
+    //     curOption.is_correct === true ||
+    //     curOption.is_correct === "true" ||
+    //     curOption.is_correct === 1
+    //   ) {
+    //     quackAssistResponseJSON.options.splice(i, 1);
+    //     i--; // if current answer is true delete it just in case its correct. since o1 will generate answer better
+    //   } else {
+    //     quackAssistResponseJSON.options[i] = {
+    //       ...curOption,
+    //       type: "mcq",
+    //       is_correct: false,
+    //     };
+    //   }
+    // }
+    // quackAssistResponseJSON.options.push({ use with generateCorrectAnswer
+    //   text: correctAnswer,
+    //   is_correct: true,
+    //   type: "mcq",
+    // });
+
     const object_w_groups = await getWhatGroupsQuestionisIn(likeQuestionId);
     const groups_question_is_in = [];
     for (let i = 0; i < object_w_groups.length; i++) {
@@ -213,4 +168,56 @@ export async function deleteAllAIGeneratedQuestion() {
   await sqlExe.executeCommand(`UPDATE questions q
   LEFT JOIN choices c on c.question_id = q.id
   SET q.deleted=1, c.deleted=1 WHERE q.ai = 1`);
+}
+/**
+ *
+ * @param {import("../../../shared-types/question.types.ts").GenQuestion} quackAssistResponseJSON
+ */
+export async function generateCorrectAnswer(quackAssistResponseJSON) {
+  const correctAnswer = (
+    await sendPromptAndRecieveJSONResult(
+      `answer this: ${quackAssistResponseJSON.question}`,
+      {
+        name: "option_return",
+        schema: {
+          name: "option_return",
+          type: "object",
+          properties: {
+            explanation: {
+              type: "string",
+              description:
+                "Explanation, written in md with LaTeX wrapped in $$",
+              minLength: 1,
+              maxLength: 1000,
+            },
+            answer: {
+              type: "string",
+              description:
+                "The correct answer to the question in LaTeX, MUST wrap LaTeX in $$",
+              minLength: 1,
+              maxLength: 500,
+            },
+          },
+          required: ["answer", "explanation"],
+          additionalProperties: false,
+          // example: {
+          //   answer: "$$9$$",
+          //   explanation:
+          //     "The answer is derived by solving the equation $$3^{x} = 9$$, which simplifies to $$x = 2$$.",
+          // },
+          strict: true,
+        },
+      },
+      "gpt-4o",
+      `answer question with accuracy. DONT FORGET output in md format with LaTeX wrapped in $$. Just include answer now context
+      example answers:
+      ${quackAssistResponseJSON.options.map((o) => o.text).join("\n")} 
+      ` // this makes sure they output same formatted answer
+    )
+  )?.answer;
+
+  if (!correctAnswer) {
+    throw new Error("Failed to get answer from sendPromptAndRecieveJSONResult");
+  }
+  return correctAnswer;
 }

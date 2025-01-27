@@ -39,6 +39,7 @@ export default function QuestionPage() {
   const questions = useSelector(selectArrayOfStateByGroupId('app.question.questions', groupId));
 
   const loadingComps = useSelector(selectLoadingState).loadingComps;
+  const questionVoteLoading = useSelector(selectLoadingState).loadingComps.QuestionVote;
 
   const [selectedQuestion, setSelectedQuestion] = useState(null);
 
@@ -50,15 +51,13 @@ export default function QuestionPage() {
   }, [questions?.[0]]); // could lead to issues
 
   useEffect(() => {
-    if (Array.isArray(questions)) {
-      if (questionId) {
-        const selectedQ = findQuestionById(questions, parseInt(questionId));
-        if (selectedQ) {
-          setSelectedQuestion(selectedQ);
-        }
+    if (Array.isArray(questions) && questionId) {
+      const selectedQ = findQuestionById(questions, parseInt(questionId));
+      if (selectedQ) {
+        setSelectedQuestion(selectedQ);
       }
     }
-  }, [questions?.[0], questionId]);
+  }, [questionId, questionVoteLoading, questions?.[0]]);
 
   // handles selected question locally
 

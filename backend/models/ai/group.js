@@ -64,7 +64,7 @@ export async function etlFilesIntoGroup(files, class_id, user_id, user_prompt) {
         curQuestion.question,
         user_id,
         [group.id],
-        false // TODO DECIDE WETHER THESE QUESTIONS SHOULD BE LABELED AS AI QUESTIONS (I SAY NO AS THIS IS JUST PARSING NON AI CONTENT)
+        true // these are ai.
       );
       await addManyChoicesToQuestion(question.id, user_id, curQuestion.options);
     }
