@@ -23,7 +23,9 @@ async function selectClasses(WHERE, params) {
 
 export async function getTotalClasses() {
   return (
-    await sqlExe.executeCommand(`SELECT COUNT(*) as count FROM classes`)
+    await sqlExe.executeCommand(
+      `SELECT COUNT(*) as count FROM classes WHERE deleted = 0`
+    )
   )[0]?.count;
 }
 
