@@ -10,6 +10,7 @@ import { getStartedNow } from '@app/layout/navbar/navbarSlice';
 import CreateGroupByPDF from '../class/group/CreateGroupByPDF';
 import { makeUserACreator } from '@app/creator/creatorSlice';
 import { selectLoadingState } from '@app/store/loadingSlice';
+import { use } from 'react';
 
 export default function NewPageWrapper() {
   const dispatch = useDispatch();
@@ -28,11 +29,16 @@ export default function NewPageWrapper() {
   const [classId, setClassId] = useState(null);
 
   useEffect(() => {
+    if (user_id && user?.is_creator) {
+      dispatch(getClassesByUserId());
+    }
+  }, [user?.is_creator, user_id, dispatch]);
+
+  useEffect(() => {
     if (user_id && !user?.is_creator) {
       dispatch(makeUserACreator());
-    } else if (user_id && !userCreatedClasses) {
-      dispatch(getClassesByUserId());
     } else if (
+      !loading &&
       user?.is_creator &&
       defaultClassCreated.current === false &&
       user_id &&
@@ -42,7 +48,7 @@ export default function NewPageWrapper() {
       defaultClassCreated.current = true;
       dispatch(createDefaultUserClass());
     }
-  }, [user_id, dispatch, userCreatedClasses, user?.is_creator]);
+  }, [user_id, dispatch, userCreatedClasses, user?.is_creator, loading]);
 
   return (
     <Segment raised padded loading={loading}>
