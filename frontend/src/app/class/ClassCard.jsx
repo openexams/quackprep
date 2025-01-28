@@ -217,6 +217,22 @@ export default function ClassCard({ id, name, category, desc, school_id, created
                 <div style={quadrantTextStyle}>Study By PDF</div>
               </div>
             )}
+            {!group_id && !pdf_id && (
+              <div
+                onClick={() => dispatch(changeNavbarPage(navigate, `${id}/group`))}
+                style={{
+                  ...quadrantStyle,
+                  gridColumn: '1 / -1',
+                  gridRow: '1 / -1',
+                  borderTop: '1px solid #fff',
+                }}
+              >
+                <Icon name='x' size='large' color='red' style={{ pointerEvents: 'none' }} />
+                <div style={quadrantTextStyle}>
+                  No Content Found, If you own this class click here to create content, or use AIcreate
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </Card>
