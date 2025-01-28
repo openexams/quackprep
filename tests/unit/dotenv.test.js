@@ -21,4 +21,5 @@ test("test dotenv config has all needed values", async function () {
   expect(process.env.OPENAI_API_KEY).toBeTruthy();
   expect(process.env.MATHPIX_API_KEY).toBeTruthy();
   expect(process.env.MATHPIX_APP_ID).toBeTruthy();
+  expect(process.env.DEEPSEEK_API_KEY).toBeTruthy();
 });

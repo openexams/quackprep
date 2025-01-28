@@ -105,7 +105,6 @@ export default function QuestionPage() {
             </Grid.Column>
           </Grid.Row>
         </Grid>
-        <ChatbotWidget />
       </CustomImageLoader>
     </Segment>
   );

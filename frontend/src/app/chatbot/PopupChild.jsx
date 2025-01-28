@@ -46,7 +46,7 @@ export default function PopupChild() {
             <p style={{ margin: '0.5rem 0' }}>I'm here to help you with your questions! Your current question prompt is:</p>
           </div>
           <TextArea
-            value={currentQuestion?.question || 'Cant Find your Current Question'}
+            value={currentQuestion?.question || 'Go to a question so I can help!'}
             style={{
               width: '100%',
               marginBottom: '1rem',
