@@ -1,3 +1,4 @@
+// basically pings the mathpix api
 import "@backend/config/config.js";
 import { postImageAndRecieveText } from "@backend/utils/mathpix";
 import { test, expect } from "playwright/test";

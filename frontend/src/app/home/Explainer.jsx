@@ -46,7 +46,7 @@ export default function Explainer() {
                 </Card.Content>
               </Card>
 
-              <Card raised>
+              <Card raised onClick={() => dispatch(changeNavbarPage(navigate, '/class'))}>
                 <Card.Content textAlign='center'>
                   <Icon name='search' size='huge' color='orange' style={{ marginBottom: '0.5em' }} />
                   <Card.Header as='h4' style={{ fontSize: '1.33em', color: '#333' }}>
