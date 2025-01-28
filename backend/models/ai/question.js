@@ -170,56 +170,56 @@ export async function deleteAllAIGeneratedQuestion() {
   SET q.deleted=1, c.deleted=1 WHERE q.ai = 1`);
 }
 
-/**
- * Not used currently I would recommend checking correctness before using
- * @param {import("../../../shared-types/question.types.ts").GenQuestion} quackAssistResponseJSON
- * @returns {String}
- */
-export async function generateCorrectAnswer(quackAssistResponseJSON) {
-  const correctAnswer = (
-    await sendPromptAndRecieveJSONResult(
-      `answer this: ${quackAssistResponseJSON.question}`,
-      {
-        name: "option_return",
-        schema: {
-          name: "option_return",
-          type: "object",
-          properties: {
-            explanation: {
-              type: "string",
-              description:
-                "Explanation, written in md with LaTeX wrapped in $$",
-              minLength: 1,
-              maxLength: 1000,
-            },
-            answer: {
-              type: "string",
-              description:
-                "The correct answer to the question in LaTeX, MUST wrap LaTeX in $$",
-              minLength: 1,
-              maxLength: 500,
-            },
-          },
-          required: ["answer", "explanation"],
-          additionalProperties: false,
-          // example: {
-          //   answer: "$$9$$",
-          //   explanation:
-          //     "The answer is derived by solving the equation $$3^{x} = 9$$, which simplifies to $$x = 2$$.",
-          // },
-          strict: true,
-        },
-      },
-      "gpt-4o", // buy o1 and switch to o1
-      `answer question with accuracy in this format: md with LaTeX wrapped in $$.
-      follow example answers:
-      ${quackAssistResponseJSON.options.map((o) => o.text).join("\n")} 
-      ` // this makes sure they output same formatted answer
-    )
-  )?.answer;
+// /**
+//  * Not used currently I would recommend checking correctness before using
+//  * @param {import("../../../shared-types/question.types.ts").GenQuestion} quackAssistResponseJSON
+//  * @returns {String}
+//  */
+// export async function generateCorrectAnswer(quackAssistResponseJSON) {
+//   const correctAnswer = (
+//     await sendPromptAndRecieveJSONResult(
+//       `answer this: ${quackAssistResponseJSON.question}`,
+//       {
+//         name: "option_return",
+//         schema: {
+//           name: "option_return",
+//           type: "object",
+//           properties: {
+//             explanation: {
+//               type: "string",
+//               description:
+//                 "Explanation, written in md with LaTeX wrapped in $$",
+//               minLength: 1,
+//               maxLength: 1000,
+//             },
+//             answer: {
+//               type: "string",
+//               description:
+//                 "The correct answer to the question in LaTeX, MUST wrap LaTeX in $$",
+//               minLength: 1,
+//               maxLength: 500,
+//             },
+//           },
+//           required: ["answer", "explanation"],
+//           additionalProperties: false,
+//           // example: {
+//           //   answer: "$$9$$",
+//           //   explanation:
+//           //     "The answer is derived by solving the equation $$3^{x} = 9$$, which simplifies to $$x = 2$$.",
+//           // },
+//           strict: true,
+//         },
+//       },
+//       "gpt-4o", // buy o1 and switch to o1
+//       `answer question with accuracy in this format: md with LaTeX wrapped in $$.
+//       follow example answers:
+//       ${quackAssistResponseJSON.options.map((o) => o.text).join("\n")}
+//       ` // this makes sure they output same formatted answer
+//     )
+//   )?.answer;
 
-  if (!correctAnswer) {
-    throw new Error("Failed to get answer from sendPromptAndRecieveJSONResult");
-  }
-  return correctAnswer;
-}
+//   if (!correctAnswer) {
+//     throw new Error("Failed to get answer from sendPromptAndRecieveJSONResult");
+//   }
+//   return correctAnswer;
+// }
