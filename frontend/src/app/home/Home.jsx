@@ -76,7 +76,7 @@ export default function Home() {
       },
       title: {
         display: true,
-        text: 'QuackPrepAI vs gpt4o Ability in STEM Categories',
+        text: 'QuackPrepAI* vs gpt4o (MMLU) in STEM Categories',
       },
     },
   };
@@ -209,8 +209,8 @@ export default function Home() {
               </Header>
               <p style={{ fontSize: '1.2em' }}>
                 Our AI-powered tool leverages advanced algorithms to provide accurate and reliable assistance across various STEM
-                subjects. Compare the performance of Quackprep AI against traditional statistical methods to see how we stand out
-                in enhancing your learning experience.
+                subjects. Compare the performance of Quackprep AI against the standard model to see how we stand out in enhancing
+                your learning experience.
               </p>
             </Grid.Column>
 
