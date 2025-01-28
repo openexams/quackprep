@@ -46,6 +46,11 @@ export const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
+export const deepseek = new OpenAI({
+  apiKey: process.env.DEEPSEEK_API_KEY,
+  baseURL: "https://api.deepseek.com",
+});
+
 export const MYSQL_CONFIG = {
   host: process.env.MADDOX_MYSQL_SERVER,
   user: process.env.MADDOX_MYSQL_USERNAME,

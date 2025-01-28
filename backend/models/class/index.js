@@ -62,19 +62,7 @@ export async function upsertClass(
   category,
   user_id
 ) {
-  const params = { id, school_id, name, description, category, user_id }; // TODO CAN THIS USER CREATE A CLASS IN THIS SCHOOL?
-  const unique = await sqlExe.executeCommand(
-    `SELECT * from classes WHERE school_id = :school_id AND name =:name AND created_by != :user_id`, // dont actually need (created_by != :user_id) but its the safe play "im conservative in my programming but liberal in eveything else" - Hubert Dunesmore
-    params
-  );
-  if (!id && unique?.[0]?.name) {
-    // TODO is this a good way to do this, can i abstract this out?
-    // verifys issue where you create a class with same name and school as other person.
-    throw new Error(
-      "verifys issue where you create a class with same name and school as other person."
-    );
-    return;
-  }
+  const params = { id, school_id, name, description, category, user_id };
   const class_id = (
     await sqlExe.executeCommand(
       `INSERT INTO classes (id,school_id,name,description,category,created_by)

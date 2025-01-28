@@ -9,7 +9,7 @@ import FormData from "form-data";
 import { upsertGroupInClass, deleteGroupById } from "#models/group/index.js";
 import {
   MAX_FILE_SIZE_IN_BYTES,
-  QUACK_CREAT_GROUP_ASS_ID,
+  QUACK_CREATE_GROUP_ASS_ID,
 } from "#config/constants.js";
 import { FILE_SIZE_EXCEEDED } from "#config/error_codes.js";
 import CustomError from "#utils/CustomError.js";
@@ -51,7 +51,7 @@ export async function etlFilesIntoGroup(files, class_id, user_id, user_prompt) {
     /**@type {import("../../../../shared-types/group.type.ts").GenGroup} */
     const GenGroupResponseJSON =
       await sendOpenAiAssistantPromptAndRecieveResult(
-        QUACK_CREAT_GROUP_ASS_ID,
+        QUACK_CREATE_GROUP_ASS_ID,
         `${mdd_res}\n${user_prompt}`,
         { retire_time: 10000 }
       );
