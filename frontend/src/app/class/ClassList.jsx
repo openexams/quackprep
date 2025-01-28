@@ -6,15 +6,17 @@ import { useSelector } from 'react-redux';
 import { selectClassCategories } from './class_categories/classCategorySlice';
 import { selectLoadingState } from '../store/loadingSlice';
 import ClassEditor from '../creator/forms/ClassEditor';
-import { selectArrayOfIncludingItemsByNumber, selectBINARYArrayOfStateById } from 'maddox-js-funcs';
+import { selectArrayOfIncludingItems, selectArrayOfIncludingItemsByNumber, selectBINARYArrayOfStateById } from 'maddox-js-funcs';
 import { selectNavbarState } from '@app/layout/navbar/navbarSlice';
 import { selectEditState } from '../auth/authSlice'; // cuz anyone can make classes
 import ClassCardCTA from './class_cta/ClassCardCTA';
+import ClassSearch from './ClassSearch';
 
 export default function ClassList() {
+  const [classFilter, setClassFilter] = useState('');
   let { schoolId: curSchoolId } = useSelector(selectNavbarState).navbar;
-  const classes = useSelector(selectBINARYArrayOfStateById('app.class.classes.classes', 'school_id', curSchoolId));
-
+  let classes = useSelector(selectBINARYArrayOfStateById('app.class.classes.classes', 'school_id', curSchoolId));
+  classes = selectArrayOfIncludingItems(classes, ['name'], [classFilter]);
   const loading = useSelector(selectLoadingState).loadingComps?.ClassList;
   const classCategories = useSelector(selectClassCategories).class_categories;
   const [curCategory, setCurCategory] = useState('');
@@ -36,6 +38,8 @@ export default function ClassList() {
   return (
     <Container>
       <Segment basic loading={loading}>
+        <ClassSearch setClassFilter={setClassFilter} classFilter={classFilter} />
+
         <Header.Subheader>
           {curCategory
             ? `Showing ${filteredClasses?.length} classes in ${classCategories.find((c) => c.id === curCategory)?.name}`
@@ -44,6 +48,7 @@ export default function ClassList() {
 
         <Container>
           {/* The category menu remains as is */}
+
           <Menu pointing fluid widths={classCategories?.length + 1} stackable>
             <Menu.Item name='All Classes' active={curCategory === ''} onClick={() => handleCategoryChange('')} icon='list' />
             {classCategories?.map((category, index) => (
