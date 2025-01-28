@@ -149,7 +149,6 @@ export default function navbarReducer(state = DEFAULT_STATE, action) {
       if (newPage === state.page) {
         return state;
       }
-      window.scrollTo(0, 0);
 
       // when I change the navbar set everything back to null so navbar has to dispatch to get id values;
       const urlArr = getFixedUrlArr(newPage);
