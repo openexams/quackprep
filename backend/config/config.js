@@ -37,7 +37,6 @@ export const corsOrigins = [
   "https://api.quackprep.com",
   "https://quackprep.com",
   "https://www.quackprep.com",
-  "https://*.quackprep.pages.dev",
   "https://quackprep.pages.dev",
 ];
 if (NODE_ENV === "local") corsOrigins.push("http://localhost:3001"); // maybe bad pratice
