@@ -38,6 +38,8 @@ export default function AppRouter() {
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/about' element={<AboutPage />} />
+          <Route path='/learn' element={<ComingSoon />} />
+
           <Route path='/tos' element={<TOS />} />
           <Route path='/privacy' element={<PrivacyPolicy />} />
           <Route path='/create' element={<NewPageWrapper />} />

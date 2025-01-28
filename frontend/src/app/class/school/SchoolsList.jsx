@@ -32,9 +32,6 @@ export default function SchoolsList() {
       if (wanted_school) {
         dispatch(changeNavbarPage(navigate, `/class/${wanted_school?.school_name}`));
       }
-    } else if (schools) {
-      updateSchoolId(4);
-      dispatch(changeNavbarPage(navigate, '/class/General'));
     }
   }, [schools]); // could be risky idk
 

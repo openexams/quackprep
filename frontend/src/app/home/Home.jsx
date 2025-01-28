@@ -11,6 +11,7 @@ import './home.css';
 // Import Chart.js components
 import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
+import Explainer from './Explainer';
 
 // Register Chart.js components
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
@@ -223,8 +224,10 @@ export default function Home() {
         </Container>
       </Segment>
 
+      <Explainer />
+
       {/* Testimonials Section */}
-      <Segment style={{ padding: '8em 1em', backgroundColor: '#f9f9f9' }} vertical>
+      <Segment style={{ padding: '8em 1em' }} vertical>
         <Container text>
           <Header as='h3' style={{ fontSize: '2em', textAlign: 'center' }}>
             What Our Users Say
