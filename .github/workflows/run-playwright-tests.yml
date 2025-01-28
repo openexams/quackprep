@@ -27,6 +27,7 @@ jobs:
       FRONTEND_URL: ${{ secrets.FRONTEND_URL }}
       MATHPIX_API_KEY: ${{ secrets.MATHPIX_API_KEY }}
       MATHPIX_APP_ID: ${{ secrets.MATHPIX_APP_ID }}
+      DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
 
     steps:
       - name: Check out repository
