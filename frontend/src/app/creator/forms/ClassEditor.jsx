@@ -47,7 +47,7 @@ export default function ClassEditor({ id, name, category, desc, school_id }) {
    */
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(upsertClass(id || null, selectedSchool, className, classDesc, selectedCategory));
+    dispatch(upsertClass(id || null, selectedSchool || null, className, classDesc, selectedCategory));
   };
 
   return (
@@ -77,9 +77,9 @@ export default function ClassEditor({ id, name, category, desc, school_id }) {
         />
 
         <Form.Field
+          search
           control={Dropdown}
           label='School'
-          required
           selection
           clearable
           value={selectedSchool}

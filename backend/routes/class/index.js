@@ -10,6 +10,7 @@ import {
 import { cascadeSetDeleted } from "#utils/sqlFunctions.js";
 import { commonErrorMessage } from "#utils/utils.js";
 import express from "express";
+import { GENERAL_SCHOOL_ID } from "../../../constants.js";
 const router = express.Router();
 
 router.get("/user", isAuthenticated, async function (req, res) {
@@ -17,9 +18,7 @@ router.get("/user", isAuthenticated, async function (req, res) {
     const result = await getClassesByUserId(req.user);
     res.status(200).json(result);
   } catch (error) {
-    res.status(500).json({
-      message: `server error could not get classes by user id ${req.user}`,
-    });
+    commonErrorMessage(res, 500, "failed to get all classes by user id", error);
   }
 });
 
@@ -89,7 +88,7 @@ router.post("/", isAuthenticated, isCreator, async function (req, res) {
 
     const result = await upsertClass(
       data.id || null,
-      data.school_id,
+      data.school_id || GENERAL_SCHOOL_ID,
       data.name,
       data.description,
       data.category,

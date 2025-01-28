@@ -39,6 +39,9 @@ export function getClassesByUserId() {
 
 // returns the created class
 export function upsertClass(id, school_id, name, description, category) {
+  if (school_id === '') {
+    school_id = null;
+  }
   return standardApiCall('post', `/api/class/`, { id, school_id, name, description, category }, UPSERT_CRUD_CLASSES, {
     loadingComponent: ['ClassList'],
     noticeOfSuccess: 'successfully upserted class!',
