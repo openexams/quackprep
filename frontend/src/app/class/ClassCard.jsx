@@ -65,7 +65,7 @@ export function getIconByCategory(category) {
   }
 }
 
-export default function ClassCard({ id, name, category, desc, school_id, created_by, created_username }) {
+export default function ClassCard({ id, name, category, desc, school_id, created_by, created_username, group_id, pdf_id }) {
   const navigate = useNavigate();
   const [hovered, setHovered] = useState(false);
   const dispatch = useDispatch();
@@ -174,43 +174,49 @@ export default function ClassCard({ id, name, category, desc, school_id, created
               background: 'rgba(0, 0, 0, 0.4)',
             }}
           >
-            {/* Quadrant 1: Study By Topic */}
-            <div
-              onClick={() => dispatch(changeNavbarPage(navigate, `${id}/group?type=topic`))}
-              style={{
-                ...quadrantStyle,
-                borderRight: '1px solid #fff',
-                borderBottom: '1px solid #fff',
-              }}
-            >
-              <Icon name='users' size='large' color='blue' style={{ pointerEvents: 'none' }} />
-              <div style={quadrantTextStyle}>Study By Topic</div>
-            </div>
+            {group_id && (
+              <>
+                {/* Quadrant 1: Study By Topic */}
+                <div
+                  onClick={() => dispatch(changeNavbarPage(navigate, `${id}/group?type=topic`))}
+                  style={{
+                    ...quadrantStyle,
+                    borderRight: '1px solid #fff',
+                    borderBottom: '1px solid #fff',
+                  }}
+                >
+                  <Icon name='users' size='large' color='blue' style={{ pointerEvents: 'none' }} />
+                  <div style={quadrantTextStyle}>Study By Topic</div>
+                </div>
 
-            {/* Quadrant 2: Study By Exam */}
-            <div
-              onClick={() => dispatch(changeNavbarPage(navigate, `${id}/group?type=exam`))}
-              style={{
-                ...quadrantStyle,
-                borderBottom: '1px solid #fff',
-              }}
-            >
-              <Icon name='book' size='large' color='green' style={{ pointerEvents: 'none' }} />
-              <div style={quadrantTextStyle}>Study By Exam</div>
-            </div>
+                {/* Quadrant 2: Study By Exam */}
+                <div
+                  onClick={() => dispatch(changeNavbarPage(navigate, `${id}/group?type=exam`))}
+                  style={{
+                    ...quadrantStyle,
+                    borderBottom: '1px solid #fff',
+                  }}
+                >
+                  <Icon name='book' size='large' color='green' style={{ pointerEvents: 'none' }} />
+                  <div style={quadrantTextStyle}>Study By Exam</div>
+                </div>
+              </>
+            )}
 
             {/* Bottom Row (spanning both columns): Ai Learn */}
-            <div
-              onClick={() => dispatch(changeNavbarPage(navigate, `${id}/pdfexams`))}
-              style={{
-                ...quadrantStyle,
-                gridColumn: '1 / span 2',
-                borderTop: '1px solid #fff',
-              }}
-            >
-              <Icon name='plug' size='large' color='orange' style={{ pointerEvents: 'none' }} />
-              <div style={quadrantTextStyle}>Study By PDF</div>
-            </div>
+            {pdf_id && (
+              <div
+                onClick={() => dispatch(changeNavbarPage(navigate, `${id}/pdfexams`))}
+                style={{
+                  ...quadrantStyle,
+                  gridColumn: '1 / span 2',
+                  borderTop: '1px solid #fff',
+                }}
+              >
+                <Icon name='plug' size='large' color='orange' style={{ pointerEvents: 'none' }} />
+                <div style={quadrantTextStyle}>Study By PDF</div>
+              </div>
+            )}
           </div>
         </div>
       </Card>

@@ -74,6 +74,8 @@ export default function ClassList() {
                 ? filteredClasses.map((c, index) => (
                     <Grid.Column key={index}>
                       <ClassCard
+                        group_id={c.group_id}
+                        pdf_id={c.pdf_id}
                         id={c.id}
                         name={c.name}
                         category={c.category}

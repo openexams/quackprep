@@ -61,7 +61,7 @@ export default function GroupsList() {
         <Header as='h2' color='blue' dividing>
           <Icon name='book' />
           <Header.Content>
-            {className}: Study by Groups
+            {className}: Study by {typeFilter || 'Groups'}
             <Header.Subheader>Select content to start studying</Header.Subheader>
           </Header.Content>
         </Header>

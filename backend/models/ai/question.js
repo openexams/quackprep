@@ -34,7 +34,8 @@ export async function generateQuestionLike(
     const quackAssistResponseJSON =
       await sendOpenAiAssistantPromptAndRecieveResult(
         QUACK_GEN_QUESTION_ASS_ID,
-        `create a question similar to: "${likeQuestionText}"\nin json format`
+        `create a question similar to: "${likeQuestionText}"\nin json format`,
+        { retire_time: 5000, max_retires: 5 }
       );
 
     // make sure it has neccessary props to be of type GenQuestion
