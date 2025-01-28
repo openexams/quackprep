@@ -1,13 +1,11 @@
 import { deepseek } from "#config/config.js";
-import { MAX_USER_PROMPT_LENGTH } from "#config/constants.js";
 import "#utils/utils.js";
 
 /**
  * Choose any model this is not a assistant.
  * @param {String} prompt
- * @param {Object} json_schema
  * @param {String} model use openai model naming pls.
- * @param {String} context initial message to send to chat
+ * @param {String} context what is chat like? given by dev
  * @returns {Object} the result of the chat
  */
 export async function sendDeepSeekPromptAndRecieveJSONResult(
@@ -15,10 +13,6 @@ export async function sendDeepSeekPromptAndRecieveJSONResult(
   context = "Answer questions with accuracy",
   model = "deepseek-reasoner"
 ) {
-  if (context.length > MAX_USER_PROMPT_LENGTH) {
-    // prompt should be from dev, context is from user
-    throw new Error("prompt or context is too long");
-  }
   dlog("calling deepseek with prompt:", prompt);
   try {
     const completion = await deepseek.chat.completions.create({

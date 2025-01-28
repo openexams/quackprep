@@ -24,6 +24,7 @@ import Sentinel from './Sentinel.jsx';
 import Layout from './layout/Layout.jsx';
 import Auth from './auth/Auth.jsx';
 import Announcement from './extra/Announcement.jsx';
+import ChatbotWidget from './chatbot/ChatbotWidget.jsx';
 
 export default function AppRouter() {
   return (
@@ -62,6 +63,7 @@ export default function AppRouter() {
         </Routes>
         <Footer /> {/* can move out of layout and changes how it looks */}
       </Layout>
+      <ChatbotWidget />
     </Router>
   );
 }
