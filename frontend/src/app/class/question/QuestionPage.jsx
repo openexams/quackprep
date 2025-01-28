@@ -6,13 +6,14 @@ import { changeNavbarPage, selectNavbarState } from '@app/layout/navbar/navbarSl
 import { selectLoadingState } from '@app/store/loadingSlice';
 import ChoiceRouter from './choices/ChoiceRouter';
 import { useNavigate } from 'react-router-dom';
-import ChatbotWidget from '@app/chatbot/ChatbotWidget';
 import QuestionReport from './qreport/QuestionReport';
 import { selectArrayOfStateByGroupId } from '@utils/helperFuncs';
-import { selectItemById } from 'maddox-js-funcs';
+import { selectItemById, selectItemsById } from 'maddox-js-funcs';
 import NoItemsFound from '@components/NoItemsFound';
 import { CustomImageLoader } from '@components/CustomLoader/CustomImageLoader';
 import QuestionVote from './vote/QuestionVote';
+import QuestionNext from './QuestionNext';
+import { updateQuestionId } from '@app/layout/navbar/navbarSlice';
 
 /**
  *
@@ -34,14 +35,17 @@ function findQuestionById(questions, id) {
 export default function QuestionPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { groupId, groupName, questionId } = useSelector(selectNavbarState).navbar;
+  const { schoolName, classId, groupType, groupId, groupName, questionId } = useSelector(selectNavbarState).navbar;
 
-  const questions = useSelector(selectArrayOfStateByGroupId('app.question.questions', groupId));
+  let questions = useSelector(selectArrayOfStateByGroupId('app.question.questions', groupId));
 
   const loadingComps = useSelector(selectLoadingState).loadingComps;
   const questionVoteLoading = useSelector(selectLoadingState).loadingComps.QuestionVote;
 
   const [selectedQuestion, setSelectedQuestion] = useState(null);
+
+  const [showAIQuestions, setShowAIQuestions] = useState(true);
+  questions = showAIQuestions ? questions : selectItemsById(questions, 'ai', 0);
 
   useEffect(() => {
     // if the user didnt start w a question id
@@ -58,6 +62,15 @@ export default function QuestionPage() {
       }
     }
   }, [questionId, questionVoteLoading, questions?.[0]]);
+
+  useEffect(() => {
+    if (!loadingComps.QuestionPage && selectedQuestion?.id) {
+      dispatch(
+        changeNavbarPage(navigate, `/class/${schoolName}/${classId}/group/${groupId}/question/${parseInt(selectedQuestion.id)}`),
+      ); // why dude TODO FIX
+      dispatch(updateQuestionId(parseInt(selectedQuestion.id)));
+    }
+  }, [selectedQuestion?.id]);
 
   // handles selected question locally
 
@@ -77,12 +90,23 @@ export default function QuestionPage() {
         <Grid divided>
           <Grid.Row>
             <Grid.Column width={4}>
-              <QuestionList questions={questions} selectedQuestion={selectedQuestion} />
+              <QuestionList
+                setSelectedQuestion={setSelectedQuestion}
+                questions={questions}
+                selectedQuestion={selectedQuestion}
+                showAIQuestions={showAIQuestions}
+                setShowAIQuestions={setShowAIQuestions}
+              />
             </Grid.Column>
             <Grid.Column width={12}>
               {selectedQuestion ? (
                 <Segment>
                   <ChoiceRouter selectedQuestion={selectedQuestion} />
+                  <QuestionNext
+                    questions={questions}
+                    selectedQuestion={selectedQuestion}
+                    setSelectedQuestion={setSelectedQuestion}
+                  />
                   {selectedQuestion?.id && <QuestionVote questionId={selectedQuestion?.id} upvotes={selectedQuestion?.upvotes} />}
 
                   {selectedQuestion?.id && <QuestionReport questionId={selectedQuestion?.id} />}

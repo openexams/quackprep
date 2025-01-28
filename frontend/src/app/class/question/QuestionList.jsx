@@ -8,24 +8,24 @@ import GenerateQuestion from './ai/GenerateQuestion';
 import { selectCanAndIsEdit } from '@app/auth/authSlice';
 import { selectNavbarState } from '@app/layout/navbar/navbarSlice';
 import QuestionEditor from '@app/creator/forms/QuestionEditor';
-import { selectItemsById } from 'maddox-js-funcs';
 
 /**
  * List of questions that can be selected
  * @param {Object} props
  * @param {any[]} props.questions
  * @param {Object} props.selectedQuestion
+ * @param {Boolean} props.showAIQuestions
+ * @param {Function} props.setShowAIQuestions
  */
-export default function QuestionList({ questions, selectedQuestion }) {
+export default function QuestionList({ questions, selectedQuestion, setSelectedQuestion, showAIQuestions, setShowAIQuestions }) {
   // for edit
   const { groupId } = useSelector(selectNavbarState).navbar; // used for autofill
   const edit = useSelector(selectCanAndIsEdit());
   //
   const favoriteQuestions = useSelector(selectFavoriteQuestionsState);
   const [showTopics, setShowTopics] = useState(false);
-  const [showAIQuestions, setShowAIQuestions] = useState(true);
+
   const currentChoices = useSelector(selectCurrentChoicesState);
-  questions = showAIQuestions ? questions : selectItemsById(questions, 'ai', 0);
 
   return (
     <Segment>
@@ -53,6 +53,8 @@ export default function QuestionList({ questions, selectedQuestion }) {
           {edit ? <QuestionEditor group_ids={groupId} /> : null}
           {questions?.map((question, index) => (
             <QuestionCard
+              question={question}
+              setSelectedQuestion={setSelectedQuestion}
               ai={question.ai}
               key={index}
               id={question?.id}

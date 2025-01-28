@@ -6,6 +6,7 @@ import { updateQuestionId } from '@app/layout/navbar/navbarSlice';
 import { upsertFavoriteQuestion } from './favorite/favoriteSlice';
 import { selectNavbarState } from '@app/layout/navbar/navbarSlice';
 import FavoriteIcon from './favorite/FavoriteIcon';
+import { selectItemById } from 'maddox-js-funcs';
 
 /**
  *
@@ -33,17 +34,25 @@ function getQuestionTopics(questionTypes, questionGroupName) {
   return ret;
 }
 // takes in everything i need to be a question
-export default function QuestionCard({ id, selectedQuestion, type_name, group_name, showTopics, index, favorited, current, ai }) {
-  const { schoolName, classId, groupType, groupId } = useSelector(selectNavbarState).navbar;
-
+export default function QuestionCard({
+  question,
+  id,
+  setSelectedQuestion,
+  selectedQuestion,
+  type_name,
+  group_name,
+  showTopics,
+  index,
+  favorited,
+  current,
+  ai,
+}) {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   return (
     <List.Item
       key={id}
       onClick={() => {
-        dispatch(changeNavbarPage(navigate, `/class/${schoolName}/${classId}/group/${groupId}/question/${parseInt(id)}`)); // why dude TODO FIX
-        dispatch(updateQuestionId(parseInt(id)));
+        setSelectedQuestion(question);
       }}
       active={selectedQuestion && selectedQuestion.id === id}
       style={{

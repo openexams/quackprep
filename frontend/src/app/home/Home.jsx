@@ -1,4 +1,3 @@
-import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Container, Header, Button, Icon, Grid, Segment, Card } from 'semantic-ui-react';
 import { useNavigate } from 'react-router-dom';
