@@ -1,7 +1,7 @@
 import { standardApiCall } from '@utils/api';
 import { updateArrObjectsWithNewVals, filterArr, upsertArray } from 'maddox-js-funcs';
 import { countingSort } from 'maddox-js-funcs';
-import { GENERAL_SCHOOL_ID, OTHER_CLASS_CATEGORY_ID } from '../../../../global_constants';
+import { GENERAL_SCHOOL_ID, OTHER_CLASS_CATEGORY_ID } from '../../../../constants';
 import { selectUser } from '@app/auth/authSlice';
 
 const GET_CRUD_CLASSES = 'app/class/GET_CRUD_CLASSES';

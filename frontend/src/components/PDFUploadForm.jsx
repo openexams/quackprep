@@ -1,18 +1,44 @@
-import { useEffect, useRef, useState } from 'react';
-import { Form, Button, Icon, List } from 'semantic-ui-react';
+import { useRef, useState } from 'react';
+import { Form, Button, Icon, List, Message } from 'semantic-ui-react';
+import { MAX_FILE_SIZE_IN_BYTES } from '../../../constants.js';
 
 const PdfUploadForm = ({ onSubmit }) => {
   const [files, setFiles] = useState([]);
   const [isDragging, setIsDragging] = useState(false);
   const [count, setCount] = useState(0);
+  const [error, setError] = useState(null); // State to handle error messages
   const fileInputRef = useRef(null);
+
+  // Maximum file size in bytes (4MB)
 
   // Handle traditional file picking
   const handleFileChange = (e) => {
     if (e.target.files && e.target.files.length > 0) {
       const newFiles = Array.from(e.target.files);
-      setFiles((prevFiles) => [...prevFiles, ...newFiles]);
+      validateFiles(newFiles);
     }
+  };
+
+  // Validate files for size
+  const validateFiles = (newFiles) => {
+    const validFiles = [];
+    const invalidFiles = [];
+
+    newFiles.forEach((file) => {
+      if (file.size <= MAX_FILE_SIZE_IN_BYTES) {
+        validFiles.push(file);
+      } else {
+        invalidFiles.push(file.name);
+      }
+    });
+
+    if (invalidFiles.length > 0) {
+      setError(`The following files exceed the ${MAX_FILE_SIZE_IN_BYTES} bytes limit: ${invalidFiles.join(', ')}`);
+    } else {
+      setError(null);
+    }
+
+    setFiles((prevFiles) => [...prevFiles, ...validFiles]);
   };
 
   // Programmatically open the hidden file input
@@ -45,7 +71,7 @@ const PdfUploadForm = ({ onSubmit }) => {
 
     if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
       const newFiles = Array.from(e.dataTransfer.files);
-      setFiles((prevFiles) => [...prevFiles, ...newFiles]);
+      validateFiles(newFiles);
       // Clear the drag data
       e.dataTransfer.clearData();
     }
@@ -58,6 +84,7 @@ const PdfUploadForm = ({ onSubmit }) => {
     setFiles([]);
     setIsDragging(false);
     setCount((prevCount) => prevCount + 1);
+    setError(null);
   }
 
   const handleSubmit = (e) => {
@@ -105,6 +132,14 @@ const PdfUploadForm = ({ onSubmit }) => {
           multiple
           onChange={handleFileChange}
         />
+
+        {/* Display error message if any */}
+        {error && (
+          <Message negative style={{ marginTop: '1rem' }}>
+            <Message.Header>File Size Error</Message.Header>
+            <p>{error}</p>
+          </Message>
+        )}
 
         {/* Display the list of selected files */}
         {files.length > 0 && (

@@ -16,7 +16,7 @@ import {
   MAX_FIRST_NAME_LENGTH,
   MAX_LAST_NAME_LENGTH,
   MAX_USERNAME_LENGTH,
-} from "./constants.js";
+} from "../../constants.js";
 
 passport.use(
   // TODO LOOK INTO MORE checkIfProviderIdExistsInUsers()

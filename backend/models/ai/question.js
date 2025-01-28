@@ -13,7 +13,7 @@ import {
 import {
   MAX_QUESTIONS_CONTEXT,
   QUACK_GEN_QUESTION_ASS_ID,
-} from "#config/constants.js";
+} from "../../../constants.js";
 /**
  * Always mcq questions
  * @param {Integer} user_id add which user ai generated the question (does not rlly matter)

@@ -1,20 +1,18 @@
+// IF U CHANGE THIS FILE RUN NPM RUN DEV AGAIN!!!
 export const MAX_FILES_UPLOAD = 3;
 export const MAX_FILE_SIZE_IN_BYTES = 4 * 1024 * 1024; // 4MB
 export const MAX_QUESTIONS_CONTEXT = 10;
 export const QUACK_GEN_QUESTION_ASS_ID = "asst_a168JvA9PlzK2WaKZ6oukDe4";
 export const QUACK_CREATE_GROUP_ASS_ID = "asst_UXDbP8qIkOJw50jN9OLp36oA";
-export const MAX_PROMPT_LENGTH = 20000; // hopefully a pdf parse is no longer than this.
+export const MAX_PROMPT_LENGTH = 50000; // hopefully a pdf parse is no longer than this.
 export const MAX_USER_PROMPT_LENGTH = 5000;
 export const MATHPIX_API_PDF_GET_RESULT_RETRIES = 15;
-
-
+export const MATHPIX_API_PDF_GET_RESULT_SLEEP_TIME_MS = 10000;
 export const MAX_USERNAME_LENGTH = 25;
 export const MAX_EMAIL_LENGTH = 100;
 export const MAX_FIRST_NAME_LENGTH = 50;
 export const MAX_LAST_NAME_LENGTH = 50;
-
 export const AI_ROUTES_RATE_LIMIT_PER_MIN = 1;
-
 export const QUACK_GEN_QUESTION_CONTEXT = `Act as a professor to generate practice questions and corresponding answer choices with a focus on accuracy and correctness.
 
 # Steps
@@ -32,7 +30,6 @@ export const QUACK_GEN_QUESTION_CONTEXT = `Act as a professor to generate practi
 
 - Ensure the questions are challenging yet reasonable for the intended audience.
 - Make sure math questions have good numbers. ie easy human doable math.`;
-
 export const QUACK_CREATE_GROUP_CONTEXT = `
 Transform exam text into a structured JSON format based on provided schema and rules.
 
@@ -136,7 +133,6 @@ json
 - DO NOT FORGET wrap mathematical expressions in $$...$$.
 - Include all question and option details in the JSON object to match the provided schema EXACTLY.
 `;
-
 export const QUACK_GRADE_CONTEXT = `Grade students' free response questions accurately by utilizing the given question. If presented with the correct answer, the system should grade based on this answer; otherwise, it should use its best judgment with reference to the question. The system must return whether the student's response is correct and provide an explanation outlining what they got right or wrong and suggestions for improvement.
 
 # Steps
@@ -164,3 +160,8 @@ export const QUACK_GRADE_CONTEXT = `Grade students' free response questions accu
 - Special attention should be given to subjective questions where the correct answer may vary based on interpretation.
 - Provide constructive feedback aimed at promoting understanding and learning, rather than simply pointing out errors.
 - Encourage students to provide detailed, evidence-supported answers where applicable.`;
+export const ADMIN_ACCOUNT_ID = 13;
+export const GENERAL_SCHOOL_ID = 4;
+export const OTHER_CLASS_CATEGORY_ID = 8;
+
+export const MAX_QUACK_CREATE_GROUP_REQUEST_WAIT_TIME_IN_MS = 900000;

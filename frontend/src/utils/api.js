@@ -78,7 +78,7 @@ export function standardApiCall(method, route, data = null, resultAction, option
         );
       } else {
         dispatch(
-          showFlashMessage(`${options?.errorMsg || 'Sever Error'}\n`, error?.response?.data?.message || 'an error has occured.'),
+          showFlashMessage(`${options?.errorMsg || 'Sever Error'}\n`, `Server Message: ${error?.response?.data?.message}`),
         );
       }
     }

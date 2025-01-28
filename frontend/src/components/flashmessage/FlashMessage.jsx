@@ -45,15 +45,15 @@ export default function FlashMessage() {
   const dispatch = useDispatch();
   const { show, error, msg } = useSelector(selectFlashMessageState);
 
-  // Auto-hide message after 4 seconds
+  // Auto-hide success message after 6 s
   useEffect(() => {
-    if (show) {
+    if (show && !error) {
       const timer = setTimeout(() => {
         dispatch(hideFlashMessage());
       }, 6000);
       return () => clearTimeout(timer);
     }
-  }, [show, dispatch]);
+  }, [show, dispatch, error]);
 
   return (
     <Transition visible={show} animation='fade' duration={500}>

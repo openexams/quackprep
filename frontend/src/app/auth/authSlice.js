@@ -1,7 +1,7 @@
 import { standardApiCall } from '@utils/api';
 import { LOGIN } from './login/loginSlice';
 import { selectItemById } from 'maddox-js-funcs';
-import { ADMIN_ACCOUNT_ID } from '../../../../global_constants.js';
+import { ADMIN_ACCOUNT_ID } from '../../../../constants.js';
 import { createSelector } from '@reduxjs/toolkit';
 
 export function getCurUser() {

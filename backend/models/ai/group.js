@@ -10,7 +10,7 @@ import { upsertGroupInClass, deleteGroupById } from "#models/group/index.js";
 import {
   MAX_FILE_SIZE_IN_BYTES,
   QUACK_CREATE_GROUP_ASS_ID,
-} from "#config/constants.js";
+} from "../../../constants.js";
 import { FILE_SIZE_EXCEEDED } from "#config/error_codes.js";
 import CustomError from "#utils/CustomError.js";
 
@@ -53,7 +53,7 @@ export async function etlFilesIntoGroup(files, class_id, user_id, user_prompt) {
       await sendOpenAiAssistantPromptAndRecieveResult(
         QUACK_CREATE_GROUP_ASS_ID,
         `${mdd_res}\n${user_prompt}`,
-        { retire_time: 10000 }
+        { retire_time: 10000, max_retires: 60 } // this part can run for 10 mins max
       );
     group = await upsertGroupInClass(
       user_id,

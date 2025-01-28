@@ -1,5 +1,5 @@
 import sqlExe from "#db/dbFunctions.js";
-import { ADMIN_ACCOUNT_ID } from "../../global_constants.js";
+import { ADMIN_ACCOUNT_ID } from "../../constants.js";
 
 export function getLastRowManipulated(tableName, rowId = null) {
   if (rowId) {

@@ -4,9 +4,10 @@ import { commonErrorMessage } from "#utils/utils.js";
 import { generateQuestionLike } from "#models/ai/question.js";
 import {
   AI_ROUTES_RATE_LIMIT_PER_MIN,
+  MAX_FILE_SIZE_IN_BYTES,
   MAX_FILES_UPLOAD,
   MAX_USER_PROMPT_LENGTH,
-} from "#config/constants.js";
+} from "../../../constants.js";
 import { etlFilesIntoGroup } from "#models/ai/group.js";
 import { checkStudentFRQAnswer } from "#models/ai/choice.js";
 import rateLimit from "express-rate-limit";
@@ -67,14 +68,14 @@ router.post(
         commonErrorMessage(
           res,
           400,
-          "one of your file's size is too large. use compression to reduce file size.",
+          `one of your file's size is too large, the max file size is ${MAX_FILE_SIZE_IN_BYTES} bytes. use compression to reduce file size.`,
           error
         );
       } else if (error.errorCode === AI_PROMPT_TOO_LONG) {
         commonErrorMessage(
           res,
           400,
-          "The prompt is too long, contact support for assistance, or try uploading different files",
+          "The prompt is too long, meaning the file was probably too big. contact support for assistance.",
           error
         );
       } else {

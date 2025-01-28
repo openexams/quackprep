@@ -1,8 +1,5 @@
 import { openai } from "#config/config.js";
-import {
-  MAX_PROMPT_LENGTH,
-  MAX_USER_PROMPT_LENGTH,
-} from "#config/constants.js";
+import { MAX_PROMPT_LENGTH, MAX_USER_PROMPT_LENGTH } from "../../constants.js";
 import { AI_PROMPT_TOO_LONG } from "#config/error_codes.js";
 import CustomError from "./CustomError.js";
 import { sleep } from "./utils.js";
@@ -22,7 +19,7 @@ export async function sendOpenAiAssistantPromptAndRecieveResult(
   options = {}
 ) {
   dlog(
-    `calling openAi with prompt:${prompt?.slice(0, 100)}...\nlen ${
+    `calling openAi with prompt:${prompt?.slice(0, 100)}...\nprompt.len: ${
       prompt.length
     }`
   );
@@ -129,12 +126,12 @@ export async function checkThreadUntilCompleted(threadId, runId, options) {
   while (
     runRes.status === "queued" ||
     runRes.status === "in_progress" ||
-    retries < (options.max_retires || 20)
+    retries < (options.max_retires || 50)
   ) {
     dlog(
-      `openAi run not finished retrying in ${options.retire_time || 1000}ms`
+      `openAi run not finished retrying in ${options.retire_time || 10000}ms`
     );
-    await sleep(options.retire_time || 1000);
+    await sleep(options.retire_time || 10000);
     runRes = await openai.beta.threads.runs.retrieve(threadId, runId);
     retries++;
   }

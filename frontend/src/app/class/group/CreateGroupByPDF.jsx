@@ -21,8 +21,27 @@ export default function CreateGroupByPDF({ classId }) {
     }
   }
 
+  // Popup content for AI generation info
+  const aiGenerationInfoContent = (
+    <div>
+      <p>
+        <strong>Processing Time:</strong> The longer the PDF, the more time it will take to process. (Sometimes up to ~10min)
+      </p>
+      <p>
+        <strong>AI Capabilities:</strong> AI can summarize, extract key points, and generate study materials. However, it is NOT
+        perfect.
+      </p>
+      <p>
+        <strong>Custom Prompt Tip:</strong> Use a custom prompt to guide the AI for specific outputs.
+      </p>
+    </div>
+  );
+
   return (
-    <CustomImageLoader content={'Wait here or come back in a bit. Magic takes time!'} active={loading}>
+    <CustomImageLoader
+      content={`Wait here or come back in a bit. Magic takes time! It will be ready in your class when done!`}
+      active={loading}
+    >
       <div style={{ padding: '2rem', maxWidth: '600px', margin: '0 auto' }}>
         <Header as='h1' textAlign='center'>
           Generate New AI Content
@@ -40,6 +59,20 @@ export default function CreateGroupByPDF({ classId }) {
             value={customPrompt}
             onChange={(e) => setCustomPrompt(e.target.value)}
             fluid
+          />
+        </div>
+        {/* Popup for AI generation info */}
+        <div style={{ marginBottom: '1rem' }}>
+          <Popup
+            content={aiGenerationInfoContent}
+            trigger={
+              <Button icon labelPosition='left' color='blue'>
+                <Icon name='info' />
+                AI Generation Info
+              </Button>
+            }
+            wide
+            hoverable
           />
         </div>
         <PdfUploadForm onSubmit={handlePdfSubmit} />

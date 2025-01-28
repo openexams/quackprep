@@ -2,7 +2,10 @@
 import { MATHPIX_API_INFO } from "#config/config.js";
 import axios from "axios";
 import { sleep } from "#utils/utils.js";
-import { MATHPIX_API_PDF_GET_RESULT_RETRIES } from "#config/constants.js";
+import {
+  MATHPIX_API_PDF_GET_RESULT_RETRIES,
+  MATHPIX_API_PDF_GET_RESULT_SLEEP_TIME_MS,
+} from "../../constants.js";
 
 /**
  * Keeps retrying until conversion is completed. if it retries more than 5 times, it will throw an error
@@ -46,7 +49,7 @@ export async function getFormattedPdfByPdfIdMathpix(
       throw new Error("failed to get pdf by pdf_id. status is error");
     } else {
       dlog("status not completed. retrying in 10 seconds");
-      await sleep(10000); // wait 10 second
+      await sleep(MATHPIX_API_PDF_GET_RESULT_SLEEP_TIME_MS); // wait 10 second
       return getFormattedPdfByPdfIdMathpix(pdf_id, format, retries + 1);
     }
   } catch (e) {
@@ -89,6 +92,8 @@ export async function postPDFToMathpix(formData) {
  */
 export async function postPdfAndRetriveParsedPdf(formData) {
   const pdf_id = await postPDFToMathpix(formData);
+  dlog("waiting 10s then getting pdf");
+  await sleep(10000);
   return await getFormattedPdfByPdfIdMathpix(pdf_id);
 }
 

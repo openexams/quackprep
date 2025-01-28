@@ -5,7 +5,7 @@ import { Card, Icon } from 'semantic-ui-react';
 import { useNavigate } from 'react-router-dom';
 import ClassEditor from '../creator/forms/ClassEditor';
 import { selectEditState, selectUser } from '../auth/authSlice';
-import { ADMIN_ACCOUNT_ID } from '../../../../global_constants';
+import { ADMIN_ACCOUNT_ID } from '../../../../constants';
 import './class_card.css';
 import useIsMobile from '@utils/hooks/useIsMobile';
 
