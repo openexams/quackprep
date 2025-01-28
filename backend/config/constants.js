@@ -7,6 +7,7 @@ export const MAX_PROMPT_LENGTH = 20000; // hopefully a pdf parse is no longer th
 export const MAX_USER_PROMPT_LENGTH = 5000;
 export const MATHPIX_API_PDF_GET_RESULT_RETRIES = 15;
 
+
 export const MAX_USERNAME_LENGTH = 25;
 export const MAX_EMAIL_LENGTH = 100;
 export const MAX_FIRST_NAME_LENGTH = 50;
