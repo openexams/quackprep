@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { Container, Header, Button, Icon, Grid, Segment, Card } from 'semantic-ui-react';
+import { Container, Header, Button, Icon, Segment } from 'semantic-ui-react';
 import { useNavigate } from 'react-router-dom';
 import { changeNavbarPage } from '@app/layout/navbar/navbarSlice';
 import duckBlissImage from '/img/home/duck_bliss.webp';
