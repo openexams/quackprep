@@ -6,10 +6,7 @@ import {
 } from "#models/question/index.js";
 import { addManyChoicesToQuestion } from "#models/choice/index.js";
 import sqlExe from "#db/dbFunctions.js";
-import {
-  sendOpenAiAssistantPromptAndRecieveResult,
-  sendPromptAndRecieveJSONResult,
-} from "#utils/openAi.js";
+import { sendOpenAiAssistantPromptAndRecieveResult } from "#utils/openAi.js";
 import {
   MAX_QUESTIONS_CONTEXT,
   QUACK_GEN_QUESTION_ASS_ID,

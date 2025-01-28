@@ -1,8 +1,16 @@
-import { openai } from "#config/config.js";
+import { deepseek, openai } from "#config/config.js";
 import { MAX_PROMPT_LENGTH, MAX_USER_PROMPT_LENGTH } from "../../constants.js";
 import { AI_PROMPT_TOO_LONG } from "#config/error_codes.js";
 import CustomError from "./CustomError.js";
 import { sleep } from "./utils.js";
+
+function returnCorrectOpenAiClass(model) {
+  if (model?.includes("deepseek")) {
+    return deepseek;
+  } else {
+    return openai;
+  }
+}
 
 /**
  * If you need to hold a convo etc, do not use this.
@@ -67,7 +75,7 @@ export async function sendOpenAiAssistantPromptAndRecieveResult(
 }
 
 /**
- * Choose any model this is not a assistant.
+ * Choose from gpt4o or none others.
  * @param {String} prompt
  * @param {Object} json_schema
  * @param {String} model use openai model naming pls.
@@ -76,34 +84,40 @@ export async function sendOpenAiAssistantPromptAndRecieveResult(
  */
 export async function sendPromptAndRecieveJSONResult(
   prompt,
-  json_schema,
+  response_format,
   model = "o1-preview",
   context = "Answer questions with accuracy"
 ) {
+  if (prompt.length > MAX_PROMPT_LENGTH) {
+    throw new CustomError(
+      `prompt is too long, max len is ${MAX_PROMPT_LENGTH}, your len was ${prompt.length}`,
+      400,
+      AI_PROMPT_TOO_LONG
+    );
+  }
   if (context.length > MAX_USER_PROMPT_LENGTH) {
     // prompt should be from dev, context is from user
     throw new Error("prompt or context is too long");
   }
   dlog("calling normal openAi with prompt:", prompt);
   try {
-    const completion = await openai.chat.completions.create({
-      model: model,
-      messages: [
-        {
-          role: "user", // o1 has to have it from user sadly. should be system
-          content: context,
-        },
-        {
-          role: "user",
-          content: prompt,
-        },
-      ],
-      response_format: {
-        type: "json_schema",
-        json_schema: json_schema,
-      },
-      store: true,
-    });
+    const completion = await returnCorrectOpenAiClass().chat.completions.create(
+      {
+        model: model,
+        messages: [
+          {
+            role: "user", // o1 has to have it from user sadly. should be system
+            content: context,
+          },
+          {
+            role: "user",
+            content: prompt,
+          },
+        ],
+        response_format: response_format,
+        store: true,
+      }
+    );
     return JSON.parse(completion.choices[0].message.content);
   } catch (error) {
     console.error(
