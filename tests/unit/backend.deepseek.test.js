@@ -1,4 +1,3 @@
-import { QUACK_GEN_QUESTION_CONTEXT } from "constants";
 import { sendDeepSeekPromptAndRecieveJSONResult } from "@backend/utils/deepseek";
 import { test, expect } from "playwright/test";
 
