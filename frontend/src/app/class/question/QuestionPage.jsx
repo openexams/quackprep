@@ -53,6 +53,7 @@ export default function QuestionPage() {
     // if the user didnt start w a question id
     if (questions != null && questions?.length !== 0 && !questionId) {
       dispatch(changeNavbarPage(navigate, parseInt(questions?.[0]?.id)));
+      dispatch(updateQuestionId(parseInt(questions?.[0]?.id)));
     }
   }, [questions?.[0]]); // could lead to issues
 

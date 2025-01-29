@@ -136,6 +136,8 @@ export default function Sentinel() {
     loading?.QuestionPage,
     loading?.ChoiceRouter,
     loading?.PdfList,
+    loading?.PDFList,
+    loading?.SchoolsList,
   ]);
 
   return null;

@@ -163,9 +163,9 @@ export default function navbarReducer(state = DEFAULT_STATE, action) {
         className: null,
         schoolName: newSchoolName,
         schoolId: null,
-        questionId: parseInt(urlArr?.[7]) || null,
-        classId: parseInt(newClassId), // these 2 null should be brought in again, only if we changed topic or class, may cause issues when inputting new link directly into window.location TODO TEST
-        groupId: parseInt(newGroupId),
+        questionId: urlArr?.[7] ? parseInt(urlArr?.[7]) : null,
+        classId: newClassId ? parseInt(newClassId) : null, // these 2 null should be brought in again, only if we changed topic or class, may cause issues when inputting new link directly into window.location TODO TEST
+        groupId: newGroupId ? parseInt(newGroupId) : null,
         groupType: null,
         lastPage: newLastPage,
         fetchHistory: state.fetchHistory,
