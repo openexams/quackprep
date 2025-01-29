@@ -18,7 +18,7 @@ export default function CreatorDashboard() {
   }, []);
 
   return (
-    <Container>
+    <Container style={{ marginBottom: '3rem' }}>
       {/* Hero Section */}
       <Segment basic textAlign='center'>
         <Icon name='graduation cap' size='huge' />
