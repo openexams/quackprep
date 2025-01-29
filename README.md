@@ -1,4 +1,4 @@
-#quackprep
+# QuackPrep.com
 
 ## installation
   cd frontend; npm i; cd ..
