@@ -68,7 +68,7 @@ export async function sendOpenAiAssistantPromptAndRecieveResult(
       // can change max tokens used here
       assistant_id: quackAssist.id,
     });
-    dlog("quackRun started");
+    dlog("quackRun RUN started");
 
     // keep checking till its completed.
 

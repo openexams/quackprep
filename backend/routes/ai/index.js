@@ -6,6 +6,7 @@ import {
   AI_ROUTES_RATE_LIMIT_PER_MIN,
   MAX_FILE_SIZE_IN_BYTES,
   MAX_FILES_UPLOAD,
+  MAX_USER_ANSWER_SUBMISSION_LENGTH,
   MAX_USER_PROMPT_LENGTH,
 } from "../../../constants.js";
 import { etlFilesIntoGroup } from "#models/ai/group.js";
@@ -17,6 +18,7 @@ import {
   FILE_SIZE_EXCEEDED,
   AI_PROMPT_TOO_LONG,
   MAX_RETRIES_EXCEEDED,
+  ANSWER_TO_BE_GRADED_TO_LONG,
 } from "#config/error_codes.js";
 
 const router = Router();
@@ -133,7 +135,22 @@ router.post("/choice/grade/", isAuthenticated, async function (req, res) {
       return;
     }
   } catch (error) {
-    commonErrorMessage(res, 400, "failed to have ai grade your answer", error);
+    if (error.errorCode === ANSWER_TO_BE_GRADED_TO_LONG) {
+      commonErrorMessage(
+        res,
+        400,
+        `answer too long to be graded, max len is ${MAX_USER_ANSWER_SUBMISSION_LENGTH}`,
+        error
+      );
+      return;
+    } else {
+      commonErrorMessage(
+        res,
+        400,
+        "failed to have ai grade your answer",
+        error
+      );
+    }
   }
 });
 

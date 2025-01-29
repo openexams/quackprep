@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { Button, TextArea, Segment, Form, Header, Icon } from 'semantic-ui-react';
 import { upsertCurrentChoiceAndPostAnswer } from '../../choicesSlice';
 import FRQAnswer from './FRQAnswer';
+import { MAX_USER_ANSWER_SUBMISSION_LENGTH } from '../../../../../../../../constants.js';
 
 export default function FreeResponse({ choice, selectedQuestion }) {
   const dispatch = useDispatch();
@@ -35,7 +36,7 @@ export default function FreeResponse({ choice, selectedQuestion }) {
         }}
       >
         <TextArea
-          maxLength={2048}
+          maxLength={MAX_USER_ANSWER_SUBMISSION_LENGTH}
           disabled={submitted}
           value={text}
           onChange={(e, data) => setText(data.value)}
