@@ -1,6 +1,7 @@
 import mysql from "mysql2/promise.js";
 import { MYSQL_CONFIG } from "../config/config.js";
 import { verifyUserOwnsRowId } from "#utils/sqlFunctions.js";
+import "#utils/utils.js";
 
 /**
  * Used to follow a standard for making and executing mysql querys
