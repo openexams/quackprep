@@ -68,6 +68,7 @@ export async function sendOpenAiAssistantPromptAndRecieveResult(
       // can change max tokens used here
       assistant_id: quackAssist.id,
     });
+    dlog("quackRun started");
 
     // keep checking till its completed.
 
@@ -139,21 +140,24 @@ export async function sendPromptAndRecieveJSONResult(
  * @param {*} threadId
  * @param {*} runId
  * @param {Object} options
- * @param {Number} options.retire_time defaults to 10000ms
+ * @param {Number} options.retire_time defaults to 5000ms
  * @param {Number} options.max_retires defaults to 20 retriees
  */
 export async function checkThreadUntilCompleted(threadId, runId, options) {
   let retries = 0;
   let runRes = await openai.beta.threads.runs.retrieve(threadId, runId);
-  while (
-    runRes.status === "queued" ||
-    runRes.status === "in_progress" ||
-    retries < (options.max_retires || 50)
-  ) {
+  while (runRes.status === "queued" || runRes.status === "in_progress") {
+    if (retries > (options.max_retires || 50)) {
+      throw new CustomError(
+        `openAi run failed, status was ${runRes.status}, max retries reached`,
+        500,
+        MAX_RETRIES_EXCEEDED
+      );
+    }
     dlog(
-      `openAi run not finished retrying in ${options.retire_time || 10000}ms`
+      `openAi run not finished retrying in ${options.retire_time || 5000}ms`
     );
-    await sleep(options.retire_time || 10000);
+    await sleep(options.retire_time || 5000);
     runRes = await openai.beta.threads.runs.retrieve(threadId, runId);
     retries++;
   }
@@ -171,4 +175,5 @@ export async function checkThreadUntilCompleted(threadId, runId, options) {
       "OPENAI_RUN_FAILED"
     );
   }
+  return;
 }

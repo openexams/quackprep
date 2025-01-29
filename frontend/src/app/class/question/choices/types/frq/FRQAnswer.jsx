@@ -70,7 +70,16 @@ export default function FRQAnswer({ text, choice, selectedQuestion }) {
               }
             }}
           >
-            {currentChoice?.ai_response ? 'na' : user_id ? '🤖Generate AI Grade🤖' : 'Login To Generate Ai Question'}
+            {currentChoice?.ai_response ? (
+              'na'
+            ) : user_id ? (
+              '🤖Generate AI Grade🤖'
+            ) : (
+              <>
+                <s>🤖Generate AI Grade🤖</s>
+                <p>Login To Get A Grade</p>
+              </>
+            )}
           </Button>
         )}
         {currentChoice?.ai_response && (
