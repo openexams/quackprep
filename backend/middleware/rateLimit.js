@@ -32,30 +32,28 @@ export function createRateLimiter({ windowMs, max, type }) {
         res
       );
     },
-    store:
-      NODE_ENV === "prod" && getRedisClient()
-        ? new RedisStore({
-            sendCommand: (...args) => getRedisClient().sendCommand(args),
-          })
-        : undefined,
+    // store:
+    //   NODE_ENV === "prod" && getRedisClient()
+    //     ? new RedisStore({
+    //         sendCommand: (...args) => getRedisClient().sendCommand(args),
+    //       })
+    //     : undefined,
   });
 }
 
 // Different rate limits for different types of requests
 export const rateLimits = {
   // General API endpoints
-  api: () =>
-    createRateLimiter({
-      windowMs: 60 * 1000, // 1 minute
-      max: 300,
-      type: "API",
-    }),
+  api: createRateLimiter({
+    windowMs: 60 * 1000, // 1 minute
+    max: 300,
+    type: "API",
+  }),
 
   // AI-specific endpoints
-  ai: () =>
-    createRateLimiter({
-      windowMs: 60 * 1000, // 1 minute
-      max: AI_ROUTES_RATE_LIMIT_PER_MIN,
-      type: "AI",
-    }),
+  ai: createRateLimiter({
+    windowMs: 60 * 1000, // 1 minute
+    max: AI_ROUTES_RATE_LIMIT_PER_MIN,
+    type: "AI",
+  }),
 };

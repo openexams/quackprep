@@ -69,8 +69,8 @@ app.use(passport.session());
 /** *        *          *     */
 
 // Move rate limiters before other middleware
-app.use(rateLimits.api());
-app.use("/api/ai", rateLimits.ai());
+app.use(rateLimits.api);
+app.use("/api/ai", rateLimits.ai);
 
 // Then other middleware
 app.use(express.static(path.join(__dirname, "./public/")));
