@@ -21,7 +21,10 @@ export async function initRedis() {
   }
   return redisClient;
 }
-
+/**
+ * Returns the global redis client
+ * @returns {redis.RedisClient}
+ */
 export function getRedisClient() {
   return redisClient;
 }

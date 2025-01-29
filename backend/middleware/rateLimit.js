@@ -5,6 +5,7 @@ import { RATE_LIMIT_EXCEEDED } from "../../error_codes.js";
 import RedisStore from "rate-limit-redis";
 import { getRedisClient } from "#utils/redis.js";
 import { AI_ROUTES_RATE_LIMIT_PER_MIN } from "../../constants.js";
+// be careful of redis client not being initialized
 
 /**
  * Creates rate limiter with specified configuration
@@ -31,22 +32,30 @@ export function createRateLimiter({ windowMs, max, type }) {
         res
       );
     },
+    store:
+      NODE_ENV === "prod" && getRedisClient()
+        ? new RedisStore({
+            sendCommand: (...args) => getRedisClient().sendCommand(args),
+          })
+        : undefined,
   });
 }
 
 // Different rate limits for different types of requests
 export const rateLimits = {
   // General API endpoints
-  api: createRateLimiter({
-    windowMs: 60 * 1000, // 1 minute
-    max: 300,
-    type: "API",
-  }),
+  api: () =>
+    createRateLimiter({
+      windowMs: 60 * 1000, // 1 minute
+      max: 300,
+      type: "API",
+    }),
 
   // AI-specific endpoints
-  ai: createRateLimiter({
-    windowMs: 60 * 1000,
-    max: AI_ROUTES_RATE_LIMIT_PER_MIN,
-    type: "AI",
-  }),
+  ai: () =>
+    createRateLimiter({
+      windowMs: 60 * 1000,
+      max: AI_ROUTES_RATE_LIMIT_PER_MIN,
+      type: "AI",
+    }),
 };
