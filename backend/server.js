@@ -20,6 +20,8 @@ import { errorHandler } from "#middleware/errorHandler.js";
 import { RATE_LIMIT_EXCEEDED } from "../error_codes.js";
 import ApiError from "#utils/ApiError.js";
 import { AI_ROUTES_RATE_LIMIT_PER_MIN } from "../constants.js";
+import { getRedisClient, initRedis } from "#utils/redis.js";
+import { rateLimits } from "#middleware/rateLimit.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -40,42 +42,9 @@ const corsOrigin = {
 
 console.log(NODE_ENV);
 
-const anonRateLimit = rateLimit({
-  windowMs: 60 * 1000, // 1 min
-  limit: 300, // small but prob good
-  handler: (req, res) => {
-    res.setHeader("retry-after", 60);
-    errorHandler(
-      new ApiError("Rate limit exceeded", 429, RATE_LIMIT_EXCEEDED),
-      req,
-      res
-    );
-  },
-});
-
-const aiRateLimit = rateLimit({
-  windowMs: 60 * 1000, // 1 min
-  limit: AI_ROUTES_RATE_LIMIT_PER_MIN,
-  handler: (req, res) => {
-    res.setHeader("retry-after", 60);
-    errorHandler(
-      new ApiError("AI Rate limit exceeded", 429, RATE_LIMIT_EXCEEDED),
-      req,
-      res
-    );
-  },
-});
-
 if (NODE_ENV === "prod") {
-  console.log("Connecting to redis...");
-  const redisClient = redis.createClient(REDIS_CONFIG);
-
-  try {
-    await redisClient.connect();
-    console.log("Connected to redis");
-  } catch (error) {
-    console.log("Failed to connect to redis\n", error);
-  }
+  await initRedis();
+  const redisClient = getRedisClient();
 
   redisClient.on("error", (err) => {
     console.error("Redis connection error:", err);
@@ -105,8 +74,8 @@ app.use(passport.session());
 /** *        *          *     */
 
 // Move rate limiters before other middleware
-app.use(anonRateLimit);
-app.use("/api/ai", aiRateLimit);
+app.use(rateLimits.api);
+app.use("/api/ai", rateLimits.ai);
 
 // Then other middleware
 app.use(express.static(path.join(__dirname, "./public/")));
@@ -118,9 +87,11 @@ app.get("/*", (req, res) => {
   // never hits this with way I have frotend setup (its on cloudflare)
   res.redirect(process.env.FRONTEND_URL);
 });
-
+// handles errors gracefully
 app.use(errorHandler);
+//
 
+// test db connection
 await sqlExe.testConnection();
 
 app.listen(3000, () => {
