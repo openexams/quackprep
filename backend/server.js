@@ -2,24 +2,19 @@ import "#utils/utils.js"; //keep
 import express from "express";
 import cors from "cors";
 import morgan from "morgan";
-import { rateLimit } from "express-rate-limit";
 import session from "express-session";
 import router from "./routes/index.js";
 import passport from "./config/passportConfig.js";
 import RedisStore from "connect-redis";
-import redis from "redis";
 
 import bodyParser from "body-parser";
-import { REDIS_CONFIG, SESSION_CONFIG } from "./config/config.js";
+import { SESSION_CONFIG } from "./config/config.js";
 import sqlExe from "#db/dbFunctions.js";
 import path from "path";
 import { fileURLToPath } from "url";
 import { corsOrigins } from "./config/config.js";
 import { checkForBadWords } from "#middleware/badwordsMiddleware.js";
 import { errorHandler } from "#middleware/errorHandler.js";
-import { RATE_LIMIT_EXCEEDED } from "../error_codes.js";
-import ApiError from "#utils/ApiError.js";
-import { AI_ROUTES_RATE_LIMIT_PER_MIN } from "../constants.js";
 import { getRedisClient, initRedis } from "#utils/redis.js";
 import { rateLimits } from "#middleware/rateLimit.js";
 

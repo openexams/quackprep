@@ -54,7 +54,7 @@ export const rateLimits = {
   // AI-specific endpoints
   ai: () =>
     createRateLimiter({
-      windowMs: 60 * 1000,
+      windowMs: 60 * 1000, // 1 minute
       max: AI_ROUTES_RATE_LIMIT_PER_MIN,
       type: "AI",
     }),
