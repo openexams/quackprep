@@ -80,3 +80,14 @@ export async function upsertClass(
     await selectClasses("cl.id = :class_id", { class_id: id || class_id })
   )[0];
 }
+
+export async function getSchoolByClassId(class_id) {
+  return (
+    await sqlExe.executeCommand(
+      `SELECT s.* FROM schools s
+    JOIN classes c ON c.school_id = s.id
+    WHERE c.id = :class_id`,
+      { class_id }
+    )
+  )[0];
+}

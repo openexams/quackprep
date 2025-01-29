@@ -39,7 +39,7 @@ export default function CreateGroupByPDF({ classId }) {
 
   return (
     <CustomImageLoader
-      content={`Wait here or come back in a bit. Magic takes time! It will be ready in your class when done!`}
+      content={`Wait here or come back in a bit. Magic takes time! We will email you when it's ready.`}
       active={loading}
     >
       <div style={{ padding: '2rem', maxWidth: '600px', margin: '0 auto' }}>

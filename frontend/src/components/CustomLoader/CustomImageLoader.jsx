@@ -18,7 +18,14 @@ export function CustomImageLoader({ active, content, imageUrl, children }) {
                 animation: 'spin 2s linear infinite',
               }}
             />
-            <Loader size='small' content={content || 'Loading...'} />
+            <Loader
+              size='small'
+              content={content || 'Loading...'}
+              style={{
+                minWidth: '15em', // Set a minimum width to prevent wrapping
+                // whiteSpace: 'nowrap', // Prevent wrapping of text
+              }}
+            />
           </div>
         </Dimmer>
       )}

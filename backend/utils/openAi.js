@@ -1,6 +1,9 @@
 import { deepseek, openai } from "#config/config.js";
 import { MAX_PROMPT_LENGTH, MAX_USER_PROMPT_LENGTH } from "../../constants.js";
-import { AI_PROMPT_TOO_LONG } from "#config/error_codes.js";
+import {
+  AI_PROMPT_TOO_LONG,
+  MAX_RETRIES_EXCEEDED,
+} from "#config/error_codes.js";
 import CustomError from "./CustomError.js";
 import { sleep } from "./utils.js";
 
@@ -150,6 +153,17 @@ export async function checkThreadUntilCompleted(threadId, runId, options) {
     retries++;
   }
   if (runRes.status !== "completed") {
-    throw new Error("failed to generate AI question & choices.");
+    if (retries > (options.max_retires ? options.max_retires : 50)) {
+      throw new CustomError(
+        `openAi run failed, status was ${runRes.status}, max retries reached`,
+        500,
+        MAX_RETRIES_EXCEEDED
+      );
+    }
+    throw new CustomError(
+      `openAi run failed, status was ${runRes.status}`,
+      500,
+      "OPENAI_RUN_FAILED"
+    );
   }
 }

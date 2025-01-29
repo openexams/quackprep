@@ -89,3 +89,8 @@ export const MATHPIX_API_INFO = {
   MATHPIX_API_KEY: process.env.MATHPIX_API_KEY,
   MATHPIX_APP_ID: process.env.MATHPIX_APP_ID,
 };
+
+export const email_auth = {
+  user: process.env.QUACKPREP_EMAIL_USER,
+  pass: process.env.QUACKPREP_EMAIL_PASS,
+};

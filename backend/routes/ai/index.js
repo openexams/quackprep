@@ -13,7 +13,11 @@ import { checkStudentFRQAnswer } from "#models/ai/choice.js";
 import rateLimit from "express-rate-limit";
 import { Router } from "express";
 import multer from "multer";
-import { FILE_SIZE_EXCEEDED, AI_PROMPT_TOO_LONG } from "#config/error_codes.js";
+import {
+  FILE_SIZE_EXCEEDED,
+  AI_PROMPT_TOO_LONG,
+  MAX_RETRIES_EXCEEDED,
+} from "#config/error_codes.js";
 
 const router = Router();
 
@@ -67,15 +71,22 @@ router.post(
       if (error.errorCode === FILE_SIZE_EXCEEDED) {
         commonErrorMessage(
           res,
-          400,
+          error.statusCode,
           `one of your file's size is too large, the max file size is ${MAX_FILE_SIZE_IN_BYTES} bytes. use compression to reduce file size.`,
           error
         );
       } else if (error.errorCode === AI_PROMPT_TOO_LONG) {
         commonErrorMessage(
           res,
-          400,
+          error.statusCode,
           "The prompt is too long, meaning the file was probably too big. contact support for assistance.",
+          error
+        );
+      } else if (error.errorCode === MAX_RETRIES_EXCEEDED) {
+        commonErrorMessage(
+          res,
+          error.statusCode,
+          "The ai took too long to respond, please try again later.",
           error
         );
       } else {

@@ -1,4 +1,7 @@
+// user baseded things not having to do with auth
+import { SUCCESS } from "#config/error_codes.js";
 import sqlExe from "#db/dbFunctions.js";
+import EmailService from "#utils/mailer.js";
 
 export async function upsertTimeSpent(user_id) {
   return await sqlExe.executeCommand(
@@ -44,4 +47,14 @@ export async function getTotalTimeSpent() {
   return (
     await sqlExe.executeCommand(`SELECT SUM(time_spent) as tts FROM time_spent`)
   )?.[0]?.tts;
+}
+
+export async function sendEmailToUserByUserId(user_id, subject, html) {
+  const email = (
+    await sqlExe.executeCommand(`Select email from users where id = :user_id`, {
+      user_id,
+    })
+  )?.[0]?.email;
+  await new EmailService(email).sendEmail(html, subject);
+  return SUCCESS;
 }
