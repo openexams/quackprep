@@ -31,12 +31,6 @@ export function createRateLimiter({ windowMs, max, type }) {
         res
       );
     },
-    store:
-      NODE_ENV === "prod"
-        ? new RedisStore({
-            sendCommand: (...args) => getRedisClient().sendCommand(args),
-          })
-        : undefined,
   });
 }
 
