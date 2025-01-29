@@ -14,6 +14,7 @@ import { CustomImageLoader } from '@components/CustomLoader/CustomImageLoader';
 import QuestionVote from './vote/QuestionVote';
 import QuestionNext from './QuestionNext';
 import { updateQuestionId } from '@app/layout/navbar/navbarSlice';
+import useIsMobile from '@utils/hooks/useIsMobile';
 
 /**
  *
@@ -33,6 +34,7 @@ function findQuestionById(questions, id) {
 }
 
 export default function QuestionPage() {
+  const isMobile = useIsMobile();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { schoolName, classId, groupType, groupId, groupName, questionId } = useSelector(selectNavbarState).navbar;
@@ -89,16 +91,19 @@ export default function QuestionPage() {
         </Header>
         <Grid divided>
           <Grid.Row>
-            <Grid.Column width={4}>
-              <QuestionList
-                setSelectedQuestion={setSelectedQuestion}
-                questions={questions}
-                selectedQuestion={selectedQuestion}
-                showAIQuestions={showAIQuestions}
-                setShowAIQuestions={setShowAIQuestions}
-              />
-            </Grid.Column>
-            <Grid.Column width={12}>
+            {!isMobile && (
+              <Grid.Column width={4}>
+                <QuestionList
+                  setSelectedQuestion={setSelectedQuestion}
+                  questions={questions}
+                  selectedQuestion={selectedQuestion}
+                  showAIQuestions={showAIQuestions}
+                  setShowAIQuestions={setShowAIQuestions}
+                />
+              </Grid.Column>
+            )}
+
+            <Grid.Column width={isMobile ? 16 : 12}>
               {selectedQuestion ? (
                 <Segment>
                   <ChoiceRouter selectedQuestion={selectedQuestion} />

@@ -25,7 +25,7 @@ export default function CreateGroupByPDF({ classId }) {
   const aiGenerationInfoContent = (
     <div>
       <p>
-        <strong>Processing Time:</strong> The longer the PDF, the more time it will take to process. (Sometimes up to ~10min)
+        <strong>Processing Time:</strong> The longer the PDF, the more time it will take to process. (Sometimes up to ~15min)
       </p>
       <p>
         <strong>AI Capabilities:</strong> AI can summarize, extract key points, and generate study materials. However, it is NOT
@@ -33,6 +33,9 @@ export default function CreateGroupByPDF({ classId }) {
       </p>
       <p>
         <strong>Custom Prompt Tip:</strong> Use a custom prompt to guide the AI for specific outputs.
+      </p>
+      <p>
+        <strong>Accuracy Tip:</strong> Give it the correct answers, if not, it may generate incorrect information.
       </p>
     </div>
   );

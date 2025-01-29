@@ -72,7 +72,7 @@ export default function Sentinel() {
 
   ///  USE EFFECTS FOR KEEPING STORE SAME AS URL ///
   useEffect(() => {
-    if (!pathArray?.[7] && pathArray?.[1]?.includes('class') && !activePage?.includes('/auth?next') && !State401) {
+    if (pathArray?.[1]?.includes('class') && !activePage?.includes('/auth?next') && !State401) {
       if (pathArray?.[4] && className && classId) {
         dispatch(updateGroupType(pathArray[4]));
       }
