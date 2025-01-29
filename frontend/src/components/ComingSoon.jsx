@@ -4,7 +4,7 @@ import { Container, Segment, Header, Icon, Button, Grid } from 'semantic-ui-reac
 export default function ComingSoon() {
   const navigate = useNavigate();
   return (
-    <Container style={{ marginTop: '3rem' }}>
+    <Container style={{ marginTop: '3rem', marginBottom: '3rem' }}>
       <Grid textAlign='center' verticalAlign='middle'>
         <Grid.Column style={{ maxWidth: 600 }}>
           <Segment raised style={{ padding: '3rem' }}>

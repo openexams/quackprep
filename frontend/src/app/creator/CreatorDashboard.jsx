@@ -124,7 +124,12 @@ export default function CreatorDashboard() {
             <Card fluid>
               <Card.Content textAlign='center'>
                 <Icon name='camera' size='big' />
-                <Card.Header style={{ marginTop: '1rem' }}>3. Snap & Upload</Card.Header>
+                <Card.Header
+                  style={{ marginTop: '1rem', cursor: 'pointer', textDecoration: 'underline', color: 'blue' }}
+                  onClick={() => navigate('/create')}
+                >
+                  3. Snap & Upload
+                </Card.Header>
                 <Card.Description>Take a picture of your study material and upload it to our platform.</Card.Description>{' '}
                 {/* add a how too for this part */}
               </Card.Content>
