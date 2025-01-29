@@ -30,7 +30,7 @@ export default function QuestionNext({ questions, selectedQuestion, setSelectedQ
   };
 
   return (
-    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '20px 0' }}>
+    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
       {/* Previous Button */}
       <Button icon onClick={handlePrev} disabled={getIndexOfSelectedQuestionFromQuestions() === 0}>
         <Icon name='arrow left' />

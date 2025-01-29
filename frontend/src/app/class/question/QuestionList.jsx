@@ -48,7 +48,7 @@ export default function QuestionList({ questions, selectedQuestion, setSelectedQ
       </div>
 
       {/* Wrapping List in a scrollable container */}
-      <div style={{ maxHeight: '33rem', overflowY: 'auto' }}>
+      <div style={{ maxHeight: '33rem', minHeight: '33rem', overflowY: 'auto' }}>
         <List selection divided relaxed>
           {edit ? <QuestionEditor group_ids={groupId} /> : null}
           {questions?.map((question, index) => (

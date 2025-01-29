@@ -108,7 +108,6 @@ export default function QuestionPage() {
                     setSelectedQuestion={setSelectedQuestion}
                   />
                   {selectedQuestion?.id && <QuestionVote questionId={selectedQuestion?.id} upvotes={selectedQuestion?.upvotes} />}
-
                   {selectedQuestion?.id && <QuestionReport questionId={selectedQuestion?.id} />}
                   {selectedQuestion?.explanation_url && (
                     <Button as={'a'} href={selectedQuestion?.explanation_url} target='_blank'>

@@ -32,7 +32,7 @@ export default function ChoiceRouter({ selectedQuestion }) {
     }
   }
   return (
-    <Segment basic loading={loading}>
+    <Segment style={{ maxHeight: '35rem', minHeight: '35rem', overflowY: 'auto' }} basic loading={loading}>
       {selectedQuestion && choices ? (
         <>
           <Header>

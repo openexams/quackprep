@@ -1,5 +1,9 @@
 import { deepseek, openai } from "#config/config.js";
-import { MAX_PROMPT_LENGTH, MAX_USER_PROMPT_LENGTH } from "../../constants.js";
+import {
+  MAX_PROMPT_LENGTH,
+  MAX_PROMPT_TOKENS,
+  MAX_USER_PROMPT_LENGTH,
+} from "../../constants.js";
 import {
   AI_PROMPT_TOO_LONG,
   MAX_RETRIES_EXCEEDED,
@@ -60,6 +64,7 @@ export async function sendOpenAiAssistantPromptAndRecieveResult(
 
     // run the message
     const quackRun = await openai.beta.threads.runs.create(quackThread.id, {
+      max_prompt_tokens: MAX_PROMPT_TOKENS,
       // can change max tokens used here
       assistant_id: quackAssist.id,
     });
