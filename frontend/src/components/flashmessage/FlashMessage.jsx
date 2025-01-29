@@ -76,7 +76,7 @@ export default function FlashMessage() {
         />
         <Message.Header style={{ fontWeight: 'bold' }}>{error ? 'An Error Has Occurred😔' : 'Success!'}</Message.Header>
         <p style={{ position: 'relative', zIndex: 1, margin: 0 }}>
-          {msg} {error === true ? null : `${String(error) || null}`}
+          {msg} {error === true ? null : `${String(error) || ''}`}
         </p>
       </Message>
     </Transition>

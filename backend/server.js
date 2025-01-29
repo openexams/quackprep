@@ -40,6 +40,32 @@ const corsOrigin = {
 
 console.log(NODE_ENV);
 
+const anonRateLimit = rateLimit({
+  windowMs: 60 * 1000, // 1 min
+  limit: 300, // small but prob good
+  handler: (req, res) => {
+    res.setHeader("retry-after", 60);
+    errorHandler(
+      new ApiError("Rate limit exceeded", 429, RATE_LIMIT_EXCEEDED),
+      req,
+      res
+    );
+  },
+});
+
+const aiRateLimit = rateLimit({
+  windowMs: 60 * 1000, // 1 min
+  limit: AI_ROUTES_RATE_LIMIT_PER_MIN,
+  handler: (req, res) => {
+    res.setHeader("retry-after", 60);
+    errorHandler(
+      new ApiError("AI Rate limit exceeded", 429, RATE_LIMIT_EXCEEDED),
+      req,
+      res
+    );
+  },
+});
+
 if (NODE_ENV === "prod") {
   console.log("Connecting to redis...");
   const redisClient = redis.createClient(REDIS_CONFIG);
@@ -64,19 +90,6 @@ if (NODE_ENV === "prod") {
   app.use(session(SESSION_CONFIG));
 }
 
-app.use(
-  rateLimit({
-    windowMs: 60 * 1000, // 1 min
-    limit: 150, // small but prob good
-    handler: (req, res) => {
-      errorHandler(
-        new ApiError("Rate limit exceeded", 429, RATE_LIMIT_EXCEEDED),
-        req,
-        res
-      );
-    },
-  })
-);
 app.use(cors(corsOrigin));
 app.use(
   morgan(
@@ -91,24 +104,13 @@ app.use(passport.initialize());
 app.use(passport.session());
 /** *        *          *     */
 
+// Move rate limiters before other middleware
+app.use(anonRateLimit);
+app.use("/api/ai", aiRateLimit);
+
+// Then other middleware
 app.use(express.static(path.join(__dirname, "./public/")));
-
 app.use(checkForBadWords);
-
-app.use(
-  "/api/ai",
-  rateLimit({
-    windowMs: 60 * 1000, // 1 min
-    limit: AI_ROUTES_RATE_LIMIT_PER_MIN,
-    handler: (req, res) => {
-      errorHandler(
-        new ApiError("AI Rate limit exceeded", 429, RATE_LIMIT_EXCEEDED),
-        req,
-        res
-      );
-    },
-  })
-);
 
 app.use("/api", router);
 
