@@ -7,6 +7,7 @@ import {
 } from "obscenity";
 import { BadRequestError } from "#utils/ApiError.js";
 import { errorHandler } from "./errorHandler.js";
+import "#utils/utils.js";
 
 const matcher = new RegExpMatcher({
   ...englishDataset.build(),
