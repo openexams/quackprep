@@ -1,6 +1,6 @@
 import { email_auth } from "#config/config.js";
 import nodemailer from "nodemailer";
-
+import "#utils/utils.js";
 /**
  * EmailService uses nodemailer to send emails
  */

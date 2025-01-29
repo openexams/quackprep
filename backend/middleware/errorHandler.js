@@ -1,4 +1,5 @@
 import ApiError from "#utils/ApiError.js";
+import { INTERNAL_SERVER_ERROR, DATABASE_ERROR } from "../../error_codes.js";
 // returns error in format and sends a res to the client
 /**
  * Global error handling middleware that processes errors and sends formatted responses
@@ -37,7 +38,7 @@ export function errorHandler(err, req, res, next) {
       errorCode: err.errorCode,
       message: err.message,
       details: err.details,
-      ...(process.env.NODE_ENV === "development" && { stack: err.stack }),
+      ...(NODE_ENV === "local" && { stack: err.stack }),
     });
   }
 
@@ -45,17 +46,17 @@ export function errorHandler(err, req, res, next) {
   else if (err.code && err.code.startsWith("ER_")) {
     return res.status(500).json({
       status: "error",
-      errorCode: "DATABASE_ERROR",
+      errorCode: DATABASE_ERROR,
       message: "Database operation failed",
-      ...(process.env.NODE_ENV === "development" && { details: err.message }),
+      ...(NODE_ENV === "local" && { details: err.message }),
     });
   } else {
     // Default error
     return res.status(500).json({
       status: "error",
-      errorCode: "INTERNAL_SERVER_ERROR",
+      errorCode: INTERNAL_SERVER_ERROR,
       message: "An unexpected error occurred",
-      ...(process.env.NODE_ENV === "development" && { stack: err.stack }),
+      ...(NODE_ENV === "local" && { stack: err.stack }),
     });
   }
 }

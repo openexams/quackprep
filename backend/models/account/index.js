@@ -1,7 +1,7 @@
 // user baseded things not having to do with auth
 import { SUCCESS } from "../../../error_codes.js";
 import sqlExe from "#db/dbFunctions.js";
-import EmailService from "#utils/mailer.js";
+import EmailService from "#utils/EmailService.js";
 
 export async function upsertTimeSpent(user_id) {
   return await sqlExe.executeCommand(

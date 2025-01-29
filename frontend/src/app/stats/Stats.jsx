@@ -120,8 +120,8 @@ export default function StatsPage() {
       <Segment basic loading={loading}>
         <Statistic color='green' value={`${Math.round(tts / 60)} H`} label={'Total Time Spent Studying'} />
         <Statistic color='yellow' value={getTotalSubmissons()} label={'Total Question Submissions'} />
-        <Statistic color='blue' value={total_ai_questions} label={'Total AI Generated Questions'} />
-        <Statistic color='red' value={total_classes_created} label={'Total Classes Created'} />
+        <Statistic color='blue' value={total_ai_questions || 0} label={'Total AI Generated Questions'} />
+        <Statistic color='red' value={total_classes_created || 0} label={'Total Classes Created'} />
 
         <Grid columns={1} stackable>
           <Grid.Row>

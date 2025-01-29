@@ -1,5 +1,5 @@
 import { email_auth } from "@backend/config/config.js";
-import EmailService from "@backend/utils/mailer.js";
+import EmailService from "@backend/utils/EmailService.js";
 import { test, expect } from "playwright/test";
 import "@backend/utils/utils.js";
 

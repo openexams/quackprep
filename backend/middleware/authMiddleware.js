@@ -40,6 +40,6 @@ export async function isAuthenticated(req, res, next) {
     }
   } else {
     dlog("User not authed");
-    errorHandler(new UnauthorizedError(), req, res, next);
+    return errorHandler(new UnauthorizedError(), req, res, next);
   }
 }
