@@ -1,4 +1,7 @@
 import { checkApiKey } from "#models/auth/index.js";
+import ApiError, { UnauthorizedError } from "#utils/ApiError.js";
+import { UNAUTHORIZED } from "../../error_codes.js";
+import { errorHandler } from "./errorHandler.js";
 
 /**
  * Checks if the user is using an api key. if so attach to user obj (saved by redis I think idk)
@@ -37,8 +40,6 @@ export async function isAuthenticated(req, res, next) {
     }
   } else {
     dlog("User not authed");
-    res.status(401).json({
-      message: "401 you do not have access to this page, please login",
-    });
+    errorHandler(new UnauthorizedError(), req, res, next);
   }
 }

@@ -5,8 +5,8 @@ import {
   MAX_USER_ANSWER_SUBMISSION_LENGTH,
   QUACK_GRADE_ASS_ID,
 } from "../../../constants.js";
-import CustomError from "#utils/CustomError.js";
-import { ANSWER_TO_BE_GRADED_TO_LONG } from "#config/error_codes.js";
+import CustomError from "#utils/ApiError.js";
+import { ANSWER_TO_BE_GRADED_TO_LONG } from "../../../error_codes.js";
 /**
  *
  * @param {Number} trans_id the answers_transactional id they submission is tied to.

@@ -13,7 +13,6 @@ export function getSchoolByClassId(classId) {
     const curClass = selectItemById(selectClassState(getState()).classes, 'id', classId);
     const school_id = curClass.school_id;
     const school = selectItemById(selectSchoolState(getState()).schools, 'id', school_id);
-    console.log(school);
     return school;
   };
 }

@@ -10,19 +10,19 @@ import {
 } from "#models/choice/index.js";
 
 import { cascadeSetDeleted } from "#utils/sqlFunctions.js";
-import { commonErrorMessage } from "#utils/utils.js";
 import { Router } from "express";
 import currentRouter from "./current/index.js";
+import { BadRequestError } from "#utils/ApiError.js";
 
 const router = Router();
 
 router.use("/current", currentRouter);
 
 // answers transactional
-router.post("/answer/", async function (req, res) {
+router.post("/answer/", async function (req, res, next) {
   const data = req.body;
   if (!data.question_id || !data.choice_id) {
-    commonErrorMessage(res, 400, "please include a choice & question");
+    next(new BadRequestError("please include a choice & question"));
     return;
   }
   try {
@@ -34,47 +34,37 @@ router.post("/answer/", async function (req, res) {
     );
     res.status(201).json(result);
   } catch (error) {
-    commonErrorMessage(res, 500, "failed to post answer", error);
+    next(error);
   }
 });
 
 /// CRUD CHOICES
 
 //// R
-router.get("/user", isAuthenticated, async function (req, res) {
+router.get("/user", isAuthenticated, async function (req, res, next) {
   try {
     const result = await getChoicesByUserId(req.user);
     res.status(200).json(result);
   } catch (error) {
-    commonErrorMessage(res, 500, "failed to get choice by user", error);
+    next(error);
   }
 });
 
-router.get("/:question_id", async function (req, res) {
+router.get("/:question_id", async function (req, res, next) {
   try {
     const result = await getChoicesByQuestion(req.params.question_id);
     res.status(200).json(result);
   } catch (error) {
-    commonErrorMessage(
-      res,
-      500,
-      `failed to get choices by q.id ${req.params.question_id}`,
-      error
-    );
+    next(error);
   }
 });
 
-router.get("/group/:group_id", async function (req, res) {
+router.get("/group/:group_id", async function (req, res, next) {
   try {
     const result = await getChoicesByGroupId(req.params.group_id);
     res.status(200).json(result);
   } catch (error) {
-    commonErrorMessage(
-      res,
-      500,
-      `failed to get choices by group id ${req.params.group_id}`,
-      error
-    );
+    next(error);
   }
 });
 
@@ -84,7 +74,7 @@ router.post(
   "/many/:question_id",
   isAuthenticated,
   isCreator,
-  async function (req, res) {
+  async function (req, res, next) {
     const data = req.body;
     try {
       if (!data?.choices) {
@@ -99,12 +89,7 @@ router.post(
 
       res.status(201).json(result);
     } catch (error) {
-      commonErrorMessage(
-        res,
-        500,
-        `failed to add many choices to q id ${req.params.question_id}`,
-        error
-      );
+      next(error);
     }
   }
 );
@@ -113,14 +98,14 @@ router.post(
   "/:question_id",
   isAuthenticated,
   isCreator,
-  async function (req, res) {
+  async function (req, res, next) {
     const data = req.body;
     try {
       if (data?.text == null || data?.isCorrect == null || !data?.type) {
-        commonErrorMessage(
-          res,
-          400,
-          "send body with text (string), isCorrect(bool), type"
+        next(
+          new BadRequestError(
+            "send body with text (string), isCorrect(bool), type"
+          )
         );
       }
 
@@ -134,12 +119,7 @@ router.post(
       );
       res.status(201).json(result);
     } catch (error) {
-      commonErrorMessage(
-        res,
-        500,
-        `failed to add choice to q id ${req.params.question_id}`,
-        error
-      );
+      next(error);
     }
   }
 );
@@ -149,7 +129,7 @@ router.delete(
   "/:choice_id",
   isAuthenticated,
   isCreator,
-  async function (req, res) {
+  async function (req, res, next) {
     try {
       const choice_id = parseInt(req.params.choice_id);
       const result = await cascadeSetDeleted(
@@ -164,12 +144,7 @@ router.delete(
       );
       res.status(200).json(result);
     } catch (error) {
-      commonErrorMessage(
-        res,
-        500,
-        `failed to delete choice ${req.params.choice_id}`,
-        error
-      );
+      next(error);
     }
   }
 );

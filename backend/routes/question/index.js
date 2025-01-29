@@ -8,41 +8,30 @@ import {
 } from "#models/question/index.js";
 import { cascadeSetDeleted } from "#utils/sqlFunctions.js";
 import { isCreator } from "#middleware/creatorMiddleware.js";
-import { commonErrorMessage } from "#utils/utils.js";
 import favRouter from "./favorite/index.js";
 import voteRouter from "./vote/index.js";
-
+import { BadRequestError } from "#utils/ApiError.js";
 const router = express.Router();
 
 router.use("/vote", voteRouter);
 
 router.use("/favorite", favRouter);
 
-router.get("/user", isAuthenticated, async function (req, res) {
+router.get("/user", isAuthenticated, async function (req, res, next) {
   try {
     const result = await getQuestionsByUserId(req.user);
     res.status(200).json(result);
   } catch (error) {
-    commonErrorMessage(
-      res,
-      500,
-      `failed to get questions by user id ${req.user}`,
-      error
-    );
+    next(error);
   }
 });
 
-router.get("/:group_id", async function (req, res) {
+router.get("/:group_id", async function (req, res, next) {
   try {
     const result = await getQuestionsByGroupId(req.params.group_id);
     res.status(200).json(result);
   } catch (error) {
-    commonErrorMessage(
-      res,
-      500,
-      `failed to get question by group id ${req.params.group_id}`,
-      error
-    );
+    next(error);
   }
 });
 
@@ -50,7 +39,7 @@ router.delete(
   "/:question_id",
   isAuthenticated,
   isCreator,
-  async function (req, res) {
+  async function (req, res, next) {
     try {
       const question_id = parseInt(req.params.question_id);
       const result = await cascadeSetDeleted(
@@ -65,26 +54,20 @@ router.delete(
       );
       res.status(200).json(result);
     } catch (error) {
-      commonErrorMessage(
-        res,
-        500,
-        `failed to delete question by id ${req.params.question_id}`,
-        error
-      );
+      next(error);
     }
   }
 );
 
-router.post("/", isAuthenticated, isCreator, async function (req, res) {
+router.post("/", isAuthenticated, isCreator, async function (req, res, next) {
   const data = req.body;
   try {
     if (!data.question || !Array.isArray(data?.group_ids)) {
-      commonErrorMessage(
-        res,
-        500,
-        `please send in a question (string) and group_ids (array<int>)`
+      return next(
+        new BadRequestError(
+          `please send in a question (string) and group_ids (array<int>)`
+        )
       );
-      return;
     }
     const question = await upsertQuestion(
       data?.id,
@@ -95,35 +78,33 @@ router.post("/", isAuthenticated, isCreator, async function (req, res) {
 
     res.status(201).json(question);
   } catch (error) {
-    commonErrorMessage(res, 500, `failed to create question`, error);
+    next(error);
   }
 });
 
-router.post("/report/:question_id", isAuthenticated, async function (req, res) {
-  const { text } = req.body;
-  if (!text || !req.params.question_id) {
-    commonErrorMessage(
-      res,
-      500,
-      `please send in a text (string) and question_id (int)`
-    );
-    return;
+router.post(
+  "/report/:question_id",
+  isAuthenticated,
+  async function (req, res, next) {
+    const { text } = req.body;
+    if (!text || !req.params.question_id) {
+      return next(
+        new BadRequestError(
+          `please send in a text (string) and question_id (int)`
+        )
+      );
+    }
+    try {
+      const result = await createQuestionReport(
+        req.user,
+        req.params.question_id,
+        text
+      );
+      res.status(200).json(result);
+    } catch (error) {
+      next(error);
+    }
   }
-  try {
-    const result = await createQuestionReport(
-      req.user,
-      req.params.question_id,
-      text
-    );
-    res.status(200).json(result);
-  } catch (error) {
-    commonErrorMessage(
-      res,
-      500,
-      `failed to report question by id ${req.params.question_id}`,
-      error
-    );
-  }
-});
+);
 
 export default router;

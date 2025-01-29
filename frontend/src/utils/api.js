@@ -4,6 +4,24 @@ import { hideFlashMessage, showFlashMessage } from '@components/flashmessage/fla
 import { startLoading, stopLoading } from '@app/store/loadingSlice.js';
 import { signOut } from '@app/auth/login/loginSlice.js';
 import { updateFetchHistory } from '@app/layout/navbar/navbarSlice';
+import { UNAUTHORIZED, RATE_LIMIT_EXCEEDED } from '../../../error_codes.js';
+
+function handleApiError(error, dispatch) {
+  const errorResponse = error.response?.data;
+
+  switch (errorResponse?.errorCode) {
+    case UNAUTHORIZED:
+      dispatch(signOut());
+      dispatch(show401Msg());
+      return 'Your session has expired. Please login again.';
+
+    case RATE_LIMIT_EXCEEDED:
+      return `Rate limit exceeded. Please try again in ${error.response?.headers?.['retry-after']} seconds.`;
+
+    default: // all others can just be shown to the user.
+      return errorResponse?.message || 'An unexpected error occurred';
+  }
+}
 
 /**
  * A redux thunk standard api call THIS IS BASICALLY A MIDDLEWARE (idk how to make a real one yet) IF YOU ARE TALKING TO THE API PLS USE THIS
@@ -63,24 +81,13 @@ export function standardApiCall(method, route, data = null, resultAction, option
       return result.data;
     } catch (error) {
       console.error(error);
+      const errorMessage = handleApiError(error, dispatch);
       dispatch(stopLoading(options?.loadingComponent));
-      console.error('Failed req to ', error?.request?.responseURL);
-      if (error?.response?.status === 401 && !route.includes('/auth/login')) {
-        dispatch(signOut());
-        dispatch(hideFlashMessage());
-        dispatch(show401Msg());
-      } else if (error?.response?.status === 429) {
-        dispatch(
-          showFlashMessage(
-            `Your Rate Limit has been exceeded, please try again later.`,
-            `Retry After: ${error?.response?.headers?.['retry-after'] || `~60`}s`,
-          ),
-        );
-      } else {
-        dispatch(
-          showFlashMessage(`${options?.errorMsg || 'Sever Error'}\n`, `Server Message: ${error?.response?.data?.message}`),
-        );
-      }
+      dispatch(showFlashMessage(errorMessage, true));
+
+      // if (options?.onError) {
+      //   options.onError(error);
+      // }
     }
   };
 }

@@ -1,4 +1,3 @@
-import { commonErrorMessage } from "#utils/utils.js";
 import {
   RegExpMatcher,
   englishDataset,
@@ -6,6 +5,8 @@ import {
   skipNonAlphabeticTransformer,
   collapseDuplicatesTransformer,
 } from "obscenity";
+import { BadRequestError } from "#utils/ApiError.js";
+import { errorHandler } from "./errorHandler.js";
 
 const matcher = new RegExpMatcher({
   ...englishDataset.build(),
@@ -46,18 +47,20 @@ export function checkAllFieldsForBadWords(obj) {
 export function checkForBadWords(req, res, next) {
   if (req.method === "POST" || req.method === "PUT" || req.method === "PATCH") {
     if (checkAllFieldsForBadWords(req.body)) {
-      return commonErrorMessage(
+      return errorHandler(
+        new BadRequestError("Inappropriate content detected in body"),
+        req,
         res,
-        400,
-        "Inappropriate content detected in body"
+        next
       );
     }
 
     if (checkAllFieldsForBadWords(req.params)) {
-      return commonErrorMessage(
+      return errorHandler(
+        new BadRequestError("Inappropriate content detected in params"),
+        req,
         res,
-        400,
-        "Inappropriate content detected in params"
+        next
       );
     }
   }

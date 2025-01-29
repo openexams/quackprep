@@ -6,44 +6,33 @@ import {
 } from "#models/account/index.js";
 
 import { isAuthenticated } from "#middleware/authMiddleware.js";
-import { commonErrorMessage } from "#utils/utils.js";
 
 const router = Router();
 
-router.post("/time_spent", isAuthenticated, async function (req, res) {
+router.post("/time_spent", isAuthenticated, async function (req, res, next) {
   try {
     const result = await upsertTimeSpent(req.user); // always 5 min
     res.status(201).json(result);
   } catch (error) {
-    commonErrorMessage(
-      res,
-      500,
-      "failed to update your time spent on the site",
-      error
-    );
+    next(error);
   }
 });
 
-router.get("/time_spent/total", async function (req, res) {
+router.get("/time_spent/total", async function (req, res, next) {
   try {
     const result = await getTotalTimeSpent();
     res.status(200).json(result);
   } catch (error) {
-    commonErrorMessage(res, 500, "failed to get total time spent", error);
+    next(error);
   }
 });
 
-router.get("/stats", isAuthenticated, async function (req, res) {
+router.get("/stats", isAuthenticated, async function (req, res, next) {
   try {
     const result = await getMyStats(req.user);
     res.status(200).json(result);
   } catch (error) {
-    commonErrorMessage(
-      res,
-      500,
-      `failed to get stats by user_id ${req.user}`,
-      error
-    );
+    next(error);
   }
 });
 

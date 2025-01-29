@@ -8,40 +8,35 @@ import {
   getClassCategories,
 } from "#models/class/index.js";
 import { cascadeSetDeleted } from "#utils/sqlFunctions.js";
-import { commonErrorMessage } from "#utils/utils.js";
 import express from "express";
 import { GENERAL_SCHOOL_ID } from "../../../constants.js";
+import { BadRequestError } from "#utils/ApiError.js";
 const router = express.Router();
 
-router.get("/user", isAuthenticated, async function (req, res) {
+router.get("/user", isAuthenticated, async function (req, res, next) {
   try {
     const result = await getClassesByUserId(req.user);
     res.status(200).json(result);
   } catch (error) {
-    commonErrorMessage(res, 500, "failed to get all classes by user id", error);
+    next(error);
   }
 });
 
-router.get("/categories", async function (req, res) {
+router.get("/categories", async function (req, res, next) {
   try {
     const result = await getClassCategories();
     res.status(200).json(result);
   } catch (error) {
-    commonErrorMessage(res, 500, "failed to get all class categories", error);
+    next(error);
   }
 });
 
-router.get("/:school_id", async function (req, res) {
+router.get("/:school_id", async function (req, res, next) {
   try {
     const result = await getClassesBySchoolId(req.params.school_id);
     res.status(200).json(result);
   } catch (error) {
-    commonErrorMessage(
-      res,
-      500,
-      `failed to get all classes by school id ${req.params.school_id}`,
-      error
-    );
+    next(error);
   }
 });
 
@@ -49,7 +44,7 @@ router.delete(
   "/:class_id",
   isAuthenticated,
   isCreator,
-  async function (req, res) {
+  async function (req, res, next) {
     try {
       const class_id = parseInt(req.params.class_id);
       const result = await cascadeSetDeleted(
@@ -64,24 +59,19 @@ router.delete(
       );
       res.status(200).json(result);
     } catch (error) {
-      commonErrorMessage(
-        res,
-        500,
-        `failed to delete class ${req.params.class_id}`,
-        error
-      );
+      next(error);
     }
   }
 );
 
-router.post("/", isAuthenticated, isCreator, async function (req, res) {
+router.post("/", isAuthenticated, isCreator, async function (req, res, next) {
   const data = req.body;
   try {
     if (!data.school_id || !data.name || !data.description || !data.category) {
-      commonErrorMessage(
-        res,
-        400,
-        "missing required fields school_id, name, description, category"
+      next(
+        new BadRequestError(
+          "missing required fields school_id, name, description, category"
+        )
       );
       return;
     }
@@ -96,17 +86,17 @@ router.post("/", isAuthenticated, isCreator, async function (req, res) {
     );
     res.status(200).json(result);
   } catch (error) {
-    commonErrorMessage(res, 500, "failed to add class", error);
+    next(error);
   }
 });
 
 //shcool table stuff
-router.get("/school/all", async function (req, res) {
+router.get("/school/all", async function (req, res, next) {
   try {
     const result = await getSchools();
     res.status(200).json(result);
   } catch (error) {
-    commonErrorMessage(res, 500, "failed to get all schools", error);
+    next(error);
   }
 });
 

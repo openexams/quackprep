@@ -4,29 +4,24 @@ import {
   getFavoriteQuestionsByUserId,
   upsertFavoriteQuestion,
 } from "#models/question/favorite/index.js";
-import { commonErrorMessage } from "#utils/utils.js";
-
+import { BadRequestError } from "#utils/ApiError.js";
 const router = express.Router();
 
-router.get("/", isAuthenticated, async function (req, res) {
+router.get("/", isAuthenticated, async function (req, res, next) {
   try {
     const result = await getFavoriteQuestionsByUserId(req.user);
     res.status(200).json(result);
   } catch (error) {
-    commonErrorMessage(
-      res,
-      500,
-      `failed to get fav questions by user id ${req.user}`,
-      error
-    );
+    next(error);
   }
 });
 
-router.post("/", isAuthenticated, async function (req, res) {
+router.post("/", isAuthenticated, async function (req, res, next) {
   const data = req.body;
   if (!data.question_id || data.is_favorite == null) {
-    commonErrorMessage(res, 400, "please input a is_favorite and question_id");
-    return;
+    return next(
+      new BadRequestError("please input a is_favorite and question_id")
+    );
   }
   try {
     const result = await upsertFavoriteQuestion(
@@ -37,12 +32,7 @@ router.post("/", isAuthenticated, async function (req, res) {
     );
     res.status(200).json(result);
   } catch (error) {
-    commonErrorMessage(
-      res,
-      500,
-      `failed to get fav questions by user id ${req.user}`,
-      error
-    );
+    next(error);
   }
 });
 

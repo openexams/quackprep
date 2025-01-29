@@ -16,6 +16,10 @@ import path from "path";
 import { fileURLToPath } from "url";
 import { corsOrigins } from "./config/config.js";
 import { checkForBadWords } from "#middleware/badwordsMiddleware.js";
+import { errorHandler } from "#middleware/errorHandler.js";
+import { RATE_LIMIT_EXCEEDED } from "../error_codes.js";
+import ApiError from "#utils/ApiError.js";
+import { AI_ROUTES_RATE_LIMIT_PER_MIN } from "../constants.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -59,10 +63,18 @@ if (NODE_ENV === "prod") {
 } else {
   app.use(session(SESSION_CONFIG));
 }
+
 app.use(
   rateLimit({
     windowMs: 60 * 1000, // 1 min
     limit: 150, // small but prob good
+    handler: (req, res) => {
+      errorHandler(
+        new ApiError("Rate limit exceeded", 429, RATE_LIMIT_EXCEEDED),
+        req,
+        res
+      );
+    },
   })
 );
 app.use(cors(corsOrigin));
@@ -83,12 +95,29 @@ app.use(express.static(path.join(__dirname, "./public/")));
 
 app.use(checkForBadWords);
 
+app.use(
+  "/api/ai",
+  rateLimit({
+    windowMs: 60 * 1000, // 1 min
+    limit: AI_ROUTES_RATE_LIMIT_PER_MIN,
+    handler: (req, res) => {
+      errorHandler(
+        new ApiError("AI Rate limit exceeded", 429, RATE_LIMIT_EXCEEDED),
+        req,
+        res
+      );
+    },
+  })
+);
+
 app.use("/api", router);
 
 app.get("/*", (req, res) => {
   // never hits this with way I have frotend setup (its on cloudflare)
   res.redirect(process.env.FRONTEND_URL);
 });
+
+app.use(errorHandler);
 
 await sqlExe.testConnection();
 

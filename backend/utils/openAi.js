@@ -4,11 +4,8 @@ import {
   MAX_PROMPT_TOKENS,
   MAX_USER_PROMPT_LENGTH,
 } from "../../constants.js";
-import {
-  AI_PROMPT_TOO_LONG,
-  MAX_RETRIES_EXCEEDED,
-} from "#config/error_codes.js";
-import CustomError from "./CustomError.js";
+import { AI_PROMPT_TOO_LONG, MAX_RETRIES_EXCEEDED } from "../../error_codes.js";
+import CustomError from "./ApiError.js";
 import { sleep } from "./utils.js";
 
 function returnCorrectOpenAiClass(model) {

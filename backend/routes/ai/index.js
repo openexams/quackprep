@@ -1,34 +1,24 @@
 import { isAuthenticated } from "#middleware/authMiddleware.js";
 import { verifyUserOwnsRowId } from "#utils/sqlFunctions.js";
-import { commonErrorMessage } from "#utils/utils.js";
 import { generateQuestionLike } from "#models/ai/question.js";
 import {
   AI_ROUTES_RATE_LIMIT_PER_MIN,
-  MAX_FILE_SIZE_IN_BYTES,
   MAX_FILES_UPLOAD,
   MAX_USER_ANSWER_SUBMISSION_LENGTH,
   MAX_USER_PROMPT_LENGTH,
 } from "../../../constants.js";
 import { etlFilesIntoGroup } from "#models/ai/group.js";
 import { checkStudentFRQAnswer } from "#models/ai/choice.js";
-import rateLimit from "express-rate-limit";
 import { Router } from "express";
 import multer from "multer";
 import {
-  FILE_SIZE_EXCEEDED,
-  AI_PROMPT_TOO_LONG,
-  MAX_RETRIES_EXCEEDED,
+  CONTEXT_TOO_LONG,
+  MISSING_REQUIRED_FIELDS,
   ANSWER_TO_BE_GRADED_TO_LONG,
-} from "#config/error_codes.js";
+} from "../../../error_codes.js";
+import { BadRequestError } from "#utils/ApiError.js";
 
 const router = Router();
-
-router.use(
-  rateLimit({
-    windowMs: 60 * 1000, // 1 min
-    limit: AI_ROUTES_RATE_LIMIT_PER_MIN,
-  })
-);
 
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage }); // Store files in memory
@@ -37,31 +27,27 @@ router.post(
   "/group/",
   isAuthenticated,
   upload.array("files", MAX_FILES_UPLOAD),
-  async function (req, res) {
+  async (req, res, next) => {
     try {
-      const files = req.files;
-      const class_id = req.body.class_id;
-      const user_given_context = req.body.prompt;
+      const {
+        files,
+        body: { class_id, prompt: user_given_context },
+      } = req;
 
       if (user_given_context?.length > MAX_USER_PROMPT_LENGTH) {
-        commonErrorMessage(
-          res,
-          400,
-          `user_given_context is too long, max length is ${MAX_USER_PROMPT_LENGTH}`
+        throw new BadRequestError(
+          `User context exceeds maximum length of ${MAX_USER_PROMPT_LENGTH}`,
+          CONTEXT_TOO_LONG
         );
-        return;
       }
 
-      if (!files[0] || !class_id) {
-        commonErrorMessage(
-          res,
-          400,
-          `missing required fields: need file and class_id`
+      if (!files?.[0] || !class_id) {
+        throw new BadRequestError(
+          "Missing required fields: file and class_id",
+          MISSING_REQUIRED_FIELDS
         );
-        return;
       }
 
-      // Process file (stored in memory or temporary location)
       const result = await etlFilesIntoGroup(
         files,
         class_id,
@@ -70,43 +56,15 @@ router.post(
       );
       res.status(201).json(result);
     } catch (error) {
-      if (error.errorCode === FILE_SIZE_EXCEEDED) {
-        commonErrorMessage(
-          res,
-          error.statusCode,
-          `one of your file's size is too large, the max file size is ${MAX_FILE_SIZE_IN_BYTES} bytes. use compression to reduce file size.`,
-          error
-        );
-      } else if (error.errorCode === AI_PROMPT_TOO_LONG) {
-        commonErrorMessage(
-          res,
-          error.statusCode,
-          "The prompt is too long, meaning the file was probably too big. contact support for assistance.",
-          error
-        );
-      } else if (error.errorCode === MAX_RETRIES_EXCEEDED) {
-        commonErrorMessage(
-          res,
-          error.statusCode,
-          "The ai took too long to respond, please try again later.",
-          error
-        );
-      } else {
-        commonErrorMessage(
-          res,
-          500,
-          `failed to generate ai group in class ${req.body?.class_id}`,
-          error
-        );
-      }
+      next(error); // Pass to error handler middleware
     }
   }
 );
 
-router.post("/choice/grade/", isAuthenticated, async function (req, res) {
+router.post("/choice/grade/", isAuthenticated, async function (req, res, next) {
   const data = req.body;
   if (!data.trans_id || !data.question_text || !data.student_answer_text) {
-    commonErrorMessage(res, 400, "please send all required body", null);
+    next(new BadRequestError("please send all required body", null));
     return;
   }
   try {
@@ -126,30 +84,23 @@ router.post("/choice/grade/", isAuthenticated, async function (req, res) {
       );
       res.status(201).json(result);
     } else {
-      commonErrorMessage(
-        res,
-        400,
-        "YOU DONT OWN THE ROW YOU ARE TRYING TO MANIPULATE",
-        null
+      next(
+        new BadRequestError(
+          "YOU DONT OWN THE ROW YOU ARE TRYING TO MANIPULATE",
+          null
+        )
       );
-      return;
     }
   } catch (error) {
     if (error.errorCode === ANSWER_TO_BE_GRADED_TO_LONG) {
-      commonErrorMessage(
-        res,
-        400,
-        `answer too long to be graded, max len is ${MAX_USER_ANSWER_SUBMISSION_LENGTH}`,
-        error
+      next(
+        new BadRequestError(
+          `answer too long to be graded, max len is ${MAX_USER_ANSWER_SUBMISSION_LENGTH}`,
+          ANSWER_TO_BE_GRADED_TO_LONG
+        )
       );
-      return;
     } else {
-      commonErrorMessage(
-        res,
-        400,
-        "failed to have ai grade your answer",
-        error
-      );
+      next(error);
     }
   }
 });
@@ -157,13 +108,14 @@ router.post("/choice/grade/", isAuthenticated, async function (req, res) {
 router.post(
   "/question/question_like/",
   isAuthenticated,
-  async function (req, res) {
+  async function (req, res, next) {
     const data = req.body;
     if (!data.likeQuestionId || !data.likeQuestionText) {
-      commonErrorMessage(
-        res,
-        400,
-        "please select a question for an example for the ai"
+      next(
+        new BadRequestError(
+          "please select a question for an example for the ai",
+          null
+        )
       );
       return;
     }
@@ -175,12 +127,7 @@ router.post(
       );
       res.status(201).json(result);
     } catch (error) {
-      commonErrorMessage(
-        res,
-        500,
-        `failed to gen fav question based on question_id: ${data?.likeQuestionId}`,
-        error
-      );
+      next(error);
     }
   }
 );

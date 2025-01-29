@@ -8,7 +8,7 @@ import {
   englishDataset,
   englishRecommendedTransformers,
 } from "obscenity";
-import { commonErrorMessage } from "#utils/utils.js";
+import { BadRequestError, InternalServerError } from "#utils/ApiError.js";
 
 const matcher = new RegExpMatcher({
   ...englishDataset.build(),
@@ -17,55 +17,50 @@ const matcher = new RegExpMatcher({
 
 const router = Router();
 
-router.get("/users/count", async function (req, res) {
+router.get("/users/count", async function (req, res, next) {
   try {
     const result = await getUserCount();
     res.status(200).json(result?.[0].COUNT);
   } catch (error) {
-    commonErrorMessage(res, 500, "failed to get user count", error);
+    next(error);
   }
 });
 
-router.post("/register", async function (req, res) {
-  commonErrorMessage(
-    res,
-    500,
-    "register through email is currently turned off, please use google login"
-  );
+router.post("/register", async function (req, res, next) {
+  next(new Error("no register allowed"));
   return;
   // make sure to check if that emails not alr taken lol TODO FIX AND ITS TURNED OFF RN
   const { username, email, password } = req.body;
 
   if (!username || !email || !password) {
-    commonErrorMessage(
-      res,
-      400,
-      "please send all required fields: first name, last name, username, email, password"
+    return next(
+      new BadRequestError(
+        "please send all required fields: first name, last name, username, email, password"
+      )
     );
-    return;
   }
   if (!validator.isEmail(email)) {
-    commonErrorMessage(res, 400, "Invalid Email, try again with a valid email");
-    return;
+    return next(
+      new BadRequestError("Invalid Email, try again with a valid email")
+    );
   }
   if (
     matcher.getAllMatches(email).length !== 0 ||
     matcher.getAllMatches(username).length !== 0
   ) {
-    commonErrorMessage(
-      res,
-      400,
-      "no bad words allowed, if you believe this is a mistake please contact support"
+    return next(
+      new BadRequestError(
+        "no bad words allowed, if you believe this is a mistake please contact support"
+      )
     );
     return;
   }
   if (username.includes(" ")) {
-    commonErrorMessage(
-      res,
-      400,
-      "no spaces allowed in first name, last name, or username"
+    return next(
+      new BadRequestError(
+        "no spaces allowed in first name, last name, or username"
+      )
     );
-    return;
   }
 
   // check if email alr exists TODO will currently just not work
@@ -75,7 +70,7 @@ router.post("/register", async function (req, res) {
   if (result) {
     res.status(201).json({ message: "successfully created a account" });
   } else {
-    commonErrorMessage(res, 500, "failed to create account");
+    next(new InternalServerError("failed to create account"));
   }
 });
 

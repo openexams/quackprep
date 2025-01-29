@@ -7,25 +7,20 @@ import {
   deleteGroupById,
 } from "#models/group/index.js";
 import { isCreator } from "#middleware/creatorMiddleware.js";
-import { commonErrorMessage } from "#utils/utils.js";
+import { BadRequestError } from "#utils/ApiError.js";
 
 const router = express.Router();
 
-router.get("/user/", isAuthenticated, async function (req, res) {
+router.get("/user/", isAuthenticated, async function (req, res, next) {
   try {
     const result = await getGroupsByUserId(req.user, req.params.type);
     res.status(200).json(result);
   } catch (error) {
-    commonErrorMessage(
-      res,
-      500,
-      `failed to get groups by user id ${req.user}`,
-      error
-    );
+    next(error);
   }
 });
 
-router.get("/:class_id/:type?", async function (req, res) {
+router.get("/:class_id/:type?", async function (req, res, next) {
   try {
     const result = await getGroupsByClassId(
       req.params.class_id,
@@ -33,12 +28,7 @@ router.get("/:class_id/:type?", async function (req, res) {
     );
     res.status(200).json(result);
   } catch (error) {
-    commonErrorMessage(
-      res,
-      500,
-      `failed to get groups by class id ${req.params.classId} & type ${req.params.type} (if type passed in) `,
-      error
-    );
+    next(error);
   }
 });
 
@@ -46,51 +36,45 @@ router.delete(
   "/:group_id",
   isAuthenticated,
   isCreator,
-  async function (req, res) {
+  async function (req, res, next) {
     try {
       const group_id = parseInt(req.params.group_id);
       const result = await deleteGroupById(req.user, group_id);
       res.status(200).json(result);
     } catch (error) {
-      commonErrorMessage(
-        res,
-        500,
-        `failed to delete group ${req.params.group_id}`,
-        error
-      );
+      next(error);
     }
   }
 );
 
 // type must be for now topic || exam changing now gay
-router.post("/:type", isAuthenticated, isCreator, async function (req, res) {
-  const data = req.body;
-  try {
-    if (!req.params.type || !data.name || !data.desc || !data.class_id) {
-      commonErrorMessage(
-        res,
-        400,
-        `missing required fields need type, name, desc, class_id`
+router.post(
+  "/:type",
+  isAuthenticated,
+  isCreator,
+  async function (req, res, next) {
+    const data = req.body;
+    try {
+      if (!req.params.type || !data.name || !data.desc || !data.class_id) {
+        return next(
+          new BadRequestError(
+            `missing required fields need type, name, desc, class_id`
+          )
+        );
+      }
+      const result = await upsertGroupInClass(
+        req.user,
+        data.class_id,
+        req.params.type,
+        data.name,
+        data.desc,
+        data?.id
       );
-      return;
+      res.status(201).json(result);
+    } catch (error) {
+      next(error);
     }
-    const result = await upsertGroupInClass(
-      req.user,
-      data.class_id,
-      req.params.type,
-      data.name,
-      data.desc,
-      data?.id
-    );
-    res.status(201).json(result);
-  } catch (error) {
-    commonErrorMessage(
-      res,
-      500,
-      `failed to create group in class ${req.body.class_id} and type ${req.params.type}`,
-      error
-    );
   }
-});
+);
 
 export default router;

@@ -11,8 +11,8 @@ import {
   MAX_FILE_SIZE_IN_BYTES,
   QUACK_CREATE_GROUP_ASS_ID,
 } from "../../../constants.js";
-import { FILE_SIZE_EXCEEDED, SUCCESS } from "#config/error_codes.js";
-import CustomError from "#utils/CustomError.js";
+import { FILE_SIZE_EXCEEDED, SUCCESS } from "../../../error_codes.js";
+import CustomError, { BadRequestError } from "#utils/ApiError.js";
 import { sendEmailToUserByUserId } from "#models/account/index.js";
 import { getSchoolByClassId } from "#models/class/index.js";
 
@@ -35,12 +35,12 @@ export async function etlFilesIntoGroup(files, class_id, user_id, user_prompt) {
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
       if (file.size > MAX_FILE_SIZE_IN_BYTES) {
-        throw new CustomError("File size exceeded", 400, FILE_SIZE_EXCEEDED);
+        throw new BadRequestError("File size exceeded", FILE_SIZE_EXCEEDED);
       }
       const fileType = file?.mimetype?.split("/")?.[1];
       dlog(file);
       if (!file) {
-        throw new Error("no file when it says there is a file??");
+        throw new BadRequestError("No file found when expected");
       } else if (fileType === "pdf") {
         const formData = new FormData();
         formData.append("file", file.buffer, file.originalname);
@@ -142,7 +142,7 @@ export async function etlFilesIntoGroup(files, class_id, user_id, user_prompt) {
       <h1>Welcome to Your New Group</h1>
       <p>Your group <strong>${group.name}</strong> has been successfully added!</p>
       <a href="https://quackprep.com/class/${school_name}/${class_id}/group/${group.id}/question/">Click here to view your group and start studying!</a>
-      <p>We’re excited to have you as part of QuackPrep!</p>
+      <p>We're excited to have you as part of QuackPrep!</p>
     </div>
     <div class="footer">
       <p>Powered by QuackPrep</p>
@@ -167,8 +167,7 @@ export async function etlFilesIntoGroup(files, class_id, user_id, user_prompt) {
       await deleteGroupById(user_id, group.id);
       dlog(`successfully cascade deleted group_id: ${group.id}`);
     }
-    console.error(error);
-    throw error; // throw to route to handle it
+    throw error; // Let the error handler middleware handle it
   }
 }
 // add assitant ids to constant FILE

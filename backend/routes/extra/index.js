@@ -9,44 +9,34 @@ import {
 import { cascadeSetDeleted } from "#utils/sqlFunctions.js";
 import { isAuthenticated } from "#middleware/authMiddleware.js";
 import { isCreator } from "#middleware/creatorMiddleware.js";
-import { commonErrorMessage } from "#utils/utils.js";
+import { BadRequestError } from "#utils/ApiError.js";
 
 const router = express.Router();
 
-router.get("/announcement/", async function (req, res) {
+router.get("/announcement/", async function (req, res, next) {
   try {
     const result = await getAnnouncement();
     res.status(200).json(result);
   } catch (error) {
-    commonErrorMessage(res, 500, `failed to get announcement`, error);
+    next(error);
   }
 });
 
-router.get("/pdfs/user/", async function (req, res) {
+router.get("/pdfs/user/", async function (req, res, next) {
   try {
     const result = await getPdfsByUserId(req.user);
     res.status(200).json(result);
   } catch (error) {
-    commonErrorMessage(
-      res,
-      500,
-      `failed to get pdfs by user id ${req.user}`,
-      error
-    );
+    next(error);
   }
 });
 
-router.get("/pdfs/:class_id", async function (req, res) {
+router.get("/pdfs/:class_id", async function (req, res, next) {
   try {
     const result = await getPdfsByClassId(req.params.class_id);
     res.status(200).json(result);
   } catch (error) {
-    commonErrorMessage(
-      res,
-      500,
-      `failed to get pdfs by class id ${req.params.class_id}`,
-      error
-    );
+    next(error);
   }
 });
 
@@ -54,7 +44,7 @@ router.delete(
   "/pdfs/:pdf_id",
   isAuthenticated,
   isCreator,
-  async function (req, res) {
+  async function (req, res, next) {
     try {
       const result = await cascadeSetDeleted(
         // pdf only delete itself
@@ -69,21 +59,17 @@ router.delete(
       );
       res.status(200).json(result);
     } catch (error) {
-      commonErrorMessage(
-        res,
-        500,
-        `failed to delete pdf by id ${req.params.pdf_id}`,
-        error
-      );
+      next(error);
     }
   }
 );
 
-router.post("/pdfs", async function (req, res) {
+router.post("/pdfs", async function (req, res, next) {
   const data = req.body;
   if (!data.link || !data.class_id || !data.name) {
-    commonErrorMessage(res, 400, `link, class_id, and name are required`);
-    return;
+    return next(
+      new BadRequestError("missing required fields link, class_id, name")
+    );
   }
   try {
     const result = await upsertPdf(
@@ -95,7 +81,7 @@ router.post("/pdfs", async function (req, res) {
     );
     res.status(200).json(result);
   } catch (error) {
-    commonErrorMessage(res, 500, `failed to add pdf`, error);
+    next(error);
   }
 });
 
