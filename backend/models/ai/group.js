@@ -141,7 +141,7 @@ export async function etlFilesIntoGroup(files, class_id, user_id, user_prompt) {
     <div class="content">
       <h1>Welcome to Your New Group</h1>
       <p>Your group <strong>${group.name}</strong> has been successfully added!</p>
-      <a href="https://quackprep.com/class/${school_name}/${class_id}/group/${group.id}/question/">Click here to view your group and start studying!</a>
+      <a href="https://quackprep.com/class/${school_name}/${class_id}/group/${group.id}/question">Click here to view your group and start studying!</a>
       <p>We're excited to have you as part of QuackPrep!</p>
     </div>
     <div class="footer">
