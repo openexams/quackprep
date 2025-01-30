@@ -61,6 +61,8 @@ export const MYSQL_CONFIG = {
   queueLimit: 0,
   namedPlaceholders: true,
   timezone: "Z", // This sets the timezone to UTC
+  enableKeepAlive: true,
+  keepAliveInitialDelay: 10000,
 };
 
 export const SESSION_CONFIG = {
