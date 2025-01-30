@@ -16,6 +16,7 @@ export default function NewPageWrapper() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const defaultClassCreated = useRef(false);
+  const haveGottenClassesByUserId = useRef(false);
 
   // Get the user ID from Redux
   const user = useSelector(selectUser).user;
@@ -29,26 +30,33 @@ export default function NewPageWrapper() {
   const [classId, setClassId] = useState(null);
 
   useEffect(() => {
-    if (user_id && user?.is_creator) {
-      dispatch(getClassesByUserId());
+    async function fetchClasses() {
+      if (user_id && user?.is_creator && !haveGottenClassesByUserId.current) {
+        await dispatch(getClassesByUserId());
+        haveGottenClassesByUserId.current = true; // could be kept in redux as well
+      }
     }
+
+    fetchClasses();
   }, [user?.is_creator, user_id, dispatch]);
+
+  const shouldCreateDefaultClass =
+    haveGottenClassesByUserId.current &&
+    !loading &&
+    user?.is_creator &&
+    !defaultClassCreated.current &&
+    user_id &&
+    Array.isArray(userCreatedClasses) &&
+    userCreatedClasses.length === 0;
 
   useEffect(() => {
     if (user_id && !user?.is_creator) {
       dispatch(makeUserACreator());
-    } else if (
-      !loading &&
-      user?.is_creator &&
-      defaultClassCreated.current === false &&
-      user_id &&
-      Array.isArray(userCreatedClasses) &&
-      userCreatedClasses.length === 0
-    ) {
+    } else if (shouldCreateDefaultClass) {
       defaultClassCreated.current = true;
       dispatch(createDefaultUserClass());
     }
-  }, [user_id, dispatch, userCreatedClasses, user?.is_creator, loading]);
+  }, [user_id, dispatch, user?.is_creator]);
 
   return (
     <Segment raised padded loading={loading}>
