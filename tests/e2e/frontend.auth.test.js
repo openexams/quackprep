@@ -27,7 +27,7 @@ test("test auth pushes you to last page, go to create, and then login and expect
 }) => {
   await page.goto("http://localhost:3001/");
   await page.getByRole("link", { name: "AI Create" }).click();
-  await page.waitForTimeout(2000);
+  await page.waitForURL("**/create");
   await login(page);
   await page.waitForURL("**/create");
 });
