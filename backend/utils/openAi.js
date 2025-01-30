@@ -28,7 +28,6 @@ export async function sendAiMessageChainAndRecieveResult(
   model = "gpt-4o",
   options
 ) {
-  console.log("messages", messages);
   try {
     const completion =
       await returnCorrectOpenAiClass().beta.chat.completions.parse({

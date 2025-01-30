@@ -10,6 +10,7 @@ import TypingLoader from './TypingLoader/TypingLoader';
 import './chatbot.css';
 import { selectMessages, sendAiMessage } from './chatbotSlice';
 import { useDispatch } from 'react-redux';
+import logo from '/img/quackprep_logo.webp';
 
 export default function ChatBot() {
   const messages = useSelector(selectMessages);
@@ -53,11 +54,9 @@ export default function ChatBot() {
   if (!user_id) return <LoginRequired title='QuackPrepGPT' />;
 
   return (
-    <Segment className='chat-container'>
-      {/* Add welcome message when empty */}
-
+    <Segment className='chat-container' style={{ width: '20rem', height: '35rem' }}>
       <div className='messages-wrapper'>
-        {(!messages || messages?.length === 0) && (
+        {
           <div className='message-bubble assistant-message'>
             <div className='message-text'>
               {currentQuestion
@@ -65,7 +64,7 @@ export default function ChatBot() {
                 : "Hello! I'm QuackPrepGPT. How can I help you today?"}
             </div>
           </div>
-        )}
+        }
         {messages &&
           messages.map((message, index) => (
             <div key={index} className={`message-bubble ${message.role === 'user' ? 'user-message' : 'assistant-message'}`}>

@@ -17,8 +17,12 @@ export async function sendChatbotPromptAndRecieveResult(messages, model) {
     content:
       "Assist students by providing accurate, clear solutions and explanations. Use accessible language, ensure accuracy, and encourage learning with guiding questions. Act respectfully like a supportive professor.",
   });
-  const res = await sendAiMessageChainAndRecieveResult(newMessages, "gpt-4o", {
-    max_completion_tokens: 5000,
-  }); // todo maybe premium user gets diff model
+  const res = await sendAiMessageChainAndRecieveResult(
+    newMessages,
+    "gpt-4o-mini",
+    {
+      max_completion_tokens: 5000,
+    }
+  ); // todo maybe premium user gets diff model
   return res;
 }
