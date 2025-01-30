@@ -16,7 +16,9 @@ function handleApiError(error, dispatch) {
       return 'Your session has expired. Please login again.';
 
     case RATE_LIMIT_EXCEEDED: {
-      const errorMessage = `Rate limit exceeded. Please try again in ${error.response?.headers?.['retry-after']} seconds.`;
+      const errorMessage = `Rate limit exceeded. Please try again ${
+        error.response?.headers?.['retry-after'] ? 'in ' + error.response?.headers?.['retry-after'] + ' seconds' : 'later'
+      }`;
       dispatch(showFlashMessage(errorMessage, true));
       return errorMessage;
     }

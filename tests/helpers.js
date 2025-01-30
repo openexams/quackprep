@@ -7,5 +7,6 @@ export async function login(page) {
   await page.getByPlaceholder("Enter password...").click();
   await page.getByPlaceholder("Enter password...").fill(TEST_ACCOUNT_PASS);
   await page.getByRole("button", { name: "Submit" }).click();
-  await page.waitForTimeout(2000); // Wait for 2000 milliseconds (2 seconds)
+  await page.waitForURL((url) => !url.pathname.includes("/auth"));
+  console.log("logged in");
 }
