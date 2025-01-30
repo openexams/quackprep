@@ -11,21 +11,27 @@ import { selectNavbarState } from '@app/layout/navbar/navbarSlice';
 import { selectEditState } from '../auth/authSlice'; // cuz anyone can make classes
 import ClassCardCTA from './class_cta/ClassCardCTA';
 import ClassSearch from './ClassSearch';
-
+import { selectUser } from '../auth/authSlice';
 export default function ClassList() {
+  const user_id = useSelector(selectUser).user?.id;
   const [classFilter, setClassFilter] = useState('');
   let { schoolId: curSchoolId } = useSelector(selectNavbarState).navbar;
-  let classes = useSelector(selectBINARYArrayOfStateById('app.class.classes.classes', 'school_id', curSchoolId));
-  classes = selectArrayOfIncludingItems(classes, ['name'], [classFilter]);
+
   const loading = useSelector(selectLoadingState).loadingComps?.ClassList;
   const classCategories = useSelector(selectClassCategories).class_categories;
   const [curCategory, setCurCategory] = useState('');
   const [visible, setVisible] = useState(true);
   const edit = useSelector(selectEditState);
 
+  let classes = useSelector(selectBINARYArrayOfStateById('app.class.classes.classes', 'school_id', curSchoolId));
+  classes = selectArrayOfIncludingItems(classes, ['name'], [classFilter]);
   let filteredClasses = curCategory
     ? selectArrayOfIncludingItemsByNumber(classes, ['category'], [parseInt(curCategory)])
     : classes;
+
+  filteredClasses = filteredClasses
+    ? filteredClasses.filter((c) => c.pdf_id !== null || c.group_id !== null || c.created_by === user_id)
+    : null;
 
   const handleCategoryChange = (category) => {
     setVisible(false);

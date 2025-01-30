@@ -44,6 +44,9 @@ export default function Footer() {
               </Header>
               <p>Follow us on social media for updates and news.</p>
               <List horizontal inverted divided link size='small'>
+                <List.Item as='a' href='https://discord.com/invite/APy5379qT8' target='_blank' rel='noopener noreferrer'>
+                  <Icon color='blue' name='discord' /> Discord
+                </List.Item>
                 <List.Item
                   as='a'
                   href='https://www.youtube.com/playlist?list=PLDLOmQLH1ppwvW7tcnB1uiJrwUGPeUbzJ'

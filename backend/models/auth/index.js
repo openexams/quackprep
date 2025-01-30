@@ -93,6 +93,7 @@ export async function getUserByUsername(username) {
       { username }
     )
   )?.[0];
+  if (!curUser?.id) return null;
   return {
     // DONT RET PASSWORD
     id: curUser.id,
