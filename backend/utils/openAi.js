@@ -15,6 +15,37 @@ function returnCorrectOpenAiClass(model) {
     return openai;
   }
 }
+/**
+ * @param {ChatCompletionMessageParam[]} messages
+ * @param {String} model
+ * @param {Object} options
+ * @param {Number} options.max_completion_tokens
+ * @returns {ChatCompletionMessageParam} the new message from the chatbot
+ */
+
+export async function sendAiMessageChainAndRecieveResult(
+  messages,
+  model = "gpt-4o",
+  options
+) {
+  console.log("messages", messages);
+  try {
+    const completion =
+      await returnCorrectOpenAiClass().beta.chat.completions.parse({
+        model: model,
+        messages: messages,
+        max_completion_tokens: options.max_completion_tokens || undefined,
+      });
+
+    const { role, content } = completion.choices[0].message;
+    return { role, content };
+  } catch (error) {
+    console.error(
+      "failed to call openai api at sendAiMessageChainAndRecieveResult, rethrowing error"
+    );
+    throw error;
+  }
+}
 
 /**
  * If you need to hold a convo etc, do not use this.
@@ -43,10 +74,11 @@ export async function sendOpenAiAssistantPromptAndRecieveResult(
     );
   }
   try {
-    const quackAssist = await openai.beta.assistants.retrieve(assistant_id);
+    const quackAssist =
+      await returnCorrectOpenAiClass().beta.assistants.retrieve(assistant_id);
 
     // create the thread which to send messages and send a starter msg
-    const quackThread = await openai.beta.threads.create({
+    const quackThread = await returnCorrectOpenAiClass().beta.threads.create({
       messages: [
         {
           role: "assistant",
@@ -60,11 +92,15 @@ export async function sendOpenAiAssistantPromptAndRecieveResult(
     });
 
     // run the message
-    const quackRun = await openai.beta.threads.runs.create(quackThread.id, {
-      max_prompt_tokens: MAX_PROMPT_TOKENS,
-      // can change max tokens used here
-      assistant_id: quackAssist.id,
-    });
+    const quackRun = await returnCorrectOpenAiClass().beta.threads.runs.create(
+      quackThread.id,
+      {
+        max_prompt_tokens: MAX_PROMPT_TOKENS,
+        // can change max tokens used here
+        assistant_id: quackAssist.id,
+      }
+    );
+
     dlog("quackRun RUN started");
 
     // keep checking till its completed.
@@ -72,7 +108,10 @@ export async function sendOpenAiAssistantPromptAndRecieveResult(
     await checkThreadUntilCompleted(quackThread.id, quackRun.id, options);
 
     // get message from AI when completed.
-    const allMessages = await openai.beta.threads.messages.list(quackThread.id);
+    const allMessages =
+      await returnCorrectOpenAiClass().beta.threads.messages.list(
+        quackThread.id
+      );
     return JSON.parse(allMessages?.data[0]?.content?.[0]?.text?.value);
   } catch (error) {
     console.error("failed to call openai api, rethrowing error");
@@ -142,7 +181,10 @@ export async function sendPromptAndRecieveJSONResult(
  */
 export async function checkThreadUntilCompleted(threadId, runId, options) {
   let retries = 0;
-  let runRes = await openai.beta.threads.runs.retrieve(threadId, runId);
+  let runRes = await returnCorrectOpenAiClass().beta.threads.runs.retrieve(
+    threadId,
+    runId
+  );
   while (runRes.status === "queued" || runRes.status === "in_progress") {
     if (retries > (options.max_retires || 50)) {
       throw new CustomError(
@@ -155,9 +197,13 @@ export async function checkThreadUntilCompleted(threadId, runId, options) {
       `openAi run not finished retrying in ${options.retire_time || 5000}ms`
     );
     await sleep(options.retire_time || 5000);
-    runRes = await openai.beta.threads.runs.retrieve(threadId, runId);
+    runRes = await returnCorrectOpenAiClass().beta.threads.runs.retrieve(
+      threadId,
+      runId
+    );
     retries++;
   }
+
   if (runRes.status !== "completed") {
     if (retries > (options.max_retires ? options.max_retires : 50)) {
       throw new CustomError(

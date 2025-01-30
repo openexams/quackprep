@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Button, Image, Popup } from 'semantic-ui-react';
 import './widget.css';
-import PopupChild from './PopupChild';
+import PopupChild from './ChatBot';
 
 export default function ChatbotWidget() {
   const [open, setOpen] = useState(false);
@@ -34,7 +34,9 @@ export default function ChatbotWidget() {
     justifyContent: 'center',
     alignItems: 'center',
     overflow: 'hidden',
-    zIndex: 1000,
+    zIndex: 9999,
+    transform: 'translateZ(0)',
+    willChange: 'transform',
   };
 
   const imageStyles = {

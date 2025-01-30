@@ -7,12 +7,13 @@ import reactRefresh from "eslint-plugin-react-refresh";
 export default [
   { ignores: ["dist"] },
   {
-    files: ["**/*.{js,jsx}"],
+    files: ["**/*.{js,jsx,mjs}"],
     languageOptions: {
       ecmaVersion: 2024,
       globals: {
         ...globals.browser,
-        dlog: "readonly", // only in backend
+        ...globals.node,
+        dlog: "readonly",
       },
       parserOptions: {
         ecmaVersion: "latest",
@@ -20,7 +21,14 @@ export default [
         sourceType: "module",
       },
     },
-    settings: { react: { version: "18.3" } },
+    settings: {
+      react: { version: "18.3" },
+      "import/resolver": {
+        node: {
+          extensions: [".js", ".jsx", ".ts", ".tsx"],
+        },
+      },
+    },
     plugins: {
       react,
       "react-hooks": reactHooks,
@@ -37,7 +45,12 @@ export default [
         { allowConstantExport: true },
       ],
       "require-await": "error",
-      "@typescript-eslint/no-floating-promises": "error",
+      "no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
+      "no-undef": "error",
+      "no-console": ["warn", { allow: ["warn", "error"] }],
+      "no-var": "error",
+      "prefer-const": "warn",
+      strict: ["error", "global"],
     },
   },
 ];

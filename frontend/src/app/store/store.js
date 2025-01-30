@@ -1,6 +1,7 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 
 import loadingReducer from './loadingSlice';
+import chatbotReducer from '@app/chatbot/chatbotSlice';
 
 import flashReducer from '@components/flashmessage/flashMessageSlice';
 import homeReducer from '../home/homeSlice';
@@ -20,6 +21,7 @@ import favoriteReducer from '../class/question/favorite/favoriteSlice';
 import groupReducer from '../class/group/groupSlice';
 
 const app = combineReducers({
+  chatbot: chatbotReducer,
   home: homeReducer,
   navbar: navbarReducer,
   streak: streakReducer,
