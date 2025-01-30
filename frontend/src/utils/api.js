@@ -15,11 +15,18 @@ function handleApiError(error, dispatch) {
       dispatch(show401Msg());
       return 'Your session has expired. Please login again.';
 
-    case RATE_LIMIT_EXCEEDED:
-      return `Rate limit exceeded. Please try again in ${error.response?.headers?.['retry-after']} seconds.`;
+    case RATE_LIMIT_EXCEEDED: {
+      const errorMessage = `Rate limit exceeded. Please try again in ${error.response?.headers?.['retry-after']} seconds.`;
+      dispatch(showFlashMessage(errorMessage, true));
+      return errorMessage;
+    }
 
-    default: // all others can just be shown to the user.
-      return errorResponse?.message || 'An unexpected error occurred';
+    default: {
+      // all others can just be shown to the user.
+      const errorMessage = errorResponse?.message || 'An unexpected error occurred';
+      dispatch(showFlashMessage(errorMessage, true));
+      return errorMessage;
+    }
   }
 }
 
@@ -82,7 +89,8 @@ export function standardApiCall(method, route, data = null, resultAction, option
     } catch (error) {
       console.error(error);
       const errorMessage = handleApiError(error, dispatch);
-      dispatch(showFlashMessage(errorMessage, true));
+      console.error(errorMessage);
+
       dispatch(stopLoading(options?.loadingComponent));
 
       // if (options?.onError) {
