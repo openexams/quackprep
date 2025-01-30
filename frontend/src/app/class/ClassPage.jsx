@@ -10,14 +10,14 @@ export default function ClassPage() {
   let { schoolId: curSchoolId } = useSelector(selectNavbarState).navbar;
 
   return (
-    <Container fluid>
+    <Container fluid style={{ padding: '0px' }}>
       <Header as='h1' textAlign='center' icon={'graduation cap'}>
         {curSchoolId ? 'Available Classes' : 'Choose a School'}
         <Header.Subheader>Choose one to begin your learning journey</Header.Subheader>
       </Header>
       <SchoolsList />
       {curSchoolId == null ? (
-        <Segment placeholder textAlign='center'>
+        <Segment placeholder textAlign='center' style={{ marginTop: 0 }}>
           <Header icon>
             <Icon name='building' />
             Please Select a School
@@ -25,7 +25,7 @@ export default function ClassPage() {
           </Header>
         </Segment>
       ) : (
-        <Segment placeholder textAlign='center'>
+        <Segment placeholder textAlign='center' style={{ marginTop: 0 }}>
           <ClassList />
         </Segment>
       )}

@@ -36,7 +36,7 @@ export default function SchoolsList() {
   }, [schools]); // could be risky idk
 
   return (
-    <Segment loading={loading}>
+    <Segment loading={loading} style={{ marginBottom: '-1em', overflowX: 'auto' }}>
       <Grid columns={8} doubling>
         {schools?.map((school) => (
           <Grid.Column key={'s' + school.id}>

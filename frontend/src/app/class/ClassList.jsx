@@ -37,7 +37,7 @@ export default function ClassList() {
 
   return (
     <Container>
-      <Segment basic loading={loading}>
+      <Segment loading={loading}>
         <ClassSearch setClassFilter={setClassFilter} classFilter={classFilter} />
 
         <Header.Subheader>
@@ -46,7 +46,7 @@ export default function ClassList() {
             : `Showing all ${classes?.length} available classes`}
         </Header.Subheader>
 
-        <Container>
+        <Container style={{ backgroundColor: '#f9fafb' }}>
           {/* The category menu remains as is */}
 
           <Menu pointing fluid widths={classCategories?.length + 1} stackable>
