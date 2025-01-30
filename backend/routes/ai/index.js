@@ -16,15 +16,33 @@ import {
   ANSWER_TO_BE_GRADED_TO_LONG,
 } from "../../../error_codes.js";
 import { BadRequestError } from "#utils/ApiError.js";
+import { sendChatbotPromptAndRecieveResult } from "#models/ai/chatbot.js";
 
 const router = Router();
+router.use(isAuthenticated);
 
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage }); // Store files in memory
 
+router.post("/chatbot/", async function (req, res, next) {
+  const data = req.body;
+  if (!data.messages) {
+    next(new BadRequestError("please send all required body", null));
+    return;
+  }
+  try {
+    const result = await sendChatbotPromptAndRecieveResult(
+      data.messages,
+      data.model
+    );
+    res.status(201).json(result);
+  } catch (error) {
+    next(error);
+  }
+});
+
 router.post(
   "/group/",
-  isAuthenticated,
   upload.array("files", MAX_FILES_UPLOAD),
   async (req, res, next) => {
     try {
@@ -60,7 +78,7 @@ router.post(
   }
 );
 
-router.post("/choice/grade/", isAuthenticated, async function (req, res, next) {
+router.post("/choice/grade/", async function (req, res, next) {
   const data = req.body;
   if (!data.trans_id || !data.question_text || !data.student_answer_text) {
     next(new BadRequestError("please send all required body", null));
@@ -106,7 +124,7 @@ router.post("/choice/grade/", isAuthenticated, async function (req, res, next) {
 
 router.post(
   "/question/question_like/",
-  isAuthenticated,
+
   async function (req, res, next) {
     const data = req.body;
     if (!data.likeQuestionId || !data.likeQuestionText) {

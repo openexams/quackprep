@@ -9,6 +9,7 @@ import { getCurrentChoices, removeStateCurrentChoices } from '@app/class/questio
 import { getSchools } from '@app/class/school/schoolSlice';
 import { getHasStreak } from '@app/streak/streakSlice';
 import { getAnnouncement } from './layout/navbar/navbarSlice';
+import { clearChat } from './chatbot/chatbotSlice';
 export default function Init() {
   const user = useSelector(selectUser).user;
   const navigate = useNavigate();
@@ -33,13 +34,14 @@ export default function Init() {
     };
   }, []);
 
-  // on login init
+  // on login init and on logout
   useEffect(() => {
     if (user?.id) {
       dispatch(getHasStreak());
       dispatch(getFavoriteQuestions());
       dispatch(getCurrentChoices());
     } else {
+      dispatch(clearChat());
       dispatch(getCurUser());
       dispatch(removeStateCurrentChoices());
       dispatch(removeStateFavoriteQuestions());
