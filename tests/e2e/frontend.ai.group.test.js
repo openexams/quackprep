@@ -10,6 +10,7 @@ test("given a file and being logged in test that a user with a class can use the
   test.setTimeout(70000); // 70 seconds
   const fileExists = fs.existsSync(path_to_assets + "imgs/cs251_rbt.png");
   expect(fileExists).toBe(true);
+  await page.goto("http://localhost:3001/");
   await login(page);
   await page.getByRole("link", { name: "AI Create" }).click();
   await page.getByRole("alert").click();
