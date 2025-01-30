@@ -52,13 +52,13 @@ export const rateLimits = {
   // AI-specific endpoints
   ai: createRateLimiter({
     windowMs: 60 * 1000, // 1 minute
-    max: 2,
+    max: 4,
     type: "AI",
   }),
 
   auth: createRateLimiter({
-    windowMs: 60 * 1000, // 1 minute
-    max: 5,
+    windowMs: 60 * 10000, // 10 minute
+    max: 30,
     type: "AUTH",
   }),
 };
