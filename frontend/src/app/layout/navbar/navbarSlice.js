@@ -141,12 +141,17 @@ export default function navbarReducer(state = DEFAULT_STATE, action) {
           fetchHistory: state.fetchHistory,
         };
       }
+      // this custom logic is kinda shit.
       // case where question/ is the old page
-      if (state.page?.[state.page.length - 1] === '/') {
+      if (state.page?.length > 1 && state.page?.[state.page.length - 1] === '/') {
         newPage = state.page + action.payload;
       } else if (action.payload?.[0] !== '/') {
         newPage = state.page + '/' + action.payload;
+      } else {
+        // / at start meaning reset everything
+        newPage = action.payload;
       }
+
       if (newPage === state.page) {
         return state;
       }
