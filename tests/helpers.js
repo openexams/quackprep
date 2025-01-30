@@ -8,5 +8,9 @@ export async function login(page) {
   await page.getByPlaceholder("Enter password...").fill(TEST_ACCOUNT_PASS);
   await page.getByRole("button", { name: "Submit" }).click();
   await page.waitForURL((url) => !url.pathname.includes("/auth"));
-  console.log("logged in");
+  page.on("console", (msg) => {
+    if (msg.type() === "error") {
+      console.log(`Console error: ${msg.text()}`);
+    }
+  });
 }
