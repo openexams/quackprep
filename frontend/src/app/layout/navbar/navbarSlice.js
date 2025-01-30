@@ -141,9 +141,10 @@ export default function navbarReducer(state = DEFAULT_STATE, action) {
           fetchHistory: state.fetchHistory,
         };
       }
-      // after base cases
-      // same logic that navigate() has
-      if (action.payload?.[0] !== '/') {
+      // case where question/ is the old page
+      if (state.page?.[state.page.length - 1] === '/') {
+        newPage = state.page + action.payload;
+      } else if (action.payload?.[0] !== '/') {
         newPage = state.page + '/' + action.payload;
       }
       if (newPage === state.page) {
@@ -155,6 +156,7 @@ export default function navbarReducer(state = DEFAULT_STATE, action) {
       const newSchoolName = urlArr?.[2] || null;
       const newClassId = urlArr?.[3] || null;
       const newGroupId = urlArr?.[5] || null;
+      const newQuestionId = urlArr?.[7] || null;
 
       return {
         ...state,
@@ -163,7 +165,7 @@ export default function navbarReducer(state = DEFAULT_STATE, action) {
         className: null,
         schoolName: newSchoolName,
         schoolId: null,
-        questionId: urlArr?.[7] ? parseInt(urlArr?.[7]) : null,
+        questionId: newQuestionId ? parseInt(newQuestionId) : null,
         classId: newClassId ? parseInt(newClassId) : null, // these 2 null should be brought in again, only if we changed topic or class, may cause issues when inputting new link directly into window.location TODO TEST
         groupId: newGroupId ? parseInt(newGroupId) : null,
         groupType: null,
