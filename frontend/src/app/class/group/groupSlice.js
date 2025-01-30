@@ -26,8 +26,8 @@ export function getGroupsByClassId(classId) {
 export function createGroupGivenPDF(formData, class_id, prompt) {
   formData.append('prompt', prompt); // Add the prompt
   formData.append('class_id', class_id); // Add the class_id
-  return async function (dispatch) {
-    standardApiCall('post', `/api/ai/group/`, formData, null, {
+  return async function (dispatch, getState) {
+    await standardApiCall('post', `/api/ai/group/`, formData, null, {
       // this will not update state to much work just have user refresh or smth
       loadingComponent: ['CreateGroupByPDF'],
       noticeOfSuccess: 'successfully generate group by AI!',
@@ -38,7 +38,7 @@ export function createGroupGivenPDF(formData, class_id, prompt) {
         timeout: MAX_QUACK_CREATE_GROUP_REQUEST_WAIT_TIME_IN_MS,
       },
       relocateOnCompletion: `/class/${dispatch(getSchoolByClassId(class_id))?.school_name}/${class_id}/group`,
-    })(dispatch);
+    })(dispatch, getState);
   };
 }
 

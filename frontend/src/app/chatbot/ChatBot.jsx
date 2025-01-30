@@ -85,7 +85,14 @@ export default function ChatBot() {
           className='chat-textarea'
           disabled={loading}
         />
-        <Button color='blue' onClick={handleSubmit} disabled={!inputValue.trim() || loading} className='send-button'>
+        <Button
+          id='send-ai-prompt'
+          name='send'
+          color='blue'
+          onClick={handleSubmit}
+          disabled={!inputValue.trim() || loading}
+          className='send-button'
+        >
           <Icon name='send' />
         </Button>
       </div>

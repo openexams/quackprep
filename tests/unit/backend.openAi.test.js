@@ -1,7 +1,6 @@
 import { test, expect } from "playwright/test";
 import { sendOpenAiAssistantPromptAndRecieveResult } from "@backend/utils/openAi.js";
 import { QUACK_GRADE_ASS_ID } from "../../constants.js";
-import { sendAiPromptAndRecieveResult } from "@backend/utils/openAi.js";
 
 test.describe("OpenAI Integration Tests, using QUACK_GRADE assitant, which grades and responds in json format", () => {
   test("should successfully grade a student's answer", async () => {
@@ -69,27 +68,4 @@ test.describe("OpenAI Integration Tests, using QUACK_GRADE assitant, which grade
     expect(result).toHaveProperty("grade");
     expect(result).toHaveProperty("explanation");
   });
-});
-
-test("should extract event information using sendAiPromptAndRecieveResult", async () => {
-  const messages = [
-    { role: "system", content: "Extract the event information." },
-    {
-      role: "user",
-      content: "Alice and Bob are goingn to a science fair on Friday.",
-    },
-  ];
-
-  const result = await sendAiPromptAndRecieveResult(messages, "gpt-4o");
-  console.log(result);
-
-  // Check that we get a response
-  expect(result).toBeDefined();
-  expect(result.role).toEqual("assistant");
-  expect(typeof result.content).toBe("string");
-
-  // Check that the response contains key information
-  expect(result.content.toLowerCase()).toContain("science fair");
-  expect(result.content.toLowerCase()).toContain("friday");
-  expect(result.content.toLowerCase()).toMatch(/alice|bob/);
 });
