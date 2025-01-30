@@ -53,7 +53,7 @@ export default function Auth() {
                   )
                 }
               >
-                <Button size='large' fluid className='google-login-button'>
+                <Button size='large' fluid className='google-login-button h r'>
                   <Icon name='google' className='google-login-icon' />
                   {logOrSignText} with Google
                 </Button>

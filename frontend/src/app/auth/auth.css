@@ -1,7 +1,8 @@
-.google-login-button {
-  background-color: #ffffff !important;
+/* Google Login Button Styles */
+.ui.button.google-login-button {
+  background-color: white !important;
   border: 1px solid #dadce0 !important;
-  color: #757575 !important;
+  color: black !important;
   display: flex !important;
   justify-content: center !important;
   align-items: center !important;
@@ -15,30 +16,32 @@
   animation: pulse 2s infinite;
 }
 
-.google-login-button:hover {
+.ui.button.google-login-button:hover {
   transform: scale(1.05);
   box-shadow: 0 4px 10px rgba(66, 133, 244, 0.3);
+  background-color: #f8f9fa !important;
 }
 
-.form .button .google-login-icon {
-  color: var(--accent-color) !important;
+.ui.button.google-login-button .google-login-icon {
   margin-right: 10px !important;
   transition: transform 0.2s ease;
 }
 
-.google-login-button:hover .google-login-icon {
+.ui.button.google-login-button:hover .google-login-icon {
   transform: rotate(20deg);
 }
 
-/* Keyframes for pulsing effect */
-@keyframes pulse {
-  0% {
-    box-shadow: 0 0 0 rgba(66, 133, 244, 0.3);
-  }
-  50% {
-    box-shadow: 0 0 20px rgba(66, 133, 244, 0.6);
-  }
-  100% {
-    box-shadow: 0 0 0 rgba(66, 133, 244, 0.3);
-  }
+.google-login-icon {
+  background: conic-gradient(
+    from -45deg,
+    #ea4335 110deg,
+    #4285f4 110deg 200deg,
+    #34a853 200deg 270deg,
+    #fbbc05 270deg 360deg
+  ) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  color: transparent !important;
+  -webkit-text-fill-color: transparent !important;
+  font-size: 1.15em !important;
 }
