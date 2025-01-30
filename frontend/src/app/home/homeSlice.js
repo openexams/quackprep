@@ -3,7 +3,7 @@ import { standardApiCall } from '@utils/api';
 const GET_USERS_COUNT = 'app/home/GET_USERS_COUNT';
 
 export function getUserCount() {
-  return standardApiCall('get', '/api/auth/users/count', null, GET_USERS_COUNT);
+  return standardApiCall('get', '/api/account/users/count', null, GET_USERS_COUNT);
 }
 const DEFAULT_STATE = {
   userCount: null,

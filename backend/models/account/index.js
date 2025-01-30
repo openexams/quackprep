@@ -58,3 +58,7 @@ export async function sendEmailToUserByUserId(user_id, subject, html) {
   await new EmailService(email).sendEmail(html, subject);
   return SUCCESS;
 }
+
+export async function getUserCount() {
+  return await sqlExe.executeCommand("SELECT COUNT(*) AS COUNT FROM users");
+}

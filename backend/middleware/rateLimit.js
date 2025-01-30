@@ -56,4 +56,10 @@ export const rateLimits = {
     max: AI_ROUTES_RATE_LIMIT_PER_MIN,
     type: "AI",
   }),
+
+  auth: createRateLimiter({
+    windowMs: 60 * 1000, // 1 minute
+    max: 5,
+    type: "AUTH",
+  }),
 };

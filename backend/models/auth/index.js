@@ -11,10 +11,6 @@ export async function findUserIdByProviderId(provider, provider_id) {
   return false;
 }
 
-export async function getUserCount() {
-  return await sqlExe.executeCommand("SELECT COUNT(*) AS COUNT FROM users");
-}
-
 export async function register(username, email, hashedPass) {
   const params = {
     username,
@@ -75,6 +71,7 @@ export async function findLocalUserByEmailPassword(email, password) {
   }
   const curUser = exists?.[0];
   return {
+    // DONT RET PASSWORD
     id: curUser.id,
     username: curUser.username,
     email: curUser.email,
@@ -84,14 +81,28 @@ export async function findLocalUserByEmailPassword(email, password) {
     is_creator: curUser.is_creator,
   };
 }
+/**
+ *
+ * @param {String} username
+ * @returns {Object} user without password
+ */
 export async function getUserByUsername(username) {
-  const user = (
+  const curUser = (
     await sqlExe.executeCommand(
       `SELECT * FROM users u where username = :username`,
       { username }
     )
   )?.[0];
-  return user;
+  return {
+    // DONT RET PASSWORD
+    id: curUser.id,
+    username: curUser.username,
+    email: curUser.email,
+    first_name: curUser.first_name,
+    last_name: curUser.last_name,
+    icon: curUser.icon,
+    is_creator: curUser.is_creator,
+  };
 }
 
 export async function findUserById(id) {

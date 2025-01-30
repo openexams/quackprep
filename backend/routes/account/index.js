@@ -3,11 +3,21 @@ import {
   getMyStats,
   getTotalTimeSpent,
   upsertTimeSpent,
+  getUserCount,
 } from "#models/account/index.js";
 
 import { isAuthenticated } from "#middleware/authMiddleware.js";
 
 const router = Router();
+
+router.get("/users/count", async function (req, res, next) {
+  try {
+    const result = await getUserCount();
+    res.status(200).json(result?.[0].COUNT);
+  } catch (error) {
+    next(error);
+  }
+});
 
 router.post("/time_spent", isAuthenticated, async function (req, res, next) {
   try {

@@ -1,6 +1,6 @@
 import { Router } from "express";
 import bcrypt from "bcrypt";
-import { findUserById, getUserCount, register } from "#models/auth/index.js";
+import { findUserById, register } from "#models/auth/index.js";
 import passport from "#config/passportConfig.js";
 import validator from "validator";
 import {
@@ -16,15 +16,6 @@ const matcher = new RegExpMatcher({
 });
 
 const router = Router();
-
-router.get("/users/count", async function (req, res, next) {
-  try {
-    const result = await getUserCount();
-    res.status(200).json(result?.[0].COUNT);
-  } catch (error) {
-    next(error);
-  }
-});
 
 router.post("/register", async function (req, res, next) {
   next(new Error("no register allowed"));
