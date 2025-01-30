@@ -11,5 +11,9 @@ export default defineConfig({
   },
   use: {
     baseURL: "http://localhost:3001/",
+    trace: "on-first-retry",
+    screenshot: "only-on-failure",
+    video: "on-first-retry",
   },
+  outputDir: "test-results/",
 });

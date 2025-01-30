@@ -53,3 +53,12 @@ jobs:
 
       - name: Run Playwright tests
         run: npx playwright test
+
+      - name: Upload test artifacts
+        if: always() # Upload artifacts even if tests fail
+        uses: actions/upload-artifact@v3
+        with:
+          name: playwright-artifacts
+          path: |
+            test-results/
+            playwright-report/
