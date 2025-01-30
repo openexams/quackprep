@@ -4,7 +4,6 @@ import ApiError from "#utils/ApiError.js";
 import { RATE_LIMIT_EXCEEDED } from "../../error_codes.js";
 import RedisStore from "rate-limit-redis";
 import { getRedisClient } from "#utils/redis.js";
-import { AI_ROUTES_RATE_LIMIT_PER_MIN } from "../../constants.js";
 // be careful of redis client not being initialized
 
 /**
@@ -53,7 +52,7 @@ export const rateLimits = {
   // AI-specific endpoints
   ai: createRateLimiter({
     windowMs: 60 * 1000, // 1 minute
-    max: AI_ROUTES_RATE_LIMIT_PER_MIN,
+    max: 2,
     type: "AI",
   }),
 

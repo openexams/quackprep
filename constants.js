@@ -14,7 +14,6 @@ export const MAX_USERNAME_LENGTH = 25;
 export const MAX_EMAIL_LENGTH = 100;
 export const MAX_FIRST_NAME_LENGTH = 50;
 export const MAX_LAST_NAME_LENGTH = 50;
-export const AI_ROUTES_RATE_LIMIT_PER_MIN = 1;
 export const ADMIN_ACCOUNT_ID = 13;
 export const GENERAL_SCHOOL_ID = 4;
 export const OTHER_CLASS_CATEGORY_ID = 8;

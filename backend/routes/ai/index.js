@@ -2,7 +2,6 @@ import { isAuthenticated } from "#middleware/authMiddleware.js";
 import { verifyUserOwnsRowId } from "#utils/sqlFunctions.js";
 import { generateQuestionLike } from "#models/ai/question.js";
 import {
-  AI_ROUTES_RATE_LIMIT_PER_MIN,
   MAX_FILES_UPLOAD,
   MAX_USER_ANSWER_SUBMISSION_LENGTH,
   MAX_USER_PROMPT_LENGTH,
