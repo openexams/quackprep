@@ -32,12 +32,12 @@ export function createRateLimiter({ windowMs, max, type }) {
         res
       );
     },
-    // store:
-    //   NODE_ENV === "prod" && getRedisClient()
-    //     ? new RedisStore({
-    //         sendCommand: (...args) => getRedisClient().sendCommand(args),
-    //       })
-    //     : undefined,
+    store:
+      NODE_ENV === "prod" && getRedisClient()
+        ? new RedisStore({
+            sendCommand: (...args) => getRedisClient().sendCommand(args),
+          })
+        : undefined,
   });
 }
 
