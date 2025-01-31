@@ -22,7 +22,7 @@ export default function LoginRequired({ title }) {
               You must be logged in to access <span style={{ color: 'var(--primary-color)' }}>{title}</span>
             </Header>
             <p style={{ fontSize: '1rem', color: '#555' }}>
-              Please log in or sign up to continue and enjoy all the features our platform has to offer.
+              Please log in or sign up to continue and enjoy all the features our platform has to offer. (its free😊)
             </p>
           </Segment>
           <Button onClick={() => dispatch(changeNavbarPage(navigate, `/auth`))}>Login Now</Button>

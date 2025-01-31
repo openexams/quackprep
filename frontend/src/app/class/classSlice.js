@@ -25,7 +25,7 @@ export function createDefaultUserClass() {
         loadingComponent: ['ClassList', 'CreateGroupByPDF', 'CreatePage'],
         noticeOfSuccess: 'successfully created default class',
       },
-    )(dispatch); // have a action that puts this created class into the classlist
+    )(dispatch, getState); // have a action that puts this created class into the classlist
   };
 }
 

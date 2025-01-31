@@ -28,7 +28,7 @@ export default function ClassList() {
   let filteredClasses = curCategory
     ? selectArrayOfIncludingItemsByNumber(classes, ['category'], [parseInt(curCategory)])
     : classes;
-
+  // only show classes with no content to user who owns the class
   filteredClasses = filteredClasses
     ? filteredClasses.filter((c) => c.pdf_id !== null || c.group_id !== null || c.created_by === user_id)
     : null;

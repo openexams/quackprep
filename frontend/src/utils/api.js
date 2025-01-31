@@ -47,10 +47,19 @@ function handleApiError(error, dispatch) {
  * @param {String} [options.errorMsg] - error message to be seen by user
  * @param {String} [options.noticeOfSuccess] - if given, will show a flash message with this message
  * @param {String} [options.relocateOnCompletion] - if given, will have the client refresh to the page on completion
+ * @param {Object} [options.fetchAction] - if given, will dispatch this action on call
  * @returns {Function} dispatches an action to the reducer with a action.payload of the data
  */
 export function standardApiCall(method, route, data = null, resultAction, options) {
   return async function (dispatch, getState) {
+    if (!dispatch || !getState) {
+      console.error('standardApiCall: dispatch or getState is not defined');
+      return;
+    }
+    if (options?.fetchAction) {
+      dispatch(options.fetchAction); // example: { type: SEND_MESSAGE, payload: messages[messages.length - 1] }
+    }
+
     if ((options?.fetchHistory && options?.fetchHistory === true) || method === 'get') {
       const fetchHistory = getState().app.navbar.fetchHistory;
       if (fetchHistory[route] !== undefined) {
