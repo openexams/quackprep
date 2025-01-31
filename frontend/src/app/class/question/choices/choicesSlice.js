@@ -83,7 +83,10 @@ export default function choicesReducer(state = DEFAULT_STATE, action) {
     case GET_CRUD_CHOICES: {
       return {
         ...state,
-        choices: countingSort([...(state.choices || []), ...action.payload], 'question_id'),
+        choices: countingSort(
+          updateArrObjectsWithNewVals([...(state.choices || [])], [...action.payload], 'question_id'),
+          'question_id',
+        ),
       };
     }
     case DELETE_CRUD_CHOICE:

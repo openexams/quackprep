@@ -14,6 +14,7 @@ export default function ShowerVideo({ src }) {
         }}
       >
         <video
+          alt='Quackprep Video'
           loading='lazy'
           src={src}
           autoPlay

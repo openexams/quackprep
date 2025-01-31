@@ -33,11 +33,26 @@ function findQuestionById(questions, id) {
   return null;
 }
 
+function getLocalShowAIQuestions() {
+  const showAIQuestions = window.localStorage.getItem('showAIQuestions');
+  if (showAIQuestions) {
+    return showAIQuestions === 'true';
+  }
+  return true;
+}
+
+/**
+ * @param {Boolean} showAIQuestions
+ */
+function setLocalShowAIQuestions(showAIQuestions) {
+  window.localStorage.setItem('showAIQuestions', String(showAIQuestions));
+}
+
 export default function QuestionPage() {
   const isMobile = useIsMobile();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { schoolName, classId, groupType, groupId, groupName, questionId } = useSelector(selectNavbarState).navbar;
+  const { schoolName, classId, groupId, groupName, questionId } = useSelector(selectNavbarState).navbar;
 
   let questions = useSelector(selectArrayOfStateByGroupId('app.question.questions', groupId));
 
@@ -46,11 +61,17 @@ export default function QuestionPage() {
 
   const [selectedQuestion, setSelectedQuestion] = useState(null);
 
-  const [showAIQuestions, setShowAIQuestions] = useState(true);
+  ///
+  const [showAIQuestions, setShowAIQuestions] = useState(getLocalShowAIQuestions());
   questions = showAIQuestions ? questions : selectItemsById(questions, 'ai', 0);
+  useEffect(() => {
+    setLocalShowAIQuestions(showAIQuestions);
+  }, [showAIQuestions]);
+  ///
 
   useEffect(() => {
     // if the user didnt start w a question id
+
     if (questions != null && questions?.length !== 0 && !questionId) {
       dispatch(changeNavbarPage(navigate, parseInt(questions?.[0]?.id)));
       // dispatch(updateQuestionId(parseInt(questions?.[0]?.id)));
@@ -127,7 +148,7 @@ export default function QuestionPage() {
                   {selectItemById(questions, 'id', questionId) ? ( // if question is selected and I cant find it then it dne
                     <Header as='h3'>Please select a question from the list.</Header>
                   ) : (
-                    <NoItemsFound title={'Question'} />
+                    <NoItemsFound title={'Question'} message={'No questions found, try enabling AI questions'} />
                   )}
                 </Segment>
               )}

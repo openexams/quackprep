@@ -19,7 +19,7 @@ export async function sendChatbotPromptAndRecieveResult(messages, model) {
   });
   const res = await sendAiMessageChainAndRecieveResult(
     newMessages,
-    "gpt-4o-mini",
+    "deepseek-chat",
     {
       max_completion_tokens: 5000,
     }

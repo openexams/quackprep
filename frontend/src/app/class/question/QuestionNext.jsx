@@ -7,6 +7,9 @@ export default function QuestionNext({ questions, selectedQuestion, setSelectedQ
     return null;
   }
   function getIndexOfSelectedQuestionFromQuestions() {
+    if (questions.length === 0) {
+      return -1;
+    }
     for (let i = 0; i < questions.length; i++) {
       if (questions[i].id === selectedQuestion.id) {
         return i;
@@ -32,7 +35,7 @@ export default function QuestionNext({ questions, selectedQuestion, setSelectedQ
   return (
     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
       {/* Previous Button */}
-      <Button icon onClick={handlePrev} disabled={getIndexOfSelectedQuestionFromQuestions() === 0}>
+      <Button icon onClick={handlePrev} disabled={getIndexOfSelectedQuestionFromQuestions() === 0 || questions.length === 0}>
         <Icon name='arrow left' />
       </Button>
 
@@ -42,7 +45,11 @@ export default function QuestionNext({ questions, selectedQuestion, setSelectedQ
       </span>
 
       {/* Next Button */}
-      <Button icon onClick={handleNext} disabled={getIndexOfSelectedQuestionFromQuestions() === questions.length - 1}>
+      <Button
+        icon
+        onClick={handleNext}
+        disabled={getIndexOfSelectedQuestionFromQuestions() === questions.length - 1 || questions.length === 0}
+      >
         <Icon name='arrow right' />
       </Button>
     </div>
