@@ -85,7 +85,7 @@ app.get("/*", (req, res) => {
 });
 // handles errors gracefully
 app.use(errorHandler);
-//
+///
 
 // test db connection
 await sqlExe.testConnection();
