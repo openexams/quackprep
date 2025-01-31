@@ -97,10 +97,12 @@ export default function Home() {
           </Button>
         </Container>
       </Segment>
+
       <KeyFeatures />
 
       <HomeGraph />
       <Explainer />
+
       <Testimonials />
     </div>
   );

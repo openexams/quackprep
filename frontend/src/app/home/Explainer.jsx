@@ -2,7 +2,7 @@ import { useDispatch } from 'react-redux';
 import { Segment, Card, Icon, Container, Header, Grid } from 'semantic-ui-react';
 import { changeNavbarPage } from '@app/layout/navbar/navbarSlice';
 import { useNavigate } from 'react-router-dom';
-
+import ShowerVideo from './ShowerVideo';
 export default function Explainer() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -14,6 +14,8 @@ export default function Explainer() {
         <Header as='h3' style={{ fontSize: '2em', textAlign: 'center' }}>
           How to Use QuackPrep.com
         </Header>
+        <ShowerVideo src='/vid/quack.mp4' />
+
         <Grid stackable columns={1} style={{ marginTop: '2em' }}>
           <Grid.Column>
             <Header as='h6' style={{ fontSize: '1.2em', textAlign: 'center', color: '#333' }}>
