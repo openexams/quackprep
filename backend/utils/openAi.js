@@ -182,10 +182,7 @@ export async function sendPromptAndRecieveJSONResult(
  */
 export async function checkThreadUntilCompleted(threadId, runId, options) {
   let retries = 0;
-  let runRes = await returnCorrectOpenAiClass(model).beta.threads.runs.retrieve(
-    threadId,
-    runId
-  );
+  let runRes = await openai.beta.threads.runs.retrieve(threadId, runId);
 
   while (runRes.status === "queued" || runRes.status === "in_progress") {
     if (retries > (options.max_retires || 50)) {
@@ -199,10 +196,7 @@ export async function checkThreadUntilCompleted(threadId, runId, options) {
       `openAi run not finished retrying in ${options.retire_time || 5000}ms`
     );
     await sleep(options.retire_time || 5000);
-    runRes = await returnCorrectOpenAiClass(model).beta.threads.runs.retrieve(
-      threadId,
-      runId
-    );
+    runRes = await openai.beta.threads.runs.retrieve(threadId, runId);
 
     retries++;
   }
