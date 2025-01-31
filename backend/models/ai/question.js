@@ -27,7 +27,6 @@ export async function generateQuestionLike(
   dlog(`ai generating like q_id: ${likeQuestionId}`);
   // find the assistant I created
   try {
-    /**@type {import("../../../shared-types/question.types.ts").GenQuestion} */
     const quackAssistResponseJSON =
       await sendOpenAiAssistantPromptAndRecieveResult(
         QUACK_GEN_QUESTION_ASS_ID,
@@ -120,7 +119,6 @@ export async function generateQuestionFromGroup(user_id, group_id) {
     const prompt =
       "Generate a question in JSON format that covers the same topic as the questions above";
 
-    /**@type {import("../../../shared-types/question.types.ts").GenQuestion} */
     const quackAssistResponseJSON =
       await sendOpenAiAssistantPromptAndRecieveResult(
         QUACK_GEN_QUESTION_ASS_ID,
@@ -169,7 +167,6 @@ export async function deleteAllAIGeneratedQuestion() {
 
 // /**
 //  * Not used currently I would recommend checking correctness before using
-//  * @param {import("../../../shared-types/question.types.ts").GenQuestion} quackAssistResponseJSON
 //  * @returns {String}
 //  */
 // export async function generateCorrectAnswer(quackAssistResponseJSON) {

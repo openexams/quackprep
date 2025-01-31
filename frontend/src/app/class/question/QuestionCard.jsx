@@ -1,12 +1,8 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { List, Label, Icon, Popup } from 'semantic-ui-react';
-import { changeNavbarPage } from '@app/layout/navbar/navbarSlice';
-import { updateQuestionId } from '@app/layout/navbar/navbarSlice';
+
 import { upsertFavoriteQuestion } from './favorite/favoriteSlice';
-import { selectNavbarState } from '@app/layout/navbar/navbarSlice';
 import FavoriteIcon from './favorite/FavoriteIcon';
-import { selectItemById } from 'maddox-js-funcs';
 
 /**
  *
@@ -15,13 +11,6 @@ import { selectItemById } from 'maddox-js-funcs';
  * @returns {Array}
  */
 function getQuestionTopics(questionTypes, questionGroupName) {
-  questionTypes = questionTypes.split(',');
-
-  questionGroupName = questionGroupName.split(',');
-  if (!Array.isArray(questionTypes) && questionTypes === 'topic') {
-    return [questionGroupName];
-  }
-  //else they are arrays we must go through them.
   const ret = [];
   let added = false;
   for (let i = 0; i < questionTypes.length; i++) {

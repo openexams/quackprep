@@ -47,7 +47,7 @@ export default [
       "require-await": "error",
       "no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
       "no-undef": "error",
-      "no-console": ["warn", { allow: ["warn", "error"] }],
+      "no-console": ["warn", { allow: ["warn", "error", "log"] }],
       "no-var": "error",
       "prefer-const": "warn",
       strict: ["error", "global"],

@@ -50,7 +50,6 @@ export async function etlFilesIntoGroup(files, class_id, user_id, user_prompt) {
       }
     }
 
-    /**@type {import("../../../shared-types/group.type.js").GenGroup} */
     const GenGroupResponseJSON =
       await sendOpenAiAssistantPromptAndRecieveResult(
         QUACK_CREATE_GROUP_ASS_ID,

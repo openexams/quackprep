@@ -1,12 +1,11 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createGroupGivenPDF } from './groupSlice';
-import { Button, Input, Header, Popup, Icon, Modal } from 'semantic-ui-react';
+import { Button, Input, Header, Popup, Icon } from 'semantic-ui-react';
 import PdfUploadForm from '@components/PDFUploadForm';
 import { CustomImageLoader } from '@components/CustomLoader/CustomImageLoader';
 import { selectLoadingState } from '@app/store/loadingSlice';
 
-// will only render if user has edit permissions
 export default function CreateGroupByPDF({ classId }) {
   const dispatch = useDispatch();
   const [customPrompt, setCustomPrompt] = useState('');
@@ -25,7 +24,7 @@ export default function CreateGroupByPDF({ classId }) {
   const aiGenerationInfoContent = (
     <div>
       <p>
-        <strong>Processing Time:</strong> The longer the PDF, the more time it will take to process. (Sometimes up to ~15min)
+        <strong>Processing Time:</strong> The longer the PDF, the more time it will take to process. (Sometimes up to ~10min)
       </p>
       <p>
         <strong>AI Capabilities:</strong> AI can summarize, extract key points, and generate study materials. However, it is NOT

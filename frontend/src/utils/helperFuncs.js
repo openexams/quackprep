@@ -57,7 +57,7 @@ export function mergeData(data) {
     return null;
   }
   const dataCopy = structuredClone(data);
-  let updated_arr = [];
+  const updated_arr = [];
   let accumulated_object = {};
   let j = 0;
   for (let i = 0; i < dataCopy.length; i = j) {
@@ -89,18 +89,12 @@ export function selectArrayOfStateByGroupId(path, id) {
     if (!isNaN(id)) {
       parseInt(id);
     }
-    let tmp = [];
+    const tmp = [];
     for (let i = 0; i < stateArr.length; i++) {
-      // group id can be csv array or not array
-      if (!stateArr[i]?.group_id?.includes(',') && parseInt(stateArr[i]?.group_id) === id) {
-        tmp.push(stateArr[i]);
-      } else {
-        // its an arr and go through it.
-        for (let j = 0; j < stateArr[i]?.group_id?.split(',')?.length; j++) {
-          if (parseInt(stateArr[i]?.group_id?.split(',')[j]) === id) {
-            tmp.push(stateArr[i]);
-            break; // we can add this so go next WHAT IF A QUESTION IS ONLY IN 1 GROUP TODO FIX REATRD
-          }
+      for (let j = 0; j < stateArr[i]?.group_id?.length; j++) {
+        if (parseInt(stateArr[i]?.group_id[j]) === id) {
+          tmp.push(stateArr[i]);
+          break;
         }
       }
     }
@@ -109,18 +103,12 @@ export function selectArrayOfStateByGroupId(path, id) {
 }
 
 export function selectQuestionsByGroupId(questions, id) {
-  let tmp = [];
+  const tmp = [];
   for (let i = 0; i < questions.length; i++) {
-    // group id can be csv array or not array
-    if (!questions[i]?.group_id?.includes(',') && parseInt(questions[i]?.group_id) === id) {
-      tmp.push(questions[i]);
-    } else {
-      // its an arr and go through it.
-      for (let j = 0; j < questions[i]?.group_id?.split(',')?.length; j++) {
-        if (parseInt(questions[i]?.group_id?.split(',')[j]) === id) {
-          tmp.push(questions[i]);
-          break; // we can add this so go next WHAT IF A QUESTION IS ONLY IN 1 GROUP TODO FIX REATRD
-        }
+    for (let j = 0; j < questions[i]?.group_id?.length; j++) {
+      if (parseInt(questions[i]?.group_id[j]) === id) {
+        tmp.push(questions[i]);
+        break;
       }
     }
   }

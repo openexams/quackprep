@@ -18,14 +18,17 @@ const PdfUploadForm = ({ onSubmit }) => {
       validateFiles(newFiles);
     }
   };
+  const allowedFileTypes = ['application/pdf', 'image/jpeg', 'image/png', 'image/jpg'];
 
-  // Validate files for size
+  /**
+   * @param {File[]} newFiles
+   */
   const validateFiles = (newFiles) => {
     const validFiles = [];
     const invalidFiles = [];
 
     newFiles.forEach((file) => {
-      if (file.size <= MAX_FILE_SIZE_IN_BYTES) {
+      if (file.size <= MAX_FILE_SIZE_IN_BYTES && allowedFileTypes.includes(file.type)) {
         validFiles.push(file);
       } else {
         invalidFiles.push(file.name);
@@ -33,7 +36,11 @@ const PdfUploadForm = ({ onSubmit }) => {
     });
 
     if (invalidFiles.length > 0) {
-      setError(`The following files exceed the ${MAX_FILE_SIZE_IN_BYTES} bytes limit: ${invalidFiles.join(', ')}`);
+      setError(
+        `The following files exceed the ${MAX_FILE_SIZE_IN_BYTES} bytes limit or werent the correct type: ${invalidFiles.join(
+          ', ',
+        )}`,
+      );
     } else {
       setError(null);
     }
@@ -119,7 +126,7 @@ const PdfUploadForm = ({ onSubmit }) => {
         >
           <Icon name='file pdf outline' size='huge' />
           <p style={{ marginTop: '1rem' }}>
-            {isDragging ? 'Drop your PDF/Image here...' : 'Drag & Drop your PDF/Image files here or click to select'}
+            {isDragging ? 'Drop your PDF/Image here...' : `Click HERE or Drag & Drop your PDF/Image files`}
           </p>
         </div>
         {/* Hidden input for picking files traditionally */}
@@ -127,7 +134,7 @@ const PdfUploadForm = ({ onSubmit }) => {
           ref={fileInputRef}
           id='file'
           type='file'
-          accept='application/pdf, image/jpeg, image/png, image/jpg'
+          accept={allowedFileTypes.join(',')}
           hidden
           multiple
           onChange={handleFileChange}
@@ -157,7 +164,7 @@ const PdfUploadForm = ({ onSubmit }) => {
         )}
 
         <Button type='submit' color='blue' style={{ marginTop: '1rem' }}>
-          <Icon name='upload' /> Upload
+          <Icon name='upload' /> Submit
         </Button>
       </Form>
     </div>

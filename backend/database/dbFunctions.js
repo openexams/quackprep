@@ -9,20 +9,6 @@ import "#utils/utils.js";
 export default class sqlExe {
   static pool = mysql.createPool(MYSQL_CONFIG);
 
-  // not used rn doesnt work
-  static async handlePoolError(error) {
-    console.error("MySQL pool error:", error);
-    try {
-      await sqlExe.pool.end();
-      await sleep(5000);
-      console.log("Attempting to reconnect to MySQL...");
-      sqlExe.pool = mysql.createPool(MYSQL_CONFIG); // Recreate the pool
-      sqlExe.pool.on("error", sqlExe.handlePoolError); // Re-attach the error handler
-    } catch (error) {
-      console.error("Error while handling pool error:", error);
-    }
-  }
-
   /**
    * This is a good function for executing querys, just send it the sql command you want to run and
    * the inputs (variables) you want it to have.
