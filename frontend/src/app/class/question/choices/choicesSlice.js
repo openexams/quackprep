@@ -94,7 +94,6 @@ export default function choicesReducer(state = DEFAULT_STATE, action) {
     case UPSERT_CRUD_CHOICE:
       return { ...state, choices: countingSort(upsertArray(state.choices, action.payload), 'question_id') };
     case GEN_AI_Q_AND_C_RES: {
-      /**@type {import("../../../../../../shared-types/choice.types").GenQuestion} */
       const generatedChoices = action.payload?.choices;
       return { ...state, choices: countingSort(updateArrObjectsWithNewVals(state.choices, generatedChoices), 'question_id') }; // shouldnt have to counting sort them because they are new
     }

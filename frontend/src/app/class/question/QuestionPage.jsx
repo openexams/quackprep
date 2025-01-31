@@ -15,6 +15,7 @@ import QuestionVote from './vote/QuestionVote';
 import QuestionNext from './QuestionNext';
 import { updateQuestionId } from '@app/layout/navbar/navbarSlice';
 import useIsMobile from '@utils/hooks/useIsMobile';
+import { Question } from '../../../../../schema.js';
 
 /**
  *
@@ -53,7 +54,7 @@ export default function QuestionPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { schoolName, classId, groupId, groupName, questionId } = useSelector(selectNavbarState).navbar;
-
+  /**@type {Question[]} */
   let questions = useSelector(selectArrayOfStateByGroupId('app.question.questions', groupId));
 
   const loadingComps = useSelector(selectLoadingState).loadingComps;
