@@ -6,6 +6,7 @@ import {
 } from "../../constants.js";
 import { AI_PROMPT_TOO_LONG, MAX_RETRIES_EXCEEDED } from "../../error_codes.js";
 import { sleep } from "./utils.js";
+import ApiError from "./ApiError.js";
 
 function returnCorrectOpenAiClass(model) {
   if (!model) {
@@ -72,21 +73,17 @@ export async function sendOpenAiAssistantPromptAndRecieveResult(
     }`
   );
   if (prompt.length > MAX_PROMPT_LENGTH) {
-    throw new CustomError(
+    throw new ApiError(
       `prompt is too long, max len is ${MAX_PROMPT_LENGTH}, your len was ${prompt.length}`,
       400,
       AI_PROMPT_TOO_LONG
     );
   }
   try {
-    const quackAssist = await returnCorrectOpenAiClass(
-      model
-    ).beta.assistants.retrieve(assistant_id);
+    const quackAssist = await openai.beta.assistants.retrieve(assistant_id);
 
     // create the thread which to send messages and send a starter msg
-    const quackThread = await returnCorrectOpenAiClass(
-      model
-    ).beta.threads.create({
+    const quackThread = await openai.beta.threads.create({
       messages: [
         {
           role: "assistant",
@@ -100,9 +97,7 @@ export async function sendOpenAiAssistantPromptAndRecieveResult(
     });
 
     // run the message
-    const quackRun = await returnCorrectOpenAiClass(
-      model
-    ).beta.threads.runs.create(quackThread.id, {
+    const quackRun = await openai.beta.threads.runs.create(quackThread.id, {
       max_prompt_tokens: MAX_PROMPT_TOKENS,
       // can change max tokens used here
       assistant_id: quackAssist.id,
@@ -115,9 +110,7 @@ export async function sendOpenAiAssistantPromptAndRecieveResult(
     await checkThreadUntilCompleted(quackThread.id, quackRun.id, options);
 
     // get message from AI when completed.
-    const allMessages = await returnCorrectOpenAiClass(
-      model
-    ).beta.threads.messages.list(quackThread.id);
+    const allMessages = await openai.beta.threads.messages.list(quackThread.id);
 
     return JSON.parse(allMessages?.data[0]?.content?.[0]?.text?.value);
   } catch (error) {
@@ -141,7 +134,7 @@ export async function sendPromptAndRecieveJSONResult(
   context = "Answer questions with accuracy"
 ) {
   if (prompt.length > MAX_PROMPT_LENGTH) {
-    throw new CustomError(
+    throw new ApiError(
       `prompt is too long, max len is ${MAX_PROMPT_LENGTH}, your len was ${prompt.length}`,
       400,
       AI_PROMPT_TOO_LONG
@@ -196,7 +189,7 @@ export async function checkThreadUntilCompleted(threadId, runId, options) {
 
   while (runRes.status === "queued" || runRes.status === "in_progress") {
     if (retries > (options.max_retires || 50)) {
-      throw new CustomError(
+      throw new ApiError(
         `openAi run failed, status was ${runRes.status}, max retries reached`,
         500,
         MAX_RETRIES_EXCEEDED
@@ -216,13 +209,13 @@ export async function checkThreadUntilCompleted(threadId, runId, options) {
 
   if (runRes.status !== "completed") {
     if (retries > (options.max_retires ? options.max_retires : 50)) {
-      throw new CustomError(
+      throw new ApiError(
         `openAi run failed, status was ${runRes.status}, max retries reached`,
         500,
         MAX_RETRIES_EXCEEDED
       );
     }
-    throw new CustomError(
+    throw new ApiError(
       `openAi run failed, status was ${runRes.status}`,
       500,
       "OPENAI_RUN_FAILED"
