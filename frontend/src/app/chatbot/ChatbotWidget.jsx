@@ -23,8 +23,8 @@ export default function ChatbotWidget() {
 
   const widgetStyles = {
     position: 'fixed',
-    bottom: '20px',
-    right: '20px',
+    bottom: '1.5rem',
+    right: '1.5rem',
     width: '4.5rem',
     height: '4.5rem',
     backgroundColor: 'var(--accent-color) !important',

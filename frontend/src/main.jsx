@@ -6,11 +6,13 @@ import store from '@app/store/store.js';
 
 import FlashMessage from '@components/flashmessage/FlashMessage.jsx';
 import AppRouter from '@app/AppRouter';
+import DarkModeWidget from '@components/DarkMode.jsx';
 
 export default function Main() {
   return (
     <Provider store={store}>
       <FlashMessage />
+      <DarkModeWidget />
       <AppRouter />
     </Provider>
   );

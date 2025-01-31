@@ -85,7 +85,7 @@ export default function Home() {
                     maxWidth: '800px',
                     marginLeft: 'auto',
                     borderRadius: '24px',
-                    boxShadow: '0 30px 70px -15px rgba(0, 0, 0, 0.5)',
+                    boxShadow: '0 30px 70px -15px rgba(0, 0, 100, 0.5)',
                   }}
                 >
                   <img
@@ -104,7 +104,7 @@ export default function Home() {
                       right: '-30px',
                       width: '40%',
                       borderRadius: '20px',
-                      boxShadow: '0 25px 50px -10px rgba(0, 0, 0, 0.3)',
+                      boxShadow: '0 25px 50px -10px rgba(0, 0, 100, 0.3)',
                       transform: 'rotate(5deg)',
                     }}
                   >
