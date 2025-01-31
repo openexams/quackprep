@@ -22,12 +22,12 @@ test("login", async ({ page }) => {
   await page.getByText("User ID:").click();
 });
 
-test("test auth pushes you to last page, go to create, and then login and expect to be on create after login", async ({
+test("test auth pushes you to last page, go to class, and then login and expect to be on class after login", async ({
   page,
 }) => {
   await page.goto("http://localhost:3001/");
-  await page.getByRole("link", { name: "AI Create" }).click();
-  await page.waitForURL("**/create");
+  await page.getByRole("link", { name: "Classes" }).click();
+  await page.waitForURL("**/class");
   await login(page);
-  await page.waitForURL("**/create");
+  await page.waitForURL("**/class");
 });

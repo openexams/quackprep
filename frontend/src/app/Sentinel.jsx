@@ -52,6 +52,8 @@ export default function Sentinel() {
       document.title = schoolName + ' - ' + 'Quackprep';
     } else if (urlArr[1]) {
       document.title = firstLetterUppercase(urlArr[1]) + ' - ' + 'Quackprep';
+    } else {
+      document.title = 'QuackPrep | AI Study Tools | Past Exams';
     }
   }, [location]);
 

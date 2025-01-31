@@ -1,16 +1,15 @@
 import { useDispatch } from 'react-redux';
-import { Container, Header, Button, Icon, Segment } from 'semantic-ui-react';
+import { Container, Header, Button, Icon, Segment, Grid } from 'semantic-ui-react';
 import { useNavigate } from 'react-router-dom';
 import { changeNavbarPage } from '@app/layout/navbar/navbarSlice';
 import duckBlissImage from '/img/home/duck_bliss.webp';
-
 import './home.css';
 import Explainer from './Explainer';
 import HomeGraph from './Graph';
 import Testimonials from './Testimonials';
 import KeyFeatures from './KeyFeatures';
-
-// Register Chart.js components
+import desktop from '/img/home/desktop.png';
+import mobile from '/img/home/mobile.png';
 
 export default function Home() {
   const navigate = useNavigate();
@@ -20,89 +19,115 @@ export default function Home() {
     <div className='home-page' style={{ overflowX: 'hidden' }}>
       {/* Hero Section */}
       <Segment
-        inverted
+        basic
         vertical
-        textAlign='center'
+        textAlign='left'
         style={{
           marginTop: 0,
-          minHeight: 700,
-          padding: '1em 0em',
+          minHeight: '90vh',
+          padding: '8em 0',
           position: 'relative',
-          display: 'flex',
-          alignItems: 'center',
+          backgroundColor: 'white',
         }}
       >
-        <img
-          loading='lazy'
-          src={duckBlissImage}
-          width='1792'
-          height='1024'
-          alt='quackprep background image'
-          style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover',
-            zIndex: 0,
-            filter: 'brightness(0.85)',
-          }}
-        />
-        <Container
-          style={{
-            zIndex: 1,
-            position: 'relative',
-            textAlign: 'center',
-          }}
-          text
-        >
-          <Header
-            as='h1'
-            inverted
-            style={{
-              fontSize: '4em',
-              fontWeight: 'bold',
-              marginBottom: '0.5em',
-              textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)',
-            }}
-          >
-            Master Your Exams
-          </Header>
-          <Header
-            as='h2'
-            style={{
-              fontSize: '1.7em',
-              fontWeight: 'normal',
-              marginTop: '.3em',
-              marginBottom: '1em',
-              color: 'white',
-              textShadow: '-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000, 0 0 8px rgba(0,0,0,0.5)',
-            }}
-          >
-            The First Study Tool that "Grows with You" as you Learn
-          </Header>
-          <Button
-            className='get-started-button pulsing'
-            primary
-            size='huge'
-            onClick={() => dispatch(changeNavbarPage(navigate, '/class'))}
-            style={{
-              backgroundColor: '#fbbd08',
-              color: 'rgba(0, 0, 0, 0.8)',
-            }}
-          >
-            Get Started
-            <Icon name='right arrow' style={{ marginLeft: '0.5em' }} />
-          </Button>
+        <Container>
+          <Grid stackable verticalAlign='middle'>
+            <Grid.Row>
+              <Grid.Column width={7} style={{ paddingRight: '4em', paddingLeft: '3em' }}>
+                <Header
+                  as='h1'
+                  style={{
+                    fontSize: '3.5rem',
+                    fontWeight: 800,
+                    lineHeight: 1.2,
+                    marginBottom: '1.5rem',
+                    color: '#2d3436',
+                  }}
+                >
+                  Master Your Exams with Smart AI Learning
+                </Header>
+                <p
+                  style={{
+                    fontSize: '1.25rem',
+                    marginBottom: '2.5rem',
+                    color: '#636e72',
+                    lineHeight: 1.6,
+                  }}
+                >
+                  Transform learning materials into interactive exams, gamified challenges, and dynamic study guides powered by
+                  AI.
+                </p>
+                <div style={{ display: 'flex', gap: '1rem' }}>
+                  <Button
+                    primary
+                    size='huge'
+                    onClick={() => dispatch(changeNavbarPage(navigate, '/class'))}
+                    style={{
+                      backgroundColor: '#4a90e2',
+                      color: 'white',
+                      padding: '1.2em 2em',
+                      borderRadius: '12px',
+                      transition: 'transform 0.2s',
+                    }}
+                    onMouseOver={(e) => (e.currentTarget.style.transform = 'translateY(-2px)')}
+                    onMouseOut={(e) => (e.currentTarget.style.transform = 'none')}
+                  >
+                    Get Started
+                    <Icon name='right arrow' style={{ marginLeft: '0.5em' }} />
+                  </Button>
+                </div>
+              </Grid.Column>
+
+              <Grid.Column width={9} style={{ paddingRight: '4em' }}>
+                <div
+                  style={{
+                    position: 'relative',
+                    maxWidth: '800px',
+                    marginLeft: 'auto',
+                    borderRadius: '24px',
+                    boxShadow: '0 30px 70px -15px rgba(0, 0, 0, 0.5)',
+                  }}
+                >
+                  <img
+                    src={desktop}
+                    alt='Desktop app preview'
+                    style={{
+                      borderRadius: '24px',
+                      width: '100%',
+                      height: 'auto',
+                    }}
+                  />
+                  <div
+                    style={{
+                      position: 'absolute',
+                      bottom: '-50px',
+                      right: '-30px',
+                      width: '40%',
+                      borderRadius: '20px',
+                      boxShadow: '0 25px 50px -10px rgba(0, 0, 0, 0.3)',
+                      transform: 'rotate(5deg)',
+                    }}
+                  >
+                    <img
+                      src={mobile}
+                      alt='Mobile app preview'
+                      style={{
+                        borderRadius: '20px',
+                        width: '100%',
+                        height: 'auto',
+                      }}
+                    />
+                  </div>
+                </div>
+              </Grid.Column>
+            </Grid.Row>
+          </Grid>
         </Container>
       </Segment>
 
       <KeyFeatures />
-
       <HomeGraph />
       <Explainer />
-
       <Testimonials />
     </div>
   );

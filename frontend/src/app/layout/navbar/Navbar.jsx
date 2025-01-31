@@ -34,7 +34,7 @@ export default function Navbar({ isMobile, sidebarOpened, handlePageChange, acti
         onClick={handlePageChange}
         as={Link}
         to='/class'
-        active={activePage === '/class'}
+        active={activePage && activePage?.includes('/class')}
         name='/class'
       >
         <Icon name='book' />
@@ -74,7 +74,7 @@ export default function Navbar({ isMobile, sidebarOpened, handlePageChange, acti
         name='/create'
       >
         <Icon name='plus' />
-        AI Create
+        Exam Generator {/**could change to a global constant as this is used for tests */}
       </Menu.Item>
 
       {user && user.id ? (
