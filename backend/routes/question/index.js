@@ -11,7 +11,7 @@ import { isCreator } from "#middleware/creatorMiddleware.js";
 import favRouter from "./favorite/index.js";
 import voteRouter from "./vote/index.js";
 import { BadRequestError } from "#utils/ApiError.js";
-import { questionSchema } from "../../../schema.js";
+import { questionSchema } from "../../../schema/index.js";
 const router = express.Router();
 
 router.use("/vote", voteRouter);
@@ -32,7 +32,6 @@ router.get("/:group_id", async function (req, res, next) {
   try {
     const result = await getQuestionsByGroupId(req.params.group_id);
     const validated = questionSchema.array().parse(result);
-    console.log(validated);
     res.status(200).json(validated);
   } catch (error) {
     next(error);
