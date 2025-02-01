@@ -54,8 +54,8 @@ export default function Home() {
                     lineHeight: 1.6,
                   }}
                 >
-                  Transform learning materials into interactive exams, gamified challenges, and dynamic study guides powered by
-                  AI.
+                  Access a wide range of exams and practice questions to prepare for your exams, with personalized study material
+                  and expert AI-driven guidance.
                 </p>
                 <div style={{ display: 'flex', gap: '1rem' }}>
                   <Button

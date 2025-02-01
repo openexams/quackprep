@@ -4,7 +4,7 @@ import { path_to_assets } from "../index.js";
 import fs from "fs";
 import { TEST_ACCOUNT_USER } from "constants.js";
 
-test("given a file and being logged in test that a user with a class can use the Exam Generator To create material and on finish jump to that material.", async ({
+test("given a file and being logged in test that a user with a class can use the AI Exam Parser To create material and on finish jump to that material.", async ({
   page,
 }) => {
   test.setTimeout(70000); // 70 seconds
@@ -12,7 +12,7 @@ test("given a file and being logged in test that a user with a class can use the
   expect(fileExists).toBe(true);
   await page.goto("http://localhost:3001/");
   await login(page);
-  await page.getByRole("link", { name: "Exam Generator" }).click();
+  await page.getByRole("link", { name: "AI Exam Parser" }).click();
   await page.getByRole("alert").click();
   await page
     .getByRole("option", { name: `${TEST_ACCOUNT_USER}'s Study Content` })

@@ -46,13 +46,16 @@ export default function CreateGroupByPDF({ classId }) {
     >
       <div style={{ padding: '2rem', maxWidth: '600px', margin: '0 auto' }}>
         <Header as='h1' textAlign='center'>
-          Generate New AI Content
+          Upload Past Exams
         </Header>
+        <Header.Subheader>
+          For the best results please send the ai the answers or answer key. If not available, it will try to solve them.
+        </Header.Subheader>
         <div style={{ marginBottom: '1rem' }}>
           <label style={{ fontWeight: 'bold' }}>
             Custom Prompt{' '}
             <Popup
-              content="Examples: 'Summarize the document for a study group', 'Extract key points and questions', 'Generate a lesson plan based on this material'."
+              content='Example: This Exam is about calc 3 and the answers are given in a seperate document.'
               trigger={<Icon name='info circle' color='blue' />}
             />
           </label>

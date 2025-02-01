@@ -14,6 +14,9 @@ export default function Explainer() {
         <Header as='h3' style={{ fontSize: '2em', textAlign: 'center' }}>
           How to Use QuackPrep.com
         </Header>
+        <Header.Subheader style={{ textAlign: 'center' }}>
+          Here's a quick guide to help you get started uploading exams to study with.
+        </Header.Subheader>
         <ShowerVideo src='/vid/quack.mp4' />
 
         <Grid stackable columns={1} style={{ marginTop: '2em' }}>

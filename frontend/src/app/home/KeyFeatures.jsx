@@ -6,13 +6,13 @@ export default function KeyFeatures() {
   const features = [
     {
       icon: extensiveDucks,
-      title: 'Extensive Question Bank',
-      description: 'Access a wide range of questions across multiple subjects.',
+      title: 'Extensive Exam Bank',
+      description: 'Access a wide range of Exams across multiple schools and classes.',
     },
     {
       icon: kiteDuck,
       title: 'AI Generated Questions',
-      description: 'Leverage AI to explore all exam questions and receive personalized, AI-generated questions.',
+      description: 'Leverage AI to generate personalized questions tailored to your strengths and weaknesses.',
     },
     {
       icon: libraryComputerDucks,

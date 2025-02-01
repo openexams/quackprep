@@ -53,7 +53,7 @@ export default function Sentinel() {
     } else if (urlArr[1]) {
       document.title = firstLetterUppercase(urlArr[1]) + ' - ' + 'Quackprep';
     } else {
-      document.title = 'QuackPrep | AI Study Tools | Past Exams';
+      document.title = 'QuackPrep | Past Exams | AI Study Tools';
     }
   }, [location]);
 

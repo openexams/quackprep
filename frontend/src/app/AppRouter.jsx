@@ -18,12 +18,13 @@ import Footer from '@components/Footer.jsx';
 import ComingSoon from '@components/ComingSoon.jsx';
 import TOS from './extra/TOS.jsx';
 import PrivacyPolicy from './extra/Privacy.jsx';
-import NewPageWrapper from './create/CreatePage.jsx';
+import NewPageWrapper from './ai/create/CreatePage.jsx';
 import Init from './Init.jsx';
 import Sentinel from './Sentinel.jsx';
 import Layout from './layout/Layout.jsx';
 import Auth from './auth/Auth.jsx';
 import Announcement from './extra/Announcement.jsx';
+
 import ChatbotWidget from './chatbot/ChatbotWidget.jsx';
 
 export default function AppRouter() {
