@@ -15,7 +15,7 @@ export default function GroupEditor({ id, name, type, description, class_id }) {
   const dispatch = useDispatch();
 
   // Pull your Redux state
-  const { classes } = useSelector(selectClassState);
+  const classes = useSelector(selectClassState);
 
   // Local state for controlled components
   const [groupName, setGroupName] = useState(name || '');

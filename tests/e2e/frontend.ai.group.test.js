@@ -20,7 +20,14 @@ test("given a file and being logged in test that a user with a class can use the
   const fileInput = page.locator('input[type="file"]');
   await fileInput.setInputFiles(path_to_assets + "imgs/cs251_rbt.png");
   await page.getByRole("button", { name: "Submit" }).click(); // if someone changes this button, it will break
-  await page.waitForURL("http://localhost:3001/class/General/72/group");
+  await page.waitForURL(
+    "http://localhost:3001/class/General/72/group/*/question/"
+  );
   await page.waitForTimeout(3000); // wait for my site to load
-  await page.getByText(`${TEST_ACCOUNT_USER}'s Study Content: Study`).click();
+  await page
+    .getByText(
+      `Choose a Question
+`
+    )
+    .click();
 });

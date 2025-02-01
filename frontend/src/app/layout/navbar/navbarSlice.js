@@ -205,9 +205,10 @@ export default function navbarReducer(state = DEFAULT_STATE, action) {
   }
 }
 
-export const selectCurrentPage = function (state) {
-  return { page: state.app.navbar.page };
-};
+export const selectCurrentPage = createSelector(
+  (state) => state.app.navbar.page,
+  (page) => page,
+);
 
 export const selectNavbarState = createSelector(
   (state) => state,

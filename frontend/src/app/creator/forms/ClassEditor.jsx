@@ -33,8 +33,8 @@ export default function ClassEditor({ id, name, category, desc, school_id }) {
   const dispatch = useDispatch();
 
   // Pull your Redux state
-  const { schools } = useSelector(selectSchoolState);
-  const { class_categories: classCategories } = useSelector(selectClassCategories);
+  const schools = useSelector(selectSchoolState);
+  const classCategories = useSelector(selectClassCategories);
 
   // Local state for controlled components
   const [className, setClassName] = useState(name || '');

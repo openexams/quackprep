@@ -10,9 +10,9 @@ export function getSchools() {
 
 export function getSchoolByClassId(classId) {
   return function (dispatch, getState) {
-    const curClass = selectItemById(selectClassState(getState()).classes, 'id', classId);
+    const curClass = selectItemById(selectClassState(getState()), 'id', classId);
     const school_id = curClass.school_id;
-    const school = selectItemById(selectSchoolState(getState()).schools, 'id', school_id);
+    const school = selectItemById(selectSchoolState(getState()), 'id', school_id);
     return school;
   };
 }
@@ -28,7 +28,9 @@ export default function schoolsReducer(state = DEFAULT_STATE, action) {
       return state;
   }
 }
+import { createSelector } from '@reduxjs/toolkit';
 
-export const selectSchoolState = (state) => {
-  return { schools: state.app.school.schools };
-};
+export const selectSchoolState = createSelector(
+  (state) => state.app.school.schools,
+  (schools) => schools,
+);

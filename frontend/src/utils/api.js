@@ -46,7 +46,6 @@ function handleApiError(error, dispatch) {
  * @param {import('axios').AxiosRequestConfig} [options.axiosConfig] - Axios Config
  * @param {String} [options.errorMsg] - error message to be seen by user
  * @param {String} [options.noticeOfSuccess] - if given, will show a flash message with this message
- * @param {String} [options.relocateOnCompletion] - if given, will have the client refresh to the page on completion
  * @param {Object} [options.fetchAction] - if given, will dispatch this action on call
  * @returns {Function} dispatches an action to the reducer with a action.payload of the data
  */
@@ -78,10 +77,6 @@ export function standardApiCall(method, route, data = null, resultAction, option
         result = await axios[method.toLowerCase()](route, options?.axiosConfig);
       } else {
         dispatch(showFlashMessage('axios method not found, this is a developer error. email support for help', 'err'));
-        return;
-      }
-      if (options?.relocateOnCompletion) {
-        window.location.href = options.relocateOnCompletion;
         return;
       }
       if (Array.isArray(resultAction)) {

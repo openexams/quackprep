@@ -11,10 +11,11 @@ export default function ClassPage() {
 
   return (
     <Container fluid style={{ padding: '0px' }}>
-      <Header as='h1' textAlign='center' icon={'graduation cap'}>
+      <Header as='h1' textAlign='center'>
         {curSchoolId ? 'Available Classes' : 'Choose a School'}
         <Header.Subheader>Choose one to begin your learning journey</Header.Subheader>
       </Header>
+
       <SchoolsList />
       {curSchoolId == null ? (
         <Segment placeholder textAlign='center' style={{ marginTop: 0 }}>

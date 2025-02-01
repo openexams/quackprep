@@ -12,7 +12,7 @@ export default function SchoolsList() {
   let { schoolId: curSchoolId } = useSelector(selectNavbarState).navbar;
   let selectedSchoolId = useSelector(selectNavbarState).navbar?.schoolId;
   const navigate = useNavigate();
-  const schools = useSelector(selectSchoolState).schools;
+  const schools = useSelector(selectSchoolState);
   const loading = useSelector(selectLoadingState).loadingComps?.SchoolsList;
   const dispatch = useDispatch();
 

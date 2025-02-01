@@ -19,9 +19,9 @@ export default function Layout({ children }) {
   const navigate = useNavigate();
 
   // Redux store data
-  const { page: activePage } = useSelector(selectCurrentPage);
+  const activePage = useSelector(selectCurrentPage);
   const { user } = useSelector(selectUser);
-  const { hasStreak } = useSelector(selectHasStreak);
+  const hasStreak = useSelector(selectHasStreak);
 
   const handleToggleSidebar = (bool) => {
     if (bool === true || sidebarOpened === false) {

@@ -12,17 +12,19 @@ import {
   QUACK_CREATE_GROUP_ASS_ID,
 } from "../../../constants.js";
 import { FILE_SIZE_EXCEEDED, SUCCESS } from "../../../error_codes.js";
-import CustomError, { BadRequestError } from "#utils/ApiError.js";
+import { BadRequestError } from "#utils/ApiError.js";
 import { sendEmailToUserByUserId } from "#models/account/index.js";
 import { getSchoolByClassId } from "#models/class/index.js";
 
 /**
  *
  * @param {Express.Multer.File[]} files
- * @param {*} class_id
- * @param {*} user_id
- * @param {*} user_prompt
+ * @param {Number} class_id
+ * @param {Number} user_id
+ * @param {String} user_prompt
+ * @returns {Number} group_id the created group's id
  */
+
 export async function etlFilesIntoGroup(files, class_id, user_id, user_prompt) {
   user_prompt =
     user_prompt ??
@@ -46,7 +48,7 @@ export async function etlFilesIntoGroup(files, class_id, user_id, user_prompt) {
         formData.append("file", file.buffer, file.originalname);
         mdd_res += await postPdfAndRetriveParsedPdf(formData);
       } else {
-        mdd_res += await postImageAndRecieveText(file.buffer); // file .buffer is in base 64
+        mdd_res += await postImageAndRecieveText(file); // file .buffer is in base 64
       }
     }
 
@@ -158,7 +160,7 @@ export async function etlFilesIntoGroup(files, class_id, user_id, user_prompt) {
       emailHTML
     );
     ///////////////////////////////////
-    return SUCCESS;
+    return group.id;
   } catch (error) {
     if (group && group.id) {
       dlog("group detected and function failed, attempting to delete group");

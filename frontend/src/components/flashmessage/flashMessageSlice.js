@@ -1,5 +1,6 @@
 const HIDE_FLASH = 'components/FlashMessage/HIDE_FLASH';
 const SHOW_FLASH = 'components/FlashMessage/SHOW_FLASH';
+import { createSelector } from '@reduxjs/toolkit';
 
 export function showFlashMessage(msg, error) {
   return {
@@ -32,10 +33,7 @@ export default function flashReducer(state = DEFAULT_STATE, action) {
   }
 }
 
-export const selectFlashMessageState = function (state) {
-  return {
-    show: state.flashMessage.show,
-    msg: state.flashMessage.msg,
-    error: state.flashMessage.error,
-  };
-};
+export const selectFlashMessageState = createSelector(
+  (state) => state.flashMessage,
+  (flashMessage) => flashMessage,
+);

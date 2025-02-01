@@ -38,12 +38,12 @@ export default function Sentinel() {
   const dispatch = useDispatch();
   const user = useSelector(selectUser).user;
   const userIdRef = useRef(user.id);
-  const schools = useSelector(selectSchoolState).schools;
+  const schools = useSelector(selectSchoolState);
   const loading = useSelector(selectLoadingState)?.loadingComps;
   const State401 = useSelector(select401CompState).show;
   const pathArray = getFixedUrlArr(activePage);
   const location = useLocation();
-  const classes = useSelector(selectClassState).classes;
+  const classes = useSelector(selectClassState);
   const groups = useSelector(selectGroupsState);
 
   useEffect(() => {

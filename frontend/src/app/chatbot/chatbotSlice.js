@@ -45,12 +45,6 @@ export default function chatbotReducer(state = DEFAULT_STATE, action) {
   }
 }
 
-// Selectors
-export const selectChatbotState = createSelector(
-  (state) => state,
-  (state) => ({ chatbot: state.app.chatbot }),
-);
-
 export const selectMessages = createSelector(
   (state) => state,
   (state) => state.app.chatbot.messages,

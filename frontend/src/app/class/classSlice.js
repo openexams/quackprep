@@ -3,6 +3,7 @@ import { updateArrObjectsWithNewVals, filterArr, upsertArray } from 'maddox-js-f
 import { countingSort } from 'maddox-js-funcs';
 import { GENERAL_SCHOOL_ID, OTHER_CLASS_CATEGORY_ID } from '../../../../constants';
 import { selectUser } from '@app/auth/authSlice';
+import { createSelector } from '@reduxjs/toolkit';
 
 const GET_CRUD_CLASSES = 'app/class/GET_CRUD_CLASSES';
 const DELETE_CRUD_CLASS = 'app/class/DELETE_CRUD_CLASS';
@@ -75,9 +76,10 @@ export default function classReducer(state = DEFAULT_STATE, action) {
   }
 }
 
-export const selectClassState = function (state) {
-  return { classes: state.app.class.classes.classes };
-};
+export const selectClassState = createSelector(
+  (state) => state.app.class.classes.classes,
+  (classes) => classes,
+);
 
 export function selectClassStateById(id) {
   return function (state) {

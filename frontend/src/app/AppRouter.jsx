@@ -24,7 +24,7 @@ import Sentinel from './Sentinel.jsx';
 import Layout from './layout/Layout.jsx';
 import Auth from './auth/Auth.jsx';
 import Announcement from './extra/Announcement.jsx';
-
+import Test from './test/Test.jsx';
 import ChatbotWidget from './chatbot/ChatbotWidget.jsx';
 
 export default function AppRouter() {
@@ -39,6 +39,7 @@ export default function AppRouter() {
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/about' element={<AboutPage />} />
+          <Route path='/test' element={<Test />} />
           <Route path='/learn' element={<ComingSoon />} />
 
           <Route path='/tos' element={<TOS />} />

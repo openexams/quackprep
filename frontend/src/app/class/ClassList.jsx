@@ -18,7 +18,7 @@ export default function ClassList() {
   let { schoolId: curSchoolId } = useSelector(selectNavbarState).navbar;
 
   const loading = useSelector(selectLoadingState).loadingComps?.ClassList;
-  const classCategories = useSelector(selectClassCategories).class_categories;
+  const classCategories = useSelector(selectClassCategories);
   const [curCategory, setCurCategory] = useState('');
   const [visible, setVisible] = useState(true);
   const edit = useSelector(selectEditState);
@@ -55,7 +55,7 @@ export default function ClassList() {
         <Container style={{ backgroundColor: '#f9fafb' }}>
           {/* The category menu remains as is */}
 
-          <Menu pointing fluid widths={classCategories?.length + 1} stackable>
+          <Menu pointing fluid widths={classCategories?.length > 0 ? classCategories.length + 1 : 1} stackable>
             <Menu.Item name='All Classes' active={curCategory === ''} onClick={() => handleCategoryChange('')} icon='list' />
             {classCategories?.map((category, index) => (
               <Menu.Item

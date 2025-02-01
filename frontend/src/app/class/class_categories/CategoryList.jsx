@@ -3,7 +3,7 @@ import { Segment } from 'semantic-ui-react';
 import { selectClassCategories } from './classCategorySlice';
 
 export default function CategoryList() {
-  const categories = useSelector(selectClassCategories).class_categories;
+  const categories = useSelector(selectClassCategories);
   return (
     <Segment>
       <ul>

@@ -1,4 +1,5 @@
 import { standardApiCall } from '@utils/api.js';
+import { createSelector } from '@reduxjs/toolkit';
 
 const GET_HAS_STREAK = 'app/streak/GET_HAS_STREAK';
 const GET_STREAK = 'app/streak/GET_STREAK';
@@ -43,9 +44,10 @@ export default function streakReducer(state = DEFAULT_STATE, action) {
   }
 }
 
-export const selectHasStreak = function (state) {
-  return { hasStreak: state.app.streak.hasStreak };
-};
+export const selectHasStreak = createSelector(
+  (state) => state.app.streak.hasStreak,
+  (hasStreak) => hasStreak,
+);
 
 export const selectStreakData = function (state) {
   return { streak: state.app.streak };

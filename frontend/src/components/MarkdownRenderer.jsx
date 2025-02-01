@@ -14,17 +14,22 @@ import 'katex/dist/katex.min.css';
 export default function MarkdownRenderer({ render, components = {}, allowLinks = false }) {
   // Check if links are allowed
   const linkComponents = allowLinks
-    ? components
+    ? {}
     : {
-        ...components,
         a: ({ node, ...props }) => <span>{props.children}</span>, // Disable link rendering
       };
+
+  const customComponents = {
+    ...components,
+    ...linkComponents, //props of later object overwrite props of earlier object
+    img: ({ node, ...props }) => <img {...props} style={{ maxWidth: '20em', height: 'auto' }} alt={props.alt} />, // Add max size for images
+  };
 
   if (!render?.includes('$') && !render?.includes('/') && !render?.includes('#') && !render?.includes('\\')) {
     return <span>{render}</span>;
   } else {
     return (
-      <ReactMarkdown components={linkComponents} remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatex]}>
+      <ReactMarkdown components={customComponents} remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatex]}>
         {render}
       </ReactMarkdown>
     );

@@ -66,6 +66,9 @@ export async function getFormattedPdfByPdfIdMathpix(
  * @returns {String} pdf_id
  */
 export async function postPDFToMathpix(formData) {
+  formData.append("math_inline_delimiters", JSON.stringify(["$$", "$$"]));
+  formData.append("math_display_delimiters", JSON.stringify([])); // no display delimiters
+
   const result = await axios.post(
     "https://api.mathpix.com/v3/pdf",
     formData,
@@ -99,9 +102,10 @@ export async function postPdfAndRetriveParsedPdf(formData) {
 
 /**
  * post image to mathpix and get text
- * @param {File} file file opened with fs.readFileSync
+ * @param {Express.Multer.File} file file
  * @returns {String} text
  */
+
 export async function postImageAndRecieveText(file) {
   try {
     // formData.append(
@@ -113,16 +117,18 @@ export async function postImageAndRecieveText(file) {
     // );
     const result = await axios.post(
       "https://api.mathpix.com/v3/text",
+
       {
-        src: `data:image/${file.type};base64,` + file.toString("base64"),
-        options: { math_inline_delimiters: ["$$", "$$"], rm_spaces: true }, // this part does not wrap latex in $$, so no work
+        src: `data:${file.mimetype};base64,` + file.buffer.toString("base64"),
+
+        math_inline_delimiters: ["$$", "$$"],
+        math_display_delimiters: ["", ""],
+        rm_spaces: true,
       },
       {
         headers: {
-          // ...formData.getHeaders(),
           app_id: MATHPIX_API_INFO.MATHPIX_APP_ID,
           app_key: MATHPIX_API_INFO.MATHPIX_API_KEY,
-          // "Content-type": "multipart/form-data",
         },
       }
     );
