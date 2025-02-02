@@ -22,6 +22,8 @@ import {
   groupFetchLogic,
   groupUpdateLogic,
 } from './fetchFunction';
+import { blogs } from './blog/blogs';
+import Blog from './blog/Blog';
 
 export default function Sentinel() {
   const {
@@ -48,14 +50,16 @@ export default function Sentinel() {
 
   useEffect(() => {
     const urlArr = getFixedUrlArr(location.pathname);
-    if (schoolName) {
+    if (urlArr[1] === 'blog' && urlArr[2]) {
+      document.title = Blog.getBlogFromLinkAndArray(blogs, urlArr[2]).getTitle();
+    } else if (schoolName) {
       document.title = schoolName + ' - ' + 'Quackprep';
     } else if (urlArr[1]) {
       document.title = firstLetterUppercase(urlArr[1]) + ' - ' + 'Quackprep';
     } else {
       document.title = 'QuackPrep | Past Exams | AI Study Tools';
     }
-  }, [location]);
+  }, [location, schoolName]);
 
   useEffect(() => {
     userIdRef.current = user.id;

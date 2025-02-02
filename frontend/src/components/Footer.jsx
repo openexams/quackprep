@@ -19,6 +19,9 @@ export default function Footer() {
             <Grid.Column width={3}>
               <Header inverted as='h4' content='About' />
               <List link inverted>
+                <List.Item as={Link} to='/blog'>
+                  Blog
+                </List.Item>
                 <List.Item as={Link} to='/about'>
                   Company
                 </List.Item>

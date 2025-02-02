@@ -29,12 +29,19 @@ export function getAnnouncement() {
 /**
  * navigates to given page using rrd navigate() and keeps my navbar state up to date! (middleware)
  * @param {String} name
+ * @param {String} page
+ * @param {Object} options
+ * @param {Boolean} options.scrollToTop
  * @returns
  */
-export function changeNavbarPage(navigate, page) {
+
+export function changeNavbarPage(navigate, page, options = {}) {
   const dupName = page + '';
 
   navigate(dupName);
+  if (options.scrollToTop) {
+    window.scrollTo(0, 0);
+  }
   return { type: CHANGE_NAVBAR_PAGE, payload: dupName };
 }
 

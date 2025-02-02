@@ -12,7 +12,7 @@ export default function Main() {
   return (
     <Provider store={store}>
       <FlashMessage />
-      <DarkModeWidget />
+      {/* <DarkModeWidget /> */}
       <AppRouter />
     </Provider>
   );
