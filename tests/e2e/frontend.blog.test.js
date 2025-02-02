@@ -6,9 +6,7 @@ test("test blog working by going to footer, clicking blog, and then clicking on 
   await page.getByText("Blog").click();
   await page.getByRole("heading", { name: "Helpful Articles" }).click();
   await page
-    .getByText(
-      "Published On: 2/1/2025Unlocking The Secrets Of Success: The Value Of Past Exam"
-    )
+    .getByText("Unlocking The Secrets Of Success: The Value Of Past Exam")
     .click();
   await page
     .getByRole("heading", {
