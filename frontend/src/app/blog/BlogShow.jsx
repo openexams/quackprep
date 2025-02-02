@@ -28,18 +28,17 @@ export default function BlogShow() {
             <Header as='h1' textAlign='center'>
               {blog.getTitle()}
             </Header>
-            <Header as='h3' textAlign='center' color='grey'>
+            {/* <Header as='h3' textAlign='center' color='grey'>
               By {blog.getBy()}
             </Header>
-            <Divider />
             <Segment basic textAlign='center'>
               <p style={{ color: 'grey', fontSize: '1.1em' }}>Published On: {blog.getPubDate().toLocaleDateString()}</p>
-            </Segment>
+            </Segment> */}
           </Grid.Column>
         </Grid.Row>
         <Grid.Row>
           <Grid.Column width={16}>
-            <Segment raised>
+            <Segment basic raised padded>
               <Image
                 style={{ margin: '0 auto' }}
                 src={blog.getIcon()} // Assuming you have a method to get the image URL

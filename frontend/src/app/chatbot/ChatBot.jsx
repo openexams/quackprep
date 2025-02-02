@@ -61,7 +61,7 @@ export default function ChatBot() {
             <div className='message-text'>
               {currentQuestion
                 ? `Ask me anything about "${currentQuestion?.question?.slice(0, 50)} ..."`
-                : "Hello! I'm QuackPrepGPT. How can I help you today?"}
+                : "Hello! I'm QuackPrepGPT🦆. How can I help you today?"}
             </div>
           </div>
         }

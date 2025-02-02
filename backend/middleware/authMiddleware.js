@@ -1,6 +1,5 @@
 import { checkApiKey } from "#models/auth/index.js";
-import ApiError, { UnauthorizedError } from "#utils/ApiError.js";
-import { UNAUTHORIZED } from "../../error_codes.js";
+import { UnauthorizedError } from "#utils/ApiError.js";
 import { errorHandler } from "./errorHandler.js";
 
 /**
@@ -40,6 +39,6 @@ export async function isAuthenticated(req, res, next) {
     }
   } else {
     dlog("User not authed");
-    return errorHandler(new UnauthorizedError(), req, res, next);
+    return errorHandler(new UnauthorizedError(), req, res, next); // do NOT call next() here
   }
 }
