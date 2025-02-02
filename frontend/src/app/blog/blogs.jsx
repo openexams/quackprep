@@ -130,3 +130,5 @@ export const past_exams_prep = new Blog(
 );
 
 export const blogs = [past_exams_prep];
+
+blogs.sort((a, b) => b.pub_date - a.pub_date); // newest first
