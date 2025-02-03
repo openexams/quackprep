@@ -25,8 +25,6 @@ const app = express();
 
 console.log(path.join(__dirname, "../."));
 
-app.use(express.json());
-
 app.set("trust proxy", 1);
 
 const corsOrigin = {
@@ -76,7 +74,8 @@ app.use("/api/auth", rateLimits.auth);
 // Then other middleware
 app.use(express.static(path.join(__dirname, "./public/")));
 app.use(checkForBadWords);
-
+app.use("/api/ai/chatbot/", express.json({ limit: "5mb" })); // must be set before global json limit
+app.use(express.json({ limit: "10kb" }));
 app.use("/api", router);
 
 app.get("/*", (req, res) => {

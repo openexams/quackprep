@@ -22,3 +22,9 @@ export const MAX_USER_ANSWER_SUBMISSION_LENGTH = 2048; // match sql max varchar 
 export const TEST_ACCOUNT_EMAIL = "test@gmail.com";
 export const TEST_ACCOUNT_USER = "Test";
 export const TEST_ACCOUNT_PASS = "Test"; // secrets? Na
+export const ALLOWED_FILE_TYPES = [
+  "application/pdf",
+  "image/jpeg",
+  "image/png",
+  "image/jpg",
+];

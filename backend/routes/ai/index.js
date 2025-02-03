@@ -2,6 +2,7 @@ import { isAuthenticated } from "#middleware/authMiddleware.js";
 import { verifyUserOwnsRowId } from "#utils/sqlFunctions.js";
 import { generateQuestionLike } from "#models/ai/question.js";
 import {
+  MAX_FILE_SIZE_IN_BYTES,
   MAX_FILES_UPLOAD,
   MAX_USER_ANSWER_SUBMISSION_LENGTH,
   MAX_USER_PROMPT_LENGTH,
@@ -22,7 +23,10 @@ const router = Router();
 router.use(isAuthenticated);
 
 const storage = multer.memoryStorage();
-const upload = multer({ storage: storage }); // Store files in memory
+const upload = multer({
+  storage: storage,
+  limits: { fileSize: MAX_FILE_SIZE_IN_BYTES },
+}); // Store files in memory
 
 router.post("/chatbot/", async function (req, res, next) {
   const data = req.body;

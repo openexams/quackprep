@@ -25,12 +25,22 @@ export default function MarkdownRenderer({ render, components = {}, allowLinks =
     img: ({ node, ...props }) => <img {...props} style={{ maxWidth: '20em', height: 'auto' }} alt={props.alt} />, // Add max size for images
   };
 
-  if (!render?.includes('$') && !render?.includes('/') && !render?.includes('#') && !render?.includes('\\')) {
+  const processedRender = render
+    .replace(/\\\[/g, '$$') // Replace \[ with $$ TMP FIX
+    .replace(/\\\]/g, '$$'); // Replace \] with $$ TMP FIX
+
+  if (
+    !processedRender?.includes('$') &&
+    !processedRender?.includes('/') &&
+    !processedRender?.includes('#') &&
+    !processedRender?.includes('\\') &&
+    !processedRender?.includes('$$')
+  ) {
     return <span>{render}</span>;
   } else {
     return (
       <ReactMarkdown components={customComponents} remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatex]}>
-        {render}
+        {processedRender}
       </ReactMarkdown>
     );
   }

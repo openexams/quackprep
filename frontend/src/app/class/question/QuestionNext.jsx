@@ -15,7 +15,6 @@ export default function QuestionNext({ questions, selectedQuestion, setSelectedQ
         return i;
       }
     }
-    console.error('impossible');
     return null;
   }
 

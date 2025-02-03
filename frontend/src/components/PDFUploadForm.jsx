@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react';
 import { Button, Icon, List, Message } from 'semantic-ui-react';
 import { MAX_FILE_SIZE_IN_BYTES } from '../../../constants.js';
+import { ALLOWED_FILE_TYPES } from '../../../constants.js';
 
 const PdfUploadForm = ({ onSubmit, showImages = true, buttonText = 'Submit' }) => {
   const [files, setFiles] = useState([]);
@@ -16,14 +17,12 @@ const PdfUploadForm = ({ onSubmit, showImages = true, buttonText = 'Submit' }) =
     }
   };
 
-  const allowedFileTypes = ['application/pdf', 'image/jpeg', 'image/png', 'image/jpg'];
-
   const validateFiles = (newFiles) => {
     const validFiles = [];
     const invalidFiles = [];
 
     newFiles.forEach((file) => {
-      if (file.size <= MAX_FILE_SIZE_IN_BYTES && allowedFileTypes.includes(file.type)) {
+      if (file.size <= MAX_FILE_SIZE_IN_BYTES && ALLOWED_FILE_TYPES.includes(file.type)) {
         validFiles.push(file);
       } else {
         invalidFiles.push(file.name);
@@ -118,7 +117,7 @@ const PdfUploadForm = ({ onSubmit, showImages = true, buttonText = 'Submit' }) =
         ref={fileInputRef}
         id='file'
         type='file'
-        accept={allowedFileTypes.join(',')}
+        accept={ALLOWED_FILE_TYPES.join(',')}
         hidden
         multiple
         onChange={handleFileChange}

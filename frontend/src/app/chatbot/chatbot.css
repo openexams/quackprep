@@ -62,3 +62,51 @@
   border-radius: 50% !important;
   padding: 1rem !important;
 }
+
+/* Add to existing CSS */
+.file-input-wrapper {
+  position: relative;
+  margin: 0 0.5rem;
+}
+
+.file-drop-area {
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.file-drop-area.active {
+  background-color: #f0f0f0;
+  border: 2px dashed #2185d0;
+}
+
+.file-drop-area:hover {
+  background-color: #f8f8f8;
+}
+
+.file-drop-area .floating.label {
+  top: -0.5em;
+  right: -0.5em;
+  pointer-events: none;
+  position: absolute;
+}
+
+.input-section {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  position: relative;
+  padding-top: 0.5rem;
+}
+
+.chat-textarea {
+  flex-grow: 1;
+  resize: none !important;
+  min-height: 38px !important;
+  max-height: 100px !important;
+  overflow-y: auto !important;
+}

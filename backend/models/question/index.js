@@ -1,5 +1,6 @@
 import sqlExe from "#db/dbFunctions.js";
 import { verifyUserOwnsRowId } from "#utils/sqlFunctions.js";
+import { questionSchema } from "../../../schema/index.js";
 
 export async function createQuestionReport(user_id, question_id, text) {
   const params = { user_id, question_id, text };
@@ -11,10 +12,11 @@ export async function createQuestionReport(user_id, question_id, text) {
 
 // this function has down syndrome
 export async function getQuestionsByGroupId(group_id) {
-  return await sqlExe.executeCommand(
+  const result = await sqlExe.executeCommand(
     `SELECT q.id,
        q.question,
         group_concat(g.id SEPARATOR ',') AS group_id,
+
        q.explanation_url,
         group_concat(g.name SEPARATOR ',') as group_name,
        group_concat(gt.type_name SEPARATOR ',') as type_name,
@@ -42,16 +44,19 @@ export async function getQuestionsByGroupId(group_id) {
     ORDER BY q.id ASC`,
     { group_id }
   );
+  const validated = questionSchema.array().parse(result);
+  return validated;
 }
 
 export async function selectQuestion(WHERE, params) {
-  return await sqlExe.executeCommand(
+  const result = await sqlExe.executeCommand(
     `SELECT
     q.id,
     q.question,
     q.ai,
     CONVERT(COALESCE(qv.upvotes, 0), SIGNED) AS upvotes,
     group_concat(g.id SEPARATOR ',') AS group_id,
+
     group_concat(gt.type_name SEPARATOR ',') as type_name,
     group_concat(g.name SEPARATOR ',') as group_name,
     cl.id AS class_id,
@@ -83,6 +88,9 @@ ORDER BY
     q.id ASC`,
     params
   );
+  const validated = questionSchema.array().parse(result);
+
+  return validated;
 }
 
 export async function getQuestionsByUserId(user_id) {

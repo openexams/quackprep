@@ -169,3 +169,24 @@ export function selectArrayOfIncludingItemsByNumber(array, keysToCheck, valuesIn
   }
   return ret;
 }
+
+/**
+ * local images made with URL.createObjectURL() to base64
+ * @param {Blob[]} images maybe File[] instead idk
+ * @returns {String[]} base64 images
+ */
+export async function localImagesToBase64(images) {
+  const base64Images = [];
+
+  for (let i = 0; i < images.length; i++) {
+    const base64 = await new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onloadend = () => resolve(reader.result);
+      reader.onerror = reject;
+      reader.readAsDataURL(images[i]);
+    });
+    base64Images.push(base64);
+  }
+
+  return base64Images;
+}
