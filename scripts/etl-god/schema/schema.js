@@ -66,7 +66,7 @@ export const BoilerQuestionSchema = z
   .object({
     id: z.string(),
     type: z.enum(["MULTIPLE_CHOICE", "FREE_RESPONSE"]), //check for free response
-    data: z.object({ body: z.string(), solution: z.number().int() }),
+    data: z.object({ body: z.string(), solution: z.array(z.number().int()) }),
     answerChoices: z.array(
       z.object({ id: z.string(), index: z.number().int(), body: z.string() })
     ),
@@ -91,10 +91,18 @@ export const BoilerQuestionSchema = z
   })
   .strip();
 
+// my JSON SCHEMA
+export const JSONChoiceSchema = z.object({
+  answer: z.string(),
+  is_correct: z.number().int().max(1).min(0),
+  type: z.enum(["mcq", "frq"]),
+});
+
 export const JSONQuestionSchema = z.object({
   question: z.string(),
-  explanation_url: z.string(),
-  topics: z.array(z.string()),
+  explanation_url: z.string().nullable(),
+  topics: z.array(z.string()), // array of topic names
+  choices: z.array(JSONChoiceSchema),
 });
 export const JSONGroupSchema = z.object({
   name: z.string(),
@@ -105,11 +113,6 @@ export const JSONGroupSchema = z.object({
   pdfLink: z.string(),
 });
 
-export const JSONChoiceSchema = z.object({
-  answer: z.string(),
-  is_correct: z.number().int().max(1).min(0),
-  type: z.enum(["mcq", "frq"]),
-});
 export const JSONClassSchema = z.object({
   name: z.string(),
   description: z.string(),

@@ -2,8 +2,17 @@ import { fetchWithExponetialBackoff } from "../axios.js";
 import { BoilerExamSchema, JSONGroupSchema } from "../schema/schema.js";
 
 /**
+ * Fetches and processes exam data from a JSON class to generate grouped question information.
  *
- * @param {import("../types").JSONClass} jsonClass
+ * @param {import("../types").JSONClass} jsonClass - The JSON class object containing course information to fetch exams for.
+ * @returns {Promise<{groupJson: import("../types").JSONGroup[], boilerQuestionIds: string[][]}>} A Promise that resolves to an object containing:
+ * - `groupJson`: Array of validated exam groups formatted according to JSONGroupSchema
+ * - `boilerQuestionIds`: 2D array containing question IDs grouped by exam
+ *
+ * @example
+ * const result = await getJsonGroupsFromJsonClass(math101Class);
+ * console.log(result.groupJson); // Array of exam groups
+ * console.log(result.boilerQuestionIds); // Array of question ID arrays
  */
 export async function getJsonGroupsFromJsonClass(jsonClass) {
   const result = await fetchWithExponetialBackoff(
@@ -12,7 +21,10 @@ export async function getJsonGroupsFromJsonClass(jsonClass) {
 
   const validated = BoilerExamSchema.array().parse(result);
   const groupsJson = [];
+  const questionIdsInExams = [];
+
   for (let i = 0; i < validated.length; i++) {
+    questionIdsInExams.push([]);
     const curExam = validated[i];
     let curPDFLink = null;
     for (let j = 0; j < curExam.resources.length; j++) {
@@ -25,6 +37,12 @@ export async function getJsonGroupsFromJsonClass(jsonClass) {
         curPDFLink = curExam.resources[j].data.link;
       }
     }
+    if (questionIdsInExams[i].length !== 0) {
+      throw new Error("ASSERT questionIdsInExams[i].length ===0 failed");
+    }
+    for (let j = 0; j < curExam.questions.length; j++) {
+      questionIdsInExams[i].push(curExam.questions[j].id);
+    }
     groupsJson.push({
       name: `${
         curExam.number !== 0 ? `Exam ${curExam.number}` : "Final Exam"
@@ -36,5 +54,8 @@ export async function getJsonGroupsFromJsonClass(jsonClass) {
       pdfLink: curPDFLink,
     });
   }
-  return JSONGroupSchema.array().parse(groupsJson);
+  return {
+    groupJson: JSONGroupSchema.array().parse(groupsJson),
+    boilerQuestionIds: questionIdsInExams,
+  };
 }
