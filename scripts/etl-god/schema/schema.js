@@ -102,6 +102,7 @@ export const JSONGroupSchema = z.object({
   desc: z.string(),
   questionCount: z.number().int(),
   questions: z.array(JSONQuestionSchema).nullable(),
+  pdfLink: z.string(),
 });
 
 export const JSONChoiceSchema = z.object({

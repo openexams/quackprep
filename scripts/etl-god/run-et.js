@@ -1,12 +1,14 @@
 import { getBoilerClassAndParseToJsonClass } from "./func/class.js";
 import "../../backend/utils/utils.js";
 import "../../backend/config/config.js";
-import { getJsonGroupsCallBoilerFromJsonClass } from "./func/exam.js";
+import { getJsonGroupsFromJsonClass } from "./func/exam.js";
 
 const finalJason = await getBoilerClassAndParseToJsonClass();
 finalJason;
 for (let i = 0; i < finalJason.length; i++) {
-  const jsonGroup = await getJsonGroupsCallBoilerFromJsonClass(finalJason[i]);
-  finalJason[i].groups = jsonGroup;
-  // now go into each group and add question etc
+  // for all classes
+  finalJason[i].groups = await getJsonGroupsFromJsonClass(finalJason[i]);
+  for (let j = 0; j < finalJason[i].groups.length; j++) {
+    finalJason[i].groups[j].questions = null; // TODO
+  }
 }
