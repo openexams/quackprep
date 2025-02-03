@@ -1,6 +1,6 @@
 import sqlExe from "#db/dbFunctions.js";
 import { verifyUserOwnsRowId } from "#utils/sqlFunctions.js";
-import { questionSchema } from "../../../schema/index.js";
+import { myQuestionSchema } from "../../../schema/index.js";
 
 export async function createQuestionReport(user_id, question_id, text) {
   const params = { user_id, question_id, text };
@@ -44,7 +44,7 @@ export async function getQuestionsByGroupId(group_id) {
     ORDER BY q.id ASC`,
     { group_id }
   );
-  const validated = questionSchema.array().parse(result);
+  const validated = myQuestionSchema.array().parse(result);
   return validated;
 }
 
@@ -88,7 +88,7 @@ ORDER BY
     q.id ASC`,
     params
   );
-  const validated = questionSchema.array().parse(result);
+  const validated = myQuestionSchema.array().parse(result);
 
   return validated;
 }

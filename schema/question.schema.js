@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const questionSchema = z.object({
+export const myQuestionSchema = z.object({
   question: z.string().min(1).max(2048),
   group_id: z.string().transform((val) => val.split(",")), // if i parse to int frontend somehow reverts to string
   id: z.number().int().positive(),
