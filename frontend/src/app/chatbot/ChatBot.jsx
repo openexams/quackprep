@@ -31,6 +31,9 @@ export default function ChatBot() {
   const [inputValue, setInputValue] = useState('');
   const messagesEndRef = useRef(null);
 
+  useEffect(() => {
+    scrollToBottom();
+  }, []);
   function removeCurrentlyWorkingOn(message) {
     const tmp = message;
     return tmp.replace(/currently-working-on:".*?"/g, '');

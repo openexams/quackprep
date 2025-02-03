@@ -46,7 +46,7 @@ export default function Init() {
       dispatch(removeStateCurrentChoices());
       dispatch(removeStateFavoriteQuestions());
     }
-  }, [user?.id]);
+  }, [user?.id, dispatch]);
 
   return null;
 }
