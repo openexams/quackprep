@@ -1,5 +1,21 @@
 import z from "zod";
 
+export const BoilerResourcesSchema = z.array(
+  z
+    .object({
+      type: z.enum(["IMAGE", "VIDEO", "PDF", "LOGO"]),
+      data: z.object({
+        url: z.string().optional(),
+        altText: z.string().optional(),
+        link: z.string().optional(),
+      }),
+      questionId: z.string().nullable(), // tied to question
+      answerChoiceId: z.string().nullable(), // tied to some mcq answer
+      explanationId: z.string().nullable(), // for free response only
+    })
+    .strip()
+);
+
 const BoilerStatsSchema = z
   .object({
     count: z.number(),
@@ -27,7 +43,7 @@ const BoilerCourseSchema = z
     studyModes: z.any(),
     flags: z.any(),
     stats: BoilerStatsSchema,
-    resources: z.any(),
+    resources: BoilerResourcesSchema,
   })
   .strip();
 
@@ -40,20 +56,12 @@ export const BoilerClassSchema = z
 
 export const BoilerExamSchema = z
   .object({
-    // https://api.boilerexams.com/courses/MA16200/exams
     id: z.string(),
     number: z.number(),
     year: z.number().int().min(1900).max(new Date().getFullYear()),
     season: z.enum(["WINTER", "SPRING", "SUMMER", "FALL"]),
     stats: z.object({ questions: z.number().int() }),
-    resources: z.array(
-      z.object({
-        type: z.string(),
-        data: z.object({
-          link: z.string(),
-        }),
-      })
-    ),
+    resources: BoilerResourcesSchema,
     questions: z.array(
       z.object({
         id: z.string(),
@@ -65,11 +73,15 @@ export const BoilerExamSchema = z
 export const BoilerQuestionSchema = z
   .object({
     id: z.string(),
-    type: z.enum(["MULTIPLE_CHOICE", "FREE_RESPONSE"]), //check for free response
-    data: z.object({ body: z.string(), solution: z.array(z.number().int()) }),
-    answerChoices: z.array(
-      z.object({ id: z.string(), index: z.number().int(), body: z.string() })
-    ),
+    type: z.enum(["MULTIPLE_CHOICE", "FREE_RESPONSE", "PARENT"]), //check for free response
+    data: z.object({
+      body: z.string(),
+      solution: z.string().or(z.array(z.number().int())),
+      answerChoices: z.array(
+        z.object({ id: z.string(), index: z.number().int(), body: z.string() })
+      ),
+    }),
+
     topics: z.array(
       z.object({
         id: z.string(),
@@ -77,19 +89,24 @@ export const BoilerQuestionSchema = z
       })
     ),
     explanation: z.object({
-      resouces: z.array(
-        // explanation for correct answer choice
-        z.object({
-          type: z.enum(["IMAGE", "VIDEO"]),
-          data: z.object({ url: z.string() }),
-          questionId: z.string().nullable(), // tied to question
-          answerChoiceId: z.string().nullable(), // tied to some answer
-          explanationId: z.string().nullable(), // tied to correct answer
-        })
-      ),
+      resources: BoilerResourcesSchema,
     }),
+    resources: BoilerResourcesSchema,
+    children: z.array(z.lazy(() => BoilerQuestionSchema)),
   })
-  .strip();
+  .strip(); // superRefine is cool like checking what i check on question.js
+
+export const BoilerQuestionSubmissionSchema = z.object({
+  questionId: z.string(),
+  timeStarted: z.coerce.date(),
+  timeEnded: z.coerce.date(),
+  timeSpent: z.number().int().nonnegative(),
+  timeSpentModal: z.number().int().nonnegative(),
+  timeSpentVideo: z.number().int().nonnegative(),
+  osFamily: z.string(),
+  userSolution: z.array(z.number().int()),
+  type: z.enum(["MULTIPLE_CHOICE", "FREE_RESPONSE"]),
+});
 
 // my JSON SCHEMA
 export const JSONChoiceSchema = z.object({
@@ -110,7 +127,7 @@ export const JSONGroupSchema = z.object({
   desc: z.string(),
   questionCount: z.number().int(),
   questions: z.array(JSONQuestionSchema).nullable(),
-  pdfLink: z.string(),
+  pdfLink: z.string().nullable(),
 });
 
 export const JSONClassSchema = z.object({

@@ -1,4 +1,4 @@
-import { sleep } from "../../backend/utils/utils.js";
+import { sleep } from "./helpers.js";
 import axios from "axios";
 
 // Set the base URL for all requests
@@ -29,7 +29,7 @@ export async function fetchWithExponetialBackoff(
   } catch (error) {
     if (retries > 0) {
       const delayTime = delay * 2 ** (5 - retries); // 1 on init call
-      dlog(`retrying in ${delayTime}`);
+      console.log(`retrying in ${delayTime}`);
       await sleep(delayTime);
       return fetchWithExponetialBackoff(url, retries - 1, delay); //If you return a promise (like the result of another async function), the async function will wait for that promise to resolve and then return its resolved value.
     } else {

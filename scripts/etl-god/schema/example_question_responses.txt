@@ -1,0 +1,928 @@
+{
+  "id": "83c76fe4-afab-415c-84a3-c0d634f2281f",
+  "type": "MULTIPLE_CHOICE",
+  "data": {
+    "body": "Let $G$ be the graph represented by the edge list below. $G$ is directed and unweighted. Each tuple $(u, v)$ represents the edge between vertices $u$ and $v$.\n$${(2,3),(3,1),(4,0),(4,1),(5,2),(5,0)}$$\nFind all the topological sorts for $G$\n(Then select all that are valid topological sortings from the multiple choice question below)",
+    "solution": [
+      5,
+      4,
+      2,
+      0
+    ],
+    "answerChoices": [
+      {
+        "id": "a0d6016b-ce45-4931-8fa6-1b8bf981ce1f",
+        "index": 0,
+        "body": "4,5,2,0,3,1",
+        "questionId": "83c76fe4-afab-415c-84a3-c0d634f2281f",
+        "stats": {
+          "count": 540
+        },
+        "resources": []
+      },
+      {
+        "id": "c9c399a1-0edb-4ce6-87ff-f1383f586459",
+        "index": 1,
+        "body": "4,5,3,0,2,1",
+        "questionId": "83c76fe4-afab-415c-84a3-c0d634f2281f",
+        "stats": {
+          "count": 43
+        },
+        "resources": []
+      },
+      {
+        "id": "7702988f-899c-4728-9865-5c1e7fe7b4e6",
+        "index": 2,
+        "body": "5,4,0,2,3,1",
+        "questionId": "83c76fe4-afab-415c-84a3-c0d634f2281f",
+        "stats": {
+          "count": 544
+        },
+        "resources": []
+      },
+      {
+        "id": "487f2169-4166-418f-ba30-0ea6b4e481a8",
+        "index": 3,
+        "body": "5,0,2,3,1,4\n",
+        "questionId": "83c76fe4-afab-415c-84a3-c0d634f2281f",
+        "stats": {
+          "count": 43
+        },
+        "resources": []
+      },
+      {
+        "id": "9509edad-a56d-4c54-818b-919522d99cf7",
+        "index": 4,
+        "body": "5,2,3,4,0,1",
+        "questionId": "83c76fe4-afab-415c-84a3-c0d634f2281f",
+        "stats": {
+          "count": 534
+        },
+        "resources": []
+      },
+      {
+        "id": "1cf08c62-72bb-4ecc-a2e1-679833c656de",
+        "index": 5,
+        "body": "4,5,0,2,3,1",
+        "questionId": "83c76fe4-afab-415c-84a3-c0d634f2281f",
+        "stats": {
+          "count": 544
+        },
+        "resources": []
+      }
+    ]
+  },
+  "number": 8,
+  "disclaimer": "",
+  "examId": "d55e9a80-dc28-4cce-a4da-2ef58d4f127e",
+  "courseId": "27c7ff3a-c08b-432e-ac8d-19aff935e0fb",
+  "parentId": null,
+  "flags": {
+    "published": true,
+    "disableRandomAnswers": false,
+    "answersStartHidden": true
+  },
+  "stats": {
+    "count": 1,
+    "timeSpent": "185355801",
+    "timeSpentVideo": "0",
+    "submissions": 705,
+    "submissionsCorrect": 544,
+    "accuracy": 0.7716312056737589,
+    "difficulty": 0.512111801242236
+  },
+  "resources": [],
+  "exam": {
+    "id": "d55e9a80-dc28-4cce-a4da-2ef58d4f127e",
+    "number": 3,
+    "year": 2022,
+    "season": "FALL",
+    "disclaimer": "",
+    "courseId": "27c7ff3a-c08b-432e-ac8d-19aff935e0fb",
+    "flags": {
+      "published": true,
+      "practice": false
+    },
+    "stats": {
+      "count": 1,
+      "timeSpent": "1302083714",
+      "timeSpentVideo": "0",
+      "submissions": 7568,
+      "submissionsCorrect": 5707,
+      "questions": 11,
+      "accuracy": 0.7540961945031712,
+      "difficulty": 0.49921752738654146
+    }
+  },
+  "explanation": {
+    "id": "bb671cf4-3579-4276-a1ce-4a910425ade3",
+    "body": "",
+    "questionId": "83c76fe4-afab-415c-84a3-c0d634f2281f",
+    "resources": []
+  },
+  "topics": [],
+  "children": []
+}
+
+
+{
+  "id": "ce777564-d3e5-49d0-9e16-e85c69d36b7b",
+  "type": "MULTIPLE_CHOICE",
+  "data": {
+    "body": "Show the state of the Left-Leaning Red-Black Tree after each of the following operations:\ninsert(3), insert(7), insert(2), insert(9), insert(0), insert(11), insert(1)\nNote: Denote black nodes using circles and red nodes using triangles.\nWARNING: Answers stated in terms of 2-3 Trees would receive 0 points.\n\nDo this question on your own, and then check your answers for each step below. To get this question marked as correct, select all the answers and hit submit.",
+    "solution": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "answerChoices": [
+      {
+        "id": "50300656-f86b-4ad3-9896-6a6a45ad6e3e",
+        "index": 0,
+        "body": "insert(3)",
+        "questionId": "ce777564-d3e5-49d0-9e16-e85c69d36b7b",
+        "stats": {
+          "count": 65
+        },
+        "resources": [
+          {
+            "id": "4ad81e1f-cc94-4ef4-b264-db787b6e636c",
+            "type": "IMAGE",
+            "data": {
+              "key": "ZizDhqOJ--lqlhA9i2GIF",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/ZizDhqOJ--lqlhA9i2GIF",
+              "altText": "Black node 3"
+            },
+            "courseId": null,
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": "50300656-f86b-4ad3-9896-6a6a45ad6e3e",
+            "customExamId": null
+          }
+        ]
+      },
+      {
+        "id": "8b3f5248-db12-49d4-af8e-ae1642ea25c1",
+        "index": 1,
+        "body": "insert(7)",
+        "questionId": "ce777564-d3e5-49d0-9e16-e85c69d36b7b",
+        "stats": {
+          "count": 55
+        },
+        "resources": [
+          {
+            "id": "6b9f808a-e4e7-4196-b5f5-828affb38ce6",
+            "type": "IMAGE",
+            "data": {
+              "key": "9_Q3HhGW2BKMWFwanfvVg",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/9_Q3HhGW2BKMWFwanfvVg",
+              "altText": "Black 7, Red 3 as left child"
+            },
+            "courseId": null,
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": "8b3f5248-db12-49d4-af8e-ae1642ea25c1",
+            "customExamId": null
+          }
+        ]
+      },
+      {
+        "id": "70f4fcd4-e839-4e1d-a504-11de443636c8",
+        "index": 2,
+        "body": "insert(2)\n",
+        "questionId": "ce777564-d3e5-49d0-9e16-e85c69d36b7b",
+        "stats": {
+          "count": 56
+        },
+        "resources": [
+          {
+            "id": "c07cd060-f82b-443e-a0c3-2d40b4e53b63",
+            "type": "IMAGE",
+            "data": {
+              "key": "TTQaePa8rRObWJhFx4PhP",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/TTQaePa8rRObWJhFx4PhP",
+              "altText": "Black 3 root, black 2/7 children"
+            },
+            "courseId": null,
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": "70f4fcd4-e839-4e1d-a504-11de443636c8",
+            "customExamId": null
+          }
+        ]
+      },
+      {
+        "id": "e1264bc9-e9ae-40bd-96bd-aedb80baa04c",
+        "index": 3,
+        "body": "insert(9)",
+        "questionId": "ce777564-d3e5-49d0-9e16-e85c69d36b7b",
+        "stats": {
+          "count": 56
+        },
+        "resources": [
+          {
+            "id": "05d26185-9ce2-42b9-a724-789f3a33a265",
+            "type": "IMAGE",
+            "data": {
+              "key": "b-qNwPwryGwsAEtOuQnnN",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/b-qNwPwryGwsAEtOuQnnN",
+              "altText": "Black 3 root, with black 2 and 9 as children. Red 7 as child of 9"
+            },
+            "courseId": null,
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": "e1264bc9-e9ae-40bd-96bd-aedb80baa04c",
+            "customExamId": null
+          }
+        ]
+      },
+      {
+        "id": "0a1403ef-a06c-48a9-a3a6-2cbdde018f2b",
+        "index": 4,
+        "body": "insert(0)",
+        "questionId": "ce777564-d3e5-49d0-9e16-e85c69d36b7b",
+        "stats": {
+          "count": 58
+        },
+        "resources": [
+          {
+            "id": "036356ef-bf1d-4315-a108-f3306f1fac9e",
+            "type": "IMAGE",
+            "data": {
+              "key": "4pBbBbw08ke3TqJuYtLuS",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/4pBbBbw08ke3TqJuYtLuS",
+              "altText": "Same as previous with a red 0 as a child of the black 2"
+            },
+            "courseId": null,
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": "0a1403ef-a06c-48a9-a3a6-2cbdde018f2b",
+            "customExamId": null
+          }
+        ]
+      },
+      {
+        "id": "92921f46-2231-4e55-8492-ef4e49678040",
+        "index": 5,
+        "body": "insert(11)",
+        "questionId": "ce777564-d3e5-49d0-9e16-e85c69d36b7b",
+        "stats": {
+          "count": 69
+        },
+        "resources": [
+          {
+            "id": "101609a7-e067-4214-b373-4123fba64bc0",
+            "type": "IMAGE",
+            "data": {
+              "key": "w4WsTCBt6g_jdh_N4kZes",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/w4WsTCBt6g_jdh_N4kZes",
+              "altText": "Black 9 root, Black 11 right child, Red 3 left child, Black 2 and Black 7 children of the Red 3, Red 0 as left child of the black 2"
+            },
+            "courseId": null,
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": "92921f46-2231-4e55-8492-ef4e49678040",
+            "customExamId": null
+          }
+        ]
+      },
+      {
+        "id": "d59fea30-68af-4ad6-9a51-b473d6c6efbc",
+        "index": 6,
+        "body": "insert(1)",
+        "questionId": "ce777564-d3e5-49d0-9e16-e85c69d36b7b",
+        "stats": {
+          "count": 155
+        },
+        "resources": [
+          {
+            "id": "4a24cd57-5b4f-47d7-b956-824c14f4e720",
+            "type": "IMAGE",
+            "data": {
+              "key": "AT2z_WaX_oYuysVIBzYmZ",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/AT2z_WaX_oYuysVIBzYmZ",
+              "altText": "All nodes are black, Tree from top to bottom and left to right is 3, 1, 9, 0, 2, 7, 11"
+            },
+            "courseId": null,
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": "d59fea30-68af-4ad6-9a51-b473d6c6efbc",
+            "customExamId": null
+          }
+        ]
+      }
+    ]
+  },
+  "number": 1,
+  "disclaimer": "",
+  "examId": "d55e9a80-dc28-4cce-a4da-2ef58d4f127e",
+  "courseId": "27c7ff3a-c08b-432e-ac8d-19aff935e0fb",
+  "parentId": null,
+  "flags": {
+    "published": true,
+    "disableRandomAnswers": false,
+    "answersStartHidden": true
+  },
+  "stats": {
+    "count": 1,
+    "timeSpent": "71520429",
+    "timeSpentVideo": "0",
+    "submissions": 258,
+    "submissionsCorrect": 162,
+    "accuracy": 0.627906976744186,
+    "difficulty": 0.6578212290502793
+  },
+  "resources": [],
+  "exam": {
+    "id": "d55e9a80-dc28-4cce-a4da-2ef58d4f127e",
+    "number": 3,
+    "year": 2022,
+    "season": "FALL",
+    "disclaimer": "",
+    "courseId": "27c7ff3a-c08b-432e-ac8d-19aff935e0fb",
+    "flags": {
+      "published": true,
+      "practice": false
+    },
+    "stats": {
+      "count": 1,
+      "timeSpent": "1302140494",
+      "timeSpentVideo": "0",
+      "submissions": 7571,
+      "submissionsCorrect": 5709,
+      "questions": 11,
+      "accuracy": 0.7540615506538106,
+      "difficulty": 0.49925042367357586
+    }
+  },
+  "explanation": {
+    "id": "3cb0f39f-8d94-4092-ac60-5dabc700c724",
+    "body": "",
+    "questionId": "ce777564-d3e5-49d0-9e16-e85c69d36b7b",
+    "resources": []
+  },
+  "topics": [],
+  "children": []
+}
+
+// cs 251
+{
+    "id": "7fd058ac-8a9b-4488-9ced-7abb5400cd3a",
+    "type": "FREE_RESPONSE",
+    "data": {
+        "body": "Show the state of the Left-Leaning Red-Black Tree and the corresponding 2-3 Tree after each of the following operations:\n\ninsert(3), insert(7), insert(2), insert(9), insert(0), insert(11), insert(1)\n",
+        "solution": "Solution:",
+        "answerChoices": []
+    },
+    "number": 2,
+    "disclaimer": null,
+    "examId": "b8acd269-d79d-46e1-9c10-71da9f4dfa49",
+    "courseId": "27c7ff3a-c08b-432e-ac8d-19aff935e0fb",
+    "parentId": null,
+    "flags": {
+        "published": true,
+        "disableRandomAnswers": false,
+        "answersStartHidden": false
+    },
+    "stats": {
+        "count": 1,
+        "timeSpent": "248576003",
+        "timeSpentVideo": "64856944",
+        "submissions": 843,
+        "submissionsCorrect": 447,
+        "accuracy": 0.5302491103202847,
+        "difficulty": 0.7229586426299046
+    },
+    "resources": [],
+    "exam": {
+        "id": "b8acd269-d79d-46e1-9c10-71da9f4dfa49",
+        "number": 2,
+        "year": 2022,
+        "season": "SPRING",
+        "disclaimer": "",
+        "courseId": "27c7ff3a-c08b-432e-ac8d-19aff935e0fb",
+        "flags": {
+            "published": true,
+            "practice": false
+        },
+        "stats": {
+            "count": 1,
+            "timeSpent": "1381515136",
+            "timeSpentVideo": "217893489",
+            "submissions": 10329,
+            "submissionsCorrect": 7651,
+            "questions": 17,
+            "accuracy": 0.7407299835414851,
+            "difficulty": 0.5115782913030972
+        }
+    },
+    "explanation": {
+        "id": "76a3cfb6-3eca-4ceb-8118-e53c944c07bd",
+        "body": null,
+        "questionId": "7fd058ac-8a9b-4488-9ced-7abb5400cd3a",
+        "resources": [
+            {
+                "id": "84965c1f-72c4-4b6d-9a20-e7d23477a3ce",
+                "type": "VIDEO",
+                "data": {
+                    "url": "https://youtu.be/4xCSOJgJ9V4?t=364"
+                },
+                "courseId": null,
+                "examId": null,
+                "questionId": null,
+                "explanationId": "76a3cfb6-3eca-4ceb-8118-e53c944c07bd",
+                "applicationId": null,
+                "answerChoiceId": null,
+                "customExamId": null
+            },
+            {
+                "id": "304a820b-e4a7-439f-abc2-90e387edf4a3",
+                "type": "IMAGE",
+                "data": {
+                    "key": "V06AzcVm5tc3qMt-hHhgY",
+                    "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/V06AzcVm5tc3qMt-hHhgY",
+                    "altText": "Image"
+                },
+                "courseId": null,
+                "examId": null,
+                "questionId": null,
+                "explanationId": "76a3cfb6-3eca-4ceb-8118-e53c944c07bd", // HERE!
+                "applicationId": null,
+                "answerChoiceId": null,
+                "customExamId": null
+            }
+        ]
+    },
+    "topics": [
+        {
+            "id": "d8a419a1-5a52-4c92-9c24-e962c5d8d2cb",
+            "name": "2-3 Trees",
+            "courseId": "27c7ff3a-c08b-432e-ac8d-19aff935e0fb",
+            "stats": {
+                "count": 1,
+                "timeSpent": "2875669198",
+                "timeSpentVideo": "220111037",
+                "submissions": 7724,
+                "submissionsCorrect": 4939,
+                "questions": 8,
+                "accuracy": 0.6394355256343863,
+                "difficulty": 0.6123466257668712
+            }
+        },
+        {
+            "id": "22a1c21a-6a23-4934-8f52-e34a5e95d768",
+            "name": "Binary Trees",
+            "courseId": "27c7ff3a-c08b-432e-ac8d-19aff935e0fb",
+            "stats": {
+                "count": 1,
+                "timeSpent": "1660364328",
+                "timeSpentVideo": "86462439",
+                "submissions": 3853,
+                "submissionsCorrect": 2715,
+                "questions": 4,
+                "accuracy": 0.7046457305995328,
+                "difficulty": 0.5505312420946117
+            }
+        },
+        {
+            "id": "17a3959f-bfec-46b4-b484-343beba28722",
+            "name": "Binary Search Trees",
+            "courseId": "27c7ff3a-c08b-432e-ac8d-19aff935e0fb",
+            "stats": {
+                "count": 1,
+                "timeSpent": "2145812569",
+                "timeSpentVideo": "103963401",
+                "submissions": 5743,
+                "submissionsCorrect": 4212,
+                "questions": 7,
+                "accuracy": 0.733414591676824,
+                "difficulty": 0.5205801814136574
+            }
+        }
+    ],
+    "children": []
+} 
+
+{
+    "id": "91839a1e-5f61-4ac7-a05f-75b97967004a",
+    "type": "MULTIPLE_CHOICE",
+    "data": {
+        "body": "The cart is negotiating a turn of radius R at a constant speed $v$. The boom B is being raised relative to the cart at a constant rate $\\omega$.\n\nFind simple expressions for the following:\n(a). The angular velocity  of the boom relative to the ground, $^f \\bar{\\omega}^B$ \n\n(b). The angular acceleration of  the boom relative to the ground $^f \\bar{\\alpha}^B$.",
+        "solution": [],
+        "answerChoices": []
+    },
+    "number": 1,
+    "disclaimer": null,
+    "examId": "a52e964d-fdf5-4bfe-828b-98eded588ff9",
+    "courseId": "917504b9-0d67-4558-af71-b5961ee7b962",
+    "parentId": null,
+    "flags": {
+        "published": true,
+        "disableRandomAnswers": true,
+        "answersStartHidden": true
+    },
+    "stats": {
+        "count": 1,
+        "timeSpent": "53054796",
+        "timeSpentVideo": "27002642",
+        "submissions": 168,
+        "submissionsCorrect": 0,
+        "accuracy": 0,
+        "difficulty": 1.0634328358208955
+    },
+    "resources": [
+        {
+            "id": "ba8785ef-1741-43eb-a321-f6b3d99cf33b",
+            "type": "IMAGE",
+            "data": {
+                "key": "lnSfi_KeeSb0RX8bpYGBZ",
+                "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/lnSfi_KeeSb0RX8bpYGBZ"
+            },
+            "courseId": null,
+            "examId": null,
+            "questionId": "91839a1e-5f61-4ac7-a05f-75b97967004a",
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+        }
+    ],
+    "exam": {
+        "id": "a52e964d-fdf5-4bfe-828b-98eded588ff9",
+        "number": 2,
+        "year": 2022,
+        "season": "SPRING",
+        "disclaimer": "",
+        "courseId": "917504b9-0d67-4558-af71-b5961ee7b962",
+        "flags": {
+            "published": true,
+            "practice": true
+        },
+        "stats": {
+            "count": 1,
+            "timeSpent": "124660788",
+            "timeSpentVideo": "45987444",
+            "submissions": 302,
+            "submissionsCorrect": 0,
+            "questions": 2,
+            "accuracy": 0,
+            "difficulty": 1.1256218905472637
+        }
+    },
+    "explanation": {
+        "id": "78fec6e4-1f7c-43e8-8f51-676acae91b63",
+        "body": null,
+        "questionId": "91839a1e-5f61-4ac7-a05f-75b97967004a",
+        "resources": [
+            {
+                "id": "1ec9e2c1-c162-4ba0-89aa-5de38271ad54",
+                "type": "VIDEO",
+                "data": {
+                    "url": "https://www.youtube.com/watch?v=kgI2LSynSmQ&t=3s"
+                },
+                "courseId": null,
+                "examId": null,
+                "questionId": null,
+                "explanationId": "78fec6e4-1f7c-43e8-8f51-676acae91b63",
+                "applicationId": null,
+                "answerChoiceId": null,
+                "customExamId": null
+            }
+        ]
+    },
+    "topics": [
+        {
+            "id": "08338f4a-373e-489b-96b1-7697285d7081",
+            "name": "Basic Kinematic Equation (BKE)",
+            "courseId": "917504b9-0d67-4558-af71-b5961ee7b962",
+            "stats": {
+                "count": 1,
+                "timeSpent": "2526051928",
+                "timeSpentVideo": "412894875",
+                "submissions": 1992,
+                "submissionsCorrect": 0,
+                "questions": 10,
+                "accuracy": 0,
+                "difficulty": 1.2260994263862333
+            }
+        },
+        {
+            "id": "5b610b76-81aa-4ce8-9725-bbe621a6b2d6",
+            "name": "Complex Rotations",
+            "courseId": "917504b9-0d67-4558-af71-b5961ee7b962",
+            "stats": {
+                "count": 1,
+                "timeSpent": "1460365724",
+                "timeSpentVideo": "221352319",
+                "submissions": 1003,
+                "submissionsCorrect": 0,
+                "questions": 6,
+                "accuracy": 0,
+                "difficulty": 1.2046690843155032
+            }
+        }
+    ],
+    "children": []
+}
+
+
+// cs251 multiple part question
+{
+    "id": "8eeec429-b7d4-4bce-931c-9aa52f6e7a13",
+    "type": "PARENT",
+    "data": {
+        "body": "Let $\\sum$={a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,_} where _ is the space character, and T=\"she sells sea shells\".\nAnswer the below questions:",
+        "numberingType": "NUMBER",
+        "answerChoices": []
+    },
+    "number": 6,
+    "disclaimer": null,
+    "examId": "9fb2b1d3-1dad-4417-adee-8d2f419e42e2",
+    "courseId": "27c7ff3a-c08b-432e-ac8d-19aff935e0fb",
+    "parentId": null,
+    "flags": {
+        "published": true,
+        "disableRandomAnswers": false,
+        "answersStartHidden": false
+    },
+    "stats": {
+        "count": 1,
+        "timeSpent": "185372297",
+        "timeSpentVideo": "28989642",
+        "submissions": 346,
+        "submissionsCorrect": 346,
+        "accuracy": 1,
+        "difficulty": 0.36210762331838564
+    },
+    "resources": [],
+    "exam": {
+        "id": "9fb2b1d3-1dad-4417-adee-8d2f419e42e2",
+        "number": 0,
+        "year": 2022,
+        "season": "SPRING",
+        "disclaimer": "",
+        "courseId": "27c7ff3a-c08b-432e-ac8d-19aff935e0fb",
+        "flags": {
+            "published": true,
+            "practice": false
+        },
+        "stats": {
+            "count": 1,
+            "timeSpent": "960000053",
+            "timeSpentVideo": "129719524",
+            "submissions": 2686,
+            "submissionsCorrect": 1932,
+            "questions": 11,
+            "accuracy": 0.7192851824274014,
+            "difficulty": 0.5385857860732233
+        }
+    },
+    "explanation": {
+        "id": "687cff99-a361-4951-80bd-735ec702e05f",
+        "body": null,
+        "questionId": "8eeec429-b7d4-4bce-931c-9aa52f6e7a13",
+        "resources": [
+            {
+                "id": "49f7e9d6-4534-4e96-a785-75ea0ae9e771",
+                "type": "VIDEO",
+                "data": {
+                    "url": "https://youtu.be/5uU8q5Ec3yU?t=3339"
+                },
+                "courseId": null,
+                "examId": null,
+                "questionId": null,
+                "explanationId": "687cff99-a361-4951-80bd-735ec702e05f",
+                "applicationId": null,
+                "answerChoiceId": null,
+                "customExamId": null
+            }
+        ]
+    },
+    "topics": [
+        {
+            "id": "65a081b7-89d4-4630-ade2-96c33da7604a",
+            "name": "Huffman Coding",
+            "courseId": "27c7ff3a-c08b-432e-ac8d-19aff935e0fb",
+            "stats": {
+                "count": 1,
+                "timeSpent": "411840131",
+                "timeSpentVideo": "28989642",
+                "submissions": 346,
+                "submissionsCorrect": 346,
+                "questions": 1,
+                "accuracy": 1,
+                "difficulty": 0.36210762331838564
+            }
+        }
+    ],
+    "children": [
+        {
+            "id": "c4cc7fe3-d92b-4b12-9529-22375e307c79",
+            "type": "FREE_RESPONSE",
+            "data": {
+                "body": "Build a Huffman Coding tree for T (Don't forget the space character!). Show the frequency table, the coding tree, and the table with the codewords for the characters in T.\nNote that if there is a tie in the min-heap, follow the below directions:\n1. If at least one of the nodes in the min-heap has a character, return the tied node with the first character according to $\\sum$\n2. Else, return the tied senior node (i.e. the tied node that has been in the heap the longest)",
+                "solution": "",
+                "answerChoices": []
+            },
+            "number": 1,
+            "disclaimer": null,
+            "examId": "9fb2b1d3-1dad-4417-adee-8d2f419e42e2",
+            "courseId": "27c7ff3a-c08b-432e-ac8d-19aff935e0fb",
+            "parentId": "8eeec429-b7d4-4bce-931c-9aa52f6e7a13",
+            "flags": {
+                "published": true,
+                "disableRandomAnswers": false,
+                "answersStartHidden": false
+            },
+            "stats": {
+                "count": 0,
+                "timeSpent": "0",
+                "timeSpentVideo": "0",
+                "submissions": 0,
+                "submissionsCorrect": 0,
+                "accuracy": 0,
+                "difficulty": 0.75
+            },
+            "resources": [],
+            "exam": {
+                "id": "9fb2b1d3-1dad-4417-adee-8d2f419e42e2",
+                "number": 0,
+                "year": 2022,
+                "season": "SPRING",
+                "disclaimer": "",
+                "courseId": "27c7ff3a-c08b-432e-ac8d-19aff935e0fb",
+                "flags": {
+                    "published": true,
+                    "practice": false
+                },
+                "stats": {
+                    "count": 1,
+                    "timeSpent": "960000053",
+                    "timeSpentVideo": "129719524",
+                    "submissions": 2686,
+                    "submissionsCorrect": 1932,
+                    "questions": 11,
+                    "accuracy": 0.7192851824274014,
+                    "difficulty": 0.5385857860732233
+                }
+            },
+            "explanation": {
+                "id": "b7e7b8b3-41d4-4b46-a4a8-0892ffd5d3b0",
+                "body": null,
+                "questionId": "c4cc7fe3-d92b-4b12-9529-22375e307c79",
+                "resources": [
+                    {
+                        "id": "e8159506-f5b9-4bd1-a7cd-e730fb9788a9",
+                        "type": "IMAGE",
+                        "data": {
+                            "key": "vZk22uFkxIpVbXt84tnUc",
+                            "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/vZk22uFkxIpVbXt84tnUc"
+                        },
+                        "courseId": null,
+                        "examId": null,
+                        "questionId": null,
+                        "explanationId": "b7e7b8b3-41d4-4b46-a4a8-0892ffd5d3b0",
+                        "applicationId": null,
+                        "answerChoiceId": null,
+                        "customExamId": null
+                    }
+                ]
+            },
+            "topics": []
+        },
+        {
+            "id": "55444626-2a7d-415c-a904-b5bfaa5e2e7d",
+            "type": "FREE_RESPONSE",
+            "data": {
+                "body": "Encode the words:\n1) \"seal\"\n2) \"heal\"\n3) \"sell\"",
+                "solution": "1) 1000111001\n2) 111100111001\n3) 10000101",
+                "answerChoices": []
+            },
+            "number": 2,
+            "disclaimer": null,
+            "examId": "9fb2b1d3-1dad-4417-adee-8d2f419e42e2",
+            "courseId": "27c7ff3a-c08b-432e-ac8d-19aff935e0fb",
+            "parentId": "8eeec429-b7d4-4bce-931c-9aa52f6e7a13",
+            "flags": {
+                "published": true,
+                "disableRandomAnswers": false,
+                "answersStartHidden": false
+            },
+            "stats": {
+                "count": 0,
+                "timeSpent": "0",
+                "timeSpentVideo": "0",
+                "submissions": 0,
+                "submissionsCorrect": 0,
+                "accuracy": 0,
+                "difficulty": 0.75
+            },
+            "resources": [],
+            "exam": {
+                "id": "9fb2b1d3-1dad-4417-adee-8d2f419e42e2",
+                "number": 0,
+                "year": 2022,
+                "season": "SPRING",
+                "disclaimer": "",
+                "courseId": "27c7ff3a-c08b-432e-ac8d-19aff935e0fb",
+                "flags": {
+                    "published": true,
+                    "practice": false
+                },
+                "stats": {
+                    "count": 1,
+                    "timeSpent": "960000053",
+                    "timeSpentVideo": "129719524",
+                    "submissions": 2686,
+                    "submissionsCorrect": 1932,
+                    "questions": 11,
+                    "accuracy": 0.7192851824274014,
+                    "difficulty": 0.5385857860732233
+                }
+            },
+            "explanation": {
+                "id": "bb1db154-aa68-4cf4-a213-081f72c20507",
+                "body": null,
+                "questionId": "55444626-2a7d-415c-a904-b5bfaa5e2e7d",
+                "resources": []
+            },
+            "topics": []
+        },
+        {
+            "id": "b4e98125-5283-44e1-af86-f4967d858c34",
+            "type": "FREE_RESPONSE",
+            "data": {
+                "body": "Decode the codewords:\n1) 101111000101\n2) 1011100100\n3) 1000001100011100110",
+                "solution": "1) shell\n2) sale\n3) see eals",
+                "answerChoices": []
+            },
+            "number": 3,
+            "disclaimer": null,
+            "examId": "9fb2b1d3-1dad-4417-adee-8d2f419e42e2",
+            "courseId": "27c7ff3a-c08b-432e-ac8d-19aff935e0fb",
+            "parentId": "8eeec429-b7d4-4bce-931c-9aa52f6e7a13",
+            "flags": {
+                "published": true,
+                "disableRandomAnswers": false,
+                "answersStartHidden": false
+            },
+            "stats": {
+                "count": 0,
+                "timeSpent": "0",
+                "timeSpentVideo": "0",
+                "submissions": 0,
+                "submissionsCorrect": 0,
+                "accuracy": 0,
+                "difficulty": 0.75
+            },
+            "resources": [],
+            "exam": {
+                "id": "9fb2b1d3-1dad-4417-adee-8d2f419e42e2",
+                "number": 0,
+                "year": 2022,
+                "season": "SPRING",
+                "disclaimer": "",
+                "courseId": "27c7ff3a-c08b-432e-ac8d-19aff935e0fb",
+                "flags": {
+                    "published": true,
+                    "practice": false
+                },
+                "stats": {
+                    "count": 1,
+                    "timeSpent": "960000053",
+                    "timeSpentVideo": "129719524",
+                    "submissions": 2686,
+                    "submissionsCorrect": 1932,
+                    "questions": 11,
+                    "accuracy": 0.7192851824274014,
+                    "difficulty": 0.5385857860732233
+                }
+            },
+            "explanation": {
+                "id": "7e67a46d-01dc-4746-ac18-58cf7f016437",
+                "body": null,
+                "questionId": "b4e98125-5283-44e1-af86-f4967d858c34",
+                "resources": []
+            },
+            "topics": []
+        }
+    ]
+}

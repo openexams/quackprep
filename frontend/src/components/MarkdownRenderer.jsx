@@ -27,7 +27,9 @@ export default function MarkdownRenderer({ render, components = {}, allowLinks =
 
   const processedRender = render
     .replace(/\\\[/g, '$$') // Replace \[ with $$ TMP FIX
-    .replace(/\\\]/g, '$$'); // Replace \] with $$ TMP FIX
+    .replace(/\\\]/g, '$$')
+    .replaceAll('$', '$$')
+    .replaceAll('\\\\', '\\'); // Replace \] with $$ TMP FIX
 
   if (
     !processedRender?.includes('$') &&

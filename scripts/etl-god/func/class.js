@@ -30,8 +30,8 @@ function subjectToCategoryNumber(subject) {
 
 /**
  * @param {Object} options
- * @param {string} options.subject get all classes for this subject TODO
- * @param {string} options.courseName get class by course name TODO
+ * @param {string} options.subject get all classes for this subject
+ * @param {string} options.courseName get class by course name
  * @returns {import("../types.js").JSONClass[]}
  */
 export async function getBoilerClassAndParseToJsonClass(options) {
@@ -40,13 +40,28 @@ export async function getBoilerClassAndParseToJsonClass(options) {
   const JSON = [];
   for (let i = 0; i < validated.length; i++) {
     // go through subjects
+    if (
+      options &&
+      options.subject &&
+      validated[i].subject !== options.subject
+    ) {
+      continue;
+    }
     for (let j = 0; j < validated[i].courses.length; j++) {
-      dlog("curCourseId", validated[i].courses[j].id);
-      // go through courses in that subject
       const curCourse = validated[i].courses[j];
+      if (
+        options &&
+        options.courseName &&
+        curCourse.abbreviation + curCourse.number !== options.courseName
+      ) {
+        continue;
+      }
+      console.log("curCourseId", curCourse.id);
+      // go through courses in that subject
       const name = curCourse.abbreviation + curCourse.number;
       const description = curCourse.name;
       const category = subjectToCategoryNumber(validated[i].subject);
+
       const school_id = 1;
       const questionCount = curCourse.stats.questions;
       JSON.push({
