@@ -50,7 +50,7 @@ export async function postQuestionSubmissionToBoilerExams(
 /**
  * TODO FINISH!!
  * @param {String[]} boilerQuestionIds
- * @returns {import("../types").JSONQuestion} questions with choices included.
+ * @returns {import("../../types.js").JSONQuestion} questions with choices included.
  */
 export async function boilerQuestionsToJsonQuestions(boilerQuestionIds) {
   const questions = [];

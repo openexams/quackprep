@@ -5,10 +5,10 @@ import { BoilerExamSchema, JSONGroupSchema } from "../schema/schema.js";
 /**
  * Fetches and processes exam data from a JSON class to generate grouped question information.
  *
- * @param {import("../types").JSONClass} jsonClass - The JSON class object containing course information to fetch exams for.
+ * @param {import("../../types.js").JSONClass} jsonClass - The JSON class object containing course information to fetch exams for.
  * @param {Object} options
  * @param {Boolean} options.downloadPDFS
- * @returns {Promise<{groupJson: import("../types").JSONGroup[], boilerQuestionIds: string[][]}>} A Promise that resolves to an object containing:
+ * @returns {Promise<{groupJson: import("../../types.js").JSONGroup[], boilerQuestionIds: string[][]}>} A Promise that resolves to an object containing:
  * - `groupJson`: Array of validated exam groups formatted according to JSONGroupSchema
  * - `boilerQuestionIds`: 2D array containing question IDs grouped by exam
  *
@@ -59,9 +59,18 @@ export async function getJsonGroupsFromJsonClass(jsonClass, options) {
     });
     if (curPDFLink && options && options.downloadPDFS) {
       const result = await axios.get(curPDFLink, { responseType: "stream" });
+      const contentType = result.headers["content-type"];
+      const mimeTypes = {
+        "application/pdf": "pdf",
+        "image/jpeg": "jpg",
+        "image/png": "png",
+      }; // in reality dont need to check this
       await writeToFile(
+        // result.data is a stream.
         result.data,
-        `pdf/${jsonClass.name}_${groupsJson[i].name.replaceAll(" ", "")}.pdf`
+        `pdf/${jsonClass.name}_${groupsJson[i].name.replaceAll(" ", "")}.${
+          mimeTypes[contentType] || "unknown"
+        }`
       );
     }
   }
@@ -70,4 +79,3 @@ export async function getJsonGroupsFromJsonClass(jsonClass, options) {
     boilerQuestionIds: questionIdsInExams,
   };
 }
-await getJsonGroupsFromJsonClass({ name: "CS25100" }, { downloadPDFS: true });

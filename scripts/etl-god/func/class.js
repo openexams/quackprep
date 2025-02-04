@@ -32,7 +32,7 @@ function subjectToCategoryNumber(subject) {
  * @param {Object} options
  * @param {string} options.subject get all classes for this subject
  * @param {string} options.courseName get class by course name
- * @returns {import("../types.js").JSONClass[]}
+ * @returns {import("../../types.js").JSONClass[]}
  */
 export async function getBoilerClassAndParseToJsonClass(options) {
   const result = await fetchWithExponetialBackoff("/courses/subjects");
