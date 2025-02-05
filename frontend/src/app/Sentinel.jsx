@@ -51,7 +51,7 @@ export default function Sentinel() {
   useEffect(() => {
     const urlArr = getFixedUrlArr(location.pathname);
     if (urlArr[1] === 'blog' && urlArr[2]) {
-      document.title = Blog.getBlogFromLinkAndArray(blogs, urlArr[2]).getTitle();
+      document.title = Blog.getBlogFromLink(blogs, urlArr[2])?.getTitle() || '404 Blog - Quackprep';
     } else if (schoolName) {
       document.title = schoolName + ' - ' + 'Quackprep';
     } else if (urlArr[1]) {

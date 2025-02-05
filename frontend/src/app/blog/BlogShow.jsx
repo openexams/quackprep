@@ -1,4 +1,3 @@
-import React from 'react';
 import { useParams } from 'react-router-dom';
 import { blogs } from './blogs';
 import Blog from './Blog'; // Import the Blog class
@@ -6,11 +5,11 @@ import { Segment, Header, Container, Grid, Image, Divider, Icon } from 'semantic
 
 export default function BlogShow() {
   const { blog_link } = useParams();
-  const blog = Blog.getBlogFromLinkAndArray(blogs, blog_link);
+  const blog = Blog.getBlogFromLink(blogs, blog_link);
 
   if (!blog) {
     return (
-      <Container textAlign='center' style={{ marginTop: '2em' }}>
+      <Container textAlign='center' style={{ marginTop: '2em', minHeight: '60vh' }}>
         <Header as='h2' icon>
           <Icon name='frown outline' />
           404 - Blog Not Found

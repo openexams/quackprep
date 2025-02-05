@@ -12,11 +12,11 @@ export default function BlogMain() {
         Helpful Articles
       </Header>
 
-      <Grid columns={3} stackable centered>
-        <Grid.Row>
-          {blogs.map((blog) => (
+      <Grid columns={2} stackable centered>
+        {blogs.map((blog) => (
+          <Grid.Column style={{ maxWidth: '25em', maxHeight: '25em' }} key={blog.getLink()}>
             <Card
-              style={{ width: '25rem' }}
+              style={{ width: '25em', height: '25em' }}
               as='a'
               onClick={() => changeNavbarPage(navigate, `/blog/${blog.getLink()}`, { scrollToTop: true })}
               size='small'
@@ -26,17 +26,17 @@ export default function BlogMain() {
               <Image src={blog.getIcon()} fluid />
 
               {/* Publication Date */}
-              <p style={{ marginTop: '1em', color: 'grey', fontSize: '0.9em' }}>
+              <p style={{ marginTop: '1em', color: 'grey', fontSize: '0.9em', padding: '0em .5em' }}>
                 Published On: {blog.getPubDate().toLocaleDateString()}
               </p>
 
               {/* Blog Title */}
-              <Header as='h2' style={{ marginBottom: '0.5em', marginTop: '-.5em' }}>
+              <Header as='h2' style={{ marginBottom: '0.5em', marginTop: '-.5em', padding: '0em .5em' }}>
                 {blog.getTitle()}
               </Header>
             </Card>
-          ))}
-        </Grid.Row>
+          </Grid.Column>
+        ))}
       </Grid>
     </Segment>
   );

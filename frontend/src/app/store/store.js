@@ -36,10 +36,9 @@ const app = combineReducers({
   favorites: favoriteReducer,
 });
 const auth = combineReducers({ user: loginReducer });
-
 const store = configureStore({
   reducer: { flashMessage: flashReducer, show401: reducer401, loading: loadingReducer, app, auth },
-  devTools: import.meta.env.MODE === 'developement' ? true : false, // Disable in production
+  devTools: import.meta.env.MODE === 'development' ? true : false, // Disable in production
 });
 
 // if (import.meta.env.MODE === 'development') {

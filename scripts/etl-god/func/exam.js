@@ -72,7 +72,7 @@ export async function getJsonGroupsFromJsonClass(jsonClass, options) {
       await writeToFile(
         // result.data is a stream.
         result.data,
-        `pdf/${jsonClass.name}_${groupsJson[i].name.replaceAll(" ", "")}.${
+        `pdf/${jsonClass.name}-${groupsJson[i].name.replaceAll(" ", "")}.${
           mimeTypes[contentType] || "unknown"
         }`
       );

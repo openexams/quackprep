@@ -69,13 +69,13 @@ export default class Blog {
    * @param {String} link
    * @returns {Blog}
    */
-  static getBlogFromLinkAndArray(blogs, link) {
-    let title = link.replaceAll('-', ' ');
-    title = upperCaseAllLettersAfterASpace(title);
+  static getBlogFromLink(blogs, link) {
+    const title = link.replaceAll('-', ' ');
     for (let i = 0; i < blogs.length; i++) {
-      if (blogs[i].getTitle() === title) {
+      if (blogs[i].getTitle().toLowerCase() === title.toLowerCase()) {
         return blogs[i];
       }
     }
+    return null;
   }
 }
