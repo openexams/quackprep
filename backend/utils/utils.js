@@ -12,3 +12,7 @@ global.dlog = function (message, ...params) {
     console.log(message, ...params);
   }
 };
+
+export function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}

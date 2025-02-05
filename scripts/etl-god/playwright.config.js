@@ -1,7 +1,7 @@
 import { defineConfig } from "playwright/test";
 
 export default defineConfig({
-  name: "quackprep-tests",
+  name: "etl-god-tests",
   testDir: "./tests/",
   outputDir: "test-results/",
 });
