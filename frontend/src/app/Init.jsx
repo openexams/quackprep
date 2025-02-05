@@ -20,7 +20,7 @@ export default function Init() {
     dispatch(changeNavbarPage(navigate, curPage));
     dispatch(getClassCategories());
     dispatch(getSchools());
-    dispatch(getAnnouncement());
+    // dispatch(getAnnouncement());
   }, []);
 
   useEffect(() => {
