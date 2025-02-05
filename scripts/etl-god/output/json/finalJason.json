@@ -1,0 +1,3627 @@
+[
+  {
+    "name": "ECON25200",
+    "description": "Macroeconomics",
+    "category": "ECO",
+    "questionCount": 130,
+    "groups": [
+      {
+        "name": "Final Exam - SPRING 2023",
+        "type": "exam",
+        "desc": "A ECON25200 Exam",
+        "questions": [
+          {
+            "question": "Which of the following statements is true?",
+            "explanation_url": null,
+            "topics": [],
+            "choices": [
+              {
+                "answer": "One of the limitations of using money is that it does not allow for the transfer of purchasing power into the future.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "When money is used as a yardstick to describe the price of various goods and services, it serves as a store of value.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "The necessary condition required for money to function as a medium of exchange is that it also needs to be a store of value.",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "The hours of labor that go into producing a product are a better unit of account than paper money.",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": " If the growth rate of nominal GDP and the rate of inflation in an economy are 4% and 1% respectively, the growth rate of real GDP in the economy must be:",
+            "explanation_url": null,
+            "topics": [],
+            "choices": [
+              {
+                "answer": "$4 \\%$.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "$1 \\%$.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "$5 \\%$.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "$3 \\%$.",
+                "is_correct": 1,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "The quantity theory of money implies that:",
+            "explanation_url": null,
+            "topics": [],
+            "choices": [
+              {
+                "answer": "inflation is equal to the gap between the growth rate of money supply and the current real interest rates.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "inflation is equal to the gap between the growth rate of money supply and the current nominal interest rates.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "inflation is equal to the gap between the growth rate of money supply and the growth rate of real GDP.",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "inflation is equal to the gap between the growth rate of money supply and the growth rate of nominal GDP.",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Assuming all else equal, inflation can:",
+            "explanation_url": null,
+            "topics": [],
+            "choices": [
+              {
+                "answer": "reduce the real interest rate, and increase the real wage rate.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "increase both the real interest rate and the real wage rate.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "reduce both the real interest rate and the real wage rate.",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "increase the real interest rate, and reduce the real wage rate.",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Which of the following is likely to happen when the Fed lowers the federal funds rate?",
+            "explanation_url": null,
+            "topics": [],
+            "choices": [
+              {
+                "answer": "The long-run interest rate will increase.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "The volume of economic activity will decrease.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "The labor demand curve shifts to the left.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "The labor demand curve shifts to the right.",
+                "is_correct": 1,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Assuming all else equal, if there is a contraction in the quantity of bank account balances, it will cause:",
+            "explanation_url": null,
+            "topics": [],
+            "choices": [
+              {
+                "answer": "a downward movement along the demand curve for reserves.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "a rightward shift in the demand curve for reserves.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "a leftward shift in the demand curve for reserves.",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "an upward movement along the demand curve for reserves.",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "If the Fed purchases government bonds in the open market, it will cause:",
+            "explanation_url": null,
+            "topics": [],
+            "choices": [
+              {
+                "answer": "a shift of the supply curve for reserves to the left.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "an upward movement along the supply curve for reserves.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "a downward movement along the supply curve for reserves.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "a shift of the supply curve for reserves to the right.",
+                "is_correct": 1,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "If there is a change in the federal funds rate from a target rate due to an increase in the demand for reserves, the Fed can maintain the target by:",
+            "explanation_url": null,
+            "topics": [],
+            "choices": [
+              {
+                "answer": "causing the supply curve of reserves to shift to the left.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "causing the supply curve of reserves to shift to the right.",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "causing an upward movement along the supply of reserves curve.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "causing a downward movement along the supply of reserves curve.",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "If the realized real interest rate in an economy is $6 \\%$, the realized inflation rate is $8 \\%$, and the expected inflation rate is $8 \\%$, then the nominal interest rate in the economy is:",
+            "explanation_url": null,
+            "topics": [],
+            "choices": [
+              {
+                "answer": "$20 \\%$.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "$2 \\%$.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "$8 \\%$.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "$14 \\%$.",
+                "is_correct": 1,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "If there are no changes in inflation expectations, a purchase of government bonds by the Fed in the open market will cause ______.",
+            "explanation_url": null,
+            "topics": [],
+            "choices": [
+              {
+                "answer": "the federal funds rate to fall and the long-run expected real interest rate to rise",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "both the federal funds rate and long-run expected real interest rate to fall",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "the federal funds rate to rise and the long-run expected real interest rate to fall",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "both the federal funds rate and long-run expected real interest rate to rise",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "The following figure shows the labor demand curve, LD2 and labor supply curve, LS1. at the trough of a recession. Six months later, the labor demand curve partially recovers and shifts to LD1\n\nRefer to the figure below. Everything else remaining unchanged, if the wage is currently rigidly  fixed at $60, what will the change in employment be when the demand curve shifts to LD1? ![](https://boilerexams-production.s3.us-east-2.amazonaws.com/SqF3tSK-KlD_WUL-Dlgyo)",
+            "explanation_url": null,
+            "topics": [],
+            "choices": [
+              {
+                "answer": "$10$",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "$20$",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "$30$",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "$40$",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Which of the following is not a property of economic fluctuations?",
+            "explanation_url": null,
+            "topics": [],
+            "choices": [
+              {
+                "answer": "Co-movement of many aggregate macroeconomic variables",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Regularity of flutuations",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "Persistence in the rate of economic growth",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Limited predictability of fluctuations",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "The marginal product of a country's workers falls during winters due to excessive cold. Which of the following is likely to happen in this case, assuming all else equal?",
+            "explanation_url": null,
+            "topics": [],
+            "choices": [
+              {
+                "answer": "There will be an upward movement along the labor demand curve.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "There will be a downward movement along the labor demand curve.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "The country's labor demand curve will shift to the left in winter.",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "The country's labor demand curve will shift to the right in winter.",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "The ________ in employment during a recession is smaller if wages are ________.",
+            "explanation_url": null,
+            "topics": [],
+            "choices": [
+              {
+                "answer": "increase; rigid",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "decline; rigid",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "decline; flexible",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "increase; flexible",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "The diagram below shows the labor demand and labor supply curves for an economy.\n\nRefer to the figure below. The labor market is currently at point E. Which of the following is likely to happen if a recession hits the economy assuming that wages are downward rigid? ![](https://boilerexams-production.s3.us-east-2.amazonaws.com/M8IgyHr4iCki23QAFVGyL)",
+            "explanation_url": null,
+            "topics": [],
+            "choices": [
+              {
+                "answer": "The labor market equilibrium will move from $\\mathrm{E}$ to $\\mathrm{D}$.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "The labor market equilibrium will move from $\\mathrm{E}$ to $\\mathrm{F}$.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "The labor market equilibrium will move from $\\mathrm{E}$ to $\\mathrm{G}$.",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "The labor market equilibrium will move from $\\mathrm{E}$ to $\\mathrm{H}$.",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "________ emphasize(s) that changing productivity and technology are the main reasons behind fluctuations in the economy.",
+            "explanation_url": null,
+            "topics": [],
+            "choices": [
+              {
+                "answer": "The real business cycle theory",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "Keynesian theory",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Ricardian theory",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Monetary and Financial theory",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Agraria specializes in the production of cotton. However, cotton manufacturers in Agraria are expecting the demand for its exports to fall sharply due to growing competition from a neighboring country. Assuming all else equal, which of the following is likely to happen in this case?",
+            "explanation_url": null,
+            "topics": [],
+            "choices": [
+              {
+                "answer": "Investment expenditure in Agraria will rise.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Consumption expenditure in Agraria will fall.",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "The equilibrium unemployment in Agraria will fall.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "The equilibrium real wage in Agraria will rise.",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Why did many banks fail in the U.S. during 2007-2009?",
+            "explanation_url": null,
+            "topics": [],
+            "choices": [
+              {
+                "answer": "Fall in housing prices",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Many people stopped paying their motgages",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Many mortgages vastly exeeded the value of the homes",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "all of the above",
+                "is_correct": 1,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "A decrease in money supply will lead to ________ if nominal wages are fixed",
+            "explanation_url": null,
+            "topics": [],
+            "choices": [
+              {
+                "answer": "higher output",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "lower unemployment",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "lower real wages",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "higher real wages",
+                "is_correct": 1,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "A decline in money supply will lead to a(n) ________ if nominal wages are rigid.",
+            "explanation_url": null,
+            "topics": [],
+            "choices": [
+              {
+                "answer": "increase in labor demand",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "fall in real wages",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "increase in real output",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "fall in labor demand",
+                "is_correct": 1,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": " Identify the correct statement.",
+            "explanation_url": null,
+            "topics": [],
+            "choices": [
+              {
+                "answer": "Countercyclical monetary policy stimulates the economy during a recession by shifting the labor demand curve to the left.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Countercyclical fiscal policy stimulates the economy during a recession by shifting the labor demand curve to the left.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Countercyclical monetary policy slows down the growth rate of an economy during an expansion by shifting the labor demand curve to the right.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Countercyclical fiscal policy stimulates the economy during a recession by shifting the labor demand curve to the right.",
+                "is_correct": 1,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Why would policymakers target a reduction in GDP growth by using contractionary policies?\n\ni) The Fed fights inflation by increasing interest rates, which in turn causes a reduction in employment as a by-product.\n\nii) Excessive optimistic sentiments about the economy can result in an unsustainable economic expansion.",
+            "explanation_url": null,
+            "topics": [],
+            "choices": [
+              {
+                "answer": "i) is true and ii) is false",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "i) and ii) are both false",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "i) and ii) are both true",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "i) is false and ii) is true",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "If the long-run real interest rate falls, ________.",
+            "explanation_url": null,
+            "topics": [],
+            "choices": [
+              {
+                "answer": "the demand for loans decreases",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "investment by firms decreases",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "investment by firms increases",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "unemployment increases",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "________ occurs when the Fed creates a large amount of reserves to buy long-term bonds from banks.",
+            "explanation_url": null,
+            "topics": [],
+            "choices": [
+              {
+                "answer": "Monetary neutrality",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Quantitative easing",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "Budgetary surplus",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Money illusion",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "According to the Taylor Rule, for a given inflation rate, ________.",
+            "explanation_url": null,
+            "topics": [],
+            "choices": [
+              {
+                "answer": "every percentage point increase in the nominal interest rate increases the federal funds rate by half a percentage point",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "every percentage point increase in the inflation rate increases the federal funds rate by $1.5$ percentage points",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "every percentage point increase in the nominal interest rate decreases the federal funds rate by half a percentage point",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "every percentage point increase in the inflation rate decreases the federal funds rate by 1.5 percentage points",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Suppose the inflation rate target is $2 \\%$ and the long run federal funds target is $3.5 \\%$ Using the  Taylor rule, calculate the federal funds rate if the current inflation rate is $5 \\%$ and real output is $6 \\%$ below trend output.",
+            "explanation_url": null,
+            "topics": [],
+            "choices": [
+              {
+                "answer": "$11.0 \\%$",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "$3.5 \\%$",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "$5.0 \\%$",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "$4.5 \\%$",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Which of the following is an example of an automatic stabilizer during a recession?",
+            "explanation_url": null,
+            "topics": [],
+            "choices": [
+              {
+                "answer": "An increase in interest rates due to a decrease in investment",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "An increase in government expenditure in unemployment benefits",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "A decrease in inflation due to an increase in consumption",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "An decrease in money supply due to a decrease in bank deposits",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Which of the following is an example of a expansionary fiscal policy during a recession?",
+            "explanation_url": null,
+            "topics": [],
+            "choices": [
+              {
+                "answer": "A reduction in public assistance programs",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "A decrease in money supply to lower the federal funds rate",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "An increase in tax rates to increase revenue",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "A temporary tax cut to boost consumption",
+                "is_correct": 1,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Which of the following is likely to be true when the economy is in a boom?",
+            "explanation_url": null,
+            "topics": [],
+            "choices": [
+              {
+                "answer": "The unemployment rate is high.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "The size of government expenditure multiplier is large.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "The inflation rate is negative.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "The size of government expenditure multiplier is small.",
+                "is_correct": 1,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "If the value of a government-taxation multiplier is 1.8, which of the following is likely to be true if  all other variables remain unchanged?",
+            "explanation_url": null,
+            "topics": [],
+            "choices": [
+              {
+                "answer": "A $\\$ 1$ reduction in taxation increases gross domestic product by $\\$ 1.80$.",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "A $\\$ 1$ increase in taxation increases gross domestic product by $\\$ 1.80$.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "A $\\$ 1.80$ reduction in taxation increases gross domestic product by $\\$ 1.80$.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "A $\\$ 1.80$ increase in taxation increases gross domestic product by $\\$ 1.80$.",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Consider two economies, Beta and Zeta. Each farmer in Beta can grow 1,000 pounds of apples in a year or 500 pounds of oranges. Each farmer in Zeta can grow 400 pounds of apples or 1,200 pounds of oranges in a year.\n \nRefer to the scenario above. Which of the following statements is true?",
+            "explanation_url": null,
+            "topics": [],
+            "choices": [
+              {
+                "answer": "Zeta has absolute advantage in producing apples.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Beta has a comparative advantage in producing apples.",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "Beta has a comparative advantage in producing oranges.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Zeta has an comparative advantage in producing apples.",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Consider two economies, Beta and Zeta. Each farmer in Beta can grow 1,000 pounds of apples in a year or 500 pounds of oranges. Each farmer in Zeta can grow 400 pounds of apples or 1,200 pounds of oranges in a year.\n \nRefer to the scenario above. Which of the following statements is true?",
+            "explanation_url": null,
+            "topics": [],
+            "choices": [
+              {
+                "answer": "Beta has a comparative advantage in producing oranges.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Zeta has an comparative advantage in producing apples.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Zeta has absolute advantage in producing oranges.",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "Beta has an absolute advantage in producing oranges.",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Consider two economies, Beta and Zeta. Each farmer in Beta can grow 1,000 pounds of apples in a year or 500 pounds of oranges. Each farmer in Zeta can grow 400 pounds of apples or 1,200 pounds of oranges in a year.\n\nRefer to the scenario above. Which of the following statements is true?",
+            "explanation_url": null,
+            "topics": [],
+            "choices": [
+              {
+                "answer": "Zeta has an absolute advantage in producing both oranges and apples.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Beta and Zeta will suffer losses if they engage in foreign trade.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Beta has a comparative advantage in producing both oranges and apples.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Zeta should specialize in producing oranges and Beta should specialize in producing apples.",
+                "is_correct": 1,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Industria is predominantly a producer and exporter of manufactured goods. However, it imports several agricultural products.\n\nRefer to the scenario above. Recently, the government has imposed a tariff on the import of some cash crops. Which of the following is likely to happen in this case?",
+            "explanation_url": null,
+            "topics": [],
+            "choices": [
+              {
+                "answer": "The volume of imports is likely to increase.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "The domestic consumers of these crops will be better off.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "The domestic producers of these crops will be better off.",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "The government's revenue is expected to fall.",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Lawland imports cell phones worth 1,000 billion, and exports coffee worth $820 billion in a year.\n\nRefer to the scenario above. If Lawland's net factor payments from abroad equals zero and net transfer payments from abroad is negative,",
+            "explanation_url": null,
+            "topics": [],
+            "choices": [
+              {
+                "answer": "Lawland is likely to experience a current account deficit",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "Lawland is likely to experience a current account surplus",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Lawland is likely to stop trading with its trading partners",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Lawland is likely to experience a net inflow of assets",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "There are two countries - Earthland and Plutoland - who trade only with each other. Residents in Earthland purchased buildings worth $10 billion in Plutoland during a certain year. None of the other transactions between the two countries during that year involved purchase or sale of assets.\n\nRefer to the scenario above. Earthland's financial account would report a balance of for the year.",
+            "explanation_url": null,
+            "topics": [],
+            "choices": [
+              {
+                "answer": "$-\\$ 10$ billion",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "$\\$ 10$ billion",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "$\\$ 4$ billion",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "-6 billion",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "The table below shows the payments received from foreigners by the residents of Laborland and the payments made to foreigners by Laborland's residents during a certain year.\n\n\nRefer to the table below. Laborland's net exports equal ______. ![](https://boilerexams-production.s3.us-east-2.amazonaws.com/9PyTrCSW0-8ZZpNrqqTk4)",
+            "explanation_url": null,
+            "topics": [],
+            "choices": [
+              {
+                "answer": "$-\\$ 20$ billion",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "$\\$ 25$ billion",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "$\\$ 18$ billion",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "$-\\$ 18$ billion",
+                "is_correct": 1,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Refer to the table below. Laborland's net factor payments from abroad equal ______. ![](https://boilerexams-production.s3.us-east-2.amazonaws.com/Z9MFvhT0Wb8KWA0TKCfFn)",
+            "explanation_url": null,
+            "topics": [],
+            "choices": [
+              {
+                "answer": "$-\\$ 20$ billion",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "$\\$ 25$ billion",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "$-\\$ 18$ billion",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "$\\$ 20$ billion",
+                "is_correct": 1,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Refer to the table below. Laborland's current account balance equals ________. ![](https://boilerexams-production.s3.us-east-2.amazonaws.com/50lX-6_rsUWeV8L8_leyv)",
+            "explanation_url": null,
+            "topics": [],
+            "choices": [
+              {
+                "answer": "$-\\$ 61$ billion",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "$-\\$ 23$ billion",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "$\\$ 23$ billion",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "$\\$ 20$ billion",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Refer to the table below. Which of the following is likely to be true in this case? ![](https://boilerexams-production.s3.us-east-2.amazonaws.com/hZgounLiWmNBkUMkpHizE)",
+            "explanation_url": null,
+            "topics": [],
+            "choices": [
+              {
+                "answer": "There will be a deficit in laborland's financial account.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Laborland's economy will go into a recession.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Laborland's terms of trade will improve.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "There will be a surplus in Laborland's financial account.",
+                "is_correct": 1,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Everything else equal, an appreciation of the dollar against the yuan:",
+            "explanation_url": null,
+            "topics": [],
+            "choices": [
+              {
+                "answer": "will lead to a decrease in the quantity of dollars demanded.",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "will lead to an increase in the quantity of dollars demanded.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "will lead to a decrease in the quantity of dollars supplied.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "can either lead to an increase or a decrease in the quantity of dollars demanded depending on the magnitude of the appreciation.",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Everything else equal, a shift to the left of the demand curve for dollars in exchange for the pesos:",
+            "explanation_url": null,
+            "topics": [],
+            "choices": [
+              {
+                "answer": "will cause the dollars to appreciate against the pesos and will decrease the quantity of dollars being traded in the foreign exchange market.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "will cause the dollars to appreciate against the pesos and will increase the quantity of dollars being traded in the foreign exchange market.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "will cause the dollars to depreciate against the pesos and will decrease the quantity of dollars being traded in the foreign exchange market.",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "will cause the dollars to depreciate against the pesos and will increase the quantity of dollars being traded in the foreign exchange market.",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "If it is said that a foreign currency is overvalued against the dollar, it is meant that:",
+            "explanation_url": null,
+            "topics": [],
+            "choices": [
+              {
+                "answer": "the dollar is worth less of that currency than it would have been under a fixed exchange rate regime.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "the dollar is worth less of that currency than it would have been under a flexible exchange rate regime.",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "the dollar is worth less of that currency than it would have been under a managed exchange rate regime.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "the dollar is worth more of that currency than it would have been under a fixed exchange rate regime.",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "If the dollar is undervalued against the peso, it implies that:",
+            "explanation_url": null,
+            "topics": [],
+            "choices": [
+              {
+                "answer": "quantity of dollar supplied in exchange of pesos equals the quantity of dollars demanded in exchange of pesos in the foreign exchange market.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "the exchange rate between the dollar and the peso is flexible.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "quantity supplied of dollar in exchange of pesos exceeds the quantity of dollars demanded in exchange of pesos in the foreign exchange market.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "quantity supplied of dollars in exchange of pesos is less than the quantity of dollars demanded in exchange of pesos in the foreign exchange market.",
+                "is_correct": 1,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Assume that the dollar price of a U.S. basket is $\\$ 2$ and the Mexican price for a U.S. basket is $40$ pesos. On the other hand, the Mexican price for the Mexican basket is $100$ pesos. Given this information, the dollar price for the Mexican basket will be:",
+            "explanation_url": null,
+            "topics": [],
+            "choices": [
+              {
+                "answer": "$\\$ 12$.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "$\\$ 10$.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "$\\$ 8$.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "$\\$ 5$.",
+                "is_correct": 1,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "When the ratio of domestic prices to foreign prices falls:",
+            "explanation_url": null,
+            "topics": [],
+            "choices": [
+              {
+                "answer": "the real exchange rate depreciates even when the nominal exchange rate is constant.",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "the real exchange rate appreciates.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "the real exchange rate depreciates only when the nominal exchange rate appreciates.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "the real exchange rate depreciates only when the nominal exchange rate depreciates.",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": " If the government of a country uses expansionary monetary policy:",
+            "explanation_url": null,
+            "topics": [],
+            "choices": [
+              {
+                "answer": "its currency will appreciate.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "its currency will depreciate.",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "its currency will initially appreciate and then depreciate.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": " its value of its currency in the foreign exchange market will not be affected.",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Everything else equal, a depreciation of the dollar will:",
+            "explanation_url": null,
+            "topics": [],
+            "choices": [
+              {
+                "answer": " cause U.S. exports to decrease.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "cause the unemployment rate to rise in the U.S.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "cause U.S. imports to increase.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "cause the unemployment rate to fall in the U.S.",
+                "is_correct": 1,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": " What will be the likely effect of an increase in the demand for American goods in the markets of Mexico on the exchange rate between dollars and pesos?",
+            "explanation_url": null,
+            "topics": [],
+            "choices": [
+              {
+                "answer": "This will cause the dollar to appreciate and the peso to depreciate.",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "This will cause the dollar to depreciate and the peso to appreciate.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "This will cause the dollar and the peso to appreciate",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "This will cause the dollar and the peso to depreciate",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "How would a government with a fixed nominal exchange rate defend an undervalued currency?",
+            "explanation_url": null,
+            "topics": [],
+            "choices": [
+              {
+                "answer": "To defend the currency, the domestic government has to buy the foreign currency and sell the domestic currency. ",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "To defend the currency, the domestic government has to sell the foreign currency and buy the domestic currency.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "To defend the currency, the domestic government has to buy the foreign and the domestic currency.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "To defend the currency, the domestic government has to sell the foreign and the domestic currency.",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          }
+        ],
+        "pdfLink": "https://boilerexams-production.s3.us-east-2.amazonaws.com/1fjC9b0Uh-1aTKCVhwy8u",
+        "questionCount": 50
+      },
+      {
+        "name": "Exam 1 - SPRING 2023",
+        "type": "exam",
+        "desc": "A ECON25200 Exam",
+        "questions": [
+          {
+            "question": "In economics, scarcity refers to the situation of:",
+            "explanation_url": "https://youtu.be/QG5T6wqAn3w?si=h1jlO3umJ_mrxQ8l",
+            "topics": [
+              "Chapter 1-3"
+            ],
+            "choices": [
+              {
+                "answer": "Optimizing with the use of limited information.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Having more wants than the amount of available resources.",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "Sellers setting the prices of their products too high for people to be able to afford them.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Rationing of available goods and services by the government.",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Which of the following correctly defines the term \"equilibrium\"?",
+            "explanation_url": "https://youtu.be/QG5T6wqAn3w?si=_6jWAJpy7naBS7_b&t=107",
+            "topics": [
+              "Chapter 1-3"
+            ],
+            "choices": [
+              {
+                "answer": "It refers to a situation where all agents are simultaneously optimizing.",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "It refers to government intervention that efficiently allocates scarce resources.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "It refers to an optimizing decision made by an individual economic agent.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "It refers to analysis that uses data to arrive at conclusions.",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "A student has two options: she can either surf the web or work part-time. Working part-time pays her $20 per hour. What is the student's opportunity cost of surfing the web for 5 hours? ",
+            "explanation_url": "https://youtu.be/QG5T6wqAn3w?si=v7eil7XtZ8GwpXpN&t=208",
+            "topics": [
+              "Chapter 1-3"
+            ],
+            "choices": [
+              {
+                "answer": "$100",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "$20",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "$50",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "$4",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Maria has to choose between driving and taking a train to destination A. Traveling by train will cost her \\$400 and will take 4 hours. Driving to destination A takes 6 hours, and the required amount of gasoline costs \\$250. Her opportunity cost of time is \\$15 per hour.\nRefer to the scenario above. To optimize, Maria should choose to",
+            "explanation_url": "https://youtu.be/QG5T6wqAn3w?si=s47jRciLnH9M_AtY&t=265",
+            "topics": [
+              "Chapter 1-3"
+            ],
+            "choices": [
+              {
+                "answer": "drive, as it will save her $120.",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "travel by train, because it is quicker.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "travel by train, as it will save her \\$30  in travel time.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "drive, as it will give her a real saving of \\$150.",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Empiricism refers to the process of:",
+            "explanation_url": "https://youtu.be/QG5T6wqAn3w?si=mw47nYKe-Fjr8ylS&t=417",
+            "topics": [
+              "Chapter 1-3"
+            ],
+            "choices": [
+              {
+                "answer": "making choices using values and beliefs.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Measuring variables",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Collecting and organizing data",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Testing ideas using data",
+                "is_correct": 1,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Which of the following statements identifies a difference between correlation and causation?",
+            "explanation_url": "https://youtu.be/QG5T6wqAn3w?si=DoI9X0AEs9Xv8x7H&t=476",
+            "topics": [
+              "Chapter 1-3"
+            ],
+            "choices": [
+              {
+                "answer": "Correlation occurs when one thing directly affects another, whereas causation implies a mutual relationship between two things.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Causation cannot arise when correlation is present, and correlation cannot arise when causation is present.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "A causal relationship exists between two variables when they are correlated, but correlation does not necessarily exist if there's a causal relationship between two variables.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Correlation implies a mutual relationship between two things, whereas causation occurs when one thing directly affects another.",
+                "is_correct": 1,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Randomization is the assignment of subjects by ______ to a ______.",
+            "explanation_url": "https://youtu.be/QG5T6wqAn3w?si=YfedHJHRSPZ0HKBQ&t=587",
+            "topics": [
+              "Chapter 1-3"
+            ],
+            "choices": [
+              {
+                "answer": "chance, rather than by choice; treatment group or into a test group.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "choice, rather than by chance; treatment group or into a control group.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "chance, rather than by choice; treatment group or into a control group.",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "choice, rather than by chance; treatment group or into a test group.",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "If Project A has a cost of \\$2 and provides a benefit of \\$3, and Project B has a cost of \\$5 and provides a benefit of \\$8, which of the following statements is true?",
+            "explanation_url": "https://youtu.be/QG5T6wqAn3w?si=EcgkQIT6pjFd9aQ6&t=674",
+            "topics": [
+              "Chapter 1-3"
+            ],
+            "choices": [
+              {
+                "answer": "The net benefit of Project A is $5.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "A shift from Project A to Project B increases the net benefit by $1.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "An individual can optimize by choosing Project B.",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "Project A has a higher net benefit than Project B.",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Sarah has to choose between renting a hotel room for two days and renting a hotel room for three days.\n\nRefer to the scenario above. If Sarah is optimizing in differences, then which of the following statements is true?",
+            "explanation_url": "https://youtu.be/QG5T6wqAn3w?si=hsHhlQVBZXacTDW_&t=791",
+            "topics": [
+              "Chapter 1-3"
+            ],
+            "choices": [
+              {
+                "answer": "An optimizer will rent the hotel room for three days if the benefit of staying for the third day exceeds the benefits of staying for the first two days.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "An optimizer will rent the hotel room for three days if the benefit of staying for the third day exceeds the cost of staying for the third day.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "An optimizer will rent the hotel room for three days if the net benefit of staying for three days exceeds the net benefit of staying for two days.",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "An optimizer will rent the hotel room for three days if the cost of staying for the first two days is less than the cost of staying for the third day.",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Assume that a firm wants to set up a factory. It has four different options. The rent of the factory in the four different locations and the time taken to transport the product from each location to the market is shown in the table below. The opportunity cost of time is $10 per hour.\n\nRefer to the table. Which is the optimum location for the firm to set up its factory? ![](https://boilerexams-production.s3.us-east-2.amazonaws.com/claz8Qox7RNU1TNU9BA6E)",
+            "explanation_url": "https://youtu.be/QG5T6wqAn3w?si=aoKjb77OjwJuhPHG&t=954",
+            "topics": [
+              "Chapter 1-3"
+            ],
+            "choices": [
+              {
+                "answer": "Close",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Very Far",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Very Close",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Far",
+                "is_correct": 1,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Which of the following statements is correct about the concept of willingness to pay?",
+            "explanation_url": "https://youtu.be/SushyBoHrko?si=2pr6F4TXUlABea-H",
+            "topics": [
+              "Chapter 4"
+            ],
+            "choices": [
+              {
+                "answer": "The willingness to pay is the lowest price that a buyer is willing to pay for an extra unit of a commodity.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "The willingness to pay for a commodity increases exponentially as the consumption of the commodity increases.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "The willingness to pay for a commodity decreases as the amount consumed of the commodity increases.",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "The willingness to pay for a commodity increases linearly as the consumption of the commodity increases.",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "The following table shows the demand schedules of three consumers of wine. Assume that these three buyers constitute the entire market.\n\nRefer to the table above. If the market price of wine is $8 bottle, and the market demand for wine is 19 bottles, David's consumption of wine is: ![](https://boilerexams-production.s3.us-east-2.amazonaws.com/2F9gCEhUkI6e3X3gC-du6)",
+            "explanation_url": "https://youtu.be/SushyBoHrko?si=TerGGHozXtsXYrAt&t=141",
+            "topics": [
+              "Chapter 4"
+            ],
+            "choices": [
+              {
+                "answer": "7 Bottles.",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "4 Bottles.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "9 Bottles.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "12 Bottles.",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Two goods are said to be substitutes when a fall in the price of one good:",
+            "explanation_url": "https://youtu.be/SushyBoHrko?si=eyLq5JS-mhsbPCYw&t=209",
+            "topics": [
+              "Chapter 4"
+            ],
+            "choices": [
+              {
+                "answer": "doesn't affect the demand for the other good.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "leads to a right shift in the demand for the other good.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "leads to a rise in the price of the other good.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": " leads to a left shift in the demand for the other good",
+                "is_correct": 1,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Assume that the economy is in a recession and consumers are expecting a fall in their income  levels. This will cause a(n):",
+            "explanation_url": "https://youtu.be/SushyBoHrko?si=_NuloWcwSO4WrUoD&t=265",
+            "topics": [
+              "Chapter 4"
+            ],
+            "choices": [
+              {
+                "answer": "increase in the total quantity demanded of all inferior goods.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "decrease in the total quantity demanded of all normal goods.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "right shift in the market demand for all normal goods.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "left shift in the market demand for all normal goods.",
+                "is_correct": 1,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Which of the following is likely to lead to an increase in the quantity supplied of steel?",
+            "explanation_url": "https://youtu.be/SushyBoHrko?si=xMJJpwCBWbx4X0n-&t=371",
+            "topics": [
+              "Chapter 4"
+            ],
+            "choices": [
+              {
+                "answer": "A rise in the market price of steel",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "A fall in the wage rate of labor employed in the steel industry",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "An increase in the productivity of capital due to technological innovation",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "An expected increase in the demand for steel in the future",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Assume that a worker in a technology firm can produce 3 circuit boards in an hour. Due to  subsequent innovation, he is now able to produce 6 circuit boards per hour. Other things remaining the same, the firm's supply curve is likely to:",
+            "explanation_url": "https://youtu.be/SushyBoHrko?si=DVqxnW5wIt6cOR-g&t=400",
+            "topics": [
+              "Chapter 4"
+            ],
+            "choices": [
+              {
+                "answer": "shift to the right.",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "remain unchanged.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "become steeper.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "shift to the left.",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "The following table shows the market demand schedule and supply schedule for notebooks.\n\nRefer to the table above. What is the equilibrium price of notebooks? ![](https://boilerexams-production.s3.us-east-2.amazonaws.com/47CKVKsoDFxKvlrUbF4ns)",
+            "explanation_url": "https://youtu.be/SushyBoHrko?si=Mw1Fz-TN13CKc_3w&t=508",
+            "topics": [
+              "Chapter 4"
+            ],
+            "choices": [
+              {
+                "answer": "$2",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "$7",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "$6",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "$4",
+                "is_correct": 1,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "If the demand and supply curves for a commodity shift to the right and the shift in demand is greater than the shift in supply, then in comparison to the initial equilibrium, the new equilibrium will be characterized by:",
+            "explanation_url": "https://youtu.be/SushyBoHrko?si=Hp56pu81bZxspJpr&t=570",
+            "topics": [
+              "Chapter 4"
+            ],
+            "choices": [
+              {
+                "answer": "a higher price and a lower quantity.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "a higher price and quantity.",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "the same price and quantity.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "a lower price and quantity.",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Z is a normal good. The equilibrium price and quantity of Z in the year 2011 was $25 and 60 units,  respectively. In 2014, the equilibrium price of Z had increased to 35 but the equilibrium quantity had decreased to 50 units. Other things remaining the same, which of the following could explain this change?",
+            "explanation_url": "https://youtu.be/SushyBoHrko?si=AV4EeUlm1d5XOgjM&t=662",
+            "topics": [
+              "Chapter 4"
+            ],
+            "choices": [
+              {
+                "answer": "Shift of the supply curve of Z to the right",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Shift of the demand curve for Z to the right",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Shift of the supply curve of Z to the left",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "Shift of the demand curve for Z to the left",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "The market demand for hamburgers is given by Qd=50-2P. The market supply of of hamburgers is given by Qs= 5P-6. The equilibrium price and quantity of hamburgers is;",
+            "explanation_url": "https://youtu.be/SushyBoHrko?si=91fDRn4vk1q7pLVc&t=814",
+            "topics": [
+              "Chapter 4"
+            ],
+            "choices": [
+              {
+                "answer": "P*=8, Q*=34",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "P*=9, Q*=32",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "P*=10, Q*=30",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "P*=12, Q*=26",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Which of the following is likely to be included in a country's Gross Domestic Product in a particular year?",
+            "explanation_url": null,
+            "topics": [
+              "Chapter 5"
+            ],
+            "choices": [
+              {
+                "answer": "The total amount of flour used by bakeries to make bread in that year",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "An unused stock of goods produced in the previous year",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "An unsold inventory of automobiles produced in that year",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "The total amount steel used in the production of automobiles in that year",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Which of the following will be included in the calculation of gross domestic product using the expenditure method?",
+            "explanation_url": null,
+            "topics": [
+              "Chapter 5"
+            ],
+            "choices": [
+              {
+                "answer": "Services purchased by the government",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "Interest paid by households for loans",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Dividends paid by firms to shareholders",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Wages paid to labor by firms",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "The gross domestic product of Ritzland during a particular year was $120,000. If the expenditure on investment was 16,000, the expenditure incurred by the government was 35,000, the value of\nexports was 10,000, and the value of imports was 22,000, calculate the expenditure on\nconsumption.",
+            "explanation_url": null,
+            "topics": [
+              "Chapter 5"
+            ],
+            "choices": [
+              {
+                "answer": "$44,000",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "$37,500",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "$19,000",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "$81,000",
+                "is_correct": 1,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Which of the following will be included in the income-based method of national accounting?",
+            "explanation_url": null,
+            "topics": [
+              "Chapter 5"
+            ],
+            "choices": [
+              {
+                "answer": "A consumer's expenditure on a imported car",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": " A student's expenditure on education",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "A worker's retirement benefits",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "A firm's expenditure on raw materials",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Infi Corp. is a leading manufacturer of smartphones. Every year, customers spend $31 billion on smartphones manufactured by Infi Corp. 10 billion of this sale comes from a leading retailer while the remaining buy directly from Infi Corp. The retailer pays 70% of its revenue to Infi Corp. and Infi Corp. pays 19 billion to its suppliers.\n\nRefer to the scenario above. The retailer adds a value of ________ to the production process.",
+            "explanation_url": null,
+            "topics": [
+              "Chapter 5"
+            ],
+            "choices": [
+              {
+                "answer": "$3 billion",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "$10 billion",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "$1 billion",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "$5 billion",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "The value of production generated by a country's factors of production within the borders of foreign countries during a particular year was $51,000 and the production of foreign factors of production within the borders of the country during that year was worth 80,000. Which of the\nfollowing is likely to be true in this case?",
+            "explanation_url": null,
+            "topics": [
+              "Chapter 5"
+            ],
+            "choices": [
+              {
+                "answer": "The GDP of the country is lower than its GNP.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "The GDP of the country equals its GNP.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "The GDP of the country is higher than its GNP.",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "The GDP of the country equals its trade balance.",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "A country produces only one good. It produced 5,000 units of the good during Year 1 and 6,000 units of the good in Year 2. The price of each unit of the good in Year 1 was $280 and it was 320 in Year 2. Suppose Year 1 is taken as the base year for the calculation of GDP.\n\nRefer to the scenario above. The real GDP of the country in Year 2 was ________.\n",
+            "explanation_url": null,
+            "topics": [
+              "Chapter 5"
+            ],
+            "choices": [
+              {
+                "answer": "$1,420,000",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "$1,680,000",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "$32,000,000",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "$240,000",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "A country produces only one good. It produced 5,000 units of the good during Year 1 and 6,000 units of the good in Year 2. The price of each unit of the good in Year 1 was $280 and it was 320 in Year 2. Suppose Year 1 is taken as the base year for the calculation of GDP.\n\n\nRefer to the scenario above. The nominal GDP of the country for Year 2 was ________.",
+            "explanation_url": null,
+            "topics": [
+              "Chapter 5"
+            ],
+            "choices": [
+              {
+                "answer": "$1,920,000",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "$2,510,000",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "$174,000",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "$180,000",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "The consumer price index for a country in Year 1 was 129 and in Year 2, it was 133. The inflation rate of the country between the two years is approximately ________.",
+            "explanation_url": null,
+            "topics": [
+              "Chapter 5"
+            ],
+            "choices": [
+              {
+                "answer": "2.2 %",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "6 %",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "3.1 %",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "4 %",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Mr. Clooney inherited a sum of $30,000 in 1990. If the price index for 1990 was 100 and the price 30) index for 2014 is 188, the value of the money he inherited in 2014 dollars is ________.",
+            "explanation_url": null,
+            "topics": [
+              "Chapter 5"
+            ],
+            "choices": [
+              {
+                "answer": "$48,000",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "$38,800",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "$56,400",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "$45,200",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "The gross domestic product of a small country which has a population of 200,000 is $56,000,000. The income per capita of the country is ________.",
+            "explanation_url": null,
+            "topics": [
+              "Chapter 6"
+            ],
+            "choices": [
+              {
+                "answer": "$50",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "$200",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "$280",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "$100",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "The price of an Apple Watch Series 3 GPS + Cellular in the U.S. is $399. The table below lists the income per capita and prices of the same Apple Watch in four different countries in 2017 in their own currencies. Using the Apple Watch as a representative commodity common to the countries, you can calculate the purchasing power parity (PPP)-adjustment factor for each country, and then the PPP-adjusted level of GDP per capita in each country\n\nRefer to the scenario below. Which country has the highest income per capita in PPP-adjusted dollars? ![Table.](https://boilerexams-production.s3.us-east-2.amazonaws.com/OieUBmeTLjVGI3VPa2cfV)",
+            "explanation_url": null,
+            "topics": [
+              "Chapter 6"
+            ],
+            "choices": [
+              {
+                "answer": "Country 1",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "Country 2",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Country 3",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Country 4",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "The income per capita and population of two neighboring countries for a particular year were equal. However, Country 1 had a higher income per worker than Country 2. Which of the\nfollowing is likely to be true?",
+            "explanation_url": null,
+            "topics": [
+              "Chapter 6"
+            ],
+            "choices": [
+              {
+                "answer": "The number of people employed is higher in Country 2 than in Country 1.",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "The number of people unemployed is lower in Country 1 than in Country 2.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "The number of retired people is higher in Country 2 than in Country 1.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "The number of children aged below 15 is higher in Country 2 than in Country 1.",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Refer to the figure below. What does the slope of the aggregate production function imply? ![](https://boilerexams-production.s3.us-east-2.amazonaws.com/2qxfVAchjR5wSpf_dCPgD)",
+            "explanation_url": null,
+            "topics": [
+              "Chapter 6"
+            ],
+            "choices": [
+              {
+                "answer": "Diminishing marginal product of labor",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "Increasing returns to scale",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Diminishing marginal product of capital",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Decreasing returns to scale",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Suppose a country's labor supply increases in a year while its capital stock remains constant. Which of the following is likely to happen in this case if output is a function of capital and total efficiency\nunits of labor?",
+            "explanation_url": null,
+            "topics": [
+              "Chapter 6"
+            ],
+            "choices": [
+              {
+                "answer": "Its total output will remain constant.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Its total output will increase.",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": " Its total output will decrease.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Its output per capita will decrease.",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Laborland has 1 million workers. Suppose 50,000 workers migrate from a neighboring country to join Laborland's work force. Which of the following will happen in this case if Laborland's capital\nstock remains unchanged?",
+            "explanation_url": null,
+            "topics": [
+              "Chapter 6"
+            ],
+            "choices": [
+              {
+                "answer": "The total efficiency units of labor in the economy will decrease.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "The relationship between output and capital stock becomes negative.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "The country's income per worker will increase.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "The marginal contribution of labor to Laborland's output will fall.",
+                "is_correct": 1,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "In a graph with aggregate output in the Y-axis and human capital in the X-axis, which of the following will result in an upward shift of the aggregate production function?",
+            "explanation_url": null,
+            "topics": [
+              "Chapter 6"
+            ],
+            "choices": [
+              {
+                "answer": "An increase in the aggregate price level in the economy",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "An increase in the rate of taxation in the economy",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "An increase in productivity due to the discovery of an advanced technology",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "An increase in the number of educated people in the economy",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "The aggregate production function of an economy shifts upward when ________ produce a higher output.",
+            "explanation_url": null,
+            "topics": [
+              "Chapter 6"
+            ],
+            "choices": [
+              {
+                "answer": "the same amount of capital and labor",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "the same amount of capital and a higher amount of labor",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "the same amount of labor and a higher amount of capital",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "none of the above",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "In the year 2010, the income per worker in the United States was $82,359 and the income per worker in South Korea was 54,315. The income per worker in South Korea if the technology\nwere at US level would be 74,496. What part of the income per worker gap between the US and South Korea can be explained by differences in technology ?",
+            "explanation_url": null,
+            "topics": [
+              "Chapter 6"
+            ],
+            "choices": [
+              {
+                "answer": "$28,044",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "$20,181",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "$7,863",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "$4,315",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "In the year 2010, the income per worker in the United States was $82,359 and the income per worker in South Korea was 54,315. The income per worker in South Korea if the technology were at US level would be 74,496. What part of the income per worker gap between the US and South Korea can be explained by differences in human capital and physical capital?",
+            "explanation_url": null,
+            "topics": [
+              "Chapter 6"
+            ],
+            "choices": [
+              {
+                "answer": "$7,863",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "$20,181",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "$4,315",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "28,044",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          }
+        ],
+        "pdfLink": "https://boilerexams-production.s3.us-east-2.amazonaws.com/nkDLTjoCzyx744EsvHWOE",
+        "questionCount": 40
+      },
+      {
+        "name": "Exam 2 - SPRING 2023",
+        "type": "exam",
+        "desc": "A ECON25200 Exam",
+        "questions": [
+          {
+            "question": "At the beginning of year 2010, the GDP per capita in country A is $2,400. The annual growth rate of output in country A is 3%\n\nRefer to the scenario above. What will be the GDP per capita of country A at the beginning of year 2012?",
+            "explanation_url": null,
+            "topics": [],
+            "choices": [
+              {
+                "answer": "$\\$ 2,800$",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "$\\$ 2,410.26$",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "$\\$ 2,760.24$",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "2,546.16",
+                "is_correct": 1,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Singapore had a GDP per capita of  $395 in 1960, and 52,918 in 2013. The U.S had a GDP per capita of 2,881 in 1960 and 52,839 in 2013. Singapore's growth is referred to as:\n",
+            "explanation_url": null,
+            "topics": [],
+            "choices": [
+              {
+                "answer": "Catch-up growth",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "Disguised growth",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Sustained growth",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Instant growth",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Consider two economies: A and B that are completely similar, except their savings rate. The savings rate in economy A is greater than the savings rate in economy B. Which of the following statements is true?",
+            "explanation_url": null,
+            "topics": [],
+            "choices": [
+              {
+                "answer": " Capital accumulation will be faster in economy B in comparison to economy A",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Rate of capital accumulation will be the same in both economies.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Capital accumulation will be faster in economy A in comparison to economy B.",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "Growth rate in country B is likely to be higher than the growth rate of country A in the long-run.",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Consider a closed economy without the government. If the savings rate in the economy is $15 \\%$ and the aggregate savings is $\\$ 6,000$, the GDP of the economy is:",
+            "explanation_url": null,
+            "topics": [],
+            "choices": [
+              {
+                "answer": "$\\$ 27,000$.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "$\\$ 30,000$.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "$\\$ 15,000$.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "$\\$ 40,000$.",
+                "is_correct": 1,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Which of the following statements is true?",
+            "explanation_url": null,
+            "topics": [],
+            "choices": [
+              {
+                "answer": "Economic growth can reduce poverty only if it is not associated with a significant rise in inequality.",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "Economic growth always reduces inequality.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Economic growth always reduces poverty.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Economic growth is ineffective in reducing both poverty and inequality.",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Which of the following equations captures the aggregate capital stock of the economy in this year, Know?",
+            "explanation_url": null,
+            "topics": [],
+            "choices": [
+              {
+                "answer": "$\\mathrm{K}_{\\text {now }}=(1-$ depreciation rate $) \\times \\mathrm{K}_{\\text {lastyear }}+\\mathrm{I}$",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "$\\mathrm{K}_{\\text {now }}=(1-$ depreciation rate $) \\times \\mathrm{K}_{\\text {lastyear }} \\times \\mathrm{I}$",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "$\\mathrm{K}_{\\text {now }}=(1-$ depreciation rate $) \\times \\mathrm{K}_{\\text {lastyear }}-\\mathrm{I}$",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "$\\mathrm{K}_{\\text {now }}=(1+$ depreciation rate $) \\times \\mathrm{K}_{\\text {lastyear }}+\\mathrm{I}$",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "If s denotes savings rate, I denotes aggregate investment, and $Y$ denotes GDP, then which of the following equations is correct?",
+            "explanation_url": null,
+            "topics": [],
+            "choices": [
+              {
+                "answer": "$I=s \\times Y$",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "$\\mathrm{I}=\\mathrm{Y} / \\mathrm{s}$",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "$Y=s \\times I$",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "$\\mathrm{I}=\\mathrm{s} / \\mathrm{Y}$ ",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "In the Solow growth model, a steady-state equilibrium refers to:",
+            "explanation_url": null,
+            "topics": [],
+            "choices": [
+              {
+                "answer": "an equilibrium in which the stock of physical capital remains constant over time.",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "an equilibrium in which the GDP per capita remains constant over time.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "an equilibrium in which the poverty rate remains constant over time.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "an equilibrium in which the inequality remains constant over time.",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "The following graph shows the production function and the relationship between investment and physical capital stock\ngiven the saving rate of household, s, and depreciation rate, d.\n\nRefer to the figure below. Assume there is no government expenditure and the economy is closed.\nWhat is the steady state stock of physical capital in the economy? ![](https://boilerexams-production.s3.us-east-2.amazonaws.com/nCUZQjGm9s665od-abVnr)",
+            "explanation_url": null,
+            "topics": [],
+            "choices": [
+              {
+                "answer": "$\\$ 2,000$",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "$\\$ 300$",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "$\\$ 400$",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "$\\$ 450$",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Refer to the figure below. Assume there is no government expenditure and the economy is closed.\nWhat is the steady state investment in physical capital in the economy? ![](https://boilerexams-production.s3.us-east-2.amazonaws.com/-VvRiuKDFzvc39oZjxRBx)",
+            "explanation_url": null,
+            "topics": [],
+            "choices": [
+              {
+                "answer": "$\\$ 4,000$",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "$\\$ 6,000$",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "$\\$ 7,000$",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "$\\$ 2,000$ ",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Consider two economies: A and B. Both countries have access to the same aggregate production function and have the same population and same efficiency units of labor, but have different saving rates. The savings rate is higher in country A in comparison to country B.\n\nRefer to the scenario above. If both economies have identical depreciation rate, then:",
+            "explanation_url": null,
+            "topics": [],
+            "choices": [
+              {
+                "answer": "economy A's steady state equilibrium will lie to the right and below economy B's steady state equilibrium.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "economy A's steady state equilibrium will lie to the right and above economy B's steady state equilibrium.",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "economy A's steady state equilibrium will lie to the left and above economy B's steady state equilibrium.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "economy A's steady state equilibrium will lie to the left and below economy B's steady state equilibrium.",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Which of the following statements is true?",
+            "explanation_url": null,
+            "topics": [],
+            "choices": [
+              {
+                "answer": "Stock of human capital and the geography of a nation can be considered fundamental causes of prosperity.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Cultural and geographical conditions of a nation can be considered proximate causes of prosperity.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Stock of human capital and physical capital available to a nation can be considered proximate causes of prosperity.",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "Stock of human capital and the geography of a nation can be considered proximate causes of prosperity.",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Countries in sub-Saharan Africa are economically disadvantaged because infectious diseases spread in these countries relatively easily. This statement reflects the:",
+            "explanation_url": null,
+            "topics": [],
+            "choices": [
+              {
+                "answer": "institutions hypothesis.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "culture hypothesis.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "location hypothesis.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "geography hypothesis.",
+                "is_correct": 1,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "The difference in economic growth in North Korea and South Korea can be fundamentally attributed to differences in",
+            "explanation_url": null,
+            "topics": [],
+            "choices": [
+              {
+                "answer": "institutions",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "geography",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "technology",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "culture",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Consider two countries - country A and country B. Both countries are exactly similar in all aspects except for one. The institutions in country A are inclusive while the institutions in country B are extractive. Given this information, which of the following statements is likely to be true?",
+            "explanation_url": null,
+            "topics": [],
+            "choices": [
+              {
+                "answer": "Both countries are likely to be capitalistic.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Country A is likely to have well-defined property rights, while country B is likely to lack well-defined property rights.",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "Country B is likely to have well defined property rights, while country A is likely to lack well-defined property rights.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Both countries are likely to be totalitarian.",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "If the institutions in an economy change from being inclusive to extractive, the return-to-entrepreneurship schedule in the economy will:",
+            "explanation_url": null,
+            "topics": [],
+            "choices": [
+              {
+                "answer": "become horizontal.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": " shift leftward.",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "shift rightward.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "become vertical.",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Political creative destruction is likely to be opposed:",
+            "explanation_url": null,
+            "topics": [],
+            "choices": [
+              {
+                "answer": "more in a market economy than in a command economy.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "equally in all types of economies.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": " less in an economy with inclusive institutions than in an economy with extractive institutions.",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": " more in an economy with inclusive institutions than in an economy with extractive institutions.",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "The reversal of fortune can be attributed to the fact that:",
+            "explanation_url": null,
+            "topics": [],
+            "choices": [
+              {
+                "answer": "economic institutions in initially prosperous European colonies were extractive, whereas economic institutions in formerly less prosperous nations and colonies were inclusive.",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "economic institutions in European colonies were inclusive in all nations.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "economic institutions in European colonies were extractive in all nations.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "economic institutions in initially prosperous European colonies were inclusive, whereas economic institutions in formerly less prosperous nations and colonies were extractive.",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "If the number of employed workers in an economy is 8 million, the number of potential workers in the economy is 12 million, and the number of adults not in the labor force is 1 million, the number of unemployed people in the economy will equal:",
+            "explanation_url": null,
+            "topics": [],
+            "choices": [
+              {
+                "answer": "5 million.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "3 million.",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "1 million.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "7 million.",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "If unemployment rate among workers with an high school diploma is represented by HS, and unemployment rate among workers with a bachelor's degree is represented by BS, then which of the following statements is true?",
+            "explanation_url": null,
+            "topics": [],
+            "choices": [
+              {
+                "answer": "$\\mathrm{HS}>\\mathrm{NS}>\\mathrm{BS}$",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "$\\mathrm{BS}>\\mathrm{HS}>\\mathrm{NS}$",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "$\\mathrm{NS}>\\mathrm{HS}>\\mathrm{BS}$",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "NS > BS > HS",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "What will happen to the demand curve for workers in steel mills if some technology that increases their productivity is introduced assuming all else equal?",
+            "explanation_url": null,
+            "topics": [],
+            "choices": [
+              {
+                "answer": "It will cause an upward movement along the demand curve of the workers.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "It may cause a rightward shift in the demand curve of the workers.",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "It will cause a leftward shift in the demand curve of the workers.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "It will cause a downward movement along the demand curve of the workers.",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": " If the opportunity cost of working outside the home decreases then it is likely that ________,  assuming all else equal.",
+            "explanation_url": null,
+            "topics": [],
+            "choices": [
+              {
+                "answer": "there will be a rightward shift in the labor supply curve",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "there will be an upward movement along the labor supply curve",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "there will be a downward movement along the labor supply curve",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "there will be a leftward shift in the labor supply curve",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Of the $5000$ people age $16+$ not institutions in a particular country, $2400$ are employed and $600$ are unemployed. What is the labor force participation rate?",
+            "explanation_url": null,
+            "topics": [],
+            "choices": [
+              {
+                "answer": "$\\mathrm{LFPR}=12 \\%$",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "$\\mathrm{LFPR}=25 \\%$",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "$\\mathrm{LFPR}=48 \\%$",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "$\\mathrm{LFPR}=60 \\%$ ",
+                "is_correct": 1,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "The following table summarizes the production function for Boiler Burgers. Hambugers sell for $$5 per unit, labor cost is $20 per worker.\n\nHow many workers should Boiler Burgers employ to maximize profits? ![](https://boilerexams-production.s3.us-east-2.amazonaws.com/b224EZLVRSC6DWCaMsbEM)",
+            "explanation_url": null,
+            "topics": [],
+            "choices": [
+              {
+                "answer": "$2$",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "$3$",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "$4$",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "$5$",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Unemployment arising from job search is called:",
+            "explanation_url": null,
+            "topics": [],
+            "choices": [
+              {
+                "answer": "cyclical unemployment.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "disguised unemployment.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "frictional unemployment.",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "structural unemployment.",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Downward wage rigidity is likely to:",
+            "explanation_url": null,
+            "topics": [],
+            "choices": [
+              {
+                "answer": "increase unemployment.",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "increase wage rates.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "decrease wage rates.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "decrease unemployment.",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": " Which of the following statements is true?",
+            "explanation_url": null,
+            "topics": [],
+            "choices": [
+              {
+                "answer": "Firms usually tend to lay off workers than cut wages to reduce costs.",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "Firms tend to decrease wages in periods of contracting economic activity to boost labor productivity.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Firms usually tend to cut wages than lay off people to cut costs.x",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Firms tend to increase wages in periods of contracting economic activity to boost morale. ",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "The following figure shows the labor demand curve, LD1, and labor supply curve, LS1, in a market. A month later, the labor demand curve shifts to LD2.\n\nRefer to the figure below. If there is downward wage rigidity in the market, what will the unemployment in the market be after the demand curve shifts to LD2?\n\n ![](https://boilerexams-production.s3.us-east-2.amazonaws.com/JOAu-xDm6uI0jcv0KTWW1)",
+            "explanation_url": null,
+            "topics": [],
+            "choices": [
+              {
+                "answer": "$15$ units of labor",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "$20$ units of labor",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "$5$ units of labor",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "$10$ units of labor",
+                "is_correct": 1,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Refer to the figure below. If the wage is flexible, what will the unemployment in the market be after the demand curve shifts to LD2? ![](https://boilerexams-production.s3.us-east-2.amazonaws.com/La5ClnEJ8apiahJdHa1uN)",
+            "explanation_url": null,
+            "topics": [],
+            "choices": [
+              {
+                "answer": "$0$ units of labor",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "$15$ units of labor",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "$5$ units of labor",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "$10$ units of labor",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "If the nominal interest rate in an economy is 4% and the real interest rate in the economy is 2%, the rate of inflation in the economy must be:",
+            "explanation_url": null,
+            "topics": [],
+            "choices": [
+              {
+                "answer": "$0.5 \\%$.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "$-2 \\%$.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "$4 \\%$.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "$2 \\%$.",
+                "is_correct": 1,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Assuming all else equal, if there is an increase in the real interest rate:",
+            "explanation_url": null,
+            "topics": [],
+            "choices": [
+              {
+                "answer": "there will be an upward movement along the credit demand curve.",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "there will be a downward movement along the credit demand curve.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "the credit demand curve shifts to the left.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "the credit demand curve shifts to the right.",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Assuming all else equal, if a household is pessimistic about future income, it is likely to cause a(n):",
+            "explanation_url": null,
+            "topics": [],
+            "choices": [
+              {
+                "answer": "shift in the current credit supply curve of the household to the right.",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "downward movement along the current credit supply curve of the household.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "upward movement along the current credit supply curve of the household.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "shift in the current credit supply curve of the household to the left. ",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Boilers Bank assets and liabilities at the beginning of the year are given by the following balance sheet\n\nRefer to Boilers Bank Balance Sheet below. Assume that, due to an economic downturn, several of the bank's customers defaulted on their loans and the value of Boilers Bank long term investment declines by 15%. What is the new value of boilers bank stockholders’ equity after the decline in long term investment? ![](https://boilerexams-production.s3.us-east-2.amazonaws.com/FJ2MTFbb0rKyvtdnjqeNU)",
+            "explanation_url": null,
+            "topics": [],
+            "choices": [
+              {
+                "answer": "$0$",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "$140$",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "$240$",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "$720$",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Boilers Bank assets and liabilities at the beginning of the year are given by the following balance sheet.\n\nRefer to Boilers Bank Balance Sheet below. Assume that customers of boiler bank made 5 million dollars in purchases using the bank's credit card. How does this transaction affect the bank's total assets. ![](https://boilerexams-production.s3.us-east-2.amazonaws.com/N5NLq21pZu6S-UNeShP69)",
+            "explanation_url": null,
+            "topics": [],
+            "choices": [
+              {
+                "answer": "Total assets remain unchanged",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "Total assets increase by 5 million",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Total assets decrease by 5 million",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Total assets increase by 10 million",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "How does the following transaction enter into the bank’s balance sheet? A customer makes a loan payment of $700; $600 of the payment represents interest on the balance of the loan, and $100 represents repayment of part of the principal of the loan.",
+            "explanation_url": null,
+            "topics": [],
+            "choices": [
+              {
+                "answer": "$\\quad+700$ in Reserves; $-600$ in Long-term Investments; $+100$ in Stockholders' Equity",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "$\\quad+700$ in Reserves; $-100$ in Long-term Investments; $+600$ in Stockholders' Equity",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "$\\quad+700$ in Reserves; $-700$ in Long-term Investment",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "$\\quad+700$ in Long-term Investments; $+700$ in Stockholders' Equity",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "How does the following transaction enter into the bank's balance sheet? A customer makes a purchase of $50 on Amazon using the bank's debit card.",
+            "explanation_url": null,
+            "topics": [],
+            "choices": [
+              {
+                "answer": "$\\quad-50$ in Reserves; $-50$ in Demand Deposits",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "$\\quad-50$ in Reserves; $+50$ in Long-term Investments",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "$\\quad-50$ in Reserves; $+50$ in Short-term Borrowing",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "$\\quad+50$ in Reserves; $+50$ in Demand Deposits",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "An asset is liquid if:",
+            "explanation_url": null,
+            "topics": [],
+            "choices": [
+              {
+                "answer": "its value is more likely to increase in future.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "it can be easily converted into cash without loss of value.",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "its value does not change from day to day.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": " it offers a positive rate of interest.",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "A bank is solvent when:",
+            "explanation_url": null,
+            "topics": [],
+            "choices": [
+              {
+                "answer": "the value of its total assets exceeds the value of its liabilities.",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "the value of its liabilities exceeds its stockholders' equity.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "its stockholders' equity exceeds the value of its assets.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "the value of its liabilities exceeds the value of its assets.",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "A bank run occurs when:",
+            "explanation_url": null,
+            "topics": [],
+            "choices": [
+              {
+                "answer": "a bank experiences an extraordinarily large volume of withdrawals.",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "a bank sells its assets to its own stockholders.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "the central monetary authority regulates the functioning of banks.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "a bank's assets exceeds its liabilities.",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Systemically important financial institutions are:",
+            "explanation_url": null,
+            "topics": [],
+            "choices": [
+              {
+                "answer": "large banks that have become a large market power and are too big to fail.",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "all banks whose value of liabilities exceeds its value of assets and are likely to fail.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "banks that are owned and run by the government.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "all banks whose value of assets exceeds its value of liabilities. ",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          }
+        ],
+        "pdfLink": "https://boilerexams-production.s3.us-east-2.amazonaws.com/_BvgpLbiEVdLlHefJwur4",
+        "questionCount": 40
+      }
+    ]
+  }
+]
