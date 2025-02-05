@@ -65,11 +65,7 @@ export async function runEt(options = {}) {
   }
 }
 
-// await runEt({
-//   downloadPDFS: true,
-//   courseName: "ECON25200",
-//   appendClassToOutputFile: true,
-// });
-
-const result = JSON.parse(await readFromFile("json/finalJason.json"));
-console.log(result.length);
+await runEt({
+  downloadPDFS: true,
+  courseName: "ECON25200",
+});

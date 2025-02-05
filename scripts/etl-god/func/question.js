@@ -78,7 +78,7 @@ export async function boilerQuestionToJsonQuestion(
             createMDImageFromURLAndAlt(item.data.url, item.data.altText)
           )
           .join("\n")
-      : "";
+      : null;
 
   const question_video_resource = boilerQuestion.explanation.resources.find(
     (resource) => resource.type === "VIDEO"
@@ -132,7 +132,7 @@ export async function boilerQuestionToJsonQuestion(
       );
       if (result_child_question.length !== 1) {
         throw new Error(
-          "Child Question isnt 1 question, may have more or less"
+          "ChildQuestion.length !== 1. child question may have more children question or another issue occured."
         );
       } else {
         return_questions.push(result_child_question[0]);
@@ -148,7 +148,7 @@ export async function boilerQuestionToJsonQuestion(
   // all things relating to the choices for images etc will be in explanation.resources
   let choices = null;
   if (question_type === "frq") {
-    const choice_images =
+    const explanation_resources_images =
       boilerQuestion.explanation.resources.length > 0
         ? boilerQuestion.explanation.resources
             .filter((item) => item.type === "IMAGE")
@@ -156,10 +156,14 @@ export async function boilerQuestionToJsonQuestion(
               createMDImageFromURLAndAlt(item.data.url, item.data.altText)
             )
             .join("\n")
-        : "";
+        : null;
     choices = [
       {
-        answer: boilerQuestion.data.solution + " " + choice_images,
+        answer:
+          boilerQuestion.data.solution +
+          (explanation_resources_images
+            ? " " + explanation_resources_images
+            : ""),
         is_correct: 1,
         type: question_type,
       },
@@ -177,9 +181,9 @@ export async function boilerQuestionToJsonQuestion(
                 createMDImageFromURLAndAlt(item.data.url, item.data.altText)
               )
               .join("\n")
-          : "";
+          : null;
       return {
-        answer: choice.body + " " + curChoiceImages,
+        answer: choice.body + (curChoiceImages ? " " + curChoiceImages : ""),
         is_correct: boilerQuestion.data.solution.includes(choice.index) ? 1 : 0,
         type: question_type,
       };
@@ -188,7 +192,7 @@ export async function boilerQuestionToJsonQuestion(
     throw new Error("question type isnt frq or mcq somehow");
   }
   return_questions.push({
-    question: question_text + " " + question_images,
+    question: question_text + (question_images ? " " + question_images : ""),
     explanation_url: question_explanation_url,
     topics: question_topic_names,
     choices: JSONChoiceSchema.array().parse(choices),
