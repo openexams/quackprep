@@ -20,6 +20,7 @@ export async function getJsonGroupsFromJsonClass(jsonClass, options) {
   const result = await fetchWithExponetialBackoff(
     `courses/${jsonClass.name}/exams/`
   );
+  console.log("recieved all exams for class", jsonClass.name, "parsing now");
 
   const validated = BoilerExamSchema.array().parse(result);
 
