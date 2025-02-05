@@ -18,7 +18,7 @@ import Footer from '@components/Footer.jsx';
 import ComingSoon from '@components/ComingSoon.jsx';
 import TOS from './extra/TOS.jsx';
 import PrivacyPolicy from './extra/Privacy.jsx';
-import NewPageWrapper from './ai/create/CreatePage.jsx';
+import NewPageWrapper from './ai/create/Create.jsx';
 import Init from './Init.jsx';
 import Sentinel from './Sentinel.jsx';
 import Layout from './layout/Layout.jsx';

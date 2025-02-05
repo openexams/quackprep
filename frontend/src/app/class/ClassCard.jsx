@@ -130,6 +130,7 @@ export default function ClassCard({ id, name, category, desc, school_id, created
 
   return (
     <div
+      id={`class_${id}_card`}
       ref={divRef}
       // Desktop: Hover triggers overlay. Mobile: Click toggles overlay.
       onMouseEnter={!isMobile ? () => setHovered(true) : undefined}
@@ -178,6 +179,7 @@ export default function ClassCard({ id, name, category, desc, school_id, created
               <>
                 {/* Quadrant 1: Study By Topic */}
                 <div
+                  id={`class_${id}_study_by_topic`}
                   onClick={() => dispatch(changeNavbarPage(navigate, `${id}/group?type=topic`))}
                   style={{
                     ...quadrantStyle,
@@ -191,6 +193,7 @@ export default function ClassCard({ id, name, category, desc, school_id, created
 
                 {/* Quadrant 2: Study By Exam */}
                 <div
+                  id={`class_${id}_study_by_exam`}
                   onClick={() => dispatch(changeNavbarPage(navigate, `${id}/group?type=exam`))}
                   style={{
                     ...quadrantStyle,

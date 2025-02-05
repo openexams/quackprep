@@ -23,7 +23,7 @@ export function createDefaultUserClass() {
       },
       UPSERT_CRUD_CLASSES,
       {
-        loadingComponent: ['ClassList', 'CreateGroupByPDF', 'CreatePage'],
+        loadingComponent: ['ClassList', 'CreateGroupByPDF', 'Create'],
         noticeOfSuccess: 'successfully created default class',
       },
     )(dispatch, getState); // have a action that puts this created class into the classlist

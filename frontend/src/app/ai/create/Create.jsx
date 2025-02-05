@@ -23,7 +23,7 @@ export default function CreatePage() {
 
   // Grab classes created by the user
   const userCreatedClasses = useSelector(selectArrayOfStateById('app.class.classes.classes', 'created_by', parseInt(user_id)));
-  const loading = useSelector(selectLoadingState).loadingComps.CreatePage;
+  const loading = useSelector(selectLoadingState).loadingComps.Create;
 
   // Local state for the selected class
   const [classId, setClassId] = useState(null);

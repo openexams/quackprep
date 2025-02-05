@@ -14,7 +14,7 @@ export default function GroupCard({ id, name, class_id, description, created_by,
     return <GroupEditor id={id} name={name} description={description} class_id={class_id} created_by={created_by} type={type} />;
   }
   return (
-    <Card key={id} raised>
+    <Card id={`group_${id}_card`} key={id} raised>
       <Card.Content>
         <Card.Header>{turnUnderscoreIntoSpace(name)}</Card.Header>
         <Card.Description>{description}</Card.Description>

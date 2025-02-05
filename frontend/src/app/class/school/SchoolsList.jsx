@@ -43,6 +43,7 @@ export default function SchoolsList() {
             <Popup
               trigger={
                 <Button
+                  id={school.school_name}
                   className={`school-button
                   ${selectedSchoolId === school.id ? 'selected pulse' : ''}
                   ${!selectedSchoolId ? 'glow-effect pulse' : ''}

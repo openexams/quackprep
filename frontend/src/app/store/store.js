@@ -37,6 +37,12 @@ const app = combineReducers({
 });
 const auth = combineReducers({ user: loginReducer });
 
-export default configureStore({
+const store = configureStore({
   reducer: { flashMessage: flashReducer, show401: reducer401, loading: loadingReducer, app, auth },
+  devTools: import.meta.env.MODE === 'developement' ? true : false, // Disable in production
 });
+
+// if (import.meta.env.MODE === 'development') {
+//   window.__REDUX_STATE__ = store.getState;
+// }
+export default store;

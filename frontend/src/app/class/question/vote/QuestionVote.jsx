@@ -13,8 +13,15 @@ export default function QuestionVote({ questionId, upvotes }) {
   if (!questionId) return null;
 
   return (
-    <Segment basic loading={loading} style={{ display: 'inline-flex', alignItems: 'center', padding: '.2rem' }}>
-      <span style={{ marginRight: '0.5rem', fontWeight: 'bold' }}>{upvotes}</span>
+    <Segment
+      id={`question_${questionId}_vote`}
+      basic
+      loading={loading}
+      style={{ display: 'inline-flex', alignItems: 'center', padding: '.2rem' }}
+    >
+      <span id='upvotes_num' style={{ marginRight: '0.5rem', fontWeight: 'bold' }}>
+        {upvotes}
+      </span>
       <Button.Group size='medium' vertical>
         <Button icon compact color='teal' onClick={() => handleVote(1)}>
           <Icon name='up arrow' />

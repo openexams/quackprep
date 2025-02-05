@@ -15,3 +15,7 @@ export async function login(page) {
 
   await page.waitForURL((url) => !url.pathname.includes("/auth"));
 }
+
+export async function getState(page) {
+  return await page.evaluate(() => window.__REDUX_STATE__());
+}
