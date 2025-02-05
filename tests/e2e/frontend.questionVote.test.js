@@ -1,8 +1,8 @@
 import { test, expect } from "playwright/test";
 import { login } from "../helpers.js";
-import store from "@frontend/src/app/store/store.js";
-import { selectQuestionState } from "@frontend/src/app/class/question/questionSlice.js";
-import { questionSchema } from "schema/question.schema.js";
+// import store from "@frontend/src/app/store/store.js";
+// import { selectQuestionState } from "@frontend/src/app/class/question/questionSlice.js";
+// import { questionSchema } from "schema/question.schema.js";
 
 test("test questionvoting. go into a certain class, downvote a question, make sure it is was correct, then upvote, then check state to see if the question is still the correct schema", async ({
   page,
