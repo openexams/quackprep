@@ -28,48 +28,52 @@ export default function QuestionList({ questions, selectedQuestion, setSelectedQ
   const currentChoices = useSelector(selectCurrentChoicesState);
 
   return (
-    <Segment>
-      <Header as='h3' style={{ marginBottom: '0.2rem' }}>
-        Choose a Question
-      </Header>
-      <div style={{ marginBottom: '1rem' }}>
-        <Checkbox
-          label={{ children: 'Show AI', style: { fontSize: '0.9em', color: 'rgba(0,0,0,0.6)' } }}
-          checked={showAIQuestions}
-          onChange={() => setShowAIQuestions(!showAIQuestions)}
-          style={{ fontSize: '0.9em', marginRight: '.5rem' }}
-        />
-        <Checkbox
-          label={{ children: 'Show topics', style: { fontSize: '0.9em', color: 'rgba(0,0,0,0.6)' } }}
-          checked={showTopics}
-          onChange={() => setShowTopics(!showTopics)}
-          style={{ fontSize: '0.9em' }}
-        />
-      </div>
+    <>
+      <Segment>
+        <Header as='h3' style={{ marginBottom: '0.2rem' }}>
+          Choose a Question
+        </Header>
+        <div style={{ marginBottom: '1rem' }}>
+          <Checkbox
+            label={{ children: 'Show AI', style: { fontSize: '0.9em', color: 'rgba(0,0,0,0.6)' } }}
+            checked={showAIQuestions}
+            onChange={() => setShowAIQuestions(!showAIQuestions)}
+            style={{ fontSize: '0.9em', marginRight: '.5rem' }}
+          />
+          <Checkbox
+            label={{ children: 'Show topics', style: { fontSize: '0.9em', color: 'rgba(0,0,0,0.6)' } }}
+            checked={showTopics}
+            onChange={() => setShowTopics(!showTopics)}
+            style={{ fontSize: '0.9em' }}
+          />
+        </div>
 
-      {/* Wrapping List in a scrollable container */}
-      <div style={{ maxHeight: '33rem', minHeight: '33rem', overflowY: 'auto' }}>
-        <List selection divided relaxed>
-          {edit ? <QuestionEditor group_ids={groupId} /> : null}
-          {questions?.map((question, index) => (
-            <QuestionCard
-              question={question}
-              setSelectedQuestion={setSelectedQuestion}
-              ai={question.ai}
-              key={index}
-              id={question?.id}
-              selectedQuestion={selectedQuestion}
-              type_name={question.type_name}
-              group_name={question.group_name}
-              showTopics={showTopics}
-              index={index}
-              current={doesQuestionHaveCurrentChoice(currentChoices, question.id)}
-              favorited={isFavoriteQuestion(favoriteQuestions, question.id)}
-            />
-          ))}
-          <GenerateQuestion />
-        </List>
-      </div>
-    </Segment>
+        {/* Wrapping List in a scrollable container */}
+        <div style={{ maxHeight: '33rem', minHeight: '33rem', overflowY: 'auto' }}>
+          <List selection divided relaxed>
+            {edit ? <QuestionEditor group_ids={groupId} /> : null}
+            {questions?.map((question, index) => (
+              <QuestionCard
+                question={question}
+                setSelectedQuestion={setSelectedQuestion}
+                ai={question.ai}
+                key={index}
+                id={question?.id}
+                selectedQuestion={selectedQuestion}
+                type_name={question.type_name}
+                group_name={question.group_name}
+                showTopics={showTopics}
+                index={index}
+                current={doesQuestionHaveCurrentChoice(currentChoices, question.id)}
+                favorited={isFavoriteQuestion(favoriteQuestions, question.id)}
+              />
+            ))}
+          </List>
+        </div>
+      </Segment>
+      <Segment style={{ marginTop: '-.5em' }}>
+        <GenerateQuestion />
+      </Segment>
+    </>
   );
 }

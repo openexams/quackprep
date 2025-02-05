@@ -6,7 +6,7 @@ import { createDefaultUserClass, getClassesByUserId } from '@app/class/classSlic
 import { selectUser } from '@app/auth/authSlice';
 import { selectArrayOfStateById } from 'maddox-js-funcs';
 import { mapClassesToDropdown } from '@app/creator/forms/dropdownMappings';
-import { getStartedNow } from '@app/layout/navbar/navbarSlice';
+import { changeNavbarPage, getStartedNow } from '@app/layout/navbar/navbarSlice';
 import CreateGroupByPDF from '@app/class/group/CreateGroupByPDF';
 import { makeUserACreator } from '@app/creator/creatorSlice';
 import { selectLoadingState } from '@app/store/loadingSlice';
@@ -95,7 +95,16 @@ export default function CreatePage() {
                 <>
                   <Message info>
                     <Message.Header>Select a Class to Add Content</Message.Header>
-                    <p>Choose one of your existing classes to generate and manage new content with AI.</p>
+                    <p>
+                      Choose one of your existing classes to generate and manage new content with AI.<br></br> Dont know how to
+                      make a class?{' '}
+                      <a
+                        style={{ color: 'blue', cursor: 'pointer' }}
+                        onClick={() => dispatch(changeNavbarPage(navigate, '/creatordashboard'))}
+                      >
+                        <u>Click here</u>
+                      </a>
+                    </p>
                   </Message>
                   <Form>
                     <Form.Field

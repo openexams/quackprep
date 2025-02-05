@@ -28,7 +28,7 @@ export default function GenerateQuestion() {
     <>
       <List.Item onClick={() => setIsOpen(true)} style={{ cursor: 'pointer' }}>
         <List.Header as='h4' style={{ margin: 0, display: 'flex' }}>
-          Generate New Question 🤖 <Label size='mini' color='blue' content={'AI'} />
+          AI Generate Question 🤖 <Label size='mini' color='blue' content={'AI'} />
         </List.Header>
       </List.Item>
 
