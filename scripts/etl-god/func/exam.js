@@ -59,6 +59,7 @@ export async function getJsonGroupsFromJsonClass(jsonClass, options) {
       questionCount: curExam.stats.questions,
       pdfLink: curPDFLink,
     });
+
     if (curPDFLink && options && options.downloadPDFS) {
       const result = await axios.get(curPDFLink, { responseType: "stream" });
       const contentType = result.headers["content-type"];
@@ -76,6 +77,7 @@ export async function getJsonGroupsFromJsonClass(jsonClass, options) {
       );
     }
   }
+
   return {
     groupJson: JSONGroupSchema.array().parse(groupsJson),
     boilerQuestionIds: questionIdsInExams,

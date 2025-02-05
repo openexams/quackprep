@@ -926,3 +926,249 @@
         }
     ]
 }
+
+
+{
+    "id": "b4e62772-7b0c-4ad4-a03c-4451ad3330de",
+    "type": "MULTIPLE_CHOICE",
+    "data": {
+        "body": "The small bead P is moving along the portion of the wire which is inclined at a fixed angle $\\theta$ relative to the horizontal plane. The wire rotates at a constant rate $\\Omega$ about a vertical axis relative to the ground. \n\nFind nice expressions for the velocity and acceleration of P relative to the ground. ",
+        "solution": [],
+        "answerChoices": []
+    },
+    "number": 1,
+    "disclaimer": null,
+    "examId": "07d63283-3e6e-410e-93ee-dbab6a7def3c",
+    "courseId": "917504b9-0d67-4558-af71-b5961ee7b962",
+    "parentId": null,
+    "flags": {
+        "published": true,
+        "disableRandomAnswers": true,
+        "answersStartHidden": true
+    },
+    "stats": {
+        "count": 1,
+        "timeSpent": "76039587",
+        "timeSpentVideo": "26321843",
+        "submissions": 220,
+        "submissionsCorrect": 0,
+        "accuracy": 0,
+        "difficulty": 1.09375
+    },
+    "resources": [
+        {
+            "id": "335e1d98-74a1-4494-93e4-2972df3dc01d",
+            "type": "IMAGE",
+            "data": {
+                "key": "qnIDFVIu-hcyp4S3S7mvS",
+                "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/qnIDFVIu-hcyp4S3S7mvS"
+            },
+            "courseId": null,
+            "examId": null,
+            "questionId": "b4e62772-7b0c-4ad4-a03c-4451ad3330de",
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+        }
+    ],
+    "exam": {
+        "id": "07d63283-3e6e-410e-93ee-dbab6a7def3c",
+        "number": 0,
+        "year": 2007,
+        "season": "SPRING",
+        "disclaimer": "",
+        "courseId": "917504b9-0d67-4558-af71-b5961ee7b962",
+        "flags": {
+            "published": true,
+            "practice": false
+        },
+        "stats": {
+            "count": 1,
+            "timeSpent": "226887914",
+            "timeSpentVideo": "88566196",
+            "submissions": 573,
+            "submissionsCorrect": 0,
+            "questions": 4,
+            "accuracy": 0,
+            "difficulty": 1.175705794947994
+        }
+    },
+    "explanation": {
+        "id": "20f94776-79aa-4f31-8be0-13b1af9503b9",
+        "body": null,
+        "questionId": "b4e62772-7b0c-4ad4-a03c-4451ad3330de",
+        "resources": [
+            {
+                "id": "70dcfcb7-d189-4ade-90d2-95af0992e1da",
+                "type": "VIDEO",
+                "data": {
+                    "url": "https://www.youtube.com/watch?v=bbYP-YUaq0c&t=3307s"
+                },
+                "courseId": null,
+                "examId": null,
+                "questionId": null,
+                "explanationId": "20f94776-79aa-4f31-8be0-13b1af9503b9",
+                "applicationId": null,
+                "answerChoiceId": null,
+                "customExamId": null
+            }
+        ]
+    },
+    "topics": [
+        {
+            "id": "08338f4a-373e-489b-96b1-7697285d7081",
+            "name": "Basic Kinematic Equation (BKE)",
+            "courseId": "917504b9-0d67-4558-af71-b5961ee7b962",
+            "stats": {
+                "count": 1,
+                "timeSpent": "2526231834",
+                "timeSpentVideo": "413619692",
+                "submissions": 1997,
+                "submissionsCorrect": 0,
+                "questions": 10,
+                "accuracy": 0,
+                "difficulty": 1.2261564139246544
+            }
+        }
+    ],
+    "children": []
+}
+
+{
+  "id": "2067c797-cf23-46b8-badc-9c37a2d0ef3d",
+  "type": "FREE_RESPONSE",
+  "data": {
+    "body": "Consider the Left-Leaning Red-Black below. All nodes/links are black. Show the steps in the tree for\ndelete(7).",
+    "solution": "This question is still under review, as some of you have pointed out, the below solution doesn't maintain black height because pathway 8-\u003E11-\u003E9-\u003ENULL has black height 4 while all other paths to NULL have black height 5 so the given solution is incorrect. You need to find a way to change the tree we found to maintain black height. This is why deletion in RB trees is hard :-(",
+    "answerChoices": []
+  },
+  "number": 3,
+  "disclaimer": null,
+  "examId": "b8acd269-d79d-46e1-9c10-71da9f4dfa49",
+  "courseId": "27c7ff3a-c08b-432e-ac8d-19aff935e0fb",
+  "parentId": null,
+  "flags": {
+    "published": true,
+    "disableRandomAnswers": false,
+    "answersStartHidden": false
+  },
+  "stats": {
+    "count": 1,
+    "timeSpent": "126574745",
+    "timeSpentVideo": "21605495",
+    "submissions": 568,
+    "submissionsCorrect": 315,
+    "accuracy": 0.554577464788732,
+    "difficulty": 0.703592814371258
+  },
+  "resources": [
+    {
+      "id": "a233b7a5-e441-48f4-aa59-6f631766ff87",
+      "type": "IMAGE",
+      "data": {
+        "key": "tsY0pn3ftjkjRZuX-rpj2",
+        "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/tsY0pn3ftjkjRZuX-rpj2"
+      },
+      "courseId": null,
+      "examId": null,
+      "questionId": "2067c797-cf23-46b8-badc-9c37a2d0ef3d",
+      "explanationId": null,
+      "applicationId": null,
+      "answerChoiceId": null,
+      "customExamId": null
+    }
+  ],
+  "exam": {
+    "id": "b8acd269-d79d-46e1-9c10-71da9f4dfa49",
+    "number": 2,
+    "year": 2022,
+    "season": "SPRING",
+    "disclaimer": "",
+    "courseId": "27c7ff3a-c08b-432e-ac8d-19aff935e0fb",
+    "flags": {
+      "published": true,
+      "practice": false
+    },
+    "stats": {
+      "count": 1,
+      "timeSpent": "1384866248",
+      "timeSpentVideo": "218370785",
+      "submissions": 10337,
+      "submissionsCorrect": 7657,
+      "questions": 17,
+      "accuracy": 0.740737157782722,
+      "difficulty": 0.511569416498994
+    }
+  },
+  "explanation": {
+    "id": "eb6e35d2-ad0d-4cd7-9230-2e52147d7352",
+    "body": null,
+    "questionId": "2067c797-cf23-46b8-badc-9c37a2d0ef3d",
+    "resources": [
+      {
+        "id": "bbeda3ac-583c-4330-8470-e9583bea4f42",
+        "type": "IMAGE",
+        "data": {
+          "key": "z-7TWXSYXdnGztp5ZHWNP",
+          "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/z-7TWXSYXdnGztp5ZHWNP"
+        },
+        "courseId": null,
+        "examId": null,
+        "questionId": null,
+        "explanationId": "eb6e35d2-ad0d-4cd7-9230-2e52147d7352",
+        "applicationId": null,
+        "answerChoiceId": null,
+        "customExamId": null
+      }
+    ]
+  },
+  "topics": [
+    {
+      "id": "d8a419a1-5a52-4c92-9c24-e962c5d8d2cb",
+      "name": "2-3 Trees",
+      "courseId": "27c7ff3a-c08b-432e-ac8d-19aff935e0fb",
+      "stats": {
+        "count": 1,
+        "timeSpent": "2889057689",
+        "timeSpentVideo": "220826427",
+        "submissions": 7734,
+        "submissionsCorrect": 4945,
+        "questions": 8,
+        "accuracy": 0.639384535815878,
+        "difficulty": 0.612394689813633
+      }
+    },
+    {
+      "id": "17a3959f-bfec-46b4-b484-343beba28722",
+      "name": "Binary Search Trees",
+      "courseId": "27c7ff3a-c08b-432e-ac8d-19aff935e0fb",
+      "stats": {
+        "count": 1,
+        "timeSpent": "2218705495",
+        "timeSpentVideo": "105540143",
+        "submissions": 5850,
+        "submissionsCorrect": 4273,
+        "questions": 7,
+        "accuracy": 0.73042735042735,
+        "difficulty": 0.523445378151261
+      }
+    },
+    {
+      "id": "22a1c21a-6a23-4934-8f52-e34a5e95d768",
+      "name": "Binary Trees",
+      "courseId": "27c7ff3a-c08b-432e-ac8d-19aff935e0fb",
+      "stats": {
+        "count": 1,
+        "timeSpent": "1699341232",
+        "timeSpentVideo": "86939735",
+        "submissions": 3950,
+        "submissionsCorrect": 2788,
+        "questions": 4,
+        "accuracy": 0.705822784810127,
+        "difficulty": 0.549259259259259
+      }
+    }
+  ],
+  "children": []
+}

@@ -71,7 +71,7 @@ export async function boilerQuestionToJsonQuestion(
 
   const return_questions = [];
   const question_images =
-    boilerQuestion.resources.length > 0
+    boilerQuestion.resources.length > 0 // in resources and not explanation.resources
       ? boilerQuestion.resources
           .filter((item) => item.type === "IMAGE" && item.questionId !== null) // all things related to question will be in base resource.
           .map((item) =>
