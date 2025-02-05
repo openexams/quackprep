@@ -3,8 +3,7 @@ import { writeToFile } from "../helpers.js";
 import { BoilerExamSchema, JSONGroupSchema } from "../schema/schema.js";
 
 /**
- * Fetches and processes exam data from a JSON class to generate grouped question information.
- *
+ * Fetches and processes exam data from a JSON class to generate groups
  * @param {import("../../types.js").JSONClass} jsonClass - The JSON class object containing course information to fetch exams for.
  * @param {Object} options
  * @param {Boolean} options.downloadPDFS
@@ -13,7 +12,7 @@ import { BoilerExamSchema, JSONGroupSchema } from "../schema/schema.js";
  * - `boilerQuestionIds`: 2D array containing question IDs grouped by exam
  *
  * @example
- * const result = await getJsonGroupsFromJsonClass(math101Class);
+ * const result = await getJsonGroupsFromJsonClass(math101Class, { downloadPDFS: true });
  * console.log(result.groupJson); // Array of exam groups
  * console.log(result.boilerQuestionIds); // Array of question ID arrays
  */
@@ -23,11 +22,14 @@ export async function getJsonGroupsFromJsonClass(jsonClass, options) {
   );
 
   const validated = BoilerExamSchema.array().parse(result);
+
   const groupsJson = [];
   const questionIdsInExams = [];
 
   for (let i = 0; i < validated.length; i++) {
+    console.log("curExamId", validated[i].id);
     questionIdsInExams.push([]);
+
     const curExam = validated[i];
     let curPDFLink = null;
     for (let j = 0; j < curExam.resources.length; j++) {
@@ -51,7 +53,7 @@ export async function getJsonGroupsFromJsonClass(jsonClass, options) {
       name: `${
         curExam.number !== 0 ? `Exam ${curExam.number}` : "Final Exam"
       } - ${curExam.season} ${curExam.year}`,
-      type: 2,
+      type: "exam",
       desc: `A ${jsonClass.name} Exam`,
       questions: null,
       questionCount: curExam.stats.questions,

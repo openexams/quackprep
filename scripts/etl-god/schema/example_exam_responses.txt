@@ -1,0 +1,1088 @@
+[
+  {
+    "id": "07d63283-3e6e-410e-93ee-dbab6a7def3c",
+    "number": 0,
+    "year": 2007,
+    "season": "SPRING",
+    "disclaimer": "",
+    "courseId": "917504b9-0d67-4558-af71-b5961ee7b962",
+    "flags": {
+      "published": true,
+      "practice": false
+    },
+    "stats": {
+      "count": 1,
+      "timeSpent": "226887914",
+      "timeSpentVideo": "88566196",
+      "submissions": 573,
+      "submissionsCorrect": 0,
+      "questions": 4,
+      "accuracy": 0,
+      "difficulty": 1.175705794947994
+    },
+    "resources": [],
+    "questions": [
+      {
+        "id": "b4e62772-7b0c-4ad4-a03c-4451ad3330de",
+        "number": 1,
+        "flags": {
+          "published": true,
+          "disableRandomAnswers": true,
+          "answersStartHidden": true
+        },
+        "stats": {
+          "count": 1,
+          "timeSpent": "76039587",
+          "timeSpentVideo": "26321843",
+          "submissions": 220,
+          "submissionsCorrect": 0,
+          "accuracy": 0,
+          "difficulty": 1.09375
+        },
+        "type": "MULTIPLE_CHOICE",
+        "topics": [
+          {
+            "id": "08338f4a-373e-489b-96b1-7697285d7081",
+            "name": "Basic Kinematic Equation (BKE)",
+            "courseId": "917504b9-0d67-4558-af71-b5961ee7b962",
+            "stats": {
+              "count": 1,
+              "timeSpent": "2526231834",
+              "timeSpentVideo": "413619692",
+              "submissions": 1997,
+              "submissionsCorrect": 0,
+              "questions": 10,
+              "accuracy": 0,
+              "difficulty": 1.2261564139246544
+            }
+          }
+        ],
+        "children": []
+      },
+      {
+        "id": "f54b8742-7838-4e33-99d5-68a2643cc9b9",
+        "number": 2,
+        "flags": {
+          "published": true,
+          "disableRandomAnswers": true,
+          "answersStartHidden": true
+        },
+        "stats": {
+          "count": 1,
+          "timeSpent": "63602957",
+          "timeSpentVideo": "31849117",
+          "submissions": 158,
+          "submissionsCorrect": 0,
+          "accuracy": 0,
+          "difficulty": 1.056201550387597
+        },
+        "type": "MULTIPLE_CHOICE",
+        "topics": [
+          {
+            "id": "08338f4a-373e-489b-96b1-7697285d7081",
+            "name": "Basic Kinematic Equation (BKE)",
+            "courseId": "917504b9-0d67-4558-af71-b5961ee7b962",
+            "stats": {
+              "count": 1,
+              "timeSpent": "2526231834",
+              "timeSpentVideo": "413619692",
+              "submissions": 1997,
+              "submissionsCorrect": 0,
+              "questions": 10,
+              "accuracy": 0,
+              "difficulty": 1.2261564139246544
+            }
+          },
+          {
+            "id": "d7973e46-e2d8-42fd-932f-2e1a444f6549",
+            "name": "Forces",
+            "courseId": "917504b9-0d67-4558-af71-b5961ee7b962",
+            "stats": {
+              "count": 1,
+              "timeSpent": "752949806",
+              "timeSpentVideo": "77318322",
+              "submissions": 496,
+              "submissionsCorrect": 0,
+              "questions": 4,
+              "accuracy": 0,
+              "difficulty": 1.1661073825503356
+            }
+          },
+          {
+            "id": "a310a05d-0bb2-42ea-98cc-c2ca471b2461",
+            "name": "Velocity and Acceleration Expansions",
+            "courseId": "917504b9-0d67-4558-af71-b5961ee7b962",
+            "stats": {
+              "count": 1,
+              "timeSpent": "1228643236",
+              "timeSpentVideo": "186526137",
+              "submissions": 826,
+              "submissionsCorrect": 0,
+              "questions": 5,
+              "accuracy": 0,
+              "difficulty": 1.1960043196544277
+            }
+          }
+        ],
+        "children": []
+      },
+      {
+        "id": "4bbd37b2-e9ea-406e-b570-f2dcb20b648a",
+        "number": 3,
+        "flags": {
+          "published": true,
+          "disableRandomAnswers": true,
+          "answersStartHidden": true
+        },
+        "stats": {
+          "count": 1,
+          "timeSpent": "37197638",
+          "timeSpentVideo": "15216048",
+          "submissions": 114,
+          "submissionsCorrect": 0,
+          "accuracy": 0,
+          "difficulty": 1.016355140186916
+        },
+        "type": "MULTIPLE_CHOICE",
+        "topics": [
+          {
+            "id": "56192ccb-2df4-43c3-a242-e1df33a0d7fa",
+            "name": "Vectors",
+            "courseId": "917504b9-0d67-4558-af71-b5961ee7b962",
+            "stats": {
+              "count": 1,
+              "timeSpent": "372095644",
+              "timeSpentVideo": "50684465",
+              "submissions": 479,
+              "submissionsCorrect": 0,
+              "questions": 3,
+              "accuracy": 0,
+              "difficulty": 1.1636442141623489
+            }
+          },
+          {
+            "id": "e5ff4218-6a89-4af5-a45b-092c62acb820",
+            "name": "Moments",
+            "courseId": "917504b9-0d67-4558-af71-b5961ee7b962",
+            "stats": {
+              "count": 1,
+              "timeSpent": "603815529",
+              "timeSpentVideo": "60684269",
+              "submissions": 394,
+              "submissionsCorrect": 0,
+              "questions": 3,
+              "accuracy": 0,
+              "difficulty": 1.1487854251012146
+            }
+          }
+        ],
+        "children": []
+      },
+      {
+        "id": "682fd1a1-5e6e-4ab0-9815-714974ce1f1f",
+        "number": 4,
+        "flags": {
+          "published": true,
+          "disableRandomAnswers": true,
+          "answersStartHidden": true
+        },
+        "stats": {
+          "count": 1,
+          "timeSpent": "50047732",
+          "timeSpentVideo": "15179188",
+          "submissions": 81,
+          "submissionsCorrect": 0,
+          "accuracy": 0,
+          "difficulty": 0.9737569060773481
+        },
+        "type": "MULTIPLE_CHOICE",
+        "topics": [
+          {
+            "id": "e5ff4218-6a89-4af5-a45b-092c62acb820",
+            "name": "Moments",
+            "courseId": "917504b9-0d67-4558-af71-b5961ee7b962",
+            "stats": {
+              "count": 1,
+              "timeSpent": "603815529",
+              "timeSpentVideo": "60684269",
+              "submissions": 394,
+              "submissionsCorrect": 0,
+              "questions": 3,
+              "accuracy": 0,
+              "difficulty": 1.1487854251012146
+            }
+          },
+          {
+            "id": "d7973e46-e2d8-42fd-932f-2e1a444f6549",
+            "name": "Forces",
+            "courseId": "917504b9-0d67-4558-af71-b5961ee7b962",
+            "stats": {
+              "count": 1,
+              "timeSpent": "752949806",
+              "timeSpentVideo": "77318322",
+              "submissions": 496,
+              "submissionsCorrect": 0,
+              "questions": 4,
+              "accuracy": 0,
+              "difficulty": 1.1661073825503356
+            }
+          },
+          {
+            "id": "10040de0-2e79-402c-bb3b-8dfc6755fec4",
+            "name": "Statics",
+            "courseId": "917504b9-0d67-4558-af71-b5961ee7b962",
+            "stats": {
+              "count": 1,
+              "timeSpent": "515875501",
+              "timeSpentVideo": "45468221",
+              "submissions": 280,
+              "submissionsCorrect": 0,
+              "questions": 2,
+              "accuracy": 0,
+              "difficulty": 1.118421052631579
+            }
+          }
+        ],
+        "children": []
+      }
+    ]
+  },
+  {
+    "id": "2f74ba91-0121-47ca-b90e-3d81e4ceab12",
+    "number": 1,
+    "year": 2015,
+    "season": "FALL",
+    "disclaimer": "",
+    "courseId": "917504b9-0d67-4558-af71-b5961ee7b962",
+    "flags": {
+      "published": true,
+      "practice": false
+    },
+    "stats": {
+      "count": 1,
+      "timeSpent": "337278200",
+      "timeSpentVideo": "165562411",
+      "submissions": 865,
+      "submissionsCorrect": 0,
+      "questions": 4,
+      "accuracy": 0,
+      "difficulty": 1.1981865284974094
+    },
+    "resources": [],
+    "questions": [
+      {
+        "id": "bfe3e2c2-f5a5-4ab9-8274-ec1e4b5eb11a",
+        "number": 1,
+        "flags": {
+          "published": true,
+          "disableRandomAnswers": true,
+          "answersStartHidden": true
+        },
+        "stats": {
+          "count": 1,
+          "timeSpent": "111485904",
+          "timeSpentVideo": "32001256",
+          "submissions": 280,
+          "submissionsCorrect": 0,
+          "accuracy": 0,
+          "difficulty": 1.118421052631579
+        },
+        "type": "MULTIPLE_CHOICE",
+        "topics": [
+          {
+            "id": "7b60e825-90e8-4a43-bef9-4bd765f22f33",
+            "name": "Dimensional Analysis",
+            "courseId": "917504b9-0d67-4558-af71-b5961ee7b962",
+            "stats": {
+              "count": 1,
+              "timeSpent": "811369019",
+              "timeSpentVideo": "110550518",
+              "submissions": 949,
+              "submissionsCorrect": 25,
+              "questions": 3,
+              "accuracy": 0.026343519494204427,
+              "difficulty": 1.1785033365109627
+            }
+          }
+        ],
+        "children": []
+      },
+      {
+        "id": "999b30c5-da43-4dc2-ad05-e59963a74eff",
+        "number": 2,
+        "flags": {
+          "published": true,
+          "disableRandomAnswers": true,
+          "answersStartHidden": true
+        },
+        "stats": {
+          "count": 1,
+          "timeSpent": "62788559",
+          "timeSpentVideo": "15581275",
+          "submissions": 165,
+          "submissionsCorrect": 0,
+          "accuracy": 0,
+          "difficulty": 1.0613207547169812
+        },
+        "type": "MULTIPLE_CHOICE",
+        "topics": [
+          {
+            "id": "56192ccb-2df4-43c3-a242-e1df33a0d7fa",
+            "name": "Vectors",
+            "courseId": "917504b9-0d67-4558-af71-b5961ee7b962",
+            "stats": {
+              "count": 1,
+              "timeSpent": "372095644",
+              "timeSpentVideo": "50684465",
+              "submissions": 479,
+              "submissionsCorrect": 0,
+              "questions": 3,
+              "accuracy": 0,
+              "difficulty": 1.1636442141623489
+            }
+          }
+        ],
+        "children": []
+      },
+      {
+        "id": "7ed3ea14-9da8-4412-bfd5-68bc9643e586",
+        "number": 3,
+        "flags": {
+          "published": true,
+          "disableRandomAnswers": true,
+          "answersStartHidden": true
+        },
+        "stats": {
+          "count": 1,
+          "timeSpent": "114543380",
+          "timeSpentVideo": "85467412",
+          "submissions": 252,
+          "submissionsCorrect": 0,
+          "accuracy": 0,
+          "difficulty": 1.1079545454545454
+        },
+        "type": "MULTIPLE_CHOICE",
+        "topics": [
+          {
+            "id": "08338f4a-373e-489b-96b1-7697285d7081",
+            "name": "Basic Kinematic Equation (BKE)",
+            "courseId": "917504b9-0d67-4558-af71-b5961ee7b962",
+            "stats": {
+              "count": 1,
+              "timeSpent": "2526231834",
+              "timeSpentVideo": "413619692",
+              "submissions": 1997,
+              "submissionsCorrect": 0,
+              "questions": 10,
+              "accuracy": 0,
+              "difficulty": 1.2261564139246544
+            }
+          },
+          {
+            "id": "a310a05d-0bb2-42ea-98cc-c2ca471b2461",
+            "name": "Velocity and Acceleration Expansions",
+            "courseId": "917504b9-0d67-4558-af71-b5961ee7b962",
+            "stats": {
+              "count": 1,
+              "timeSpent": "1228643236",
+              "timeSpentVideo": "186526137",
+              "submissions": 826,
+              "submissionsCorrect": 0,
+              "questions": 5,
+              "accuracy": 0,
+              "difficulty": 1.1960043196544277
+            }
+          },
+          {
+            "id": "5b610b76-81aa-4ce8-9725-bbe621a6b2d6",
+            "name": "Complex Rotations",
+            "courseId": "917504b9-0d67-4558-af71-b5961ee7b962",
+            "stats": {
+              "count": 1,
+              "timeSpent": "1460505646",
+              "timeSpentVideo": "221943465",
+              "submissions": 1006,
+              "submissionsCorrect": 0,
+              "questions": 6,
+              "accuracy": 0,
+              "difficulty": 1.2047920433996384
+            }
+          }
+        ],
+        "children": []
+      },
+      {
+        "id": "2e606a96-63f3-4951-ab92-9fc4835aad21",
+        "number": 4,
+        "flags": {
+          "published": true,
+          "disableRandomAnswers": true,
+          "answersStartHidden": true
+        },
+        "stats": {
+          "count": 1,
+          "timeSpent": "48460357",
+          "timeSpentVideo": "32512468",
+          "submissions": 168,
+          "submissionsCorrect": 0,
+          "accuracy": 0,
+          "difficulty": 1.0634328358208955
+        },
+        "type": "MULTIPLE_CHOICE",
+        "topics": [
+          {
+            "id": "08338f4a-373e-489b-96b1-7697285d7081",
+            "name": "Basic Kinematic Equation (BKE)",
+            "courseId": "917504b9-0d67-4558-af71-b5961ee7b962",
+            "stats": {
+              "count": 1,
+              "timeSpent": "2526231834",
+              "timeSpentVideo": "413619692",
+              "submissions": 1997,
+              "submissionsCorrect": 0,
+              "questions": 10,
+              "accuracy": 0,
+              "difficulty": 1.2261564139246544
+            }
+          },
+          {
+            "id": "5b610b76-81aa-4ce8-9725-bbe621a6b2d6",
+            "name": "Complex Rotations",
+            "courseId": "917504b9-0d67-4558-af71-b5961ee7b962",
+            "stats": {
+              "count": 1,
+              "timeSpent": "1460505646",
+              "timeSpentVideo": "221943465",
+              "submissions": 1006,
+              "submissionsCorrect": 0,
+              "questions": 6,
+              "accuracy": 0,
+              "difficulty": 1.2047920433996384
+            }
+          }
+        ],
+        "children": []
+      }
+    ]
+  },
+  {
+    "id": "e0671e01-a892-4c15-a1ab-116eadaae47c",
+    "number": 2,
+    "year": 2019,
+    "season": "SPRING",
+    "disclaimer": "",
+    "courseId": "917504b9-0d67-4558-af71-b5961ee7b962",
+    "flags": {
+      "published": true,
+      "practice": false
+    },
+    "stats": {
+      "count": 1,
+      "timeSpent": "119978298",
+      "timeSpentVideo": "37521815",
+      "submissions": 224,
+      "submissionsCorrect": 0,
+      "questions": 1,
+      "accuracy": 0,
+      "difficulty": 1.095679012345679
+    },
+    "resources": [],
+    "questions": [
+      {
+        "id": "b43b1bd0-3a8a-4d99-ade2-75ddd20e3ce3",
+        "number": 1,
+        "flags": {
+          "published": true,
+          "disableRandomAnswers": true,
+          "answersStartHidden": true
+        },
+        "stats": {
+          "count": 1,
+          "timeSpent": "119978298",
+          "timeSpentVideo": "37521815",
+          "submissions": 224,
+          "submissionsCorrect": 0,
+          "accuracy": 0,
+          "difficulty": 1.095679012345679
+        },
+        "type": "MULTIPLE_CHOICE",
+        "topics": [
+          {
+            "id": "5b610b76-81aa-4ce8-9725-bbe621a6b2d6",
+            "name": "Complex Rotations",
+            "courseId": "917504b9-0d67-4558-af71-b5961ee7b962",
+            "stats": {
+              "count": 1,
+              "timeSpent": "1460505646",
+              "timeSpentVideo": "221943465",
+              "submissions": 1006,
+              "submissionsCorrect": 0,
+              "questions": 6,
+              "accuracy": 0,
+              "difficulty": 1.2047920433996384
+            }
+          },
+          {
+            "id": "08338f4a-373e-489b-96b1-7697285d7081",
+            "name": "Basic Kinematic Equation (BKE)",
+            "courseId": "917504b9-0d67-4558-af71-b5961ee7b962",
+            "stats": {
+              "count": 1,
+              "timeSpent": "2526231834",
+              "timeSpentVideo": "413619692",
+              "submissions": 1997,
+              "submissionsCorrect": 0,
+              "questions": 10,
+              "accuracy": 0,
+              "difficulty": 1.2261564139246544
+            }
+          },
+          {
+            "id": "a310a05d-0bb2-42ea-98cc-c2ca471b2461",
+            "name": "Velocity and Acceleration Expansions",
+            "courseId": "917504b9-0d67-4558-af71-b5961ee7b962",
+            "stats": {
+              "count": 1,
+              "timeSpent": "1228643236",
+              "timeSpentVideo": "186526137",
+              "submissions": 826,
+              "submissionsCorrect": 0,
+              "questions": 5,
+              "accuracy": 0,
+              "difficulty": 1.1960043196544277
+            }
+          }
+        ],
+        "children": []
+      }
+    ]
+  },
+  {
+    "id": "980a7fac-0598-4946-9d68-c68f9808a290",
+    "number": 0,
+    "year": 2022,
+    "season": "SPRING",
+    "disclaimer": "",
+    "courseId": "917504b9-0d67-4558-af71-b5961ee7b962",
+    "flags": {
+      "published": true,
+      "practice": true
+    },
+    "stats": {
+      "count": 1,
+      "timeSpent": "354847023",
+      "timeSpentVideo": "100595748",
+      "submissions": 859,
+      "submissionsCorrect": 0,
+      "questions": 4,
+      "accuracy": 0,
+      "difficulty": 1.1978623566214808
+    },
+    "resources": [],
+    "questions": [
+      {
+        "id": "5097ba70-6be7-4b3d-ae12-b0a5548a4e7b",
+        "number": 1,
+        "flags": {
+          "published": true,
+          "disableRandomAnswers": true,
+          "answersStartHidden": true
+        },
+        "stats": {
+          "count": 1,
+          "timeSpent": "91469392",
+          "timeSpentVideo": "29445641",
+          "submissions": 300,
+          "submissionsCorrect": 0,
+          "accuracy": 0,
+          "difficulty": 1.125
+        },
+        "type": "MULTIPLE_CHOICE",
+        "topics": [
+          {
+            "id": "7b60e825-90e8-4a43-bef9-4bd765f22f33",
+            "name": "Dimensional Analysis",
+            "courseId": "917504b9-0d67-4558-af71-b5961ee7b962",
+            "stats": {
+              "count": 1,
+              "timeSpent": "811369019",
+              "timeSpentVideo": "110550518",
+              "submissions": 949,
+              "submissionsCorrect": 25,
+              "questions": 3,
+              "accuracy": 0.026343519494204427,
+              "difficulty": 1.1785033365109627
+            }
+          }
+        ],
+        "children": []
+      },
+      {
+        "id": "e3dfc3cc-d0b2-4966-88e9-6ddc85ff4bc4",
+        "number": 2,
+        "flags": {
+          "published": true,
+          "disableRandomAnswers": true,
+          "answersStartHidden": true
+        },
+        "stats": {
+          "count": 1,
+          "timeSpent": "96002459",
+          "timeSpentVideo": "30289033",
+          "submissions": 199,
+          "submissionsCorrect": 0,
+          "accuracy": 0,
+          "difficulty": 1.0827759197324416
+        },
+        "type": "MULTIPLE_CHOICE",
+        "topics": [
+          {
+            "id": "10040de0-2e79-402c-bb3b-8dfc6755fec4",
+            "name": "Statics",
+            "courseId": "917504b9-0d67-4558-af71-b5961ee7b962",
+            "stats": {
+              "count": 1,
+              "timeSpent": "515875501",
+              "timeSpentVideo": "45468221",
+              "submissions": 280,
+              "submissionsCorrect": 0,
+              "questions": 2,
+              "accuracy": 0,
+              "difficulty": 1.118421052631579
+            }
+          },
+          {
+            "id": "d7973e46-e2d8-42fd-932f-2e1a444f6549",
+            "name": "Forces",
+            "courseId": "917504b9-0d67-4558-af71-b5961ee7b962",
+            "stats": {
+              "count": 1,
+              "timeSpent": "752949806",
+              "timeSpentVideo": "77318322",
+              "submissions": 496,
+              "submissionsCorrect": 0,
+              "questions": 4,
+              "accuracy": 0,
+              "difficulty": 1.1661073825503356
+            }
+          },
+          {
+            "id": "e5ff4218-6a89-4af5-a45b-092c62acb820",
+            "name": "Moments",
+            "courseId": "917504b9-0d67-4558-af71-b5961ee7b962",
+            "stats": {
+              "count": 1,
+              "timeSpent": "603815529",
+              "timeSpentVideo": "60684269",
+              "submissions": 394,
+              "submissionsCorrect": 0,
+              "questions": 3,
+              "accuracy": 0,
+              "difficulty": 1.1487854251012146
+            }
+          }
+        ],
+        "children": []
+      },
+      {
+        "id": "a0de090d-9a18-471d-9162-862586ad6d3c",
+        "number": 3,
+        "flags": {
+          "published": true,
+          "disableRandomAnswers": true,
+          "answersStartHidden": true
+        },
+        "stats": {
+          "count": 1,
+          "timeSpent": "148248457",
+          "timeSpentVideo": "40860090",
+          "submissions": 302,
+          "submissionsCorrect": 0,
+          "accuracy": 0,
+          "difficulty": 1.1256218905472637
+        },
+        "type": "MULTIPLE_CHOICE",
+        "topics": [
+          {
+            "id": "08338f4a-373e-489b-96b1-7697285d7081",
+            "name": "Basic Kinematic Equation (BKE)",
+            "courseId": "917504b9-0d67-4558-af71-b5961ee7b962",
+            "stats": {
+              "count": 1,
+              "timeSpent": "2526231834",
+              "timeSpentVideo": "413619692",
+              "submissions": 1997,
+              "submissionsCorrect": 0,
+              "questions": 10,
+              "accuracy": 0,
+              "difficulty": 1.2261564139246544
+            }
+          }
+        ],
+        "children": []
+      },
+      {
+        "id": "71ea18d7-5bec-473c-9e2e-760a698f05e0",
+        "number": 4,
+        "flags": {
+          "published": true,
+          "disableRandomAnswers": true,
+          "answersStartHidden": true
+        },
+        "stats": {
+          "count": 1,
+          "timeSpent": "19126715",
+          "timeSpentVideo": "984",
+          "submissions": 58,
+          "submissionsCorrect": 0,
+          "accuracy": 0,
+          "difficulty": 0.9335443037974683
+        },
+        "type": "MULTIPLE_CHOICE",
+        "topics": [
+          {
+            "id": "08338f4a-373e-489b-96b1-7697285d7081",
+            "name": "Basic Kinematic Equation (BKE)",
+            "courseId": "917504b9-0d67-4558-af71-b5961ee7b962",
+            "stats": {
+              "count": 1,
+              "timeSpent": "2526231834",
+              "timeSpentVideo": "413619692",
+              "submissions": 1997,
+              "submissionsCorrect": 0,
+              "questions": 10,
+              "accuracy": 0,
+              "difficulty": 1.2261564139246544
+            }
+          },
+          {
+            "id": "5b610b76-81aa-4ce8-9725-bbe621a6b2d6",
+            "name": "Complex Rotations",
+            "courseId": "917504b9-0d67-4558-af71-b5961ee7b962",
+            "stats": {
+              "count": 1,
+              "timeSpent": "1460505646",
+              "timeSpentVideo": "221943465",
+              "submissions": 1006,
+              "submissionsCorrect": 0,
+              "questions": 6,
+              "accuracy": 0,
+              "difficulty": 1.2047920433996384
+            }
+          },
+          {
+            "id": "d7973e46-e2d8-42fd-932f-2e1a444f6549",
+            "name": "Forces",
+            "courseId": "917504b9-0d67-4558-af71-b5961ee7b962",
+            "stats": {
+              "count": 1,
+              "timeSpent": "752949806",
+              "timeSpentVideo": "77318322",
+              "submissions": 496,
+              "submissionsCorrect": 0,
+              "questions": 4,
+              "accuracy": 0,
+              "difficulty": 1.1661073825503356
+            }
+          },
+          {
+            "id": "a310a05d-0bb2-42ea-98cc-c2ca471b2461",
+            "name": "Velocity and Acceleration Expansions",
+            "courseId": "917504b9-0d67-4558-af71-b5961ee7b962",
+            "stats": {
+              "count": 1,
+              "timeSpent": "1228643236",
+              "timeSpentVideo": "186526137",
+              "submissions": 826,
+              "submissionsCorrect": 0,
+              "questions": 5,
+              "accuracy": 0,
+              "difficulty": 1.1960043196544277
+            }
+          }
+        ],
+        "children": []
+      }
+    ]
+  },
+  {
+    "id": "67aa41b1-fe92-4180-aaad-7c94b3400c92",
+    "number": 1,
+    "year": 2022,
+    "season": "SPRING",
+    "disclaimer": "",
+    "courseId": "917504b9-0d67-4558-af71-b5961ee7b962",
+    "flags": {
+      "published": true,
+      "practice": true
+    },
+    "stats": {
+      "count": 1,
+      "timeSpent": "290735047",
+      "timeSpentVideo": "109210238",
+      "submissions": 880,
+      "submissionsCorrect": 25,
+      "questions": 3,
+      "accuracy": 0.028409090909090908,
+      "difficulty": 1.1734693877551021
+    },
+    "resources": [],
+    "questions": [
+      {
+        "id": "ca852066-1766-484e-9fff-720eb1e402d7",
+        "number": 1,
+        "flags": {
+          "published": true,
+          "disableRandomAnswers": true,
+          "answersStartHidden": true
+        },
+        "stats": {
+          "count": 1,
+          "timeSpent": "98870331",
+          "timeSpentVideo": "27814644",
+          "submissions": 369,
+          "submissionsCorrect": 25,
+          "accuracy": 0.06775067750677506,
+          "difficulty": 1.090085287846482
+        },
+        "type": "FREE_RESPONSE",
+        "topics": [
+          {
+            "id": "7b60e825-90e8-4a43-bef9-4bd765f22f33",
+            "name": "Dimensional Analysis",
+            "courseId": "917504b9-0d67-4558-af71-b5961ee7b962",
+            "stats": {
+              "count": 1,
+              "timeSpent": "811369019",
+              "timeSpentVideo": "110550518",
+              "submissions": 949,
+              "submissionsCorrect": 25,
+              "questions": 3,
+              "accuracy": 0.026343519494204427,
+              "difficulty": 1.1785033365109627
+            }
+          }
+        ],
+        "children": []
+      },
+      {
+        "id": "4c1acdc7-df12-4710-9da6-f607f2397327",
+        "number": 2,
+        "flags": {
+          "published": true,
+          "disableRandomAnswers": true,
+          "answersStartHidden": true
+        },
+        "stats": {
+          "count": 1,
+          "timeSpent": "52189161",
+          "timeSpentVideo": "16127591",
+          "submissions": 200,
+          "submissionsCorrect": 0,
+          "accuracy": 0,
+          "difficulty": 1.0833333333333333
+        },
+        "type": "MULTIPLE_CHOICE",
+        "topics": [
+          {
+            "id": "56192ccb-2df4-43c3-a242-e1df33a0d7fa",
+            "name": "Vectors",
+            "courseId": "917504b9-0d67-4558-af71-b5961ee7b962",
+            "stats": {
+              "count": 1,
+              "timeSpent": "372095644",
+              "timeSpentVideo": "50684465",
+              "submissions": 479,
+              "submissionsCorrect": 0,
+              "questions": 3,
+              "accuracy": 0,
+              "difficulty": 1.1636442141623489
+            }
+          }
+        ],
+        "children": []
+      },
+      {
+        "id": "b615b099-bc25-4a9f-971a-9e076ae63bc0",
+        "number": 3,
+        "flags": {
+          "published": true,
+          "disableRandomAnswers": true,
+          "answersStartHidden": true
+        },
+        "stats": {
+          "count": 1,
+          "timeSpent": "139675555",
+          "timeSpentVideo": "65268003",
+          "submissions": 311,
+          "submissionsCorrect": 0,
+          "accuracy": 0,
+          "difficulty": 1.128345498783455
+        },
+        "type": "MULTIPLE_CHOICE",
+        "topics": [
+          {
+            "id": "08338f4a-373e-489b-96b1-7697285d7081",
+            "name": "Basic Kinematic Equation (BKE)",
+            "courseId": "917504b9-0d67-4558-af71-b5961ee7b962",
+            "stats": {
+              "count": 1,
+              "timeSpent": "2526231834",
+              "timeSpentVideo": "413619692",
+              "submissions": 1997,
+              "submissionsCorrect": 0,
+              "questions": 10,
+              "accuracy": 0,
+              "difficulty": 1.2261564139246544
+            }
+          }
+        ],
+        "children": []
+      }
+    ]
+  },
+  {
+    "id": "a52e964d-fdf5-4bfe-828b-98eded588ff9",
+    "number": 2,
+    "year": 2022,
+    "season": "SPRING",
+    "disclaimer": "",
+    "courseId": "917504b9-0d67-4558-af71-b5961ee7b962",
+    "flags": {
+      "published": true,
+      "practice": true
+    },
+    "stats": {
+      "count": 1,
+      "timeSpent": "124701163",
+      "timeSpentVideo": "45987444",
+      "submissions": 304,
+      "submissionsCorrect": 0,
+      "questions": 2,
+      "accuracy": 0,
+      "difficulty": 1.1262376237623761
+    },
+    "resources": [],
+    "questions": [
+      {
+        "id": "91839a1e-5f61-4ac7-a05f-75b97967004a",
+        "number": 1,
+        "flags": {
+          "published": true,
+          "disableRandomAnswers": true,
+          "answersStartHidden": true
+        },
+        "stats": {
+          "count": 1,
+          "timeSpent": "53095171",
+          "timeSpentVideo": "27002642",
+          "submissions": 170,
+          "submissionsCorrect": 0,
+          "accuracy": 0,
+          "difficulty": 1.0648148148148149
+        },
+        "type": "MULTIPLE_CHOICE",
+        "topics": [
+          {
+            "id": "08338f4a-373e-489b-96b1-7697285d7081",
+            "name": "Basic Kinematic Equation (BKE)",
+            "courseId": "917504b9-0d67-4558-af71-b5961ee7b962",
+            "stats": {
+              "count": 1,
+              "timeSpent": "2526231834",
+              "timeSpentVideo": "413619692",
+              "submissions": 1997,
+              "submissionsCorrect": 0,
+              "questions": 10,
+              "accuracy": 0,
+              "difficulty": 1.2261564139246544
+            }
+          },
+          {
+            "id": "5b610b76-81aa-4ce8-9725-bbe621a6b2d6",
+            "name": "Complex Rotations",
+            "courseId": "917504b9-0d67-4558-af71-b5961ee7b962",
+            "stats": {
+              "count": 1,
+              "timeSpent": "1460505646",
+              "timeSpentVideo": "221943465",
+              "submissions": 1006,
+              "submissionsCorrect": 0,
+              "questions": 6,
+              "accuracy": 0,
+              "difficulty": 1.2047920433996384
+            }
+          }
+        ],
+        "children": []
+      },
+      {
+        "id": "8779ef85-203b-47d2-b8c5-c7ff169c52f8",
+        "number": 2,
+        "flags": {
+          "published": true,
+          "disableRandomAnswers": true,
+          "answersStartHidden": true
+        },
+        "stats": {
+          "count": 1,
+          "timeSpent": "71605992",
+          "timeSpentVideo": "18984802",
+          "submissions": 134,
+          "submissionsCorrect": 0,
+          "accuracy": 0,
+          "difficulty": 1.0363247863247864
+        },
+        "type": "MULTIPLE_CHOICE",
+        "topics": [
+          {
+            "id": "08338f4a-373e-489b-96b1-7697285d7081",
+            "name": "Basic Kinematic Equation (BKE)",
+            "courseId": "917504b9-0d67-4558-af71-b5961ee7b962",
+            "stats": {
+              "count": 1,
+              "timeSpent": "2526231834",
+              "timeSpentVideo": "413619692",
+              "submissions": 1997,
+              "submissionsCorrect": 0,
+              "questions": 10,
+              "accuracy": 0,
+              "difficulty": 1.2261564139246544
+            }
+          },
+          {
+            "id": "5b610b76-81aa-4ce8-9725-bbe621a6b2d6",
+            "name": "Complex Rotations",
+            "courseId": "917504b9-0d67-4558-af71-b5961ee7b962",
+            "stats": {
+              "count": 1,
+              "timeSpent": "1460505646",
+              "timeSpentVideo": "221943465",
+              "submissions": 1006,
+              "submissionsCorrect": 0,
+              "questions": 6,
+              "accuracy": 0,
+              "difficulty": 1.2047920433996384
+            }
+          },
+          {
+            "id": "a310a05d-0bb2-42ea-98cc-c2ca471b2461",
+            "name": "Velocity and Acceleration Expansions",
+            "courseId": "917504b9-0d67-4558-af71-b5961ee7b962",
+            "stats": {
+              "count": 1,
+              "timeSpent": "1228643236",
+              "timeSpentVideo": "186526137",
+              "submissions": 826,
+              "submissionsCorrect": 0,
+              "questions": 5,
+              "accuracy": 0,
+              "difficulty": 1.1960043196544277
+            }
+          }
+        ],
+        "children": []
+      }
+    ]
+  }
+]

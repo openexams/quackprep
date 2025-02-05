@@ -49,14 +49,27 @@ export async function postQuestionSubmissionToBoilerExams(
 
 /**
  *
- * @param {import("../types.js").BoilerQuestion} boilerQuestion
+ * @param {import("../types.js").BoilerQuestion | String} boilerQuestion
  * @param {String} questionContext
- * @returns {import("../types.js").JSONQuestion}
+ * @returns {import("../types.js").JSONQuestion[]}
  */
-export function boilerQuestionToJsonQuestion(
-  boilerQuestion,
+export async function boilerQuestionToJsonQuestion(
+  boilerQuestionOrId,
   questionContext = null
 ) {
+  let boilerQuestion = null;
+  if (typeof boilerQuestionOrId === "string") {
+    const result = await fetchWithExponetialBackoff(
+      `/questions/${boilerQuestionOrId}`
+    );
+    boilerQuestion = BoilerQuestionSchema.parse(result);
+  } else {
+    boilerQuestion = BoilerQuestionSchema.parse(boilerQuestionOrId);
+  }
+  console.log("curQuestionId", boilerQuestion.id);
+  // now do some cool stuff
+
+  const return_questions = [];
   const question_images =
     boilerQuestion.resources.length > 0
       ? boilerQuestion.resources
@@ -65,18 +78,22 @@ export function boilerQuestionToJsonQuestion(
             createMDImageFromURLAndAlt(item.data.url, item.data.altText)
           )
           .join("\n")
-      : null;
+      : "";
 
-  const question_explanation_url = boilerQuestion.explanation.resources.find(
+  const question_video_resource = boilerQuestion.explanation.resources.find(
     (resource) => resource.type === "VIDEO"
-  ).data.url; // finds first video (should only be one I hope. add validation checks for this)
+  ); // finds first video (should only be one I hope. add validation checks for this)
 
-  const question_text = boilerQuestion.data.body;
+  const question_explanation_url = question_video_resource
+    ? question_video_resource?.data?.url
+    : null;
+
+  const question_text = (questionContext || "") + boilerQuestion.data.body;
 
   const question_topic_names = boilerQuestion.topics.map((topic) => topic.name);
 
   let question_type = null;
-  // dumbass logic to check question type for quackprep.
+  // dumbass logic to check question type for transformation to quackprep.
   if (
     Array.isArray(boilerQuestion.data.solution) &&
     boilerQuestion.data.solution.length > 0 &&
@@ -101,14 +118,34 @@ export function boilerQuestionToJsonQuestion(
     boilerQuestion.type === "PARENT" &&
     boilerQuestion.data.answerChoices.length === 0
   ) {
-    // TODO QUESTION TYPE PARENT TODO, WHAT SHOULD I DO IN GENERAL?
+    console.log("Found PARENT question, splitting now");
+    const context = question_text; // context for child question is parent question text
+    const childQuestions = boilerQuestion.children;
+    // these child questions should NOT have children of they own.
+    for (let k = 0; k < childQuestions.length; k++) {
+      // push data in from og question.
+      childQuestions[k].explanation.resources.push(question_video_resource);
+      childQuestions[k].topics = boilerQuestion.topics;
+      //
+      const result_child_question = JSONQuestionSchema.array().parse(
+        await boilerQuestionToJsonQuestion(childQuestions[k], context) // call this function again, it should return the child question.
+      );
+      if (result_child_question.length !== 1) {
+        throw new Error(
+          "Child Question isnt 1 question, may have more or less"
+        );
+      } else {
+        return_questions.push(result_child_question[0]);
+      }
+    } // TODO MAKE THESE QUESTIONS TOPIC & explanation_url SAME AS PARENT
+    return return_questions; // cuz this question we are on will NOT be made into a question
   } else {
     throw new Error(
       `I have not forseen this question type ${{ boilerQuestion }}`
     );
   }
-  // all things relating to the choices for images etc will be in explanation.resources
 
+  // all things relating to the choices for images etc will be in explanation.resources
   let choices = null;
   if (question_type === "frq") {
     const choice_images =
@@ -119,7 +156,7 @@ export function boilerQuestionToJsonQuestion(
               createMDImageFromURLAndAlt(item.data.url, item.data.altText)
             )
             .join("\n")
-        : null;
+        : "";
     choices = [
       {
         answer: boilerQuestion.data.solution + " " + choice_images,
@@ -140,7 +177,7 @@ export function boilerQuestionToJsonQuestion(
                 createMDImageFromURLAndAlt(item.data.url, item.data.altText)
               )
               .join("\n")
-          : null;
+          : "";
       return {
         answer: choice.body + " " + curChoiceImages,
         is_correct: boilerQuestion.data.solution.includes(choice.index) ? 1 : 0,
@@ -150,30 +187,28 @@ export function boilerQuestionToJsonQuestion(
   } else {
     throw new Error("question type isnt frq or mcq somehow");
   }
-
-  return JSONQuestionSchema.parse({
+  return_questions.push({
     question: question_text + " " + question_images,
     explanation_url: question_explanation_url,
     topics: question_topic_names,
     choices: JSONChoiceSchema.array().parse(choices),
   });
+
+  return JSONQuestionSchema.array().parse(return_questions);
 }
 
 /**
- * TODO FINISH!!
  * @param {String[]} boilerQuestionIds
- * @returns {import("../../types.js").JSONQuestion} questions with choices included.
+ * @returns {import("../types.ts").JSONQuestion[]} questions with choices included.
  */
 export async function boilerQuestionsToJsonQuestions(boilerQuestionIds) {
-  const questions = [];
+  let questions = [];
   for (let i = 0; i < boilerQuestionIds.length; i++) {
     // for all passed in questions
-    const result = await fetchWithExponetialBackoff(
-      `/questions/${boilerQuestionIds[i]}`
+    const jsonQuestions = await boilerQuestionToJsonQuestion(
+      boilerQuestionIds[i]
     );
-    const validated = BoilerQuestionSchema.parse(result);
-    const jsonQuestion = boilerQuestionToJsonQuestion(validated, null);
-    questions.push(jsonQuestion);
+    questions = [...questions, ...jsonQuestions];
   }
   return JSONQuestionSchema.array().parse(questions);
 }

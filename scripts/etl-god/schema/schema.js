@@ -5,6 +5,7 @@ export const BoilerResourcesSchema = z.array(
     .object({
       type: z.enum(["IMAGE", "VIDEO", "PDF", "LOGO"]),
       data: z.object({
+        key: z.string().optional(),
         url: z.string().optional(),
         altText: z.string().optional(),
         link: z.string().optional(),
@@ -19,15 +20,9 @@ export const BoilerResourcesSchema = z.array(
 const BoilerStatsSchema = z
   .object({
     count: z.number(),
-    timeSpent: z.string(),
-    timeSpentVideo: z.string(),
-    submissions: z.number(),
-    submissionsCorrect: z.number(),
     questions: z.number(), // count of questions in class, can be used to verify we added everything.
     exams: z.number(), // same for exams
     topics: z.number(),
-    accuracy: z.number(),
-    difficulty: z.number(),
   })
   .strip();
 
@@ -39,8 +34,6 @@ const BoilerCourseSchema = z
     name: z.string(),
     subject: z.any(),
     color: z.any(),
-    disclaimer: z.any(),
-    studyModes: z.any(),
     flags: z.any(),
     stats: BoilerStatsSchema,
     resources: BoilerResourcesSchema,
@@ -73,10 +66,10 @@ export const BoilerExamSchema = z
 export const BoilerQuestionSchema = z
   .object({
     id: z.string(),
-    type: z.enum(["MULTIPLE_CHOICE", "FREE_RESPONSE", "PARENT"]), //check for free response
+    type: z.enum(["MULTIPLE_CHOICE", "FREE_RESPONSE", "PARENT"]),
     data: z.object({
       body: z.string(),
-      solution: z.string().or(z.array(z.number().int())),
+      solution: z.string().or(z.array(z.number().int())).optional(),
       answerChoices: z.array(
         z.object({ id: z.string(), index: z.number().int(), body: z.string() })
       ),
@@ -92,7 +85,7 @@ export const BoilerQuestionSchema = z
       resources: BoilerResourcesSchema,
     }),
     resources: BoilerResourcesSchema,
-    children: z.array(z.lazy(() => BoilerQuestionSchema)),
+    children: z.array(z.lazy(() => BoilerQuestionSchema)).optional(),
   })
   .strip(); // superRefine is cool like checking what i check on question.js
 
@@ -105,10 +98,10 @@ export const BoilerQuestionSubmissionSchema = z.object({
   timeSpentVideo: z.number().int().nonnegative(),
   osFamily: z.string(),
   userSolution: z.array(z.number().int()),
-  type: z.enum(["MULTIPLE_CHOICE", "FREE_RESPONSE"]),
+  type: z.enum(["MULTIPLE_CHOICE", "FREE_RESPONSE", "PARENT"]),
 });
 
-// my JSON SCHEMA
+// MY JSON SCHEMA //
 export const JSONChoiceSchema = z.object({
   answer: z.string(),
   is_correct: z.number().int().max(1).min(0),
@@ -123,17 +116,28 @@ export const JSONQuestionSchema = z.object({
 });
 export const JSONGroupSchema = z.object({
   name: z.string(),
-  type: z.number().int(),
+  type: z.enum(["exam", "topic"]),
   desc: z.string(),
-  questionCount: z.number().int(),
   questions: z.array(JSONQuestionSchema).nullable(),
   pdfLink: z.string().nullable(),
+  questionCount: z.number().int().optional(), // to track stats
 });
 
 export const JSONClassSchema = z.object({
   name: z.string(),
   description: z.string(),
-  category: z.number().int(),
-  questionCount: z.number().int(),
+  category: z.enum([
+    "CS",
+    "MA",
+    "ECO",
+    "BIO",
+    "CHEM",
+    "PHY",
+    "ENG",
+    "STAT",
+    "PSY",
+    "Other", // TODO KEEP UP TO DATE WITH SQL DB I HAVE THESE HARDCODED IN LIKE 5 DIFF SPOTS
+  ]),
+  questionCount: z.number().int().optional(), // to track stats
   groups: z.array(JSONGroupSchema).nullable(),
 });

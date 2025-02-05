@@ -1,0 +1,2100 @@
+[
+  {
+    "subject": "Mathematics",
+    "courses": [
+      {
+        "id": "12e7296b-53d1-4cba-909b-9b8c8bce8415",
+        "abbreviation": "MA",
+        "number": 16100,
+        "name": "Plane Analytic Geometry And Calculus I",
+        "subject": "Mathematics",
+        "color": "#860124",
+        "disclaimer": "",
+        "studyModes": [
+          "EXAM",
+          "TIMED_EXAM",
+          "TOPIC"
+        ],
+        "flags": {
+          "published": true,
+          "invertImageColors": false
+        },
+        "stats": {
+          "count": 1,
+          "timeSpent": "33498638746",
+          "timeSpentVideo": "7240007723",
+          "submissions": 225164,
+          "submissionsCorrect": 138119,
+          "questions": 313,
+          "exams": 24,
+          "topics": 0,
+          "accuracy": 0.61341511076371,
+          "difficulty": 0.6366352368776191
+        },
+        "resources": [
+          {
+            "id": "40673d73-35df-45b9-8c90-647968218097",
+            "type": "LOGO",
+            "data": {
+              "key": "xVuznvG4egRuWOxe1QZEs",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/xVuznvG4egRuWOxe1QZEs"
+            },
+            "courseId": "12e7296b-53d1-4cba-909b-9b8c8bce8415",
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+          }
+        ],
+        "secondaryColor": "#6b011d"
+      },
+      {
+        "id": "70661c23-09d4-445b-abdf-a91c55cebcf5",
+        "abbreviation": "MA",
+        "number": 16200,
+        "name": "Plane Analytic Geometry And Calculus II",
+        "subject": "Mathematics",
+        "color": "#700136",
+        "disclaimer": "",
+        "studyModes": [
+          "EXAM",
+          "TIMED_EXAM",
+          "TOPIC"
+        ],
+        "flags": {
+          "published": true,
+          "invertImageColors": false
+        },
+        "stats": {
+          "count": 1,
+          "timeSpent": "104794554940",
+          "timeSpentVideo": "21613079396",
+          "submissions": 629790,
+          "submissionsCorrect": 388973,
+          "questions": 326,
+          "exams": 24,
+          "topics": 0,
+          "accuracy": 0.6176233347623811,
+          "difficulty": 0.6323953388686914
+        },
+        "resources": [
+          {
+            "id": "44753324-1087-42aa-aa47-3e7f14f6adad",
+            "type": "LOGO",
+            "data": {
+              "key": "1boYhntcMycxAer5WAr_R",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/1boYhntcMycxAer5WAr_R"
+            },
+            "courseId": "70661c23-09d4-445b-abdf-a91c55cebcf5",
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+          }
+        ],
+        "secondaryColor": "#5a012b"
+      },
+      {
+        "id": "24539138-2fa4-4a53-8976-88d5db5345a4",
+        "abbreviation": "MA",
+        "number": 16600,
+        "name": "Analytic Geometry And Calculus II",
+        "subject": "Mathematics",
+        "color": "#5a0148",
+        "disclaimer": "",
+        "studyModes": [
+          "EXAM",
+          "TIMED_EXAM",
+          "TOPIC"
+        ],
+        "flags": {
+          "published": true,
+          "invertImageColors": false
+        },
+        "stats": {
+          "count": 1,
+          "timeSpent": "6711633",
+          "timeSpentVideo": "0",
+          "submissions": 213,
+          "submissionsCorrect": 10,
+          "questions": 12,
+          "exams": 1,
+          "topics": 0,
+          "accuracy": 0.046948356807511735,
+          "difficulty": 1.0583067092651757
+        },
+        "resources": [
+          {
+            "id": "88315ae4-4738-405b-8f2c-17a49fc7a011",
+            "type": "LOGO",
+            "data": {
+              "key": "OfVNNvPqP9HhddiDSwKD1",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/OfVNNvPqP9HhddiDSwKD1"
+            },
+            "courseId": "24539138-2fa4-4a53-8976-88d5db5345a4",
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+          },
+          {
+            "id": "19daede1-9bee-4846-83a6-3e8662ef5b57",
+            "type": "LOGO",
+            "data": {
+              "key": "OfVNNvPqP9HhddiDSwKD1",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/OfVNNvPqP9HhddiDSwKD1"
+            },
+            "courseId": "24539138-2fa4-4a53-8976-88d5db5345a4",
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+          },
+          {
+            "id": "1e2137ba-e310-49d8-b077-e5858b411030",
+            "type": "LOGO",
+            "data": {
+              "key": "OfVNNvPqP9HhddiDSwKD1",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/OfVNNvPqP9HhddiDSwKD1"
+            },
+            "courseId": "24539138-2fa4-4a53-8976-88d5db5345a4",
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+          },
+          {
+            "id": "77d392a5-7c3c-42a8-85d6-6a9a1e83b7f3",
+            "type": "LOGO",
+            "data": {
+              "key": "OfVNNvPqP9HhddiDSwKD1",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/OfVNNvPqP9HhddiDSwKD1"
+            },
+            "courseId": "24539138-2fa4-4a53-8976-88d5db5345a4",
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+          },
+          {
+            "id": "dc90550d-acc0-43b0-95be-d2d0c4766e11",
+            "type": "LOGO",
+            "data": {
+              "key": "OfVNNvPqP9HhddiDSwKD1",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/OfVNNvPqP9HhddiDSwKD1"
+            },
+            "courseId": "24539138-2fa4-4a53-8976-88d5db5345a4",
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+          },
+          {
+            "id": "67b1bdf5-e333-49b1-a707-6fd854350206",
+            "type": "LOGO",
+            "data": {
+              "key": "OfVNNvPqP9HhddiDSwKD1",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/OfVNNvPqP9HhddiDSwKD1"
+            },
+            "courseId": "24539138-2fa4-4a53-8976-88d5db5345a4",
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+          },
+          {
+            "id": "fbcc13d9-6cc9-4ab0-b8f7-3d2d780d3954",
+            "type": "LOGO",
+            "data": {
+              "key": "OfVNNvPqP9HhddiDSwKD1",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/OfVNNvPqP9HhddiDSwKD1"
+            },
+            "courseId": "24539138-2fa4-4a53-8976-88d5db5345a4",
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+          },
+          {
+            "id": "280bc647-af08-4de1-88c3-8a205106f3d9",
+            "type": "LOGO",
+            "data": {
+              "key": "OfVNNvPqP9HhddiDSwKD1",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/OfVNNvPqP9HhddiDSwKD1"
+            },
+            "courseId": "24539138-2fa4-4a53-8976-88d5db5345a4",
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+          },
+          {
+            "id": "a3491d44-77bf-4b22-9515-0d5888746fbd",
+            "type": "LOGO",
+            "data": {
+              "key": "OfVNNvPqP9HhddiDSwKD1",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/OfVNNvPqP9HhddiDSwKD1"
+            },
+            "courseId": "24539138-2fa4-4a53-8976-88d5db5345a4",
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+          },
+          {
+            "id": "64f685be-3faa-49e2-ad9c-d1ea00dce593",
+            "type": "LOGO",
+            "data": {
+              "key": "OfVNNvPqP9HhddiDSwKD1",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/OfVNNvPqP9HhddiDSwKD1"
+            },
+            "courseId": "24539138-2fa4-4a53-8976-88d5db5345a4",
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+          },
+          {
+            "id": "873be4a2-3225-4f50-8aea-1a498f72eccd",
+            "type": "LOGO",
+            "data": {
+              "key": "OfVNNvPqP9HhddiDSwKD1",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/OfVNNvPqP9HhddiDSwKD1"
+            },
+            "courseId": "24539138-2fa4-4a53-8976-88d5db5345a4",
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+          },
+          {
+            "id": "e7a34469-d9b1-468d-807a-cdaf39382191",
+            "type": "LOGO",
+            "data": {
+              "key": "OfVNNvPqP9HhddiDSwKD1",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/OfVNNvPqP9HhddiDSwKD1"
+            },
+            "courseId": "24539138-2fa4-4a53-8976-88d5db5345a4",
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+          },
+          {
+            "id": "0dc71763-8659-4afa-8882-361accb054ff",
+            "type": "LOGO",
+            "data": {
+              "key": "OfVNNvPqP9HhddiDSwKD1",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/OfVNNvPqP9HhddiDSwKD1"
+            },
+            "courseId": "24539138-2fa4-4a53-8976-88d5db5345a4",
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+          },
+          {
+            "id": "7b74a2b4-6607-433f-af2b-5e5d924fbfd4",
+            "type": "LOGO",
+            "data": {
+              "key": "OfVNNvPqP9HhddiDSwKD1",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/OfVNNvPqP9HhddiDSwKD1"
+            },
+            "courseId": "24539138-2fa4-4a53-8976-88d5db5345a4",
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+          },
+          {
+            "id": "c4653bb4-be9c-4f6f-a4d8-b6019909768f",
+            "type": "LOGO",
+            "data": {
+              "key": "OfVNNvPqP9HhddiDSwKD1",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/OfVNNvPqP9HhddiDSwKD1"
+            },
+            "courseId": "24539138-2fa4-4a53-8976-88d5db5345a4",
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+          },
+          {
+            "id": "6b3af282-f044-4f0a-b72d-38ea1e27bbe3",
+            "type": "LOGO",
+            "data": {
+              "key": "OfVNNvPqP9HhddiDSwKD1",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/OfVNNvPqP9HhddiDSwKD1"
+            },
+            "courseId": "24539138-2fa4-4a53-8976-88d5db5345a4",
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+          },
+          {
+            "id": "e190d60d-b00c-42db-a134-e1d0014fd684",
+            "type": "LOGO",
+            "data": {
+              "key": "OfVNNvPqP9HhddiDSwKD1",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/OfVNNvPqP9HhddiDSwKD1"
+            },
+            "courseId": "24539138-2fa4-4a53-8976-88d5db5345a4",
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+          },
+          {
+            "id": "832f3355-4172-4862-92c8-cea187643917",
+            "type": "LOGO",
+            "data": {
+              "key": "OfVNNvPqP9HhddiDSwKD1",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/OfVNNvPqP9HhddiDSwKD1"
+            },
+            "courseId": "24539138-2fa4-4a53-8976-88d5db5345a4",
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+          },
+          {
+            "id": "305a222c-dc1b-41fa-8693-968b41b456f9",
+            "type": "LOGO",
+            "data": {
+              "key": "OfVNNvPqP9HhddiDSwKD1",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/OfVNNvPqP9HhddiDSwKD1"
+            },
+            "courseId": "24539138-2fa4-4a53-8976-88d5db5345a4",
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+          },
+          {
+            "id": "a25f1334-87cd-4e94-ac9d-c1dc1605a61c",
+            "type": "LOGO",
+            "data": {
+              "key": "OfVNNvPqP9HhddiDSwKD1",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/OfVNNvPqP9HhddiDSwKD1"
+            },
+            "courseId": "24539138-2fa4-4a53-8976-88d5db5345a4",
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+          },
+          {
+            "id": "16e94ba8-bc16-49d7-9987-272bd33878cb",
+            "type": "LOGO",
+            "data": {
+              "key": "OfVNNvPqP9HhddiDSwKD1",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/OfVNNvPqP9HhddiDSwKD1"
+            },
+            "courseId": "24539138-2fa4-4a53-8976-88d5db5345a4",
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+          },
+          {
+            "id": "0939fcaa-5b4f-424e-a08f-4fd104f32e11",
+            "type": "LOGO",
+            "data": {
+              "key": "OfVNNvPqP9HhddiDSwKD1",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/OfVNNvPqP9HhddiDSwKD1"
+            },
+            "courseId": "24539138-2fa4-4a53-8976-88d5db5345a4",
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+          },
+          {
+            "id": "cfe2c97d-879e-4e7d-9171-37bac034630d",
+            "type": "LOGO",
+            "data": {
+              "key": "OfVNNvPqP9HhddiDSwKD1",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/OfVNNvPqP9HhddiDSwKD1"
+            },
+            "courseId": "24539138-2fa4-4a53-8976-88d5db5345a4",
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+          },
+          {
+            "id": "ff5c80ba-244e-488b-ad20-0f9c0e32062c",
+            "type": "LOGO",
+            "data": {
+              "key": "OfVNNvPqP9HhddiDSwKD1",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/OfVNNvPqP9HhddiDSwKD1"
+            },
+            "courseId": "24539138-2fa4-4a53-8976-88d5db5345a4",
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+          },
+          {
+            "id": "0d41332f-3772-454c-8995-6c3fb23f4df9",
+            "type": "LOGO",
+            "data": {
+              "key": "OfVNNvPqP9HhddiDSwKD1",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/OfVNNvPqP9HhddiDSwKD1"
+            },
+            "courseId": "24539138-2fa4-4a53-8976-88d5db5345a4",
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+          },
+          {
+            "id": "257a46b1-5b5c-452e-ab32-f8871c044421",
+            "type": "LOGO",
+            "data": {
+              "key": "OfVNNvPqP9HhddiDSwKD1",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/OfVNNvPqP9HhddiDSwKD1"
+            },
+            "courseId": "24539138-2fa4-4a53-8976-88d5db5345a4",
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+          },
+          {
+            "id": "82809876-e4a4-459c-9a41-86416d6fff07",
+            "type": "LOGO",
+            "data": {
+              "key": "OfVNNvPqP9HhddiDSwKD1",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/OfVNNvPqP9HhddiDSwKD1"
+            },
+            "courseId": "24539138-2fa4-4a53-8976-88d5db5345a4",
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+          },
+          {
+            "id": "7fca5259-dd10-43d3-b1e5-2f40ef88ec24",
+            "type": "LOGO",
+            "data": {
+              "key": "OfVNNvPqP9HhddiDSwKD1",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/OfVNNvPqP9HhddiDSwKD1"
+            },
+            "courseId": "24539138-2fa4-4a53-8976-88d5db5345a4",
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+          },
+          {
+            "id": "99e3c0ee-48fd-4afd-b57d-b3e8ef1afd26",
+            "type": "LOGO",
+            "data": {
+              "key": "OfVNNvPqP9HhddiDSwKD1",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/OfVNNvPqP9HhddiDSwKD1"
+            },
+            "courseId": "24539138-2fa4-4a53-8976-88d5db5345a4",
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+          },
+          {
+            "id": "ad93a2ae-b398-4dcc-8be8-9695c0976176",
+            "type": "LOGO",
+            "data": {
+              "key": "OfVNNvPqP9HhddiDSwKD1",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/OfVNNvPqP9HhddiDSwKD1"
+            },
+            "courseId": "24539138-2fa4-4a53-8976-88d5db5345a4",
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+          },
+          {
+            "id": "12c1380b-d7a8-4c30-9252-cb023d6cebee",
+            "type": "LOGO",
+            "data": {
+              "key": "OfVNNvPqP9HhddiDSwKD1",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/OfVNNvPqP9HhddiDSwKD1"
+            },
+            "courseId": "24539138-2fa4-4a53-8976-88d5db5345a4",
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+          },
+          {
+            "id": "f316ab7e-97ee-4319-857c-00897fe7dec0",
+            "type": "LOGO",
+            "data": {
+              "key": "OfVNNvPqP9HhddiDSwKD1",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/OfVNNvPqP9HhddiDSwKD1"
+            },
+            "courseId": "24539138-2fa4-4a53-8976-88d5db5345a4",
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+          },
+          {
+            "id": "489e4e16-a7ef-457b-855e-a3b0ad27f274",
+            "type": "LOGO",
+            "data": {
+              "key": "OfVNNvPqP9HhddiDSwKD1",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/OfVNNvPqP9HhddiDSwKD1"
+            },
+            "courseId": "24539138-2fa4-4a53-8976-88d5db5345a4",
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+          },
+          {
+            "id": "c9ba23de-444c-46ac-9d37-f96aed690c70",
+            "type": "LOGO",
+            "data": {
+              "key": "OfVNNvPqP9HhddiDSwKD1",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/OfVNNvPqP9HhddiDSwKD1"
+            },
+            "courseId": "24539138-2fa4-4a53-8976-88d5db5345a4",
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+          },
+          {
+            "id": "c7095bf4-8962-4618-a3d3-cff82fddc690",
+            "type": "LOGO",
+            "data": {
+              "key": "OfVNNvPqP9HhddiDSwKD1",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/OfVNNvPqP9HhddiDSwKD1"
+            },
+            "courseId": "24539138-2fa4-4a53-8976-88d5db5345a4",
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+          },
+          {
+            "id": "6e144d21-b41b-46f5-aa6e-6e037bf5877b",
+            "type": "LOGO",
+            "data": {
+              "key": "OfVNNvPqP9HhddiDSwKD1",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/OfVNNvPqP9HhddiDSwKD1"
+            },
+            "courseId": "24539138-2fa4-4a53-8976-88d5db5345a4",
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+          },
+          {
+            "id": "db4854a9-2ad9-4a2c-a5d8-835c16922647",
+            "type": "LOGO",
+            "data": {
+              "key": "OfVNNvPqP9HhddiDSwKD1",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/OfVNNvPqP9HhddiDSwKD1"
+            },
+            "courseId": "24539138-2fa4-4a53-8976-88d5db5345a4",
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+          },
+          {
+            "id": "da28de5d-49c0-4d5f-b705-154289b69704",
+            "type": "LOGO",
+            "data": {
+              "key": "OfVNNvPqP9HhddiDSwKD1",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/OfVNNvPqP9HhddiDSwKD1"
+            },
+            "courseId": "24539138-2fa4-4a53-8976-88d5db5345a4",
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+          },
+          {
+            "id": "a30c040b-9d8f-4b74-bcf1-5023750994fb",
+            "type": "LOGO",
+            "data": {
+              "key": "OfVNNvPqP9HhddiDSwKD1",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/OfVNNvPqP9HhddiDSwKD1"
+            },
+            "courseId": "24539138-2fa4-4a53-8976-88d5db5345a4",
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+          },
+          {
+            "id": "24666d64-242c-4c03-a5d0-7746b4eb98a0",
+            "type": "LOGO",
+            "data": {
+              "key": "OfVNNvPqP9HhddiDSwKD1",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/OfVNNvPqP9HhddiDSwKD1"
+            },
+            "courseId": "24539138-2fa4-4a53-8976-88d5db5345a4",
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+          },
+          {
+            "id": "80d8ecdd-ff85-4b28-a339-72ecc58fbe6b",
+            "type": "LOGO",
+            "data": {
+              "key": "OfVNNvPqP9HhddiDSwKD1",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/OfVNNvPqP9HhddiDSwKD1"
+            },
+            "courseId": "24539138-2fa4-4a53-8976-88d5db5345a4",
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+          },
+          {
+            "id": "e9f5f6cf-095f-4d2d-8eea-c04c10185c07",
+            "type": "LOGO",
+            "data": {
+              "key": "OfVNNvPqP9HhddiDSwKD1",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/OfVNNvPqP9HhddiDSwKD1"
+            },
+            "courseId": "24539138-2fa4-4a53-8976-88d5db5345a4",
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+          },
+          {
+            "id": "b080450a-99ca-4e48-9168-b8e8a868e621",
+            "type": "LOGO",
+            "data": {
+              "key": "OfVNNvPqP9HhddiDSwKD1",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/OfVNNvPqP9HhddiDSwKD1"
+            },
+            "courseId": "24539138-2fa4-4a53-8976-88d5db5345a4",
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+          },
+          {
+            "id": "43d1ee2a-e02f-4ba4-a7bb-99770d33b692",
+            "type": "LOGO",
+            "data": {
+              "key": "OfVNNvPqP9HhddiDSwKD1",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/OfVNNvPqP9HhddiDSwKD1"
+            },
+            "courseId": "24539138-2fa4-4a53-8976-88d5db5345a4",
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+          },
+          {
+            "id": "4f0292cd-0408-450c-92f2-243e865e9486",
+            "type": "LOGO",
+            "data": {
+              "key": "OfVNNvPqP9HhddiDSwKD1",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/OfVNNvPqP9HhddiDSwKD1"
+            },
+            "courseId": "24539138-2fa4-4a53-8976-88d5db5345a4",
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+          },
+          {
+            "id": "61f92d8c-f2ed-4ce1-b6fc-1d37eed61b81",
+            "type": "LOGO",
+            "data": {
+              "key": "OfVNNvPqP9HhddiDSwKD1",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/OfVNNvPqP9HhddiDSwKD1"
+            },
+            "courseId": "24539138-2fa4-4a53-8976-88d5db5345a4",
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+          },
+          {
+            "id": "c48bc0d1-5491-4154-b2f7-ff88651a49b6",
+            "type": "LOGO",
+            "data": {
+              "key": "OfVNNvPqP9HhddiDSwKD1",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/OfVNNvPqP9HhddiDSwKD1"
+            },
+            "courseId": "24539138-2fa4-4a53-8976-88d5db5345a4",
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+          },
+          {
+            "id": "10432468-564f-4606-9d72-0d8fffdb9390",
+            "type": "LOGO",
+            "data": {
+              "key": "OfVNNvPqP9HhddiDSwKD1",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/OfVNNvPqP9HhddiDSwKD1"
+            },
+            "courseId": "24539138-2fa4-4a53-8976-88d5db5345a4",
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+          },
+          {
+            "id": "712e7613-116a-4c44-af2a-d7dcd7e88b54",
+            "type": "LOGO",
+            "data": {
+              "key": "OfVNNvPqP9HhddiDSwKD1",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/OfVNNvPqP9HhddiDSwKD1"
+            },
+            "courseId": "24539138-2fa4-4a53-8976-88d5db5345a4",
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+          },
+          {
+            "id": "e76df8c0-1181-4403-8f7d-4dbdd85806de",
+            "type": "LOGO",
+            "data": {
+              "key": "OfVNNvPqP9HhddiDSwKD1",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/OfVNNvPqP9HhddiDSwKD1"
+            },
+            "courseId": "24539138-2fa4-4a53-8976-88d5db5345a4",
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+          },
+          {
+            "id": "86727ee5-021d-401b-aa4f-a0cd9378ab6e",
+            "type": "LOGO",
+            "data": {
+              "key": "OfVNNvPqP9HhddiDSwKD1",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/OfVNNvPqP9HhddiDSwKD1"
+            },
+            "courseId": "24539138-2fa4-4a53-8976-88d5db5345a4",
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+          },
+          {
+            "id": "a480f726-31a6-4c5a-ac09-83da1046608d",
+            "type": "LOGO",
+            "data": {
+              "key": "OfVNNvPqP9HhddiDSwKD1",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/OfVNNvPqP9HhddiDSwKD1"
+            },
+            "courseId": "24539138-2fa4-4a53-8976-88d5db5345a4",
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+          },
+          {
+            "id": "2a5f5c5b-c975-4cf4-96af-f609fbe2ac82",
+            "type": "LOGO",
+            "data": {
+              "key": "OfVNNvPqP9HhddiDSwKD1",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/OfVNNvPqP9HhddiDSwKD1"
+            },
+            "courseId": "24539138-2fa4-4a53-8976-88d5db5345a4",
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+          },
+          {
+            "id": "eb2f3629-9601-435e-b719-8ec45e192cf2",
+            "type": "LOGO",
+            "data": {
+              "key": "OfVNNvPqP9HhddiDSwKD1",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/OfVNNvPqP9HhddiDSwKD1"
+            },
+            "courseId": "24539138-2fa4-4a53-8976-88d5db5345a4",
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+          },
+          {
+            "id": "f63c1fd3-d4fe-4e54-89de-7e1c478d2a77",
+            "type": "LOGO",
+            "data": {
+              "key": "OfVNNvPqP9HhddiDSwKD1",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/OfVNNvPqP9HhddiDSwKD1"
+            },
+            "courseId": "24539138-2fa4-4a53-8976-88d5db5345a4",
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+          },
+          {
+            "id": "825364aa-37af-485e-a228-f3926d51ef19",
+            "type": "LOGO",
+            "data": {
+              "key": "OfVNNvPqP9HhddiDSwKD1",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/OfVNNvPqP9HhddiDSwKD1"
+            },
+            "courseId": "24539138-2fa4-4a53-8976-88d5db5345a4",
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+          },
+          {
+            "id": "30fc2c0e-7d39-42c2-8b20-5f58099eab6f",
+            "type": "LOGO",
+            "data": {
+              "key": "OfVNNvPqP9HhddiDSwKD1",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/OfVNNvPqP9HhddiDSwKD1"
+            },
+            "courseId": "24539138-2fa4-4a53-8976-88d5db5345a4",
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+          },
+          {
+            "id": "d4bcc4d0-4766-474c-aea5-13bb976f89d6",
+            "type": "LOGO",
+            "data": {
+              "key": "OfVNNvPqP9HhddiDSwKD1",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/OfVNNvPqP9HhddiDSwKD1"
+            },
+            "courseId": "24539138-2fa4-4a53-8976-88d5db5345a4",
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+          },
+          {
+            "id": "7b5973d9-4ae6-4b66-85b5-2492a802fa56",
+            "type": "LOGO",
+            "data": {
+              "key": "OfVNNvPqP9HhddiDSwKD1",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/OfVNNvPqP9HhddiDSwKD1"
+            },
+            "courseId": "24539138-2fa4-4a53-8976-88d5db5345a4",
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+          },
+          {
+            "id": "1a97ac41-288c-4f4c-a12d-e05beb50cea8",
+            "type": "LOGO",
+            "data": {
+              "key": "OfVNNvPqP9HhddiDSwKD1",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/OfVNNvPqP9HhddiDSwKD1"
+            },
+            "courseId": "24539138-2fa4-4a53-8976-88d5db5345a4",
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+          },
+          {
+            "id": "80f1a1d6-601c-4fe0-8945-f3a9a779cefd",
+            "type": "LOGO",
+            "data": {
+              "key": "OfVNNvPqP9HhddiDSwKD1",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/OfVNNvPqP9HhddiDSwKD1"
+            },
+            "courseId": "24539138-2fa4-4a53-8976-88d5db5345a4",
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+          },
+          {
+            "id": "ba827563-2837-4d46-942b-95f0a0e9a052",
+            "type": "LOGO",
+            "data": {
+              "key": "OfVNNvPqP9HhddiDSwKD1",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/OfVNNvPqP9HhddiDSwKD1"
+            },
+            "courseId": "24539138-2fa4-4a53-8976-88d5db5345a4",
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+          },
+          {
+            "id": "04eecd1f-c67b-4dc9-8a3c-b4373615279a",
+            "type": "LOGO",
+            "data": {
+              "key": "OfVNNvPqP9HhddiDSwKD1",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/OfVNNvPqP9HhddiDSwKD1"
+            },
+            "courseId": "24539138-2fa4-4a53-8976-88d5db5345a4",
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+          },
+          {
+            "id": "cfe58605-4fd6-4462-a9a5-26463b98abb5",
+            "type": "LOGO",
+            "data": {
+              "key": "OfVNNvPqP9HhddiDSwKD1",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/OfVNNvPqP9HhddiDSwKD1"
+            },
+            "courseId": "24539138-2fa4-4a53-8976-88d5db5345a4",
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+          },
+          {
+            "id": "4bcac587-4167-4055-84ee-e10e0b0456cf",
+            "type": "LOGO",
+            "data": {
+              "key": "OfVNNvPqP9HhddiDSwKD1",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/OfVNNvPqP9HhddiDSwKD1"
+            },
+            "courseId": "24539138-2fa4-4a53-8976-88d5db5345a4",
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+          },
+          {
+            "id": "446b4628-9925-44a5-aa16-b4bebb4d93e2",
+            "type": "LOGO",
+            "data": {
+              "key": "OfVNNvPqP9HhddiDSwKD1",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/OfVNNvPqP9HhddiDSwKD1"
+            },
+            "courseId": "24539138-2fa4-4a53-8976-88d5db5345a4",
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+          },
+          {
+            "id": "f77e673d-3f23-4400-979c-577df61e924f",
+            "type": "LOGO",
+            "data": {
+              "key": "OfVNNvPqP9HhddiDSwKD1",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/OfVNNvPqP9HhddiDSwKD1"
+            },
+            "courseId": "24539138-2fa4-4a53-8976-88d5db5345a4",
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+          },
+          {
+            "id": "9334a808-b3fb-4e80-b6fd-4f023c22a594",
+            "type": "LOGO",
+            "data": {
+              "key": "OfVNNvPqP9HhddiDSwKD1",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/OfVNNvPqP9HhddiDSwKD1"
+            },
+            "courseId": "24539138-2fa4-4a53-8976-88d5db5345a4",
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+          },
+          {
+            "id": "f05b9c25-9c0b-4559-a2e4-7dc9e99147fb",
+            "type": "LOGO",
+            "data": {
+              "key": "OfVNNvPqP9HhddiDSwKD1",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/OfVNNvPqP9HhddiDSwKD1"
+            },
+            "courseId": "24539138-2fa4-4a53-8976-88d5db5345a4",
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+          }
+        ],
+        "secondaryColor": "#48013a"
+      },
+      {
+        "id": "847b72f2-2293-47ee-849a-94c79e4fab16",
+        "abbreviation": "MA",
+        "number": 26100,
+        "name": "Multivariate Calculus",
+        "subject": "Mathematics",
+        "color": "#43015a",
+        "disclaimer": "",
+        "studyModes": [
+          "EXAM",
+          "TIMED_EXAM",
+          "TOPIC"
+        ],
+        "flags": {
+          "published": true,
+          "invertImageColors": false
+        },
+        "stats": {
+          "count": 1,
+          "timeSpent": "192199154604",
+          "timeSpentVideo": "41218285974",
+          "submissions": 952145,
+          "submissionsCorrect": 562652,
+          "questions": 364,
+          "exams": 25,
+          "topics": 0,
+          "accuracy": 0.5909310031560319,
+          "difficulty": 0.6590785459624361
+        },
+        "resources": [
+          {
+            "id": "2b7ed41e-4774-4ff1-ba5e-d3d3f30f166f",
+            "type": "LOGO",
+            "data": {
+              "key": "bYI2qM5r9Ag0vcVkFQF6X",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/bYI2qM5r9Ag0vcVkFQF6X"
+            },
+            "courseId": "847b72f2-2293-47ee-849a-94c79e4fab16",
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+          }
+        ],
+        "secondaryColor": "#360148"
+      },
+      {
+        "id": "0a632987-df1d-4ee0-aee1-4de7d1bfb4ab",
+        "abbreviation": "MA",
+        "number": 26200,
+        "name": "Linear Algebra And Differential Equations",
+        "subject": "Mathematics",
+        "color": "#2d026c",
+        "disclaimer": "",
+        "studyModes": [
+          "EXAM",
+          "TIMED_EXAM",
+          "TOPIC"
+        ],
+        "flags": {
+          "published": true,
+          "invertImageColors": false
+        },
+        "stats": {
+          "count": 1,
+          "timeSpent": "17143453620",
+          "timeSpentVideo": "3539268285",
+          "submissions": 78524,
+          "submissionsCorrect": 45228,
+          "questions": 152,
+          "exams": 11,
+          "topics": 0,
+          "accuracy": 0.5759767714329377,
+          "difficulty": 0.6741198616198616
+        },
+        "resources": [
+          {
+            "id": "f262c0fa-e48a-4608-9d1a-0b75005dac5a",
+            "type": "LOGO",
+            "data": {
+              "key": "RJ1ykvN4ariTYP89Fm_xJ",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/RJ1ykvN4ariTYP89Fm_xJ"
+            },
+            "courseId": "0a632987-df1d-4ee0-aee1-4de7d1bfb4ab",
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+          }
+        ],
+        "secondaryColor": "#240256"
+      },
+      {
+        "id": "b66f6a52-dcf1-4bd7-958c-5aa55993563c",
+        "abbreviation": "MA",
+        "number": 26500,
+        "name": "Linear Algebra",
+        "subject": "Mathematics",
+        "color": "#16027e",
+        "disclaimer": "",
+        "studyModes": [
+          "EXAM",
+          "TIMED_EXAM",
+          "TOPIC"
+        ],
+        "flags": {
+          "published": true,
+          "invertImageColors": false
+        },
+        "stats": {
+          "count": 1,
+          "timeSpent": "53387194199",
+          "timeSpentVideo": "15174408203",
+          "submissions": 319830,
+          "submissionsCorrect": 188544,
+          "questions": 237,
+          "exams": 14,
+          "topics": 0,
+          "accuracy": 0.5895131788762781,
+          "difficulty": 0.6605148001125246
+        },
+        "resources": [
+          {
+            "id": "94931701-d8d6-424a-beec-a6192cc322d7",
+            "type": "LOGO",
+            "data": {
+              "key": "-CfxT_7I7DQcYKTEnXnx2",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/-CfxT_7I7DQcYKTEnXnx2"
+            },
+            "courseId": "b66f6a52-dcf1-4bd7-958c-5aa55993563c",
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+          }
+        ],
+        "secondaryColor": "#120265"
+      },
+      {
+        "id": "b5fe6d3e-d7ff-42d1-993b-44ee2bfe2dd3",
+        "abbreviation": "MA",
+        "number": 26600,
+        "name": "Ordinary Differential Equations",
+        "subject": "Mathematics",
+        "color": "#000290",
+        "disclaimer": "",
+        "studyModes": [
+          "EXAM",
+          "TIMED_EXAM",
+          "TOPIC"
+        ],
+        "flags": {
+          "published": true,
+          "invertImageColors": false
+        },
+        "stats": {
+          "count": 1,
+          "timeSpent": "34004242602",
+          "timeSpentVideo": "6033846956",
+          "submissions": 149958,
+          "submissionsCorrect": 93311,
+          "questions": 174,
+          "exams": 12,
+          "topics": 0,
+          "accuracy": 0.6222475626508756,
+          "difficulty": 0.6278339042237002
+        },
+        "resources": [
+          {
+            "id": "b71c9b8d-54fb-4c77-be43-84a95f96b113",
+            "type": "LOGO",
+            "data": {
+              "key": "eSwUDUSXpGxVIxal8rhiw",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/eSwUDUSXpGxVIxal8rhiw"
+            },
+            "courseId": "b5fe6d3e-d7ff-42d1-993b-44ee2bfe2dd3",
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+          }
+        ],
+        "secondaryColor": "#000273"
+      }
+    ]
+  },
+  {
+    "subject": "Computer Sciences",
+    "courses": [
+      {
+        "id": "803cbab7-3f7d-4912-9bf1-9812e893d445",
+        "abbreviation": "CS",
+        "number": 15900,
+        "name": "C Programming",
+        "subject": "Computer Sciences",
+        "color": "#3BA99C",
+        "disclaimer": "",
+        "studyModes": [
+          "EXAM",
+          "TIMED_EXAM",
+          "TOPIC"
+        ],
+        "flags": {
+          "published": true,
+          "invertImageColors": false
+        },
+        "stats": {
+          "count": 1,
+          "timeSpent": "97636402965",
+          "timeSpentVideo": "1842493980",
+          "submissions": 996869,
+          "submissionsCorrect": 669322,
+          "questions": 698,
+          "exams": 19,
+          "topics": 0,
+          "accuracy": 0.6714242292618188,
+          "difficulty": 0.5785929652777568
+        },
+        "resources": [
+          {
+            "id": "00fb4459-d26f-4a94-9060-c7ab380457b2",
+            "type": "LOGO",
+            "data": {
+              "key": "U_FXBXfWfJ5Dfoz0MaUGK",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/U_FXBXfWfJ5Dfoz0MaUGK"
+            },
+            "courseId": "803cbab7-3f7d-4912-9bf1-9812e893d445",
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+          }
+        ],
+        "secondaryColor": "#2f877d"
+      },
+      {
+        "id": "920272c4-6859-48d3-8fe7-f981c8a159e1",
+        "abbreviation": "CS",
+        "number": 17700,
+        "name": "Programming With Multimedia Objects",
+        "subject": "Computer Sciences",
+        "color": "#3BA5A8",
+        "disclaimer": "",
+        "studyModes": [
+          "EXAM",
+          "TIMED_EXAM",
+          "TOPIC"
+        ],
+        "flags": {
+          "published": true,
+          "invertImageColors": false
+        },
+        "stats": {
+          "count": 1,
+          "timeSpent": "3286517062",
+          "timeSpentVideo": "252747331",
+          "submissions": 33897,
+          "submissionsCorrect": 23897,
+          "questions": 54,
+          "exams": 4,
+          "topics": 0,
+          "accuracy": 0.7049886420627194,
+          "difficulty": 0.5456143189104921
+        },
+        "resources": [
+          {
+            "id": "08381ce7-b6ec-4aa6-8952-d23fc97e2005",
+            "type": "LOGO",
+            "data": {
+              "key": "RijQAKkDT25VWNXCjoSOO",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/RijQAKkDT25VWNXCjoSOO"
+            },
+            "courseId": "920272c4-6859-48d3-8fe7-f981c8a159e1",
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+          },
+          {
+            "id": "f3fd25e4-00a8-463f-9eac-e70e59949bcd",
+            "type": "LOGO",
+            "data": {
+              "key": "RijQAKkDT25VWNXCjoSOO",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/RijQAKkDT25VWNXCjoSOO"
+            },
+            "courseId": "920272c4-6859-48d3-8fe7-f981c8a159e1",
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+          }
+        ],
+        "secondaryColor": "#2f8486"
+      },
+      {
+        "id": "27c7ff3a-c08b-432e-ac8d-19aff935e0fb",
+        "abbreviation": "CS",
+        "number": 25100,
+        "name": "Data Structures And Algorithms",
+        "subject": "Computer Sciences",
+        "color": "#3B8BA8",
+        "disclaimer": "",
+        "studyModes": [
+          "EXAM",
+          "TIMED_EXAM",
+          "TOPIC"
+        ],
+        "flags": {
+          "published": true,
+          "invertImageColors": false
+        },
+        "stats": {
+          "count": 1,
+          "timeSpent": "16203248098",
+          "timeSpentVideo": "903308931",
+          "submissions": 102086,
+          "submissionsCorrect": 75363,
+          "questions": 130,
+          "exams": 9,
+          "topics": 0,
+          "accuracy": 0.7382305115294947,
+          "difficulty": 0.5120026226684673
+        },
+        "resources": [
+          {
+            "id": "3fee111e-ff0a-4952-99d2-d2d8c15fdb89",
+            "type": "LOGO",
+            "data": {
+              "key": "-I_hLDYZUPOdRaIzwYiaC",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/-I_hLDYZUPOdRaIzwYiaC"
+            },
+            "courseId": "27c7ff3a-c08b-432e-ac8d-19aff935e0fb",
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+          },
+          {
+            "id": "26dae51a-8e52-4ab4-a5ff-64bb79a621a2",
+            "type": "LOGO",
+            "data": {
+              "key": "-I_hLDYZUPOdRaIzwYiaC",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/-I_hLDYZUPOdRaIzwYiaC"
+            },
+            "courseId": "27c7ff3a-c08b-432e-ac8d-19aff935e0fb",
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+          },
+          {
+            "id": "015f1e2b-a6ee-4744-aa30-4196db77c6eb",
+            "type": "LOGO",
+            "data": {
+              "key": "-I_hLDYZUPOdRaIzwYiaC",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/-I_hLDYZUPOdRaIzwYiaC"
+            },
+            "courseId": "27c7ff3a-c08b-432e-ac8d-19aff935e0fb",
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+          },
+          {
+            "id": "a5313ab4-e5a2-4a11-b575-68af063034a2",
+            "type": "LOGO",
+            "data": {
+              "key": "-I_hLDYZUPOdRaIzwYiaC",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/-I_hLDYZUPOdRaIzwYiaC"
+            },
+            "courseId": "27c7ff3a-c08b-432e-ac8d-19aff935e0fb",
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+          }
+        ],
+        "secondaryColor": "#2f6f86"
+      }
+    ]
+  },
+  {
+    "subject": "Aero & Astro Engineering",
+    "courses": [
+      {
+        "id": "917504b9-0d67-4558-af71-b5961ee7b962",
+        "abbreviation": "AAE",
+        "number": 20300,
+        "name": "Aeromechanics I",
+        "subject": "Aero & Astro Engineering",
+        "color": "#d357fe",
+        "disclaimer": "",
+        "studyModes": [
+          "EXAM",
+          "TIMED_EXAM",
+          "TOPIC"
+        ],
+        "flags": {
+          "published": true,
+          "invertImageColors": false
+        },
+        "stats": {
+          "count": 1,
+          "timeSpent": "1454427645",
+          "timeSpentVideo": "547443852",
+          "submissions": 3705,
+          "submissionsCorrect": 25,
+          "questions": 18,
+          "exams": 6,
+          "topics": 0,
+          "accuracy": 0.006747638326585695,
+          "difficulty": 1.2302890932982917
+        },
+        "resources": [
+          {
+            "id": "334636fb-e2dd-4f22-b74a-63c42591061e",
+            "type": "LOGO",
+            "data": {
+              "key": "S7MMHMvYffFdAmlvYLya6",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/S7MMHMvYffFdAmlvYLya6"
+            },
+            "courseId": "917504b9-0d67-4558-af71-b5961ee7b962",
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+          }
+        ],
+        "secondaryColor": "#a946cb"
+      },
+      {
+        "id": "4e7d365a-7901-424c-a5eb-64cc91d8d4db",
+        "abbreviation": "AAE",
+        "number": 20400,
+        "name": "Aeromechanics II",
+        "subject": "Aero & Astro Engineering",
+        "color": "#b707cf",
+        "disclaimer": "",
+        "studyModes": [
+          "EXAM",
+          "TIMED_EXAM",
+          "TOPIC"
+        ],
+        "flags": {
+          "published": true,
+          "invertImageColors": false
+        },
+        "stats": {
+          "count": 1,
+          "timeSpent": "74665465",
+          "timeSpentVideo": "17329589",
+          "submissions": 849,
+          "submissionsCorrect": 54,
+          "questions": 10,
+          "exams": 3,
+          "topics": 0,
+          "accuracy": 0.0636042402826855,
+          "difficulty": 1.1404109589041096
+        },
+        "resources": [
+          {
+            "id": "1c207bf1-2e09-42ce-9f8d-8599fcf3f6d5",
+            "type": "LOGO",
+            "data": {
+              "key": "8rGoUA0VrokpBkODTwsdO",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/8rGoUA0VrokpBkODTwsdO"
+            },
+            "courseId": "4e7d365a-7901-424c-a5eb-64cc91d8d4db",
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+          }
+        ],
+        "secondaryColor": "#9206a6"
+      }
+    ]
+  },
+  {
+    "subject": "Chemistry",
+    "courses": [
+      {
+        "id": "ac43bde0-42dd-42ef-a6e6-1b4c8b572616",
+        "abbreviation": "CHM",
+        "number": 11500,
+        "name": "General Chemistry",
+        "subject": "Chemistry",
+        "color": "#2d3dff",
+        "disclaimer": "",
+        "studyModes": [
+          "TOPIC"
+        ],
+        "flags": {
+          "published": true,
+          "invertImageColors": false
+        },
+        "stats": {
+          "count": 1,
+          "timeSpent": "62594033577",
+          "timeSpentVideo": "11002263708",
+          "submissions": 549801,
+          "submissionsCorrect": 378047,
+          "questions": 167,
+          "exams": 5,
+          "topics": 0,
+          "accuracy": 0.6876069705220617,
+          "difficulty": 0.562427145977185
+        },
+        "resources": [
+          {
+            "id": "b868630f-d508-4f05-9f90-9ef6758446c1",
+            "type": "LOGO",
+            "data": {
+              "key": "wH_m3LH6zUDTONuCd-JBA",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/wH_m3LH6zUDTONuCd-JBA"
+            },
+            "courseId": "ac43bde0-42dd-42ef-a6e6-1b4c8b572616",
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+          }
+        ],
+        "secondaryColor": "#2431cc"
+      },
+      {
+        "id": "b9779093-fa12-45fe-9bbf-3c2118913dd4",
+        "abbreviation": "CHM",
+        "number": 25500,
+        "name": "Organic Chemistry For The Life Sciences I",
+        "subject": "Chemistry",
+        "color": "#00a3d7",
+        "disclaimer": "",
+        "studyModes": [
+          "EXAM",
+          "TIMED_EXAM",
+          "TOPIC"
+        ],
+        "flags": {
+          "published": true,
+          "invertImageColors": false
+        },
+        "stats": {
+          "count": 1,
+          "timeSpent": "9279022",
+          "timeSpentVideo": "776871",
+          "submissions": 289,
+          "submissionsCorrect": 24,
+          "questions": 71,
+          "exams": 5,
+          "topics": 0,
+          "accuracy": 0.08304498269896193,
+          "difficulty": 1.0597686375321338
+        },
+        "resources": [
+          {
+            "id": "8b0885c8-ddcc-4139-bc7a-71965a85839a",
+            "type": "LOGO",
+            "data": {
+              "key": "njUu5pejGpRUTD0UfaMMm",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/njUu5pejGpRUTD0UfaMMm"
+            },
+            "courseId": "b9779093-fa12-45fe-9bbf-3c2118913dd4",
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+          },
+          {
+            "id": "2be85d3d-326c-413a-8857-75afe0b6c1ea",
+            "type": "LOGO",
+            "data": {
+              "key": "njUu5pejGpRUTD0UfaMMm",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/njUu5pejGpRUTD0UfaMMm"
+            },
+            "courseId": "b9779093-fa12-45fe-9bbf-3c2118913dd4",
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+          }
+        ],
+        "secondaryColor": "#0082ac"
+      }
+    ]
+  },
+  {
+    "subject": "Electrical & Computer Engr",
+    "courses": [
+      {
+        "id": "eff5f02a-e609-42d1-a77f-8e9183c7e180",
+        "abbreviation": "ECE",
+        "number": 20001,
+        "name": "Electrical Engineering Fundamentals I",
+        "subject": "Electrical & Computer Engr",
+        "color": "#5E3BA8",
+        "disclaimer": "",
+        "studyModes": [
+          "EXAM",
+          "TIMED_EXAM",
+          "TOPIC"
+        ],
+        "flags": {
+          "published": true,
+          "invertImageColors": false
+        },
+        "stats": {
+          "count": 1,
+          "timeSpent": "3375908905",
+          "timeSpentVideo": "923795796",
+          "submissions": 17950,
+          "submissionsCorrect": 10156,
+          "questions": 65,
+          "exams": 4,
+          "topics": 0,
+          "accuracy": 0.5657938718662953,
+          "difficulty": 0.6845706371191136
+        },
+        "resources": [
+          {
+            "id": "b7d844a0-ec5b-4613-a026-3de4a1811428",
+            "type": "LOGO",
+            "data": {
+              "key": "dWK3zZONx0EHW0jO6UZnO",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/dWK3zZONx0EHW0jO6UZnO"
+            },
+            "courseId": "eff5f02a-e609-42d1-a77f-8e9183c7e180",
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+          }
+        ],
+        "secondaryColor": "#4b2f86"
+      },
+      {
+        "id": "80d160dd-4c67-49a5-ad90-6b9414e08685",
+        "abbreviation": "ECE",
+        "number": 20002,
+        "name": "Electrical Engineering Fundamentals II",
+        "subject": "Electrical & Computer Engr",
+        "color": "#733BA8",
+        "disclaimer": "",
+        "studyModes": [
+          "EXAM",
+          "TIMED_EXAM",
+          "TOPIC"
+        ],
+        "flags": {
+          "published": true,
+          "invertImageColors": false
+        },
+        "stats": {
+          "count": 1,
+          "timeSpent": "1973098500",
+          "timeSpentVideo": "491196470",
+          "submissions": 7609,
+          "submissionsCorrect": 3802,
+          "questions": 29,
+          "exams": 3,
+          "topics": 0,
+          "accuracy": 0.49967144171376005,
+          "difficulty": 0.7503242962770788
+        },
+        "resources": [
+          {
+            "id": "782dbb05-f56c-4852-9ca1-81155b83b25c",
+            "type": "LOGO",
+            "data": {
+              "key": "ze2isr7O18SIEkkhbsLs4",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/ze2isr7O18SIEkkhbsLs4"
+            },
+            "courseId": "80d160dd-4c67-49a5-ad90-6b9414e08685",
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+          }
+        ],
+        "secondaryColor": "#5c2f86"
+      }
+    ]
+  },
+  {
+    "subject": "Biological Sciences",
+    "courses": [
+      {
+        "id": "30949ec4-4915-44f1-ad9d-c08300116610",
+        "abbreviation": "BIOL",
+        "number": 20400,
+        "name": "Human Anatomy And Physiology",
+        "subject": "Biological Sciences",
+        "color": "#669c35",
+        "disclaimer": "",
+        "studyModes": [
+          "EXAM",
+          "TIMED_EXAM",
+          "TOPIC"
+        ],
+        "flags": {
+          "published": true,
+          "invertImageColors": false
+        },
+        "stats": {
+          "count": 1,
+          "timeSpent": "1525013760",
+          "timeSpentVideo": "0",
+          "submissions": 25308,
+          "submissionsCorrect": 19267,
+          "questions": 80,
+          "exams": 2,
+          "topics": 0,
+          "accuracy": 0.7613007744586692,
+          "difficulty": 0.48972764483627207
+        },
+        "resources": [
+          {
+            "id": "a9cc52a0-4a53-4087-916a-ea583874313e",
+            "type": "LOGO",
+            "data": {
+              "key": "Ny8Pd7MUT-vG7beJTGluq",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/Ny8Pd7MUT-vG7beJTGluq"
+            },
+            "courseId": "30949ec4-4915-44f1-ad9d-c08300116610",
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+          }
+        ],
+        "secondaryColor": "#527d2a"
+      }
+    ]
+  },
+  {
+    "subject": "Economics",
+    "courses": [
+      {
+        "id": "afcc2cc8-493e-4e84-9082-d91f84f04c36",
+        "abbreviation": "ECON",
+        "number": 25200,
+        "name": "Macroeconomics",
+        "subject": "Economics",
+        "color": "#235803",
+        "disclaimer": "",
+        "studyModes": [
+          "EXAM",
+          "TIMED_EXAM",
+          "TOPIC"
+        ],
+        "flags": {
+          "published": true,
+          "invertImageColors": false
+        },
+        "stats": {
+          "count": 1,
+          "timeSpent": "5966297237",
+          "timeSpentVideo": "34116167",
+          "submissions": 70568,
+          "submissionsCorrect": 52148,
+          "questions": 130,
+          "exams": 3,
+          "topics": 0,
+          "accuracy": 0.738975172882893,
+          "difficulty": 0.5113629931510726
+        },
+        "resources": [
+          {
+            "id": "824e8e09-0fb4-4d0b-91bc-c7cf1a6f9a07",
+            "type": "LOGO",
+            "data": {
+              "key": "aVhi3MW7wR--S31FLMHM9",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/aVhi3MW7wR--S31FLMHM9"
+            },
+            "courseId": "afcc2cc8-493e-4e84-9082-d91f84f04c36",
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+          }
+        ],
+        "secondaryColor": "#1c4602"
+      }
+    ]
+  },
+  {
+    "subject": "Physics",
+    "courses": [
+      {
+        "id": "3f668ccb-d36a-4244-84c6-dc211bb934d3",
+        "abbreviation": "PHYS",
+        "number": 17200,
+        "name": "Modern Mechanics",
+        "subject": "Physics",
+        "color": "#178fe8",
+        "disclaimer": "",
+        "studyModes": [
+          "EXAM",
+          "TIMED_EXAM",
+          "TOPIC"
+        ],
+        "flags": {
+          "published": true,
+          "invertImageColors": false
+        },
+        "stats": {
+          "count": 1,
+          "timeSpent": "9688729525",
+          "timeSpentVideo": "1475255761",
+          "submissions": 86550,
+          "submissionsCorrect": 59574,
+          "questions": 73,
+          "exams": 4,
+          "topics": 0,
+          "accuracy": 0.6883188908145581,
+          "difficulty": 0.5618984420080785
+        },
+        "resources": [
+          {
+            "id": "e077a050-1995-4b26-8476-a4cd4b14eafa",
+            "type": "LOGO",
+            "data": {
+              "key": "whKnBuo4xUUi7wTm8Yisq",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/whKnBuo4xUUi7wTm8Yisq"
+            },
+            "courseId": "3f668ccb-d36a-4244-84c6-dc211bb934d3",
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+          }
+        ],
+        "secondaryColor": "#1272ba"
+      }
+    ]
+  },
+  {
+    "subject": "Statistics",
+    "courses": [
+      {
+        "id": "8daac4e7-67b2-43f1-a575-31cc651b64af",
+        "abbreviation": "STAT",
+        "number": 35000,
+        "name": "Introduction To Statistics",
+        "subject": "Statistics",
+        "color": "#7a7a7a",
+        "disclaimer": "",
+        "studyModes": [
+          "EXAM",
+          "TIMED_EXAM",
+          "TOPIC"
+        ],
+        "flags": {
+          "published": true,
+          "invertImageColors": false
+        },
+        "stats": {
+          "count": 1,
+          "timeSpent": "687326439",
+          "timeSpentVideo": "230451312",
+          "submissions": 6801,
+          "submissionsCorrect": 3253,
+          "questions": 68,
+          "exams": 3,
+          "topics": 0,
+          "accuracy": 0.4783120129392736,
+          "difficulty": 0.7713737139544994
+        },
+        "resources": [
+          {
+            "id": "77c6cacf-badd-46c2-b3a7-e62d8fae2372",
+            "type": "LOGO",
+            "data": {
+              "key": "OH4KSgALiEkSkX6GM83m4",
+              "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/OH4KSgALiEkSkX6GM83m4"
+            },
+            "courseId": "8daac4e7-67b2-43f1-a575-31cc651b64af",
+            "examId": null,
+            "questionId": null,
+            "explanationId": null,
+            "applicationId": null,
+            "answerChoiceId": null,
+            "customExamId": null
+          }
+        ],
+        "secondaryColor": "#626262"
+      }
+    ]
+  }
+]

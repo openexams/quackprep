@@ -5,26 +5,26 @@ import { BoilerClassSchema, JSONClassSchema } from "../schema/schema.js";
 function subjectToCategoryNumber(subject) {
   switch (subject) {
     case "Computer Sciences":
-      return 1;
+      return "CS";
     case "Mathematics":
-      return 2;
+      return "MA";
     case "Economics":
-      return 3;
+      return "ECO";
     case "Biological Sciences":
-      return 4;
+      return "BIO";
     case "Chemistry":
-      return 5;
+      return "CHEM";
     case "Physics":
-      return 6;
+      return "PHY";
     case "Aero & Astro Engineering":
     case "Electrical & Computer Engr":
-      return 9;
+      return "ENG";
     case "Statistics":
-      return 10;
+      return "STAT";
     case "Psychology":
-      return 7;
+      return "PSY";
     default:
-      return 8;
+      return "Other"; // OTHER
   }
 }
 
