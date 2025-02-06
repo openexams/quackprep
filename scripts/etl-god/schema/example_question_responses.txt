@@ -1172,3 +1172,95 @@
   ],
   "children": []
 }
+
+
+{
+    "id": "aab6128a-1cf4-4f62-b26f-9f5719a04ae1",
+    "type": "SHORT_ANSWER",
+    "data": {
+        "body": "\n A major source of profit for a new video streaming company, YouCube, is the advertisements that are played before their videos begin. The company charges their ad clients a rate per second watched. Therefore, it is of importance for YouCube to find out how long the users are willing to wait, in seconds, before the “Skip Ad” option appears on screen. To determine this information, the first 400 newly registered users were chosen. Then the company randomly assigned 4, 5, 6, or 7 seconds to wait for the “Skip Ad” option to appear on the screen for each user. Thus, each group has 100 participants. After one month, they will record the activity score of each user, ranging between 1 and 10, which reflects how active the user is on the platform at the moment of recording. \n\n(B) Is this an observational study or an experiment? Please explain your answer.\n\n(C) State one lurking variable in this scenario. Be sure to state whether it is confounding or common response.\n",
+        "solution": "(B) experiment. Reason: The company is assigning the number of seconds until the “Skip Ad” option appears.   \n\n(C) Why the users are watching the videos What type of videos are being watched Are there are there other platforms that the users could watch the videos The ads themselves: content/quality, etc.  State one. ",
+        "answerChoices": []
+    },
+    "number": 11,
+    "disclaimer": null,
+    "examId": "6af81495-2440-45ee-a1d7-bb3ccd1d8137",
+    "courseId": "8daac4e7-67b2-43f1-a575-31cc651b64af",
+    "parentId": null,
+    "flags": {
+        "published": true,
+        "disableRandomAnswers": true,
+        "answersStartHidden": true
+    },
+    "stats": {
+        "count": 1,
+        "timeSpent": "13264389",
+        "timeSpentVideo": "4538356",
+        "submissions": 97,
+        "submissionsCorrect": 0,
+        "accuracy": 0,
+        "difficulty": 0.9961928934010152
+    },
+    "resources": [],
+    "exam": {
+        "id": "6af81495-2440-45ee-a1d7-bb3ccd1d8137",
+        "number": 2,
+        "year": 2023,
+        "season": "SPRING",
+        "disclaimer": "",
+        "courseId": "8daac4e7-67b2-43f1-a575-31cc651b64af",
+        "flags": {
+            "published": true,
+            "practice": true
+        },
+        "stats": {
+            "count": 1,
+            "timeSpent": "350239796",
+            "timeSpentVideo": "100611042",
+            "submissions": 3310,
+            "submissionsCorrect": 1616,
+            "questions": 24,
+            "accuracy": 0.4882175226586103,
+            "difficulty": 0.7614369501466276
+        }
+    },
+    "explanation": {
+        "id": "4857baef-731d-4d20-89e4-41e152cb88d8",
+        "body": null,
+        "questionId": "aab6128a-1cf4-4f62-b26f-9f5719a04ae1",
+        "resources": [
+            {
+                "id": "0f7fcb07-4b42-40cf-9b08-a78bf4d9c224",
+                "type": "VIDEO",
+                "data": {
+                    "url": "https://www.youtube.com/watch?v=rRDuaKnGF94&t=1102s"
+                },
+                "courseId": null,
+                "examId": null,
+                "questionId": null,
+                "explanationId": "4857baef-731d-4d20-89e4-41e152cb88d8",
+                "applicationId": null,
+                "answerChoiceId": null,
+                "customExamId": null
+            }
+        ]
+    },
+    "topics": [
+        {
+            "id": "e97c90c8-777f-49a2-b280-a69200d39824",
+            "name": "Experiment Design",
+            "courseId": "8daac4e7-67b2-43f1-a575-31cc651b64af",
+            "stats": {
+                "count": 1,
+                "timeSpent": "117466683",
+                "timeSpentVideo": "12741074",
+                "submissions": 1065,
+                "submissionsCorrect": 617,
+                "questions": 8,
+                "accuracy": 0.5793427230046948,
+                "difficulty": 0.6774678111587983
+            }
+        }
+    ],
+    "children": []
+}

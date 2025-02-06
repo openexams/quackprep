@@ -20,7 +20,6 @@ export default defineConfig({
     trace: "on-first-retry",
     screenshot: "only-on-failure",
     video: "on-first-retry",
-    // Use the modified Chromium with stealth capabilities
     browserName: "chromium",
     launchOptions: {
       executablePath: chromium.executablePath(),

@@ -37,7 +37,6 @@ export async function runEt(options = {}) {
       }
     }
 
-    console.log("finished! writing to file now");
     if (options && options.appendClassToOutputFile === true) {
       const result = JSON.parse(await readFromFile("json/finalJason.json"));
       console.log(
@@ -60,12 +59,19 @@ export async function runEt(options = {}) {
       );
     }
   } catch (error) {
-    await writeToFile(finalJason, "output/finalJasonERRORED.json");
-    console.error("Error in runEt", error);
+    console.log(error);
+    try {
+      await writeToFile(finalJason, "json/finalJasonERRORED.json");
+    } catch (error) {
+      console.error("Errored writing to file", error);
+    }
   }
 }
 
+// stat econ and phys done
+
 await runEt({
+  appendClassToOutputFile: true,
   downloadPDFS: true,
   courseName: "ECON25200",
 });

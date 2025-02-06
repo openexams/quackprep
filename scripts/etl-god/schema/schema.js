@@ -66,7 +66,12 @@ export const BoilerExamSchema = z
 export const BoilerQuestionSchema = z
   .object({
     id: z.string(),
-    type: z.enum(["MULTIPLE_CHOICE", "FREE_RESPONSE", "PARENT"]),
+    type: z.enum([
+      "MULTIPLE_CHOICE",
+      "FREE_RESPONSE",
+      "PARENT",
+      "SHORT_ANSWER",
+    ]),
     data: z.object({
       body: z.string(),
       solution: z.string().or(z.array(z.number().int())).optional(),

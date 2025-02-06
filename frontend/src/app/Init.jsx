@@ -26,7 +26,7 @@ export default function Init() {
   useEffect(() => {
     const handlePopState = (event) => {
       const pathAfterDomain = window.location.pathname + window.location.search + window.location.hash;
-      dispatch(changeNavbarPage(() => {}, pathAfterDomain));
+      dispatch(changeNavbarPage(() => {}, pathAfterDomain)); // change state but dont navigate
     };
     window.addEventListener('popstate', handlePopState);
     return () => {

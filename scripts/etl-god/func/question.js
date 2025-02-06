@@ -59,14 +59,16 @@ export async function boilerQuestionToJsonQuestion(
 ) {
   let boilerQuestion = null;
   if (typeof boilerQuestionOrId === "string") {
+    console.log("curQuestionId", boilerQuestionOrId);
     const result = await fetchWithExponetialBackoff(
       `/questions/${boilerQuestionOrId}`
     );
     boilerQuestion = BoilerQuestionSchema.parse(result);
   } else {
+    console.log("curQuestionId", boilerQuestionOrId.id);
     boilerQuestion = BoilerQuestionSchema.parse(boilerQuestionOrId);
   }
-  console.log("curQuestionId", boilerQuestion.id);
+
   // now do some cool stuff
 
   const return_questions = [];
@@ -110,7 +112,8 @@ export async function boilerQuestionToJsonQuestion(
   ) {
     question_type = "frq";
   } else if (
-    boilerQuestion.type === "FREE_RESPONSE" &&
+    (boilerQuestion.type === "FREE_RESPONSE" ||
+      boilerQuestion.type === "SHORT_ANSWER") &&
     !Array.isArray(boilerQuestion.data.solution)
   ) {
     question_type = "frq";
