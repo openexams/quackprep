@@ -12,9 +12,9 @@ export default function BlogMain() {
         Helpful Articles
       </Header>
 
-      <Grid columns={2} stackable centered>
+      <Grid columns={2} stackable centered padded>
         {blogs.map((blog) => (
-          <Grid.Column style={{ maxWidth: '25em', maxHeight: '25em' }} key={blog.getLink()}>
+          <Grid.Column style={{ maxWidth: '25em', maxHeight: '25em', marginTop: '.8em' }} key={blog.getLink()}>
             <Card
               style={{ width: '25em', height: '25em' }}
               as='a'
