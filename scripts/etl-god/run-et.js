@@ -73,5 +73,5 @@ export async function runEt(options = {}) {
 await runEt({
   appendClassToOutputFile: true,
   downloadPDFS: true,
-  courseName: "BIOL20400",
+  subject: "Electrical & Computer Engr",
 });
