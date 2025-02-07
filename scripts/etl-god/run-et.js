@@ -68,10 +68,10 @@ export async function runEt(options = {}) {
   }
 }
 
-// stat econ and phys done
+// stat econ and phys done BIOL20400
 
 await runEt({
   appendClassToOutputFile: true,
   downloadPDFS: true,
-  courseName: "ECON25200",
+  courseName: "BIOL20400",
 });

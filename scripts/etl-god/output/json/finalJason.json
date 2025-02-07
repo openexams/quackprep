@@ -1,5 +1,2351 @@
 [
   {
+    "name": "BIOL20400",
+    "description": "Human Anatomy And Physiology",
+    "category": "BIO",
+    "questionCount": 80,
+    "groups": [
+      {
+        "name": "Exam 3 - SPRING 2023",
+        "type": "exam",
+        "desc": "A BIOL20400 Exam",
+        "questions": [
+          {
+            "question": "Which fluid do the kidneys filter at the glomerulus to produce urine?",
+            "explanation_url": null,
+            "topics": [
+              "Urinary System"
+            ],
+            "choices": [
+              {
+                "answer": "Chyme",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Blood",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "Lymph",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Bile",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Which of the following form part of the filtration membrane at the glomerulus?",
+            "explanation_url": null,
+            "topics": [
+              "Urinary System"
+            ],
+            "choices": [
+              {
+                "answer": "Minor calyx",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "The macula densa",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Fenestrated endothelium of the capillary",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "Juxtaglomerular cells",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "The glomerulus excludes which of the following substances from the filtrate? (i.e., you cannot find this substance in the filtrate of a healthy person)",
+            "explanation_url": null,
+            "topics": [
+              "Urinary System"
+            ],
+            "choices": [
+              {
+                "answer": "Leukocytes",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "Small ions",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Glucose",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Free amino acids",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Arrange the following in the sequence in which filtrate moves through them:\n\n1. Loop of Henle\n2. Collecting duct\n3. Capsular space of Bowman’s capsule\n4. Distal convoluted tubule\n5. Proximal convoluted tubule",
+            "explanation_url": null,
+            "topics": [
+              "Urinary System"
+            ],
+            "choices": [
+              {
+                "answer": "2, 4, 1, 5, 3",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "1, 2, 3, 4, 5",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "3, 5, 1, 2, 4",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "3, 5, 1, 4, 2",
+                "is_correct": 1,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "According to the myogenic mechanism of renal autoregulation, a(n) $\\rule{2.5cm}{0.4pt}$ in blood pressure will result in afferent arteriole smooth muscle $\\rule{2.5cm}{0.4pt}$, which will result in a(n) $\\rule{2.5cm}{0.4pt}$ of the glomerular filtration rate (GFR).",
+            "explanation_url": null,
+            "topics": [
+              "Urinary System"
+            ],
+            "choices": [
+              {
+                "answer": "Increase / constriction / decrease",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "Increase / relaxation / decrease",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Decrease / constriction / increase",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Decrease / relaxation / decrease",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "$\\rule{2.5cm}{0.4pt}$ is the process where water and solutes are removed from the filtrate and enter back into the circulation via peritubular capillaries.",
+            "explanation_url": null,
+            "topics": [
+              "Urinary System"
+            ],
+            "choices": [
+              {
+                "answer": "Tubular reabsorption",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "Tubular secretion",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Tubular excretion",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Glomerular filtration\n",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Select the incorrect statement regarding this figure: ![Image of a nephron](https://boilerexams-production.s3.us-east-2.amazonaws.com/PAnw6aF7PeCQTqVEi1bbU)",
+            "explanation_url": null,
+            "topics": [
+              "Urinary System"
+            ],
+            "choices": [
+              {
+                "answer": "Filtration occurs in structure #1.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Structure #3 is responsible for the countercurrent multiplier mechanism.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Structure #4 is responsible for reabsorbing approximately 65% of filtered water and sodium and all the filtered amino acids and glucose.",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "Structure #5 is relatively impermeable to water and solutes unless influenced by hormones.",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Which Na$^{+}$ transporter is NOT correctly matched with their location in the renal tubule?",
+            "explanation_url": null,
+            "topics": [
+              "Urinary System"
+            ],
+            "choices": [
+              {
+                "answer": "Na$^{+}$/H$^{+}$  antiporter or exchanger - Proximal convoluted tubule",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Na–K–2Cl (NKCC2) transporter – Descending limb of the nephron loop",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "Na$^{+}$/Cl$^{-}$ cotransporter – Distal convoluted tubule",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Epithelial Na$^{+}$  Channel (ENaC) – Collecting duct",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "All the following information about the countercurrent mechanism is true, EXCEPT:",
+            "explanation_url": null,
+            "topics": [
+              "Urinary System"
+            ],
+            "choices": [
+              {
+                "answer": "The nephron loops of juxtamedullary nephrons are involved in the countercurrent multiplier system.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "The blood of the vasa recta flows in the opposite direction from the filtrate, forming the countercurrent exchanger.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "It creates and maintains a medullary osmotic gradient in the interstitial fluid of the renal medulla.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "The filtrate reaches its highest concentration at the end of the ascending limb, promoting facultative water reabsorption in the proximal convoluted tubule.",
+                "is_correct": 1,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Muscle breakdown, such as that occurring in Rhabdomyolysis, releases myoglobin into the blood, giving a characteristic color to the urine. Which color is this?",
+            "explanation_url": null,
+            "topics": [
+              "Urinary System"
+            ],
+            "choices": [
+              {
+                "answer": "Cola-colored",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "Red",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Green",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Pale yellow",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "What is hematuria?",
+            "explanation_url": null,
+            "topics": [
+              "Urinary System"
+            ],
+            "choices": [
+              {
+                "answer": "The presence of urine in the blood.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "The new synthesis of red blood cells in the urine for disposal.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "The presence of pus in the urine.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "The presence of red blood cells in the urine.\n",
+                "is_correct": 1,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Where is the detrusor muscle located?",
+            "explanation_url": null,
+            "topics": [
+              "Urinary System"
+            ],
+            "choices": [
+              {
+                "answer": "In the kidney",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "In the stomach",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "In the urinary bladder",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "In the small intestine",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "The $\\rule{1.5cm}{0.4pt}$ nervous system enables the bladder to $\\rule{1.5cm}{0.4pt}$ by activation of $\\rule{1.5cm}{0.4pt}$ receptors",
+            "explanation_url": null,
+            "topics": [
+              "Urinary System"
+            ],
+            "choices": [
+              {
+                "answer": "Parasympathetic / empty urine / muscarinic type 3 (M3)",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "Sympathetic / empty urine / muscarinic type 3 (M3)",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Parasympathetic / fill with urine / beta-adrenergic receptors type 3 ($\\beta$3)",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Sympathetic / fill with urine / muscarinic type 3 (M3)",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "In the process of micturition (=urination or voiding) in adults, which role does the somatic nervous system have?",
+            "explanation_url": null,
+            "topics": [
+              "Urinary System"
+            ],
+            "choices": [
+              {
+                "answer": "It allows for voluntary contraction of the urinary bladder’s wall muscle.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "It controls the voluntary contraction of the internal urethral sphincter.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "It controls the voluntary contraction of the external urethral sphincter.",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "None - Urination is only regulated by the autonomic nervous system.",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Which is the most abundant cation of the extracellular fluid that drives water movement by osmosis between body compartments?",
+            "explanation_url": null,
+            "topics": [
+              "Fluid Balance"
+            ],
+            "choices": [
+              {
+                "answer": "K$^{+}$",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Na$^{+}$",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "Mg$_{2}$$^{+}$",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Ca$_{2}$$^{+}$",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Aldosterone acts on the principal cells in the late distal tubule and collecting duct to:",
+            "explanation_url": null,
+            "topics": [
+              "Fluid Balance"
+            ],
+            "choices": [
+              {
+                "answer": "Increase the reabsorption of K$^{+}$",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Increase the excretion of Na$^{+}$",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Increase the secretion of both Na$^{+}$ and K$^{+}$",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Increase the reabsorption of Na$^{+}$",
+                "is_correct": 1,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Which disorder in water balance will an excess of aldosterone secretion produce?",
+            "explanation_url": null,
+            "topics": [
+              "Fluid Balance"
+            ],
+            "choices": [
+              {
+                "answer": "Dehydration (negative water balance)",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Hypotonic hydration",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Volume excess",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "Volume depletion (hypovolemia)",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Which hormone acts on the collecting duct to increase its permeability to water by inserting aquaporins in the membrane of the tubule cells?",
+            "explanation_url": null,
+            "topics": [
+              "Fluid Balance"
+            ],
+            "choices": [
+              {
+                "answer": "Antidiuretic hormone (ADH)",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "Aldosterone",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Atrial Natriuretic Peptide (ANP)",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Angiotensin II",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Which of the following will form part of the body's response to increased plasma osmolality (e.g., when a person is dehydrated)?",
+            "explanation_url": null,
+            "topics": [
+              "Fluid Balance"
+            ],
+            "choices": [
+              {
+                "answer": "Inhibition of ADH secretion.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Decrease in water reabsorption.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Water diuresis.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Production of hypertonic urine.",
+                "is_correct": 1,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Which of the following statements about Angiotensin II is TRUE?",
+            "explanation_url": null,
+            "topics": [
+              "Fluid Balance"
+            ],
+            "choices": [
+              {
+                "answer": "It is an enzyme released by the juxtaglomerular cells.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "It promotes vasodilation of blood vessels.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "It promotes reabsorption of Na$^{+}$ in the renal tubule.",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "It inhibits the release of aldosterone by the suprarenal gland.",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "The $\\rule{2.5cm}{0.4pt}$ have the predominant role in regulating the blood bicarbonate concentration and hence, the metabolic component of acid-base balance.",
+            "explanation_url": null,
+            "topics": [
+              "Acid-Base Balance"
+            ],
+            "choices": [
+              {
+                "answer": "Kidneys",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "Sweat glands",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Lungs",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Feces",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "The respiratory system compensates for changes in the pH level by adjusting the levels of:",
+            "explanation_url": null,
+            "topics": [
+              "Acid-Base Balance"
+            ],
+            "choices": [
+              {
+                "answer": "CO$_{2}$",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "H$_{2}$O",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Phosphates",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "HCO$_{3}$$^{-}$",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Hyperventilation (breathing in and out more air than usual) during a panic attack causes an increase in blood $\\rule{1.5cm}{0.4pt}$.",
+            "explanation_url": null,
+            "topics": [
+              "Acid-Base Balance"
+            ],
+            "choices": [
+              {
+                "answer": "CO$_{2}$",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "H$^{+}$",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "pH",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "acidity",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "The Arterial Blood Gas (ABG) test for a patient shows the following results: \n\npH = 7.66, PCO$_{2}$ = 36, HCO$_{3}$$^{-}$ = 33\n\nConsidering the normal values of these parameters indicated below, select the acid-base disorder that the patient is experiencing: ![Normal Values. pH = 7.35-7.45, PCO2 = 35-45 mmHg, HCO3- = 22-28 mmol/L](https://boilerexams-production.s3.us-east-2.amazonaws.com/tDGDHxXzJP9HGQrzvPAui)",
+            "explanation_url": null,
+            "topics": [
+              "Acid-Base Balance"
+            ],
+            "choices": [
+              {
+                "answer": "Respiratory alkalosis",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Respiratory acidosis",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Metabolic acidosis",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Metabolic alkalosis",
+                "is_correct": 1,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "The kidneys compensate for respiratory acidosis by $\\rule{2.5cm}{0.4pt}$",
+            "explanation_url": null,
+            "topics": [
+              "Acid-Base Balance"
+            ],
+            "choices": [
+              {
+                "answer": "Decreasing the number of phosphate ions reabsorbed.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Increasing the rate of H+ secretion into the tubular fluid.",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "Producing alkaline urine.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Increasing the volume of urine produced.",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "What is the name of the process involving alternative waves of smooth muscle contraction that aid in moving food down the esophagus?",
+            "explanation_url": null,
+            "topics": [
+              "Digestive System"
+            ],
+            "choices": [
+              {
+                "answer": "Segmentation",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Peristalsis",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "Mass movements",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Mastication",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "All digestive tract organs have the same basic pattern of tissue layers in their walls. Which of the following is NOT a layer of this wall?",
+            "explanation_url": null,
+            "topics": [
+              "Digestive System"
+            ],
+            "choices": [
+              {
+                "answer": "Mucosa",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Muscularis",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Submucosa",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Glandulosa",
+                "is_correct": 1,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "What is the myenteric plexus?",
+            "explanation_url": null,
+            "topics": [
+              "Digestive System"
+            ],
+            "choices": [
+              {
+                "answer": "The special smooth muscle surrounding the afferent arteriole at the glomerulus.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "A complex ecological system formed by all the microorganisms, including bacteria, fungi, and viruses, that live in our digestive tract.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "A network of nerve fibers and ganglia between the longitudinal and circular muscle layers of the digestive organs that form part of the enteric nervous system.",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "A network of capillaries supplying blood to the organs of the digestive system.",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "The outer layer of the teeth's crown is a hard mineralized (apatite crystals), non-living substance called:",
+            "explanation_url": null,
+            "topics": [
+              "Digestive System"
+            ],
+            "choices": [
+              {
+                "answer": "Enamel",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "Periodontal ligament",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Cementum",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Pulp",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Parotid, submandibular, and sublingual refers to:",
+            "explanation_url": null,
+            "topics": [
+              "Digestive System"
+            ],
+            "choices": [
+              {
+                "answer": "The three types of teeth.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Enzymes of the saliva.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Extrinsic salivary glands.",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "Three types of food movements in the mouth.",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Which of the following is NOT a mechanism for stomach protection from acid?",
+            "explanation_url": null,
+            "topics": [
+              "Digestive System"
+            ],
+            "choices": [
+              {
+                "answer": "Tight junctions between epithelial cells.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Frequent replacement of damaged epithelial cells by stem cells.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Mucous coat.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Pancreatic secretion of bicarbonate directly into the stomach to neutralize the excess of acid.",
+                "is_correct": 1,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "In the stomach, the parietal cells, apart from secreting $\\rule{2.5cm}{0.4pt}$, produce $\\rule{2.5cm}{0.4pt}$, which facilitates the absorption of vitamin B12 in the small intestine.",
+            "explanation_url": null,
+            "topics": [
+              "Digestive System"
+            ],
+            "choices": [
+              {
+                "answer": "Gastric acid (HCl) / intrinsic factor",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "Bicarbonate / mucus",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Pepsinogen / gastric lipase",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Gastrin / bile",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Which hormone secreted by duodenal cells triggers the contraction of the gallbladder to release bile?",
+            "explanation_url": null,
+            "topics": [
+              "Digestive System"
+            ],
+            "choices": [
+              {
+                "answer": "Insulin",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Cholecystokinin",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "Gastrin",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Histamine",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "In the pancreas, secretin stimulates $\\rule{1.5cm}{0.4pt}$ to produce a watery secretion rich in $\\rule{1.5cm}{0.4pt}$.",
+            "explanation_url": null,
+            "topics": [
+              "Digestive System"
+            ],
+            "choices": [
+              {
+                "answer": "Duct cells / bicarbonate ions",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "Acinar cells / hormones (insulin, glucagon)",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Islets of Langerhans / digestive enzymes",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Hepatocytes / bile acids",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "The cystic duct and common hepatic duct join to form the $\\rule{1.5cm}{0.4pt}$ before entering the duodenum.",
+            "explanation_url": null,
+            "topics": [
+              "Digestive System"
+            ],
+            "choices": [
+              {
+                "answer": "Appendix",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Bile canaliculi",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Common bile duct",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "Portal triad",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Which of the following statements is NOT true of the small intestine?",
+            "explanation_url": null,
+            "topics": [
+              "Digestive System"
+            ],
+            "choices": [
+              {
+                "answer": "It extends from the pyloric sphincter to the ileocecal valve.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Circular folds, villi, and microvilli increase the intestinal surface area for digestion and absorption.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Its first part (the duodenum) receives the pancreatic juice and bile.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "It contains the highest concentration of enteric bacteria.",
+                "is_correct": 1,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "The specialized epithelial cells covering the villi in the intestinal mucosa that produce mucus to lubricate the intestine are called $\\rule{1.5cm}{0.4pt}$ cells.",
+            "explanation_url": null,
+            "topics": [
+              "Digestive System"
+            ],
+            "choices": [
+              {
+                "answer": "Goblet",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "Enterocyte",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Paneth",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Peyer",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Taenia coli (muscular bands) and haustra (pocket-like sacs) are anatomical characteristics of the $\\rule{2.5cm}{0.4pt}$.",
+            "explanation_url": null,
+            "topics": [
+              "Digestive System"
+            ],
+            "choices": [
+              {
+                "answer": "Esophagus",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Large intestine",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "Stomach",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Liver",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "The main function of the $\\rule{2.5cm}{0.4pt}$ is to absorb water and compact intestinal contents into feces.",
+            "explanation_url": null,
+            "topics": [
+              "Digestive System"
+            ],
+            "choices": [
+              {
+                "answer": "Gallbladder",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Colon",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "Pylorus",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Antrum",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "What stimulates the defecation reflex?",
+            "explanation_url": null,
+            "topics": [
+              "Digestive System"
+            ],
+            "choices": [
+              {
+                "answer": "An increase in osmolarity of the colon, which stimulates osmoreceptors.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Sitting on the toilet, which stimulates a spinal reflex.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Distention of the rectum, which stimulates stretch receptors.",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "The desire for defecation, which produces muscle contraction of the rectum by sympathetic\nmotor fibers.",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          }
+        ],
+        "pdfLink": null,
+        "questionCount": 40
+      },
+      {
+        "name": "Exam 4 - SPRING 2023",
+        "type": "exam",
+        "desc": "A BIOL20400 Exam",
+        "questions": [
+          {
+            "question": "The diagram below represents the $\\underline{digestion}$ process in which large food molecules are broken down into their monomers for absorption. What could A and B in the boxes represent? ![Box A is broken down to Box B](https://boilerexams-production.s3.us-east-2.amazonaws.com/hG_lujzyOltKYbWJXu2-8)",
+            "explanation_url": null,
+            "topics": [
+              "Nutrition & Metabolism"
+            ],
+            "choices": [
+              {
+                "answer": "A= carbohydrates, B= glycerol\n",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "A= carbohydrates, B= monosaccharides",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "A= proteins, B= fatty acids",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "A= lipids, B= amino acids",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Which energy-yielding macronutrients produce the highest number of calories when one gram of them is fully oxidized in the body?",
+            "explanation_url": null,
+            "topics": [
+              "Nutrition & Metabolism"
+            ],
+            "choices": [
+              {
+                "answer": "Fats",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "Proteins",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Carbohydrates",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Minerals",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Which of the following is a fat-soluble vitamin that can accumulate in toxic amounts in the body?",
+            "explanation_url": null,
+            "topics": [
+              "Nutrition & Metabolism"
+            ],
+            "choices": [
+              {
+                "answer": "Vitamin B",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Vitamin C",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Vitamin A",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "None- all the above vitamins are water-soluble.",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Concerning iron homeostasis: $\\rule{2.5cm}{0.4pt}$ is essential in storing excess iron in the liver, while $\\rule{2.5cm}{0.4pt}$ is the major iron-transport protein in blood plasma.\n",
+            "explanation_url": null,
+            "topics": [
+              "Nutrition & Metabolism"
+            ],
+            "choices": [
+              {
+                "answer": "Hepcidin / Transportin",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Myoglobin / Ferroportin",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Ferritin / Transferrin",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "Hemoglobin / Albumin",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "In the table below, identify the missing enzymes (A, B, and C): ![Table for Q5 MT4 Sp23](https://boilerexams-production.s3.us-east-2.amazonaws.com/AuqpseMmdp5jFChzqF4CL)",
+            "explanation_url": null,
+            "topics": [
+              "Nutrition & Metabolism"
+            ],
+            "choices": [
+              {
+                "answer": "A = Dextrinase / B = peptidase / C = elastase",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "A = Amylase / B = lipase / C = chymotrypsin\n",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "A = Lipase / B = maltase / C = aminopeptidase",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "A = Lactase / B = amylase / C = pepsin",
+                "is_correct": 1,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Aerobic respiration of glucose includes several successive pathways; which of the following does not form part of it? (Please note that they might not be in order).",
+            "explanation_url": null,
+            "topics": [
+              "Nutrition & Metabolism"
+            ],
+            "choices": [
+              {
+                "answer": "Citric acid cycle (or Krebs cycle)",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Oxidative deamination",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "Glycolysis",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Electron transport chain and oxidative phosphorylation",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Bile salts are produced in the liver from $\\rule{1.5cm}{0.4pt}$ and aid in the digestion of fats through $\\rule{1.5cm}{0.4pt}$ , which increases the surface area for the enzyme $\\rule{2.5cm}{0.4pt}$ to attack the triglyceride molecules.",
+            "explanation_url": null,
+            "topics": [
+              "Nutrition & Metabolism"
+            ],
+            "choices": [
+              {
+                "answer": "Taurine / hydrolysis / protease",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Triglycerides / agglomeration / amylase",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Bilirubin / micelles formation / salivary lipase",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Cholesterol / emulsification / pancreatic lipase",
+                "is_correct": 1,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "In the lumen of the intestine, bile salts combine with fatty acids, cholesterol, and other hydrophobic molecules to form complexes called $\\rule{1.5cm}{0.4pt}$ that facilitate lipid transport to the enterocyte surface for absorption.",
+            "explanation_url": null,
+            "topics": [
+              "Nutrition & Metabolism"
+            ],
+            "choices": [
+              {
+                "answer": "Micelles",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "Lipoprotein",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Chyle",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Globules",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Which of the following is TRUE about chylomicrons?",
+            "explanation_url": null,
+            "topics": [
+              "Nutrition & Metabolism"
+            ],
+            "choices": [
+              {
+                "answer": "They contain the most protein of any lipoprotein",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "After being formed, since they are too large to penetrate the lacteals, they enter the capillaries of the intestinal villi.\n",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "They have a hydrophobic core of phospholipids and apolipoproteins surrounded by a membrane made of triglycerides.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "They are assembled within the intestinal epithelial cells (enterocytes).\n",
+                "is_correct": 1,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Which of the following statements best describes LDL?\n",
+            "explanation_url": null,
+            "topics": [
+              "Nutrition & Metabolism"
+            ],
+            "choices": [
+              {
+                "answer": "A byproduct of enzymatic digestion of triglycerides in the intestine.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "A type of lipoprotein that delivers cholesterol to the body’s cells.",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "An enzyme found on the surface of endothelial cells that breaks down triglycerides.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "A glycolysis intermediate that is used to generate pyruvate.",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Which of the following hormones is a long-term regulator of appetite?",
+            "explanation_url": null,
+            "topics": [
+              "Nutrition & Metabolism"
+            ],
+            "choices": [
+              {
+                "answer": "Leptin",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "Ghrelin",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Amylin",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Peptide YY",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "The dartos muscle and cremaster muscle contract in an effort to $\\rule{2.5cm}{0.4pt}$.",
+            "explanation_url": null,
+            "topics": [
+              "Male Reproductive System"
+            ],
+            "choices": [
+              {
+                "answer": "Ejaculate sperm by compressing the urethra.\n",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Produce penis erection by decreasing the blood flow to the penis.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Maintain proper temperature for sperm production when the testes are exposed to cold.",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "Lower the position of the testes for facilitating intercourse.\n",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": " Spermatogenesis takes place in the $\\rule{2.5cm}{0.4pt}$, while the storage and maturation of sperm occur in the $\\rule{2.5cm}{0.4pt}$.",
+            "explanation_url": null,
+            "topics": [
+              "Male Reproductive System"
+            ],
+            "choices": [
+              {
+                "answer": "Seminal vesicles / scrotum",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Seminiferous tubules / epididymis",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "Prostate / rete testis\n",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Penis / ejaculatory ducts",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "The anterior pituitary gland releases $\\rule{1.5cm}{0.4pt}$, which stimulates the secretion of testosterone by $\\rule{1.5cm}{0.4pt}$.",
+            "explanation_url": null,
+            "topics": [
+              "Male Reproductive System"
+            ],
+            "choices": [
+              {
+                "answer": "FSH / Sperm cells",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "FSH / Spermatogonia",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "LH / Sertoli cells\n",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "LH / Leydig cells",
+                "is_correct": 1,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Arrange the following cells in the order in which they are produced during spermatogenesis:\n\n1. Secondary spermatocytes\n2. Spermatozoa\n3. Primary spermatocytes\n4. Spermatogonia\n5. Spermatid\n",
+            "explanation_url": null,
+            "topics": [
+              "Male Reproductive System"
+            ],
+            "choices": [
+              {
+                "answer": "3 → 1 → 5 → 4 → 2",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "2 → 4 → 3 → 1 → 5",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "4 → 3 → 1 → 5 → 2",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "5 → 4 → 3 → 2 → 1\n",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Which of the following statements concerning erection is INCORRECT?",
+            "explanation_url": null,
+            "topics": [
+              "Male Reproductive System"
+            ],
+            "choices": [
+              {
+                "answer": "Erection is achieved by the engorgement of the corpora cavernosa sinusoids with blood.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Nitric oxide (NO) plays a crucial role in this process by stimulating the enzyme guanylate cyclase.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "cGMP relaxes the smooth muscle of the deep arteries and cavernous spaces of the corpora cavernosa.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Erection is controlled by the sympathetic division of the autonomic nervous system.",
+                "is_correct": 1,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Which structure secretes semenogelin, a protein that helps semen coagulate after ejaculation?",
+            "explanation_url": null,
+            "topics": [
+              "Male Reproductive System"
+            ],
+            "choices": [
+              {
+                "answer": "Seminal vesicles",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "Testes",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Prostate",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Scrotum",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "In the follicular phase of the ovarian cycle, stimulation of the follicle by $\\rule{1.5cm}{0.4pt}$ will stimulate the secretion of $\\rule{1.5cm}{0.4pt}$ by the granulosa cells.\n",
+            "explanation_url": null,
+            "topics": [
+              "Female Reproductive System"
+            ],
+            "choices": [
+              {
+                "answer": "LH / progesterone",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "FSH / estrogen\n",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "GnRH / androgen\n",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Progesterone / FSH",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "The process by which the Graafian follicle breaks and release a(n) $\\rule{2.5cm}{0.4pt}$ from the ovary to the uterine tube is called $\\rule{2.5cm}{0.4pt}$.\n",
+            "explanation_url": null,
+            "topics": [
+              "Female Reproductive System"
+            ],
+            "choices": [
+              {
+                "answer": "Secondary oocyte / ovulation",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "Primary oocyte / ejaculation\n",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Tertiary oocyte / menstruation",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Ootid / folliculogenesis\n",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Considering the following picture, which structure appears during the luteal phase of the ovarian cycle and produces progesterone and estrogens?\n ![Q20 Image](https://boilerexams-production.s3.us-east-2.amazonaws.com/rKhcJ6hP8DesvV70pzuwa)",
+            "explanation_url": null,
+            "topics": [
+              "Female Reproductive System"
+            ],
+            "choices": [
+              {
+                "answer": "A",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "B",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "C",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "D",
+                "is_correct": 1,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Which structure of the female reproductive system is shed during the menstrual phase of the menstrual cycle?",
+            "explanation_url": null,
+            "topics": [
+              "Female Reproductive System"
+            ],
+            "choices": [
+              {
+                "answer": "The mucosa of the vagina",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "The functional layer of the endometrium",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "The basal layer of the uterine tube\n",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "The hymen",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "When does the proliferative phase of the menstrual cycle occur?",
+            "explanation_url": null,
+            "topics": [
+              "Female Reproductive System"
+            ],
+            "choices": [
+              {
+                "answer": "The first day of menses (day 1 of a new cycle).",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "The following days after ovulation.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "After menses (=blood discharge) and before ovulation.",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "During the entire menstrual cycle.\n",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "When does the second meiotic division (meiosis II) in oogenesis complete, producing ootids?",
+            "explanation_url": null,
+            "topics": [
+              "Female Reproductive System"
+            ],
+            "choices": [
+              {
+                "answer": "Before birth.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Only if the egg is fertilized by sperm.",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "Just prior to ovulation.\n",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Monthly after puberty, independently of the presence of sperm.",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "The level of which hormone peaks during the first trimester of pregnancy, and is commonly detected in pregnancy tests?\n",
+            "explanation_url": null,
+            "topics": [
+              "Female Reproductive System"
+            ],
+            "choices": [
+              {
+                "answer": "Human chorionic gonadotropin (hCG)\n",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "Cortisol",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Placental lactogen",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Oxytocin",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Some of the major physiological changes that occur in the maternal body during pregnancy are the following EXCEPT:",
+            "explanation_url": null,
+            "topics": [
+              "Female Reproductive System"
+            ],
+            "choices": [
+              {
+                "answer": "Dyspnea (=difficult breathing)\n",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Increase in blood volume\n",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Edema of the ankles and feet",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Decrease of cardiac output",
+                "is_correct": 1,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "How does oxytocin aid the birth process (parturition)?",
+            "explanation_url": null,
+            "topics": [
+              "Female Reproductive System"
+            ],
+            "choices": [
+              {
+                "answer": "By increasing the number of estrogen receptors in the uterine wall",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "By promoting uterine wall contractions\n",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "By decreasing the levels of prostaglandins",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "By inhibiting cervical stretching",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Select the INCORRECT statement about the development of the mammary glands:",
+            "explanation_url": null,
+            "topics": [
+              "Female Reproductive System"
+            ],
+            "choices": [
+              {
+                "answer": "Terminal End Buds (TEB) appear at the ends of lactiferous ducts at puberty, promoted by increased estrogen levels.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Alveolar buds are formed during pregnancy.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "In a mature virgin (=a person who has never had sexual intercourse), alveoli are fully matured, and the lactocytes can produce milk.\n",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "Estrogens and progesterone cause the ductal system of the mammary glands to grow (elongate) and branch.\n",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "While $\\rule{2.5cm}{0.4pt}$ stimulates milk production and secretion by lactocytes, $\\rule{2.5cm}{0.4pt}$ stimulates the contraction of the myoepithelial cells, pushing the milk out of the alveoli into the ducts.\n",
+            "explanation_url": null,
+            "topics": [
+              "Female Reproductive System"
+            ],
+            "choices": [
+              {
+                "answer": "Progesterone / estrogen",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Prolactin / oxytocin",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "FSH / LH\n",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Suckling / detaching of the baby’s lips from the nipple",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Although the male ejaculate contains hundreds of millions of sperm cells, $\\rule{2.5cm}{0.4pt}$.",
+            "explanation_url": null,
+            "topics": [
+              "Development"
+            ],
+            "choices": [
+              {
+                "answer": "Only a few hundred of them will reach the vicinity of the egg.",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "Most will be destroyed by the alkaline environment of the vagina at ejaculation.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Most will be destroyed by capacitation before reaching the oocyte.",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Only one will release its acrosomal enzymes to penetrate the outer layers of the oocyte.",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "What is the name of the reaction following the fusion of sperm and egg, where the cortical granules from the egg release their content, causing a structural modification of the zona pellucida that hardens it (zona response), preventing polyspermy?",
+            "explanation_url": null,
+            "topics": [
+              "Development"
+            ],
+            "choices": [
+              {
+                "answer": "Acrosomal reaction",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Capacitation",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Fast block",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Cortical reaction",
+                "is_correct": 1,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Which structure of the blastocyst will develop into the embryo?",
+            "explanation_url": null,
+            "topics": [
+              "Development"
+            ],
+            "choices": [
+              {
+                "answer": "The blastocoele",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Cytotrophoblast",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "The inner cell mass",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "Syncytiotrophoblast",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Arrange the following stages of development in the order they appear during human development:\n\n1. Blastocyst\n2. Fetus\n3. Morula\n4. Embryo\n5. Zygote\n",
+            "explanation_url": null,
+            "topics": [
+              "Development"
+            ],
+            "choices": [
+              {
+                "answer": "3, 5, 1, 2, 4\n",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "5, 3, 1, 2, 4",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "1, 5, 3, 4, 2",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "5, 3, 1, 4, 2\n",
+                "is_correct": 1,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Which are the two layers of the bilaminar embryonic disc?",
+            "explanation_url": null,
+            "topics": [
+              "Development"
+            ],
+            "choices": [
+              {
+                "answer": "Epiblast and hypoblast",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "Ectoderm and endoderm",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Yolk sac and amnion",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Cytotrophoblast and syncytiotrophoblast",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "During what process do the three primary germ layers first appear?",
+            "explanation_url": null,
+            "topics": [
+              "Development"
+            ],
+            "choices": [
+              {
+                "answer": "Cleavage",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Gastrulation",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "Fertilization",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Capacitation",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Following are four structures together with a germ layer. Identify the INCORRECT association:",
+            "explanation_url": null,
+            "topics": [
+              "Development"
+            ],
+            "choices": [
+              {
+                "answer": "Neuron - ectoderm",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Epithelial cells lining the intestine – ectoderm",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "Cardiac muscle – mesoderm",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Bone - mesoderm",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "When does organogenesis occur?",
+            "explanation_url": null,
+            "topics": [
+              "Development"
+            ],
+            "choices": [
+              {
+                "answer": "During the preembryonic stage\n",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "During the fetal stage",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "During the postnatal stage",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "During the embryonic stage",
+                "is_correct": 1,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Which extraembryonic membrane contributes to forming the fetal portion of the placenta?\n",
+            "explanation_url": null,
+            "topics": [
+              "Development"
+            ],
+            "choices": [
+              {
+                "answer": "Amnion",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Allantois",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Chorion",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "Yolk sac",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Which of the following allows for transferring oxygen and nutrients from maternal circulation into fetal circulation?",
+            "explanation_url": null,
+            "topics": [
+              "Development"
+            ],
+            "choices": [
+              {
+                "answer": "The umbilical cord",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "The cervix\n",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "The zona pellucida",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "The chorionic cavity",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Which of the following changes does NOT occur with aging?",
+            "explanation_url": null,
+            "topics": [
+              "Aging"
+            ],
+            "choices": [
+              {
+                "answer": "Decrease in muscular mass",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Decrease in bone mineral density",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Decrease in arterial stiffness\n",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "Loss of elasticity in the skin",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          },
+          {
+            "question": "Which of these processes is NOT associated with cellular senescence?",
+            "explanation_url": null,
+            "topics": [
+              "Aging"
+            ],
+            "choices": [
+              {
+                "answer": "Unrepaired DNA damage",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Telomere elongation with each round of DNA replication",
+                "is_correct": 1,
+                "type": "mcq"
+              },
+              {
+                "answer": "Hyperactivation of oncogenes",
+                "is_correct": 0,
+                "type": "mcq"
+              },
+              {
+                "answer": "Formation of reactive oxygen species",
+                "is_correct": 0,
+                "type": "mcq"
+              }
+            ]
+          }
+        ],
+        "pdfLink": null,
+        "questionCount": 40
+      }
+    ]
+  },
+  {
     "name": "ECON25200",
     "description": "Macroeconomics",
     "category": "ECO",

@@ -4,8 +4,7 @@ import CreatorInfo from './TeamCard.jsx';
 const About = () => {
   const creators = [
     {
-      imgSrc:
-        'https://media.licdn.com/dms/image/v2/D5603AQFo1LTbAVeJ-A/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1707747042254?e=1743033600&v=beta&t=sEuGzlRHda7qrMS_ROE_EYWo09FRDSHtzlOL_VGL_r4',
+      imgSrc: 'https://bookface-images.s3.amazonaws.com/avatars/25375148855527639e6871415d404c73702a02fc.jpg',
       name: 'Maddox Schmidlkofer',
       description: 'All work and no play makes maddox a dull boy.', //Founder and Lead Developer of QuackPrep. Passionate about creating innovative solutions to make learning fun and engaging for college students.
       links: [
