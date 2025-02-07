@@ -60,6 +60,12 @@ export function getIconByCategory(category) {
     case 7:
     case 'PSY':
       return 'puzzle';
+    case 9:
+    case 'ENG':
+      return 'settings';
+    case 10:
+    case 'STAT':
+      return 'area graph';
     default:
       return 'beer';
   }
@@ -74,10 +80,7 @@ export default function ClassCard({ id, name, category, desc, school_id, created
   const currentUserId = useSelector(selectUser).user?.id;
   const isOwner = currentUserId === parseInt(created_by) || currentUserId === ADMIN_ACCOUNT_ID;
   const edit = isOwner && editMode;
-  ////
 
-  // Simple mobile check
-  // could abstract this to a hook, pls do
   const isMobile = useIsMobile();
 
   // Extract level from class name

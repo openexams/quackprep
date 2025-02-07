@@ -1,7 +1,12 @@
 import sqlExe from "#db/dbFunctions.js";
 
 export async function getClassCategories() {
-  return await sqlExe.executeCommand(`SELECT * FROM class_categories`);
+  return await sqlExe.executeCommand(`SELECT * FROM class_categories
+    ORDER BY
+    CASE
+      WHEN id = 8 THEN 5000
+      ELSE id
+      END, id;`);
 }
 
 async function selectClasses(WHERE, params) {
