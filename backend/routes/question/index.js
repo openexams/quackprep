@@ -10,12 +10,14 @@ import { cascadeSetDeleted } from "#utils/sqlFunctions.js";
 import { isCreator } from "#middleware/creatorMiddleware.js";
 import favRouter from "./favorite/index.js";
 import voteRouter from "./vote/index.js";
+import postRouter from "./post/index.js";
 import { BadRequestError } from "#utils/ApiError.js";
 const router = express.Router();
 
 router.use("/vote", voteRouter);
 
 router.use("/favorite", favRouter);
+router.use("/post", postRouter);
 
 router.get("/user", isAuthenticated, async function (req, res, next) {
   try {

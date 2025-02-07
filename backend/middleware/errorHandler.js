@@ -36,7 +36,7 @@ export function errorHandler(err, req, res, next) {
     return res.status(err.statusCode).json({
       status: "error",
       errorCode: err.errorCode,
-      message: err.message,
+      message: err.message, // custom error message ONLY FROM HERE DO NOT SEND ERROR FROM SERVER HERE
       details: err.details,
       ...(NODE_ENV === "local" && { stack: err.stack }),
     });
@@ -55,7 +55,7 @@ export function errorHandler(err, req, res, next) {
     return res.status(500).json({
       status: "error",
       errorCode: INTERNAL_SERVER_ERROR,
-      message: err.message,
+      message: NODE_ENV === "local" ? err.message : "Internal server error",
       ...(NODE_ENV === "local" && { stack: err.stack }),
     });
   }

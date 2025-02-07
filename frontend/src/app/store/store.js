@@ -19,6 +19,7 @@ import classCategoriesReducer from '../class/class_categories/classCategorySlice
 import pdfsReducer from '../class/group/pdf/pdfSlice';
 import favoriteReducer from '../class/question/favorite/favoriteSlice';
 import groupReducer from '../class/group/groupSlice';
+import questionPostReducer from '@app/class/question/post/questionPostSlice';
 
 const app = combineReducers({
   chatbot: chatbotReducer,
@@ -26,7 +27,7 @@ const app = combineReducers({
   navbar: navbarReducer,
   streak: streakReducer,
   class: combineReducers({ classes: classReducer, classCategories: classCategoriesReducer }),
-  question: questionsReducer,
+  question: combineReducers({ questions: questionsReducer, questionPosts: questionPostReducer }),
   leaderboard: leadboardReducer,
   choices: choicesReducer,
   group: groupReducer,
