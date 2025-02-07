@@ -1264,3 +1264,141 @@
     ],
     "children": []
 }
+
+{
+  "id": "35a4f3db-15b1-4b20-8447-26fef37febf1",
+  "type": "FREE_RESPONSE",
+  "data": {
+    "body": "1. (a) Draw the Lewis structure for the molecule indicated below. Show all lone pair electrons and formal charges. (4 pts)\n\n(b) Draw the line angle formula for the molecule (4 pts).\n\n(c) What is the most electronegative atom in the molecule? (2 pts)",
+    "solution": [],
+    "answerChoices": []
+  },
+  "number": 1,
+  "disclaimer": null,
+  "examId": "cf10e972-282d-497a-9f31-368eebcb6df3",
+  "courseId": "b9779093-fa12-45fe-9bbf-3c2118913dd4",
+  "parentId": null,
+  "flags": {
+    "published": true,
+    "disableRandomAnswers": false,
+    "answersStartHidden": false
+  },
+  "stats": {
+    "count": 1,
+    "timeSpent": "903125",
+    "timeSpentVideo": "0",
+    "submissions": 11,
+    "submissionsCorrect": 1,
+    "accuracy": 0.09090909090909091,
+    "difficulty": 0.7905405405405406
+  },
+  "resources": [
+    {
+      "id": "3380ae37-fe02-43ba-ae09-ed38ef299d4e",
+      "type": "IMAGE",
+      "data": {
+        "key": "6UPfw_R78i22IxSR1EAJb",
+        "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/6UPfw_R78i22IxSR1EAJb",
+        "altText": "[H2CCHCO2]-"
+      },
+      "courseId": null,
+      "examId": null,
+      "questionId": "35a4f3db-15b1-4b20-8447-26fef37febf1",
+      "explanationId": null,
+      "applicationId": null,
+      "answerChoiceId": null,
+      "customExamId": null
+    }
+  ],
+  "exam": {
+    "id": "cf10e972-282d-497a-9f31-368eebcb6df3",
+    "number": 1,
+    "year": 2022,
+    "season": "FALL",
+    "disclaimer": "",
+    "courseId": "b9779093-fa12-45fe-9bbf-3c2118913dd4",
+    "flags": {
+      "published": true,
+      "practice": false
+    },
+    "stats": {
+      "count": 1,
+      "timeSpent": "7738765",
+      "timeSpentVideo": "2523190",
+      "submissions": 55,
+      "submissionsCorrect": 11,
+      "questions": 10,
+      "accuracy": 0.2,
+      "difficulty": 0.8564516129032258
+    }
+  },
+  "explanation": {
+    "id": "1e52d1b8-cf9b-4d6e-ac99-87ff81286e2b",
+    "body": null,
+    "questionId": "35a4f3db-15b1-4b20-8447-26fef37febf1",
+    "resources": [
+      {
+        "id": "46b18a79-9223-4260-b3d3-092e41c16286",
+        "type": "VIDEO",
+        "data": {
+          "url": "https://youtu.be/zFyvGRO-ShU"
+        },
+        "courseId": null,
+        "examId": null,
+        "questionId": null,
+        "explanationId": "1e52d1b8-cf9b-4d6e-ac99-87ff81286e2b",
+        "applicationId": null,
+        "answerChoiceId": null,
+        "customExamId": null
+      },
+      {
+        "id": "a05dc538-1b5b-4e37-9c32-831c3f8df0e1",
+        "type": "IMAGE",
+        "data": {
+          "key": "p5UXP1m7jwXemCIMA7RQp",
+          "url": "https://boilerexams-production.s3.us-east-2.amazonaws.com/p5UXP1m7jwXemCIMA7RQp"
+        },
+        "courseId": null,
+        "examId": null,
+        "questionId": null,
+        "explanationId": "1e52d1b8-cf9b-4d6e-ac99-87ff81286e2b",
+        "applicationId": null,
+        "answerChoiceId": null,
+        "customExamId": null
+      }
+    ]
+  },
+  "topics": [
+    {
+      "id": "04a46663-4e79-414b-a0d8-4232dc109fc8",
+      "name": "Electronegativity",
+      "courseId": "b9779093-fa12-45fe-9bbf-3c2118913dd4",
+      "stats": {
+        "count": 1,
+        "timeSpent": "23555619",
+        "timeSpentVideo": "62416",
+        "submissions": 49,
+        "submissionsCorrect": 9,
+        "questions": 2,
+        "accuracy": 0.1836734693877551,
+        "difficulty": 0.8540268456375839
+      }
+    },
+    {
+      "id": "abab710a-2bb6-4f36-951d-23a2e2cf3936",
+      "name": "Lewis Structures and Line Angle Formula",
+      "courseId": "b9779093-fa12-45fe-9bbf-3c2118913dd4",
+      "stats": {
+        "count": 1,
+        "timeSpent": "23763378",
+        "timeSpentVideo": "62416",
+        "submissions": 54,
+        "submissionsCorrect": 9,
+        "questions": 3,
+        "accuracy": 0.16666666666666666,
+        "difficulty": 0.8668831168831168
+      }
+    }
+  ],
+  "children": []
+}

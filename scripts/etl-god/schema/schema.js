@@ -47,14 +47,11 @@ export const BoilerClassSchema = z
   })
   .strip(); // use clas shema to create name
 
-export const BoilerExamSchema = z
+export const BoilerTopicSchema = z
   .object({
     id: z.string(),
-    number: z.number(),
-    year: z.number().int().min(1900).max(new Date().getFullYear()),
-    season: z.enum(["WINTER", "SPRING", "SUMMER", "FALL"]),
+    name: z.string(),
     stats: z.object({ questions: z.number().int() }),
-    resources: BoilerResourcesSchema,
     questions: z.array(
       z.object({
         id: z.string(),
@@ -62,6 +59,20 @@ export const BoilerExamSchema = z
     ),
   })
   .strip();
+
+export const BoilerExamSchema = z.object({
+  id: z.string(),
+  stats: z.object({ questions: z.number().int() }),
+  questions: z.array(
+    z.object({
+      id: z.string(),
+    })
+  ),
+  number: z.number(),
+  year: z.number().int().min(1900).max(new Date().getFullYear()),
+  season: z.enum(["WINTER", "SPRING", "SUMMER", "FALL"]),
+  resources: BoilerResourcesSchema,
+});
 
 export const BoilerQuestionSchema = z
   .object({

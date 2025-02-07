@@ -1,5 +1,5 @@
 import { getBoilerClassAndParseToJsonClass } from "./func/class.js";
-import { getJsonGroupsFromJsonClass } from "./func/exam.js";
+import { getExamJsonGroupsFromJsonClass } from "./func/exam.js";
 import { boilerQuestionsToJsonQuestions } from "./func/question.js";
 import { readFromFile, writeToFile } from "./helpers.js";
 
@@ -25,10 +25,10 @@ export async function runEt(options = {}) {
     for (let i = 0; i < finalJason.length; i++) {
       totalQuestionsThatShouldBeAdded += finalJason[i].questionCount;
       // for all returned classes
-      const { groupJson, boilerQuestionIds } = await getJsonGroupsFromJsonClass(
-        finalJason[i],
-        { downloadPDFS: options.downloadPDFS }
-      );
+      const { groupJson, boilerQuestionIds } =
+        await getExamJsonGroupsFromJsonClass(finalJason[i], {
+          downloadPDFS: options.downloadPDFS,
+        });
       finalJason[i].groups = groupJson;
       for (let j = 0; j < finalJason[i].groups.length; j++) {
         finalJason[i].groups[j].questions =
@@ -61,7 +61,10 @@ export async function runEt(options = {}) {
   } catch (error) {
     console.log(error);
     try {
-      await writeToFile(finalJason, "json/finalJasonERRORED.json");
+      await writeToFile(
+        JSON.stringify(finalJason, null, 2),
+        "json/finalJasonERRORED.json"
+      );
     } catch (error) {
       console.error("Errored writing to file", error);
     }
@@ -69,9 +72,31 @@ export async function runEt(options = {}) {
 }
 
 // stat econ and phys done BIOL20400
+// CHM11500 only has topics no exams.
 
 await runEt({
   appendClassToOutputFile: true,
   downloadPDFS: true,
-  subject: "Electrical & Computer Engr",
+  courseName: "CHM11500",
 });
+
+// proxy code
+// app.use('/proxy', async (req, res) => {
+//   const url = req.url;
+
+//   try {
+//     // Forward the request using axios
+//     const response = await axios({
+//       method: req.method,
+//       url: url,
+//       data: req.body, // Forward the request body
+//       headers: req.headers // Forward the request headers
+//     });
+
+//     // Send the response back to the client
+//     res.status(response.status).send(response.data);
+//   } catch (err) {
+//     console.error('Proxy error:', err);
+//     res.status(500).send('Proxy error');
+//   }
+// });

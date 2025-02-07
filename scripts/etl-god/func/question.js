@@ -112,9 +112,8 @@ export async function boilerQuestionToJsonQuestion(
   ) {
     question_type = "frq";
   } else if (
-    (boilerQuestion.type === "FREE_RESPONSE" ||
-      boilerQuestion.type === "SHORT_ANSWER") &&
-    !Array.isArray(boilerQuestion.data.solution)
+    boilerQuestion.type === "FREE_RESPONSE" ||
+    boilerQuestion.type === "SHORT_ANSWER"
   ) {
     question_type = "frq";
   } else if (
@@ -143,9 +142,7 @@ export async function boilerQuestionToJsonQuestion(
     } // TODO MAKE THESE QUESTIONS TOPIC & explanation_url SAME AS PARENT
     return return_questions; // cuz this question we are on will NOT be made into a question
   } else {
-    throw new Error(
-      `I have not forseen this question type ${{ boilerQuestion }}`
-    );
+    throw new Error(`I have not forseen this question type ${boilerQuestion}`);
   }
 
   // all things relating to the choices for images etc will be in explanation.resources
@@ -163,7 +160,9 @@ export async function boilerQuestionToJsonQuestion(
     choices = [
       {
         answer:
-          boilerQuestion.data.solution +
+          (!Array.isArray(boilerQuestion.data.solution)
+            ? boilerQuestion.data.solution
+            : "") +
           (explanation_resources_images
             ? " " + explanation_resources_images
             : ""),

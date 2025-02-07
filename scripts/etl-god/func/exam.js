@@ -1,6 +1,54 @@
 import axios, { fetchWithExponetialBackoff } from "../axios.js";
 import { writeToFile } from "../helpers.js";
-import { BoilerExamSchema, JSONGroupSchema } from "../schema/schema.js";
+import {
+  BoilerExamSchema,
+  BoilerTopicSchema,
+  JSONGroupSchema,
+} from "../schema/schema.js";
+
+/**
+ *
+ * @param {import("../types.js").BoilerExam | import("../types.js").BoilerTopic} boilerGroup
+ * @returns {String[]}
+ */
+export function addBoilerQuestionIdsFromGroupToArray(boilerGroup) {
+  const ret = [];
+  for (let j = 0; j < boilerGroup.questions.length; j++) {
+    ret.push(boilerGroup.questions[j].id);
+  }
+  return ret;
+}
+
+/**
+ *
+ * @param {import("../types.js").JSONClass} jsonClass
+ * @returns {import("../types.js").JSONGroup[]}
+ */
+export async function getTopicJsonGroupsFromJsonClass(jsonClass) {
+  const result = await fetchWithExponetialBackoff(
+    `/courses/${jsonClass.name}/topics`
+  );
+  const validated = BoilerTopicSchema.array().parse(result);
+  console.log(`got ${validated.length} topics from ${jsonClass.name}`);
+  const questionIdsInTopics = [];
+  const topics = [];
+  for (let i = 0; i < validated.length; i++) {
+    const curTopic = validated[i];
+    questionIdsInTopics.push(addBoilerQuestionIdsFromGroupToArray(curTopic));
+    topics.push({
+      name: curTopic.name,
+      type: "topic",
+      desc: `${curTopic.name} in ${jsonClass.name}`,
+      questions: null,
+      questionCount: curTopic.stats.questions,
+      pdfLink: null,
+    });
+  }
+  return {
+    groupJson: JSONGroupSchema.array().parse(topics),
+    boilerQuestionIds: questionIdsInTopics,
+  };
+}
 
 /**
  * Fetches and processes exam data from a JSON class to generate groups
@@ -16,20 +64,26 @@ import { BoilerExamSchema, JSONGroupSchema } from "../schema/schema.js";
  * console.log(result.groupJson); // Array of exam groups
  * console.log(result.boilerQuestionIds); // Array of question ID arrays
  */
-export async function getJsonGroupsFromJsonClass(jsonClass, options) {
+export async function getExamJsonGroupsFromJsonClass(jsonClass, options) {
   const result = await fetchWithExponetialBackoff(
     `courses/${jsonClass.name}/exams/`
   );
-  console.log("recieved all exams for class", jsonClass.name, "parsing now");
+  if (
+    !Array.isArray(result) ||
+    (Array.isArray(result) && result.length === 0)
+  ) {
+    console.log(`courses/${jsonClass.name}/exams/ has no exams, trying topics`);
+    return getTopicJsonGroupsFromJsonClass(jsonClass);
+  }
 
   const validated = BoilerExamSchema.array().parse(result);
+  console.log(`recieved ${validated.length} exams for class`, jsonClass.name);
 
   const groupsJson = [];
   const questionIdsInExams = [];
 
   for (let i = 0; i < validated.length; i++) {
     console.log("curExamId", validated[i].id);
-    questionIdsInExams.push([]);
 
     const curExam = validated[i];
     let curPDFLink = null;
@@ -44,12 +98,7 @@ export async function getJsonGroupsFromJsonClass(jsonClass, options) {
         curPDFLink = curExam.resources[j].data.link;
       }
     }
-    if (questionIdsInExams[i].length !== 0) {
-      throw new Error("ASSERT questionIdsInExams[i].length ===0 failed");
-    }
-    for (let j = 0; j < curExam.questions.length; j++) {
-      questionIdsInExams[i].push(curExam.questions[j].id);
-    }
+    questionIdsInExams.push(addBoilerQuestionIdsFromGroupToArray(curExam));
     groupsJson.push({
       name: `${
         curExam.number !== 0 ? `Exam ${curExam.number}` : "Final Exam"
