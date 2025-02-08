@@ -48,7 +48,7 @@ function getLocalShowAIQuestions() {
 function setLocalShowAIQuestions(showAIQuestions) {
   window.localStorage.setItem('showAIQuestions', String(showAIQuestions));
 }
-
+// TODO FIX THIS SHITTY COMPONENT AND PAGE
 export default function QuestionPage() {
   const isMobile = useIsMobile();
   const navigate = useNavigate();
@@ -78,11 +78,18 @@ export default function QuestionPage() {
         dispatch(updateQuestionId(parseInt(questions?.[0]?.id)));
         dispatch(changeNavbarPage(navigate, parseInt(questions?.[0]?.id)));
       }
-      setSelectedQuestion(questions?.[0]);
     }
-  }, [questions?.[0]]); // could lead to issues
+  }, [questions?.length]); // could lead to issues
 
   useEffect(() => {
+    // keep selected question state same as navbar
+    if (questionId && questions?.length > 0) {
+      setSelectedQuestion(selectItemById(questions, 'id', questionId));
+    }
+  }, [questionId, questions?.length]);
+
+  useEffect(() => {
+    // change navbar state when selected question id changes
     if (!loadingComps.QuestionPage && selectedQuestion?.id) {
       dispatch(
         changeNavbarPage(navigate, `/class/${schoolName}/${classId}/group/${groupId}/question/${parseInt(selectedQuestion.id)}`),
@@ -151,7 +158,7 @@ export default function QuestionPage() {
           </Grid.Row>
         </Grid>
       </CustomImageLoader>
-      <QuestionPostMain questionId={selectedQuestion.id} />
+      {selectedQuestion?.id && <QuestionPostMain questionId={selectedQuestion.id} />}
     </Segment>
   );
 }

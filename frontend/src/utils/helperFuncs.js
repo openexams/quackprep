@@ -1,4 +1,4 @@
-import { sendObjToPath } from 'maddox-js-funcs';
+import { sendObjToPath, selectItemsById } from 'maddox-js-funcs';
 /**
  * Text len must be >=2
  * @param {String} text
@@ -189,4 +189,46 @@ export async function localImagesToBase64(images) {
   }
 
   return base64Images;
+}
+
+/**
+ * @param {Object} parent parent must have prop parent_id_name and it is what the parents id name is, in the child
+ * @param {Object[]} items
+ * @param {String} parent_id_name
+ * @returns {Object} the updated child
+ */
+function addChildren(parent, items, parent_id_name) {
+  const children = selectItemsById(items, parent_id_name, parent.id);
+  if (children.length === 0) {
+    return parent;
+  } else {
+    // for all children add children;
+
+    parent['children'] = [];
+    for (let i = 0; i < children.length; i++) {
+      parent.children.push(addChildren(children[i], items, parent_id_name));
+    }
+    return parent;
+  }
+}
+
+/**
+ *
+ * @param {Object[]} items
+ * @param {String} parent_id_name
+ */
+export function forAllParentsCallAddChildren(items, parent_id_name) {
+  for (let i = 0; i < items.length; i++) {
+    if (items[i][parent_id_name] === null) {
+      addChildren(items[i], items, parent_id_name);
+    }
+  }
+  // remove all those alr added
+  for (let i = 0; i < items.length; i++) {
+    if (items[i][parent_id_name] !== null) {
+      items.splice(i, 1); // remove all children
+      i--;
+    }
+  }
+  return items;
 }
