@@ -1,38 +1,62 @@
-import { useSelector } from 'react-redux';
-import { selectQuestionPosts } from './questionPostSlice';
-import { useDispatch } from 'react-redux';
-import { getQuestionPostsByQuestionId } from './questionPostSlice';
-import { useEffect } from 'react';
-import QuestionPost from './QuestionPost';
+import { useEffect, useMemo } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { Comment, Segment } from 'semantic-ui-react';
+import { selectQuestionPosts, getQuestionPostsByQuestionId } from './questionPostSlice';
 import { forAllParentsCallAddChildren } from '@utils/helperFuncs';
+import QuestionPost from './QuestionPost';
+import QuestionPostInput from './QuestionPostInput';
+import { selectLoadingState } from '@app/store/loadingSlice';
 
 export default function QuestionPostMain({ questionId }) {
+  const loading = useSelector(selectLoadingState).loadingComps?.QuestionPostMain;
   const dispatch = useDispatch();
-  /**@type {import('../../../../../../types.ts').QuestionPostSelect[]} */
-  const questionPosts = forAllParentsCallAddChildren(structuredClone(useSelector(selectQuestionPosts(questionId))), 'post_id');
+  // Get the raw posts from Redux. (Adjust the selector if needed.)
+  const rawPosts = useSelector(selectQuestionPosts(questionId));
 
+  // Build a nested structure of posts (with children attached) using useMemo to avoid unnecessary recomputation.
+  const questionPosts = useMemo(() => {
+    return rawPosts ? forAllParentsCallAddChildren(structuredClone(rawPosts), 'post_id') : [];
+  }, [rawPosts]);
+
+  // Fetch posts if none exist for the current questionId.
   useEffect(() => {
-    if ((questionId && !questionPosts) || (questionId && Array.isArray(questionPosts) && questionPosts.length === 0)) {
+    if (questionId && (!rawPosts || rawPosts.length === 0)) {
       dispatch(getQuestionPostsByQuestionId(questionId));
     }
-  }, []);
+  }, [dispatch, questionId, rawPosts]);
+
+  /**
+   * Recursively renders a comment and its nested replies.
+   * @param {import('../../../../../../types.ts').QuestionPostSelect} qpost - The current post.
+   * @returns {React.ReactNode}
+   */
+  function renderComments(qpost) {
+    return (
+      <QuestionPost
+        id={qpost.id}
+        key={qpost.id}
+        post_id={qpost.post_id}
+        username={qpost.username}
+        user_id={qpost.created_by}
+        icon={qpost.icon}
+        text={qpost.text}
+        updated_at={qpost.updated_at}
+      >
+        {qpost?.children != null ? qpost.children.map((child) => <div key={child.id}>{renderComments(child)}</div>) : null}
+      </QuestionPost>
+    );
+  }
 
   return (
-    <div>
-      {questionPosts.map((qpost) => {
-        return (
-          <QuestionPost
-            id={qpost.id}
-            key={qpost.id}
-            post_id={qpost.post_id}
-            username={qpost.username}
-            user_id={qpost.created_by}
-            icon={qpost.icon}
-            text={qpost.text}
-            updated_at={qpost.updated_at}
-          ></QuestionPost>
-        );
-      })}
-    </div>
+    <Segment raised padded loading={loading}>
+      <Comment.Group threaded>
+        {questionPosts?.length > 0 ? (
+          questionPosts.map((qpost) => renderComments(qpost))
+        ) : (
+          <p>No posts yet. Be the first to ask!</p>
+        )}
+      </Comment.Group>
+      <QuestionPostInput />
+    </Segment>
   );
 }
