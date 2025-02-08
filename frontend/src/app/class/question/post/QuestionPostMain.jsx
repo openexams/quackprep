@@ -41,6 +41,7 @@ export default function QuestionPostMain({ questionId }) {
         icon={qpost.icon}
         text={qpost.text}
         updated_at={qpost.updated_at}
+        question_id={questionId}
       >
         {qpost?.children != null ? qpost.children.map((child) => <div key={child.id}>{renderComments(child)}</div>) : null}
       </QuestionPost>
@@ -56,7 +57,7 @@ export default function QuestionPostMain({ questionId }) {
           <p>No posts yet. Be the first to ask!</p>
         )}
       </Comment.Group>
-      <QuestionPostInput />
+      <QuestionPostInput question_id={questionId} />
     </Segment>
   );
 }

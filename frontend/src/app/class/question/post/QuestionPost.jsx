@@ -1,9 +1,12 @@
 import { useState } from 'react';
 import { Comment } from 'semantic-ui-react';
 import QuestionPostInput from './QuestionPostInput';
-export default function QuestionPost({ id, post_id, username, user_id, icon, text, updated_at, children }) {
+import { selectUser } from '@app/auth/authSlice';
+import { useSelector } from 'react-redux';
+export default function QuestionPost({ id, post_id, username, user_id, icon, text, updated_at, children, question_id }) {
   const [editMode, setEditMode] = useState(false);
   const [replyMode, setReplyMode] = useState(false);
+  const my_user_id = useSelector(selectUser).user?.id;
 
   return (
     <Comment key={id}>
@@ -16,6 +19,7 @@ export default function QuestionPost({ id, post_id, username, user_id, icon, tex
         <Comment.Text>
           {editMode ? (
             <QuestionPostInput
+              question_id={question_id}
               id={id}
               post_id={post_id}
               username={username}
@@ -29,14 +33,16 @@ export default function QuestionPost({ id, post_id, username, user_id, icon, tex
           )}
         </Comment.Text>
         <Comment.Actions>
-          <Comment.Action
-            onClick={() => {
-              setEditMode(!editMode);
-              setReplyMode(false);
-            }}
-          >
-            Edit
-          </Comment.Action>
+          {my_user_id === user_id && (
+            <Comment.Action
+              onClick={() => {
+                setEditMode(!editMode);
+                setReplyMode(false);
+              }}
+            >
+              Edit
+            </Comment.Action>
+          )}
           <Comment.Action
             onClick={() => {
               setReplyMode(!replyMode);
@@ -45,7 +51,7 @@ export default function QuestionPost({ id, post_id, username, user_id, icon, tex
           >
             Reply
           </Comment.Action>
-          {replyMode && <QuestionPostInput post_id={id} parent_username={username} />}
+          {replyMode && <QuestionPostInput question_id={question_id} post_id={id} parent_username={username} />}
         </Comment.Actions>
       </Comment.Content>
       <Comment.Group>{children}</Comment.Group>

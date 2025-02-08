@@ -11,20 +11,30 @@ export default function QuestionPostInput({ id, post_id, text, parent_username, 
     e.preventDefault();
     dispatch(upsertQuestionPost(question_id, id, post_id, curText));
   };
+
+  if (!question_id) {
+    console.error('NEED QUESTION ID');
+    return null;
+  }
   let maintext = '';
+
   if (id) {
     maintext = 'Edit Your Post';
-  } else if (parent_username && post_id) {
+  } else if (parent_username && post_id && !text) {
     maintext = `Reply to ${parent_username}`;
   } else if (!id && !post_id && !text) {
     maintext = 'Create a New Post';
+  } else {
+    console.error('Invalid props for QuestionPostInput');
+    return null;
   }
 
   return (
-    <Segment>
+    <Segment size='tiny'>
       <Header as='h4' dividing>
         {maintext}
       </Header>
+
       <Form onSubmit={handleSubmit}>
         <Form.Field>
           <TextArea
