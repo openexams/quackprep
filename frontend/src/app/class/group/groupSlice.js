@@ -37,9 +37,10 @@ export function createGroupGivenPDF(formData, class_id, prompt) {
         timeout: MAX_QUACK_CREATE_GROUP_REQUEST_WAIT_TIME_IN_MS,
       },
     })(dispatch, getState);
+
     // redirect to the groups content when its finished
     const school_name = dispatch(getSchoolByClassId(class_id))?.school_name;
-    if (!school_name) {
+    if (!school_name || !group_id) {
       window.location.href = `/class`;
     } else {
       window.location.href = `/class/${school_name}/${class_id}/group/${group_id}/question/`;

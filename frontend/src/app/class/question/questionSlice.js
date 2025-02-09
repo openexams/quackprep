@@ -70,5 +70,5 @@ export default function questionsReducer(state = DEFAULT_STATE, action) {
 }
 
 export const selectQuestionState = (state) => {
-  return { questions: state.app.question.questions };
+  return { questions: state.app.question.questions.questions };
 };

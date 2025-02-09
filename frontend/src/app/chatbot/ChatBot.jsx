@@ -25,7 +25,7 @@ export default function ChatBot() {
   const user_id = useSelector(selectUser).user?.id;
   const { questionId } = useSelector(selectNavbarState).navbar;
 
-  const currentQuestion = useSelector(selectArrayOfStateById('app.question.questions', 'id', questionId))?.[0];
+  const currentQuestion = useSelector(selectArrayOfStateById('app.question.questions.questions', 'id', questionId))?.[0];
   const dispatch = useDispatch();
 
   const [inputValue, setInputValue] = useState('');

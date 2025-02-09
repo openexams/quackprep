@@ -10,7 +10,7 @@ import { selectArrayOfStateByGroupId } from '@utils/helperFuncs';
 
 export default function GenerateQuestion() {
   const { groupId } = useSelector(selectNavbarState).navbar;
-  const questions = useSelector(selectArrayOfStateByGroupId('app.question.questions', groupId));
+  const questions = useSelector(selectArrayOfStateByGroupId('app.question.questions.questions', groupId));
   const loading = useSelector(selectLoadingState).loadingComps?.GenerateQuestion;
   const user = useSelector(selectUser).user;
 

@@ -15,10 +15,11 @@ import QuestionVote from './vote/QuestionVote';
 import QuestionNext from './QuestionNext';
 import { updateQuestionId } from '@app/layout/navbar/navbarSlice';
 import useIsMobile from '@utils/hooks/useIsMobile';
-
+import QuestionPostMain from './post/QuestionPostMain';
 /**
  *
  * @param {Array} questions
+
  * @param {Int} id
  */
 function findQuestionById(questions, id) {
@@ -47,54 +48,55 @@ function getLocalShowAIQuestions() {
 function setLocalShowAIQuestions(showAIQuestions) {
   window.localStorage.setItem('showAIQuestions', String(showAIQuestions));
 }
-
+// TODO FIX THIS SHITTY COMPONENT AND PAGE
 export default function QuestionPage() {
   const isMobile = useIsMobile();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { schoolName, classId, groupId, groupName, questionId } = useSelector(selectNavbarState).navbar;
   /**@type {import('../../../../../types.ts').Question[]} */
-  let questions = useSelector(selectArrayOfStateByGroupId('app.question.questions', groupId));
+  let questions = useSelector(selectArrayOfStateByGroupId('app.question.questions.questions', groupId));
 
   const loadingComps = useSelector(selectLoadingState).loadingComps;
   const questionVoteLoading = useSelector(selectLoadingState).loadingComps.QuestionVote;
 
-  const [selectedQuestion, setSelectedQuestion] = useState(null);
+  const [selectedQuestion, setSelectedQuestion] = useState({});
 
   ///
   const [showAIQuestions, setShowAIQuestions] = useState(getLocalShowAIQuestions());
   questions = showAIQuestions ? questions : selectItemsById(questions, 'ai', 0);
+
   useEffect(() => {
     setLocalShowAIQuestions(showAIQuestions);
   }, [showAIQuestions]);
   ///
 
   useEffect(() => {
-    // if the user didnt start w a question id
-
-    if (questions != null && questions?.length !== 0 && !questionId) {
-      dispatch(changeNavbarPage(navigate, parseInt(questions?.[0]?.id)));
-      // dispatch(updateQuestionId(parseInt(questions?.[0]?.id)));
-    }
-  }, [questions?.[0]]); // could lead to issues
-
-  useEffect(() => {
-    if (Array.isArray(questions) && questionId) {
-      const selectedQ = findQuestionById(questions, parseInt(questionId));
-      if (selectedQ) {
-        setSelectedQuestion(selectedQ);
+    // hydrate state
+    if (questions != null && questions?.length !== 0) {
+      if (!questionId) {
+        dispatch(updateQuestionId(parseInt(questions?.[0]?.id)));
+        dispatch(changeNavbarPage(navigate, parseInt(questions?.[0]?.id)));
       }
     }
-  }, [questionId, questionVoteLoading, questions?.[0]]);
+  }, [questions?.length]); // could lead to issues
 
   useEffect(() => {
+    // keep selected question state same as navbar
+    if (questionId && questions?.length > 0) {
+      setSelectedQuestion(selectItemById(questions, 'id', questionId));
+    }
+  }, [questionId, questions?.length]);
+
+  useEffect(() => {
+    // change navbar state when selected question id changes
     if (!loadingComps.QuestionPage && selectedQuestion?.id) {
       dispatch(
         changeNavbarPage(navigate, `/class/${schoolName}/${classId}/group/${groupId}/question/${parseInt(selectedQuestion.id)}`),
       ); // why dude TODO FIX
       dispatch(updateQuestionId(parseInt(selectedQuestion.id)));
     }
-  }, [selectedQuestion?.id]);
+  }, [selectedQuestion?.id, questionVoteLoading, loadingComps.QuestionPage]);
 
   // handles selected question locally
 
@@ -156,6 +158,7 @@ export default function QuestionPage() {
           </Grid.Row>
         </Grid>
       </CustomImageLoader>
+      {selectedQuestion?.id && <QuestionPostMain questionId={selectedQuestion.id} />}
     </Segment>
   );
 }
