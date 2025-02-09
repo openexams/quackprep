@@ -1402,3 +1402,139 @@
   ],
   "children": []
 }
+
+// question with CODE as resource enum type
+{
+  "id": "8b220f6c-1208-43fa-bf2e-ddfd25250f26",
+  "type": "MULTIPLE_CHOICE",
+  "data": {
+    "body": "Which of the following is the output generated in the program?",
+    "solution": [
+      2
+    ],
+    "answerChoices": [
+      {
+        "id": "ec56221c-e49a-40bd-ac02-0c00d1e028e9",
+        "index": 0,
+        "body": "x[3] = 0",
+        "questionId": "8b220f6c-1208-43fa-bf2e-ddfd25250f26",
+        "stats": {
+          "count": 28
+        },
+        "resources": []
+      },
+      {
+        "id": "f29f3fbc-4bc1-4d0a-b8b8-3b89bada1fde",
+        "index": 1,
+        "body": "x[3] = 8",
+        "questionId": "8b220f6c-1208-43fa-bf2e-ddfd25250f26",
+        "stats": {
+          "count": 22
+        },
+        "resources": []
+      },
+      {
+        "id": "bf9a12e0-4c9c-4331-b976-f36f8e24ff5c",
+        "index": 2,
+        "body": "x[3] = 14",
+        "questionId": "8b220f6c-1208-43fa-bf2e-ddfd25250f26",
+        "stats": {
+          "count": 835
+        },
+        "resources": []
+      },
+      {
+        "id": "f774881a-0185-4583-beff-eee7c4073aca",
+        "index": 3,
+        "body": "None of the above.",
+        "questionId": "8b220f6c-1208-43fa-bf2e-ddfd25250f26",
+        "stats": {
+          "count": 49
+        },
+        "resources": []
+      }
+    ]
+  },
+  "number": 1,
+  "disclaimer": "",
+  "examId": "e8b508ac-7f59-4b0f-ad95-57975922cabd",
+  "courseId": "803cbab7-3f7d-4912-9bf1-9812e893d445",
+  "parentId": null,
+  "flags": {
+    "published": true,
+    "disableRandomAnswers": false,
+    "answersStartHidden": false
+  },
+  "stats": {
+    "count": 1,
+    "timeSpent": "282062404",
+    "timeSpentVideo": "0",
+    "submissions": 937,
+    "submissionsCorrect": 835,
+    "accuracy": 0.8911419423692636,
+    "difficulty": 0.39657666345226616
+  },
+  "resources": [
+    {
+      "id": "d01bd066-4579-4129-a458-2658f7f36740",
+      "type": "CODE",
+      "data": {
+        "content": "#include <stdio.h>\n#define SIZE 9\n\nint main() {\n  int x[SIZE] = {0, 5, 4, 1, 2, 7, 8, 6};\n  int i;\n\n  for(i = 1; i < SIZE - 1; i++)\n  {\n    x[i - 1] = x[i] * x[i + 1];\n  }\n  \n  printf(\"x[3] = %d\\n\", x[3]);\n\n  return(0);\n}",
+        "language": "C"
+      },
+      "courseId": null,
+      "examId": null,
+      "questionId": "8b220f6c-1208-43fa-bf2e-ddfd25250f26",
+      "explanationId": null,
+      "applicationId": null,
+      "answerChoiceId": null,
+      "customExamId": null
+    }
+  ],
+  "exam": {
+    "id": "e8b508ac-7f59-4b0f-ad95-57975922cabd",
+    "number": 0,
+    "year": 2017,
+    "season": "SPRING",
+    "disclaimer": "",
+    "courseId": "803cbab7-3f7d-4912-9bf1-9812e893d445",
+    "flags": {
+      "published": true,
+      "practice": false
+    },
+    "stats": {
+      "count": 1,
+      "timeSpent": "4633482339",
+      "timeSpentVideo": "0",
+      "submissions": 35781,
+      "submissionsCorrect": 24135,
+      "questions": 49,
+      "accuracy": 0.6745199966462648,
+      "difficulty": 0.5759663888966305
+    }
+  },
+  "explanation": {
+    "id": "e487a70b-f820-423c-aeae-6cbe8069c0d0",
+    "body": "",
+    "questionId": "8b220f6c-1208-43fa-bf2e-ddfd25250f26",
+    "resources": []
+  },
+  "topics": [
+    {
+      "id": "ae24734f-46a2-4513-a398-90cffa269acf",
+      "name": "Arrays",
+      "courseId": "803cbab7-3f7d-4912-9bf1-9812e893d445",
+      "stats": {
+        "count": 1,
+        "timeSpent": "10856032692",
+        "timeSpentVideo": "116824992",
+        "submissions": 35873,
+        "submissionsCorrect": 24405,
+        "questions": 30,
+        "accuracy": 0.6803166727064923,
+        "difficulty": 0.5701845828816057
+      }
+    }
+  ],
+  "children": []
+}

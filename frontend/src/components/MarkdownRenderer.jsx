@@ -26,12 +26,15 @@ export default function MarkdownRenderer({ render, components = {}, allowLinks =
   };
 
   const processedRender = render
+    .replace(/(?<!\\)\\n/g, '  \n') // Replace \n with two spaces and a newline
+
     .replace(/\\\[/g, '$$') // Replace \[ with $$ TMP FIX
     .replace(/\\\]/g, '$$')
     .replaceAll('$', '$$')
     .replaceAll('\\\\', '\\'); // Replace \] with $$ TMP FIX
 
   if (
+    !processedRender?.includes('```') &&
     !processedRender?.includes('$') &&
     !processedRender?.includes('/') &&
     !processedRender?.includes('#') &&
