@@ -65,6 +65,7 @@ export default function QuestionPage() {
   ///
   const [showAIQuestions, setShowAIQuestions] = useState(getLocalShowAIQuestions());
   questions = showAIQuestions ? questions : selectItemsById(questions, 'ai', 0);
+
   useEffect(() => {
     setLocalShowAIQuestions(showAIQuestions);
   }, [showAIQuestions]);
@@ -72,7 +73,6 @@ export default function QuestionPage() {
 
   useEffect(() => {
     // hydrate state
-
     if (questions != null && questions?.length !== 0) {
       if (!questionId) {
         dispatch(updateQuestionId(parseInt(questions?.[0]?.id)));
