@@ -1,6 +1,6 @@
 import { useEffect, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Comment, Segment } from 'semantic-ui-react';
+import { Comment, Segment, Header } from 'semantic-ui-react';
 import { selectQuestionPosts, getQuestionPostsByQuestionId } from './questionPostSlice';
 import { forAllParentsCallAddChildren } from '@utils/helperFuncs';
 import QuestionPost from './QuestionPost';
@@ -34,6 +34,7 @@ export default function QuestionPostMain({ questionId }) {
     return (
       <QuestionPost
         id={qpost.id}
+        deleted={qpost.deleted}
         key={qpost.id}
         post_id={qpost.post_id}
         username={qpost.username}
@@ -50,6 +51,7 @@ export default function QuestionPostMain({ questionId }) {
 
   return (
     <Segment raised padded loading={loading}>
+      <Header>Question Forum</Header>
       <Comment.Group threaded>
         {questionPosts?.length > 0 ? (
           questionPosts.map((qpost) => renderComments(qpost))

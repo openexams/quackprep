@@ -9,7 +9,12 @@ export default function QuestionPostInput({ id, post_id, text, parent_username, 
 
   const handleSubmit = (e, d) => {
     e.preventDefault();
-    dispatch(upsertQuestionPost(question_id, id, post_id, curText));
+    if (curText !== '') {
+      dispatch(upsertQuestionPost(question_id, id, post_id, curText));
+      setCurText('');
+    } else {
+      window.alert('please add text before adding this comment');
+    }
   };
 
   if (!question_id) {
