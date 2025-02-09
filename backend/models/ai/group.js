@@ -75,7 +75,7 @@ export async function etlFilesIntoGroup(files, class_id, user_id, user_prompt) {
         curQuestion.question,
         user_id,
         [group.id],
-        true // these are ai.
+        false // these are ai, however user should make sure they inserted correctly.
       );
       await addManyChoicesToQuestion(question.id, user_id, curQuestion.options);
     }
