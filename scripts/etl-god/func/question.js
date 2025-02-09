@@ -10,6 +10,17 @@ import { sleep } from "../helpers.js";
 function createMDImageFromURLAndAlt(url, altText) {
   return `![${altText || ""}](${url})`;
 }
+/**
+ *
+ * @param {String} lang
+ * @param {String} code
+ * @returns {String}
+ */
+function createCodeBlockFromLangaugeAndCode(lang, code) {
+  return `\`\`\`${lang.toLowerCase()}
+            ${code} 
+            \`\`\``;
+}
 
 /**
  *
@@ -78,6 +89,19 @@ export async function boilerQuestionToJsonQuestion(
           .filter((item) => item.type === "IMAGE" && item.questionId !== null) // all things related to question will be in base resource.
           .map((item) =>
             createMDImageFromURLAndAlt(item.data.url, item.data.altText)
+          )
+          .join("\n")
+      : null;
+
+  const question_attachments =
+    boilerQuestion.resources.length > 0 // in resources and not explanation.resources
+      ? boilerQuestion.resources
+          .filter((item) => item.type === "CODE" && item.questionId !== null) // all things related to question will be in base resource.
+          .map((item) =>
+            createCodeBlockFromLangaugeAndCode(
+              item.data.language,
+              item.data.content
+            )
           )
           .join("\n")
       : null;
@@ -157,14 +181,30 @@ export async function boilerQuestionToJsonQuestion(
             )
             .join("\n")
         : null;
+    const explanation_resources_attachments =
+      boilerQuestion.explanation.resources.length > 0
+        ? boilerQuestion.explanation.resources
+            .filter((item) => item.type === "CODE")
+            .map((item) =>
+              createCodeBlockFromLangaugeAndCode(
+                item.data.language,
+                item.data.content
+              )
+            )
+            .join("\n")
+        : null;
+
     choices = [
       {
         answer:
-          (!Array.isArray(boilerQuestion.data.solution)
+          (!Array.isArray(boilerQuestion.data.solution) // if its a array it always is useless.
             ? boilerQuestion.data.solution
             : "") +
           (explanation_resources_images
             ? " " + explanation_resources_images
+            : "") +
+          (explanation_resources_attachments
+            ? " " + explanation_resources_attachments
             : ""),
         is_correct: 1,
         type: question_type,
@@ -184,8 +224,27 @@ export async function boilerQuestionToJsonQuestion(
               )
               .join("\n")
           : null;
+
+      const curChoiceAttachments =
+        boilerQuestion.explanation.resources.length > 0
+          ? boilerQuestion.explanation.resources
+              .filter(
+                (item) =>
+                  item.answerChoiceId === choice.id && item.type === "CODE"
+              )
+              .map((item) =>
+                createCodeBlockFromLangaugeAndCode(
+                  item.data.language,
+                  item.data.content
+                )
+              )
+              .join("\n")
+          : null;
       return {
-        answer: choice.body + (curChoiceImages ? " " + curChoiceImages : ""),
+        answer:
+          choice.body +
+          (curChoiceImages ? " " + curChoiceImages : "") +
+          (curChoiceAttachments ? " " + curChoiceAttachments : ""),
         is_correct: boilerQuestion.data.solution.includes(choice.index) ? 1 : 0,
         type: question_type,
       };
@@ -194,7 +253,10 @@ export async function boilerQuestionToJsonQuestion(
     throw new Error("question type isnt frq or mcq somehow");
   }
   return_questions.push({
-    question: question_text + (question_images ? " " + question_images : ""),
+    question:
+      question_text +
+      (question_images ? " " + question_images : "") +
+      (question_attachments ? " " + question_attachments : ""),
     explanation_url: question_explanation_url,
     topics: question_topic_names,
     choices: JSONChoiceSchema.array().parse(choices),

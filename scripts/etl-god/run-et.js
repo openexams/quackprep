@@ -77,7 +77,7 @@ export async function runEt(options = {}) {
 await runEt({
   appendClassToOutputFile: true,
   downloadPDFS: true,
-  subject: "Mathematics",
+  subject: "Computer Sciences",
 });
 
 // proxy code

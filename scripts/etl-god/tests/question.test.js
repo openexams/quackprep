@@ -64,3 +64,12 @@ test("test boilerQuestionToJsonQuestion given a question id and a question which
     "This question is still under review, as some of you have pointed out, the below solution doesn't maintain black height because pathway 8-\u003E11-\u003E9-\u003ENULL has black height 4 while all other paths to NULL have black height 5 so the given solution is incorrect. You need to find a way to change the tree we found to maintain black height. This is why deletion in RB trees is hard :-( ![](https://boilerexams-production.s3.us-east-2.amazonaws.com/z-7TWXSYXdnGztp5ZHWNP)"
   );
 });
+
+test("test boilerQuestionToJsonQuestion given a question_content and a question which is mcq and has code in the question it sends back it correctly with code n shit", async function () {
+  const questions = await boilerQuestionToJsonQuestion(
+    "8b220f6c-1208-43fa-bf2e-ddfd25250f26"
+  );
+  expect(questions.length).toBe(1);
+  const question = questions[0];
+  expect(question.question.includes("```c")).toBe(true);
+});

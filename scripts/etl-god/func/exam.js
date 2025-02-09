@@ -19,6 +19,21 @@ export function addBoilerQuestionIdsFromGroupToArray(boilerGroup) {
   return ret;
 }
 
+export async function downloadPDF(pdfLink, name) {
+  const result = await axios.get(pdfLink, { responseType: "stream" });
+  const contentType = result.headers["content-type"];
+  const mimeTypes = {
+    "application/pdf": "pdf",
+    "image/jpeg": "jpg",
+    "image/png": "png",
+  }; // in reality dont need to check this
+  await writeToFile(
+    // result.data is a stream.
+    result.data,
+    `pdf/${name}.${mimeTypes[contentType] || "unknown"}`
+  );
+}
+
 /**
  *
  * @param {import("../types.js").JSONClass} jsonClass
@@ -90,12 +105,16 @@ export async function getExamJsonGroupsFromJsonClass(jsonClass, options) {
     for (let j = 0; j < curExam.resources.length; j++) {
       if (
         curExam.resources[j].type === "PDF" &&
-        curExam.resources[j].data.link &&
-        curExam.resources[j].data.link.includes(
+        (curExam.resources[j].data.link?.includes(
           "https://boilerexams-production.s3.us-east-2.amazonaws.com/"
-        )
+        ) ||
+          curExam.resources[j].data.url?.includes(
+            "https://boilerexams-production.s3.us-east-2.amazonaws.com/"
+          ))
       ) {
-        curPDFLink = curExam.resources[j].data.link;
+        curPDFLink = curExam.resources[j].data.link
+          ? curExam.resources[j].data.link
+          : curExam.resources[j].data.url; // if both exist then this dataset is shittier than I thought. why do they have it 2 ways anyway.
       }
     }
     questionIdsInExams.push(addBoilerQuestionIdsFromGroupToArray(curExam));
@@ -111,19 +130,9 @@ export async function getExamJsonGroupsFromJsonClass(jsonClass, options) {
     });
 
     if (curPDFLink && options && options.downloadPDFS) {
-      const result = await axios.get(curPDFLink, { responseType: "stream" });
-      const contentType = result.headers["content-type"];
-      const mimeTypes = {
-        "application/pdf": "pdf",
-        "image/jpeg": "jpg",
-        "image/png": "png",
-      }; // in reality dont need to check this
-      await writeToFile(
-        // result.data is a stream.
-        result.data,
-        `pdf/${jsonClass.name}-${groupsJson[i].name.replaceAll(" ", "")}.${
-          mimeTypes[contentType] || "unknown"
-        }`
+      downloadPDF(
+        curPDFLink,
+        `${jsonClass.name}-${groupsJson[i].name.replaceAll(" ", "")}`
       );
     }
   }

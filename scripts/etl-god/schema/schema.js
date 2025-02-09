@@ -3,12 +3,14 @@ import z from "zod";
 export const BoilerResourcesSchema = z.array(
   z
     .object({
-      type: z.enum(["IMAGE", "VIDEO", "PDF", "LOGO"]),
+      type: z.enum(["IMAGE", "VIDEO", "PDF", "LOGO", "CODE"]),
       data: z.object({
         key: z.string().optional(),
         url: z.string().optional(),
         altText: z.string().optional(),
         link: z.string().optional(),
+        language: z.string().max(100).optional(),
+        content: z.string().max(4096).optional(),
       }),
       questionId: z.string().nullable(), // tied to question
       answerChoiceId: z.string().nullable(), // tied to some mcq answer

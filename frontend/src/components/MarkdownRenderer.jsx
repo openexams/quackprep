@@ -1,6 +1,8 @@
 import ReactMarkdown from 'react-markdown';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
+import remarkGfm from 'remark-gfm';
+
 import 'katex/dist/katex.min.css';
 
 /**
@@ -25,13 +27,13 @@ export default function MarkdownRenderer({ render, components = {}, allowLinks =
     img: ({ node, ...props }) => <img {...props} style={{ maxWidth: '20em', height: 'auto' }} alt={props.alt} />, // Add max size for images
   };
 
-  const processedRender = render
-    .replace(/(?<!\\)\\n/g, '  \n') // Replace \n with two spaces and a newline
+  const processedRender = JSON.parse(JSON.stringify(render))
 
+    // .replace(/(?<!\\)\\n/g, '  \n') // Replace \n with two spaces and a newline
     .replace(/\\\[/g, '$$') // Replace \[ with $$ TMP FIX
     .replace(/\\\]/g, '$$')
     .replaceAll('$', '$$')
-    .replaceAll('\\\\', '\\'); // Replace \] with $$ TMP FIX
+    .replaceAll('\\\\', '\\');
 
   if (
     !processedRender?.includes('```') &&
@@ -44,7 +46,7 @@ export default function MarkdownRenderer({ render, components = {}, allowLinks =
     return <span>{render}</span>;
   } else {
     return (
-      <ReactMarkdown components={customComponents} remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatex]}>
+      <ReactMarkdown components={customComponents} remarkPlugins={[remarkMath, remarkGfm]} rehypePlugins={[rehypeKatex]}>
         {processedRender}
       </ReactMarkdown>
     );
