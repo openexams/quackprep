@@ -56,7 +56,7 @@ export default function BlogShow() {
         <Grid.Row>
           <Grid.Column width={16} textAlign='center'>
             <Segment basic>
-              <Icon name='tags' /> Tags: {blog.getTags().join(', ')} {/* Assuming you have a method to get tags */}
+              <Icon name='tags' /> Tags: {blog.getTags()?.length > 0 ? blog.getTags().join(', ') : 'No tags'}
             </Segment>
           </Grid.Column>
         </Grid.Row>

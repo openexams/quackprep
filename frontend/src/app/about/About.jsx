@@ -1,28 +1,9 @@
 import { Container, Header, Grid, Image } from 'semantic-ui-react';
 import CreatorInfo from './TeamCard.jsx';
+import { contributors } from './contributors.js';
 
 const About = () => {
-  const creators = [
-    {
-      imgSrc: 'https://bookface-images.s3.amazonaws.com/avatars/25375148855527639e6871415d404c73702a02fc.jpg',
-      name: 'Maddox Schmidlkofer',
-      description: 'All work and no play makes maddox a dull boy.', //Founder and Lead Developer of QuackPrep. Passionate about creating innovative solutions to make learning fun and engaging for college students.
-      links: [
-        { label: 'GitHub', url: 'https://github.com/maddox05', icon: 'github', color: 'black' },
-        { label: 'LinkedIn', url: 'https://www.linkedin.com/in/maddox-schmidlkofer/', icon: 'linkedin', color: 'blue' },
-      ],
-    },
-    {
-      imgSrc:
-        'https://media.licdn.com/dms/image/v2/D5603AQH9l-dAsT1WXQ/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1699241824248?e=1743033600&v=beta&t=T7FaGrM_q1ogj_G6X7_BKCTkj5WDnswVCXIJrtqlb2U',
-      name: 'Hayes Bounds',
-      description: 'Think about that', //Founder and Lead Developer of QuackPrep. Passionate about creating innovative solutions to make learning fun and engaging for college students.
-      links: [
-        { label: 'GitHub', url: 'https://github.com/hebounds', icon: 'github', color: 'black' },
-        { label: 'LinkedIn', url: 'https://www.linkedin.com/in/hayes-bounds-441a7b210/', icon: 'linkedin', color: 'blue' },
-      ],
-    },
-  ];
+  // add your stuff here if you contribute to the project
 
   return (
     <Container style={{ marginTop: '2em', marginBottom: '2em' }}>
@@ -40,10 +21,15 @@ const About = () => {
         Meet the Team
       </Header>
 
-      <Grid stackable columns={3}>
-        {creators.map((creator, index) => (
+      <Grid stackable columns={3} padded>
+        {contributors.map((contributor, index) => (
           <Grid.Column key={index}>
-            <CreatorInfo imgSrc={creator.imgSrc} name={creator.name} description={creator.description} links={creator.links} />
+            <CreatorInfo
+              imgSrc={contributor.imgSrc}
+              name={contributor.name}
+              description={contributor.description}
+              links={contributor.links}
+            />
           </Grid.Column>
         ))}
       </Grid>

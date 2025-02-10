@@ -6,6 +6,7 @@ const CreatorInfo = ({ imgSrc, name, description, links }) => {
     <Card
       fluid
       style={{
+        padding: '.5em',
         borderRadius: '15px',
         boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)',
         maxWidth: '350px',
