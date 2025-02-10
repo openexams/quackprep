@@ -17,6 +17,7 @@ import { checkForBadWords } from "#middleware/badwordsMiddleware.js";
 import { errorHandler } from "#middleware/errorHandler.js";
 import { getRedisClient, initRedis } from "#utils/redis.js";
 import { rateLimits } from "#middleware/rateLimit.js";
+import { secrets } from "#config/secrets.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -33,9 +34,9 @@ const corsOrigin = {
   optionSuccessStatus: 200,
 };
 
-console.log(NODE_ENV);
+console.log(secrets.NODE_ENV);
 
-if (NODE_ENV === "prod") {
+if (secrets.NODE_ENV === "prod") {
   await initRedis();
   const redisClient = getRedisClient();
 
@@ -72,7 +73,7 @@ app.use("/api/ai", rateLimits.ai);
 app.use("/api/auth", rateLimits.auth);
 
 // Then other middleware
-app.use(express.static(path.join(__dirname, "./public/")));
+// app.use(express.static(path.join(__dirname, "./public/")));
 app.use(checkForBadWords);
 app.use("/api/ai/chatbot/", express.json({ limit: "5mb" })); // must be set before global json limit
 app.use(express.json({ limit: "10kb" }));

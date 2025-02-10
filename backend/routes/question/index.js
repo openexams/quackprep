@@ -77,7 +77,6 @@ router.post("/", isAuthenticated, isCreator, async function (req, res, next) {
       req.user,
       data.group_ids // destructure group ids into last arg
     ); // will be the id of the question, however question_id will be an array of 2 as duplicate groups occur
-
     res.status(201).json(question);
   } catch (error) {
     next(error);

@@ -1,9 +1,16 @@
 import sqlExe from "#db/dbFunctions.js";
 import { verifyUserOwnsRowId } from "#utils/sqlFunctions.js";
 import { cascadeSetDeleted } from "#utils/sqlFunctions.js";
+import { groupSelectSchema } from "../../../schema/index.js";
 
+/**
+ *
+ * @param {*} WHERE
+ * @param {*} params
+ * @returns {import('../../../types').Group[]}
+ */
 async function selectGroups(WHERE, params) {
-  return await sqlExe.executeCommand(
+  const result = await sqlExe.executeCommand(
     `SELECT g.name,g.id,g.desc,g.created_by, g.class_id, gt.type_name as type, cl.category as class_category, cl.school_id
     FROM cgroups g JOIN group_types gt on g.type = gt.id 
     JOIN classes cl ON g.class_id = cl.id
@@ -12,6 +19,7 @@ async function selectGroups(WHERE, params) {
     ORDER BY g.class_id ASC`,
     params
   );
+  return groupSelectSchema.array().parse(result);
 }
 
 export async function getGroupsByClassId(class_id, type) {
@@ -63,4 +71,19 @@ export async function upsertGroupInClass(
 }
 export async function deleteGroupById(user_id, group_id) {
   return await cascadeSetDeleted(user_id, "group", group_id, 0, 1, 1, 1, 0);
+}
+
+/**
+ * Maps a link to a group
+ * @param {String} link
+ * @param {Number} group_id
+ * @returns {Number} id that was created in group_file_inserts
+ */
+export async function uploadFileLinkToGroup(link, group_id) {
+  return (
+    await sqlExe.executeCommand(
+      `INSERT INTO group_file_inserts (link,group_id) VALUES (:link,:group_id)`,
+      { link, group_id }
+    )
+  ).insertId;
 }

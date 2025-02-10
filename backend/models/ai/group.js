@@ -6,7 +6,11 @@ import {
 } from "#utils/mathpix.js";
 import { sendOpenAiAssistantPromptAndRecieveResult } from "#utils/openAi.js";
 import FormData from "form-data";
-import { upsertGroupInClass, deleteGroupById } from "#models/group/index.js";
+import {
+  upsertGroupInClass,
+  deleteGroupById,
+  uploadFileLinkToGroup,
+} from "#models/group/index.js";
 import {
   MAX_FILE_SIZE_IN_BYTES,
   QUACK_CREATE_GROUP_ASS_ID,
@@ -15,6 +19,33 @@ import { FILE_SIZE_EXCEEDED, SUCCESS } from "../../../error_codes.js";
 import { BadRequestError } from "#utils/ApiError.js";
 import { sendEmailToUserByUserId } from "#models/account/index.js";
 import { getSchoolByClassId } from "#models/class/index.js";
+import { myS3Client } from "#config/config.js";
+import { PutObjectCommand } from "@aws-sdk/client-s3";
+import { secrets } from "#config/secrets.js";
+/**
+ *
+ * @param {Express.Multer.File} file
+ */
+function findFilesType(file) {
+  return file.mimetype.split("/")[1];
+}
+
+/**
+ * Uploads a file to s3 given a multer file and a bucket to upload it to.
+ * @param {String} bucket
+ * @param {Express.Multer.File} file must have props originalname, mimetype , buffer
+ */
+async function uploadFileToS3(bucket, file) {
+  const uuid = `${new Date().getTime()}_${file.originalname}`;
+  const data_to_send = new PutObjectCommand({
+    Bucket: bucket,
+    Key: uuid,
+    ContentType: file.mimetype,
+    Body: file.buffer,
+  });
+  await myS3Client.send(data_to_send);
+  return uuid;
+}
 
 /**
  *
@@ -39,7 +70,7 @@ export async function etlFilesIntoGroup(files, class_id, user_id, user_prompt) {
       if (file.size > MAX_FILE_SIZE_IN_BYTES) {
         throw new BadRequestError("File size exceeded", FILE_SIZE_EXCEEDED);
       }
-      const fileType = file?.mimetype?.split("/")?.[1];
+      const fileType = findFilesType(file);
       dlog(file);
       if (!file) {
         throw new BadRequestError("No file found when expected");
@@ -48,6 +79,7 @@ export async function etlFilesIntoGroup(files, class_id, user_id, user_prompt) {
         formData.append("file", file.buffer, file.originalname);
         mdd_res += await postPdfAndRetriveParsedPdf(formData);
       } else {
+        // must be a valid image
         mdd_res += await postImageAndRecieveText(file); // file .buffer is in base 64
       }
     }
@@ -66,8 +98,19 @@ export async function etlFilesIntoGroup(files, class_id, user_id, user_prompt) {
       GenGroupResponseJSON.group_description,
       null
     );
+    if (!group.id) {
+      throw new Error("group id not found when group id is needed");
+    }
+    // for (let i = 0; i < files.length; i++) {
+    //   const uuid = await uploadFileToS3("group_inserts", files[i]);
+    //   uploadFileLinkToGroup(
+    //     `${secrets.R2_ENDPOINT}/group_inserts/${uuid}`,
+    //     group.id
+    //   );
+    // }
+
     for (let i = 0; i < GenGroupResponseJSON.questions.length; i++) {
-      // this is server intensive can i fix this?
+      // this is server intensive can i fix this? -maddox -> no you never can and never will.
       const curQuestion = GenGroupResponseJSON.questions[i];
       const question = await upsertQuestion(
         // TODO how can i give topics to these questions?
@@ -75,7 +118,7 @@ export async function etlFilesIntoGroup(files, class_id, user_id, user_prompt) {
         curQuestion.question,
         user_id,
         [group.id],
-        false // these are ai, however user should make sure they inserted correctly.
+        false // these are ai, however user should make sure they inserted correctly. as such they are not marked as ai.
       );
       await addManyChoicesToQuestion(question.id, user_id, curQuestion.options);
     }

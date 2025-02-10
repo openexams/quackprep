@@ -42,7 +42,7 @@ const store = configureStore({
   devTools: import.meta.env.MODE === 'development' ? true : false, // Disable in production
 });
 
-// if (import.meta.env.MODE === 'development') {
-//   window.__REDUX_STATE__ = store.getState;
-// }
+if (import.meta.env.MODE === 'development') {
+  window.__REDUX_STATE__ = store.getState;
+}
 export default store;

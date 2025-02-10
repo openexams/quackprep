@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Grid, Header, Segment, Button, Icon } from 'semantic-ui-react';
 import QuestionList from './QuestionList';
 import { useDispatch, useSelector } from 'react-redux';
@@ -7,7 +7,6 @@ import { selectLoadingState } from '@app/store/loadingSlice';
 import ChoiceRouter from './choices/ChoiceRouter';
 import { useNavigate } from 'react-router-dom';
 import QuestionReport from './qreport/QuestionReport';
-import { selectArrayOfStateByGroupId } from '@utils/helperFuncs';
 import { selectItemById, selectItemsById } from 'maddox-js-funcs';
 import NoItemsFound from '@components/NoItemsFound';
 import { CustomImageLoader } from '@components/CustomLoader/CustomImageLoader';
@@ -16,6 +15,7 @@ import QuestionNext from './QuestionNext';
 import { updateQuestionId } from '@app/layout/navbar/navbarSlice';
 import useIsMobile from '@utils/hooks/useIsMobile';
 import QuestionPostMain from './post/QuestionPostMain';
+import { selectQuestionsByGroupId } from './questionSlice';
 /**
  *
  * @param {Array} questions
@@ -55,17 +55,23 @@ export default function QuestionPage() {
   const dispatch = useDispatch();
   const { schoolName, classId, groupId, groupName, questionId } = useSelector(selectNavbarState).navbar;
   /**@type {import('../../../../../types.ts').Question[]} */
-  let questions = useSelector(selectArrayOfStateByGroupId('app.question.questions.questions', groupId));
+  let questions = useSelector(selectQuestionsByGroupId());
 
-  const loadingComps = useSelector(selectLoadingState).loadingComps;
-  const questionVoteLoading = useSelector(selectLoadingState).loadingComps.QuestionVote;
+  const questionPageLoading = useSelector(selectLoadingState).loadingComps?.QuestionPage;
+  const questionVoteLoading = useSelector(selectLoadingState).loadingComps?.QuestionVote;
+  const generateQuestionLoading = useSelector(selectLoadingState).loadingComps?.GenerateQuestion;
 
   const [selectedQuestion, setSelectedQuestion] = useState({});
 
-  ///
+  /// for ai show toggle
   const [showAIQuestions, setShowAIQuestions] = useState(getLocalShowAIQuestions());
-  questions = showAIQuestions ? questions : selectItemsById(questions, 'ai', 0);
-
+  questions = useMemo(() => {
+    if (showAIQuestions) {
+      return questions;
+    } else {
+      selectItemsById(questions, 'ai', 0);
+    }
+  }, [showAIQuestions, questions]);
   useEffect(() => {
     setLocalShowAIQuestions(showAIQuestions);
   }, [showAIQuestions]);
@@ -83,33 +89,33 @@ export default function QuestionPage() {
 
   useEffect(() => {
     // keep selected question state same as navbar
-    if (questionId && questions?.length > 0) {
+    if (questionId && questions?.length > 0 && questionPageLoading === false) {
       setSelectedQuestion(selectItemById(questions, 'id', questionId));
     }
-  }, [questionId, questions?.length]);
+  }, [questionId, questionPageLoading]); // if you watch questions it will rerender every milisecond idk why
 
   useEffect(() => {
     // change navbar state when selected question id changes
-    if (!loadingComps.QuestionPage && selectedQuestion?.id) {
+    if (!questionPageLoading && selectedQuestion?.id) {
       dispatch(
         changeNavbarPage(navigate, `/class/${schoolName}/${classId}/group/${groupId}/question/${parseInt(selectedQuestion.id)}`),
       ); // why dude TODO FIX
       dispatch(updateQuestionId(parseInt(selectedQuestion.id)));
     }
-  }, [selectedQuestion?.id, questionVoteLoading, loadingComps.QuestionPage]);
+  }, [selectedQuestion?.id, questionVoteLoading, questionPageLoading]);
 
   // handles selected question locally
 
   if (!questions)
     return (
-      <Segment loading={loadingComps.QuestionPage}>
+      <Segment loading={questionPageLoading}>
         <Header>Loading</Header>
       </Segment>
     );
 
   return (
-    <Segment basic loading={loadingComps.QuestionPage}>
-      <CustomImageLoader content={'generating ai question (takes ~10s)'} active={loadingComps.GenerateQuestion}>
+    <Segment basic loading={questionPageLoading}>
+      <CustomImageLoader content={'generating ai question (takes ~10s)'} active={generateQuestionLoading}>
         <Header style={{ fontSize: '2.5rem' }} textAlign='center'>
           {groupName}
         </Header>

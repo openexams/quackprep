@@ -1,6 +1,7 @@
 import { standardApiCall } from '@utils/api';
 import { updateArrObjectsWithNewVals, upsertArray, filterArr } from 'maddox-js-funcs';
 import { GEN_AI_QUESTION_RES } from './ai/aiQuestionSlice';
+import { createSelector } from '@reduxjs/toolkit';
 
 const GET_CRUD_QUESTIONS = 'app/class/question/GET_CRUD_QUESTIONS';
 export const UPSERT_CRUD_QUESTION = 'app/class/question/UPSERT_CRUD_QUESTION';
@@ -72,3 +73,20 @@ export default function questionsReducer(state = DEFAULT_STATE, action) {
 export const selectQuestionState = (state) => {
   return { questions: state.app.question.questions.questions };
 };
+
+export function selectQuestionsByGroupId() {
+  return createSelector(
+    [(state) => state.app.question.questions.questions, (state) => state.app.navbar.groupId],
+    (untyped_questions, group_id) => {
+      if (!Array.isArray(untyped_questions)) {
+        return [];
+      }
+      /** @type {import("../../../../../types").Question[]} */
+      const questions = untyped_questions;
+
+      return questions.filter((question) => {
+        return question.group_id.includes(String(group_id));
+      });
+    },
+  );
+}

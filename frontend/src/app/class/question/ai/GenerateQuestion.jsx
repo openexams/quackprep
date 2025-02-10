@@ -6,11 +6,11 @@ import { selectUser } from '@app/auth/authSlice';
 import LoginRequired from '@app/auth/LoginRequired';
 import { selectLoadingState } from '@app/store/loadingSlice';
 import { selectNavbarState } from '@app/layout/navbar/navbarSlice';
-import { selectArrayOfStateByGroupId } from '@utils/helperFuncs';
+import { selectQuestionsByGroupId } from '../questionSlice';
 
 export default function GenerateQuestion() {
   const { groupId } = useSelector(selectNavbarState).navbar;
-  const questions = useSelector(selectArrayOfStateByGroupId('app.question.questions.questions', groupId));
+  const questions = useSelector(selectQuestionsByGroupId(groupId));
   const loading = useSelector(selectLoadingState).loadingComps?.GenerateQuestion;
   const user = useSelector(selectUser).user;
 

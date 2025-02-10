@@ -102,19 +102,6 @@ export function selectArrayOfStateByGroupId(path, id) {
   };
 }
 
-export function selectQuestionsByGroupId(questions, id) {
-  const tmp = [];
-  for (let i = 0; i < questions.length; i++) {
-    for (let j = 0; j < questions[i]?.group_id?.length; j++) {
-      if (parseInt(questions[i]?.group_id[j]) === id) {
-        tmp.push(questions[i]);
-        break;
-      }
-    }
-  }
-  return tmp;
-}
-
 /**
  * checks equivalances using == againt the array and filter u are using. if valuesIncluded[i] == '' it is skipped
  * checks exact equivalence (the number u are using in the filter will be checked with == to the key)

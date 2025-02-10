@@ -6,7 +6,7 @@ import { signOut } from '@app/auth/login/loginSlice.js';
 import { updateFetchHistory } from '@app/layout/navbar/navbarSlice';
 import { UNAUTHORIZED, RATE_LIMIT_EXCEEDED } from '../../../error_codes.js';
 
-function handleApiError(error, dispatch) {
+function handleApiError(error, dispatch, customMSG) {
   const errorResponse = error.response?.data;
 
   switch (errorResponse?.errorCode) {
@@ -25,7 +25,7 @@ function handleApiError(error, dispatch) {
 
     default: {
       // all others can just be shown to the user.
-      const errorMessage = errorResponse?.message || 'An unexpected error occurred';
+      const errorMessage = customMSG || errorResponse?.message || 'An unexpected error occurred';
       dispatch(showFlashMessage(errorMessage, true));
       return errorMessage;
     }
@@ -94,7 +94,7 @@ export function standardApiCall(method, route, data = null, resultAction, option
       return result.data;
     } catch (error) {
       console.error(error);
-      const errorMessage = handleApiError(error, dispatch);
+      const errorMessage = handleApiError(error, dispatch, options.errorMsg);
       console.error(errorMessage);
 
       dispatch(stopLoading(options?.loadingComponent));

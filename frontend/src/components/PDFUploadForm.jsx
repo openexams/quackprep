@@ -1,7 +1,6 @@
 import { useRef, useState } from 'react';
 import { Button, Icon, List, Message } from 'semantic-ui-react';
-import { MAX_FILE_SIZE_IN_BYTES } from '../../../constants.js';
-import { ALLOWED_FILE_TYPES } from '../../../constants.js';
+import { MAX_FILE_SIZE_IN_BYTES, ALLOWED_FILE_TYPES } from '../../../constants.js';
 
 const PdfUploadForm = ({ onSubmit, showImages = true, buttonText = 'Submit' }) => {
   const [files, setFiles] = useState([]);

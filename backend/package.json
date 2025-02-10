@@ -2,6 +2,7 @@
   "main": "server.js",
   "type": "module",
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.744.0",
     "axios": "^1.7.9",
     "bcrypt": "^5.1.1",
     "connect-redis": "^7.1.1",

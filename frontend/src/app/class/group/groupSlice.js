@@ -40,9 +40,7 @@ export function createGroupGivenPDF(formData, class_id, prompt) {
 
     // redirect to the groups content when its finished
     const school_name = dispatch(getSchoolByClassId(class_id))?.school_name;
-    if (!school_name || !group_id) {
-      window.location.href = `/class`;
-    } else {
+    if (school_name && group_id) {
       window.location.href = `/class/${school_name}/${class_id}/group/${group_id}/question/`;
     }
   };

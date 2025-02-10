@@ -1,6 +1,6 @@
 import sqlExe from "#db/dbFunctions.js";
 import { verifyUserOwnsRowId } from "#utils/sqlFunctions.js";
-import { myQuestionSchema } from "../../../schema/index.js";
+import { questionSelectSchema } from "../../../schema/index.js";
 
 export async function createQuestionReport(user_id, question_id, text) {
   const params = { user_id, question_id, text };
@@ -10,7 +10,11 @@ export async function createQuestionReport(user_id, question_id, text) {
   );
 }
 
-// this function has down syndrome
+/**
+ * this function has down syndrome
+ * @param {Number} group_id
+ * @returns {import('../../../types').Question[]}
+ */
 export async function getQuestionsByGroupId(group_id) {
   const result = await sqlExe.executeCommand(
     `SELECT q.id,
@@ -44,10 +48,13 @@ export async function getQuestionsByGroupId(group_id) {
     ORDER BY q.id ASC`,
     { group_id }
   );
-  const validated = myQuestionSchema.array().parse(result);
+  const validated = questionSelectSchema.array().parse(result);
   return validated;
 }
 
+/**
+ * @returns {import('../../../types').Question[]}
+ */
 export async function selectQuestion(WHERE, params) {
   const result = await sqlExe.executeCommand(
     `SELECT
@@ -88,7 +95,7 @@ ORDER BY
     q.id ASC`,
     params
   );
-  const validated = myQuestionSchema.array().parse(result);
+  const validated = questionSelectSchema.array().parse(result);
 
   return validated;
 }
@@ -103,10 +110,8 @@ export async function getQuestionsByUserId(user_id) {
  * @param {int} id
  * @param {String} question
  * @param {Int} user_id
- * @param {Array<Number>} group_ids only needs group ids to verify the user owns the groups
- * @param {Boolean} aiGenerated 
-
- * @returns {Array} returns upserted Question
+ * @param {Number[]} group_ids only needs group ids to verify the user owns the groups
+ * @param {Boolean} aiGenerated
  */
 export async function upsertQuestion(
   id = null,

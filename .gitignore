@@ -32,3 +32,8 @@ frontend/*.env
 /playwright-report/
 /blob-report/
 /playwright/.cache/
+
+.env
+secrets.env
+*.env
+.env*

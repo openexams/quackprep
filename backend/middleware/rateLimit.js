@@ -4,6 +4,7 @@ import ApiError from "#utils/ApiError.js";
 import { RATE_LIMIT_EXCEEDED } from "../../error_codes.js";
 import RedisStore from "rate-limit-redis";
 import { getRedisClient } from "#utils/redis.js";
+import { secrets } from "#config/secrets.js";
 // be careful of redis client not being initialized
 
 /**
@@ -32,7 +33,7 @@ export function createRateLimiter({ windowMs, max, type }) {
       );
     },
     store:
-      NODE_ENV === "prod" && getRedisClient()
+      secrets.NODE_ENV === "prod" && getRedisClient()
         ? new RedisStore({
             sendCommand: (...args) => getRedisClient().sendCommand(args),
           })

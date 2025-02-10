@@ -32,10 +32,15 @@ export default function ChoiceRouter({ selectedQuestion }) {
     }
   }
   return (
-    <Segment style={{ maxHeight: '35rem', minHeight: '35rem', overflowY: 'auto' }} basic loading={loading}>
+    <Segment
+      id={`question_${selectedQuestion.id}_segment`}
+      style={{ maxHeight: '35rem', minHeight: '35rem', overflowY: 'auto' }}
+      basic
+      loading={loading}
+    >
       {selectedQuestion && choices ? (
         <>
-          <Header id={`question_${selectedQuestion.id}_header`}>
+          <Header id={`question_${selectedQuestion.question}_header`}>
             {edit ? (
               <QuestionEditor
                 key={selectedQuestion.id}

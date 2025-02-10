@@ -1,4 +1,5 @@
 import ApiError from "#utils/ApiError.js";
+import { secrets } from "#config/secrets.js";
 import { INTERNAL_SERVER_ERROR, DATABASE_ERROR } from "../../error_codes.js";
 // returns error in format and sends a res to the client
 /**
@@ -38,7 +39,7 @@ export function errorHandler(err, req, res, next) {
       errorCode: err.errorCode,
       message: err.message, // custom error message ONLY FROM HERE DO NOT SEND ERROR FROM SERVER HERE
       details: err.details,
-      ...(NODE_ENV === "local" && { stack: err.stack }),
+      ...(secrets.NODE_ENV === "local" && { stack: err.stack }),
     });
   }
 
@@ -48,15 +49,16 @@ export function errorHandler(err, req, res, next) {
       status: "error",
       errorCode: DATABASE_ERROR,
       message: "Database operation failed",
-      ...(NODE_ENV === "local" && { details: err.message }),
+      ...(secrets.NODE_ENV === "local" && { details: err.message }),
     });
   } else {
     // Default error
     return res.status(500).json({
       status: "error",
       errorCode: INTERNAL_SERVER_ERROR,
-      message: NODE_ENV === "local" ? err.message : "Internal server error",
-      ...(NODE_ENV === "local" && { stack: err.stack }),
+      message:
+        secrets.NODE_ENV === "local" ? err.message : "Internal server error",
+      ...(secrets.NODE_ENV === "local" && { stack: err.stack }),
     });
   }
 }

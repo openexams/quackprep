@@ -1,36 +1,6 @@
-import dotenv from "dotenv";
+import { secrets } from "#config/secrets.js";
 import OpenAI from "openai";
-
-global.NODE_ENV = process.env.NODE_ENV;
-if (NODE_ENV === undefined) {
-  dotenv.config({
-    path: "../../secrets.env",
-    debug: true,
-  });
-}
-global.NODE_ENV = process.env.NODE_ENV;
-if (NODE_ENV === undefined) {
-  dotenv.config({
-    path: "../secrets.env",
-    debug: true,
-  });
-}
-
-global.NODE_ENV = process.env.NODE_ENV;
-if (NODE_ENV === undefined) {
-  dotenv.config({
-    path: "./secrets.env",
-    debug: true,
-  });
-}
-
-global.NODE_ENV = process.env.NODE_ENV;
-
-if (NODE_ENV == undefined) {
-  throw Error("fatal error ENV VARS NOT LOADED");
-} else {
-  console.log("secrets found!");
-}
+import { S3Client } from "@aws-sdk/client-s3";
 
 export const corsOrigins = [
   "https://accounts.google.com/o/oauth2",
@@ -39,23 +9,32 @@ export const corsOrigins = [
   "https://www.quackprep.com",
   "https://quackprep.pages.dev",
 ];
-if (NODE_ENV === "local") corsOrigins.push("http://localhost:3001"); // maybe bad pratice
+if (secrets.NODE_ENV === "local") corsOrigins.push("http://localhost:3001"); // maybe bad pratice
+
+export const myS3Client = new S3Client({
+  region: "auto",
+  endpoint: secrets.R2_ENDPOINT,
+  credentials: {
+    secretAccessKey: secrets.R2_SECRET_ACCESS_KEY,
+    accessKeyId: secrets.R2_ACCESS_KEY_ID,
+  },
+});
 
 export const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
+  apiKey: secrets.OPENAI_API_KEY,
 });
 
 export const deepseek = new OpenAI({
-  apiKey: process.env.DEEPSEEK_API_KEY,
+  apiKey: secrets.DEEPSEEK_API_KEY,
   baseURL: "https://api.deepseek.com",
 });
 
 export const MYSQL_CONFIG = {
-  host: process.env.MADDOX_MYSQL_SERVER,
-  user: process.env.MADDOX_MYSQL_USERNAME,
-  password: process.env.MADDOX_MYSQL_PASSWORD,
-  database: process.env.MADDOX_MYSQL_DB,
-  port: process.env.MADDOX_MYSQL_PORT,
+  host: secrets.MADDOX_MYSQL_SERVER,
+  user: secrets.MADDOX_MYSQL_USERNAME,
+  password: secrets.MADDOX_MYSQL_PASSWORD,
+  database: secrets.MADDOX_MYSQL_DB,
+  port: secrets.MADDOX_MYSQL_PORT,
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0,
@@ -66,33 +45,33 @@ export const MYSQL_CONFIG = {
 };
 
 export const SESSION_CONFIG = {
-  secret: process.env.SESSION_SECRET,
+  secret: secrets.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
   cookie: {
-    domain: process.env.NODE_ENV === "prod" ? "quackprep.com" : "",
-    httpOnly: process.env.NODE_ENV === "prod" ? true : false,
-    secure: process.env.NODE_ENV !== "local",
+    domain: secrets.NODE_ENV === "prod" ? "quackprep.com" : "",
+    httpOnly: secrets.NODE_ENV === "prod" ? true : false,
+    secure: secrets.NODE_ENV !== "local",
     sameSite: true,
   },
 };
 
 export const REDIS_CONFIG = {
-  url: process.env.REDIS_URL, // why does this work?
+  url: secrets.REDIS_URL, // why does this work?
 };
 
 export const GOOGLE_OAUTH_CONFIG = {
-  clientID: process.env.GOOGLE_CLIENT_ID,
-  clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-  callbackURL: `${process.env.BACKEND_URL}/api/auth/google/callback`, // local or prod
+  clientID: secrets.GOOGLE_CLIENT_ID,
+  clientSecret: secrets.GOOGLE_CLIENT_SECRET,
+  callbackURL: `${secrets.BACKEND_URL}/api/auth/google/callback`, // local or prod
 };
 
 export const MATHPIX_API_INFO = {
-  MATHPIX_API_KEY: process.env.MATHPIX_API_KEY,
-  MATHPIX_APP_ID: process.env.MATHPIX_APP_ID,
+  MATHPIX_API_KEY: secrets.MATHPIX_API_KEY,
+  MATHPIX_APP_ID: secrets.MATHPIX_APP_ID,
 };
 
 export const email_auth = {
-  user: process.env.QUACKPREP_EMAIL_USER,
-  pass: process.env.QUACKPREP_EMAIL_PASS,
+  user: secrets.QUACKPREP_EMAIL_USER,
+  pass: secrets.QUACKPREP_EMAIL_PASS,
 };
