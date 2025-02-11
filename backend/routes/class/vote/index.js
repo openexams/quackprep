@@ -1,5 +1,5 @@
 import { isAuthenticated } from "#middleware/authMiddleware.js";
-import { upsertVoteOnClass } from "#models/class/vote";
+import { upsertVoteOnClass } from "#models/class/vote/index.js";
 
 import express from "express";
 import { classVotePostSchema } from "../../../../schema/index.js";

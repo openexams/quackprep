@@ -89,6 +89,7 @@ export default function ClassList() {
                         school_id={c.school_id}
                         created_by={c.created_by}
                         created_username={c.created_username}
+                        upvotes={c.upvotes}
                       />
                     </Grid.Column>
                   ))

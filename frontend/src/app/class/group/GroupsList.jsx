@@ -12,7 +12,7 @@ import { useEffect, useState } from 'react';
 import { GROUP_TYPES } from './groupSlice';
 import CreateGroupByPDF from './CreateGroupByPDF';
 import NoItemsFound from '@components/NoItemsFound';
-
+import ClassVote from '../vote/ClassVote';
 export default function GroupsList() {
   const { className, classId } = useSelector(selectNavbarState).navbar;
 
