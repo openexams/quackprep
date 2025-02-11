@@ -5,7 +5,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 if (!process.env.NODE_ENV) {
   dotenv.config({
-    path: path.join(__dirname, "../../../secrets.env"),
+    path: path.join(__dirname, "../../secrets.env"),
     debug: true,
   });
 }
