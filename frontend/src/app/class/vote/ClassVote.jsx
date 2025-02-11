@@ -4,13 +4,16 @@ import { upsertVoteOnClass } from './classVoteSlice';
 import { selectClassState } from '../classSlice';
 import { selectItemById } from 'maddox-js-funcs';
 import { selectLoadingState } from '@app/store/loadingSlice';
+
 export default function ClassVote({ class_id }) {
   const loading = useSelector(selectLoadingState).loadingComps?.ClassVote;
   const upvotes = selectItemById(useSelector(selectClassState), 'id', class_id).upvotes;
   const dispatch = useDispatch();
+
   const handleVote = (vote) => {
     dispatch(upsertVoteOnClass(class_id, vote));
   };
+
   return (
     <Segment floated='right' basic loading={loading} style={{ marginBottom: '10px' }}>
       Vote Here! {upvotes}{' '}
@@ -23,6 +26,8 @@ export default function ClassVote({ class_id }) {
             handleVote(1);
           }}
           style={{ padding: '8px' }}
+          disabled={loading}
+          aria-label='Upvote'
         >
           <Icon name='up arrow' />
         </Button>
@@ -34,6 +39,8 @@ export default function ClassVote({ class_id }) {
             handleVote(0);
           }}
           style={{ padding: '8px' }}
+          disabled={loading}
+          aria-label='Downvote'
         >
           <Icon name='down arrow' />
         </Button>
