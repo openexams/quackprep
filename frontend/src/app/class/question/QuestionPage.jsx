@@ -92,7 +92,7 @@ export default function QuestionPage() {
     if (questionId && questions?.length > 0 && questionPageLoading === false) {
       setSelectedQuestion(selectItemById(questions, 'id', questionId));
     }
-  }, [questionId, questionPageLoading]); // if you watch questions it will rerender every milisecond idk why
+  }, [questionId, questionPageLoading, questionVoteLoading]); // if you watch questions it will rerender every milisecond idk why
 
   useEffect(() => {
     // change navbar state when selected question id changes
