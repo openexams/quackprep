@@ -6,7 +6,7 @@ involved: [Discord](https://discord.com/invite/APy5379qT8) • [Website](https:/
 ## Background
 
 QuackPrep is a platform that helps students prepare for exams. Finding and studying with the past exams is like gold, its exactly what will be on the actual exam.
-Maddox started this project and the hope is to help him and others prepare for their exams.
+Maddox started this project and his hope is to help him and others around the world prepare for their exams.
 
 ## Tech Stack
 
