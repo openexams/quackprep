@@ -22,7 +22,7 @@ export default function Init() {
     dispatch(getClassCategories());
     dispatch(getSchools());
     dispatch(getTopRatedClasses());
-    // dispatch(getAnnouncement());
+    dispatch(getAnnouncement());
   }, []);
 
   useEffect(() => {
