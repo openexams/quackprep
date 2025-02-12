@@ -18,7 +18,7 @@ export default function QuestionReport({ questionId }) {
   };
 
   return (
-    <>
+    <Segment basic>
       <Button icon className='report' color='red' onClick={() => setIsModalOpen(true)}>
         <Icon name='flag' />
       </Button>
@@ -50,6 +50,6 @@ export default function QuestionReport({ questionId }) {
           <Button onClick={() => setIsModalOpen(false)}>Cancel</Button>
         </Modal.Actions>
       </Modal>
-    </>
+    </Segment>
   );
 }

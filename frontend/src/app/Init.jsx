@@ -10,6 +10,7 @@ import { getSchools } from '@app/class/school/schoolSlice';
 import { getHasStreak } from '@app/streak/streakSlice';
 import { getAnnouncement } from './layout/navbar/navbarSlice';
 import { clearChat } from './chatbot/chatbotSlice';
+import { getTopRatedClasses } from './class/classSlice';
 export default function Init() {
   const user = useSelector(selectUser).user;
   const navigate = useNavigate();
@@ -20,6 +21,7 @@ export default function Init() {
     dispatch(changeNavbarPage(navigate, curPage));
     dispatch(getClassCategories());
     dispatch(getSchools());
+    dispatch(getTopRatedClasses());
     // dispatch(getAnnouncement());
   }, []);
 

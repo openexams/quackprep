@@ -1,7 +1,7 @@
 import { changeNavbarPage } from '@app/layout/navbar/navbarSlice';
 import { useMemo, useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Card, Icon } from 'semantic-ui-react';
+import { Card, Icon, Button } from 'semantic-ui-react';
 import { useNavigate } from 'react-router-dom';
 import ClassEditor from '../creator/forms/ClassEditor';
 import { selectEditState, selectUser } from '../auth/authSlice';
@@ -132,116 +132,123 @@ export default function ClassCard({ id, name, category, desc, school_id, created
   }
 
   return (
-    <div
-      id={`class_${id}_card`}
-      ref={divRef}
-      // Desktop: Hover triggers overlay. Mobile: Click toggles overlay.
-      onMouseEnter={!isMobile ? () => setHovered(true) : undefined}
-      onMouseLeave={!isMobile ? () => setHovered(false) : undefined}
-      onClick={isMobile ? () => setHovered((prev) => !prev) : undefined}
-    >
-      <Card className='class_card' color={cardColor}>
-        <Card.Content>
-          <Icon name={icon} size='large' />
-          <Card.Header>{name}</Card.Header>
-          <Card.Meta>Created By: {created_username}</Card.Meta>
-          <Card.Description>{desc}</Card.Description>
-        </Card.Content>
+    <>
+      <div
+        style={{
+          position: 'relative',
+          width: '100%',
+          height: '100%',
+        }}
+        id={`class_${id}_card`}
+        ref={divRef}
+        // Desktop: Hover triggers overlay. Mobile: Click toggles overlay.
+        onMouseEnter={!isMobile ? () => setHovered(true) : undefined}
+        onMouseLeave={!isMobile ? () => setHovered(false) : undefined}
+        onClick={isMobile ? () => setHovered((prev) => !prev) : undefined}
+      >
+        <Card className='class_card' color={cardColor}>
+          <Card.Content>
+            <Icon name={icon} size='large' />
+            <Card.Header>{name}</Card.Header>
+            <Card.Meta>Created By: {created_username}</Card.Meta>
+            <Card.Description>{desc}</Card.Description>
+          </Card.Content>
 
-        {/* Hover / Tap Overlay */}
-        <div
-          style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            width: '100%',
-            height: '100%',
-            opacity: hovered ? 1 : 0,
-            pointerEvents: hovered ? 'auto' : 'none',
-            transition: 'opacity 0.3s ease',
-            display: 'flex',
-            flexDirection: 'column',
-          }}
-        >
-          {/*
+          {/* Hover / Tap Overlay */}
+          <div
+            style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              width: '100%',
+              height: '100%',
+              opacity: hovered ? 1 : 0,
+              pointerEvents: hovered ? 'auto' : 'none',
+              transition: 'opacity 0.3s ease',
+              display: 'flex',
+              flexDirection: 'column',
+            }}
+          >
+            {/*
             2×1 grid on top, 1×1 (spanning 2 columns) on bottom:
             
               [ Q1 ] [ Q2 ]
               [    Q3    ]
           */}
-          <div
-            style={{
-              display: 'grid',
-              flex: 1,
-              gridTemplateColumns: '1fr 1fr',
-              gridTemplateRows: '1fr .8fr',
-              background: 'rgba(0, 0, 0, 0.4)',
-            }}
-          >
-            {group_id && (
-              <>
-                {/* Quadrant 1: Study By Topic */}
+            <div
+              style={{
+                display: 'grid',
+                flex: 1,
+                gridTemplateColumns: '1fr 1fr',
+                gridTemplateRows: '1fr .8fr',
+                background: 'rgba(0, 0, 0, 0.4)',
+              }}
+            >
+              {group_id && (
+                <>
+                  {/* Quadrant 1: Study By Topic */}
+                  <div
+                    id={`class_${id}_study_by_topic`}
+                    onClick={() => dispatch(changeNavbarPage(navigate, `${id}/group?type=topic`))}
+                    style={{
+                      ...quadrantStyle,
+                      borderRight: '1px solid #fff',
+                      borderBottom: '1px solid #fff',
+                    }}
+                  >
+                    <Icon name='users' size='large' color='blue' style={{ pointerEvents: 'none' }} />
+                    <div style={quadrantTextStyle}>Study By Topic</div>
+                  </div>
+
+                  {/* Quadrant 2: Study By Exam */}
+                  <div
+                    id={`class_${id}_study_by_exam`}
+                    onClick={() => dispatch(changeNavbarPage(navigate, `${id}/group?type=exam`))}
+                    style={{
+                      ...quadrantStyle,
+                      borderBottom: '1px solid #fff',
+                    }}
+                  >
+                    <Icon name='book' size='large' color='green' style={{ pointerEvents: 'none' }} />
+                    <div style={quadrantTextStyle}>Study By Exam</div>
+                  </div>
+                </>
+              )}
+
+              {/* Bottom Row (spanning both columns): Ai Learn */}
+              {pdf_id && (
                 <div
-                  id={`class_${id}_study_by_topic`}
-                  onClick={() => dispatch(changeNavbarPage(navigate, `${id}/group?type=topic`))}
+                  onClick={() => dispatch(changeNavbarPage(navigate, `${id}/pdfexams`))}
                   style={{
                     ...quadrantStyle,
-                    borderRight: '1px solid #fff',
-                    borderBottom: '1px solid #fff',
+                    gridColumn: '1 / span 2',
+                    borderTop: '1px solid #fff',
                   }}
                 >
-                  <Icon name='users' size='large' color='blue' style={{ pointerEvents: 'none' }} />
-                  <div style={quadrantTextStyle}>Study By Topic</div>
+                  <Icon name='plug' size='large' color='orange' style={{ pointerEvents: 'none' }} />
+                  <div style={quadrantTextStyle}>Study By PDF</div>
                 </div>
-
-                {/* Quadrant 2: Study By Exam */}
+              )}
+              {!group_id && !pdf_id && (
                 <div
-                  id={`class_${id}_study_by_exam`}
-                  onClick={() => dispatch(changeNavbarPage(navigate, `${id}/group?type=exam`))}
+                  onClick={() => dispatch(changeNavbarPage(navigate, `${id}/group`))}
                   style={{
                     ...quadrantStyle,
-                    borderBottom: '1px solid #fff',
+                    gridColumn: '1 / -1',
+                    gridRow: '1 / -1',
+                    borderTop: '1px solid #fff',
                   }}
                 >
-                  <Icon name='book' size='large' color='green' style={{ pointerEvents: 'none' }} />
-                  <div style={quadrantTextStyle}>Study By Exam</div>
+                  <Icon name='x' size='large' color='red' style={{ pointerEvents: 'none' }} />
+                  <div style={quadrantTextStyle}>
+                    No Content Found, If you own this class click here to create content, or use AIcreate
+                  </div>
                 </div>
-              </>
-            )}
-
-            {/* Bottom Row (spanning both columns): Ai Learn */}
-            {pdf_id && (
-              <div
-                onClick={() => dispatch(changeNavbarPage(navigate, `${id}/pdfexams`))}
-                style={{
-                  ...quadrantStyle,
-                  gridColumn: '1 / span 2',
-                  borderTop: '1px solid #fff',
-                }}
-              >
-                <Icon name='plug' size='large' color='orange' style={{ pointerEvents: 'none' }} />
-                <div style={quadrantTextStyle}>Study By PDF</div>
-              </div>
-            )}
-            {!group_id && !pdf_id && (
-              <div
-                onClick={() => dispatch(changeNavbarPage(navigate, `${id}/group`))}
-                style={{
-                  ...quadrantStyle,
-                  gridColumn: '1 / -1',
-                  gridRow: '1 / -1',
-                  borderTop: '1px solid #fff',
-                }}
-              >
-                <Icon name='x' size='large' color='red' style={{ pointerEvents: 'none' }} />
-                <div style={quadrantTextStyle}>
-                  No Content Found, If you own this class click here to create content, or use AIcreate
-                </div>
-              </div>
-            )}
+              )}
+            </div>
           </div>
-        </div>
-      </Card>
-    </div>
+        </Card>
+      </div>
+    </>
   );
 }

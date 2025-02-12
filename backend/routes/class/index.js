@@ -6,16 +6,29 @@ import {
   getClassesByUserId,
   getSchools,
   getClassCategories,
+  getTopRatedClasses,
 } from "#models/class/index.js";
 import { cascadeSetDeleted } from "#utils/sqlFunctions.js";
 import express from "express";
 import { GENERAL_SCHOOL_ID } from "../../../constants.js";
 import { BadRequestError } from "#utils/ApiError.js";
+import voteRouter from "./vote/index.js";
 const router = express.Router();
+
+router.use("/vote", voteRouter);
 
 router.get("/user", isAuthenticated, async function (req, res, next) {
   try {
     const result = await getClassesByUserId(req.user);
+    res.status(200).json(result);
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.get("/toprated", async function (req, res, next) {
+  try {
+    const result = await getTopRatedClasses(10);
     res.status(200).json(result);
   } catch (error) {
     next(error);

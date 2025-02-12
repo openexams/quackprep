@@ -7,7 +7,7 @@ import { createSelector } from '@reduxjs/toolkit';
 
 const GET_CRUD_CLASSES = 'app/class/GET_CRUD_CLASSES';
 const DELETE_CRUD_CLASS = 'app/class/DELETE_CRUD_CLASS';
-const UPSERT_CRUD_CLASSES = 'app/class/UPSERT_CRUD_CLASSES';
+export const UPSERT_CRUD_CLASSES = 'app/class/UPSERT_CRUD_CLASSES';
 
 export function createDefaultUserClass() {
   return async function (dispatch, getState) {
@@ -32,6 +32,10 @@ export function createDefaultUserClass() {
 
 export function getClassesBySchoolId(school_id) {
   return standardApiCall('get', `/api/class/${school_id}`, null, GET_CRUD_CLASSES, { loadingComponent: ['ClassList'] });
+}
+
+export function getTopRatedClasses() {
+  return standardApiCall('get', `/api/class/toprated`, null, GET_CRUD_CLASSES, { loadingComponent: ['ClassList'] });
 }
 
 export function getClassesByUserId() {

@@ -6,12 +6,13 @@ import { useSelector } from 'react-redux';
 import { selectClassCategories } from './class_categories/classCategorySlice';
 import { selectLoadingState } from '../store/loadingSlice';
 import ClassEditor from '../creator/forms/ClassEditor';
-import { selectArrayOfIncludingItems, selectArrayOfIncludingItemsByNumber, selectBINARYArrayOfStateById } from 'maddox-js-funcs';
+import { selectArrayOfIncludingItems, selectArrayOfIncludingItemsByNumber, selectMultipleBinarySearch } from 'maddox-js-funcs';
 import { selectNavbarState } from '@app/layout/navbar/navbarSlice';
 import { selectEditState } from '../auth/authSlice'; // cuz anyone can make classes
 import ClassCardCTA from './class_cta/ClassCardCTA';
 import ClassSearch from './ClassSearch';
 import { selectUser } from '../auth/authSlice';
+import { selectClassState } from './classSlice';
 export default function ClassList() {
   const user_id = useSelector(selectUser).user?.id;
   const [classFilter, setClassFilter] = useState('');
@@ -22,8 +23,8 @@ export default function ClassList() {
   const [curCategory, setCurCategory] = useState('');
   const [visible, setVisible] = useState(true);
   const edit = useSelector(selectEditState);
-
-  let classes = useSelector(selectBINARYArrayOfStateById('app.class.classes.classes', 'school_id', curSchoolId));
+  let classes = useSelector(selectClassState);
+  classes = curSchoolId ? selectMultipleBinarySearch(classes, 'school_id', curSchoolId) : [];
   classes = selectArrayOfIncludingItems(classes, ['name'], [classFilter]);
   let filteredClasses = curCategory
     ? selectArrayOfIncludingItemsByNumber(classes, ['category'], [parseInt(curCategory)])
@@ -89,6 +90,7 @@ export default function ClassList() {
                         school_id={c.school_id}
                         created_by={c.created_by}
                         created_username={c.created_username}
+                        upvotes={c.upvotes}
                       />
                     </Grid.Column>
                   ))
