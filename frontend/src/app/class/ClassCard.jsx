@@ -180,7 +180,7 @@ export default function ClassCard({ id, name, category, desc, school_id, created
                 display: 'grid',
                 flex: 1,
                 gridTemplateColumns: '1fr 1fr',
-                gridTemplateRows: '1fr .8fr',
+                gridTemplateRows: '1fr 1fr',
                 background: 'rgba(0, 0, 0, 0.4)',
               }}
             >
@@ -192,6 +192,7 @@ export default function ClassCard({ id, name, category, desc, school_id, created
                     onClick={() => dispatch(changeNavbarPage(navigate, `${id}/group?type=topic`))}
                     style={{
                       ...quadrantStyle,
+                      gridRow: !pdf_id ? '1 / span 2' : '1 / span 1',
                       borderRight: '1px solid #fff',
                       borderBottom: '1px solid #fff',
                     }}
@@ -206,6 +207,8 @@ export default function ClassCard({ id, name, category, desc, school_id, created
                     onClick={() => dispatch(changeNavbarPage(navigate, `${id}/group?type=exam`))}
                     style={{
                       ...quadrantStyle,
+                      gridRow: !pdf_id ? '1 / span 2' : '1 / span 1',
+                      borderLeft: '1px solid #fff',
                       borderBottom: '1px solid #fff',
                     }}
                   >
@@ -221,7 +224,8 @@ export default function ClassCard({ id, name, category, desc, school_id, created
                   onClick={() => dispatch(changeNavbarPage(navigate, `${id}/pdfexams`))}
                   style={{
                     ...quadrantStyle,
-                    gridColumn: '1 / span 2',
+                    gridColumn: !group_id ? '1 / span 2' : '1 / span 2',
+                    gridRow: !group_id && '1 / span 2',
                     borderTop: '1px solid #fff',
                   }}
                 >
