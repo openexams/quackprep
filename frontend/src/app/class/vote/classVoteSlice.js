@@ -1,6 +1,6 @@
 import { standardApiCall } from '@utils/api';
-const UPSERT_VOTE_ON_CLASS = 'app/class/vote/upsertVoteOnClass';
+import { UPSERT_CRUD_CLASSES } from '../classSlice';
 
 export function upsertVoteOnClass(class_id, vote) {
-  return standardApiCall('post', '/api/class/vote/', { class_id, vote }, UPSERT_VOTE_ON_CLASS, { loadingComponent: 'ClassVote' });
+  return standardApiCall('post', '/api/class/vote/', { class_id, vote }, UPSERT_CRUD_CLASSES, { loadingComponent: 'ClassVote' });
 }

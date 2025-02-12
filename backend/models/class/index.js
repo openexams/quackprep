@@ -14,7 +14,9 @@ export async function selectClasses(WHERE, params) {
   // sorts by the school_id and then by the updated_at (newest first)
   return await sqlExe.executeCommand(
     `
-    SELECT cl.id, cl.name, cl.school_id, cl.description, cl.category, MIN(g.id) as group_id, min(p.id) as pdf_id, u.id as created_by, u.username as created_username, vc.votes as upvotes
+    SELECT cl.id, cl.name, cl.school_id, cl.description, cl.category, MIN(g.id) as group_id, min(p.id) as pdf_id, u.id as created_by, u.username as created_username, COALESCE(vc.votes,0) as upvotes
+
+
     FROM classes cl
     LEFT JOIN
         (SELECT
@@ -22,6 +24,7 @@ export async function selectClasses(WHERE, params) {
              CASE
                 WHEN vote = 0 THEN -1
                 WHEN vote = 1 THEN 1
+                ELSE 0
             END
              ),0)
              as votes,
@@ -32,9 +35,34 @@ export async function selectClasses(WHERE, params) {
     INNER JOIN users u on u.id = cl.created_by
     WHERE cl.deleted=0 AND ${WHERE}
     GROUP BY cl.id, cl.name, cl.school_id, cl.description, cl.category, u.id, u.username, cl.updated_at
-    ORDER BY cl.school_id ASC, upvotes desc, cl.updated_at DESC
+    ORDER BY cl.school_id ASC, COALESCE(vc.votes,0) DESC, cl.updated_at DESC
     `,
     params
+  );
+}
+
+export async function getTopRatedClasses(limit) {
+  return await sqlExe.executeCommand(
+    `SELECT cl.id, cl.name, cl.school_id, cl.description, cl.category, MIN(g.id) as group_id, min(p.id) as pdf_id, u.id as created_by, u.username as created_username, COALESCE(vc.votes,0) as upvotes
+    FROM classes cl
+    LEFT JOIN
+        (SELECT
+             COALESCE(SUM(
+             CASE
+                WHEN vote = 0 THEN -1
+                WHEN vote = 1 THEN 1
+                ELSE 0
+            END
+             ),0)
+             as votes,
+             class_id from class_votes GROUP BY class_id) as vc ON vc.class_id = cl.id
+
+    LEFT JOIN cgroups g on g.class_id = cl.id
+    LEFT JOIN pdfs p on p.class_id = cl.id
+    INNER JOIN users u on u.id = cl.created_by
+    WHERE cl.deleted=0
+    GROUP BY cl.id, cl.name, cl.school_id, cl.description, cl.category, u.id, u.username, cl.updated_at
+    ORDER BY COALESCE(vc.votes,0) DESC, cl.updated_at DESC LIMIT ${limit}`
   );
 }
 

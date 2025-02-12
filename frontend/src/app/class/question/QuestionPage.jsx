@@ -142,14 +142,19 @@ export default function QuestionPage() {
                     selectedQuestion={selectedQuestion}
                     setSelectedQuestion={setSelectedQuestion}
                   />
-                  {selectedQuestion?.id && <QuestionVote questionId={selectedQuestion?.id} upvotes={selectedQuestion?.upvotes} />}
-                  {selectedQuestion?.id && <QuestionReport questionId={selectedQuestion?.id} />}
-                  {selectedQuestion?.explanation_url && (
-                    <Button as={'a'} href={selectedQuestion?.explanation_url} target='_blank'>
-                      <Icon color='red' name='youtube' />
-                      Show Explanation
-                    </Button> // popup modal later
-                  )}
+                  <div style={{ display: 'flex' }}>
+                    {selectedQuestion?.id && <QuestionReport questionId={selectedQuestion?.id} />}
+
+                    {selectedQuestion?.explanation_url && (
+                      <Button size='small' as={'a'} href={selectedQuestion?.explanation_url} target='_blank'>
+                        <Icon color='red' name='youtube' />
+                        Show Explanation
+                      </Button> // popup modal later
+                    )}
+                    {selectedQuestion?.id && (
+                      <QuestionVote questionId={selectedQuestion?.id} upvotes={selectedQuestion?.upvotes} />
+                    )}
+                  </div>
                 </Segment>
               ) : (
                 <Segment>

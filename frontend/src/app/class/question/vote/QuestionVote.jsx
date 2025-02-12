@@ -1,7 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { Button, Icon, Segment } from 'semantic-ui-react';
+import { Segment } from 'semantic-ui-react';
 import { upsertVoteOnQuestion } from './questionVoteSlice';
 import { selectLoadingState } from '@app/store/loadingSlice';
+import Upvote from '@components/Upvote';
 
 export default function QuestionVote({ questionId, upvotes }) {
   const loading = useSelector(selectLoadingState).loadingComps?.QuestionVote;
@@ -14,23 +15,13 @@ export default function QuestionVote({ questionId, upvotes }) {
 
   return (
     <Segment
+      textAlign='center'
       id={`question_${questionId}_vote`}
       basic
       loading={loading}
       style={{ display: 'inline-flex', alignItems: 'center', padding: '.2rem' }}
     >
-      <span id='upvotes_num' style={{ marginRight: '0.5rem', fontWeight: 'bold' }}>
-        {upvotes}
-      </span>
-      <Button.Group size='medium' vertical>
-        <Button icon compact color='teal' onClick={() => handleVote(1)}>
-          <Icon name='up arrow' />
-        </Button>
-
-        <Button icon compact color='pink' onClick={() => handleVote(0)}>
-          <Icon name='down arrow' />
-        </Button>
-      </Button.Group>
+      <Upvote upvotes={upvotes} onSubmit={handleVote} />
     </Segment>
   );
 }
