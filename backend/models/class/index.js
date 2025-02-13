@@ -30,8 +30,8 @@ export async function selectClasses(WHERE, params) {
              as votes,
              class_id from class_votes GROUP BY class_id) as vc ON vc.class_id = cl.id
 
-    LEFT JOIN cgroups g on g.class_id = cl.id
-    LEFT JOIN pdfs p on p.class_id = cl.id
+    LEFT JOIN cgroups g on g.class_id = cl.id AND g.deleted=0
+    LEFT JOIN pdfs p on p.class_id = cl.id AND p.deleted=0
     INNER JOIN users u on u.id = cl.created_by
     WHERE cl.deleted=0 AND ${WHERE}
     GROUP BY cl.id, cl.name, cl.school_id, cl.description, cl.category, u.id, u.username, cl.updated_at
@@ -66,10 +66,15 @@ export async function getTopRatedClasses(limit) {
   );
 }
 
+// pulls in all classes with any content
 export async function getTotalClasses() {
   return (
     await sqlExe.executeCommand(
-      `SELECT COUNT(*) as count FROM classes WHERE deleted = 0`
+      `SELECT COUNT(DISTINCT c.id) as count FROM classes c
+                LEFT JOIN cgroups g on g.class_id = c.id
+                LEFT JOIN pdfs p ON p.class_id = c.id
+
+                WHERE c.deleted = 0 AND (g.deleted=0 OR p.deleted=0) `
     )
   )[0]?.count;
 }
