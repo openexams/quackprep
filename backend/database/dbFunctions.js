@@ -19,7 +19,7 @@ export default class sqlExe {
    * @param {Object} options extra options
    * @param {String} options.verifyUserOwnsRowId (table name to check) will make sure the user owns the row id they are trying to edit, if not it wont run.
    * @param {Boolean} options.verifyText will make sure the text is clean does not have bad words. Will reject if sqlQuery is not clean.
-   * @returns {mysql.ResultSetHeader} returns an array of objects from your sql query
+   * @returns {mysql.ResultSetHeader | Object[]} returns an array of objects from your sql query
    * @throws {Error} throws a sql error, make sure to use try & catch
    */
   static async executeCommand(sqlCommand, params = null, options = null) {

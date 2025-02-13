@@ -63,7 +63,7 @@ export const REDIS_CONFIG = {
 export const GOOGLE_OAUTH_CONFIG = {
   clientID: secrets.GOOGLE_CLIENT_ID,
   clientSecret: secrets.GOOGLE_CLIENT_SECRET,
-  callbackURL: `${secrets.BACKEND_URL}/api/auth/google/callback`, // local or prod
+  callbackURL: `${secrets.BACKEND_URL}/api/auth/google/callback`,
 };
 
 export const MATHPIX_API_INFO = {
