@@ -2,7 +2,7 @@ import { test, expect } from "playwright/test";
 import { sendOpenAiAssistantPromptAndRecieveResult } from "@backend/utils/openAi.js";
 import { QUACK_GRADE_ASS_ID } from "../../constants.js";
 
-test.describe("OpenAI Integration Tests, using QUACK_GRADE assitant, which grades and responds in json format", () => {
+test.describe("using QUACK_GRADE assitant, which grades and responds in json format", () => {
   test("should successfully grade a student's answer", async () => {
     const question = "What is 2+2?";
     const studentAnswer = "4";
