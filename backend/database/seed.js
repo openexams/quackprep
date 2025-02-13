@@ -1,4 +1,6 @@
-import sqlExe from "./dbFunctions";
+import { initTestAccount } from "#models/auth/index.js";
+import sqlExe from "./dbFunctions.js";
+import bcrypt from "bcrypt";
 
 export const class_categories = [
   { name: "CS", description: "Computer Science" },
@@ -24,11 +26,17 @@ export async function seedDb() {
   }
   for (const type of group_types) {
     await sqlExe.executeCommand(
-      `INSERT INTO group_tyes (type_name) VALUES (:type_name)`,
+      `INSERT INTO group_types (type_name) VALUES (:type_name)`,
       { type_name: type.type_name }
     );
   }
   await sqlExe.executeCommand(
-    `INSERT INTO schools (school_name,color) VALUES('General','black')`
+    // had to remove ' from don't
+    `INSERT INTO schools (school_name,color,description) VALUES('General','black', 'Dont have a exact school you want your content in? Add it here!')`
   );
+  await initTestAccount();
+
+  return 0;
 }
+
+await seedDb();

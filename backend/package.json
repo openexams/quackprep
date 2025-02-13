@@ -39,6 +39,7 @@
     "#middleware/*": "./middleware/*"
   },
   "scripts": {
+    "seed": "node database/seed.js",
     "start": "nodemon server.js"
   }
 }

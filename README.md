@@ -6,6 +6,7 @@ involved: [Discord](https://discord.com/invite/APy5379qT8) • [Website](https:/
 ## Background
 
 QuackPrep is a platform that helps students prepare for exams. Finding and studying with the past exams is like gold, its exactly what will be on the actual exam.
+
 Maddox started this project and his hope is to help him and others around the world prepare for their exams.
 
 ## Tech Stack
@@ -22,28 +23,31 @@ The backend is built with Node.js and uses the Express framework.
 
 The database is built with mysql.
 
-## Local Development Setup
+## Structure
 
 We use a monorepo setup to keep the frontend and backend close to each other, but separated so we can work on them independently.
 
-### Requirements
+### Backend
 
-- Node.js
-- git
-- mysql
+Starting with the backend, we use a models & routes file structure.
 
-To run locally you will need to run `npm run dev` in the root directory. This will start and install packages for the backend and frontend.
+#### Models
 
-then check http://localhost:3001 to see the app running.
+- Business logic functions
 
-### ENV Vars setup
+#### Routes
 
-You will see there is a file called `@backend/config/secrets.js` which holds all of the environment variables to be exported. You will need to create a secrets.env file in the root directory and add the following from secrets.js to it.
+- API routes & error checking
 
-More coming soon about secrets.env file.
+Models & routes share the same folder structure.  
+The API routes should directly match the folder structure.
+
+### Frontend
+
+The frontend is less rigid and is the weakest part of the project.
 
 ## Contributing
 
-If you would like to contribute to the project, please feel free to fork the repository and create a pull request. Please make sure you pass all the tests in /tests/. Guide coming soon.
+If you would like to contribute to the project, please feel free to fork the repository and create a pull request. Please make sure you pass all the tests in tests. See [CONTRIBUTING.md](./CONTRIBUTING.md) for more.
 
-We love to have new people contribute to the project!
+We'd love to have new people contribute to the project!

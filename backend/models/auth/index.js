@@ -1,5 +1,27 @@
 import sqlExe from "#db/dbFunctions.js";
 import bcrypt from "bcrypt";
+import {
+  TEST_ACCOUNT_EMAIL,
+  TEST_ACCOUNT_PASS,
+  TEST_ACCOUNT_USER,
+} from "../../../constants.js";
+
+export async function initTestAccount() {
+  await sqlExe.executeCommand(
+    `INSERT INTO users (username,password_hash,email,provider,provider_id) VALUES(:username,:password_hash,:email,'local', 1)`,
+    {
+      username: TEST_ACCOUNT_USER,
+      password_hash: await bcrypt.hash(TEST_ACCOUNT_PASS, 10),
+      email: TEST_ACCOUNT_EMAIL,
+    }
+  );
+}
+
+export async function deleteTestAccount() {
+  await sqlExe.executeCommand("DELETE FROM users WHERE username = :username", {
+    username: TEST_ACCOUNT_USER,
+  });
+}
 
 export async function findUserIdByProviderId(provider, provider_id) {
   const params = { provider: provider, provider_id: provider_id };
