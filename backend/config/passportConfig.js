@@ -5,6 +5,7 @@ import {
   findUserById,
   OAuthRegister,
   getUserByUsername,
+  setLastLoginNow,
 } from "#models/auth/index.js";
 import { GOOGLE_OAUTH_CONFIG } from "./config.js";
 import passport from "passport";
@@ -124,7 +125,8 @@ passport.use(
 );
 
 passport.serializeUser(function (user, done) {
-  done(null, user.id);
+  setLastLoginNow(user.id);
+  done(null, user.id); // user.id is what it will store in req.user
 });
 
 passport.deserializeUser(async (id, done) => {
