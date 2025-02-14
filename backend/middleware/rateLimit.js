@@ -53,7 +53,7 @@ export const rateLimits = {
   // AI-specific endpoints
   ai: createRateLimiter({
     windowMs: 60 * 1000, // 1 minute
-    max: 4,
+    max: secrets.NODE_ENV === "local" ? 15 : 4,
     type: "AI",
   }),
 

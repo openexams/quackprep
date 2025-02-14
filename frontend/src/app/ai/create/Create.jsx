@@ -29,14 +29,10 @@ export default function CreatePage() {
   const [classId, setClassId] = useState(null);
 
   useEffect(() => {
-    async function fetchClasses() {
-      if (user_id && user?.is_creator && !haveGottenClassesByUserId.current) {
-        await dispatch(getClassesByUserId());
-        haveGottenClassesByUserId.current = true; // could be kept in redux as well
-      }
+    if (user_id && user?.is_creator && !haveGottenClassesByUserId.current) {
+      dispatch(getClassesByUserId());
+      haveGottenClassesByUserId.current = true; // could be kept in redux as well
     }
-
-    fetchClasses();
   }, [user?.is_creator, user_id, dispatch]);
 
   const shouldCreateDefaultClass =
@@ -49,13 +45,15 @@ export default function CreatePage() {
     userCreatedClasses.length === 0;
 
   useEffect(() => {
-    if (user_id && !user?.is_creator) {
+    if (user_id && !user?.is_creator && !loading) {
+      console.log('making user a creator');
       dispatch(makeUserACreator());
     } else if (shouldCreateDefaultClass) {
       defaultClassCreated.current = true;
+      console.log('creating default class for user!');
       dispatch(createDefaultUserClass());
     }
-  }, [user_id, dispatch, user?.is_creator]);
+  }, [user_id, dispatch, user?.is_creator, loading, shouldCreateDefaultClass]);
 
   return (
     <Container style={{ minHeight: '60vh' }}>

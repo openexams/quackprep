@@ -1,6 +1,5 @@
 import { initTestAccount } from "#models/auth/index.js";
 import sqlExe from "./dbFunctions.js";
-import bcrypt from "bcrypt";
 
 export const class_categories = [
   { name: "CS", description: "Computer Science" },

@@ -19,9 +19,9 @@ export const GENERAL_SCHOOL_ID = 4;
 export const OTHER_CLASS_CATEGORY_ID = 8;
 export const MAX_QUACK_CREATE_GROUP_REQUEST_WAIT_TIME_IN_MS = 900000;
 export const MAX_USER_ANSWER_SUBMISSION_LENGTH = 2048; // match sql max varchar len
-export const TEST_ACCOUNT_EMAIL = "test";
-export const TEST_ACCOUNT_USER = "test";
-export const TEST_ACCOUNT_PASS = "test"; // secrets? Na, we dont that here
+export const TEST_ACCOUNT_EMAIL = "test69696969696999@urmom.com"; // if someone creates this as they username it will cook everything
+export const TEST_ACCOUNT_USER = "test69696969696999";
+export const TEST_ACCOUNT_PASS = "test69696969696999"; // secrets? Na, we dont that here
 export const ALLOWED_FILE_TYPES = [
   "application/pdf",
   "image/jpeg",
