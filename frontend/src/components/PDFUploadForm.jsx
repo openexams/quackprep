@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 import { Button, Icon, List, Message } from 'semantic-ui-react';
-import { MAX_FILE_SIZE_IN_BYTES, ALLOWED_FILE_TYPES } from '../../../constants.js';
+import { MAX_FILE_SIZE_IN_BYTES, ALLOWED_FILE_TYPES, MAX_FILES_UPLOAD } from '../../../constants.js';
 
 const PdfUploadForm = ({ onSubmit, showImages = true, buttonText = 'Submit' }) => {
   const [files, setFiles] = useState([]);
@@ -9,14 +9,28 @@ const PdfUploadForm = ({ onSubmit, showImages = true, buttonText = 'Submit' }) =
   const [error, setError] = useState(null);
   const fileInputRef = useRef(null);
 
-  const handleFileChange = (e) => {
+  /**
+   *
+   * @param {Object[]} files
+   */
+  function takeFiles(arrFiles) {
+    if (files.length + arrFiles.length > MAX_FILES_UPLOAD) {
+      setError(
+        `MAX ${MAX_FILES_UPLOAD} FILES, if you really need to do more combine them or contact me i'd be willing to change the limit.`,
+      );
+    } else {
+      validateFiles(arrFiles);
+    }
+  }
+
+  const handleFileInput = (e) => {
     if (e.target.files && e.target.files.length > 0) {
-      const newFiles = Array.from(e.target.files);
-      validateFiles(newFiles);
+      takeFiles(Array.from(e.target.files));
     }
   };
 
   const validateFiles = (newFiles) => {
+    setError(null);
     const validFiles = [];
     const invalidFiles = [];
 
@@ -67,8 +81,7 @@ const PdfUploadForm = ({ onSubmit, showImages = true, buttonText = 'Submit' }) =
     setIsDragging(false);
 
     if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
-      const newFiles = Array.from(e.dataTransfer.files);
-      validateFiles(newFiles);
+      takeFiles(Array.from(e.dataTransfer.files));
       e.dataTransfer.clearData();
     }
   };
@@ -119,11 +132,11 @@ const PdfUploadForm = ({ onSubmit, showImages = true, buttonText = 'Submit' }) =
         accept={ALLOWED_FILE_TYPES.join(',')}
         hidden
         multiple
-        onChange={handleFileChange}
+        onChange={handleFileInput}
       />
       {error && (
         <Message negative style={{ marginTop: '1rem' }}>
-          <Message.Header>File Size Error</Message.Header>
+          <Message.Header>File Error</Message.Header>
           <p>{error}</p>
         </Message>
       )}
