@@ -12,6 +12,7 @@ export const corsOrigins = [
   "https://theducklair.com",
   "https://tinyexams.com",
   "https://exampredictor.org",
+  "https://deepresearch2markdown.com",
 ];
 if (secrets.NODE_ENV === NODE_ENVS_AVAILABLE.local) {
   corsOrigins.push("http://localhost:3001"); // maybe bad pratice
